@@ -19,20 +19,17 @@ namespace SmartFlow.Sales.CommonForm
         {
             InitializeComponent();
         }
-
         public DiscountForm(float itemtotal)
         {
             InitializeComponent();
             _itemtotal = itemtotal;
         }
-
         private void DiscountForm_Load(object sender, EventArgs e)
         {
             CommonFunction.FillUnitData(unitcombobox);
             label6.Text = _itemtotal.ToString("N2");
             discounttxtbox.Text = _discount.ToString("N2");
         }
-
         private void discounttxtbox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Check for a valid character (digits, control characters, and the decimal point)
@@ -48,7 +45,6 @@ namespace SmartFlow.Sales.CommonForm
                 e.Handled = true;
             }
         }
-
         private void fixedamountradio_CheckedChanged(object sender, EventArgs e)
         {
             if (fixedamountradio.Checked)
@@ -60,7 +56,6 @@ namespace SmartFlow.Sales.CommonForm
                 discounttxtbox.Enabled = false;
             }
         }
-
         private void percentageradio_CheckedChanged(object sender, EventArgs e)
         {
             if (percentageradio.Checked)
@@ -72,7 +67,6 @@ namespace SmartFlow.Sales.CommonForm
                 discounttxtbox.Enabled = false;
             }
         }
-
         private void discounttxtbox_TextChanged(object sender, EventArgs e)
         {
             if (decimal.TryParse(label6.Text, out decimal totalamount) && decimal.TryParse(discounttxtbox.Text, out decimal discount))
@@ -96,12 +90,13 @@ namespace SmartFlow.Sales.CommonForm
                 }
             }
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
             {
-                GlobalVariables.unitid = Convert.ToInt32(unitcombobox.SelectedValue);
+                GlobalVariables.unitidglobal = Convert.ToInt32(unitcombobox.SelectedValue);
+                var selectedItem = unitcombobox.SelectedItem;
+                GlobalVariables.unitnameglobal = selectedItem.ToString();
                 if (fixedamountradio.Checked || percentageradio.Checked)
                 {
                     GlobalVariables.isproductdiscounted = true;

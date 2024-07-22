@@ -10,7 +10,6 @@ namespace SmartFlow
         {
             InitializeComponent();
         }
-
         private void Warehouse_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -19,12 +18,10 @@ namespace SmartFlow
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void exitbtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void createwarehousesavebtn_Click(object sender, EventArgs e)
         {
             try
@@ -134,7 +131,6 @@ namespace SmartFlow
                 }
             }catch(Exception ex) { throw ex; }
         }
-
         private void ResetData()
         {
             warehousenametxtbox.Text = string.Empty;
@@ -142,7 +138,6 @@ namespace SmartFlow
             citytxtbox.Text = string.Empty;
             createwarehousesavebtn.Text = "Update";
         }
-
         private void Warehouse_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -155,7 +150,6 @@ namespace SmartFlow
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

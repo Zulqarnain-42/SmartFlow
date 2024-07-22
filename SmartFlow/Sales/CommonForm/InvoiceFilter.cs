@@ -16,7 +16,6 @@ namespace SmartFlow.Sales.CommonForm
         {
             InitializeComponent();
         }
-
         private void searchbtn_Click(object sender, EventArgs e)
         {
             try

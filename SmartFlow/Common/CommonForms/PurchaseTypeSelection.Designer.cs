@@ -94,13 +94,20 @@
             // 
             // dgvpurchasetypeselection
             // 
+            this.dgvpurchasetypeselection.AllowUserToAddRows = false;
+            this.dgvpurchasetypeselection.AllowUserToDeleteRows = false;
+            this.dgvpurchasetypeselection.AllowUserToResizeColumns = false;
+            this.dgvpurchasetypeselection.AllowUserToResizeRows = false;
             this.dgvpurchasetypeselection.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvpurchasetypeselection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvpurchasetypeselection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvpurchasetypeselection.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvpurchasetypeselection.Location = new System.Drawing.Point(0, 105);
             this.dgvpurchasetypeselection.Name = "dgvpurchasetypeselection";
+            this.dgvpurchasetypeselection.RowHeadersVisible = false;
             this.dgvpurchasetypeselection.RowHeadersWidth = 51;
             this.dgvpurchasetypeselection.RowTemplate.Height = 24;
+            this.dgvpurchasetypeselection.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvpurchasetypeselection.Size = new System.Drawing.Size(1232, 548);
             this.dgvpurchasetypeselection.TabIndex = 2;
             this.dgvpurchasetypeselection.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvpurchasetypeselection_CellDoubleClick);

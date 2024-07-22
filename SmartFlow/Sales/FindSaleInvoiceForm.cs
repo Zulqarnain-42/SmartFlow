@@ -16,7 +16,6 @@ namespace SmartFlow.Sales
         {
             InitializeComponent();
         }
-
         private void searchbtn_Click(object sender, EventArgs e)
         {
             try
@@ -47,7 +46,6 @@ namespace SmartFlow.Sales
 
             }catch (Exception ex) { throw ex; }
         }
-
         private void FindSaleInvoiceForm_Load(object sender, EventArgs e)
         {
             invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");

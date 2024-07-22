@@ -17,13 +17,11 @@ namespace SmartFlow.Transactions
         {
             InitializeComponent();
         }
-
         private void CreditNote_Load(object sender, EventArgs e)
         {
             invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
             invoicenotxtbox.Text = GenerateNextInvoiceNumber();
         }
-
         private bool AreDataGridViewRowsEmpty()
         {
             foreach (DataGridViewRow row in dgvCreditNote.Rows)
@@ -52,7 +50,6 @@ namespace SmartFlow.Transactions
 
             return true;
         }
-
         private string CheckInvoiceBeforeInsert()
         {
             try
@@ -71,7 +68,6 @@ namespace SmartFlow.Transactions
             }
             catch (Exception ex) { throw ex; }
         }
-
         private string GenerateNextInvoiceNumber()
         {
             try
@@ -104,7 +100,6 @@ namespace SmartFlow.Transactions
             }
             catch (Exception ex) { throw ex; }
         }
-
         private string GetLastInvoiceNumber()
         {
             string lastInvoiceNumber = null;

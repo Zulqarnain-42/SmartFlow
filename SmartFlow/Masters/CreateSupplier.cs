@@ -12,13 +12,11 @@ namespace SmartFlow.Masters
         {
             InitializeComponent();
         }
-
         public CreateSupplier(int id)
         {
             InitializeComponent();
             label1.Text = id.ToString();
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -33,7 +31,6 @@ namespace SmartFlow.Masters
                 }
             }catch(Exception ex) { throw ex; }
         }
-
         static string GenerateRandomSupplierCode()
         {
             Random random = new Random();
@@ -57,17 +54,14 @@ namespace SmartFlow.Masters
             }
             return serialNumber = String.Concat("SU", serialNumber); ;
         }
-
         private void CreateSupplier_Load(object sender, EventArgs e)
         {
             suppliercodetxtbox.Text = GenerateRandomSupplierCode();
         }
-
         private void exitbtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void UpdateData()
         {
             errorProvider.Clear();
@@ -99,7 +93,6 @@ namespace SmartFlow.Masters
                 return;
             }
         }
-
         private void AddData()
         {
             errorProvider.Clear();
@@ -181,7 +174,6 @@ namespace SmartFlow.Masters
             
            
         }
-
         private void CreateSupplier_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -190,7 +182,6 @@ namespace SmartFlow.Masters
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void selectaccountgrouptxtbox_Enter(object sender, EventArgs e)
         {
             try
@@ -199,7 +190,6 @@ namespace SmartFlow.Masters
                 form.ShowDialog();
             }catch (Exception ex) { throw ex; }
         }
-
         private void selectaccountgrouptxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             try
@@ -216,7 +206,6 @@ namespace SmartFlow.Masters
                 }
             }catch (Exception ex) { throw ex; }
         }
-
         private void CreateSupplier_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -229,7 +218,6 @@ namespace SmartFlow.Masters
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

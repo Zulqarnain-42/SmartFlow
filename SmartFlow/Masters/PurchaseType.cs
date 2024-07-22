@@ -16,7 +16,6 @@ namespace SmartFlow.Masters
         {
             InitializeComponent();
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -74,7 +73,6 @@ namespace SmartFlow.Masters
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void exitbtn_Click(object sender, EventArgs e)
         {
             this.Close();

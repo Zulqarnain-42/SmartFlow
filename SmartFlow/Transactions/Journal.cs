@@ -11,12 +11,10 @@ namespace SmartFlow.Transactions
         {
             InitializeComponent();
         }
-
         private void closebtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -37,13 +35,11 @@ namespace SmartFlow.Transactions
             catch(Exception ex) { throw ex; }
             
         }
-
         private void Journal_Load(object sender, EventArgs e) 
         {
             invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
             invoicenotxtbox.Text = GenerateNextInvoiceNumber();
         }
-
         private void Journal_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -52,7 +48,6 @@ namespace SmartFlow.Transactions
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void Journal_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -65,13 +60,11 @@ namespace SmartFlow.Transactions
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             if (!AreDataGridViewRowsEmpty()) { return true; }
             return false; // No TextBox is filled
         }
-
         private bool AreDataGridViewRowsEmpty()
         {
             foreach (DataGridViewRow row in dgvjournal.Rows)
@@ -101,7 +94,6 @@ namespace SmartFlow.Transactions
 
             return true;
         }
-
         private string CheckInvoiceBeforeInsert()
         {
             try
@@ -120,7 +112,6 @@ namespace SmartFlow.Transactions
             }
             catch (Exception ex) { throw ex; }
         }
-
         private string GetLastInvoiceNumber()
         {
             string lastInvoiceNumber = null;
@@ -140,7 +131,6 @@ namespace SmartFlow.Transactions
 
             return lastInvoiceNumber;
         }
-
         private string GenerateNextInvoiceNumber()
         {
             try
@@ -183,7 +173,6 @@ namespace SmartFlow.Transactions
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void dgvjournal_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             if (e.ColumnIndex == dgvjournal.Columns[""].Index)

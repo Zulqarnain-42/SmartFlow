@@ -18,12 +18,11 @@ namespace SmartFlow
         {
             InitializeComponent();
         }
-
         private void SaleReturnInvoice_Load(object sender, EventArgs e)
         {
+            invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
             invoicenotxtbox.Text = GenerateNextInvoiceNumber();
         }
-
         private string GenerateNextInvoiceNumber()
         {
             try
@@ -66,7 +65,6 @@ namespace SmartFlow
             }
             catch (Exception ex) { throw ex; }
         }
-
         private string GetLastInvoiceNumber()
         {
             string lastInvoiceNumber = null;
@@ -86,7 +84,6 @@ namespace SmartFlow
 
             return lastInvoiceNumber;
         }
-
         private string CheckInvoiceBeforeInsert()
         {
             try
@@ -105,7 +102,6 @@ namespace SmartFlow
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void SaleReturnInvoice_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -114,7 +110,6 @@ namespace SmartFlow
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void dgvsaleproduct_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -142,7 +137,6 @@ namespace SmartFlow
                 }
             }catch(Exception ex) { throw ex; }
         }
-
         private void dgvsaleproduct_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.D)
@@ -164,7 +158,6 @@ namespace SmartFlow
                 }
             }
         }
-
         private void selectcustomertxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(CustomerSelectionForm));
@@ -179,7 +172,6 @@ namespace SmartFlow
                 openForm.BringToFront();
             }
         }
-
         private void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
@@ -194,23 +186,31 @@ namespace SmartFlow
                 openForm.BringToFront();
             }
         }
-
         private void UpdateProductTextBox()
         {
-            selectproducttxtbox.Text = GlobalVariables.productnameglobal.ToString();
-            productidlbl.Text = GlobalVariables.productidglobal.ToString();
-            mfrtxtbox.Text = GlobalVariables.productmfrglobal.ToString();
-        }
+            if(!string.IsNullOrEmpty(GlobalVariables.productnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.productnameglobal) && 
+                !string.IsNullOrEmpty(GlobalVariables.productmfrglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.productmfrglobal) && 
+                GlobalVariables.productidglobal > 0)
+            {
+                selectproducttxtbox.Text = GlobalVariables.productnameglobal.ToString();
+                productidlbl.Text = GlobalVariables.productidglobal.ToString();
+                mfrtxtbox.Text = GlobalVariables.productmfrglobal.ToString();
+            }
 
+        }
         private void UpdateCustomerTextBox()
         {
-            codetxtbox.Text = GlobalVariables.customeridglobal.ToString();
-            selectcustomertxtbox.Text = GlobalVariables.customernameglobal.ToString();
-            refrencetxtbox.Text = GlobalVariables.customerrefrencegloba.ToString();
-            mobiletxtbox.Text = GlobalVariables.customermobileglobal.ToString();
-
+            if(!string.IsNullOrEmpty(GlobalVariables.customercodeglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.customercodeglobal) && 
+                !string.IsNullOrEmpty(GlobalVariables.customermobileglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.customermobileglobal) && 
+                !string.IsNullOrEmpty(GlobalVariables.customernameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.customernameglobal) && 
+                GlobalVariables.customeridglobal > 0)
+            {
+                codetxtbox.Text = GlobalVariables.customercodeglobal.ToString();
+                selectcustomertxtbox.Text = GlobalVariables.customernameglobal.ToString();
+                refrencetxtbox.Text = GlobalVariables.customerrefrencegloba.ToString();
+                mobiletxtbox.Text = GlobalVariables.customermobileglobal.ToString();
+            }
         }
-
         private void SaleReturnInvoice_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -223,7 +223,6 @@ namespace SmartFlow
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             if (selectcustomertxtbox.Text.Trim().Length > 0) { return true; }
@@ -231,13 +230,11 @@ namespace SmartFlow
             if (dgvsaleproducts.Rows.Count > 0) { return true; }
             return false; // No TextBox is filled
         }
-
         private void dgvsaleproducts_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             CalculateTotalVatColumn(5);
             CalculateTotalColumn(7);
         }
-
         private void CalculateTotalColumn(int columnIndex)
         {
             decimal total = 0;
@@ -255,61 +252,11 @@ namespace SmartFlow
 
             nettotaltxtbox.Text = total.ToString("0.00 AED");
         }
-
         private void dgvsaleproducts_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             CalculateTotalVatColumn(5);
             CalculateTotalColumn(7);
         }
-
-        private void qtytxtbox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // Check for a valid character (digits, control characters, and the decimal point)
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-
-            // Allow only one decimal point
-            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void pricetxtbox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // Check for a valid character (digits, control characters, and the decimal point)
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-
-            // Allow only one decimal point
-            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void discounttxtbox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // Check for a valid character (digits, control characters, and the decimal point)
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-
-            // Allow only one decimal point
-            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
-            {
-                e.Handled = true;
-            }
-        }
-
         private void CalculateTotalVatColumn(int columnIndex)
         {
             decimal totalvat = 0;
@@ -327,7 +274,6 @@ namespace SmartFlow
 
             totalvattxtbox.Text = totalvat.ToString("#,##0.## AED");
         }
-
         private void salesmantxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(SalesPersonSelection));
@@ -342,13 +288,15 @@ namespace SmartFlow
                 openForm.BringToFront();
             }
         }
-
         private void UpdateSalesPersonInfo()
         {
-            salespersonidlbl.Text = GlobalVariables.salespersonidglobal.ToString();
-            salesmantxtbox.Text = GlobalVariables.salespersonnameglobal;
+            if(!string.IsNullOrEmpty(GlobalVariables.salespersonnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.salespersonnameglobal) && 
+                GlobalVariables.salespersonidglobal > 0)
+            {
+                salespersonidlbl.Text = GlobalVariables.salespersonidglobal.ToString();
+                salesmantxtbox.Text = GlobalVariables.salespersonnameglobal;
+            }
         }
-
         private void pricetxtbox_Leave(object sender, EventArgs e)
         {
             try
@@ -407,7 +355,6 @@ namespace SmartFlow
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void selectcustomertxtbox_Leave(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(CurrencySelection));
@@ -421,19 +368,95 @@ namespace SmartFlow
                 openForm.BringToFront();
             }
         }
-
         private void selectproducttxtbox_Leave(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(ProductQtyWarehouse));
             if (openForm == null) 
             {
-                ProductQtyWarehouse productQtyWarehouse = new ProductQtyWarehouse();
-                productQtyWarehouse.ShowDialog();
+                if (!string.IsNullOrEmpty(productidlbl.Text) && !string.IsNullOrWhiteSpace(productidlbl.Text) &&
+                    !string.IsNullOrEmpty(mfrtxtbox.Text) && !string.IsNullOrWhiteSpace(mfrtxtbox.Text))
+                {
+                    string productmfr = mfrtxtbox.Text;
+                    int productid = Convert.ToInt32(productidlbl.Text);
+                    ProductQtyWarehouse productQtyWarehouse = new ProductQtyWarehouse(productmfr, productid);
+                    productQtyWarehouse.ShowDialog();
+                }
             }
             else
             {
                 openForm.BringToFront();
             }
+        }
+
+        private void saletypetxtbox_MouseClick(object sender, MouseEventArgs e)
+        {
+            Form openForm = CommonFunction.IsFormOpen(typeof(SaleTypeSelection));
+            if (openForm == null)
+            {
+                SaleTypeSelection saletype = new SaleTypeSelection();
+                saletype.ShowDialog();
+            }
+            else
+            {
+                openForm.BringToFront();
+            }
+        }
+
+        private void saletypetxtbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Form openForm = CommonFunction.IsFormOpen(typeof(SaleTypeSelection));
+                if (openForm == null)
+                {
+                    SaleTypeSelection saleTypeSelection = new SaleTypeSelection();
+                    saleTypeSelection.ShowDialog();
+                }
+                else
+                {
+                    openForm.BringToFront();
+                }
+            }
+        }
+
+        private void selectcustomertxtbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                Form openForm = CommonFunction.IsFormOpen(typeof(CustomerSelectionForm));
+                if (openForm == null)
+                {
+                    CustomerSelectionForm customerSelectionForm = new CustomerSelectionForm();
+                    customerSelectionForm.ShowDialog();
+                }
+                else
+                {
+                    openForm.BringToFront();
+                }
+            }
+        }
+
+        private void salesmantxtbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                Form openForm = CommonFunction.IsFormOpen(typeof(SalesPersonSelection));
+                if(openForm == null)
+                {
+                    SalesPersonSelection salesPersonSelection = new SalesPersonSelection();
+                    salesPersonSelection.ShowDialog();
+                }
+                else
+                {
+                    openForm.BringToFront();
+                }
+            }
+        }
+
+        private void narationtxtbox_Leave(object sender, EventArgs e)
+        {
+            InvoiceNoteForm invoiceNoteForm = new InvoiceNoteForm();
+            invoiceNoteForm.ShowDialog();
         }
     }
 }

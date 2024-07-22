@@ -13,7 +13,6 @@ namespace SmartFlow.Masters
         {
             InitializeComponent();
         }
-
         private void newbtn_Click(object sender, EventArgs e)
         {
             CreateProduct createProduct = new CreateProduct();
@@ -23,12 +22,10 @@ namespace SmartFlow.Masters
                 FillGrid("");
             };
         }
-
         private void closebtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void FillGrid(string searchvalue) 
         {
             try
@@ -77,17 +74,14 @@ namespace SmartFlow.Masters
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void Product_Load(object sender, EventArgs e)
         {
             FillGrid("");
         }
-
         private void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
             FillGrid(searchtxtbox.Text.Trim());
         }
-
         private void Product_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -102,7 +96,6 @@ namespace SmartFlow.Masters
                 e.Handled = true;
             }
         }
-
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -138,7 +131,6 @@ namespace SmartFlow.Masters
                 throw ex;
             }
         }
-
         private void productsGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -171,7 +163,6 @@ namespace SmartFlow.Masters
             }
             catch(Exception ex) { throw ex; }
         }
-
         private int GetFirstVisibleRowIndex(DataGridView dataGridView)
         {
             int firstDisplayedRowIndex = dataGridView.FirstDisplayedScrollingRowIndex;
@@ -184,7 +175,6 @@ namespace SmartFlow.Masters
 
             return firstDisplayedRowIndex + displayedRowCount - 1;
         }
-
         private void productsGridView_Scroll(object sender, ScrollEventArgs e)
         {
             int firstVisibleRowIndex = GetFirstVisibleRowIndex(productsGridView);
@@ -195,7 +185,6 @@ namespace SmartFlow.Masters
                 currentCellIndex = firstVisibleCellIndex;
             }
         }
-
         private int GetFirstVisibleCellIndex(DataGridView dataGridView)
         {
             int horizontalOffset = dataGridView.HorizontalScrollingOffset;
@@ -218,7 +207,6 @@ namespace SmartFlow.Masters
 
             return dataGridView.Columns.Count - 1;
         }
-
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -251,7 +239,6 @@ namespace SmartFlow.Masters
             }
             catch (Exception ex) { throw ex; }
         }
-
         private string BuildSearchQuery(string searchTerm)
         {
             string[] terms = searchTerm.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -285,7 +272,6 @@ namespace SmartFlow.Masters
 
             return queryBuilder.ToString();
         }
-
         private void Product_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -298,7 +284,6 @@ namespace SmartFlow.Masters
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

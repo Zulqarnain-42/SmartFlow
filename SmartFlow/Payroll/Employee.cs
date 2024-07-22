@@ -12,13 +12,11 @@ namespace SmartFlow.Payroll
         {
             InitializeComponent();
         }
-
         public Employee(int employeid)
         {
             InitializeComponent();
             employeidmain.Text = employeid.ToString();
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -35,12 +33,10 @@ namespace SmartFlow.Payroll
             catch (Exception ex) { throw ex; }
             
         }
-
         private void closebtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void Employee_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -49,7 +45,6 @@ namespace SmartFlow.Payroll
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         static string GenerateRandomEmployeCode()
         {
             Random random = new Random();
@@ -73,7 +68,6 @@ namespace SmartFlow.Payroll
             }
             return serialNumber = String.Concat("EM", serialNumber); ;
         }
-
         private void Employee_Load(object sender, EventArgs e)
         {
             employeeidtxtbox.Text = GenerateRandomEmployeCode();
@@ -84,7 +78,6 @@ namespace SmartFlow.Payroll
                 FindRecord(Convert.ToInt32(employeidmain.Text));
             }
         }
-
         private void FindRecord(int id)
         {
             try
@@ -119,7 +112,6 @@ namespace SmartFlow.Payroll
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void UpdateData()
         {
             errorProvider.Clear();
@@ -177,7 +169,6 @@ namespace SmartFlow.Payroll
                 MessageBox.Show("Something is Wrong.");
             }
         }
-
         private void AddData()
         {
             errorProvider.Clear();
@@ -265,7 +256,6 @@ namespace SmartFlow.Payroll
                 }
             }
         }
-
         private void selectaccountgrouptxtbox_Enter(object sender, EventArgs e)
         {
             try
@@ -275,7 +265,6 @@ namespace SmartFlow.Payroll
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void selectaccountgrouptxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             try
@@ -293,7 +282,6 @@ namespace SmartFlow.Payroll
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void Employee_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -306,7 +294,6 @@ namespace SmartFlow.Payroll
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

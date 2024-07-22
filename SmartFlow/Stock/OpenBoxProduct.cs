@@ -15,7 +15,6 @@ namespace SmartFlow.Stock
         {
             InitializeComponent();
         }
-
         private string GenerateNextInvoiceNumber()
         {
             try
@@ -58,7 +57,6 @@ namespace SmartFlow.Stock
             }
             catch (Exception ex) { throw ex; }
         }
-
         private string GetLastInvoiceNumber()
         {
             string lastInvoiceNumber = null;
@@ -78,12 +76,10 @@ namespace SmartFlow.Stock
 
             return lastInvoiceNumber;
         }
-
         private void OpenBoxProduct_Load(object sender, EventArgs e)
         {
             openboxproductidlbl.Text = GenerateNextInvoiceNumber();
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -174,7 +170,6 @@ namespace SmartFlow.Stock
 
             }catch (Exception ex) { throw ex; }
         }
-
         static string GenerateRandomSerialNumber()
         {
             Random random = new Random();
@@ -198,7 +193,6 @@ namespace SmartFlow.Stock
             }
             return serialNumber;
         }
-
         private void addbtn_Click(object sender, EventArgs e)
         {
             try
@@ -245,7 +239,6 @@ namespace SmartFlow.Stock
 
             }catch(Exception ex) { throw ex; }
         }
-
         private void dgvproducts_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.D)
@@ -267,7 +260,6 @@ namespace SmartFlow.Stock
                 }
             }
         }
-
         private void OpenBoxProduct_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -276,7 +268,6 @@ namespace SmartFlow.Stock
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void selectwarehousefromtxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
@@ -300,13 +291,11 @@ namespace SmartFlow.Stock
                 openForm.BringToFront();
             }
         }
-
         private void UpdateWarehouseTextBox()
         {
             selectwarehousefromtxtbox.Text = GlobalVariables.warehousenameglobal.ToString();
             warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
         }
-
         private void openboxproducttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
@@ -321,7 +310,6 @@ namespace SmartFlow.Stock
                 openForm.BringToFront();
             }
         }
-
         private void UpdateProductTextBox()
         {
             openboxproducttxtbox.Text = GlobalVariables.productnameglobal.ToString();
@@ -331,7 +319,6 @@ namespace SmartFlow.Stock
             productupclbl.Text = GlobalVariables.productupcglobal.ToString();
             productbarcodelbl.Text = GlobalVariables.productbarcodeglobal.ToString();
         }
-
         private void remainingproductmfrtxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
@@ -346,7 +333,6 @@ namespace SmartFlow.Stock
                 openForm.BringToFront();
             }
         }
-
         private void UpdateOpenBoxProductTextBox()
         {
             remainingproductmfrtxtbox.Text = GlobalVariables.productnameglobal.ToString();
@@ -356,7 +342,6 @@ namespace SmartFlow.Stock
             openboxproductupclbl.Text = GlobalVariables.productupcglobal.ToString();
             openboxproductbarcodelbl.Text = GlobalVariables.productbarcodeglobal.ToString();
         }
-
         private void OpenBoxProduct_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -369,7 +354,6 @@ namespace SmartFlow.Stock
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)
@@ -381,7 +365,6 @@ namespace SmartFlow.Stock
             }
             return false; // No TextBox is filled
         }
-
         private void closebtn_Click(object sender, EventArgs e)
         {
             this.Close();

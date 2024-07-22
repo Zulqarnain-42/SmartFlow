@@ -13,7 +13,6 @@ namespace SmartFlow.Masters
         {
             InitializeComponent();
         }
-
         private void OpeningBalance_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -22,7 +21,6 @@ namespace SmartFlow.Masters
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void FillGrid(string searchvalue)
         {
             try
@@ -71,12 +69,10 @@ namespace SmartFlow.Masters
             }
             catch(Exception ex) { throw ex; }
         }
-
         private void OpeningBalance_Load(object sender, EventArgs e)
         {
             FillGrid("");
         }
-
         private void dataGridViewopeningbalance_Scroll(object sender, ScrollEventArgs e)
         {
             int firstVisibleRowIndex = GetFirstVisibleRowIndex(dataGridViewopeningbalance);
@@ -87,7 +83,6 @@ namespace SmartFlow.Masters
                 currentCellIndex = firstVisibleCellIndex;
             }
         }
-
         private int GetFirstVisibleRowIndex(DataGridView dataGridView)
         {
             int firstDisplayedRowIndex = dataGridView.FirstDisplayedScrollingRowIndex;
@@ -100,7 +95,6 @@ namespace SmartFlow.Masters
 
             return firstDisplayedRowIndex + displayedRowCount - 1;
         }
-
         private int GetFirstVisibleCellIndex(DataGridView dataGridView)
         {
             int horizontalOffset = dataGridView.HorizontalScrollingOffset;
@@ -123,7 +117,6 @@ namespace SmartFlow.Masters
 
             return dataGridView.Columns.Count - 1;
         }
-
         private string BuildSearchQueryAccounts(string searchTerm)
         {
             string[] terms = searchTerm.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -141,12 +134,10 @@ namespace SmartFlow.Masters
 
             return queryBuilder.ToString();
         }
-
         private void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
             FillGrid(searchtxtbox.Text);
         }
-
         private void OpeningBalance_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -159,7 +150,6 @@ namespace SmartFlow.Masters
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

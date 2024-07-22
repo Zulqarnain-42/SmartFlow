@@ -390,6 +390,18 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Purchase\Reports\PurchaseQuotationRepo.cs">
+      <DependentUpon>PurchaseQuotationRepo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Purchase\Reports\PurchaseReturnRepo.cs">
+      <DependentUpon>PurchaseReturnRepo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Purchase\Reports\PurchaseOrderRepo.cs">
       <DependentUpon>PurchaseOrderRepo.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -401,6 +413,12 @@
     </Compile>
     <Compile Include="Purchase\WarehouseSelection.Designer.cs">
       <DependentUpon>WarehouseSelection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\CommonForm\AvailabilityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\CommonForm\AvailabilityForm.Designer.cs">
+      <DependentUpon>AvailabilityForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Sales\CommonForm\CurrencySelection.cs">
       <SubType>Form</SubType>
@@ -426,11 +444,23 @@
     <Compile Include="Sales\CommonForm\ItemWiseDescription.Designer.cs">
       <DependentUpon>ItemWiseDescription.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sales\CommonForm\ProductConditionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\CommonForm\ProductConditionForm.Designer.cs">
+      <DependentUpon>ProductConditionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\CommonForm\SearchQuotationForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Sales\CommonForm\SearchQuotationForm.Designer.cs">
       <DependentUpon>SearchQuotationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\CommonForm\SearchSaleInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\CommonForm\SearchSaleInvoice.Designer.cs">
+      <DependentUpon>SearchSaleInvoice.cs</DependentUpon>
     </Compile>
     <Compile Include="Sales\CommonForm\TransactionInfoProduct.cs">
       <SubType>Form</SubType>
@@ -485,6 +515,12 @@
     </Compile>
     <Compile Include="Sales\PackingList.Designer.cs">
       <DependentUpon>PackingList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\Reports\SalerReturnRepo.cs">
+      <DependentUpon>SalerReturnRepo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Sales\Reports\SaleOrderRepo.cs">
       <DependentUpon>SaleOrderRepo.rpt</DependentUpon>
@@ -567,11 +603,35 @@
     <Compile Include="Stock\OpeningStock.Designer.cs">
       <DependentUpon>OpeningStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="Stock\Reports\PrintedBarcode.cs">
+    <Compile Include="Stock\CommonForm\PrintedBarcode.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Stock\Reports\PrintedBarcode.Designer.cs">
+    <Compile Include="Stock\CommonForm\PrintedBarcode.Designer.cs">
       <DependentUpon>PrintedBarcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\Reports\BookedItemRepo.cs">
+      <DependentUpon>BookedItemRepo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Stock\Reports\DamageItemRepo.cs">
+      <DependentUpon>DamageItemRepo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Stock\Reports\OpenBoxProductRepo.cs">
+      <DependentUpon>OpenBoxProductRepo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Stock\Reports\StockTransferRepo.cs">
+      <DependentUpon>StockTransferRepo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Stock\StockLocation.cs">
       <SubType>Form</SubType>
@@ -668,6 +728,48 @@
     </Compile>
     <Compile Include="Transactions\Receipts.Designer.cs">
       <DependentUpon>Receipts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\Reports\CreditNoteRepo.cs">
+      <DependentUpon>CreditNoteRepo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Transactions\Reports\DebitNoteRepo.cs">
+      <DependentUpon>DebitNoteRepo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Transactions\Reports\JournalRepo.cs">
+      <DependentUpon>JournalRepo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Transactions\Reports\MaterialIssuedRepo.cs">
+      <DependentUpon>MaterialIssuedRepo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Transactions\Reports\MaterialReceiveRepo.cs">
+      <DependentUpon>MaterialReceiveRepo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Transactions\Reports\PaymentVoucher.cs">
+      <DependentUpon>PaymentVoucher.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Transactions\Reports\ReceiptsVoucher.cs">
+      <DependentUpon>ReceiptsVoucher.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Common\CommonForms\AccountSelectionForm.resx">
       <DependentUpon>AccountSelectionForm.cs</DependentUpon>
@@ -794,12 +896,23 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PurchaseInvoiceRepo.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\Reports\PurchaseQuotationRepo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PurchaseQuotationRepo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\Reports\PurchaseReturnRepo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PurchaseReturnRepo.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchase\Reports\PurchaseOrderRepo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PurchaseOrderRepo.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\WarehouseSelection.resx">
       <DependentUpon>WarehouseSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\CommonForm\AvailabilityForm.resx">
+      <DependentUpon>AvailabilityForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\CommonForm\CurrencySelection.resx">
       <DependentUpon>CurrencySelection.cs</DependentUpon>
@@ -813,8 +926,14 @@
     <EmbeddedResource Include="Sales\CommonForm\ItemWiseDescription.resx">
       <DependentUpon>ItemWiseDescription.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sales\CommonForm\ProductConditionForm.resx">
+      <DependentUpon>ProductConditionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sales\CommonForm\SearchQuotationForm.resx">
       <DependentUpon>SearchQuotationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\CommonForm\SearchSaleInvoice.resx">
+      <DependentUpon>SearchSaleInvoice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\CommonForm\TransactionInfoProduct.resx">
       <DependentUpon>TransactionInfoProduct.cs</DependentUpon>
@@ -842,6 +961,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\PackingList.resx">
       <DependentUpon>PackingList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\Reports\SalerReturnRepo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SalerReturnRepo.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\Reports\SaleOrderRepo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -891,8 +1014,24 @@
     <EmbeddedResource Include="Stock\OpeningStock.resx">
       <DependentUpon>OpeningStock.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Stock\Reports\PrintedBarcode.resx">
+    <EmbeddedResource Include="Stock\CommonForm\PrintedBarcode.resx">
       <DependentUpon>PrintedBarcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\Reports\BookedItemRepo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BookedItemRepo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\Reports\DamageItemRepo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DamageItemRepo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\Reports\OpenBoxProductRepo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OpenBoxProductRepo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\Reports\StockTransferRepo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StockTransferRepo.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Stock\StockLocation.resx">
       <DependentUpon>StockLocation.cs</DependentUpon>
@@ -942,6 +1081,34 @@
     <EmbeddedResource Include="Transactions\Receipts.resx">
       <DependentUpon>Receipts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\Reports\CreditNoteRepo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CreditNoteRepo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\Reports\DebitNoteRepo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DebitNoteRepo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\Reports\JournalRepo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>JournalRepo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\Reports\MaterialIssuedRepo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaterialIssuedRepo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\Reports\MaterialReceiveRepo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaterialReceiveRepo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\Reports\PaymentVoucher.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PaymentVoucher.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\Reports\ReceiptsVoucher.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReceiptsVoucher.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -961,7 +1128,6 @@
     <Folder Include="Payroll\Reports\" />
     <Folder Include="Reports\" />
     <Folder Include="Setting\Reports\" />
-    <Folder Include="Transactions\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />

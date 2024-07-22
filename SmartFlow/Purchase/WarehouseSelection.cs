@@ -11,7 +11,6 @@ namespace SmartFlow.Purchase
         {
             InitializeComponent();
         }
-
         public WarehouseSelection(DataTable warehousedata)
         {
             InitializeComponent();
@@ -19,7 +18,6 @@ namespace SmartFlow.Purchase
             dgvwarehouseselection.DataSource = datawarehouse;
             dgvwarehouseselection.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
-
         private void dgvwarehouseselection_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Enter)
@@ -33,7 +31,6 @@ namespace SmartFlow.Purchase
                 }
             }
         }
-
         private void WarehouseSelection_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -42,7 +39,6 @@ namespace SmartFlow.Purchase
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void dgvwarehouseselection_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvwarehouseselection != null)

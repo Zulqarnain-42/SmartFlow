@@ -14,18 +14,15 @@ namespace SmartFlow.Masters
         {
             InitializeComponent();
         }
-
         public Account(int id)
         {
             InitializeComponent();
             label1.Text = id.ToString();
         }
-
         private void closebtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -279,7 +276,6 @@ namespace SmartFlow.Masters
                 throw ex;
             }
         }
-
         private void Account_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -288,12 +284,10 @@ namespace SmartFlow.Masters
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void nametxtbox_TextChanged(object sender, EventArgs e)
         {
             printnametxtbox.Text = nametxtbox.Text.ToLower();
         }
-
         private void Account_Load(object sender, EventArgs e)
         {
             string labeldata = label1.Text;
@@ -302,7 +296,6 @@ namespace SmartFlow.Masters
                 FindRecord(Convert.ToInt32(label1.Text));
             }
         }
-
         private void FindRecord(int id)
         {
             try
@@ -329,7 +322,6 @@ namespace SmartFlow.Masters
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void selectaccountgrouptxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             try
@@ -347,7 +339,6 @@ namespace SmartFlow.Masters
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void selectaccountgrouptxtbox_Enter(object sender, EventArgs e)
         {
             try
@@ -357,7 +348,6 @@ namespace SmartFlow.Masters
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void Account_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -370,7 +360,6 @@ namespace SmartFlow.Masters
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

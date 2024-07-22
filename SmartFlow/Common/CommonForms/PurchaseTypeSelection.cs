@@ -18,7 +18,6 @@ namespace SmartFlow.Common.CommonForms
         {
             InitializeComponent();
         }
-
         private void PurchaseTypeSelection_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape) 
@@ -27,19 +26,16 @@ namespace SmartFlow.Common.CommonForms
                 e.Handled = true;
             }
         }
-
         private void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
             CommonFunction.GetPurchaseTypeInfo(searchtxtbox.Text,dgvpurchasetypeselection);
         }
-
         private void PurchaseTypeSelection_Load(object sender, EventArgs e)
         {
             searchtxtbox.Focus();
             dgvpurchasetypeselection.ClearSelection();
             CommonFunction.GetPurchaseTypeInfo("",dgvpurchasetypeselection);
         }
-
         private void dgvpurchasetypeselection_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -50,13 +46,15 @@ namespace SmartFlow.Common.CommonForms
                     {
                         if(dgvpurchasetypeselection.SelectedRows.Count == 1)
                         {
+                            GlobalVariables.purchasetypeidglobal = Convert.ToInt32(dgvpurchasetypeselection.CurrentRow.Cells["ID"].Value);
+                            GlobalVariables.purchasetypenameglobal = dgvpurchasetypeselection.CurrentRow.Cells["Name"].Value.ToString();
+                            GlobalVariables.purchasetypeistaxable = (bool)dgvpurchasetypeselection.CurrentRow.Cells["Taxable"].Value;
                             this.Close();
                         }
                     }
                 }
             }catch (Exception ex) { throw ex; }
         }
-
         private void dgvpurchasetypeselection_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -66,12 +64,14 @@ namespace SmartFlow.Common.CommonForms
                     DataGridViewRow selectedrow = dgvpurchasetypeselection.CurrentRow;
                     if (selectedrow != null)
                     {
+                        GlobalVariables.purchasetypeidglobal = Convert.ToInt32(dgvpurchasetypeselection.CurrentRow.Cells["ID"].Value);
+                        GlobalVariables.purchasetypenameglobal = dgvpurchasetypeselection.CurrentRow.Cells["Name"].Value.ToString();
+                        GlobalVariables.purchasetypeistaxable = (bool)dgvpurchasetypeselection.CurrentRow.Cells["Taxable"].Value;
                         this.Close();
                     }
                 }
             }catch (Exception ex) { throw ex; }
         }
-
         private void searchtxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Enter)

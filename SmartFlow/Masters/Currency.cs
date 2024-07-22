@@ -16,7 +16,6 @@ namespace SmartFlow.Masters
         {
             InitializeComponent();
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -55,12 +54,10 @@ namespace SmartFlow.Masters
 
             }catch(Exception ex) { throw ex; }
         }
-
         private void currencysymboltxtbox_TextChanged(object sender, EventArgs e)
         {
             currencystrintxtbox.Text = currencysymboltxtbox.Text.Trim();
         }
-
         private void Currency_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)

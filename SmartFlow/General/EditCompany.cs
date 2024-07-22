@@ -8,7 +8,6 @@ namespace SmartFlow.General
         {
             InitializeComponent();
         }
-
         private void EditCompany_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -17,7 +16,6 @@ namespace SmartFlow.General
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void EditCompany_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -30,7 +28,6 @@ namespace SmartFlow.General
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

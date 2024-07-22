@@ -107,6 +107,7 @@
             this.alltransactionbtn.TabIndex = 1;
             this.alltransactionbtn.Text = "ALL TRANSACTION";
             this.alltransactionbtn.UseVisualStyleBackColor = true;
+            this.alltransactionbtn.Click += new System.EventHandler(this.alltransactionbtn_Click);
             // 
             // currentcustomerdatabtn
             // 
@@ -131,7 +132,7 @@
             this.Name = "TransactionInfoProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Transaction Info Product";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TransactionInfoProduct_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TransactionInfoProduct_FormClosed);
             this.Load += new System.EventHandler(this.TransactionInfoProduct_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TransactionInfoProduct_KeyDown);
             this.panel1.ResumeLayout(false);

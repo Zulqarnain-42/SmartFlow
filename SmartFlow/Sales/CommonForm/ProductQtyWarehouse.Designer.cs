@@ -90,7 +90,7 @@
             this.Name = "ProductQtyWarehouse";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quantity Available in warehouse";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProductQtyWarehouse_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProductQtyWarehouse_FormClosed);
             this.Load += new System.EventHandler(this.ProductQtyWarehouse_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ProductQtyWarehouse_KeyDown);
             this.panel1.ResumeLayout(false);

@@ -13,7 +13,6 @@ namespace SmartFlow.Stock
         {
             InitializeComponent();
         }
-
         private void FillGrid(string searchvalue)
         {
             try
@@ -59,12 +58,10 @@ namespace SmartFlow.Stock
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void OpeningStock_Load(object sender, EventArgs e)
         {
             FillGrid("");
         }
-
         private void dgvProducts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -91,12 +88,10 @@ namespace SmartFlow.Stock
                 }
             }catch (Exception ex) { throw ex; }
         }
-
         private void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
             FillGrid(searchtxtbox.Text);
         }
-
         private void dgvProducts_Scroll(object sender, ScrollEventArgs e)
         {
             int firstVisibleRowIndex = GetFirstVisibleRowIndex(dgvProducts);
@@ -107,7 +102,6 @@ namespace SmartFlow.Stock
                 currentCellIndex = firstVisibleCellIndex;
             }
         }
-
         private int GetFirstVisibleCellIndex(DataGridView dataGridView)
         {
             int horizontalOffset = dataGridView.HorizontalScrollingOffset;
@@ -130,7 +124,6 @@ namespace SmartFlow.Stock
 
             return dataGridView.Columns.Count - 1;
         }
-
         private int GetFirstVisibleRowIndex(DataGridView dataGridView)
         {
             int firstDisplayedRowIndex = dataGridView.FirstDisplayedScrollingRowIndex;
@@ -143,7 +136,6 @@ namespace SmartFlow.Stock
 
             return firstDisplayedRowIndex + displayedRowCount - 1;
         }
-
         private void OpeningStock_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Escape)
@@ -152,7 +144,6 @@ namespace SmartFlow.Stock
                 e.Handled = true;
             }
         }
-
         private string BuildSearchQuery(string searchTerm)
         {
             string[] terms = searchTerm.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -186,7 +177,6 @@ namespace SmartFlow.Stock
 
             return queryBuilder.ToString();
         }
-
         private void OpeningStock_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -199,7 +189,6 @@ namespace SmartFlow.Stock
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

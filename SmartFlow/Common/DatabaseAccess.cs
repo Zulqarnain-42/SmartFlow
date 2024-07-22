@@ -8,7 +8,6 @@ namespace SmartFlow
     public class DatabaseAccess
     {
         public static SqlConnection conn;
-
         private static SqlConnection ConnOpen() 
         {
             if(conn == null)
@@ -23,7 +22,6 @@ namespace SmartFlow
 
             return conn;
         }
-
         public static bool Insert(String query)
         {
             try
@@ -46,7 +44,6 @@ namespace SmartFlow
             }
             finally { conn.Close(); }
         }
-
         public static int InsertId(string query)
         {
             try
@@ -65,7 +62,6 @@ namespace SmartFlow
             }
             catch(Exception ex) { throw ex; }finally { conn.Close(); }
         }
-
         public static bool Update(String query)
         {
             try
@@ -87,7 +83,6 @@ namespace SmartFlow
                 throw;
             }finally { conn.Close(); }
         }
-
         public static bool Delete(String query)
         {
             try
@@ -110,8 +105,6 @@ namespace SmartFlow
             }
             finally { conn.Close(); }
         }
-
-
         public static DataTable Retrive(String query)
         {
             try

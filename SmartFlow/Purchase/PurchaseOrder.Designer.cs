@@ -39,14 +39,20 @@ namespace SmartFlow.Purchase
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvpurchaseproducts = new System.Windows.Forms.DataGridView();
             this.mfrcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemdescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.conditioncolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qtycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vatpercentagecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vatcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discountcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pricetxtbox = new System.Windows.Forms.TextBox();
+            this.qtytxtbox = new System.Windows.Forms.TextBox();
             this.selectproducttxtbox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -54,6 +60,13 @@ namespace SmartFlow.Purchase
             this.mfrtxtbox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.currencyconversionratelbl = new System.Windows.Forms.Label();
+            this.invoicespecialnotelbl = new System.Windows.Forms.Label();
+            this.currencysymbollbl = new System.Windows.Forms.Label();
+            this.currencynamelbl = new System.Windows.Forms.Label();
+            this.currencyidlbl = new System.Windows.Forms.Label();
+            this.purchasetypeidlbl = new System.Windows.Forms.Label();
+            this.invoicedatetxtbox = new System.Windows.Forms.MaskedTextBox();
             this.purchasetypetxtbox = new System.Windows.Forms.TextBox();
             this.purchasetypelbl = new System.Windows.Forms.Label();
             this.supplieridlbl = new System.Windows.Forms.Label();
@@ -68,17 +81,12 @@ namespace SmartFlow.Purchase
             this.savebtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
-            this.invoicedatetxtbox = new System.Windows.Forms.MaskedTextBox();
             this.totaldiscountlbl = new System.Windows.Forms.Label();
-            this.totaldiscounttxtbox = new System.Windows.Forms.MaskedTextBox();
-            this.nettotaltxtbox = new System.Windows.Forms.MaskedTextBox();
-            this.totalvattxtbox = new System.Windows.Forms.MaskedTextBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.totalvatlbl = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.unitlbl = new System.Windows.Forms.Label();
-            this.unittxtbox = new System.Windows.Forms.ComboBox();
-            this.pricetxtbox = new System.Windows.Forms.MaskedTextBox();
-            this.qtytxtbox = new System.Windows.Forms.MaskedTextBox();
+            this.totaldiscounttxtbox = new System.Windows.Forms.TextBox();
+            this.totalvattxtbox = new System.Windows.Forms.TextBox();
+            this.nettotaltxtbox = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpurchaseproducts)).BeginInit();
@@ -170,12 +178,16 @@ namespace SmartFlow.Purchase
             this.dgvpurchaseproducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvpurchaseproducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.mfrcolumn,
+            this.itemdescription,
+            this.conditioncolumn,
             this.productid,
             this.productnamecolumn,
             this.qtycolumn,
-            this.pricecolumn,
-            this.vatpercentagecolumn,
+            this.unitidcolumn,
+            this.unitnamecolumn,
             this.vatcolumn,
+            this.discountcolumn,
+            this.pricecolumn,
             this.totalcolumn});
             this.dgvpurchaseproducts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvpurchaseproducts.Location = new System.Drawing.Point(3, 95);
@@ -197,6 +209,22 @@ namespace SmartFlow.Purchase
             this.mfrcolumn.MinimumWidth = 6;
             this.mfrcolumn.Name = "mfrcolumn";
             this.mfrcolumn.Width = 125;
+            // 
+            // itemdescription
+            // 
+            this.itemdescription.HeaderText = "itemdescription";
+            this.itemdescription.MinimumWidth = 6;
+            this.itemdescription.Name = "itemdescription";
+            this.itemdescription.Visible = false;
+            this.itemdescription.Width = 125;
+            // 
+            // conditioncolumn
+            // 
+            this.conditioncolumn.HeaderText = "Condition";
+            this.conditioncolumn.MinimumWidth = 6;
+            this.conditioncolumn.Name = "conditioncolumn";
+            this.conditioncolumn.Visible = false;
+            this.conditioncolumn.Width = 125;
             // 
             // productid
             // 
@@ -220,20 +248,20 @@ namespace SmartFlow.Purchase
             this.qtycolumn.Name = "qtycolumn";
             this.qtycolumn.Width = 125;
             // 
-            // pricecolumn
+            // unitidcolumn
             // 
-            this.pricecolumn.HeaderText = "Price";
-            this.pricecolumn.MinimumWidth = 6;
-            this.pricecolumn.Name = "pricecolumn";
-            this.pricecolumn.Width = 125;
+            this.unitidcolumn.HeaderText = "unitid";
+            this.unitidcolumn.MinimumWidth = 6;
+            this.unitidcolumn.Name = "unitidcolumn";
+            this.unitidcolumn.Visible = false;
+            this.unitidcolumn.Width = 125;
             // 
-            // vatpercentagecolumn
+            // unitnamecolumn
             // 
-            this.vatpercentagecolumn.HeaderText = "vatpercentage";
-            this.vatpercentagecolumn.MinimumWidth = 6;
-            this.vatpercentagecolumn.Name = "vatpercentagecolumn";
-            this.vatpercentagecolumn.Visible = false;
-            this.vatpercentagecolumn.Width = 125;
+            this.unitnamecolumn.HeaderText = "Unit";
+            this.unitnamecolumn.MinimumWidth = 6;
+            this.unitnamecolumn.Name = "unitnamecolumn";
+            this.unitnamecolumn.Width = 125;
             // 
             // vatcolumn
             // 
@@ -241,6 +269,20 @@ namespace SmartFlow.Purchase
             this.vatcolumn.MinimumWidth = 6;
             this.vatcolumn.Name = "vatcolumn";
             this.vatcolumn.Width = 125;
+            // 
+            // discountcolumn
+            // 
+            this.discountcolumn.HeaderText = "Diss";
+            this.discountcolumn.MinimumWidth = 6;
+            this.discountcolumn.Name = "discountcolumn";
+            this.discountcolumn.Width = 125;
+            // 
+            // pricecolumn
+            // 
+            this.pricecolumn.HeaderText = "Price";
+            this.pricecolumn.MinimumWidth = 6;
+            this.pricecolumn.Name = "pricecolumn";
+            this.pricecolumn.Width = 125;
             // 
             // totalcolumn
             // 
@@ -254,8 +296,6 @@ namespace SmartFlow.Purchase
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.unitlbl);
-            this.panel3.Controls.Add(this.unittxtbox);
             this.panel3.Controls.Add(this.pricetxtbox);
             this.panel3.Controls.Add(this.qtytxtbox);
             this.panel3.Controls.Add(this.selectproducttxtbox);
@@ -268,6 +308,31 @@ namespace SmartFlow.Purchase
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1724, 81);
             this.panel3.TabIndex = 0;
+            // 
+            // pricetxtbox
+            // 
+            this.pricetxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pricetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pricetxtbox.Font = new System.Drawing.Font("Calibri", 12F);
+            this.pricetxtbox.Location = new System.Drawing.Point(1567, 32);
+            this.pricetxtbox.Name = "pricetxtbox";
+            this.pricetxtbox.Size = new System.Drawing.Size(154, 32);
+            this.pricetxtbox.TabIndex = 30;
+            this.pricetxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.pricetxtbox.Leave += new System.EventHandler(this.pricetxtbox_Leave);
+            // 
+            // qtytxtbox
+            // 
+            this.qtytxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.qtytxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.qtytxtbox.Font = new System.Drawing.Font("Calibri", 12F);
+            this.qtytxtbox.Location = new System.Drawing.Point(1407, 34);
+            this.qtytxtbox.Name = "qtytxtbox";
+            this.qtytxtbox.Size = new System.Drawing.Size(154, 32);
+            this.qtytxtbox.TabIndex = 29;
+            this.qtytxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // selectproducttxtbox
             // 
@@ -335,6 +400,12 @@ namespace SmartFlow.Purchase
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.currencyconversionratelbl);
+            this.panel2.Controls.Add(this.invoicespecialnotelbl);
+            this.panel2.Controls.Add(this.currencysymbollbl);
+            this.panel2.Controls.Add(this.currencynamelbl);
+            this.panel2.Controls.Add(this.currencyidlbl);
+            this.panel2.Controls.Add(this.purchasetypeidlbl);
             this.panel2.Controls.Add(this.invoicedatetxtbox);
             this.panel2.Controls.Add(this.purchasetypetxtbox);
             this.panel2.Controls.Add(this.purchasetypelbl);
@@ -353,6 +424,77 @@ namespace SmartFlow.Purchase
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1251, 132);
             this.panel2.TabIndex = 45;
+            // 
+            // currencyconversionratelbl
+            // 
+            this.currencyconversionratelbl.AutoSize = true;
+            this.currencyconversionratelbl.Location = new System.Drawing.Point(1055, 88);
+            this.currencyconversionratelbl.Name = "currencyconversionratelbl";
+            this.currencyconversionratelbl.Size = new System.Drawing.Size(161, 16);
+            this.currencyconversionratelbl.TabIndex = 119;
+            this.currencyconversionratelbl.Text = "currencyconversionratelbl";
+            this.currencyconversionratelbl.Visible = false;
+            // 
+            // invoicespecialnotelbl
+            // 
+            this.invoicespecialnotelbl.AutoSize = true;
+            this.invoicespecialnotelbl.Location = new System.Drawing.Point(1052, 104);
+            this.invoicespecialnotelbl.Name = "invoicespecialnotelbl";
+            this.invoicespecialnotelbl.Size = new System.Drawing.Size(134, 16);
+            this.invoicespecialnotelbl.TabIndex = 118;
+            this.invoicespecialnotelbl.Text = "invoicespecialnotelbl";
+            this.invoicespecialnotelbl.Visible = false;
+            // 
+            // currencysymbollbl
+            // 
+            this.currencysymbollbl.AutoSize = true;
+            this.currencysymbollbl.Location = new System.Drawing.Point(989, 63);
+            this.currencysymbollbl.Name = "currencysymbollbl";
+            this.currencysymbollbl.Size = new System.Drawing.Size(116, 16);
+            this.currencysymbollbl.TabIndex = 117;
+            this.currencysymbollbl.Text = "currencysymbollbl";
+            this.currencysymbollbl.Visible = false;
+            // 
+            // currencynamelbl
+            // 
+            this.currencynamelbl.AutoSize = true;
+            this.currencynamelbl.Location = new System.Drawing.Point(989, 47);
+            this.currencynamelbl.Name = "currencynamelbl";
+            this.currencynamelbl.Size = new System.Drawing.Size(113, 16);
+            this.currencynamelbl.TabIndex = 116;
+            this.currencynamelbl.Text = "currecncynamelbl";
+            this.currencynamelbl.Visible = false;
+            // 
+            // currencyidlbl
+            // 
+            this.currencyidlbl.AutoSize = true;
+            this.currencyidlbl.Location = new System.Drawing.Point(989, 31);
+            this.currencyidlbl.Name = "currencyidlbl";
+            this.currencyidlbl.Size = new System.Drawing.Size(83, 16);
+            this.currencyidlbl.TabIndex = 115;
+            this.currencyidlbl.Text = "currencyidlbl";
+            this.currencyidlbl.Visible = false;
+            // 
+            // purchasetypeidlbl
+            // 
+            this.purchasetypeidlbl.AutoSize = true;
+            this.purchasetypeidlbl.Location = new System.Drawing.Point(989, 15);
+            this.purchasetypeidlbl.Name = "purchasetypeidlbl";
+            this.purchasetypeidlbl.Size = new System.Drawing.Size(114, 16);
+            this.purchasetypeidlbl.TabIndex = 114;
+            this.purchasetypeidlbl.Text = "purchasetypeidlbl";
+            this.purchasetypeidlbl.Visible = false;
+            // 
+            // invoicedatetxtbox
+            // 
+            this.invoicedatetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.invoicedatetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invoicedatetxtbox.Location = new System.Drawing.Point(396, 4);
+            this.invoicedatetxtbox.Mask = "00/00/0000";
+            this.invoicedatetxtbox.Name = "invoicedatetxtbox";
+            this.invoicedatetxtbox.Size = new System.Drawing.Size(187, 32);
+            this.invoicedatetxtbox.TabIndex = 113;
+            this.invoicedatetxtbox.ValidatingType = typeof(System.DateTime);
             // 
             // purchasetypetxtbox
             // 
@@ -437,6 +579,7 @@ namespace SmartFlow.Purchase
             this.narationtxtbox.Name = "narationtxtbox";
             this.narationtxtbox.Size = new System.Drawing.Size(852, 32);
             this.narationtxtbox.TabIndex = 3;
+            this.narationtxtbox.Leave += new System.EventHandler(this.narationtxtbox_Leave);
             // 
             // narationlbl
             // 
@@ -497,17 +640,6 @@ namespace SmartFlow.Purchase
             this.label6.Text = "PURCHASE ORDER";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // invoicedatetxtbox
-            // 
-            this.invoicedatetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.invoicedatetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoicedatetxtbox.Location = new System.Drawing.Point(396, 4);
-            this.invoicedatetxtbox.Mask = "00/00/0000";
-            this.invoicedatetxtbox.Name = "invoicedatetxtbox";
-            this.invoicedatetxtbox.Size = new System.Drawing.Size(187, 32);
-            this.invoicedatetxtbox.TabIndex = 113;
-            this.invoicedatetxtbox.ValidatingType = typeof(System.DateTime);
-            // 
             // totaldiscountlbl
             // 
             this.totaldiscountlbl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -519,63 +651,20 @@ namespace SmartFlow.Purchase
             this.totaldiscountlbl.Size = new System.Drawing.Size(95, 16);
             this.totaldiscountlbl.TabIndex = 133;
             this.totaldiscountlbl.Text = "TOTAL DISS";
+            this.totaldiscountlbl.Visible = false;
             // 
-            // totaldiscounttxtbox
+            // totalvatlbl
             // 
-            this.totaldiscounttxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.totalvatlbl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.totaldiscounttxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.totaldiscounttxtbox.Enabled = false;
-            this.totaldiscounttxtbox.Font = new System.Drawing.Font("Calibri", 12F);
-            this.totaldiscounttxtbox.Location = new System.Drawing.Point(1378, 152);
-            this.totaldiscounttxtbox.Mask = "0.00";
-            this.totaldiscounttxtbox.Name = "totaldiscounttxtbox";
-            this.totaldiscounttxtbox.Size = new System.Drawing.Size(378, 32);
-            this.totaldiscounttxtbox.TabIndex = 132;
-            this.totaldiscounttxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.totaldiscounttxtbox.ValidatingType = typeof(int);
-            // 
-            // nettotaltxtbox
-            // 
-            this.nettotaltxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.nettotaltxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.nettotaltxtbox.Enabled = false;
-            this.nettotaltxtbox.Font = new System.Drawing.Font("Calibri", 30F);
-            this.nettotaltxtbox.Location = new System.Drawing.Point(1378, 48);
-            this.nettotaltxtbox.Mask = "0.00";
-            this.nettotaltxtbox.Name = "nettotaltxtbox";
-            this.nettotaltxtbox.Size = new System.Drawing.Size(378, 69);
-            this.nettotaltxtbox.TabIndex = 131;
-            this.nettotaltxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nettotaltxtbox.ValidatingType = typeof(int);
-            // 
-            // totalvattxtbox
-            // 
-            this.totalvattxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalvattxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.totalvattxtbox.Enabled = false;
-            this.totalvattxtbox.Font = new System.Drawing.Font("Calibri", 12F);
-            this.totalvattxtbox.Location = new System.Drawing.Point(1378, 118);
-            this.totalvattxtbox.Mask = "0.00";
-            this.totalvattxtbox.Name = "totalvattxtbox";
-            this.totalvattxtbox.Size = new System.Drawing.Size(378, 32);
-            this.totalvattxtbox.TabIndex = 130;
-            this.totalvattxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.totalvattxtbox.ValidatingType = typeof(int);
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(1269, 126);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(90, 16);
-            this.label9.TabIndex = 129;
-            this.label9.Text = "TOTAL VAT";
+            this.totalvatlbl.AutoSize = true;
+            this.totalvatlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalvatlbl.Location = new System.Drawing.Point(1269, 126);
+            this.totalvatlbl.Name = "totalvatlbl";
+            this.totalvatlbl.Size = new System.Drawing.Size(90, 16);
+            this.totalvatlbl.TabIndex = 129;
+            this.totalvatlbl.Text = "TOTAL VAT";
+            this.totalvatlbl.Visible = false;
             // 
             // label14
             // 
@@ -588,56 +677,46 @@ namespace SmartFlow.Purchase
             this.label14.TabIndex = 128;
             this.label14.Text = "NET TOTAL";
             // 
-            // unitlbl
+            // totaldiscounttxtbox
             // 
-            this.unitlbl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.totaldiscounttxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.unitlbl.AutoSize = true;
-            this.unitlbl.Location = new System.Drawing.Point(1245, 6);
-            this.unitlbl.Name = "unitlbl";
-            this.unitlbl.Size = new System.Drawing.Size(42, 23);
-            this.unitlbl.TabIndex = 30;
-            this.unitlbl.Text = "Unit";
+            this.totaldiscounttxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.totaldiscounttxtbox.Enabled = false;
+            this.totaldiscounttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totaldiscounttxtbox.Location = new System.Drawing.Point(1378, 152);
+            this.totaldiscounttxtbox.Name = "totaldiscounttxtbox";
+            this.totaldiscounttxtbox.Size = new System.Drawing.Size(378, 32);
+            this.totaldiscounttxtbox.TabIndex = 147;
+            this.totaldiscounttxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.totaldiscounttxtbox.Visible = false;
             // 
-            // unittxtbox
+            // totalvattxtbox
             // 
-            this.unittxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.totalvattxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.unittxtbox.Font = new System.Drawing.Font("Calibri", 12F);
-            this.unittxtbox.FormattingEnabled = true;
-            this.unittxtbox.Location = new System.Drawing.Point(1249, 34);
-            this.unittxtbox.Name = "unittxtbox";
-            this.unittxtbox.Size = new System.Drawing.Size(152, 32);
-            this.unittxtbox.TabIndex = 29;
+            this.totalvattxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.totalvattxtbox.Enabled = false;
+            this.totalvattxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalvattxtbox.Location = new System.Drawing.Point(1378, 119);
+            this.totalvattxtbox.Name = "totalvattxtbox";
+            this.totalvattxtbox.Size = new System.Drawing.Size(378, 32);
+            this.totalvattxtbox.TabIndex = 148;
+            this.totalvattxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.totalvattxtbox.Visible = false;
             // 
-            // pricetxtbox
+            // nettotaltxtbox
             // 
-            this.pricetxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.nettotaltxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pricetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pricetxtbox.Font = new System.Drawing.Font("Calibri", 12F);
-            this.pricetxtbox.Location = new System.Drawing.Point(1567, 34);
-            this.pricetxtbox.Mask = "0.00";
-            this.pricetxtbox.Name = "pricetxtbox";
-            this.pricetxtbox.Size = new System.Drawing.Size(154, 32);
-            this.pricetxtbox.TabIndex = 28;
-            this.pricetxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.pricetxtbox.ValidatingType = typeof(int);
-            this.pricetxtbox.Leave += new System.EventHandler(this.pricetxtbox_Leave);
-            // 
-            // qtytxtbox
-            // 
-            this.qtytxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.qtytxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.qtytxtbox.Font = new System.Drawing.Font("Calibri", 12F);
-            this.qtytxtbox.Location = new System.Drawing.Point(1407, 34);
-            this.qtytxtbox.Mask = "0";
-            this.qtytxtbox.Name = "qtytxtbox";
-            this.qtytxtbox.Size = new System.Drawing.Size(154, 32);
-            this.qtytxtbox.TabIndex = 27;
-            this.qtytxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.qtytxtbox.ValidatingType = typeof(int);
+            this.nettotaltxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.nettotaltxtbox.Enabled = false;
+            this.nettotaltxtbox.Font = new System.Drawing.Font("Calibri", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nettotaltxtbox.Location = new System.Drawing.Point(1378, 48);
+            this.nettotaltxtbox.Name = "nettotaltxtbox";
+            this.nettotaltxtbox.Size = new System.Drawing.Size(378, 69);
+            this.nettotaltxtbox.TabIndex = 149;
+            this.nettotaltxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // PurchaseOrder
             // 
@@ -645,11 +724,11 @@ namespace SmartFlow.Purchase
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1768, 750);
-            this.Controls.Add(this.totaldiscountlbl);
-            this.Controls.Add(this.totaldiscounttxtbox);
             this.Controls.Add(this.nettotaltxtbox);
             this.Controls.Add(this.totalvattxtbox);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.totaldiscounttxtbox);
+            this.Controls.Add(this.totaldiscountlbl);
+            this.Controls.Add(this.totalvatlbl);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.newbtn);
@@ -707,28 +786,36 @@ namespace SmartFlow.Purchase
         private TextBox selectproducttxtbox;
         private TextBox selectsuppliertxtbox;
         private Label productidlbl;
-        private DataGridViewTextBoxColumn mfrcolumn;
-        private DataGridViewTextBoxColumn productid;
-        private DataGridViewTextBoxColumn productnamecolumn;
-        private DataGridViewTextBoxColumn qtycolumn;
-        private DataGridViewTextBoxColumn pricecolumn;
-        private DataGridViewTextBoxColumn vatpercentagecolumn;
-        private DataGridViewTextBoxColumn vatcolumn;
-        private DataGridViewTextBoxColumn totalcolumn;
         private TextBox narationtxtbox;
         private Label supplieridlbl;
         private TextBox purchasetypetxtbox;
         private Label purchasetypelbl;
         private MaskedTextBox invoicedatetxtbox;
         private Label totaldiscountlbl;
-        private MaskedTextBox totaldiscounttxtbox;
-        private MaskedTextBox nettotaltxtbox;
-        private MaskedTextBox totalvattxtbox;
-        private Label label9;
+        private Label totalvatlbl;
         private Label label14;
-        private Label unitlbl;
-        private ComboBox unittxtbox;
-        private MaskedTextBox pricetxtbox;
-        private MaskedTextBox qtytxtbox;
+        private TextBox qtytxtbox;
+        private TextBox pricetxtbox;
+        private DataGridViewTextBoxColumn mfrcolumn;
+        private DataGridViewTextBoxColumn itemdescription;
+        private DataGridViewTextBoxColumn conditioncolumn;
+        private DataGridViewTextBoxColumn productid;
+        private DataGridViewTextBoxColumn productnamecolumn;
+        private DataGridViewTextBoxColumn qtycolumn;
+        private DataGridViewTextBoxColumn unitidcolumn;
+        private DataGridViewTextBoxColumn unitnamecolumn;
+        private DataGridViewTextBoxColumn vatcolumn;
+        private DataGridViewTextBoxColumn discountcolumn;
+        private DataGridViewTextBoxColumn pricecolumn;
+        private DataGridViewTextBoxColumn totalcolumn;
+        private Label currencyconversionratelbl;
+        private Label invoicespecialnotelbl;
+        private Label currencysymbollbl;
+        private Label currencynamelbl;
+        private Label currencyidlbl;
+        private Label purchasetypeidlbl;
+        private TextBox totaldiscounttxtbox;
+        private TextBox totalvattxtbox;
+        private TextBox nettotaltxtbox;
     }
 }

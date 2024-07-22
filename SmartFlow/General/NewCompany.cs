@@ -12,7 +12,6 @@ namespace SmartFlow.General
         {
             InitializeComponent();
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -172,7 +171,6 @@ namespace SmartFlow.General
             }
             catch (Exception ex) { throw ex; }
         }
-
         public static string HashPassword(string password)
         {
             using (SHA256 sha256Hash = SHA256.Create())
@@ -189,12 +187,10 @@ namespace SmartFlow.General
                 return builder.ToString();
             }
         }
-
         private void companynametxtbox_TextChanged(object sender, EventArgs e)
         {
             mailingnametxtbox.Text = companynametxtbox.Text;
         }
-
         private void NewCompany_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -207,7 +203,6 @@ namespace SmartFlow.General
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

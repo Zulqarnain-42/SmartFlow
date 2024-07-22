@@ -17,7 +17,6 @@ namespace SmartFlow.Masters
         {
             InitializeComponent();
         }
-
         private void selectfilebtn_Click(object sender, EventArgs e)
         {
             try
@@ -60,7 +59,6 @@ namespace SmartFlow.Masters
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -292,12 +290,10 @@ namespace SmartFlow.Masters
             }
             catch(Exception ex) { throw ex; }
         }
-
         private void exitbtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void UploadExcel_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -306,19 +302,16 @@ namespace SmartFlow.Masters
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataTable dt = tableCollection[comboBox2.SelectedItem.ToString()];
             dataGridViewExcel.DataSource = dt;
         }
-
         static bool IsProcessOpen(string processName)
         {
             Process[] processes = Process.GetProcessesByName(processName);
             return processes.Length > 0;
         }
-
         static string GenerateRandomSerialNumber()
         {
             Random random = new Random();
@@ -342,7 +335,6 @@ namespace SmartFlow.Masters
             }
             return serialNumber;
         }
-
         private void UploadExcel_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -355,7 +347,6 @@ namespace SmartFlow.Masters
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)
@@ -367,7 +358,6 @@ namespace SmartFlow.Masters
             }
             return false; // No TextBox is filled
         }
-
         private void selectwarehouse_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));

@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.headinglbl = new System.Windows.Forms.Label();
             this.quotationnolbl = new System.Windows.Forms.Label();
             this.quotationnotxtbox = new System.Windows.Forms.TextBox();
             this.searchbtn = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -87,6 +90,11 @@
             this.searchbtn.TabIndex = 69;
             this.searchbtn.Text = "SEARCH";
             this.searchbtn.UseVisualStyleBackColor = true;
+            this.searchbtn.Click += new System.EventHandler(this.searchbtn_Click);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // SearchQuotationForm
             // 
@@ -102,6 +110,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Search Quotation";
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -114,5 +123,6 @@
         private System.Windows.Forms.Label quotationnolbl;
         private System.Windows.Forms.TextBox quotationnotxtbox;
         private System.Windows.Forms.Button searchbtn;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

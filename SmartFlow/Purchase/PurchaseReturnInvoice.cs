@@ -1,7 +1,9 @@
 ﻿using SmartFlow.Common;
+using SmartFlow.Common.CommonForms;
 using SmartFlow.Common.Forms;
 using SmartFlow.Purchase;
 using SmartFlow.Sales;
+using SmartFlow.Sales.CommonForm;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -15,12 +17,11 @@ namespace SmartFlow
         {
             InitializeComponent();
         }
-
         private void PurchaseReturnInvoice_Load(object sender, EventArgs e)
         {
+            invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
             invoicenotxtbox.Text = GenerateNextInvoiceNumber();
         }
-
         private string GenerateNextInvoiceNumber()
         {
             try
@@ -63,7 +64,6 @@ namespace SmartFlow
             }
             catch (Exception ex) { throw ex; }
         }
-
         private string GetLastInvoiceNumber()
         {
             string lastInvoiceNumber = null;
@@ -83,7 +83,6 @@ namespace SmartFlow
 
             return lastInvoiceNumber;
         }
-
         private string CheckInvoiceBeforeInsert()
         {
             try
@@ -102,7 +101,6 @@ namespace SmartFlow
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void PurchaseReturnInvoice_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -111,12 +109,10 @@ namespace SmartFlow
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void closebtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void dgvpurchasequotationproduct_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.D)
@@ -138,7 +134,6 @@ namespace SmartFlow
                 }
             }
         }
-
         private void selectsuppliertxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(SupplierSelectionForm));
@@ -153,13 +148,18 @@ namespace SmartFlow
                 openForm.BringToFront();
             }
         }
-
         private void UpdateSupplierTextBox()
         {
-            selectsuppliertxtbox.Text = GlobalVariables.suppliernameglobal;
-            suppliercodetxtbox.Text = GlobalVariables.suppliercodeglobal;
-        }
+            if(!string.IsNullOrEmpty(GlobalVariables.suppliernameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.suppliernameglobal) && 
+                !string.IsNullOrEmpty(GlobalVariables.suppliercodeglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.suppliercodeglobal) && 
+                GlobalVariables.supplieridglobal > 0)
+            {
+                supplieridlbl.Text = GlobalVariables.supplieridglobal.ToString();
+                selectsuppliertxtbox.Text = GlobalVariables.suppliernameglobal;
+                suppliercodetxtbox.Text = GlobalVariables.suppliercodeglobal;
+            }
 
+        }
         private void PurchaseReturnInvoice_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -172,7 +172,6 @@ namespace SmartFlow
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             if (selectsuppliertxtbox.Text.Trim().Length > 0) { return true; }
@@ -181,7 +180,6 @@ namespace SmartFlow
             if (dgvpurchaseproducts.Rows.Count > 0) { return true; }
             return false; // No TextBox is filled
         }
-
         private void selectsuppliertxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Enter)
@@ -199,7 +197,6 @@ namespace SmartFlow
                 }
             }
         }
-
         private void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
@@ -214,14 +211,18 @@ namespace SmartFlow
                 openForm.BringToFront();
             }
         }
-
         private void UpdateProductTextBox()
         {
-            selectproducttxtbox.Text = GlobalVariables.productnameglobal;
-            mfrtxtbox.Text = GlobalVariables.productmfrglobal;
-            productidlbl.Text = GlobalVariables.productidglobal.ToString();
-        }
+            if(!string.IsNullOrEmpty(GlobalVariables.productnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.productnameglobal) && 
+                !string.IsNullOrEmpty(GlobalVariables.productmfrglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.productmfrglobal) && 
+                GlobalVariables.productidglobal > 0)
+            {
+                selectproducttxtbox.Text = GlobalVariables.productnameglobal;
+                mfrtxtbox.Text = GlobalVariables.productmfrglobal;
+                productidlbl.Text = GlobalVariables.productidglobal.ToString();
+            }
 
+        }
         private void selectproducttxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) 
@@ -239,18 +240,18 @@ namespace SmartFlow
                 }
             }
         }
-
-
         private void dgvpurchaseproducts_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            CalculateTotalColumn(5);
+            CalculateTotalColumn(11);
+            CalculateTotalVat(9);
+            CalculateTotalDiscountColumn(10);
         }
-
         private void dgvpurchaseproducts_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            CalculateTotalColumn(5);
+            CalculateTotalColumn(11);
+            CalculateTotalVat(9);
+            CalculateTotalDiscountColumn(10);
         }
-
         private void CalculateTotalColumn(int columnIndex)
         {
             decimal total = 0;
@@ -266,153 +267,42 @@ namespace SmartFlow
                 }
             }
 
-            nettotaltxtbox.Text = total.ToString("#,##0.## AED");
+            nettotaltxtbox.Text = total.ToString("N2");
         }
-
-        private void addrowbtn_Click(object sender, EventArgs e)
+        private void CalculateTotalVat(int columnIndex)
         {
-            try
+            decimal totalvat = 0;
+
+            foreach (DataGridViewRow row in dgvpurchaseproducts.Rows)
             {
-                string mfr = mfrtxtbox.Text;
-                string productname = selectproducttxtbox.Text;
-                string productid = productidlbl.Text;
-                string qty = qtytxtbox.Text;
-                string price = pricetxtbox.Text;
-
-                int quantity = Convert.ToInt32(qty);
-
-                if (quantity > 0)
+                if (row.Cells[columnIndex].Value != null)
                 {
-                    string getwarehousedata = "SELECT WarehouseID,Name,Address,City,Code FROM WarehouseTable";
-                    DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
-
-                    if (warehousedata != null)
+                    if (decimal.TryParse(row.Cells[columnIndex].Value.ToString(), out decimal value))
                     {
-                        if (warehousedata.Rows.Count > 0)
-                        {
-                            WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
-                            warehouseSelection.ShowDialog();
-                        }
+                        totalvat += value;
                     }
-
-                    warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
-                }
-
-                bool productExists = false;
-                foreach (DataGridViewRow row in dgvpurchaseproducts.Rows)
-                {
-                    if (!row.IsNewRow)
-                    {
-                        if (row.Cells["productid"].Value != null && row.Cells["productid"].Value.ToString() == productidlbl.Text.ToString())
-                        {
-                            int currentQuantity = Convert.ToInt32(row.Cells["qtycolumn"].Value);
-                            row.Cells["qtycolumn"].Value = currentQuantity + Convert.ToInt32(qtytxtbox.Text);
-                            productExists = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (!productExists)
-                {
-                    dgvpurchaseproducts.Rows.Add(mfr,productid,productname,qty,price);
-                }
-
-                mfrtxtbox.Text = string.Empty;
-                selectproducttxtbox.Text = string.Empty;
-                productidlbl.Text = string.Empty;
-                qtytxtbox.Text = string.Empty;
-                pricetxtbox.Text = string.Empty;
-            }
-            catch(Exception ex) { throw ex; }
-        }
-
-        private void checkpurchasebtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string purchaseorder = purchasenotxtbox.Text;
-                string getpurchaseorder = "";
-                DataTable getpurchaseorderdata = DatabaseAccess.Retrive(getpurchaseorder);
-                
-                if (getpurchaseorderdata != null)
-                {
-                    if (getpurchaseorderdata.Rows.Count > 0)
-                    {
-                        invoicedatetxtbox.Text = getpurchaseorderdata.Rows[0][""].ToString();
-                        selectsuppliertxtbox.Text = getpurchaseorderdata.Rows[0][""].ToString();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No Purchase Order Data Available");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("No Purchase Order Data Available");
                 }
             }
-            catch(Exception ex) { throw ex; }
-        }
 
-        private void pricetxtbox_Leave(object sender, EventArgs e)
+            totalvattxtbox.Text = totalvat.ToString("N2");
+        }
+        private void CalculateTotalDiscountColumn(int columnIndex)
         {
-            try
+            decimal totaldiscount = 0;
+
+            foreach (DataGridViewRow row in dgvpurchaseproducts.Rows)
             {
-                string mfr = mfrtxtbox.Text;
-                string productname = selectproducttxtbox.Text;
-                string productid = productidlbl.Text;
-                string qty = qtytxtbox.Text;
-                string price = pricetxtbox.Text;
-
-                int quantity = Convert.ToInt32(qty);
-
-                if (quantity > 0)
+                if (row.Cells[columnIndex].Value != null)
                 {
-                    string getwarehousedata = "SELECT WarehouseID,Name,Address,City,Code FROM WarehouseTable";
-                    DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
-
-                    if (warehousedata != null)
+                    if (decimal.TryParse(row.Cells[columnIndex].Value.ToString(), out decimal value))
                     {
-                        if (warehousedata.Rows.Count > 0)
-                        {
-                            WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
-                            warehouseSelection.ShowDialog();
-                        }
-                    }
-
-                    warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
-                }
-
-                bool productExists = false;
-                foreach (DataGridViewRow row in dgvpurchaseproducts.Rows)
-                {
-                    if (!row.IsNewRow)
-                    {
-                        if (row.Cells["productid"].Value != null && row.Cells["productid"].Value.ToString() == productidlbl.Text.ToString())
-                        {
-                            int currentQuantity = Convert.ToInt32(row.Cells["qtycolumn"].Value);
-                            row.Cells["qtycolumn"].Value = currentQuantity + Convert.ToInt32(qtytxtbox.Text);
-                            productExists = true;
-                            break;
-                        }
+                        totaldiscount += value;
                     }
                 }
-
-                if (!productExists)
-                {
-                    dgvpurchaseproducts.Rows.Add(mfr, productid, productname, qty, price);
-                }
-
-                mfrtxtbox.Text = string.Empty;
-                selectproducttxtbox.Text = string.Empty;
-                productidlbl.Text = string.Empty;
-                qtytxtbox.Text = string.Empty;
-                pricetxtbox.Text = string.Empty;
             }
-            catch (Exception ex) { throw ex; }
-        }
 
+            totaldiscounttxtbox.Text = totaldiscount.ToString("N2");
+        }
         private void selectsuppliertxtbox_Leave(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(CurrencySelection));
@@ -420,25 +310,174 @@ namespace SmartFlow
             {
                 CurrencySelection currencySelection = new CurrencySelection();
                 currencySelection.ShowDialog();
+                UpdateCurrencyTextBox();
             }
             else
             {
                 openForm.BringToFront();
             }
         }
-
+        private void UpdateCurrencyTextBox()
+        {
+            if (GlobalVariables.currencyidglobal > 0 && GlobalVariables.currencynameglobal != null && GlobalVariables.currencysymbolglobal != null &&
+                GlobalVariables.currencyconversionrateglobal > 0)
+            {
+                currencyidlbl.Text = GlobalVariables.currencyidglobal.ToString();
+                currencyconversionratelbl.Text = GlobalVariables.currencyconversionrateglobal.ToString();
+                currencynamelbl.Text = GlobalVariables.currencynameglobal.ToString();
+                currencysymbollbl.Text = GlobalVariables.currencysymbolglobal.ToString();
+            }
+        }
         private void selectproducttxtbox_Leave(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(ProductQtyWarehouse));
             if (openForm == null)
             {
-                ProductQtyWarehouse productQtyWarehouse = new ProductQtyWarehouse();
-                productQtyWarehouse.ShowDialog();
+                if (!string.IsNullOrEmpty(productidlbl.Text) && !string.IsNullOrWhiteSpace(productidlbl.Text) &&
+                    !string.IsNullOrEmpty(mfrtxtbox.Text) && !string.IsNullOrWhiteSpace(mfrtxtbox.Text))
+                {
+                    string productmfr = mfrtxtbox.Text;
+                    int productid = Convert.ToInt32(productidlbl.Text);
+                    ProductQtyWarehouse productQtyWarehouse = new ProductQtyWarehouse(productmfr, productid);
+                    productQtyWarehouse.ShowDialog();
+                }
             }
             else
             {
                 openForm.BringToFront();
             }
+        }
+        private void purchasetypetxtbox_MouseClick(object sender, MouseEventArgs e)
+        {
+            Form openForm = CommonFunction.IsFormOpen(typeof(PurchaseTypeSelection));
+            if (openForm == null)
+            {
+                PurchaseTypeSelection purchaseTypeSelection = new PurchaseTypeSelection();
+                purchaseTypeSelection.ShowDialog();
+                UpdatePurchaseTypeTxtBox();
+            }
+            else
+            {
+                openForm.ShowDialog();
+            }
+        }
+        private void UpdatePurchaseTypeTxtBox()
+        {
+            if (GlobalVariables.purchasetypeidglobal > 0 && !string.IsNullOrEmpty(GlobalVariables.purchasetypenameglobal) &&
+                !string.IsNullOrWhiteSpace(GlobalVariables.purchasetypenameglobal))
+            {
+                purchasetypeidlbl.Text = GlobalVariables.purchasetypeidglobal.ToString();
+                purchasetypetxtbox.Text = GlobalVariables.purchasetypenameglobal.ToString();
+            }
+        }
+        private void purchasetypetxtbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) 
+            {
+                Form openForm = CommonFunction.IsFormOpen(typeof(PurchaseTypeSelection));
+                if (openForm == null) 
+                {
+                    PurchaseTypeSelection purchaseType = new PurchaseTypeSelection();
+                    purchaseType.ShowDialog();
+                    UpdatePurchaseTypeTxtBox();
+                }
+                else
+                {
+                    openForm.BringToFront();
+                }
+            }
+        }
+        private void narationtxtbox_Leave(object sender, EventArgs e)
+        {
+            Form openForm = CommonFunction.IsFormOpen(typeof(InvoiceNoteForm));
+            if (openForm == null)
+            {
+                InvoiceNoteForm invoiceNoteForm = new InvoiceNoteForm();
+                invoiceNoteForm.ShowDialog();
+            }
+            else
+            {
+                openForm.BringToFront(); 
+            }
+        }
+        private void pricetxtbox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(mfrtxtbox.Text) && !string.IsNullOrWhiteSpace(mfrtxtbox.Text) && !string.IsNullOrEmpty(selectproducttxtbox.Text) &&
+                    !string.IsNullOrWhiteSpace(selectproducttxtbox.Text) && !string.IsNullOrEmpty(qtytxtbox.Text) && !string.IsNullOrWhiteSpace(qtytxtbox.Text) &&
+                    !string.IsNullOrEmpty(pricetxtbox.Text) && !string.IsNullOrWhiteSpace(pricetxtbox.Text))
+                {
+                    int itemqty = Convert.ToInt32(qtytxtbox.Text);
+                    float itemprice = float.Parse(pricetxtbox.Text);
+                    float totalamount = itemqty * itemprice;
+
+                    if (GlobalVariables.purchasetypeistaxable)
+                    {
+                        VATForm vATForm = new VATForm(totalamount);
+                        vATForm.ShowDialog();
+                    }
+                    else
+                    {
+                        DiscountForm discountForm = new DiscountForm(totalamount);
+                        discountForm.ShowDialog();
+                    }
+                    string mfr = mfrtxtbox.Text;
+                    string productname = selectproducttxtbox.Text;
+                    string productid = productidlbl.Text;
+                    string qty = qtytxtbox.Text;
+                    string price = pricetxtbox.Text;
+                    decimal vat = GlobalVariables.productitemwisevatamount;
+                    decimal discount = GlobalVariables.productdiscountamountitemwise;
+                    string unitid = GlobalVariables.unitidglobal.ToString();
+                    string unitname = GlobalVariables.unitnameglobal.ToString();
+                    string itemdescription = GlobalVariables.productitemwisedescriptiongloabl;
+                    string productcondition = "NEW";
+
+                    if (vat > 0)
+                    {
+                        totalvattxtbox.Visible = true;
+                        totalvatlbl.Visible = true;
+                    }
+
+                    if (discount > 0)
+                    {
+                        totaldiscounttxtbox.Visible = true;
+                        totaldiscountlbl.Visible = true;
+                    }
+                    string finalitemwise = GlobalVariables.productfinalamountwithvatanddiscountitemwise.ToString("N2");
+
+                    int quantity = Convert.ToInt32(qty);
+
+                    bool productExists = false;
+                    foreach (DataGridViewRow row in dgvpurchaseproducts.Rows)
+                    {
+                        if (!row.IsNewRow)
+                        {
+                            if (row.Cells["productid"].Value != null && row.Cells["productid"].Value.ToString() == productidlbl.Text.ToString())
+                            {
+                                int currentQuantity = Convert.ToInt32(row.Cells["qtycolumn"].Value);
+                                row.Cells["qtycolumn"].Value = currentQuantity + Convert.ToInt32(qtytxtbox.Text);
+                                productExists = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!productExists)
+                    {
+                        dgvpurchaseproducts.Rows.Add(mfr,itemdescription,null, productid, productname, qty,unitid,unitname, price,vat,discount,finalitemwise);
+                    }
+
+                    mfrtxtbox.Text = string.Empty;
+                    selectproducttxtbox.Text = string.Empty;
+                    productidlbl.Text = string.Empty;
+                    qtytxtbox.Text = string.Empty;
+                    pricetxtbox.Text = string.Empty;
+                }
+            }
+            catch (Exception ex) { throw ex; }
+
         }
     }
 }

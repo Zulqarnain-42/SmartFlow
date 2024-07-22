@@ -211,6 +211,7 @@
             // percentageradio
             // 
             this.percentageradio.AutoSize = true;
+            this.percentageradio.Enabled = false;
             this.percentageradio.Location = new System.Drawing.Point(15, 210);
             this.percentageradio.Name = "percentageradio";
             this.percentageradio.Size = new System.Drawing.Size(121, 20);
@@ -223,6 +224,7 @@
             // fixedamountradio
             // 
             this.fixedamountradio.AutoSize = true;
+            this.fixedamountradio.Enabled = false;
             this.fixedamountradio.Location = new System.Drawing.Point(15, 184);
             this.fixedamountradio.Name = "fixedamountradio";
             this.fixedamountradio.Size = new System.Drawing.Size(128, 20);
@@ -277,8 +279,7 @@
             // 
             // VATForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.totalwithvatlbl);
             this.Controls.Add(this.unitcombobox);

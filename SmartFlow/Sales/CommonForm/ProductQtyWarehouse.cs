@@ -16,29 +16,16 @@ namespace SmartFlow.Sales
     {
         private string _productmfr;
         private int _productid;
-        public ProductQtyWarehouse()
-        {
-            InitializeComponent();
-        }
-
         public ProductQtyWarehouse(string productMfr,int productID)
         {
             InitializeComponent();
             _productmfr = productMfr;
             _productid = productID;
         }
-
-        private void ProductQtyWarehouse_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            TransactionInfoProduct transactionInfoProduct = new TransactionInfoProduct(_productmfr,_productid);
-            transactionInfoProduct.ShowDialog();
-        }
-
         private void ProductQtyWarehouse_Load(object sender, EventArgs e)
         {
             CommonFunction.GetProductQtyWarehouse(dgvInventory, _productmfr, _productid);
         }
-
         private void dgvInventory_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -51,13 +38,21 @@ namespace SmartFlow.Sales
                         {
                             GlobalVariables.warehouseidglobal = Convert.ToInt32(dgvInventory.CurrentRow.Cells["ID"].Value);
                             GlobalVariables.warehousenameglobal = dgvInventory.CurrentRow.Cells["Warehouse Name"].Value.ToString();
+                            if (Convert.ToInt32(dgvInventory.CurrentRow.Cells["Quantity"].Value) == 0)
+                            {
+                                AvailabilityForm availabilityForm = new AvailabilityForm();
+                                availabilityForm.ShowDialog();
+                            }
+                            else
+                            {
+                                GlobalVariables.availabilitystatus = "In Stock";
+                            }
                             this.Close();
                         }
                     }
                 }
             }catch(Exception ex) { throw ex; }
         }
-
         private void ProductQtyWarehouse_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Escape)
@@ -66,7 +61,6 @@ namespace SmartFlow.Sales
                 e.Handled = true;
             }
         }
-
         private void dgvInventory_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) 
@@ -76,9 +70,23 @@ namespace SmartFlow.Sales
                 {
                     GlobalVariables.warehouseidglobal = Convert.ToInt32(dgvInventory.CurrentRow.Cells["ID"].Value);
                     GlobalVariables.warehousenameglobal = dgvInventory.CurrentRow.Cells["Warehouse Name"].Value.ToString();
+                    if (Convert.ToInt32(dgvInventory.CurrentRow.Cells["Quantity"].Value) == 0)
+                    {
+                        AvailabilityForm availabilityForm = new AvailabilityForm();
+                        availabilityForm.ShowDialog();
+                    }
+                    else
+                    {
+                        GlobalVariables.availabilitystatus = "In Stock";
+                    }
                     this.Close();
                 }
             }
+        }
+        private void ProductQtyWarehouse_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            TransactionInfoProduct transactionInfoProduct = new TransactionInfoProduct(_productmfr, _productid);
+            transactionInfoProduct.ShowDialog();
         }
     }
 }

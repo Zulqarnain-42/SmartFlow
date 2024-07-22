@@ -10,12 +10,10 @@ namespace SmartFlow.Setting
         {
             InitializeComponent();
         }
-
         private void Terms_Load(object sender, EventArgs e)
         {
             CheckTerms();
         }
-
         private void CheckTerms()
         {
             try
@@ -36,7 +34,6 @@ namespace SmartFlow.Setting
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -55,7 +52,6 @@ namespace SmartFlow.Setting
 
             }catch (Exception ex) { throw ex; }
         }
-
         private void Terms_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -64,7 +60,6 @@ namespace SmartFlow.Setting
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void Terms_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -77,7 +72,6 @@ namespace SmartFlow.Setting
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

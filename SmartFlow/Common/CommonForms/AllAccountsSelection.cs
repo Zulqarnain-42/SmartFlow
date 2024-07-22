@@ -18,19 +18,16 @@ namespace SmartFlow.Common.CommonForms
         {
             InitializeComponent();
         }
-
         private void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
             CommonFunction.GetAllAccountInfo(searchtxtbox.Text, dgvallaccountselection);
         }
-
         private void AllAccountsSelection_Load(object sender, EventArgs e)
         {
             searchtxtbox.Focus();
             dgvallaccountselection.ClearSelection();
             CommonFunction.GetAllAccountInfo("",dgvallaccountselection);
         }
-
         private void dgvallaccountselection_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -47,7 +44,6 @@ namespace SmartFlow.Common.CommonForms
                 }
             }catch (Exception ex) { throw ex; }
         }
-
         private void dgvallaccountselection_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -62,7 +58,6 @@ namespace SmartFlow.Common.CommonForms
                 }
             }catch (Exception ex) { throw ex; }
         }
-
         private void AllAccountsSelection_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Escape)
@@ -71,7 +66,6 @@ namespace SmartFlow.Common.CommonForms
                 e.Handled = true;
             }
         }
-
         private void searchtxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Enter)

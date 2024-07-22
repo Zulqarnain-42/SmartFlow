@@ -16,6 +16,10 @@ namespace SmartFlow.Common
         public static string saletypenameglobal = null;
         public static bool saletypeistaxable = false;
 
+        public static int purchasetypeidglobal = 0;
+        public static string purchasetypenameglobal = null;
+        public static bool purchasetypeistaxable = false;
+
         public static int salespersonidglobal = 0;
         public static string salespersonnameglobal = null;
 
@@ -52,13 +56,18 @@ namespace SmartFlow.Common
         public static bool isproductdiscounted = false;
         public static decimal productdiscountamountitemwise = 0;
         public static decimal productfinalamountwithvatanddiscountitemwise = 0;
+        public static string productconditionglobal = null;
 
-        public static int unitid = 0;
+        public static int unitidglobal = 0;
+        public static string unitnameglobal = null;
 
-        
+        public static string invoicespecialnote = null;
             
         public static int stocklocationidglobal = 0;
         public static string stocklocationnameglobal = null;
         public static string stockracknumber = null;
+
+        public static int productinventoryglobal = 0;
+        public static string availabilitystatus = null;
     }
 }

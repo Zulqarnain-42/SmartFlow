@@ -36,7 +36,6 @@ namespace SmartFlow.Common
             catch (Exception ex) { 
                 throw ex; }
         }
-
         public static void GetCustomer(string searchvalue, DataGridView dgv)
         {
             try
@@ -62,7 +61,6 @@ namespace SmartFlow.Common
             }
             catch (Exception ex) { throw ex; }
         }
-
         public static void GetProduct(string searchvalue, DataGridView dgv)
         {
             try
@@ -87,7 +85,6 @@ namespace SmartFlow.Common
             }
             catch (Exception ex) { throw ex; }
         }
-
         public static void GetWarehouseInfo(string searchvalue, DataGridView dgv)
         {
             try
@@ -112,7 +109,6 @@ namespace SmartFlow.Common
             }
             catch (Exception ex) { throw ex; }
         }
-
         public static void GetStockLocation(string searchvalue,DataGridView dgv) 
         {
             try
@@ -136,7 +132,6 @@ namespace SmartFlow.Common
                 }
             }catch (Exception ex) { throw ex; }
         }
-
         public static void GetAccountInfo(string searchvalue,DataGridView dgv)
         {
             try
@@ -161,7 +156,6 @@ namespace SmartFlow.Common
                 }
             }catch (Exception ex) { throw ex; }
         }
-
         public static void GetSalesTypeInfo(string searchvalue, DataGridView dgv)
         {
             try
@@ -187,7 +181,6 @@ namespace SmartFlow.Common
             }
             catch (Exception ex) { throw ex; }
         }
-
         public static void GetPurchaseTypeInfo(string searchvalue,DataGridView dgv)
         {
             try
@@ -196,11 +189,12 @@ namespace SmartFlow.Common
                 DataTable dt = new DataTable();
                 if(string.IsNullOrEmpty(searchvalue) && String.IsNullOrWhiteSpace(searchvalue))
                 {
-                    query = "";
+                    query = "SELECT PurchaseTpeID [ID],Name,Code,IsTaxable [Taxable] FROM PurchaseTypeTable WHERE IsActive = '" + true + "'";
                 }
                 else
                 {
-                    query = "";
+                    query = "SELECT PurchaseTpeID [ID],Name,Code,IsTaxable [Taxable] FROM PurchaseTypeTable " +
+                        "WHERE IsActive = '" + true + "' AND Name LIKE '%" + searchvalue + "%'";
                 }
 
                 dt = DatabaseAccess.Retrive(query);
@@ -211,7 +205,6 @@ namespace SmartFlow.Common
                 }
             }catch(Exception ex) { throw ex; }
         }
-
         public static void GetSalesManInfo(string searchvalue,DataGridView dgv)
         {
             try
@@ -236,7 +229,6 @@ namespace SmartFlow.Common
                 }
             }catch (Exception ex) { throw ex; }
         }
-
         public static void GetAllAccountInfo(string searchvalue, DataGridView dgv)
         {
             try
@@ -261,7 +253,6 @@ namespace SmartFlow.Common
             }
             catch (Exception ex) { throw ex; }
         }
-
         public static void GetProductQtyWarehouse(DataGridView dgv,string productmfr,int productid)
         {
             try
@@ -301,16 +292,14 @@ namespace SmartFlow.Common
             }
             catch (Exception ex) { throw ex; }
         }
-
         public static void GetTransactionInfoProduct(DataGridView dgv,string productmfr,int productid)
         {
             try
             {
-                string query = string.Format("SELECT InvoiceTable.Invoiceid,InvoiceTable.InvoiceNo,InvoiceTable.invoicedate,InvoiceTable.ClientID,InvoiceTable.ClientName," +
-                    "InvoiceDetailsTable.ProductName,InvoiceDetailsTable.AmountWithDiscount,InvoiceDetailsTable.AmountWithoutDiscount," +
-                    "InvoiceDetailsTable.ItemPriceAfterDiscount,InvoiceDetailsTable.ItemSerialNo,InvoiceDetailsTable.ItemWiseDiscount," +
-                    "InvoiceDetailsTable.ItemWiseTotalWithoutVAT,InvoiceDetailsTable.ItemWiseTotalWithVAT,InvoiceDetailsTable.ItemWiseVAT," +
-                    "InvoiceDetailsTable.MFR,InvoiceDetailsTable.Quantity,InvoiceDetailsTable.SystemSerialNo FROM InvoiceTable " +
+                string query = string.Format("SELECT InvoiceTable.Invoiceid [ID],InvoiceTable.InvoiceNo [Invoice No],InvoiceTable.invoicedate [Date]," +
+                    "InvoiceTable.ClientID [Client ID],InvoiceTable.ClientName [Client Name],InvoiceDetailsTable.ProductName [Title],InvoiceDetailsTable.ItemSerialNo [Serial No]," +
+                    "InvoiceDetailsTable.ItemWiseDiscount [Discount],InvoiceDetailsTable.ItemWiseVAT [VAT],InvoiceDetailsTable.UnitSalePrice [Price]," +
+                    "InvoiceDetailsTable.MFR [MFR],InvoiceDetailsTable.Quantity [Quantity],InvoiceDetailsTable.SystemSerialNo [System Serial No] FROM InvoiceTable " +
                     "INNER JOIN InvoiceDetailsTable ON InvoiceDetailsTable.Invoicecode = InvoiceTable.InvoiceCode " +
                     "WHERE InvoiceDetailsTable.Productid = '" + productid + "' AND ClientID = '" + GlobalVariables.customeridglobal + "'");
                 DataTable datatransaction = DatabaseAccess.Retrive(query);
@@ -321,7 +310,6 @@ namespace SmartFlow.Common
                 }
             }catch (Exception ex) { throw ex; }
         }
-
         public static string BuildSearchQueryProduct(string searchTerm)
         {
             string[] terms = searchTerm.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -355,7 +343,6 @@ namespace SmartFlow.Common
 
             return queryBuilder.ToString();
         }
-
         public static Form IsFormOpen(Type formType)
         {
             foreach (Form form in Application.OpenForms)
@@ -367,7 +354,6 @@ namespace SmartFlow.Common
             }
             return null;
         }
-
         public static void FillCurrencyData(ComboBox combo)
         {
             try
@@ -393,7 +379,6 @@ namespace SmartFlow.Common
 
             }catch (Exception ex) { throw ex; }
         }
-
         public static void FillUnitData(ComboBox combo)
         {
             try

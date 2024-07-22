@@ -12,12 +12,10 @@ namespace SmartFlow.Masters
         {
             InitializeComponent();
         }
-
         private void exitbtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void brandsavebtn_Click(object sender, EventArgs e)
         {
             try
@@ -117,7 +115,6 @@ namespace SmartFlow.Masters
             }
             catch (Exception ex) { throw ex; }
         }
-
         static string GenerateRandomCustomerCode()
         {
             Random random = new Random();
@@ -141,12 +138,10 @@ namespace SmartFlow.Masters
             }
             return serialNumber = String.Concat("CU",serialNumber); ;
         }
-
         private void CreateCustomer_Load(object sender, EventArgs e)
         {
             customercodetxtbox.Text = GenerateRandomCustomerCode();
         }
-
         private void CreateCustomer_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -155,7 +150,6 @@ namespace SmartFlow.Masters
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void selectaccountgrouptxtbox_Enter(object sender, EventArgs e)
         {
             try
@@ -165,7 +159,6 @@ namespace SmartFlow.Masters
             }
             catch(Exception ex) { throw ex; }
         }
-
         private void selectaccountgrouptxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             try
@@ -182,7 +175,6 @@ namespace SmartFlow.Masters
                 }
             }catch(Exception ex) { throw ex; }
         }
-
         private void CreateCustomer_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -195,7 +187,6 @@ namespace SmartFlow.Masters
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

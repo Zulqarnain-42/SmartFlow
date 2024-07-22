@@ -13,7 +13,6 @@ namespace SmartFlow.Payroll
         {
             InitializeComponent();
         }
-
         private void newbtn_Click(object sender, EventArgs e)
         {
             Employee employee = new Employee();
@@ -23,12 +22,10 @@ namespace SmartFlow.Payroll
                 FillGrid("");
             };
         }
-
         private void closebtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void FillGrid(string searchvalue)
         {
             try
@@ -79,12 +76,10 @@ namespace SmartFlow.Payroll
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void EmployeeTable_Load(object sender, EventArgs e)
         {
             FillGrid("");
         }
-
         private void EmployeeTable_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Escape)
@@ -99,7 +94,6 @@ namespace SmartFlow.Payroll
                 e.Handled = true;
             }
         }
-
         private void employeedgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -131,7 +125,6 @@ namespace SmartFlow.Payroll
                 }
             }catch (Exception ex) { throw ex; }
         }
-
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -163,13 +156,11 @@ namespace SmartFlow.Payroll
                 }
             }catch (Exception ex) { throw ex; }
         }
-
         private void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
             FillGrid(searchtxtbox.Text.Trim());
 
         }
-
         private void employeedgv_Scroll(object sender, ScrollEventArgs e)
         {
             int firstVisibleRowIndex = GetFirstVisibleRowIndex(employeedgv);
@@ -180,7 +171,6 @@ namespace SmartFlow.Payroll
                 currentCellIndex = firstVisibleCellIndex;
             }
         }
-
         private int GetFirstVisibleRowIndex(DataGridView dataGridView)
         {
             int firstDisplayedRowIndex = dataGridView.FirstDisplayedScrollingRowIndex;
@@ -193,7 +183,6 @@ namespace SmartFlow.Payroll
 
             return firstDisplayedRowIndex + displayedRowCount - 1;
         }
-
         private int GetFirstVisibleCellIndex(DataGridView dataGridView)
         {
             int horizontalOffset = dataGridView.HorizontalScrollingOffset;
@@ -216,7 +205,6 @@ namespace SmartFlow.Payroll
 
             return dataGridView.Columns.Count - 1;
         }
-
         private void EmployeeTable_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -229,7 +217,6 @@ namespace SmartFlow.Payroll
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

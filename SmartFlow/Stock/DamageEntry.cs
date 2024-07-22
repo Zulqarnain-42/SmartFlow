@@ -14,12 +14,10 @@ namespace SmartFlow.Stock
         {
             InitializeComponent();
         }
-
         private void DamageEntry_Load(object sender, EventArgs e)
         {
             damageidlbl.Text = GenerateNextInvoiceNumber();
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -84,7 +82,6 @@ namespace SmartFlow.Stock
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void DamageEntry_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -93,7 +90,6 @@ namespace SmartFlow.Stock
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void addbtn_Click(object sender, EventArgs e)
         {
             try
@@ -138,7 +134,6 @@ namespace SmartFlow.Stock
             }
             catch (Exception ex) { throw ex; }
         }
-
         private string GenerateNextInvoiceNumber()
         {
             try
@@ -181,7 +176,6 @@ namespace SmartFlow.Stock
             }
             catch (Exception ex) { throw ex; }
         }
-
         private string GetLastInvoiceNumber()
         {
             string lastInvoiceNumber = null;
@@ -201,12 +195,10 @@ namespace SmartFlow.Stock
 
             return lastInvoiceNumber;
         }
-
         private void closebtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void dgvproducts_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.D)
@@ -228,7 +220,6 @@ namespace SmartFlow.Stock
                 }
             }
         }
-
         private void selectwarehousefromtxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
@@ -252,7 +243,6 @@ namespace SmartFlow.Stock
                 openForm.BringToFront();
             }
         }
-
         private void producttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
@@ -267,7 +257,6 @@ namespace SmartFlow.Stock
                 openForm.BringToFront();
             }
         }
-
         private void UpdateProductTextBox()
         {
             productidlbl.Text = GlobalVariables.productidglobal.ToString();
@@ -277,13 +266,11 @@ namespace SmartFlow.Stock
             barcodelbl.Text = GlobalVariables.productbarcodeglobal.ToString();
             productpricelbl.Text = GlobalVariables.productpriceglobal.ToString();
         }
-
         private void UpdateWarehouseTextBox() 
         {
             warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
             selectwarehousefromtxtbox.Text = GlobalVariables.warehousenameglobal.ToString();
         }
-
         private void DamageEntry_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -296,7 +283,6 @@ namespace SmartFlow.Stock
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

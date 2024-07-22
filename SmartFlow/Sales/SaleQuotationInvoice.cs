@@ -24,19 +24,18 @@ namespace SmartFlow
         {
             InitializeComponent();  
         }
-
         private void SaleQuotationInvoice_Load(object sender, EventArgs e)
         {
-            invoicedate.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            validuntil.Text = DateTime.Now.AddDays(10).ToString("dd/MM/yyyy");
+            invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            validuntiltxtbox.Text = DateTime.Now.AddDays(10).ToString("dd/MM/yyyy");
             qtytxtbox.Text = qty.ToString("0");
             pricetxtbox.Text = price.ToString("0.00");
             nettotaltxtbox.Text = total.ToString("0.00");
             totaldiscounttxtbox.Text = total.ToString("0.00");
             totalvattxtbox.Text = total.ToString("0.00");
             invoicenotxtbox.Text = GenerateNextInvoiceNumber();
+            shippingchargestxtbox.Text = total.ToString("N2");
         }
-
         private string GenerateNextInvoiceNumber()
         {
             try
@@ -79,7 +78,6 @@ namespace SmartFlow
             }
             catch (Exception ex) { throw ex; }
         }
-
         private string GetLastInvoiceNumber()
         {
             string lastInvoiceNumber = null;
@@ -99,7 +97,6 @@ namespace SmartFlow
 
             return lastInvoiceNumber;
         }
-
         private string CheckInvoiceBeforeInsert()
         {
             try
@@ -118,7 +115,6 @@ namespace SmartFlow
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void SaleQuotationInvoice_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -127,7 +123,6 @@ namespace SmartFlow
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void dgvsaleproduct_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -139,9 +134,26 @@ namespace SmartFlow
                         if (dgvsaleproducts.SelectedRows.Count == 1)
                         {
                             mfrtxtbox.Text = dgvsaleproducts.CurrentRow.Cells[0].Value.ToString();
-                            selectproducttxtbox.Text = dgvsaleproducts.CurrentRow.Cells[1].Value.ToString();
-                            qtytxtbox.Text = dgvsaleproducts.CurrentRow.Cells[3].Value.ToString();
-                            pricetxtbox.Text = dgvsaleproducts.CurrentRow.Cells[4].Value.ToString();
+                            warehouseidlbl.Text = dgvsaleproducts.CurrentRow.Cells[1].Value.ToString();
+                            itemwisedescriptionlbl.Text = dgvsaleproducts.CurrentRow.Cells[2].Value.ToString();
+                            productidlbl.Text = dgvsaleproducts.CurrentRow.Cells[3].Value.ToString();
+                            selectproducttxtbox.Text = dgvsaleproducts.CurrentRow.Cells[4].Value.ToString();
+                            qtytxtbox.Text = dgvsaleproducts.CurrentRow.Cells[5].Value.ToString();
+                            pricetxtbox.Text = dgvsaleproducts.CurrentRow.Cells[8].Value.ToString();
+
+                            int productid = Convert.ToInt32(dgvsaleproducts.CurrentRow.Cells[3].Value);
+                            if (productid > 0)
+                            {
+                                foreach (DataGridViewRow row in dgvsaleproducts.SelectedRows)
+                                {
+                                    if (!row.IsNewRow)
+                                    {
+                                        dgvsaleproducts.Rows.Remove(row);
+                                    }
+                                }
+                            }
+
+                            selectproducttxtbox.Focus();
                         }
                     }
                     else
@@ -155,12 +167,11 @@ namespace SmartFlow
                 }
             }catch(Exception ex) { throw ex; }
         }
-
         private void dgvsaleproduct_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.D)
             {
-                int productid = Convert.ToInt32(dgvsaleproducts.CurrentRow.Cells[0].Value);
+                int productid = Convert.ToInt32(dgvsaleproducts.CurrentRow.Cells[3].Value);
                 if (productid > 0)
                 {
                     foreach (DataGridViewRow row in dgvsaleproducts.SelectedRows)
@@ -177,7 +188,6 @@ namespace SmartFlow
                 }
             }
         }
-
         private void selectcustomertxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(CustomerSelectionForm));
@@ -192,7 +202,6 @@ namespace SmartFlow
                 openForm.BringToFront();
             }
         }
-
         private void UpdateCustomerTextBox()
         {
             if(GlobalVariables.customeridglobal > 0 && GlobalVariables.customercodeglobal != null && GlobalVariables.customernameglobal != null &&
@@ -205,7 +214,6 @@ namespace SmartFlow
                 mobiletxtbox.Text = GlobalVariables.customermobileglobal.ToString();
             }
         }
-
         private void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
@@ -220,7 +228,6 @@ namespace SmartFlow
                 openForm.BringToFront();
             }
         }
-
         private void UpdateProductTextBox()
         {
             if(GlobalVariables.productnameglobal != null && GlobalVariables.productidglobal > 0 && GlobalVariables.productmfrglobal != null)
@@ -230,7 +237,6 @@ namespace SmartFlow
                 mfrtxtbox.Text = GlobalVariables.productmfrglobal.ToString();
             }
         }
-
         private void SaleQuotationInvoice_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -243,7 +249,6 @@ namespace SmartFlow
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             if (selectcustomertxtbox.Text.Trim().Length > 0) { return true; }
@@ -251,14 +256,12 @@ namespace SmartFlow
             if (dgvsaleproducts.Rows.Count > 0) { return true; }
             return false; // No TextBox is filled
         }
-
         private void dgvsaleproducts_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            CalculateTotalVatColumn(9);
-            CalculateTotalColumn(11);
-            CalculateTotalDiscountColumn(10);
+            CalculateTotalVatColumn(10);
+            CalculateTotalColumn(12);
+            CalculateTotalDiscountColumn(11);
         }
-
         private void CalculateTotalColumn(int columnIndex)
         {
             decimal total = 0;
@@ -276,14 +279,12 @@ namespace SmartFlow
 
             nettotaltxtbox.Text = total.ToString("N2");
         }
-
         private void dgvsaleproducts_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            CalculateTotalVatColumn(9);
-            CalculateTotalColumn(11);
-            CalculateTotalDiscountColumn(10);
+            CalculateTotalVatColumn(10);
+            CalculateTotalColumn(12);
+            CalculateTotalDiscountColumn(11);
         }
-
         private void CalculateTotalVatColumn(int columnIndex)
         {
             decimal totalvat = 0;
@@ -301,7 +302,6 @@ namespace SmartFlow
 
             totalvattxtbox.Text = totalvat.ToString("N2");
         }
-
         private void CalculateTotalDiscountColumn(int columnIndex)
         {
             decimal totaldiscount = 0;
@@ -319,7 +319,6 @@ namespace SmartFlow
 
             totaldiscounttxtbox.Text = totaldiscount.ToString("N2");
         }
-
         private void salesmantxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(SalesPersonSelection));
@@ -334,7 +333,6 @@ namespace SmartFlow
                 openForm.BringToFront();
             }
         }
-
         private void UpdateSalesPersonInfo()
         {
             if(GlobalVariables.salespersonidglobal > 0 && GlobalVariables.salespersonnameglobal != null)
@@ -343,7 +341,6 @@ namespace SmartFlow
                 salesmantxtbox.Text = GlobalVariables.salespersonnameglobal;
             }
         }
-
         private void saletypetxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(SaleTypeSelection));
@@ -358,7 +355,6 @@ namespace SmartFlow
                 openForm.BringToFront();
             }
         }
-
         private void UpdateSaleTypeInfo()
         {
             if(GlobalVariables.saletypenameglobal != null && GlobalVariables.saletypeidglobal > 0)
@@ -367,7 +363,6 @@ namespace SmartFlow
                 saletypeidlbl.Text = GlobalVariables.saletypeidglobal.ToString();
             }
         }
-
         private void saletypetxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -385,7 +380,6 @@ namespace SmartFlow
                 }
             }
         }
-
         private void selectcustomertxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Enter)
@@ -403,7 +397,6 @@ namespace SmartFlow
                 }
             }
         }
-
         private void selectcustomertxtbox_Leave(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(CurrencySelection));
@@ -421,7 +414,6 @@ namespace SmartFlow
                 openForm.BringToFront();
             }
         }
-
         private void UpdateCurrencyTextBox()
         {
             if (GlobalVariables.currencyidglobal > 0 && GlobalVariables.currencynameglobal != null && GlobalVariables.currencysymbolglobal != null &&
@@ -433,7 +425,6 @@ namespace SmartFlow
                 currencysymbollbl.Text = GlobalVariables.currencysymbolglobal.ToString();
             }
         }
-
         private void selectproducttxtbox_Leave(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(ProductQtyWarehouse));
@@ -446,7 +437,7 @@ namespace SmartFlow
                     int productid = Convert.ToInt32(productidlbl.Text);
                     ProductQtyWarehouse productQtyWarehouse = new ProductQtyWarehouse(productmfr, productid);
                     productQtyWarehouse.ShowDialog();
-
+                    UpdateWarehouseinfo();
                 }
             }
             else
@@ -454,13 +445,20 @@ namespace SmartFlow
                 openForm.BringToFront();
             }
         }
-
+        private void UpdateWarehouseinfo()
+        {
+            if(GlobalVariables.warehouseidglobal > 0 && !string.IsNullOrEmpty(GlobalVariables.warehousenameglobal) 
+                && !string.IsNullOrWhiteSpace(GlobalVariables.warehousenameglobal))
+            {
+                warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
+                itemwisedescriptionlbl.Text = GlobalVariables.productitemwisedescriptiongloabl;
+            }
+        }
         private void narationtxtbox_Leave(object sender, EventArgs e)
         {
             InvoiceNoteForm noteForm = new InvoiceNoteForm();
             noteForm.ShowDialog();
         }
-
         private void qtytxtbox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Check if the entered character is not a digit and not a control character (e.g., backspace)
@@ -469,7 +467,6 @@ namespace SmartFlow
                 e.Handled = true; // Ignore the input
             }
         }
-
         private void pricetxtbox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Allow control characters (backspace, delete, etc.)
@@ -490,7 +487,6 @@ namespace SmartFlow
                 e.Handled = true;
             }
         }
-
         private void pricetxtbox_Leave(object sender, EventArgs e)
         {
             try
@@ -521,8 +517,11 @@ namespace SmartFlow
                     string productid = productidlbl.Text;
                     string qty = qtytxtbox.Text;
                     string price = pricetxtbox.Text;
-                    string unitid = GlobalVariables.unitid.ToString();
+                    string unitid = GlobalVariables.unitidglobal.ToString();
+                    string unitname = GlobalVariables.unitnameglobal.ToString();
                     decimal vatamount = GlobalVariables.productitemwisevatamount;
+                    string availability = GlobalVariables.availabilitystatus;
+
                     if (vatamount > 0) 
                     {
                         totalvattxtbox.Visible = true;
@@ -554,7 +553,8 @@ namespace SmartFlow
 
                     if (!productExists)
                     {
-                        dgvsaleproducts.Rows.Add(mfr,warehouseid,itemwisedescription, productid, productname, qty,unitid,unitid, price, vatamount.ToString("N2"),discount.ToString("N2"), finalitemwise);
+                        dgvsaleproducts.Rows.Add(mfr, warehouseid, itemwisedescription, productid, productname, qty, availability, unitid, unitname, price,
+                            vatamount.ToString("N2"), discount.ToString("N2"), finalitemwise);
                     }
 
                     mfrtxtbox.Text = string.Empty;
@@ -562,47 +562,16 @@ namespace SmartFlow
                     productidlbl.Text = string.Empty;
                     qtytxtbox.Text = string.Empty;
                     pricetxtbox.Text = string.Empty;
-                    GlobalVariables.unitid = 0;
+                    GlobalVariables.unitidglobal = 0;
                     GlobalVariables.productitemwisevatamount = 0;
                     GlobalVariables.productdiscountamountitemwise = 0;
                     GlobalVariables.productfinalamountwithvatanddiscountitemwise = 0;
+                    GlobalVariables.availabilitystatus = null;
                     selectproducttxtbox.Focus();
                 }
             }
             catch (Exception ex) { throw ex; }
         }
-
-        private void pricetxtbox_TextChanged(object sender, EventArgs e)
-        {
-            if (pricetxtbox.Text.Length > 0)
-            {
-                // Save the cursor position
-                int cursorPosition = pricetxtbox.SelectionStart;
-
-                // Remove commas and formatting characters before parsing
-                string unformattedText = pricetxtbox.Text.Replace(",", "");
-
-                // Try to parse the input as a decimal number
-                if (decimal.TryParse(unformattedText, out decimal value))
-                {
-                    // Format the text as currency with thousands separators and no decimal places
-                    string formattedText = value.ToString("N2");
-
-                    // Detach the event handler before updating the TextBox to avoid recursion
-                    pricetxtbox.TextChanged -= pricetxtbox_TextChanged;
-
-                    // Update the TextBox with the formatted text
-                    pricetxtbox.Text = formattedText;
-
-                    // Adjust the cursor position
-                    pricetxtbox.SelectionStart = cursorPosition + (pricetxtbox.Text.Length - formattedText.Length);
-
-                    // Reattach the event handler
-                    pricetxtbox.TextChanged += pricetxtbox_TextChanged;
-                }
-            }
-        }
-
         private void qtytxtbox_TextChanged(object sender, EventArgs e)
         {
             // Ensure that the text remains numeric after any changes
@@ -612,7 +581,6 @@ namespace SmartFlow
                 qtytxtbox.Text = qtytxtbox.Text.Remove(qtytxtbox.Text.Length - 1);
             }
         }
-
         private void selectproducttxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) 
@@ -630,7 +598,6 @@ namespace SmartFlow
                 }
             }
         }
-
         private void salesmantxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -647,6 +614,90 @@ namespace SmartFlow
                     openForm.BringToFront();
                 }
             }
+        }
+        private void savebtn_Click(object sender, EventArgs e)
+        {
+            bool detailadded = false;
+            try
+            {
+                string invoiceNo = invoicenotxtbox.Text;
+                DateTime invoiceDate = DateTime.Parse(invoicedatetxtbox.Text);
+                int saletypeid = Convert.ToInt32(saletypeidlbl.Text);
+                string saletypename = saletypetxtbox.Text;
+                int customerid = Convert.ToInt32(customeridlbl.Text);
+                string customercode = codetxtbox.Text;
+                string customername = selectcustomertxtbox.Text;
+                string customerrefrence = referncetxtbox.Text;
+                string mobile = mobiletxtbox.Text;
+                int salepersonid = Convert.ToInt32(salespersonidlbl.Text);
+                string salespersonname = salesmantxtbox.Text;
+                DateTime quotationvalidity = DateTime.Parse(validuntiltxtbox.Text);
+                int currencyid = Convert.ToInt32(currencyidlbl.Text);
+                decimal currencyconversionrate = decimal.Parse(currencyconversionratelbl.Text);
+                string currencyname = currencynamelbl.Text;
+                string currencysymbol = currencysymbollbl.Text;
+                string naration = narationtxtbox.Text;
+                string invoicespecialnotes = invoicespeicalnotelbl.Text;
+                float nettotal = float.Parse(nettotaltxtbox.Text);
+                float totalvat = float.Parse(totalvattxtbox.Text);
+                float totaldiscount = 0;
+
+                if(!string.IsNullOrEmpty(totaldiscounttxtbox.Text) && !string.IsNullOrWhiteSpace(totaldiscounttxtbox.Text))
+                {
+                    totaldiscount = float.Parse(totaldiscounttxtbox.Text);
+                }
+                else
+                {
+                    totaldiscount = float.Parse(discounttxtbox.Text);
+                }
+
+                float shippingcharges = float.Parse(shippingchargestxtbox.Text.ToString());
+
+                string invoicecode = Guid.NewGuid().ToString();
+
+                string addquotationmaster = string.Format("INSERT INTO InvoiceTable (InvoiceNo,invoicedate,ClientID,Narration,CreatedAt,CreatedDay,InvoiceCode,NetTotal," +
+                    "ClientName,TotalVat,TotalDiscount,FreightShippingCharges,Currencyid,CurrencyName,CurrencySymbol,ConversionRate) VALUES ('" + invoiceNo + "'," +
+                    "'" + invoiceDate + "','" + customerid + "','" + naration + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "'," +
+                    "'" + invoicecode + "','" + nettotal + "','" + customername + "','" + totalvat + "','" + totaldiscount + "','" + shippingcharges + "','" + currencyid + "'," +
+                    "'" + currencyname + "','" + currencysymbol + "','" + currencyconversionrate + "')");
+                bool result = DatabaseAccess.Insert(addquotationmaster);
+
+                if (result) 
+                {
+                    foreach (DataGridViewRow row in dgvsaleproducts.Rows)
+                    {
+                        if(row.IsNewRow) { continue; }
+
+                        int productid = Convert.ToInt32(row.Cells["productid"].Value.ToString());
+                        int quantity = Convert.ToInt32(row.Cells["qtycolumn"].Value.ToString());
+                        float unitprice = float.Parse(row.Cells["pricecolumn"].Value.ToString());
+                        float itemwisetotalwithoutvat = quantity * unitprice;
+                        string productname = row.Cells["productnamecolumn"].Value.ToString();
+                        string mfr = row.Cells["codecolumn"].Value.ToString();
+                        float discount = float.Parse(row.Cells["discountcolumn"].Value.ToString());
+                        float vat = float.Parse(row.Cells["vatcolumn"].Value.ToString());
+                        string itemdescription = row.Cells["itemwisedescriptioncolumn"].Value.ToString();
+                        int warehouseid = Convert.ToInt32(row.Cells["warehouseidcolumn"].Value.ToString());
+                        float total = float.Parse(row.Cells["totalcolumn"].Value.ToString());
+                        int unitid = Convert.ToInt32(row.Cells["unitid"].Value.ToString());
+
+                        string addquotationdetail = string.Format("INSERT INTO InvoiceDetailsTable (InvoiceNo,Invoicecode,Productid,Quantity,UnitSalePrice," +
+                        "ItemSerialNo,ProductName,MFR,ItemWiseDiscount,ItemWiseVAT,ItemDescription," +
+                        "Warehouseid,ItemTotal,Unitid) VALUES ('" + invoiceNo + "','" + invoicecode + "','" + productid + "','" + quantity + "','" + unitprice + "'," +
+                        "'" + null + "','" + productname + "','" + mfr + "','" + discount + "','" + vat + "','" + itemdescription + "','" + warehouseid + "'," +
+                        "'" + total + "','" + unitid + "')");
+
+                        detailadded = DatabaseAccess.Insert(addquotationdetail);
+                    }
+                    
+                }
+
+                if (detailadded)
+                {
+
+                }
+            }
+            catch (Exception ex) { throw ex; }
         }
     }
 }

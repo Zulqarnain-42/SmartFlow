@@ -18,19 +18,16 @@ namespace SmartFlow.Common.CommonForms
         {
             InitializeComponent();
         }
-
         private void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
             CommonFunction.GetStockLocation(searchtxtbox.Text,dgvstocklocation);
         }
-
         private void StockLocationSelection_Load(object sender, EventArgs e)
         {
             searchtxtbox.Focus();
             dgvstocklocation.ClearSelection();
             CommonFunction.GetStockLocation("",dgvstocklocation);
         }
-
         private void dgvstocklocation_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -55,7 +52,6 @@ namespace SmartFlow.Common.CommonForms
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void dgvstocklocation_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -73,7 +69,6 @@ namespace SmartFlow.Common.CommonForms
                 }
             }catch(Exception ex) { throw ex; }
         }
-
         private void StockLocationSelection_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -82,7 +77,6 @@ namespace SmartFlow.Common.CommonForms
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void searchtxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

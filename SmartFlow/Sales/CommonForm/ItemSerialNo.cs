@@ -11,14 +11,12 @@ namespace SmartFlow.Sales
         {
             InitializeComponent();
         }
-
         public ItemSerialNo(DataTable searchdata)
         {
             InitializeComponent();
             DataTable data = searchdata;
             dgvserialno.DataSource = data;
         }
-
         private void dgvserialno_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -32,7 +30,6 @@ namespace SmartFlow.Sales
                 }
             }
         }
-
         private void ItemSerialNo_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)

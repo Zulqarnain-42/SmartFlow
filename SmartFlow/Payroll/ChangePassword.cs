@@ -8,7 +8,6 @@ namespace SmartFlow.Payroll
         {
             InitializeComponent();
         }
-
         private void ChangePassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -17,7 +16,6 @@ namespace SmartFlow.Payroll
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void ChangePassword_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -30,7 +28,6 @@ namespace SmartFlow.Payroll
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

@@ -13,7 +13,6 @@ namespace SmartFlow.Masters
         {
             InitializeComponent();
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -100,13 +99,11 @@ namespace SmartFlow.Masters
                 
             }catch (Exception ex) { throw ex; }
         }
-
         private void ResetData()
         {
             accountheadtxtbox.Text = "";
             savebtn.Text = "SAVE";
         }
-
         private void FillGrid(string searchvalue)
         {
             try
@@ -152,17 +149,14 @@ namespace SmartFlow.Masters
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void AccountHead_Load(object sender, EventArgs e)
         {
             FillGrid("");
         }
-
         private void exitbtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void AccountHead_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -177,7 +171,6 @@ namespace SmartFlow.Masters
                 e.Handled = true;
             }
         }
-
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -214,7 +207,6 @@ namespace SmartFlow.Masters
                 }
             }catch (Exception ex) { throw ex;}
         }
-
         private int GetFirstVisibleRowIndex(DataGridView dataGridView)
         {
             int firstDisplayedRowIndex = dataGridView.FirstDisplayedScrollingRowIndex;
@@ -227,7 +219,6 @@ namespace SmartFlow.Masters
 
             return firstDisplayedRowIndex + displayedRowCount - 1;
         }
-
         private int GetFirstVisibleCellIndex(DataGridView dataGridView)
         {
             int horizontalOffset = dataGridView.HorizontalScrollingOffset;
@@ -250,7 +241,6 @@ namespace SmartFlow.Masters
 
             return dataGridView.Columns.Count - 1;
         }
-
         private void dgvaccounthead_Scroll(object sender, ScrollEventArgs e)
         {
             int firstVisibleRowIndex = GetFirstVisibleRowIndex(dgvaccounthead);
@@ -261,7 +251,6 @@ namespace SmartFlow.Masters
                 currentCellIndex = firstVisibleCellIndex;
             }
         }
-
         private void AccountHead_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -274,7 +263,6 @@ namespace SmartFlow.Masters
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

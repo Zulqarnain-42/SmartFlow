@@ -18,13 +18,11 @@ namespace SmartFlow.Stock
         {
             InitializeComponent();
         }
-
         private void BookItem_Load(object sender, EventArgs e)
         {
             startdatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
             enddatetxtbox.Text = DateTime.Now.AddDays(20).ToString("dd/MM/yyyy");
         }
-
         private void searchbtn_Click(object sender, EventArgs e)
         {
             try
@@ -48,12 +46,10 @@ namespace SmartFlow.Stock
                 }
             }catch(Exception ex) { throw ex; }
         }
-
         private void closebtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -82,7 +78,6 @@ namespace SmartFlow.Stock
 
             }catch (Exception ex) { throw ex; }
         }
-
         private void selectwarehousetxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
@@ -95,7 +90,6 @@ namespace SmartFlow.Stock
                 openForm.BringToFront();
             }
         }
-
         private void BookItem_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape) 

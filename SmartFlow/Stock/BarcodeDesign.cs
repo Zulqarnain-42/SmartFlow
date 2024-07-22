@@ -12,7 +12,6 @@ namespace SmartFlow.Stock
         {
             InitializeComponent();
         }
-
         private void BarcodeDesign_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -21,7 +20,6 @@ namespace SmartFlow.Stock
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
@@ -36,14 +34,12 @@ namespace SmartFlow.Stock
                 openForm.BringToFront();
             }
         }
-
         private void UpdateProductTextBox()
         {
             selectproducttxtbox.Text = GlobalVariables.productnameglobal;
             productidlbl.Text = GlobalVariables.productidglobal.ToString();
             productmfrlbl.Text = GlobalVariables.productmfrglobal.ToString();
         }
-
         private void addbtn_Click(object sender, EventArgs e)
         {
             try
@@ -75,7 +71,6 @@ namespace SmartFlow.Stock
                 dgvbarcodeproducts.Rows.Add(productid, mfr, productname, qty);
             }catch (Exception ex) { throw ex; }
         }
-
         private void generatebtn_Click(object sender, EventArgs e)
         {
             try
@@ -91,7 +86,6 @@ namespace SmartFlow.Stock
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void BarcodeDesign_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -104,7 +98,6 @@ namespace SmartFlow.Stock
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

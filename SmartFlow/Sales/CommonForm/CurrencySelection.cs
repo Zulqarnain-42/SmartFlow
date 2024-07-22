@@ -17,12 +17,10 @@ namespace SmartFlow.Sales
         {
             InitializeComponent();
         }
-
         private void CurrencySelection_Load(object sender, EventArgs e)
         {
             CommonFunction.FillCurrencyData(currencyComboBox);
         }
-
         private void okbtn_Click(object sender, EventArgs e)
         {
             try

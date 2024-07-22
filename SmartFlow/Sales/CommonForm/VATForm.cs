@@ -20,17 +20,15 @@ namespace SmartFlow.Sales.CommonForm
         {
             InitializeComponent();
             _itemtotal = totalitemwise;
+            vattxtbox.Focus();
         }
-
         private void VATForm_Load(object sender, EventArgs e)
         {
             label6.Text = _itemtotal.ToString("N2");
             vattxtbox.Text = _vatPercentage.ToString("N2");
             discounttxtbox.Text = _discount.ToString("N2");
-            vattxtbox.Focus();
             CommonFunction.FillUnitData(unitcombobox);
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -47,8 +45,15 @@ namespace SmartFlow.Sales.CommonForm
                 GlobalVariables.productitemwisevatpercentage = decimal.Parse(vattxtbox.Text);
                 GlobalVariables.productitemwisevatamount = decimal.Parse(vatamountlbl.Text);
                 GlobalVariables.producttotalwithvatitemwise = decimal.Parse(totalwithvatlbl.Text);
-                GlobalVariables.unitid = Convert.ToInt32(unitcombobox.SelectedValue);
-                if(fixedamountradio.Checked || percentageradio.Checked)
+                GlobalVariables.unitidglobal = Convert.ToInt32(unitcombobox.SelectedValue);
+                string query = string.Format("SELECT UnitName FROM UnitTable WHERE UnitID = '" + GlobalVariables.unitidglobal + "'");
+                DataTable dataunit = DatabaseAccess.Retrive(query);
+                if(dataunit!=null && dataunit.Rows.Count > 0)
+                {
+                    GlobalVariables.unitnameglobal = dataunit.Rows[0]["UnitName"].ToString();
+                }
+
+                if (fixedamountradio.Checked || percentageradio.Checked)
                 {
                     GlobalVariables.isproductdiscounted = true;
                     if (percentageradio.Checked)
@@ -63,7 +68,6 @@ namespace SmartFlow.Sales.CommonForm
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void vattxtbox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Check for a valid character (digits, control characters, and the decimal point)
@@ -79,7 +83,6 @@ namespace SmartFlow.Sales.CommonForm
                 e.Handled = true;
             }
         }
-
         private void discounttxtbox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Check for a valid character (digits, control characters, and the decimal point)
@@ -95,7 +98,6 @@ namespace SmartFlow.Sales.CommonForm
                 e.Handled = true;
             }
         }
-
         private void vattxtbox_TextChanged(object sender, EventArgs e)
         {
             if(decimal.TryParse(label6.Text,out decimal price) && decimal.TryParse(vattxtbox.Text,out decimal vatRate))
@@ -107,9 +109,19 @@ namespace SmartFlow.Sales.CommonForm
                 totalwithvatlbl.Text = totalAmountWithVat.ToString("N2");
                 totalwithvatanddiscountlbl.Text = totalAmountWithVat.ToString("N2");
                 totalwithvatanddiscountlbl.Visible = true;
+
+                if(vatRate > 0)
+                {
+                    fixedamountradio.Enabled = true;
+                    percentageradio.Enabled = true;
+                }
+                else
+                {
+                    fixedamountradio.Enabled = false;
+                    percentageradio.Enabled = false;
+                }
             }
         }
-
         private void fixedamountradio_CheckedChanged(object sender, EventArgs e)
         {
             if (fixedamountradio.Checked)
@@ -121,7 +133,6 @@ namespace SmartFlow.Sales.CommonForm
                 discounttxtbox.Enabled = false;
             }
         }
-
         private void percentageradio_CheckedChanged(object sender, EventArgs e)
         {
             if (percentageradio.Checked)
@@ -133,7 +144,6 @@ namespace SmartFlow.Sales.CommonForm
                 discounttxtbox.Enabled = false;
             }
         }
-
         private void discounttxtbox_TextChanged(object sender, EventArgs e)
         {
             if(decimal.TryParse(totalwithvatlbl.Text,out decimal totalwithVat) && decimal.TryParse(discounttxtbox.Text,out decimal discount))

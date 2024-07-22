@@ -42,18 +42,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvsaleproducts = new System.Windows.Forms.DataGridView();
-            this.codecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.warehouseidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemwisedescriptioncolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qtycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vatcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discountcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pricetxtbox = new System.Windows.Forms.TextBox();
             this.qtytxtbox = new System.Windows.Forms.TextBox();
@@ -82,12 +70,11 @@
             this.currencyidlbl = new System.Windows.Forms.Label();
             this.currencyconversionratelbl = new System.Windows.Forms.Label();
             this.validuntillbl = new System.Windows.Forms.Label();
-            this.invoicedate = new System.Windows.Forms.MaskedTextBox();
-            this.validuntil = new System.Windows.Forms.MaskedTextBox();
+            this.invoicedatetxtbox = new System.Windows.Forms.MaskedTextBox();
+            this.validuntiltxtbox = new System.Windows.Forms.MaskedTextBox();
             this.totaldiscountlbl = new System.Windows.Forms.Label();
             this.customeridlbl = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.shippingchargestxtbox = new System.Windows.Forms.MaskedTextBox();
             this.currencynamelbl = new System.Windows.Forms.Label();
             this.currencysymbollbl = new System.Windows.Forms.Label();
             this.itemwisedescriptionlbl = new System.Windows.Forms.Label();
@@ -98,6 +85,21 @@
             this.totaldiscounttxtbox = new System.Windows.Forms.TextBox();
             this.discounttxtbox = new System.Windows.Forms.MaskedTextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.invoicespeicalnotelbl = new System.Windows.Forms.Label();
+            this.shippingchargestxtbox = new System.Windows.Forms.TextBox();
+            this.codecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.warehouseidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemwisedescriptioncolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.availabilitycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vatcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discountcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -245,6 +247,7 @@
             this.productid,
             this.productnamecolumn,
             this.qtycolumn,
+            this.availabilitycolumn,
             this.unitid,
             this.unitname,
             this.pricecolumn,
@@ -265,106 +268,6 @@
             this.dgvsaleproducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvsaleproducts_CellValueChanged);
             this.dgvsaleproducts.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvsaleproducts_RowsAdded);
             this.dgvsaleproducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvsaleproduct_KeyDown);
-            // 
-            // codecolumn
-            // 
-            this.codecolumn.HeaderText = "Code";
-            this.codecolumn.MinimumWidth = 6;
-            this.codecolumn.Name = "codecolumn";
-            this.codecolumn.ReadOnly = true;
-            this.codecolumn.Width = 125;
-            // 
-            // warehouseidcolumn
-            // 
-            this.warehouseidcolumn.HeaderText = "warehouseid";
-            this.warehouseidcolumn.MinimumWidth = 6;
-            this.warehouseidcolumn.Name = "warehouseidcolumn";
-            this.warehouseidcolumn.ReadOnly = true;
-            this.warehouseidcolumn.Visible = false;
-            this.warehouseidcolumn.Width = 125;
-            // 
-            // itemwisedescriptioncolumn
-            // 
-            this.itemwisedescriptioncolumn.HeaderText = "itemwisedescription";
-            this.itemwisedescriptioncolumn.MinimumWidth = 6;
-            this.itemwisedescriptioncolumn.Name = "itemwisedescriptioncolumn";
-            this.itemwisedescriptioncolumn.ReadOnly = true;
-            this.itemwisedescriptioncolumn.Visible = false;
-            this.itemwisedescriptioncolumn.Width = 125;
-            // 
-            // productid
-            // 
-            this.productid.HeaderText = "ID";
-            this.productid.MinimumWidth = 6;
-            this.productid.Name = "productid";
-            this.productid.ReadOnly = true;
-            this.productid.Visible = false;
-            this.productid.Width = 125;
-            // 
-            // productnamecolumn
-            // 
-            this.productnamecolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.productnamecolumn.HeaderText = "Product Name";
-            this.productnamecolumn.MinimumWidth = 6;
-            this.productnamecolumn.Name = "productnamecolumn";
-            this.productnamecolumn.ReadOnly = true;
-            // 
-            // qtycolumn
-            // 
-            this.qtycolumn.HeaderText = "Qty";
-            this.qtycolumn.MinimumWidth = 6;
-            this.qtycolumn.Name = "qtycolumn";
-            this.qtycolumn.ReadOnly = true;
-            this.qtycolumn.Width = 80;
-            // 
-            // unitid
-            // 
-            this.unitid.HeaderText = "unitid";
-            this.unitid.MinimumWidth = 6;
-            this.unitid.Name = "unitid";
-            this.unitid.ReadOnly = true;
-            this.unitid.Visible = false;
-            this.unitid.Width = 125;
-            // 
-            // unitname
-            // 
-            this.unitname.HeaderText = "Unit";
-            this.unitname.MinimumWidth = 6;
-            this.unitname.Name = "unitname";
-            this.unitname.ReadOnly = true;
-            this.unitname.Width = 80;
-            // 
-            // pricecolumn
-            // 
-            this.pricecolumn.HeaderText = "Price";
-            this.pricecolumn.MinimumWidth = 6;
-            this.pricecolumn.Name = "pricecolumn";
-            this.pricecolumn.ReadOnly = true;
-            this.pricecolumn.Width = 125;
-            // 
-            // vatcolumn
-            // 
-            this.vatcolumn.HeaderText = "VAT";
-            this.vatcolumn.MinimumWidth = 6;
-            this.vatcolumn.Name = "vatcolumn";
-            this.vatcolumn.ReadOnly = true;
-            this.vatcolumn.Width = 125;
-            // 
-            // discountcolumn
-            // 
-            this.discountcolumn.HeaderText = "Diss";
-            this.discountcolumn.MinimumWidth = 6;
-            this.discountcolumn.Name = "discountcolumn";
-            this.discountcolumn.ReadOnly = true;
-            this.discountcolumn.Width = 125;
-            // 
-            // totalcolumn
-            // 
-            this.totalcolumn.HeaderText = "Total";
-            this.totalcolumn.MinimumWidth = 6;
-            this.totalcolumn.Name = "totalcolumn";
-            this.totalcolumn.ReadOnly = true;
-            this.totalcolumn.Width = 150;
             // 
             // panel2
             // 
@@ -395,7 +298,6 @@
             this.pricetxtbox.Size = new System.Drawing.Size(154, 32);
             this.pricetxtbox.TabIndex = 5;
             this.pricetxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.pricetxtbox.TextChanged += new System.EventHandler(this.pricetxtbox_TextChanged);
             this.pricetxtbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.pricetxtbox_KeyPress);
             this.pricetxtbox.Leave += new System.EventHandler(this.pricetxtbox_Leave);
             // 
@@ -619,6 +521,7 @@
             this.savebtn.TabIndex = 7;
             this.savebtn.Text = "SAVE && PRINT";
             this.savebtn.UseVisualStyleBackColor = true;
+            this.savebtn.Click += new System.EventHandler(this.savebtn_Click);
             // 
             // saletypelbl
             // 
@@ -681,27 +584,27 @@
             this.validuntillbl.TabIndex = 15;
             this.validuntillbl.Text = "Valid Until";
             // 
-            // invoicedate
+            // invoicedatetxtbox
             // 
-            this.invoicedate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.invoicedate.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoicedate.Location = new System.Drawing.Point(494, 48);
-            this.invoicedate.Mask = "00/00/0000";
-            this.invoicedate.Name = "invoicedate";
-            this.invoicedate.Size = new System.Drawing.Size(187, 32);
-            this.invoicedate.TabIndex = 3;
-            this.invoicedate.ValidatingType = typeof(System.DateTime);
+            this.invoicedatetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.invoicedatetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invoicedatetxtbox.Location = new System.Drawing.Point(494, 48);
+            this.invoicedatetxtbox.Mask = "00/00/0000";
+            this.invoicedatetxtbox.Name = "invoicedatetxtbox";
+            this.invoicedatetxtbox.Size = new System.Drawing.Size(187, 32);
+            this.invoicedatetxtbox.TabIndex = 3;
+            this.invoicedatetxtbox.ValidatingType = typeof(System.DateTime);
             // 
-            // validuntil
+            // validuntiltxtbox
             // 
-            this.validuntil.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.validuntil.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.validuntil.Location = new System.Drawing.Point(799, 147);
-            this.validuntil.Mask = "00/00/0000";
-            this.validuntil.Name = "validuntil";
-            this.validuntil.Size = new System.Drawing.Size(250, 32);
-            this.validuntil.TabIndex = 16;
-            this.validuntil.ValidatingType = typeof(System.DateTime);
+            this.validuntiltxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.validuntiltxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.validuntiltxtbox.Location = new System.Drawing.Point(799, 147);
+            this.validuntiltxtbox.Mask = "00/00/0000";
+            this.validuntiltxtbox.Name = "validuntiltxtbox";
+            this.validuntiltxtbox.Size = new System.Drawing.Size(250, 32);
+            this.validuntiltxtbox.TabIndex = 16;
+            this.validuntiltxtbox.ValidatingType = typeof(System.DateTime);
             // 
             // totaldiscountlbl
             // 
@@ -736,17 +639,6 @@
             this.label7.Size = new System.Drawing.Size(217, 23);
             this.label7.TabIndex = 117;
             this.label7.Text = "Freight && Shipping Charges";
-            // 
-            // shippingchargestxtbox
-            // 
-            this.shippingchargestxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.shippingchargestxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.shippingchargestxtbox.Font = new System.Drawing.Font("Calibri", 12F);
-            this.shippingchargestxtbox.Location = new System.Drawing.Point(246, 728);
-            this.shippingchargestxtbox.Name = "shippingchargestxtbox";
-            this.shippingchargestxtbox.Size = new System.Drawing.Size(378, 32);
-            this.shippingchargestxtbox.TabIndex = 6;
-            this.shippingchargestxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // currencynamelbl
             // 
@@ -863,12 +755,144 @@
             this.label9.TabIndex = 126;
             this.label9.Text = "Total Discount ";
             // 
+            // invoicespeicalnotelbl
+            // 
+            this.invoicespeicalnotelbl.AutoSize = true;
+            this.invoicespeicalnotelbl.Location = new System.Drawing.Point(1055, 179);
+            this.invoicespeicalnotelbl.Name = "invoicespeicalnotelbl";
+            this.invoicespeicalnotelbl.Size = new System.Drawing.Size(134, 16);
+            this.invoicespeicalnotelbl.TabIndex = 127;
+            this.invoicespeicalnotelbl.Text = "invoicespeicalnotelbl";
+            this.invoicespeicalnotelbl.Visible = false;
+            // 
+            // shippingchargestxtbox
+            // 
+            this.shippingchargestxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.shippingchargestxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.shippingchargestxtbox.Enabled = false;
+            this.shippingchargestxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shippingchargestxtbox.Location = new System.Drawing.Point(246, 729);
+            this.shippingchargestxtbox.Name = "shippingchargestxtbox";
+            this.shippingchargestxtbox.Size = new System.Drawing.Size(378, 32);
+            this.shippingchargestxtbox.TabIndex = 128;
+            this.shippingchargestxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // codecolumn
+            // 
+            this.codecolumn.HeaderText = "Code";
+            this.codecolumn.MinimumWidth = 6;
+            this.codecolumn.Name = "codecolumn";
+            this.codecolumn.ReadOnly = true;
+            this.codecolumn.Width = 125;
+            // 
+            // warehouseidcolumn
+            // 
+            this.warehouseidcolumn.HeaderText = "warehouseid";
+            this.warehouseidcolumn.MinimumWidth = 6;
+            this.warehouseidcolumn.Name = "warehouseidcolumn";
+            this.warehouseidcolumn.ReadOnly = true;
+            this.warehouseidcolumn.Visible = false;
+            this.warehouseidcolumn.Width = 125;
+            // 
+            // itemwisedescriptioncolumn
+            // 
+            this.itemwisedescriptioncolumn.HeaderText = "itemwisedescription";
+            this.itemwisedescriptioncolumn.MinimumWidth = 6;
+            this.itemwisedescriptioncolumn.Name = "itemwisedescriptioncolumn";
+            this.itemwisedescriptioncolumn.ReadOnly = true;
+            this.itemwisedescriptioncolumn.Visible = false;
+            this.itemwisedescriptioncolumn.Width = 125;
+            // 
+            // productid
+            // 
+            this.productid.HeaderText = "ID";
+            this.productid.MinimumWidth = 6;
+            this.productid.Name = "productid";
+            this.productid.ReadOnly = true;
+            this.productid.Visible = false;
+            this.productid.Width = 125;
+            // 
+            // productnamecolumn
+            // 
+            this.productnamecolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.productnamecolumn.HeaderText = "Product Name";
+            this.productnamecolumn.MinimumWidth = 6;
+            this.productnamecolumn.Name = "productnamecolumn";
+            this.productnamecolumn.ReadOnly = true;
+            // 
+            // qtycolumn
+            // 
+            this.qtycolumn.HeaderText = "Qty";
+            this.qtycolumn.MinimumWidth = 6;
+            this.qtycolumn.Name = "qtycolumn";
+            this.qtycolumn.ReadOnly = true;
+            this.qtycolumn.Width = 80;
+            // 
+            // availabilitycolumn
+            // 
+            this.availabilitycolumn.HeaderText = "Avail";
+            this.availabilitycolumn.MinimumWidth = 6;
+            this.availabilitycolumn.Name = "availabilitycolumn";
+            this.availabilitycolumn.ReadOnly = true;
+            this.availabilitycolumn.Width = 125;
+            // 
+            // unitid
+            // 
+            this.unitid.HeaderText = "unitid";
+            this.unitid.MinimumWidth = 6;
+            this.unitid.Name = "unitid";
+            this.unitid.ReadOnly = true;
+            this.unitid.Visible = false;
+            this.unitid.Width = 125;
+            // 
+            // unitname
+            // 
+            this.unitname.HeaderText = "Unit";
+            this.unitname.MinimumWidth = 6;
+            this.unitname.Name = "unitname";
+            this.unitname.ReadOnly = true;
+            this.unitname.Width = 80;
+            // 
+            // pricecolumn
+            // 
+            this.pricecolumn.HeaderText = "Price";
+            this.pricecolumn.MinimumWidth = 6;
+            this.pricecolumn.Name = "pricecolumn";
+            this.pricecolumn.ReadOnly = true;
+            this.pricecolumn.Width = 125;
+            // 
+            // vatcolumn
+            // 
+            this.vatcolumn.HeaderText = "VAT";
+            this.vatcolumn.MinimumWidth = 6;
+            this.vatcolumn.Name = "vatcolumn";
+            this.vatcolumn.ReadOnly = true;
+            this.vatcolumn.Width = 125;
+            // 
+            // discountcolumn
+            // 
+            this.discountcolumn.HeaderText = "Diss";
+            this.discountcolumn.MinimumWidth = 6;
+            this.discountcolumn.Name = "discountcolumn";
+            this.discountcolumn.ReadOnly = true;
+            this.discountcolumn.Width = 125;
+            // 
+            // totalcolumn
+            // 
+            this.totalcolumn.HeaderText = "Total";
+            this.totalcolumn.MinimumWidth = 6;
+            this.totalcolumn.Name = "totalcolumn";
+            this.totalcolumn.ReadOnly = true;
+            this.totalcolumn.Width = 150;
+            // 
             // SaleQuotationInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1768, 793);
+            this.Controls.Add(this.shippingchargestxtbox);
+            this.Controls.Add(this.invoicespeicalnotelbl);
             this.Controls.Add(this.discounttxtbox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.totaldiscounttxtbox);
@@ -879,12 +903,11 @@
             this.Controls.Add(this.itemwisedescriptionlbl);
             this.Controls.Add(this.currencysymbollbl);
             this.Controls.Add(this.currencynamelbl);
-            this.Controls.Add(this.shippingchargestxtbox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.customeridlbl);
             this.Controls.Add(this.totaldiscountlbl);
-            this.Controls.Add(this.validuntil);
-            this.Controls.Add(this.invoicedate);
+            this.Controls.Add(this.validuntiltxtbox);
+            this.Controls.Add(this.invoicedatetxtbox);
             this.Controls.Add(this.validuntillbl);
             this.Controls.Add(this.currencyconversionratelbl);
             this.Controls.Add(this.currencyidlbl);
@@ -976,26 +999,13 @@
         private System.Windows.Forms.Label currencyconversionratelbl;
         private System.Windows.Forms.Label currencyidlbl;
         private System.Windows.Forms.Label validuntillbl;
-        private System.Windows.Forms.MaskedTextBox invoicedate;
-        private System.Windows.Forms.MaskedTextBox validuntil;
+        private System.Windows.Forms.MaskedTextBox invoicedatetxtbox;
+        private System.Windows.Forms.MaskedTextBox validuntiltxtbox;
         private System.Windows.Forms.Label totaldiscountlbl;
         private System.Windows.Forms.Label customeridlbl;
-        private System.Windows.Forms.MaskedTextBox shippingchargestxtbox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label currencysymbollbl;
         private System.Windows.Forms.Label currencynamelbl;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codecolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn warehouseidcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn itemwisedescriptioncolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productnamecolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qtycolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unitid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unitname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pricecolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn vatcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn discountcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totalcolumn;
         private System.Windows.Forms.Label itemwisedescriptionlbl;
         private System.Windows.Forms.TextBox narationtxtbox;
         private System.Windows.Forms.Label narationlbl;
@@ -1006,5 +1016,20 @@
         private System.Windows.Forms.TextBox totalvattxtbox;
         private System.Windows.Forms.MaskedTextBox discounttxtbox;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label invoicespeicalnotelbl;
+        private System.Windows.Forms.TextBox shippingchargestxtbox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codecolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn warehouseidcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemwisedescriptioncolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productnamecolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn qtycolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn availabilitycolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pricecolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vatcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discountcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalcolumn;
     }
 }

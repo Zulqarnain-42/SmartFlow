@@ -16,7 +16,6 @@ namespace SmartFlow.Transactions
         {
             InitializeComponent();
         }
-
         private void MaterialIssueToParty_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)

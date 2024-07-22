@@ -12,7 +12,6 @@ namespace SmartFlow
         {
             InitializeComponent();
         }
-
         private void FillGrid(string searchvalue)
         {
             try
@@ -58,12 +57,10 @@ namespace SmartFlow
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void Unit_Load(object sender, EventArgs e)
         {
             FillGrid("");
         }
-
         private void Unit_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -78,7 +75,6 @@ namespace SmartFlow
                 e.Handled = true;
             }
         }
-
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -120,7 +116,6 @@ namespace SmartFlow
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -183,12 +178,10 @@ namespace SmartFlow
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void exitbtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void unitdatagridview_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -230,14 +223,12 @@ namespace SmartFlow
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void ResetData()
         {
             unitnametxtbox.Text = "";
             unitdescription.Text = "";
             savebtn.Text = "SAVE";
         }
-
         private void unitdatagridview_Scroll(object sender, ScrollEventArgs e)
         {
             int firstVisibleRowIndex = GetFirstVisibleRowIndex(unitdatagridview);
@@ -248,7 +239,6 @@ namespace SmartFlow
                 currentCellIndex = firstVisibleCellIndex;
             }
         }
-
         private int GetFirstVisibleRowIndex(DataGridView dataGridView)
         {
             int firstDisplayedRowIndex = dataGridView.FirstDisplayedScrollingRowIndex;
@@ -261,7 +251,6 @@ namespace SmartFlow
 
             return firstDisplayedRowIndex + displayedRowCount - 1;
         }
-
         private int GetFirstVisibleCellIndex(DataGridView dataGridView)
         {
             int horizontalOffset = dataGridView.HorizontalScrollingOffset;
@@ -284,7 +273,6 @@ namespace SmartFlow
 
             return dataGridView.Columns.Count - 1;
         }
-
         private void Unit_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -297,7 +285,6 @@ namespace SmartFlow
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)

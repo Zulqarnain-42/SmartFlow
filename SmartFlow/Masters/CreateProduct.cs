@@ -13,18 +13,15 @@ namespace SmartFlow.Masters
         {
             InitializeComponent();
         }
-
         public CreateProduct(int ProductID)
         {
             InitializeComponent();
             productid.Text = ProductID.ToString();
         }
-
         private void closebtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -310,7 +307,6 @@ namespace SmartFlow.Masters
                 throw ex;
             }
         }
-
         private void FindRecord(int productid)
         {
             try
@@ -379,7 +375,6 @@ namespace SmartFlow.Masters
                 throw ex;
             }
         }
-
         private void FillBundleDataGridView(int productid)
         {
             try
@@ -397,7 +392,6 @@ namespace SmartFlow.Masters
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void CreateProduct_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -406,7 +400,6 @@ namespace SmartFlow.Masters
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void CreateProduct_Load(object sender, EventArgs e)
         {
             string labeldata = productid.Text;
@@ -420,7 +413,6 @@ namespace SmartFlow.Masters
                 GenerateBarcode();
             }
         }
-
         private void GenerateBarcode()
         {
             var writer = new BarcodeWriter
@@ -464,14 +456,12 @@ namespace SmartFlow.Masters
             var barcodeImage = writer.Write(randomNumber.ToString());
             pictureBox1.Image = barcodeImage;
         }
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             includestxtbox.Text = "";
             includestxtbox.Visible = checkBox1.Checked;
             includelbl.Visible = checkBox1.Checked;
         }
-
         private void AddDataToDatabase(int productid,string productcode)
         {
             try
@@ -485,7 +475,6 @@ namespace SmartFlow.Masters
                 }
             }catch (Exception ex) { throw ex; }
         }
-
         private void DeleteBundleData(int productid)
         {
             try
@@ -495,7 +484,6 @@ namespace SmartFlow.Masters
 
             }catch (Exception ex) { throw ex; }
         }
-
         private void nametxtbox_TextChanged(object sender, EventArgs e)
         {
             nametxtbox.Text = nametxtbox.Text.Replace(Environment.NewLine, " ");

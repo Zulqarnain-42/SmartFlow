@@ -13,19 +13,16 @@ namespace SmartFlow.Common.Forms
         {
             InitializeComponent();
         }
-
         private void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
             CommonFunction.GetProduct(searchtxtbox.Text,dgvproducts);
         }
-
         private void ProductSelectionForm_Load(object sender, EventArgs e)
         {
             searchtxtbox.Focus();
             dgvproducts.ClearSelection();
             CommonFunction.GetProduct("",dgvproducts);
         }
-
         private void dgvproducts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -53,7 +50,6 @@ namespace SmartFlow.Common.Forms
             }
             catch(Exception ex) { throw ex; }
         }
-
         private void dgvproducts_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -74,7 +70,6 @@ namespace SmartFlow.Common.Forms
                 }
             }catch(Exception ex) { throw ex; }
         }
-
         private void ProductSelectionForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -83,7 +78,6 @@ namespace SmartFlow.Common.Forms
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void searchtxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -107,7 +101,6 @@ namespace SmartFlow.Common.Forms
                 e.SuppressKeyPress = true; // Prevent the beep sound on Enter key press
             }
         }
-
         private void newproductbtn_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(CreateProduct));
@@ -121,7 +114,6 @@ namespace SmartFlow.Common.Forms
                 openForm.BringToFront();
             }
         }
-
         private void customproductbtn_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(CustomProductForm));

@@ -19,7 +19,6 @@ namespace SmartFlow.Masters
         {
             InitializeComponent();
         }
-
         private void selectaccounttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(AllAccountsSelection));
@@ -33,7 +32,6 @@ namespace SmartFlow.Masters
                 openForm.BringToFront();
             }
         }
-
         private void selectaccounttxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) 
@@ -50,7 +48,6 @@ namespace SmartFlow.Masters
                 }
             }
         }
-
         private void AddGroupAccount()
         {
             try
@@ -59,7 +56,6 @@ namespace SmartFlow.Masters
             }
             catch (Exception ex) { throw ex; }
         }
-
         private void GroupingAccount_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape) 

@@ -15,12 +15,10 @@ namespace SmartFlow.Stock
         {
             InitializeComponent();
         }
-
         private void StockTransfer_Load(object sender, EventArgs e)
         {
             stocktransferidlbl.Text = GenerateNextInvoiceNumber();
         }
-
         private void addbtn_Click(object sender, EventArgs e)
         {
             try
@@ -93,7 +91,6 @@ namespace SmartFlow.Stock
 
             }catch(Exception ex) { throw ex; }
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -169,7 +166,6 @@ namespace SmartFlow.Stock
             }
             catch(Exception ex) { throw ex; }
         }
-
         private string GenerateNextInvoiceNumber()
         {
             try
@@ -212,7 +208,6 @@ namespace SmartFlow.Stock
             }
             catch (Exception ex) { throw ex; }
         }
-
         private string GetLastInvoiceNumber()
         {
             string lastInvoiceNumber = null;
@@ -232,7 +227,6 @@ namespace SmartFlow.Stock
 
             return lastInvoiceNumber;
         }
-
         private void dgvproducts_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.D)
@@ -254,7 +248,6 @@ namespace SmartFlow.Stock
                 }
             }
         }
-
         private void StockTransfer_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -263,7 +256,6 @@ namespace SmartFlow.Stock
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void mfrtxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             try
@@ -281,7 +273,6 @@ namespace SmartFlow.Stock
                 }
             }catch(Exception ex) { throw ex; }
         }
-
         private void UpdateProductTextBox()
         {
             mfrtxtbox.Text = GlobalVariables.productmfrglobal;
@@ -291,7 +282,6 @@ namespace SmartFlow.Stock
             productbarcodelbl.Text = GlobalVariables.productbarcodeglobal.ToString();
             productpricelbl.Text =  GlobalVariables.productpriceglobal.ToString();
         }
-
         private void selectwarehousefromtxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
@@ -316,13 +306,11 @@ namespace SmartFlow.Stock
                 openForm.BringToFront();
             }
         }
-
         private void UpdateWarehouseFromTextBox()
         {
             selectwarehousefromtxtbox.Text = GlobalVariables.warehousenameglobal.ToString();
             warehousefromidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
         }
-
         private void selectwarehousetotxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
@@ -347,13 +335,11 @@ namespace SmartFlow.Stock
                 openForm.BringToFront();
             }
         }
-
         private void UpdateWarehouseToTextBox() 
         {
             selectwarehousetotxtbox.Text = GlobalVariables.warehousenameglobal.ToString();
             warehousetoidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
         }
-
         private void StockTransfer_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AreAnyTextBoxesFilled())
@@ -366,7 +352,6 @@ namespace SmartFlow.Stock
                 }
             }
         }
-
         private bool AreAnyTextBoxesFilled()
         {
             foreach (Control control in this.Controls)
@@ -378,7 +363,6 @@ namespace SmartFlow.Stock
             }
             return false; // No TextBox is filled
         }
-
         private void selectwarehousetotxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -406,7 +390,6 @@ namespace SmartFlow.Stock
                 }
             }
         }
-
         private void mfrtxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Enter)
@@ -424,7 +407,6 @@ namespace SmartFlow.Stock
                 }
             }
         }
-
         private void qtytxtbox_Leave(object sender, EventArgs e)
         {
             if(qtytxtbox.Text.Trim().Length > 0 && mfrtxtbox.Text.Trim().Length > 0)
@@ -465,7 +447,6 @@ namespace SmartFlow.Stock
                 }
             } 
         }
-
         private void closebtn_Click(object sender, EventArgs e)
         {
             this.Close();

@@ -12,7 +12,6 @@ namespace SmartFlow.Stock
         {
             InitializeComponent();
         }
-
         public UpdateQuantity(int prodid,string title,string mfr,int qty)
         {
             InitializeComponent();
@@ -21,7 +20,6 @@ namespace SmartFlow.Stock
             productmfr.Text = mfr;
             openingstocklbl.Text = "OPENING STOCK - " + qty.ToString();
         }
-
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
@@ -71,7 +69,6 @@ namespace SmartFlow.Stock
 
             }catch(Exception ex) { throw ex; }
         }
-
         static string GenerateRandomSerialNumber()
         {
             Random random = new Random();
@@ -95,7 +92,6 @@ namespace SmartFlow.Stock
             }
             return serialNumber;
         }
-
         private void UpdateQuantity_Load(object sender, EventArgs e)
         {
             if(openingstocklbl.Text != "OPENING STOCK - 0")
@@ -107,7 +103,6 @@ namespace SmartFlow.Stock
                 savebtn.Text = "CLOSE";
             }
         }
-
         private void UpdateQuantity_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -116,7 +111,6 @@ namespace SmartFlow.Stock
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void selectwarehousetxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
@@ -141,7 +135,6 @@ namespace SmartFlow.Stock
                 openForm.BringToFront();
             }
         }
-
         private void UpdateWarehouseFromTextBox()
         {
             selectwarehousetxtbox.Text = GlobalVariables.warehousenameglobal.ToString();

@@ -18,7 +18,6 @@ namespace SmartFlow.Common.CommonForms
         {
             InitializeComponent();
         }
-
         private void SalesPersonSelection_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Escape)
@@ -27,19 +26,16 @@ namespace SmartFlow.Common.CommonForms
                 e.Handled = true;
             }
         }
-
         private void SalesPersonSelection_Load(object sender, EventArgs e)
         {
             searchtxtbox.Focus();
             dgvsalesperson.ClearSelection();
             CommonFunction.GetSalesManInfo("", dgvsalesperson);
         }
-
         private void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
             CommonFunction.GetSalesManInfo(searchtxtbox.Text,dgvsalesperson);
         }
-
         private void dgvsalesperson_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -58,7 +54,6 @@ namespace SmartFlow.Common.CommonForms
                 }
             }catch(Exception ex) { throw ex; }
         }
-
         private void dgvsalesperson_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -75,7 +70,6 @@ namespace SmartFlow.Common.CommonForms
                 }
             }catch(Exception ex) { throw ex; }
         }
-
         private void searchtxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             try

@@ -67,6 +67,7 @@
             this.itemwisedescriptiontxtbox.Size = new System.Drawing.Size(793, 323);
             this.itemwisedescriptiontxtbox.TabIndex = 1;
             this.itemwisedescriptiontxtbox.Text = "";
+            this.itemwisedescriptiontxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.itemwisedescriptiontxtbox_KeyDown);
             // 
             // panel2
             // 
@@ -100,6 +101,7 @@
             this.Name = "ItemWiseDescription";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Item Wise Description";
+            this.Load += new System.EventHandler(this.ItemWiseDescription_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ItemWiseDescription_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

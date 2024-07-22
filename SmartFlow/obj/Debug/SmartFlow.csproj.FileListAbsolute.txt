@@ -142,3 +142,6 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonF
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonForm.DiscountForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonForm.SearchQuotationForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CustomProductForm.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonForm.AvailabilityForm.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonForm.SearchSaleInvoice.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonForm.ProductConditionForm.resources
