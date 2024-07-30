@@ -39,10 +39,12 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvsaleproducts = new System.Windows.Forms.DataGridView();
             this.codecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.warehouseidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemdescriptioncolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qtycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vatcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,7 +74,7 @@
             this.productidlbl = new System.Windows.Forms.Label();
             this.salespersonidlbl = new System.Windows.Forms.Label();
             this.newbtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.savebtn = new System.Windows.Forms.Button();
             this.invoicedatetxtbox = new System.Windows.Forms.MaskedTextBox();
             this.saletypetxtbox = new System.Windows.Forms.TextBox();
             this.saletypelbl = new System.Windows.Forms.Label();
@@ -95,6 +97,9 @@
             this.currencynamelbl = new System.Windows.Forms.Label();
             this.currencysymbollbl = new System.Windows.Forms.Label();
             this.currencyconversionratelbl = new System.Windows.Forms.Label();
+            this.invoicespecialnotelbl = new System.Windows.Forms.Label();
+            this.productserialnodilbl = new System.Windows.Forms.Label();
+            this.productserialnolbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -193,10 +198,12 @@
             this.dgvsaleproducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvsaleproducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codecolumn,
-            this.unitidcolumn,
+            this.warehouseidcolumn,
+            this.itemdescriptioncolumn,
             this.productid,
             this.productnamecolumn,
             this.qtycolumn,
+            this.unitidcolumn,
             this.unitnamecolumn,
             this.pricecolumn,
             this.vatcolumn,
@@ -225,14 +232,23 @@
             this.codecolumn.ReadOnly = true;
             this.codecolumn.Width = 125;
             // 
-            // unitidcolumn
+            // warehouseidcolumn
             // 
-            this.unitidcolumn.HeaderText = "unitid";
-            this.unitidcolumn.MinimumWidth = 6;
-            this.unitidcolumn.Name = "unitidcolumn";
-            this.unitidcolumn.ReadOnly = true;
-            this.unitidcolumn.Visible = false;
-            this.unitidcolumn.Width = 125;
+            this.warehouseidcolumn.HeaderText = "warehouseid";
+            this.warehouseidcolumn.MinimumWidth = 6;
+            this.warehouseidcolumn.Name = "warehouseidcolumn";
+            this.warehouseidcolumn.ReadOnly = true;
+            this.warehouseidcolumn.Visible = false;
+            this.warehouseidcolumn.Width = 125;
+            // 
+            // itemdescriptioncolumn
+            // 
+            this.itemdescriptioncolumn.HeaderText = "item Description";
+            this.itemdescriptioncolumn.MinimumWidth = 6;
+            this.itemdescriptioncolumn.Name = "itemdescriptioncolumn";
+            this.itemdescriptioncolumn.ReadOnly = true;
+            this.itemdescriptioncolumn.Visible = false;
+            this.itemdescriptioncolumn.Width = 125;
             // 
             // productid
             // 
@@ -258,6 +274,15 @@
             this.qtycolumn.Name = "qtycolumn";
             this.qtycolumn.ReadOnly = true;
             this.qtycolumn.Width = 125;
+            // 
+            // unitidcolumn
+            // 
+            this.unitidcolumn.HeaderText = "unitid";
+            this.unitidcolumn.MinimumWidth = 6;
+            this.unitidcolumn.Name = "unitidcolumn";
+            this.unitidcolumn.ReadOnly = true;
+            this.unitidcolumn.Visible = false;
+            this.unitidcolumn.Width = 125;
             // 
             // unitnamecolumn
             // 
@@ -409,7 +434,7 @@
             // serialnoidlbl
             // 
             this.serialnoidlbl.AutoSize = true;
-            this.serialnoidlbl.Location = new System.Drawing.Point(1093, 50);
+            this.serialnoidlbl.Location = new System.Drawing.Point(1034, 44);
             this.serialnoidlbl.Name = "serialnoidlbl";
             this.serialnoidlbl.Size = new System.Drawing.Size(66, 16);
             this.serialnoidlbl.TabIndex = 10;
@@ -456,6 +481,7 @@
             this.salemantxtbox.Size = new System.Drawing.Size(841, 32);
             this.salemantxtbox.TabIndex = 8;
             this.salemantxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.salemantxtbox_MouseClick);
+            this.salemantxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.salemantxtbox_KeyDown);
             // 
             // label8
             // 
@@ -526,7 +552,7 @@
             // warehouseidlbl
             // 
             this.warehouseidlbl.AutoSize = true;
-            this.warehouseidlbl.Location = new System.Drawing.Point(1093, 66);
+            this.warehouseidlbl.Location = new System.Drawing.Point(1034, 60);
             this.warehouseidlbl.Name = "warehouseidlbl";
             this.warehouseidlbl.Size = new System.Drawing.Size(84, 16);
             this.warehouseidlbl.TabIndex = 68;
@@ -536,7 +562,7 @@
             // productidlbl
             // 
             this.productidlbl.AutoSize = true;
-            this.productidlbl.Location = new System.Drawing.Point(1093, 82);
+            this.productidlbl.Location = new System.Drawing.Point(1034, 76);
             this.productidlbl.Name = "productidlbl";
             this.productidlbl.Size = new System.Drawing.Size(63, 16);
             this.productidlbl.TabIndex = 69;
@@ -546,7 +572,7 @@
             // salespersonidlbl
             // 
             this.salespersonidlbl.AutoSize = true;
-            this.salespersonidlbl.Location = new System.Drawing.Point(1093, 98);
+            this.salespersonidlbl.Location = new System.Drawing.Point(1034, 92);
             this.salespersonidlbl.Name = "salespersonidlbl";
             this.salespersonidlbl.Size = new System.Drawing.Size(93, 16);
             this.salespersonidlbl.TabIndex = 103;
@@ -565,17 +591,18 @@
             this.newbtn.Text = "NEW";
             this.newbtn.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // savebtn
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Impact", 12F);
-            this.button1.Location = new System.Drawing.Point(1602, 782);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(158, 46);
-            this.button1.TabIndex = 104;
-            this.button1.Text = "SAVE && PRINT";
-            this.button1.UseVisualStyleBackColor = true;
+            this.savebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.savebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.savebtn.Font = new System.Drawing.Font("Impact", 12F);
+            this.savebtn.Location = new System.Drawing.Point(1602, 782);
+            this.savebtn.Name = "savebtn";
+            this.savebtn.Size = new System.Drawing.Size(158, 46);
+            this.savebtn.TabIndex = 104;
+            this.savebtn.Text = "SAVE && PRINT";
+            this.savebtn.UseVisualStyleBackColor = true;
+            this.savebtn.Click += new System.EventHandler(this.savebtn_Click);
             // 
             // invoicedatetxtbox
             // 
@@ -674,11 +701,12 @@
             // saletypeidlbl
             // 
             this.saletypeidlbl.AutoSize = true;
-            this.saletypeidlbl.Location = new System.Drawing.Point(1096, 115);
+            this.saletypeidlbl.Location = new System.Drawing.Point(1034, 108);
             this.saletypeidlbl.Name = "saletypeidlbl";
             this.saletypeidlbl.Size = new System.Drawing.Size(84, 16);
             this.saletypeidlbl.TabIndex = 124;
             this.saletypeidlbl.Text = "saletypeidlbl";
+            this.saletypeidlbl.Visible = false;
             // 
             // narationtxtbox
             // 
@@ -768,56 +796,90 @@
             // customeridlbl
             // 
             this.customeridlbl.AutoSize = true;
-            this.customeridlbl.Location = new System.Drawing.Point(1096, 143);
+            this.customeridlbl.Location = new System.Drawing.Point(1034, 124);
             this.customeridlbl.Name = "customeridlbl";
             this.customeridlbl.Size = new System.Drawing.Size(87, 16);
             this.customeridlbl.TabIndex = 132;
             this.customeridlbl.Text = "customeridlbl";
+            this.customeridlbl.Visible = false;
             // 
             // itemwisedescriptionlbl
             // 
             this.itemwisedescriptionlbl.AutoSize = true;
-            this.itemwisedescriptionlbl.Location = new System.Drawing.Point(1096, 165);
+            this.itemwisedescriptionlbl.Location = new System.Drawing.Point(1034, 140);
             this.itemwisedescriptionlbl.Name = "itemwisedescriptionlbl";
             this.itemwisedescriptionlbl.Size = new System.Drawing.Size(139, 16);
             this.itemwisedescriptionlbl.TabIndex = 21;
             this.itemwisedescriptionlbl.Text = "itemwisedescriptionlbl";
+            this.itemwisedescriptionlbl.Visible = false;
             // 
             // currencyidlbl
             // 
             this.currencyidlbl.AutoSize = true;
-            this.currencyidlbl.Location = new System.Drawing.Point(1035, 182);
+            this.currencyidlbl.Location = new System.Drawing.Point(1034, 172);
             this.currencyidlbl.Name = "currencyidlbl";
             this.currencyidlbl.Size = new System.Drawing.Size(83, 16);
             this.currencyidlbl.TabIndex = 133;
             this.currencyidlbl.Text = "currencyidlbl";
+            this.currencyidlbl.Visible = false;
             // 
             // currencynamelbl
             // 
             this.currencynamelbl.AutoSize = true;
-            this.currencynamelbl.Location = new System.Drawing.Point(1124, 182);
+            this.currencynamelbl.Location = new System.Drawing.Point(1034, 156);
             this.currencynamelbl.Name = "currencynamelbl";
             this.currencynamelbl.Size = new System.Drawing.Size(106, 16);
             this.currencynamelbl.TabIndex = 134;
             this.currencynamelbl.Text = "currencynamelbl";
+            this.currencynamelbl.Visible = false;
             // 
             // currencysymbollbl
             // 
             this.currencysymbollbl.AutoSize = true;
-            this.currencysymbollbl.Location = new System.Drawing.Point(1236, 182);
+            this.currencysymbollbl.Location = new System.Drawing.Point(1103, 76);
             this.currencysymbollbl.Name = "currencysymbollbl";
             this.currencysymbollbl.Size = new System.Drawing.Size(116, 16);
             this.currencysymbollbl.TabIndex = 135;
             this.currencysymbollbl.Text = "currencysymbollbl";
+            this.currencysymbollbl.Visible = false;
             // 
             // currencyconversionratelbl
             // 
             this.currencyconversionratelbl.AutoSize = true;
-            this.currencyconversionratelbl.Location = new System.Drawing.Point(1381, 199);
+            this.currencyconversionratelbl.Location = new System.Drawing.Point(1133, 93);
             this.currencyconversionratelbl.Name = "currencyconversionratelbl";
             this.currencyconversionratelbl.Size = new System.Drawing.Size(161, 16);
             this.currencyconversionratelbl.TabIndex = 136;
             this.currencyconversionratelbl.Text = "currencyconversionratelbl";
+            this.currencyconversionratelbl.Visible = false;
+            // 
+            // invoicespecialnotelbl
+            // 
+            this.invoicespecialnotelbl.AutoSize = true;
+            this.invoicespecialnotelbl.Location = new System.Drawing.Point(1034, 188);
+            this.invoicespecialnotelbl.Name = "invoicespecialnotelbl";
+            this.invoicespecialnotelbl.Size = new System.Drawing.Size(134, 16);
+            this.invoicespecialnotelbl.TabIndex = 137;
+            this.invoicespecialnotelbl.Text = "invoicespecialnotelbl";
+            this.invoicespecialnotelbl.Visible = false;
+            // 
+            // productserialnodilbl
+            // 
+            this.productserialnodilbl.AutoSize = true;
+            this.productserialnodilbl.Location = new System.Drawing.Point(1106, 44);
+            this.productserialnodilbl.Name = "productserialnodilbl";
+            this.productserialnodilbl.Size = new System.Drawing.Size(125, 16);
+            this.productserialnodilbl.TabIndex = 138;
+            this.productserialnodilbl.Text = "productserialnodilbl";
+            // 
+            // productserialnolbl
+            // 
+            this.productserialnolbl.AutoSize = true;
+            this.productserialnolbl.Location = new System.Drawing.Point(1124, 60);
+            this.productserialnolbl.Name = "productserialnolbl";
+            this.productserialnolbl.Size = new System.Drawing.Size(114, 16);
+            this.productserialnolbl.TabIndex = 139;
+            this.productserialnolbl.Text = "productserialnolbl";
             // 
             // SaleInvoice
             // 
@@ -825,6 +887,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1772, 840);
+            this.Controls.Add(this.productserialnolbl);
+            this.Controls.Add(this.productserialnodilbl);
+            this.Controls.Add(this.invoicespecialnotelbl);
             this.Controls.Add(this.currencyconversionratelbl);
             this.Controls.Add(this.currencysymbollbl);
             this.Controls.Add(this.currencynamelbl);
@@ -848,7 +913,7 @@
             this.Controls.Add(this.saletypelbl);
             this.Controls.Add(this.invoicedatetxtbox);
             this.Controls.Add(this.newbtn);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.savebtn);
             this.Controls.Add(this.salespersonidlbl);
             this.Controls.Add(this.productidlbl);
             this.Controls.Add(this.warehouseidlbl);
@@ -876,7 +941,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sale Invoice - Future Art Broadcast Trading LLC";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SaleInvoice_FormClosing);
             this.Load += new System.EventHandler(this.SaleInvoice_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaleInvoice_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
@@ -922,7 +986,7 @@
         private System.Windows.Forms.Label warehouseidlbl;
         private System.Windows.Forms.Label salespersonidlbl;
         private System.Windows.Forms.Button newbtn;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button savebtn;
         private System.Windows.Forms.MaskedTextBox invoicedatetxtbox;
         private System.Windows.Forms.TextBox saletypetxtbox;
         private System.Windows.Forms.Label saletypelbl;
@@ -933,16 +997,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codecolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unitidcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productnamecolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qtycolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unitnamecolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pricecolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn vatcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn discountcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totalcolumn;
         private System.Windows.Forms.Label saletypeidlbl;
         private System.Windows.Forms.TextBox narationtxtbox;
         private System.Windows.Forms.Label narationlbl;
@@ -959,5 +1013,20 @@
         private System.Windows.Forms.Label currencysymbollbl;
         private System.Windows.Forms.Label currencynamelbl;
         private System.Windows.Forms.Label currencyidlbl;
+        private System.Windows.Forms.Label invoicespecialnotelbl;
+        private System.Windows.Forms.Label productserialnolbl;
+        private System.Windows.Forms.Label productserialnodilbl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codecolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn warehouseidcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemdescriptioncolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productnamecolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn qtycolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitidcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitnamecolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pricecolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vatcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discountcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalcolumn;
     }
 }

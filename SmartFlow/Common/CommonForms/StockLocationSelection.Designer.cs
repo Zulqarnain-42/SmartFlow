@@ -137,7 +137,7 @@
             this.KeyPreview = true;
             this.Name = "StockLocationSelection";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Stock Location Selection";
+            this.Text = "STOCK LOCATION SELECTION - FUTURE ART BROADCAST TRADING LLC";
             this.Load += new System.EventHandler(this.StockLocationSelection_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StockLocationSelection_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvstocklocation)).EndInit();

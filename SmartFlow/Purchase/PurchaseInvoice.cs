@@ -3,19 +3,21 @@ using SmartFlow.Common;
 using SmartFlow.Common.CommonForms;
 using SmartFlow.Common.Forms;
 using SmartFlow.Masters;
+using SmartFlow.Purchase.ReportViewer;
 using SmartFlow.Sales;
 using SmartFlow.Sales.CommonForm;
 using System;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using ZXing;
 
 namespace SmartFlow.Purchase
 {
     public partial class PurchaseInvoice : Form
     {
         private int invoiceCounter = 1;
-        private decimal vatAmount = 0;
+        private decimal initalizer = 0;
         public PurchaseInvoice()
         {
             InitializeComponent();
@@ -23,6 +25,9 @@ namespace SmartFlow.Purchase
         }
         private void PurchaseInvoice_Load(object sender, EventArgs e)
         {
+            totaldiscounttxtbox.Text = initalizer.ToString("N2");
+            totalvattxtbox.Text = initalizer.ToString("N2");
+            shippingchargestxtbox.Text = initalizer.ToString("N2");
             invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
             invoicenotxtbox.Text = GenerateNextInvoiceNumber();
         }
@@ -116,17 +121,93 @@ namespace SmartFlow.Purchase
             try
             {
                 errorProvider.Clear();
+                bool isInserted = false;
                 string invoicecode = Guid.NewGuid().ToString();
-                string addpurchaseinvoice = string.Format("");
+                string invoiceNo = CheckInvoiceBeforeInsert();
+                DateTime invoiceDate = DateTime.Parse(invoicedatetxtbox.Text);
+                int supplierid = Convert.ToInt32(supplieridlbl.Text.ToString());
+                string suppliercode = codetxtbox.Text;
+                string supplierName = selectsuppliertxtbox.Text;
+                string invoiceRef = invoicerefrencetxtbox.Text;
+                int purchaseTypeid = Convert.ToInt32(purchasetypeidlbl.Text);
+                string purchaseType = purchasetypetxtbox.Text;
+                string naration = narationtxtbox.Text;
+                string specialNotes = invoicespecialnotelbl.Text;
+                int currencyId = Convert.ToInt32(currencyidlbl.Text);
+                string currencyName = currencynamelbl.Text;
+                string currencySymbol = currencysymbollbl.Text;
+                float currencyConversionRate = float.Parse(currencyconversionratelbl.Text);
+                float netTotal = float.Parse(nettotaltxtbox.Text.ToString());
+                float netVat = float.Parse(totalvattxtbox.Text.ToString());
+                float netDiscount = float.Parse(totaldiscounttxtbox.Text.ToString());
+                float shippingCharges = float.Parse(shippingchargestxtbox.Text.ToString());
+
+                string addpurchaseinvoice = string.Format("INSERT INTO InvoiceTable (InvoiceNo,invoicedate,ClientID,Narration,CreatedAt,CreatedDay,InvoiceCode,NetTotal," +
+                    "ClientName,TotalVat,TotalDiscount,FreightShippingCharges,PurchaseInvoiceRefrence,IsPlanetInvoice,Currencyid,CurrencyName,CurrencySymbol," +
+                    "ConversionRate,InvoiceTypeid,IsSaleInvoice,InvoiceTypeName,IsTaxAble) VALUES ('" + invoiceNo + "','" + invoiceDate + "','" + supplierid + "'," +
+                    "'" + naration + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + invoicecode + "','" + netTotal + "'," +
+                    "'" + supplierName + "','" + netVat + "','" + netDiscount + "','" + shippingCharges + "'," +
+                    "'" + invoiceRef + "','" + false + "','" + currencyId + "','" + currencyName + "','" + currencySymbol + "','" + currencyConversionRate + "'," +
+                    "'" + purchaseTypeid + "','" + false + "','" + purchaseType + "','" + GlobalVariables.purchasetypeistaxable + "')");
 
                 bool insertinvoice = DatabaseAccess.Insert(addpurchaseinvoice);
+
                 if (insertinvoice)
                 {
                     foreach(DataGridViewRow row in dgvpurchaseproducts.Rows)
                     {
-                        string addproductdetails = string.Format("");
+                        if (row.IsNewRow) { continue; }
+
+                        int productid = Convert.ToInt32(row.Cells["productid"].Value.ToString());
+                        int quantity = Convert.ToInt32(row.Cells["qtycolumn"].Value.ToString());
+                        float costprice = float.Parse(row.Cells["pricecolumn"].Value.ToString());
+                        string productname = row.Cells["productnamecolumn"].Value.ToString();
+                        string mfr = row.Cells["mfrcolumn"].Value.ToString();
+                        float discount = float.Parse(row.Cells["discountcolumn"].Value.ToString());
+                        float vat = float.Parse(row.Cells["vatcolumn"].Value.ToString());
+                        string itemdescription = row.Cells["itemdescriptioncolumn"].Value.ToString();
+                        int warehouseid = Convert.ToInt32(row.Cells["warehouseidcolumn"].Value.ToString());
+                        float total = float.Parse(row.Cells["totalcolumn"].Value.ToString());
+                        int unitid = Convert.ToInt32(row.Cells["unitidcolumn"].Value.ToString());
+                        
+                        float lowestprice = float.Parse(row.Cells["lowestpricecolumn"].Value.ToString());
+                        float standardprice = float.Parse(row.Cells["standardpricecolumn"].Value.ToString());
+                        float saleprice = float.Parse(row.Cells["salepricecolumn"].Value.ToString());
+
+                        string addproductdetails = string.Format("INSERT INTO InvoiceDetailsTable (InvoiceNo,Invoicecode,Productid,Quantity,UnitSalePrice,ItemSerialNo,ProductName," +
+                            "MFR,ItemWiseDiscount,ItemWiseVAT,ItemDescription,Warehouseid,PurchaseCostPrice,PurchaseLowestSalePrice,PurchaseStandardPrice,PurchaseItemSalePrice," +
+                            "SystemSerialNo,ItemTotal,Unitid,IncludeInventory) VALUES ('" + invoiceNo + "','" + invoicecode + "','" + productid + "','" + quantity + "','" + costprice + "'," +
+                            "'" + null + "','" + productname + "','" + mfr + "','" + discount + "','" + vat + "','" + itemdescription + "','" + warehouseid + "','" + costprice + "'," +
+                            "'" + lowestprice + "','" + standardprice + "','" + saleprice + "','" + null + "','" + total + "','" + unitid + "','" + true + "')");
                         bool insertprod = DatabaseAccess.Insert(addproductdetails);
+                        if (insertprod)
+                        {
+                            int count = 0;
+                            int diff = quantity - count;
+
+                            if (diff > 0)
+                            {
+                                int start = 0;
+                                while (start < diff)
+                                {
+                                    string serialnumber = GenerateRandomSerialNumber();
+                                    string query1 = string.Format("INSERT INTO SerialNoTable (ProductId,SerialNo,CreatedAt,CreatedDay) " +
+                                "VALUES ('" + productid + "','" + serialnumber + "','" + System.DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
+                                "'" + System.DateTime.Now.DayOfWeek + "')");
+                                    DatabaseAccess.Insert(query1);
+                                    start++;
+                                }
+                            }
+                        }
                     }
+                    isInserted = true;
+                }
+
+                if(isInserted == true)
+                {
+                    this.Close();
+                    InvoiceReportView invoiceReportView = new InvoiceReportView();
+                    invoiceReportView.Show();
                 }
                 else
                 {
@@ -134,12 +215,48 @@ namespace SmartFlow.Purchase
                 }
             }catch (Exception ex) { throw ex; }
         }
+        static string GenerateRandomSerialNumber()
+        {
+            Random random = new Random();
+            const string chars = "FABT0123456789";
+            char[] serialChars = new char[10];
+
+            for (int i = 0; i < serialChars.Length; i++)
+            {
+                serialChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            string serialNumber = new string(serialChars);
+            string query = "SELECT SerialNo FROM SerialNoTable WHERE SerialNo = '" + serialNumber + "'";
+            DataTable dt = DatabaseAccess.Retrive(query);
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    serialNumber = GenerateRandomSerialNumber();
+                }
+            }
+            return serialNumber;
+        }
         private void PurchaseInvoice_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
-                e.Handled = true; // Prevent further processing of the key event
+                if (AreAnyTextBoxesFilled())
+                {
+                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Close();
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    this.Close();
+                    e.Handled = true;
+                }
             }
         }
         private void selectsuppliertxtbox_MouseClick(object sender, MouseEventArgs e)
@@ -173,6 +290,7 @@ namespace SmartFlow.Purchase
                 !string.IsNullOrEmpty(GlobalVariables.suppliercodeglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.suppliercodeglobal) && 
                 GlobalVariables.supplieridglobal > 0)
             {
+                supplieridlbl.Text = GlobalVariables.supplieridglobal.ToString();
                 selectsuppliertxtbox.Text = GlobalVariables.suppliernameglobal;
                 codetxtbox.Text = GlobalVariables.suppliercodeglobal;
             }
@@ -189,18 +307,6 @@ namespace SmartFlow.Purchase
             else
             {
                 openForm.BringToFront();
-            }
-        }
-        private void PurchaseInvoice_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (AreAnyTextBoxesFilled())
-            {
-                DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
-                                                      "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.No)
-                {
-                    e.Cancel = true; // Cancel the closing event
-                }
             }
         }
         private bool AreAnyTextBoxesFilled()
@@ -247,13 +353,13 @@ namespace SmartFlow.Purchase
         }
         private void dgvpurchaseproducts_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            CalculateTotalVat(13);
+            CalculateTotalVatColumn(13);
             CalculateTotalColumn(14);
             CalculateTotalDiscount(12);
         }
         private void dgvpurchaseproducts_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            CalculateTotalVat(13);
+            CalculateTotalVatColumn(13);
             CalculateTotalColumn(14);
             CalculateTotalDiscount(12);
         }
@@ -274,7 +380,7 @@ namespace SmartFlow.Purchase
 
             nettotaltxtbox.Text = total.ToString("N2");
         }
-        private void CalculateTotalVat(int columnIndex)
+        private void CalculateTotalVatColumn(int columnIndex)
         {
             decimal totalvat = 0;
 
@@ -369,7 +475,7 @@ namespace SmartFlow.Purchase
                         discountForm.ShowDialog();
                     }
                     string mfr = mfrtxtbox.Text;
-                    string itemdescription = GlobalVariables.productitemwisedescriptiongloabl;
+                    string itemdescription = itemwisedescriptionlbl.Text;
                     string productid = productidlbl.Text;
                     string productname = selectproducttxtbox.Text;
                     string qty = qtytxtbox.Text;
@@ -377,6 +483,7 @@ namespace SmartFlow.Purchase
                     string lowestprice = lowestpricetxtbox.Text;
                     string standardprice = standardpricetxtbox.Text;
                     string saleprice = salepricetxtbox.Text;
+                    int warehouseid = Convert.ToInt32(warehouseidlbl.Text);
                     decimal vat = GlobalVariables.productitemwisevatamount;
                     decimal discount = GlobalVariables.productdiscountamountitemwise;
                     string unitid = GlobalVariables.unitidglobal.ToString();
@@ -413,8 +520,8 @@ namespace SmartFlow.Purchase
 
                     if (!productExists)
                     {
-                        dgvpurchaseproducts.Rows.Add(mfr, productid,itemdescription,productcondition, productname, qty,unitid,unitname, costprice, lowestprice, standardprice,
-                            saleprice,discount, vat,finalitemwise);
+                        dgvpurchaseproducts.Rows.Add(mfr, productid, itemdescription, productcondition, productname, qty, unitid, unitname, costprice, lowestprice, standardprice,
+                            saleprice, discount, vat, finalitemwise, warehouseid);
                     }
 
                     mfrtxtbox.Text = string.Empty;
@@ -478,6 +585,35 @@ namespace SmartFlow.Purchase
             if (!string.IsNullOrEmpty(GlobalVariables.invoicespecialnote) && !string.IsNullOrWhiteSpace(GlobalVariables.invoicespecialnote))
             {
                 invoicespecialnotelbl.Text = GlobalVariables.invoicespecialnote;
+            }
+        }
+        private void selectproducttxtbox_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(productidlbl.Text) && !string.IsNullOrWhiteSpace(productidlbl.Text) && !string.IsNullOrEmpty(mfrtxtbox.Text) &&
+                !string.IsNullOrWhiteSpace(mfrtxtbox.Text) && !string.IsNullOrEmpty(selectproducttxtbox.Text) && !string.IsNullOrWhiteSpace(selectproducttxtbox.Text))
+            {
+                Form openForm = CommonFunction.IsFormOpen(typeof(ProductQtyWarehouse));
+                if (openForm == null)
+                {
+                    string productmfr = mfrtxtbox.Text;
+                    int productid = Convert.ToInt32(productidlbl.Text);
+                    ProductQtyWarehouse productQtyWarehouse = new ProductQtyWarehouse(productmfr, productid);
+                    productQtyWarehouse.ShowDialog();
+                    UpdateWarehouseinfo();
+                }
+                else
+                {
+                    openForm.BringToFront();
+                }
+            }
+        }
+        private void UpdateWarehouseinfo()
+        {
+            if (GlobalVariables.warehouseidglobal > 0 && !string.IsNullOrEmpty(GlobalVariables.warehousenameglobal)
+                && !string.IsNullOrWhiteSpace(GlobalVariables.warehousenameglobal))
+            {
+                warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
+                itemwisedescriptionlbl.Text = GlobalVariables.productitemwisedescriptiongloabl;
             }
         }
     }

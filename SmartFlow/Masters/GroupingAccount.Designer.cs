@@ -173,7 +173,7 @@
             this.KeyPreview = true;
             this.Name = "GroupingAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Account Grouping - Future Art Broadcast Trading LLC";
+            this.Text = "ACCOUNT GROUPING - FUTURE ART BROADCAST TRADING LLC";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GroupingAccount_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

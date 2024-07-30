@@ -7,15 +7,13 @@ namespace SmartFlow.Sales
 {
     public partial class ItemSerialNo : Form
     {
-        public ItemSerialNo()
+        private string _productmfr;
+        private int _productId;
+        public ItemSerialNo(string productmfr,int productid)
         {
             InitializeComponent();
-        }
-        public ItemSerialNo(DataTable searchdata)
-        {
-            InitializeComponent();
-            DataTable data = searchdata;
-            dgvserialno.DataSource = data;
+            _productmfr = productmfr;
+            _productId = productid;
         }
         private void dgvserialno_KeyDown(object sender, KeyEventArgs e)
         {
@@ -37,6 +35,14 @@ namespace SmartFlow.Sales
                 this.Close();
                 e.Handled = true; // Prevent further processing of the key event
             }
+        }
+
+        private void ItemSerialNo_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                CommonFunction.GetItemSerialNo(_productmfr, _productId, dgvserialno);
+            }catch(Exception ex) { throw ex; }
         }
     }
 }

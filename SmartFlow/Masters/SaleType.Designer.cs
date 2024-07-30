@@ -146,7 +146,7 @@
             this.KeyPreview = true;
             this.Name = "SaleType";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sale Type - Future Art Broadcast Trading LLC";
+            this.Text = "SALE TYPE - FUTURE ART BROADCAST TRADING LLC";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

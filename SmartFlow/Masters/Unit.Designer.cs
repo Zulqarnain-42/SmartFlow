@@ -261,7 +261,7 @@
             this.MinimizeBox = false;
             this.Name = "Unit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Unit - Future Art Broadcast Trading LLC";
+            this.Text = "UNIT - FUTURE ART BROADCAST TRADING LLC";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Unit_FormClosing);
             this.Load += new System.EventHandler(this.Unit_Load);

@@ -182,7 +182,7 @@
             this.MinimizeBox = false;
             this.Name = "Customers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Customers - Future Art Broadcast Trading LLC";
+            this.Text = "CUSTOMER LIST - FUTURE ART BROADCAST TRADING LLC";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Customers_FormClosing);
             this.Load += new System.EventHandler(this.Customers_Load);

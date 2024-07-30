@@ -119,7 +119,14 @@ namespace SmartFlow.Transactions
 
             return lastInvoiceNumber;
         }
-
+        private void CreditNote_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                e.Handled = true;
+            }
+        }
     }
 
 }

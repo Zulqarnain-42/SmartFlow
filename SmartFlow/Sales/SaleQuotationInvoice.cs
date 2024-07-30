@@ -4,6 +4,7 @@ using SmartFlow.Common.Forms;
 using SmartFlow.Purchase;
 using SmartFlow.Sales;
 using SmartFlow.Sales.CommonForm;
+using SmartFlow.Sales.ReportViewer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -119,8 +120,21 @@ namespace SmartFlow
         {
             if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
-                e.Handled = true; // Prevent further processing of the key event
+                if (AreAnyTextBoxesFilled())
+                {
+                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Close();
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    this.Close();
+                    e.Handled = true;
+                }
             }
         }
         private void dgvsaleproduct_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -235,18 +249,6 @@ namespace SmartFlow
                 selectproducttxtbox.Text = GlobalVariables.productnameglobal.ToString();
                 productidlbl.Text = GlobalVariables.productidglobal.ToString();
                 mfrtxtbox.Text = GlobalVariables.productmfrglobal.ToString();
-            }
-        }
-        private void SaleQuotationInvoice_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (AreAnyTextBoxesFilled())
-            {
-                DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
-                                                      "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.No)
-                {
-                    e.Cancel = true; // Cancel the closing event
-                }
             }
         }
         private bool AreAnyTextBoxesFilled()
@@ -620,7 +622,7 @@ namespace SmartFlow
             bool detailadded = false;
             try
             {
-                string invoiceNo = invoicenotxtbox.Text;
+                string invoiceNo = CheckInvoiceBeforeInsert();
                 DateTime invoiceDate = DateTime.Parse(invoicedatetxtbox.Text);
                 int saletypeid = Convert.ToInt32(saletypeidlbl.Text);
                 string saletypename = saletypetxtbox.Text;
@@ -656,10 +658,12 @@ namespace SmartFlow
                 string invoicecode = Guid.NewGuid().ToString();
 
                 string addquotationmaster = string.Format("INSERT INTO InvoiceTable (InvoiceNo,invoicedate,ClientID,Narration,CreatedAt,CreatedDay,InvoiceCode,NetTotal," +
-                    "ClientName,TotalVat,TotalDiscount,FreightShippingCharges,Currencyid,CurrencyName,CurrencySymbol,ConversionRate) VALUES ('" + invoiceNo + "'," +
-                    "'" + invoiceDate + "','" + customerid + "','" + naration + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "'," +
-                    "'" + invoicecode + "','" + nettotal + "','" + customername + "','" + totalvat + "','" + totaldiscount + "','" + shippingcharges + "','" + currencyid + "'," +
-                    "'" + currencyname + "','" + currencysymbol + "','" + currencyconversionrate + "')");
+                    "ClientName,TotalVat,TotalDiscount,FreightShippingCharges,Currencyid,CurrencyName,CurrencySymbol,ConversionRate,InvoiceTypeid,IsSaleInvoice," +
+                    "InvoiceTypeName,IsTaxAble,QuotationValidUntill) VALUES (" +
+                    "'" + invoiceNo + "','" + invoiceDate + "','" + customerid + "','" + naration + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
+                    "'" + DateTime.Now.DayOfWeek + "','" + invoicecode + "','" + nettotal + "','" + customername + "','" + totalvat + "','" + totaldiscount + "'," +
+                    "'" + shippingcharges + "','" + currencyid + "','" + currencyname + "','" + currencysymbol + "','" + currencyconversionrate + "','" + saletypeid + "'," +
+                    "'" + true + "','" + saletypename + "','" + GlobalVariables.saletypeistaxable + "','" + quotationvalidity + "')");
                 bool result = DatabaseAccess.Insert(addquotationmaster);
 
                 if (result) 
@@ -671,7 +675,6 @@ namespace SmartFlow
                         int productid = Convert.ToInt32(row.Cells["productid"].Value.ToString());
                         int quantity = Convert.ToInt32(row.Cells["qtycolumn"].Value.ToString());
                         float unitprice = float.Parse(row.Cells["pricecolumn"].Value.ToString());
-                        float itemwisetotalwithoutvat = quantity * unitprice;
                         string productname = row.Cells["productnamecolumn"].Value.ToString();
                         string mfr = row.Cells["codecolumn"].Value.ToString();
                         float discount = float.Parse(row.Cells["discountcolumn"].Value.ToString());
@@ -687,14 +690,16 @@ namespace SmartFlow
                         "'" + null + "','" + productname + "','" + mfr + "','" + discount + "','" + vat + "','" + itemdescription + "','" + warehouseid + "'," +
                         "'" + total + "','" + unitid + "')");
 
-                        detailadded = DatabaseAccess.Insert(addquotationdetail);
+                        DatabaseAccess.Insert(addquotationdetail);
                     }
-                    
+                    detailadded = true;
                 }
 
                 if (detailadded)
                 {
-
+                    this.Close();
+                    SaleQuotationReportViewer saleQuotationReportViewer = new SaleQuotationReportViewer();
+                    saleQuotationReportViewer.Show();
                 }
             }
             catch (Exception ex) { throw ex; }

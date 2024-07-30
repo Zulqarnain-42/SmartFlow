@@ -23,32 +23,75 @@ namespace SmartFlow.Purchase
                 errorProvider.Clear();
                 if (invoicenotxtbox.Text.Trim().Length > 0)
                 {
-                    errorProvider.SetError(invoicenotxtbox,"");
+                    errorProvider.SetError(invoicenotxtbox,"Please Enter Invoice No");
                     invoicenotxtbox.Focus();
                     return;
                 }
 
                 if(invoicedatetxtbox.Text.Trim().Length > 0)
                 {
-                    errorProvider.SetError(invoicedatetxtbox,"");
+                    errorProvider.SetError(invoicedatetxtbox,"Please Enter Invoice Date");
                     invoicedatetxtbox.Focus();
                     return;
                 }
 
-                string query = string.Empty;
-                query = "";
-
-                DataTable dataInvoice = DatabaseAccess.Retrive(query);
-
-                if (dataInvoice.Rows.Count > 0)
+                if (purchasequoteradio.Checked)
                 {
+                    string query = string.Empty;
+                    query = "";
 
+                    DataTable dataInvoice = DatabaseAccess.Retrive(query);
+
+                    if (dataInvoice.Rows.Count > 0)
+                    {
+
+                    }
                 }
+                else if (lporadio.Checked)
+                {
+                    string query = string.Empty;
+                    query = "";
 
+                    DataTable dataInvoice = DatabaseAccess.Retrive(query);
+
+                    if (dataInvoice.Rows.Count > 0)
+                    {
+
+                    }
+                }
+                else if (purchaseinvoiceradio.Checked) 
+                {
+                    string query = string.Empty;
+                    query = "";
+
+                    DataTable dataInvoice = DatabaseAccess.Retrive(query);
+
+                    if (dataInvoice.Rows.Count > 0)
+                    {
+
+                    }
+                }
+                else if (purchasereturnradio.Checked)
+                {
+                    string query = string.Empty;
+                    query = "";
+
+                    DataTable dataInvoice = DatabaseAccess.Retrive(query);
+
+                    if (dataInvoice.Rows.Count > 0)
+                    {
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Select Purchase Type Radio");
+                }
             }catch (Exception ex) { throw ex; }
         }
         private void FindPurchaseInvoiceForm_Load(object sender, EventArgs e)
         {
+            invoicenotxtbox.Focus();
             invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
     }

@@ -303,7 +303,7 @@
             this.MinimizeBox = false;
             this.Name = "AccountGroupHistory";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Account Groups - Future Art Broadcast Trading LLC";
+            this.Text = "ACCOUNT GROUPS - FUTURE ART BROADCAST TRADING LLC";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccountGroupHistory_FormClosing);
             this.Load += new System.EventHandler(this.AccountGroupHistory_Load);

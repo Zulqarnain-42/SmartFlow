@@ -191,7 +191,7 @@
             this.KeyPreview = true;
             this.Name = "Currency";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Currency";
+            this.Text = "CURRENCY - FUTURE ART BROADCAST TRADING LLC";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Currency_KeyDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();

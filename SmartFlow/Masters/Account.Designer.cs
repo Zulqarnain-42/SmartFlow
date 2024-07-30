@@ -677,7 +677,7 @@
             this.MinimizeBox = false;
             this.Name = "Account";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Account - Future Art Broadcast Trading LLC";
+            this.Text = "ACCOUNT - FUTURE ART BROADCAST TRADING LLC";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Account_FormClosing);
             this.Load += new System.EventHandler(this.Account_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Account_KeyDown);

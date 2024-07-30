@@ -51,6 +51,7 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.totalwithvatlbl = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.productconditionchkbox = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -277,10 +278,24 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "TAXABLE AMOUNT : ";
             // 
+            // productconditionchkbox
+            // 
+            this.productconditionchkbox.AutoSize = true;
+            this.productconditionchkbox.Checked = true;
+            this.productconditionchkbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.productconditionchkbox.Location = new System.Drawing.Point(440, 183);
+            this.productconditionchkbox.Name = "productconditionchkbox";
+            this.productconditionchkbox.Size = new System.Drawing.Size(131, 20);
+            this.productconditionchkbox.TabIndex = 27;
+            this.productconditionchkbox.Text = "NEW PRODUCT";
+            this.productconditionchkbox.UseVisualStyleBackColor = true;
+            this.productconditionchkbox.CheckedChanged += new System.EventHandler(this.productconditionchkbox_CheckedChanged);
+            // 
             // VATForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.productconditionchkbox);
             this.Controls.Add(this.totalwithvatlbl);
             this.Controls.Add(this.unitcombobox);
             this.Controls.Add(this.unitlbl);
@@ -338,5 +353,6 @@
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Label totalwithvatlbl;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox productconditionchkbox;
     }
 }

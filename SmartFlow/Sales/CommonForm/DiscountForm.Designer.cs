@@ -44,6 +44,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.totalwithdiscountlbl = new System.Windows.Forms.Label();
             this.discountamountlbl = new System.Windows.Forms.Label();
+            this.productconditionchkbox = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -214,11 +215,24 @@
             this.discountamountlbl.Text = "discountamountlbl";
             this.discountamountlbl.Visible = false;
             // 
+            // productconditionchkbox
+            // 
+            this.productconditionchkbox.AutoSize = true;
+            this.productconditionchkbox.Checked = true;
+            this.productconditionchkbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.productconditionchkbox.Location = new System.Drawing.Point(456, 134);
+            this.productconditionchkbox.Name = "productconditionchkbox";
+            this.productconditionchkbox.Size = new System.Drawing.Size(131, 20);
+            this.productconditionchkbox.TabIndex = 28;
+            this.productconditionchkbox.Text = "NEW PRODUCT";
+            this.productconditionchkbox.UseVisualStyleBackColor = true;
+            // 
             // DiscountForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.productconditionchkbox);
             this.Controls.Add(this.discountamountlbl);
             this.Controls.Add(this.totalwithdiscountlbl);
             this.Controls.Add(this.label6);
@@ -235,6 +249,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "DiscountForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ITEM WISE DISCOUNT";
             this.Load += new System.EventHandler(this.DiscountForm_Load);
             this.panel1.ResumeLayout(false);
@@ -262,5 +277,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label totalwithdiscountlbl;
         private System.Windows.Forms.Label discountamountlbl;
+        private System.Windows.Forms.CheckBox productconditionchkbox;
     }
 }

@@ -35,10 +35,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1183, 706);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "DeliveryNote";
-            this.Text = "DeliveryNote";
+            this.Text = "DELIVERY NOTE - FUTURE ART BROADCAST TRADING LLC";
             this.ResumeLayout(false);
 
         }

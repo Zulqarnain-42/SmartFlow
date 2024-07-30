@@ -243,7 +243,7 @@
             this.MinimizeBox = false;
             this.Name = "UploadExcel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Upload Products Using Excel";
+            this.Text = "UPLOAD PRODUCTS USING EXCEL";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UploadExcel_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UploadExcel_KeyDown);

@@ -97,6 +97,12 @@ namespace SmartFlow.Sales.CommonForm
                 GlobalVariables.unitidglobal = Convert.ToInt32(unitcombobox.SelectedValue);
                 var selectedItem = unitcombobox.SelectedItem;
                 GlobalVariables.unitnameglobal = selectedItem.ToString();
+                string query = string.Format("SELECT UnitName FROM UnitTable WHERE UnitID = '" + GlobalVariables.unitidglobal + "'");
+                DataTable dataunit = DatabaseAccess.Retrive(query);
+                if (dataunit != null && dataunit.Rows.Count > 0)
+                {
+                    GlobalVariables.unitnameglobal = dataunit.Rows[0]["UnitName"].ToString();
+                }
                 if (fixedamountradio.Checked || percentageradio.Checked)
                 {
                     GlobalVariables.isproductdiscounted = true;

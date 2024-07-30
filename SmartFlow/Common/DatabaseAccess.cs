@@ -12,7 +12,8 @@ namespace SmartFlow
         {
             if(conn == null)
             {
-                conn = new SqlConnection(@"Data Source=DESKTOP-1D6LU8Q\SQLEXPRESS;Initial Catalog=SmartFlow;Integrated Security=True;Encrypt=False");
+                /*conn = new SqlConnection(@"Data Source=10.255.254.241,1433;Initial Catalog=SmartFlow;User id=fabt;Password=Fabt101;");*/
+                conn = new SqlConnection(@"Data Source=DESKTOP-1D6LU8Q\SQLEXPRESS;Initial Catalog=Smart;Integrated Security=True;Encrypt=False");
             }
 
             if(conn.State != System.Data.ConnectionState.Open)

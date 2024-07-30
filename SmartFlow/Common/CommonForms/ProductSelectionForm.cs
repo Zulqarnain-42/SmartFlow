@@ -20,7 +20,6 @@ namespace SmartFlow.Common.Forms
         private void ProductSelectionForm_Load(object sender, EventArgs e)
         {
             searchtxtbox.Focus();
-            dgvproducts.ClearSelection();
             CommonFunction.GetProduct("",dgvproducts);
         }
         private void dgvproducts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -74,6 +73,18 @@ namespace SmartFlow.Common.Forms
         {
             if (e.KeyCode == Keys.Escape)
             {
+                // Check if there are any selected rows in the DataGridView
+                if (dgvproducts.SelectedRows.Count > 0)
+                {
+                    dgvproducts.ClearSelection();
+                    GlobalVariables.productidglobal = 0;
+                    GlobalVariables.productnameglobal = null;
+                    GlobalVariables.productmfrglobal = null;
+                    GlobalVariables.productpriceglobal = 0;
+                    GlobalVariables.productupcglobal = null;
+                    GlobalVariables.productbarcodeglobal = null;
+                }
+
                 this.Close();
                 e.Handled = true; // Prevent further processing of the key event
             }

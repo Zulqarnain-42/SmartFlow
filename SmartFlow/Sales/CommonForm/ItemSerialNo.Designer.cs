@@ -104,6 +104,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Item Serial No";
+            this.Load += new System.EventHandler(this.ItemSerialNo_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ItemSerialNo_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvserialno)).EndInit();
             this.panel1.ResumeLayout(false);

@@ -136,7 +136,7 @@
             this.MinimizeBox = false;
             this.Name = "OpeningBalance";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OpeningBalance";
+            this.Text = "OPENING BALANCE - FUTURE ART BROADCAST TRADING LLC";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OpeningBalance_FormClosing);
             this.Load += new System.EventHandler(this.OpeningBalance_Load);

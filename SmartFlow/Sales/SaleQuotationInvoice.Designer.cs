@@ -42,6 +42,19 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvsaleproducts = new System.Windows.Forms.DataGridView();
+            this.codecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.warehouseidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemwisedescriptioncolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.availabilitycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vatcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discountcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pricetxtbox = new System.Windows.Forms.TextBox();
             this.qtytxtbox = new System.Windows.Forms.TextBox();
@@ -87,19 +100,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.invoicespeicalnotelbl = new System.Windows.Forms.Label();
             this.shippingchargestxtbox = new System.Windows.Forms.TextBox();
-            this.codecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.warehouseidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemwisedescriptioncolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qtycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.availabilitycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vatcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discountcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -268,6 +268,114 @@
             this.dgvsaleproducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvsaleproducts_CellValueChanged);
             this.dgvsaleproducts.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvsaleproducts_RowsAdded);
             this.dgvsaleproducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvsaleproduct_KeyDown);
+            // 
+            // codecolumn
+            // 
+            this.codecolumn.HeaderText = "Code";
+            this.codecolumn.MinimumWidth = 6;
+            this.codecolumn.Name = "codecolumn";
+            this.codecolumn.ReadOnly = true;
+            this.codecolumn.Width = 125;
+            // 
+            // warehouseidcolumn
+            // 
+            this.warehouseidcolumn.HeaderText = "warehouseid";
+            this.warehouseidcolumn.MinimumWidth = 6;
+            this.warehouseidcolumn.Name = "warehouseidcolumn";
+            this.warehouseidcolumn.ReadOnly = true;
+            this.warehouseidcolumn.Visible = false;
+            this.warehouseidcolumn.Width = 125;
+            // 
+            // itemwisedescriptioncolumn
+            // 
+            this.itemwisedescriptioncolumn.HeaderText = "itemwisedescription";
+            this.itemwisedescriptioncolumn.MinimumWidth = 6;
+            this.itemwisedescriptioncolumn.Name = "itemwisedescriptioncolumn";
+            this.itemwisedescriptioncolumn.ReadOnly = true;
+            this.itemwisedescriptioncolumn.Visible = false;
+            this.itemwisedescriptioncolumn.Width = 125;
+            // 
+            // productid
+            // 
+            this.productid.HeaderText = "ID";
+            this.productid.MinimumWidth = 6;
+            this.productid.Name = "productid";
+            this.productid.ReadOnly = true;
+            this.productid.Visible = false;
+            this.productid.Width = 125;
+            // 
+            // productnamecolumn
+            // 
+            this.productnamecolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.productnamecolumn.HeaderText = "Product Name";
+            this.productnamecolumn.MinimumWidth = 6;
+            this.productnamecolumn.Name = "productnamecolumn";
+            this.productnamecolumn.ReadOnly = true;
+            // 
+            // qtycolumn
+            // 
+            this.qtycolumn.HeaderText = "Qty";
+            this.qtycolumn.MinimumWidth = 6;
+            this.qtycolumn.Name = "qtycolumn";
+            this.qtycolumn.ReadOnly = true;
+            this.qtycolumn.Width = 80;
+            // 
+            // availabilitycolumn
+            // 
+            this.availabilitycolumn.HeaderText = "Avail";
+            this.availabilitycolumn.MinimumWidth = 6;
+            this.availabilitycolumn.Name = "availabilitycolumn";
+            this.availabilitycolumn.ReadOnly = true;
+            this.availabilitycolumn.Width = 125;
+            // 
+            // unitid
+            // 
+            this.unitid.HeaderText = "unitid";
+            this.unitid.MinimumWidth = 6;
+            this.unitid.Name = "unitid";
+            this.unitid.ReadOnly = true;
+            this.unitid.Visible = false;
+            this.unitid.Width = 125;
+            // 
+            // unitname
+            // 
+            this.unitname.HeaderText = "Unit";
+            this.unitname.MinimumWidth = 6;
+            this.unitname.Name = "unitname";
+            this.unitname.ReadOnly = true;
+            this.unitname.Width = 80;
+            // 
+            // pricecolumn
+            // 
+            this.pricecolumn.HeaderText = "Price";
+            this.pricecolumn.MinimumWidth = 6;
+            this.pricecolumn.Name = "pricecolumn";
+            this.pricecolumn.ReadOnly = true;
+            this.pricecolumn.Width = 125;
+            // 
+            // vatcolumn
+            // 
+            this.vatcolumn.HeaderText = "VAT";
+            this.vatcolumn.MinimumWidth = 6;
+            this.vatcolumn.Name = "vatcolumn";
+            this.vatcolumn.ReadOnly = true;
+            this.vatcolumn.Width = 125;
+            // 
+            // discountcolumn
+            // 
+            this.discountcolumn.HeaderText = "Diss";
+            this.discountcolumn.MinimumWidth = 6;
+            this.discountcolumn.Name = "discountcolumn";
+            this.discountcolumn.ReadOnly = true;
+            this.discountcolumn.Width = 125;
+            // 
+            // totalcolumn
+            // 
+            this.totalcolumn.HeaderText = "Total";
+            this.totalcolumn.MinimumWidth = 6;
+            this.totalcolumn.Name = "totalcolumn";
+            this.totalcolumn.ReadOnly = true;
+            this.totalcolumn.Width = 150;
             // 
             // panel2
             // 
@@ -777,114 +885,6 @@
             this.shippingchargestxtbox.TabIndex = 128;
             this.shippingchargestxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // codecolumn
-            // 
-            this.codecolumn.HeaderText = "Code";
-            this.codecolumn.MinimumWidth = 6;
-            this.codecolumn.Name = "codecolumn";
-            this.codecolumn.ReadOnly = true;
-            this.codecolumn.Width = 125;
-            // 
-            // warehouseidcolumn
-            // 
-            this.warehouseidcolumn.HeaderText = "warehouseid";
-            this.warehouseidcolumn.MinimumWidth = 6;
-            this.warehouseidcolumn.Name = "warehouseidcolumn";
-            this.warehouseidcolumn.ReadOnly = true;
-            this.warehouseidcolumn.Visible = false;
-            this.warehouseidcolumn.Width = 125;
-            // 
-            // itemwisedescriptioncolumn
-            // 
-            this.itemwisedescriptioncolumn.HeaderText = "itemwisedescription";
-            this.itemwisedescriptioncolumn.MinimumWidth = 6;
-            this.itemwisedescriptioncolumn.Name = "itemwisedescriptioncolumn";
-            this.itemwisedescriptioncolumn.ReadOnly = true;
-            this.itemwisedescriptioncolumn.Visible = false;
-            this.itemwisedescriptioncolumn.Width = 125;
-            // 
-            // productid
-            // 
-            this.productid.HeaderText = "ID";
-            this.productid.MinimumWidth = 6;
-            this.productid.Name = "productid";
-            this.productid.ReadOnly = true;
-            this.productid.Visible = false;
-            this.productid.Width = 125;
-            // 
-            // productnamecolumn
-            // 
-            this.productnamecolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.productnamecolumn.HeaderText = "Product Name";
-            this.productnamecolumn.MinimumWidth = 6;
-            this.productnamecolumn.Name = "productnamecolumn";
-            this.productnamecolumn.ReadOnly = true;
-            // 
-            // qtycolumn
-            // 
-            this.qtycolumn.HeaderText = "Qty";
-            this.qtycolumn.MinimumWidth = 6;
-            this.qtycolumn.Name = "qtycolumn";
-            this.qtycolumn.ReadOnly = true;
-            this.qtycolumn.Width = 80;
-            // 
-            // availabilitycolumn
-            // 
-            this.availabilitycolumn.HeaderText = "Avail";
-            this.availabilitycolumn.MinimumWidth = 6;
-            this.availabilitycolumn.Name = "availabilitycolumn";
-            this.availabilitycolumn.ReadOnly = true;
-            this.availabilitycolumn.Width = 125;
-            // 
-            // unitid
-            // 
-            this.unitid.HeaderText = "unitid";
-            this.unitid.MinimumWidth = 6;
-            this.unitid.Name = "unitid";
-            this.unitid.ReadOnly = true;
-            this.unitid.Visible = false;
-            this.unitid.Width = 125;
-            // 
-            // unitname
-            // 
-            this.unitname.HeaderText = "Unit";
-            this.unitname.MinimumWidth = 6;
-            this.unitname.Name = "unitname";
-            this.unitname.ReadOnly = true;
-            this.unitname.Width = 80;
-            // 
-            // pricecolumn
-            // 
-            this.pricecolumn.HeaderText = "Price";
-            this.pricecolumn.MinimumWidth = 6;
-            this.pricecolumn.Name = "pricecolumn";
-            this.pricecolumn.ReadOnly = true;
-            this.pricecolumn.Width = 125;
-            // 
-            // vatcolumn
-            // 
-            this.vatcolumn.HeaderText = "VAT";
-            this.vatcolumn.MinimumWidth = 6;
-            this.vatcolumn.Name = "vatcolumn";
-            this.vatcolumn.ReadOnly = true;
-            this.vatcolumn.Width = 125;
-            // 
-            // discountcolumn
-            // 
-            this.discountcolumn.HeaderText = "Diss";
-            this.discountcolumn.MinimumWidth = 6;
-            this.discountcolumn.Name = "discountcolumn";
-            this.discountcolumn.ReadOnly = true;
-            this.discountcolumn.Width = 125;
-            // 
-            // totalcolumn
-            // 
-            this.totalcolumn.HeaderText = "Total";
-            this.totalcolumn.MinimumWidth = 6;
-            this.totalcolumn.Name = "totalcolumn";
-            this.totalcolumn.ReadOnly = true;
-            this.totalcolumn.Width = 150;
-            // 
             // SaleQuotationInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -944,7 +944,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sale Quotation Invoice - Future Art Broadcast Trading LLC";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SaleQuotationInvoice_FormClosing);
             this.Load += new System.EventHandler(this.SaleQuotationInvoice_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaleQuotationInvoice_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();

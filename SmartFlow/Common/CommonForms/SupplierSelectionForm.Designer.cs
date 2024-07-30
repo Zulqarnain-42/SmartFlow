@@ -137,7 +137,7 @@
             this.KeyPreview = true;
             this.Name = "SupplierSelectionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Select Supplier";
+            this.Text = "SUPPLIER SELECTION FORM - FUTURE ART BROADCAST TRADING LLC";
             this.Load += new System.EventHandler(this.SupplierSelectionForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SupplierSelectionForm_KeyDown);
             this.panel1.ResumeLayout(false);

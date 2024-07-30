@@ -137,7 +137,7 @@
             this.KeyPreview = true;
             this.Name = "CustomerSelectionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Select Customer";
+            this.Text = "CUSTOMER SELECTION - FUTURE ART BROADCAST TRADING LLC";
             this.Load += new System.EventHandler(this.CustomerSelectionForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CustomerSelectionForm_KeyDown);
             this.panel1.ResumeLayout(false);

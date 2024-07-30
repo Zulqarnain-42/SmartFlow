@@ -64,6 +64,16 @@ namespace SmartFlow.Sales.CommonForm
                     
                 }
                 GlobalVariables.productfinalamountwithvatanddiscountitemwise = decimal.Parse(totalwithvatanddiscountlbl.Text);
+
+                if (!productconditionchkbox.Checked)
+                {
+                    GlobalVariables.productconditionglobal = false;
+                }
+                else
+                {
+                    GlobalVariables.productconditionglobal = true;
+                }
+
                 this.Close();
             }
             catch (Exception ex) { throw ex; }
@@ -164,6 +174,18 @@ namespace SmartFlow.Sales.CommonForm
                     totalwithvatanddiscountlbl.Text = finalamount.ToString("N2");
                     totalwithvatanddiscountlbl.Visible = true;
                 }
+            }
+        }
+
+        private void productconditionchkbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!productconditionchkbox.Checked) 
+            {
+                GlobalVariables.productconditionglobal = false;
+            }
+            else
+            {
+                GlobalVariables.productconditionglobal = true;
             }
         }
     }

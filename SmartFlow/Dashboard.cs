@@ -1,4 +1,5 @@
 ﻿using SmartFlow.Common;
+using SmartFlow.Common.CommonForms;
 using SmartFlow.General;
 using SmartFlow.Masters;
 using SmartFlow.Payroll;
@@ -20,7 +21,6 @@ namespace SmartFlow
             InitializeComponent();
             this.IsMdiContainer = true;
         }
-
         private void warehouseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(Warehouse));
@@ -31,49 +31,42 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void purchaseOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PurchaseOrder purchaseOrderInvoice = new PurchaseOrder();
             purchaseOrderInvoice.MdiParent = this;
             purchaseOrderInvoice.Show();
         }
-
         private void purchaseInvoiceToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PurchaseInvoice purchaseInvoice = new PurchaseInvoice();
             purchaseInvoice.MdiParent = this;
             purchaseInvoice.Show();
         }
-
         private void purchaseReturnToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PurchaseReturnInvoice purchaseReturnInvoice = new PurchaseReturnInvoice();
             purchaseReturnInvoice.MdiParent = this;
             purchaseReturnInvoice.Show();
         }
-
         private void salesQuotationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaleQuotationInvoice saleQuotationInvoice = new SaleQuotationInvoice();
             saleQuotationInvoice.MdiParent = this;
             saleQuotationInvoice.Show();
         }
-
         private void directSalesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaleInvoice saleInvoice = new SaleInvoice();
             saleInvoice.MdiParent = this;
             saleInvoice.Show();
         }
-
         private void salesReturnToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaleReturnInvoice salereturnInvoice = new SaleReturnInvoice();
             salereturnInvoice.MdiParent = this;
             salereturnInvoice.Show();
         }
-
         private void unitsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(Unit));
@@ -85,7 +78,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void customerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(Customers));
@@ -97,7 +89,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void supplierToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(Supplier));
@@ -109,7 +100,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void stockTransferToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(StockTransfer));
@@ -121,7 +111,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void employeeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(EmployeeTable));
@@ -133,42 +122,36 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void paymentsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Payment payment = new Payment();
             payment.MdiParent = this;
             payment.Show();
         }
-
         private void receiptsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Receipts receipts = new Receipts();
             receipts.MdiParent = this;
             receipts.Show();
         }
-
         private void journalToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Journal journal = new Journal();
             journal.MdiParent = this;
             journal.Show();
         }
-
         private void creditNoteToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             CreditNote creditNote = new CreditNote();
             creditNote.MdiParent = this;
             creditNote.Show();
         }
-
         private void debitNoteToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             DebitNote debitNote = new DebitNote();
             debitNote.MdiParent = this;
             debitNote.Show();
         }
-
         private void accountsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(AccountHistory));
@@ -180,7 +163,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void accountGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(AccountGroupHistory));
@@ -192,7 +174,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void damageEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(DamageEntry));
@@ -204,7 +185,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void barcodeDesignToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(BarcodeDesign));
@@ -215,7 +195,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void productToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(Product));
@@ -228,7 +207,6 @@ namespace SmartFlow
             else { openForm.BringToFront(); }
             
         }
-
         private void updateOpeningBalanceToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(OpeningBalance));
@@ -240,7 +218,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void addQuantityUsingScannerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(QtyUsingScanner));
@@ -253,7 +230,6 @@ namespace SmartFlow
             else { openForm.BringToFront(); }
             
         }
-
         private void uploadUsingExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(UploadExcel));
@@ -265,7 +241,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void addQuantityUsingMFRToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(QtyUsingMfr));
@@ -277,7 +252,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void addaccountbtn_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(Account));
@@ -289,7 +263,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void additembtn_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(CreateProduct));
@@ -301,7 +274,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void addmasterbtn_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(AccountGroupHistory));
@@ -313,42 +285,36 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void addpaymentbtn_Click(object sender, EventArgs e)
         {
             Payment payment = new Payment();
             payment.MdiParent = this;
             payment.Show();
         }
-
         private void addreceiptbtn_Click(object sender, EventArgs e)
         {
             Receipts receipts = new Receipts();
             receipts.MdiParent = this;
             receipts.Show();
         }
-
         private void addjournalbtn_Click(object sender, EventArgs e)
         {
             Journal journal = new Journal();
             journal.MdiParent = this;
             journal.Show();
         }
-
         private void addsalesbtn_Click(object sender, EventArgs e)
         {
             SaleInvoice invoice = new SaleInvoice();
             invoice.MdiParent = this; 
             invoice.Show();
         }
-
         private void addpurchasebtn_Click(object sender, EventArgs e)
         {
             PurchaseInvoice purchase = new PurchaseInvoice();
             purchase.MdiParent = this;
             purchase.Show();
         }
-
         private void Dashboard_KeyDown(object sender, KeyEventArgs e)
             {
             if (e.KeyCode == Keys.F1)
@@ -441,7 +407,6 @@ namespace SmartFlow
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-
         private void addOpenBoxProductsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(OpenBoxProduct));
@@ -453,14 +418,12 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void purchaseQuotationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PurchaseQuotationInvoice purchaseQuotationInvoice = new PurchaseQuotationInvoice();
             purchaseQuotationInvoice.MdiParent = this;
             purchaseQuotationInvoice.Show();
         }
-
         private void accountHeadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(AccountHead));
@@ -472,7 +435,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void termsConditionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(Terms));
@@ -484,7 +446,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(ChangePassword));
@@ -495,13 +456,11 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void tsbLogin_Click(object sender, EventArgs e)
         {
             Login login = new Login(this);
             login.ShowDialog();
         }
-
         private void stockLocationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(StockLocation));
@@ -513,23 +472,20 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
         private void editCompanyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form openForm = CommonFunction.IsFormOpen(typeof(EditCompany));
+            Form openForm = CommonFunction.IsFormOpen(typeof(NewCompany));
             if(openForm == null)
             {
-                EditCompany editCompany = new EditCompany();
-                editCompany.Show();
+                NewCompany newCompany = new NewCompany();
+                newCompany.Show();
             }
             else { openForm.BringToFront(); }
         }
-
         private void stockOpeningToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(OpeningStock));
@@ -541,50 +497,36 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
-        private void bookAnItemToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            BookItem bookItem = new BookItem();
-            bookItem.MdiParent = this;
-            bookItem.Show();
-        }
-
         private void currencyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Currency currency = new Currency();
             currency.Show();
         }
-
         private void groupingAccountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GroupingAccount groupingAccount = new GroupingAccount();
             groupingAccount.Show();
         }
-
         private void customerGroupingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CustomerGrouping customerGrouping = new CustomerGrouping();
             customerGrouping.Show();
         }
-
         private void supplierGroupingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SupplierGrouping supplierGrouping = new SupplierGrouping();
             supplierGrouping.Show();
         }
-
         private void purchaseTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PurchaseType purchaseType = new PurchaseType();
             purchaseType.Show();
         }
-
         private void saleTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaleType saleType = new SaleType();
             saleType.Show();
         }
-
         private void findAnInvoiceToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(FindPurchaseInvoiceForm));
@@ -595,7 +537,6 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void findAnInvoiceToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(FindSaleInvoiceForm));
@@ -606,46 +547,82 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-
         private void matIssuedToPartyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MaterialIssueToParty materialIssueToParty = new MaterialIssueToParty();
             materialIssueToParty.MdiParent = this;
             materialIssueToParty.Show();
         }
-
         private void matReceivedFromPartyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MaterialReceivedFromParty materialReceivedFromParty = new MaterialReceivedFromParty();
             materialReceivedFromParty.MdiParent = this;
             materialReceivedFromParty.Show();
         }
-
         private void packingListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PackingList packingList = new PackingList();
             packingList.MdiParent = this;
             packingList.Show();
         }
-
         private void deliveryNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeliveryNote deliveryNote = new DeliveryNote();
             deliveryNote.MdiParent = this;
             deliveryNote.Show();
         }
-
         private void bookingItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BookItem bookItem = new BookItem();
             bookItem.MdiParent = this;
             bookItem.Show();
         }
-
         private void allSalesQuotationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            InvoiceFilter invoiceFilter = new InvoiceFilter();
-            invoiceFilter.Show();
+            FromToDateSearchForm fromtodateform = new FromToDateSearchForm();
+            fromtodateform.MdiParent = this;
+            fromtodateform.Show();
+        }
+        private void taxPlanetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TaxPlanet taxPlanet = new TaxPlanet();
+            taxPlanet.ShowDialog();
+        }
+        private void allToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FromToDateSearchForm fromtodateform = new FromToDateSearchForm();
+            fromtodateform.MdiParent = this;
+            fromtodateform.Show();
+        }
+        private void allSalesReturnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FromToDateSearchForm fromtodateform = new FromToDateSearchForm();
+            fromtodateform.MdiParent = this;
+            fromtodateform.Show();
+        }
+        private void allPurchaseQuotationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FromToDateSearchForm fromtodateform = new FromToDateSearchForm();
+            fromtodateform.MdiParent = this;
+            fromtodateform.Show();
+        }
+        private void allPurchaseOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FromToDateSearchForm fromtodateform = new FromToDateSearchForm();
+            fromtodateform.MdiParent = this;
+            fromtodateform.Show();
+        }
+        private void allPurchaseInvoicesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FromToDateSearchForm fromtodateform = new FromToDateSearchForm();
+            fromtodateform.MdiParent = this;
+            fromtodateform.Show();
+        }
+        private void allPurchaseReturnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FromToDateSearchForm fromtodateform = new FromToDateSearchForm();
+            fromtodateform.MdiParent = this;
+            fromtodateform.Show();
         }
     }
 }

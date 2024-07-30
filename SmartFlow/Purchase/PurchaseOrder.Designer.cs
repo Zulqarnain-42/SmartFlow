@@ -50,6 +50,7 @@ namespace SmartFlow.Purchase
             this.discountcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.warehouseidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pricetxtbox = new System.Windows.Forms.TextBox();
             this.qtytxtbox = new System.Windows.Forms.TextBox();
@@ -60,6 +61,8 @@ namespace SmartFlow.Purchase
             this.mfrtxtbox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.itemwisedescriptionlbl = new System.Windows.Forms.Label();
+            this.warehouseidlbl = new System.Windows.Forms.Label();
             this.currencyconversionratelbl = new System.Windows.Forms.Label();
             this.invoicespecialnotelbl = new System.Windows.Forms.Label();
             this.currencysymbollbl = new System.Windows.Forms.Label();
@@ -188,7 +191,8 @@ namespace SmartFlow.Purchase
             this.vatcolumn,
             this.discountcolumn,
             this.pricecolumn,
-            this.totalcolumn});
+            this.totalcolumn,
+            this.warehouseidcolumn});
             this.dgvpurchaseproducts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvpurchaseproducts.Location = new System.Drawing.Point(3, 95);
             this.dgvpurchaseproducts.Name = "dgvpurchaseproducts";
@@ -291,6 +295,14 @@ namespace SmartFlow.Purchase
             this.totalcolumn.Name = "totalcolumn";
             this.totalcolumn.Width = 125;
             // 
+            // warehouseidcolumn
+            // 
+            this.warehouseidcolumn.HeaderText = "warehouseid";
+            this.warehouseidcolumn.MinimumWidth = 6;
+            this.warehouseidcolumn.Name = "warehouseidcolumn";
+            this.warehouseidcolumn.Visible = false;
+            this.warehouseidcolumn.Width = 125;
+            // 
             // panel3
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -315,7 +327,7 @@ namespace SmartFlow.Purchase
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pricetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pricetxtbox.Font = new System.Drawing.Font("Calibri", 12F);
-            this.pricetxtbox.Location = new System.Drawing.Point(1567, 32);
+            this.pricetxtbox.Location = new System.Drawing.Point(1567, 34);
             this.pricetxtbox.Name = "pricetxtbox";
             this.pricetxtbox.Size = new System.Drawing.Size(154, 32);
             this.pricetxtbox.TabIndex = 30;
@@ -400,6 +412,8 @@ namespace SmartFlow.Purchase
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.itemwisedescriptionlbl);
+            this.panel2.Controls.Add(this.warehouseidlbl);
             this.panel2.Controls.Add(this.currencyconversionratelbl);
             this.panel2.Controls.Add(this.invoicespecialnotelbl);
             this.panel2.Controls.Add(this.currencysymbollbl);
@@ -424,6 +438,26 @@ namespace SmartFlow.Purchase
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1251, 132);
             this.panel2.TabIndex = 45;
+            // 
+            // itemwisedescriptionlbl
+            // 
+            this.itemwisedescriptionlbl.AutoSize = true;
+            this.itemwisedescriptionlbl.Location = new System.Drawing.Point(1113, 39);
+            this.itemwisedescriptionlbl.Name = "itemwisedescriptionlbl";
+            this.itemwisedescriptionlbl.Size = new System.Drawing.Size(139, 16);
+            this.itemwisedescriptionlbl.TabIndex = 121;
+            this.itemwisedescriptionlbl.Text = "itemwisedescriptionlbl";
+            this.itemwisedescriptionlbl.Visible = false;
+            // 
+            // warehouseidlbl
+            // 
+            this.warehouseidlbl.AutoSize = true;
+            this.warehouseidlbl.Location = new System.Drawing.Point(1110, 19);
+            this.warehouseidlbl.Name = "warehouseidlbl";
+            this.warehouseidlbl.Size = new System.Drawing.Size(98, 16);
+            this.warehouseidlbl.TabIndex = 120;
+            this.warehouseidlbl.Text = "warehouseidlbl";
+            this.warehouseidlbl.Visible = false;
             // 
             // currencyconversionratelbl
             // 
@@ -743,7 +777,6 @@ namespace SmartFlow.Purchase
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Purchase Order Invoice - Future Art Broadcast Trading LLC";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PurchaseOrderInvoice_FormClosing);
             this.Load += new System.EventHandler(this.PurchaseOrderInvoice_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PurchaseOrderInvoice_KeyDown);
             this.tabControl1.ResumeLayout(false);
@@ -796,6 +829,15 @@ namespace SmartFlow.Purchase
         private Label label14;
         private TextBox qtytxtbox;
         private TextBox pricetxtbox;
+        private Label currencyconversionratelbl;
+        private Label invoicespecialnotelbl;
+        private Label currencysymbollbl;
+        private Label currencynamelbl;
+        private Label currencyidlbl;
+        private Label purchasetypeidlbl;
+        private TextBox totaldiscounttxtbox;
+        private TextBox totalvattxtbox;
+        private TextBox nettotaltxtbox;
         private DataGridViewTextBoxColumn mfrcolumn;
         private DataGridViewTextBoxColumn itemdescription;
         private DataGridViewTextBoxColumn conditioncolumn;
@@ -808,14 +850,8 @@ namespace SmartFlow.Purchase
         private DataGridViewTextBoxColumn discountcolumn;
         private DataGridViewTextBoxColumn pricecolumn;
         private DataGridViewTextBoxColumn totalcolumn;
-        private Label currencyconversionratelbl;
-        private Label invoicespecialnotelbl;
-        private Label currencysymbollbl;
-        private Label currencynamelbl;
-        private Label currencyidlbl;
-        private Label purchasetypeidlbl;
-        private TextBox totaldiscounttxtbox;
-        private TextBox totalvattxtbox;
-        private TextBox nettotaltxtbox;
+        private DataGridViewTextBoxColumn warehouseidcolumn;
+        private Label warehouseidlbl;
+        private Label itemwisedescriptionlbl;
     }
 }

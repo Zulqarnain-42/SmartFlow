@@ -35,10 +35,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1438, 751);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MaterialReceivedFromParty";
-            this.Text = "MaterialReceivedFromParty";
+            this.Text = "MATERIAL RECEIVED FROM PARTY - FUTURE ART BROADCAST TRADING LLC";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MaterialReceivedFromParty_KeyDown);
             this.ResumeLayout(false);
 

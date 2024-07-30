@@ -190,7 +190,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FindPurchaseInvoiceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Find Invoice - Future Art Broadcast Trading LLC";
+            this.Text = "FIND PURCHASE INVOICE - FUTURE ART BROADCAST TRADING LLC";
             this.Load += new System.EventHandler(this.FindPurchaseInvoiceForm_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();

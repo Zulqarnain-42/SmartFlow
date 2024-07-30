@@ -137,7 +137,7 @@
             this.KeyPreview = true;
             this.Name = "AccountSelectionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Select Account";
+            this.Text = "ACCOUNT SELECTION - FUTURE ART BROADCAST TRADING LLC";
             this.Load += new System.EventHandler(this.AccountSelectionForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AccountSelectionForm_KeyDown);
             this.panel1.ResumeLayout(false);

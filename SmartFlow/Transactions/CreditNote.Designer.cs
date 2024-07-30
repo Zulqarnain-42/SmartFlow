@@ -32,16 +32,12 @@
             this.invoicedatetxtbox = new System.Windows.Forms.MaskedTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.shortnarationcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.creditcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.debitcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.accountcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvCreditNote = new System.Windows.Forms.DataGridView();
             this.invoicenotxtbox = new System.Windows.Forms.TextBox();
             this.invoicenolbl = new System.Windows.Forms.Label();
@@ -50,6 +46,12 @@
             this.closebtn = new System.Windows.Forms.Button();
             this.datelbl = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.srnocolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.debitcreditcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.accountcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.debitcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.creditcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.shortnarationcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCreditNote)).BeginInit();
@@ -89,20 +91,6 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "CREDIT NOTE";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // shortnarationcolumn
-            // 
-            this.shortnarationcolumn.HeaderText = "SHORT NARATION";
-            this.shortnarationcolumn.MinimumWidth = 6;
-            this.shortnarationcolumn.Name = "shortnarationcolumn";
-            this.shortnarationcolumn.Width = 200;
-            // 
-            // creditcolumn
-            // 
-            this.creditcolumn.HeaderText = "CREDIT";
-            this.creditcolumn.MinimumWidth = 6;
-            this.creditcolumn.Name = "creditcolumn";
-            this.creditcolumn.Width = 125;
             // 
             // label3
             // 
@@ -151,13 +139,6 @@
             this.textBox1.Size = new System.Drawing.Size(1077, 93);
             this.textBox1.TabIndex = 0;
             // 
-            // debitcolumn
-            // 
-            this.debitcolumn.HeaderText = "DEBIT";
-            this.debitcolumn.MinimumWidth = 6;
-            this.debitcolumn.Name = "debitcolumn";
-            this.debitcolumn.Width = 125;
-            // 
             // groupBox1
             // 
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -168,18 +149,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "VOUCHER INFO";
             // 
-            // accountcolumn
-            // 
-            this.accountcolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.accountcolumn.HeaderText = "ACCOUNT NAME";
-            this.accountcolumn.MinimumWidth = 6;
-            this.accountcolumn.Name = "accountcolumn";
-            // 
             // dgvCreditNote
             // 
             this.dgvCreditNote.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvCreditNote.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCreditNote.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.srnocolumn,
+            this.debitcreditcolumn,
             this.accountcolumn,
             this.debitcolumn,
             this.creditcolumn,
@@ -260,6 +236,48 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // srnocolumn
+            // 
+            this.srnocolumn.HeaderText = "#";
+            this.srnocolumn.MinimumWidth = 6;
+            this.srnocolumn.Name = "srnocolumn";
+            this.srnocolumn.Width = 125;
+            // 
+            // debitcreditcolumn
+            // 
+            this.debitcreditcolumn.HeaderText = "D/C";
+            this.debitcreditcolumn.MinimumWidth = 6;
+            this.debitcreditcolumn.Name = "debitcreditcolumn";
+            this.debitcreditcolumn.Width = 125;
+            // 
+            // accountcolumn
+            // 
+            this.accountcolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.accountcolumn.HeaderText = "ACCOUNT NAME";
+            this.accountcolumn.MinimumWidth = 6;
+            this.accountcolumn.Name = "accountcolumn";
+            // 
+            // debitcolumn
+            // 
+            this.debitcolumn.HeaderText = "DEBIT";
+            this.debitcolumn.MinimumWidth = 6;
+            this.debitcolumn.Name = "debitcolumn";
+            this.debitcolumn.Width = 125;
+            // 
+            // creditcolumn
+            // 
+            this.creditcolumn.HeaderText = "CREDIT";
+            this.creditcolumn.MinimumWidth = 6;
+            this.creditcolumn.Name = "creditcolumn";
+            this.creditcolumn.Width = 125;
+            // 
+            // shortnarationcolumn
+            // 
+            this.shortnarationcolumn.HeaderText = "SHORT NARATION";
+            this.shortnarationcolumn.MinimumWidth = 6;
+            this.shortnarationcolumn.Name = "shortnarationcolumn";
+            this.shortnarationcolumn.Width = 200;
+            // 
             // CreditNote
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -279,10 +297,12 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.datelbl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.Name = "CreditNote";
             this.Text = "CreditNote";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.CreditNote_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CreditNote_KeyDown);
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -299,16 +319,12 @@
         private System.Windows.Forms.MaskedTextBox invoicedatetxtbox;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn shortnarationcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn creditcolumn;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn debitcolumn;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn accountcolumn;
         private System.Windows.Forms.DataGridView dgvCreditNote;
         private System.Windows.Forms.TextBox invoicenotxtbox;
         private System.Windows.Forms.Label invoicenolbl;
@@ -317,5 +333,11 @@
         private System.Windows.Forms.Button closebtn;
         private System.Windows.Forms.Label datelbl;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn srnocolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn debitcreditcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn accountcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn debitcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn creditcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn shortnarationcolumn;
     }
 }

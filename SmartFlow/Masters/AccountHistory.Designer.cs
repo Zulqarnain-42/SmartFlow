@@ -188,7 +188,7 @@
             this.MinimizeBox = false;
             this.Name = "AccountHistory";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AccountHistory";
+            this.Text = "ACCOUNT HISTORY - FUTURE ART BROADCAST TRADING LLC";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccountHistory_FormClosing);
             this.Load += new System.EventHandler(this.AccountHistory_Load);

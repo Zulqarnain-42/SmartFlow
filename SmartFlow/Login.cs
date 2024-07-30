@@ -9,30 +9,21 @@ namespace SmartFlow
     public partial class Login : Form
     {
         private Dashboard Dashboard;
-
         public Login()
         {
             InitializeComponent();
         }
-
         public Login(Dashboard dashboard)
         {
             InitializeComponent();
             this.Dashboard = dashboard;
         }
-
         private void loginbtn_Click(object sender, EventArgs e)
         {
             try
             {
                 string companycode = null;
                 errorProvider.Clear();
-                if (selectcompanytxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(selectcompanytxtbox, "Please Select a Company");
-                    selectcompanytxtbox.Focus();
-                    return;
-                }
 
                 if(usernametxtbox.Text.Trim().Length == 0)
                 {
@@ -98,14 +89,12 @@ namespace SmartFlow
                 }
             }catch(Exception ex) { throw ex; }
         }*/
-
         public static bool VerifyPassword(string inputPassword, string hashedPassword)
         {
             // Hash the input password and compare with the stored hashed password
             string hashedInputPassword = HashPassword(inputPassword);
             return string.Equals(hashedInputPassword, hashedPassword);
         }
-
         public static string HashPassword(string password)
         {
             using (SHA256 sha256Hash = SHA256.Create())
@@ -122,7 +111,6 @@ namespace SmartFlow
                 return builder.ToString();
             }
         }
-
         private void exitbtn_Click(object sender, EventArgs e)
         {
             this.Close();

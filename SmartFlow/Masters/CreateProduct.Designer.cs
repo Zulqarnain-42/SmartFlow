@@ -731,7 +731,7 @@
             this.MinimizeBox = false;
             this.Name = "CreateProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Create Product - Future Art Broadcast Trading LLC";
+            this.Text = "CREATE PRODUCT - FUTURE ART BROADCAST TRADING LLC";
             this.Load += new System.EventHandler(this.CreateProduct_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CreateProduct_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();

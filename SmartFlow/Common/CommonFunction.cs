@@ -36,6 +36,25 @@ namespace SmartFlow.Common
             catch (Exception ex) { 
                 throw ex; }
         }
+        public static void GetItemSerialNo(string searchvalue, int searchid, DataGridView dgv)
+        {
+            try
+            {
+                if(!string.IsNullOrEmpty(searchvalue) && !string.IsNullOrWhiteSpace(searchvalue) && searchid > 0)
+                {
+                    string query = string.Empty;
+                    DataTable dt = new DataTable();
+                    query = "SELECT SerialNOID,ProductId,SerialNo FROM SerialNoTable WHERE ProductId = '" + searchid + "' AND IsSold = '" + false + "'";
+                    dt = DatabaseAccess.Retrive(query);
+                    if(dt != null && dt.Rows.Count > 0)
+                    {
+                        dgv.DataSource = dt;
+                        dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    }
+                }
+            }
+            catch (Exception ex) { throw ex; }
+        }
         public static void GetCustomer(string searchvalue, DataGridView dgv)
         {
             try
@@ -74,30 +93,6 @@ namespace SmartFlow.Common
                 else
                 {
                     query = BuildSearchQueryProduct(searchvalue);
-                }
-
-                dt = DatabaseAccess.Retrive(query);
-                if (dt.Rows.Count > 0)
-                {
-                    dgv.DataSource = dt;
-                    dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
-            }
-            catch (Exception ex) { throw ex; }
-        }
-        public static void GetWarehouseInfo(string searchvalue, DataGridView dgv)
-        {
-            try
-            {
-                string query = string.Empty;
-                DataTable dt = new DataTable();
-                if (string.IsNullOrEmpty(searchvalue) && String.IsNullOrWhiteSpace(searchvalue))
-                {
-                    query = "SELECT WarehouseID,Name,Address,City,Code,CompanyID FROM WarehouseTable";
-                }
-                else
-                {
-                    query = "SELECT WarehouseID,Name,Address,City,Code,CompanyID FROM WarehouseTable WHERE Name LIKE '%" + searchvalue + "%'";
                 }
 
                 dt = DatabaseAccess.Retrive(query);
@@ -361,7 +356,7 @@ namespace SmartFlow.Common
                 DataTable dtCurrency = new DataTable();
                 dtCurrency.Columns.Add("CurrencyId");
                 dtCurrency.Columns.Add("Name");
-                DataTable dt = DatabaseAccess.Retrive("SELECT CurrencyId,Name FROM CurrencyTable");
+                DataTable dt = DatabaseAccess.Retrive("SELECT CurrencyId,Name FROM CurrencyTable ORDER BY IsDefault DESC");
                 if (dt != null)
                 {
                     if (dt.Rows.Count > 0)
@@ -387,7 +382,7 @@ namespace SmartFlow.Common
                 dtUnit.Columns.Add("UnitID");
                 dtUnit.Columns.Add("UnitName");
 
-                DataTable dt = DatabaseAccess.Retrive("SELECT UnitID,UnitName FROM UnitTable");
+                DataTable dt = DatabaseAccess.Retrive("SELECT UnitID,UnitName FROM UnitTable ORDER BY IsDefault DESC");
                 if (dt != null)
                 {
                     if (dt.Rows.Count > 0)

@@ -51,6 +51,8 @@
             this.unitidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pricetxtbox = new System.Windows.Forms.TextBox();
+            this.qtytxtbox = new System.Windows.Forms.TextBox();
             this.selectproducttxtbox = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -78,11 +80,16 @@
             this.label14 = new System.Windows.Forms.Label();
             this.narationtxtbox = new System.Windows.Forms.TextBox();
             this.narationlbl = new System.Windows.Forms.Label();
-            this.qtytxtbox = new System.Windows.Forms.TextBox();
-            this.pricetxtbox = new System.Windows.Forms.TextBox();
             this.totaldiscounttxtbox = new System.Windows.Forms.TextBox();
             this.totalvattxtbox = new System.Windows.Forms.TextBox();
             this.nettotaltxtbox = new System.Windows.Forms.TextBox();
+            this.currencyidlbl = new System.Windows.Forms.Label();
+            this.currencynamelbl = new System.Windows.Forms.Label();
+            this.currencysymbollbl = new System.Windows.Forms.Label();
+            this.currencyconversionratelbl = new System.Windows.Forms.Label();
+            this.invoicespecialnotelbl = new System.Windows.Forms.Label();
+            this.saletypeidlbl = new System.Windows.Forms.Label();
+            this.customeridlbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -144,7 +151,7 @@
             // serialnoidlbl
             // 
             this.serialnoidlbl.AutoSize = true;
-            this.serialnoidlbl.Location = new System.Drawing.Point(1109, 60);
+            this.serialnoidlbl.Location = new System.Drawing.Point(1035, 48);
             this.serialnoidlbl.Name = "serialnoidlbl";
             this.serialnoidlbl.Size = new System.Drawing.Size(66, 16);
             this.serialnoidlbl.TabIndex = 10;
@@ -325,6 +332,30 @@
             this.panel2.Size = new System.Drawing.Size(1739, 77);
             this.panel2.TabIndex = 0;
             // 
+            // pricetxtbox
+            // 
+            this.pricetxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pricetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pricetxtbox.Font = new System.Drawing.Font("Calibri", 12F);
+            this.pricetxtbox.Location = new System.Drawing.Point(1579, 34);
+            this.pricetxtbox.Name = "pricetxtbox";
+            this.pricetxtbox.Size = new System.Drawing.Size(154, 32);
+            this.pricetxtbox.TabIndex = 26;
+            this.pricetxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // qtytxtbox
+            // 
+            this.qtytxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.qtytxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.qtytxtbox.Font = new System.Drawing.Font("Calibri", 12F);
+            this.qtytxtbox.Location = new System.Drawing.Point(1419, 36);
+            this.qtytxtbox.Name = "qtytxtbox";
+            this.qtytxtbox.Size = new System.Drawing.Size(154, 32);
+            this.qtytxtbox.TabIndex = 25;
+            this.qtytxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // selectproducttxtbox
             // 
             this.selectproducttxtbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
@@ -472,7 +503,7 @@
             // warehouseidlbl
             // 
             this.warehouseidlbl.AutoSize = true;
-            this.warehouseidlbl.Location = new System.Drawing.Point(1112, 80);
+            this.warehouseidlbl.Location = new System.Drawing.Point(1035, 64);
             this.warehouseidlbl.Name = "warehouseidlbl";
             this.warehouseidlbl.Size = new System.Drawing.Size(84, 16);
             this.warehouseidlbl.TabIndex = 100;
@@ -482,7 +513,7 @@
             // productidlbl
             // 
             this.productidlbl.AutoSize = true;
-            this.productidlbl.Location = new System.Drawing.Point(1115, 100);
+            this.productidlbl.Location = new System.Drawing.Point(1035, 81);
             this.productidlbl.Name = "productidlbl";
             this.productidlbl.Size = new System.Drawing.Size(63, 16);
             this.productidlbl.TabIndex = 101;
@@ -492,7 +523,7 @@
             // salespersonidlbl
             // 
             this.salespersonidlbl.AutoSize = true;
-            this.salespersonidlbl.Location = new System.Drawing.Point(1118, 130);
+            this.salespersonidlbl.Location = new System.Drawing.Point(1035, 97);
             this.salespersonidlbl.Name = "salespersonidlbl";
             this.salespersonidlbl.Size = new System.Drawing.Size(93, 16);
             this.salespersonidlbl.TabIndex = 104;
@@ -522,6 +553,7 @@
             this.savebtn.TabIndex = 105;
             this.savebtn.Text = "SAVE && PRINT";
             this.savebtn.UseVisualStyleBackColor = true;
+            this.savebtn.Click += new System.EventHandler(this.savebtn_Click);
             // 
             // invoicedatetxtbox
             // 
@@ -612,30 +644,6 @@
             this.narationlbl.TabIndex = 128;
             this.narationlbl.Text = "Naration";
             // 
-            // qtytxtbox
-            // 
-            this.qtytxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.qtytxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.qtytxtbox.Font = new System.Drawing.Font("Calibri", 12F);
-            this.qtytxtbox.Location = new System.Drawing.Point(1419, 36);
-            this.qtytxtbox.Name = "qtytxtbox";
-            this.qtytxtbox.Size = new System.Drawing.Size(154, 32);
-            this.qtytxtbox.TabIndex = 25;
-            this.qtytxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // pricetxtbox
-            // 
-            this.pricetxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pricetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pricetxtbox.Font = new System.Drawing.Font("Calibri", 12F);
-            this.pricetxtbox.Location = new System.Drawing.Point(1579, 34);
-            this.pricetxtbox.Name = "pricetxtbox";
-            this.pricetxtbox.Size = new System.Drawing.Size(154, 32);
-            this.pricetxtbox.TabIndex = 26;
-            this.pricetxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // totaldiscounttxtbox
             // 
             this.totaldiscounttxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -677,12 +685,82 @@
             this.nettotaltxtbox.TabIndex = 134;
             this.nettotaltxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // currencyidlbl
+            // 
+            this.currencyidlbl.AutoSize = true;
+            this.currencyidlbl.Location = new System.Drawing.Point(1035, 114);
+            this.currencyidlbl.Name = "currencyidlbl";
+            this.currencyidlbl.Size = new System.Drawing.Size(83, 16);
+            this.currencyidlbl.TabIndex = 135;
+            this.currencyidlbl.Text = "currencyidlbl";
+            // 
+            // currencynamelbl
+            // 
+            this.currencynamelbl.AutoSize = true;
+            this.currencynamelbl.Location = new System.Drawing.Point(1035, 164);
+            this.currencynamelbl.Name = "currencynamelbl";
+            this.currencynamelbl.Size = new System.Drawing.Size(106, 16);
+            this.currencynamelbl.TabIndex = 136;
+            this.currencynamelbl.Text = "currencynamelbl";
+            // 
+            // currencysymbollbl
+            // 
+            this.currencysymbollbl.AutoSize = true;
+            this.currencysymbollbl.Location = new System.Drawing.Point(1035, 180);
+            this.currencysymbollbl.Name = "currencysymbollbl";
+            this.currencysymbollbl.Size = new System.Drawing.Size(116, 16);
+            this.currencysymbollbl.TabIndex = 137;
+            this.currencysymbollbl.Text = "currencysymbollbl";
+            // 
+            // currencyconversionratelbl
+            // 
+            this.currencyconversionratelbl.AutoSize = true;
+            this.currencyconversionratelbl.Location = new System.Drawing.Point(1035, 196);
+            this.currencyconversionratelbl.Name = "currencyconversionratelbl";
+            this.currencyconversionratelbl.Size = new System.Drawing.Size(161, 16);
+            this.currencyconversionratelbl.TabIndex = 138;
+            this.currencyconversionratelbl.Text = "currencyconversionratelbl";
+            // 
+            // invoicespecialnotelbl
+            // 
+            this.invoicespecialnotelbl.AutoSize = true;
+            this.invoicespecialnotelbl.Location = new System.Drawing.Point(1038, 134);
+            this.invoicespecialnotelbl.Name = "invoicespecialnotelbl";
+            this.invoicespecialnotelbl.Size = new System.Drawing.Size(134, 16);
+            this.invoicespecialnotelbl.TabIndex = 139;
+            this.invoicespecialnotelbl.Text = "invoicespecialnotelbl";
+            // 
+            // saletypeidlbl
+            // 
+            this.saletypeidlbl.AutoSize = true;
+            this.saletypeidlbl.Location = new System.Drawing.Point(1041, 152);
+            this.saletypeidlbl.Name = "saletypeidlbl";
+            this.saletypeidlbl.Size = new System.Drawing.Size(84, 16);
+            this.saletypeidlbl.TabIndex = 140;
+            this.saletypeidlbl.Text = "saletypeidlbl";
+            // 
+            // customeridlbl
+            // 
+            this.customeridlbl.AutoSize = true;
+            this.customeridlbl.Location = new System.Drawing.Point(1125, 48);
+            this.customeridlbl.Name = "customeridlbl";
+            this.customeridlbl.Size = new System.Drawing.Size(87, 16);
+            this.customeridlbl.TabIndex = 141;
+            this.customeridlbl.Text = "customeridlbl";
+            // 
             // SaleReturnInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1768, 799);
+            this.Controls.Add(this.customeridlbl);
+            this.Controls.Add(this.saletypeidlbl);
+            this.Controls.Add(this.invoicespecialnotelbl);
+            this.Controls.Add(this.currencyconversionratelbl);
+            this.Controls.Add(this.currencysymbollbl);
+            this.Controls.Add(this.currencynamelbl);
+            this.Controls.Add(this.currencyidlbl);
             this.Controls.Add(this.nettotaltxtbox);
             this.Controls.Add(this.totalvattxtbox);
             this.Controls.Add(this.totaldiscounttxtbox);
@@ -722,7 +800,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sale Return Invoice - Future Art Broadcast Trading LLC";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SaleReturnInvoice_FormClosing);
             this.Load += new System.EventHandler(this.SaleReturnInvoice_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaleReturnInvoice_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
@@ -792,5 +869,12 @@
         private System.Windows.Forms.TextBox totaldiscounttxtbox;
         private System.Windows.Forms.TextBox totalvattxtbox;
         private System.Windows.Forms.TextBox nettotaltxtbox;
+        private System.Windows.Forms.Label currencyconversionratelbl;
+        private System.Windows.Forms.Label currencysymbollbl;
+        private System.Windows.Forms.Label currencynamelbl;
+        private System.Windows.Forms.Label currencyidlbl;
+        private System.Windows.Forms.Label invoicespecialnotelbl;
+        private System.Windows.Forms.Label saletypeidlbl;
+        private System.Windows.Forms.Label customeridlbl;
     }
 }

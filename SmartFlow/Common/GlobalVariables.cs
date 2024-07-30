@@ -56,7 +56,7 @@ namespace SmartFlow.Common
         public static bool isproductdiscounted = false;
         public static decimal productdiscountamountitemwise = 0;
         public static decimal productfinalamountwithvatanddiscountitemwise = 0;
-        public static string productconditionglobal = null;
+        public static bool productconditionglobal = false;
 
         public static int unitidglobal = 0;
         public static string unitnameglobal = null;

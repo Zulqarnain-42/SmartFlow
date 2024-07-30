@@ -34,9 +34,9 @@
             this.searchlbl = new System.Windows.Forms.Label();
             this.dgvproducts = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.newproductbtn = new System.Windows.Forms.Button();
             this.customproductbtn = new System.Windows.Forms.Button();
+            this.newproductbtn = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvproducts)).BeginInit();
             this.panel3.SuspendLayout();
@@ -119,14 +119,15 @@
             this.panel3.Size = new System.Drawing.Size(1232, 60);
             this.panel3.TabIndex = 2;
             // 
-            // panel4
+            // customproductbtn
             // 
-            this.panel4.Controls.Add(this.dgvproducts);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(0, 105);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1232, 548);
-            this.panel4.TabIndex = 3;
+            this.customproductbtn.Location = new System.Drawing.Point(874, 5);
+            this.customproductbtn.Name = "customproductbtn";
+            this.customproductbtn.Size = new System.Drawing.Size(170, 44);
+            this.customproductbtn.TabIndex = 3;
+            this.customproductbtn.Text = "CUSTOM PRODUCT";
+            this.customproductbtn.UseVisualStyleBackColor = true;
+            this.customproductbtn.Click += new System.EventHandler(this.customproductbtn_Click);
             // 
             // newproductbtn
             // 
@@ -138,15 +139,14 @@
             this.newproductbtn.UseVisualStyleBackColor = true;
             this.newproductbtn.Click += new System.EventHandler(this.newproductbtn_Click);
             // 
-            // customproductbtn
+            // panel4
             // 
-            this.customproductbtn.Location = new System.Drawing.Point(874, 5);
-            this.customproductbtn.Name = "customproductbtn";
-            this.customproductbtn.Size = new System.Drawing.Size(170, 44);
-            this.customproductbtn.TabIndex = 3;
-            this.customproductbtn.Text = "CUSTOM PRODUCT";
-            this.customproductbtn.UseVisualStyleBackColor = true;
-            this.customproductbtn.Click += new System.EventHandler(this.customproductbtn_Click);
+            this.panel4.Controls.Add(this.dgvproducts);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(0, 105);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1232, 548);
+            this.panel4.TabIndex = 3;
             // 
             // ProductSelectionForm
             // 
@@ -161,7 +161,7 @@
             this.KeyPreview = true;
             this.Name = "ProductSelectionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Select Product";
+            this.Text = "PRODUCT SELECTION FORM - FUTURE ART BROADCAST TRADING LLC";
             this.Load += new System.EventHandler(this.ProductSelectionForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ProductSelectionForm_KeyDown);
             this.panel1.ResumeLayout(false);

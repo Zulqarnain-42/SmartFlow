@@ -211,7 +211,7 @@
             this.MinimizeBox = false;
             this.Name = "Product";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Product - Future Art Broadcast Trading LLC";
+            this.Text = "PRODUCT LIST - FUTURE ART BROADCAST TRADING LLC";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Product_FormClosing);
             this.Load += new System.EventHandler(this.Product_Load);

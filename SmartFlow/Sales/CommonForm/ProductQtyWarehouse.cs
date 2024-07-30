@@ -38,15 +38,17 @@ namespace SmartFlow.Sales
                         {
                             GlobalVariables.warehouseidglobal = Convert.ToInt32(dgvInventory.CurrentRow.Cells["ID"].Value);
                             GlobalVariables.warehousenameglobal = dgvInventory.CurrentRow.Cells["Warehouse Name"].Value.ToString();
-                            if (Convert.ToInt32(dgvInventory.CurrentRow.Cells["Quantity"].Value) == 0)
+                            /*if (Convert.ToInt32(dgvInventory.CurrentRow.Cells["Quantity"].Value) == 0)
                             {
                                 AvailabilityForm availabilityForm = new AvailabilityForm();
                                 availabilityForm.ShowDialog();
                             }
                             else
                             {
+                                ItemSerialNo itemSerialNo = new ItemSerialNo(_productmfr, _productid);
+                                itemSerialNo.ShowDialog();
                                 GlobalVariables.availabilitystatus = "In Stock";
-                            }
+                            }*/
                             this.Close();
                         }
                     }

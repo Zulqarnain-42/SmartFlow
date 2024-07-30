@@ -753,7 +753,7 @@
             this.KeyPreview = true;
             this.Name = "NewCompany";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Create a New Company";
+            this.Text = "NEW COMPANY - FUTURE ART BROADCAST TRADING LLC";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewCompany_FormClosing);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

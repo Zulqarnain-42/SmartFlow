@@ -118,7 +118,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "AllAccountsSelection";
-            this.Text = "All Accounts Selection - Future Art Broadcast Trading LLC";
+            this.Text = "ALL ACCOUNT SELECTION - FUTURE ART BROADCAST TRADING LLC";
             this.Load += new System.EventHandler(this.AllAccountsSelection_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AllAccountsSelection_KeyDown);
             this.panel1.ResumeLayout(false);

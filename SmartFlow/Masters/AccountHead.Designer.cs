@@ -243,7 +243,7 @@
             this.MinimizeBox = false;
             this.Name = "AccountHead";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AccountHead";
+            this.Text = "ACCOUNT HEAD - FUTURE ART BROADCAST TRADING LLC";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccountHead_FormClosing);
             this.Load += new System.EventHandler(this.AccountHead_Load);

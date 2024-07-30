@@ -125,7 +125,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "PurchaseTypeSelection";
-            this.Text = "Purchase Type Selection";
+            this.Text = "PURCHASE TYPE SELECTION - FUTURE ART BROADCAST TRADING LLC";
             this.Load += new System.EventHandler(this.PurchaseTypeSelection_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PurchaseTypeSelection_KeyDown);
             this.panel1.ResumeLayout(false);

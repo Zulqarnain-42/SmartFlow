@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.companynamelbl = new System.Windows.Forms.Label();
             this.passwordlbl = new System.Windows.Forms.Label();
             this.usernamelbl = new System.Windows.Forms.Label();
             this.usernametxtbox = new System.Windows.Forms.TextBox();
@@ -39,19 +38,8 @@
             this.linkLabelrestorepassword = new System.Windows.Forms.LinkLabel();
             this.linkLabelforgotpassword = new System.Windows.Forms.LinkLabel();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.selectcompanytxtbox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
-            // 
-            // companynamelbl
-            // 
-            this.companynamelbl.AutoSize = true;
-            this.companynamelbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.companynamelbl.Location = new System.Drawing.Point(303, 94);
-            this.companynamelbl.Name = "companynamelbl";
-            this.companynamelbl.Size = new System.Drawing.Size(136, 23);
-            this.companynamelbl.TabIndex = 0;
-            this.companynamelbl.Text = "Company Name ";
             // 
             // passwordlbl
             // 
@@ -139,21 +127,11 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // selectcompanytxtbox
-            // 
-            this.selectcompanytxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.selectcompanytxtbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectcompanytxtbox.Location = new System.Drawing.Point(445, 90);
-            this.selectcompanytxtbox.Name = "selectcompanytxtbox";
-            this.selectcompanytxtbox.Size = new System.Drawing.Size(301, 30);
-            this.selectcompanytxtbox.TabIndex = 10;
-            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(785, 349);
-            this.Controls.Add(this.selectcompanytxtbox);
             this.Controls.Add(this.linkLabelforgotpassword);
             this.Controls.Add(this.linkLabelrestorepassword);
             this.Controls.Add(this.exitbtn);
@@ -162,7 +140,6 @@
             this.Controls.Add(this.usernametxtbox);
             this.Controls.Add(this.usernamelbl);
             this.Controls.Add(this.passwordlbl);
-            this.Controls.Add(this.companynamelbl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -176,8 +153,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label companynamelbl;
         private System.Windows.Forms.Label passwordlbl;
         private System.Windows.Forms.Label usernamelbl;
         private System.Windows.Forms.TextBox usernametxtbox;
@@ -187,6 +162,5 @@
         private System.Windows.Forms.LinkLabel linkLabelrestorepassword;
         private System.Windows.Forms.LinkLabel linkLabelforgotpassword;
         private System.Windows.Forms.ErrorProvider errorProvider;
-        private System.Windows.Forms.TextBox selectcompanytxtbox;
     }
 }

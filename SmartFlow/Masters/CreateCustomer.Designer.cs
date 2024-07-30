@@ -845,7 +845,7 @@
             this.MinimizeBox = false;
             this.Name = "CreateCustomer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CreateCustomer";
+            this.Text = "CREATE CUSTOMER - FUTURE ART BROADCAST TRADING LLC";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CreateCustomer_FormClosing);
             this.Load += new System.EventHandler(this.CreateCustomer_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CreateCustomer_KeyDown);

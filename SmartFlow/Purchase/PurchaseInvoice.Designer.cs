@@ -41,6 +41,22 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvpurchaseproducts = new System.Windows.Forms.DataGridView();
+            this.mfrcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemdescriptioncolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.conditioncolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lowestpricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.standardpricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salepricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discountcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vatcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.warehouseidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.salepricetxtbox = new System.Windows.Forms.TextBox();
             this.standardpricetxtbox = new System.Windows.Forms.TextBox();
@@ -62,6 +78,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.itemwisedescriptionlbl = new System.Windows.Forms.Label();
+            this.narationtxtbox = new System.Windows.Forms.TextBox();
+            this.narationlbl = new System.Windows.Forms.Label();
             this.purchasetypeidlbl = new System.Windows.Forms.Label();
             this.invoicespecialnotelbl = new System.Windows.Forms.Label();
             this.currencyconversionratelbl = new System.Windows.Forms.Label();
@@ -83,26 +102,9 @@
             this.label14 = new System.Windows.Forms.Label();
             this.shippingchargestxtbox = new System.Windows.Forms.MaskedTextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.narationtxtbox = new System.Windows.Forms.TextBox();
-            this.narationlbl = new System.Windows.Forms.Label();
             this.totaldiscounttxtbox = new System.Windows.Forms.TextBox();
             this.totalvattxtbox = new System.Windows.Forms.TextBox();
             this.nettotaltxtbox = new System.Windows.Forms.TextBox();
-            this.mfrcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemdescriptioncolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.conditioncolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qtycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lowestpricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.standardpricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.salepricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discountcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vatcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -258,7 +260,8 @@
             this.salepricecolumn,
             this.discountcolumn,
             this.vatcolumn,
-            this.totalcolumn});
+            this.totalcolumn,
+            this.warehouseidcolumn});
             this.dgvpurchaseproducts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvpurchaseproducts.Location = new System.Drawing.Point(5, 83);
             this.dgvpurchaseproducts.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
@@ -271,6 +274,123 @@
             this.dgvpurchaseproducts.TabIndex = 2;
             this.dgvpurchaseproducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvpurchaseproducts_CellValueChanged);
             this.dgvpurchaseproducts.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvpurchaseproducts_RowsAdded);
+            // 
+            // mfrcolumn
+            // 
+            this.mfrcolumn.HeaderText = "MFR";
+            this.mfrcolumn.MinimumWidth = 6;
+            this.mfrcolumn.Name = "mfrcolumn";
+            this.mfrcolumn.Width = 125;
+            // 
+            // productid
+            // 
+            this.productid.HeaderText = "ID";
+            this.productid.MinimumWidth = 6;
+            this.productid.Name = "productid";
+            this.productid.Visible = false;
+            this.productid.Width = 125;
+            // 
+            // itemdescriptioncolumn
+            // 
+            this.itemdescriptioncolumn.HeaderText = "itemdescription";
+            this.itemdescriptioncolumn.MinimumWidth = 6;
+            this.itemdescriptioncolumn.Name = "itemdescriptioncolumn";
+            this.itemdescriptioncolumn.Visible = false;
+            this.itemdescriptioncolumn.Width = 125;
+            // 
+            // conditioncolumn
+            // 
+            this.conditioncolumn.HeaderText = "Condition";
+            this.conditioncolumn.MinimumWidth = 6;
+            this.conditioncolumn.Name = "conditioncolumn";
+            this.conditioncolumn.Visible = false;
+            this.conditioncolumn.Width = 125;
+            // 
+            // productnamecolumn
+            // 
+            this.productnamecolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.productnamecolumn.HeaderText = "Product Name";
+            this.productnamecolumn.MinimumWidth = 6;
+            this.productnamecolumn.Name = "productnamecolumn";
+            // 
+            // qtycolumn
+            // 
+            this.qtycolumn.HeaderText = "Qty";
+            this.qtycolumn.MinimumWidth = 6;
+            this.qtycolumn.Name = "qtycolumn";
+            this.qtycolumn.Width = 125;
+            // 
+            // unitidcolumn
+            // 
+            this.unitidcolumn.HeaderText = "unitid";
+            this.unitidcolumn.MinimumWidth = 6;
+            this.unitidcolumn.Name = "unitidcolumn";
+            this.unitidcolumn.Visible = false;
+            this.unitidcolumn.Width = 125;
+            // 
+            // unitnamecolumn
+            // 
+            this.unitnamecolumn.HeaderText = "Unit";
+            this.unitnamecolumn.MinimumWidth = 6;
+            this.unitnamecolumn.Name = "unitnamecolumn";
+            this.unitnamecolumn.Width = 125;
+            // 
+            // pricecolumn
+            // 
+            this.pricecolumn.HeaderText = "C Price";
+            this.pricecolumn.MinimumWidth = 6;
+            this.pricecolumn.Name = "pricecolumn";
+            this.pricecolumn.Width = 125;
+            // 
+            // lowestpricecolumn
+            // 
+            this.lowestpricecolumn.HeaderText = "L Price";
+            this.lowestpricecolumn.MinimumWidth = 6;
+            this.lowestpricecolumn.Name = "lowestpricecolumn";
+            this.lowestpricecolumn.Width = 125;
+            // 
+            // standardpricecolumn
+            // 
+            this.standardpricecolumn.HeaderText = "S Price";
+            this.standardpricecolumn.MinimumWidth = 6;
+            this.standardpricecolumn.Name = "standardpricecolumn";
+            this.standardpricecolumn.Width = 125;
+            // 
+            // salepricecolumn
+            // 
+            this.salepricecolumn.HeaderText = "Price";
+            this.salepricecolumn.MinimumWidth = 6;
+            this.salepricecolumn.Name = "salepricecolumn";
+            this.salepricecolumn.Width = 125;
+            // 
+            // discountcolumn
+            // 
+            this.discountcolumn.HeaderText = "Diss";
+            this.discountcolumn.MinimumWidth = 6;
+            this.discountcolumn.Name = "discountcolumn";
+            this.discountcolumn.Width = 125;
+            // 
+            // vatcolumn
+            // 
+            this.vatcolumn.HeaderText = "VAT";
+            this.vatcolumn.MinimumWidth = 6;
+            this.vatcolumn.Name = "vatcolumn";
+            this.vatcolumn.Width = 125;
+            // 
+            // totalcolumn
+            // 
+            this.totalcolumn.HeaderText = "Total";
+            this.totalcolumn.MinimumWidth = 6;
+            this.totalcolumn.Name = "totalcolumn";
+            this.totalcolumn.Width = 125;
+            // 
+            // warehouseidcolumn
+            // 
+            this.warehouseidcolumn.HeaderText = "warehouseid";
+            this.warehouseidcolumn.MinimumWidth = 6;
+            this.warehouseidcolumn.Name = "warehouseidcolumn";
+            this.warehouseidcolumn.Visible = false;
+            this.warehouseidcolumn.Width = 125;
             // 
             // panel2
             // 
@@ -371,6 +491,7 @@
             this.selectproducttxtbox.TabIndex = 19;
             this.selectproducttxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectproducttxtbox_MouseClick);
             this.selectproducttxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.selectproducttxtbox_KeyDown);
+            this.selectproducttxtbox.Leave += new System.EventHandler(this.selectproducttxtbox_Leave);
             // 
             // mfrtxtbox
             // 
@@ -530,6 +651,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.itemwisedescriptionlbl);
             this.panel3.Controls.Add(this.narationtxtbox);
             this.panel3.Controls.Add(this.narationlbl);
             this.panel3.Controls.Add(this.purchasetypeidlbl);
@@ -560,6 +682,36 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1263, 141);
             this.panel3.TabIndex = 73;
+            // 
+            // itemwisedescriptionlbl
+            // 
+            this.itemwisedescriptionlbl.AutoSize = true;
+            this.itemwisedescriptionlbl.Location = new System.Drawing.Point(1216, 29);
+            this.itemwisedescriptionlbl.Name = "itemwisedescriptionlbl";
+            this.itemwisedescriptionlbl.Size = new System.Drawing.Size(139, 16);
+            this.itemwisedescriptionlbl.TabIndex = 124;
+            this.itemwisedescriptionlbl.Text = "itemwisedescriptionlbl";
+            this.itemwisedescriptionlbl.Visible = false;
+            // 
+            // narationtxtbox
+            // 
+            this.narationtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.narationtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.narationtxtbox.Location = new System.Drawing.Point(215, 105);
+            this.narationtxtbox.Name = "narationtxtbox";
+            this.narationtxtbox.Size = new System.Drawing.Size(896, 32);
+            this.narationtxtbox.TabIndex = 122;
+            this.narationtxtbox.Leave += new System.EventHandler(this.narationtxtbox_Leave);
+            // 
+            // narationlbl
+            // 
+            this.narationlbl.AutoSize = true;
+            this.narationlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.narationlbl.Location = new System.Drawing.Point(11, 110);
+            this.narationlbl.Name = "narationlbl";
+            this.narationlbl.Size = new System.Drawing.Size(89, 23);
+            this.narationlbl.TabIndex = 123;
+            this.narationlbl.Text = "Narration ";
             // 
             // purchasetypeidlbl
             // 
@@ -807,26 +959,6 @@
             this.label15.TabIndex = 140;
             this.label15.Text = "Freight && Shipping Charges";
             // 
-            // narationtxtbox
-            // 
-            this.narationtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.narationtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.narationtxtbox.Location = new System.Drawing.Point(215, 105);
-            this.narationtxtbox.Name = "narationtxtbox";
-            this.narationtxtbox.Size = new System.Drawing.Size(896, 32);
-            this.narationtxtbox.TabIndex = 122;
-            this.narationtxtbox.Leave += new System.EventHandler(this.narationtxtbox_Leave);
-            // 
-            // narationlbl
-            // 
-            this.narationlbl.AutoSize = true;
-            this.narationlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.narationlbl.Location = new System.Drawing.Point(11, 110);
-            this.narationlbl.Name = "narationlbl";
-            this.narationlbl.Size = new System.Drawing.Size(89, 23);
-            this.narationlbl.TabIndex = 123;
-            this.narationlbl.Text = "Narration ";
-            // 
             // totaldiscounttxtbox
             // 
             this.totaldiscounttxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -868,113 +1000,6 @@
             this.nettotaltxtbox.TabIndex = 150;
             this.nettotaltxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // mfrcolumn
-            // 
-            this.mfrcolumn.HeaderText = "MFR";
-            this.mfrcolumn.MinimumWidth = 6;
-            this.mfrcolumn.Name = "mfrcolumn";
-            this.mfrcolumn.Width = 125;
-            // 
-            // productid
-            // 
-            this.productid.HeaderText = "ID";
-            this.productid.MinimumWidth = 6;
-            this.productid.Name = "productid";
-            this.productid.Visible = false;
-            this.productid.Width = 125;
-            // 
-            // itemdescriptioncolumn
-            // 
-            this.itemdescriptioncolumn.HeaderText = "itemdescription";
-            this.itemdescriptioncolumn.MinimumWidth = 6;
-            this.itemdescriptioncolumn.Name = "itemdescriptioncolumn";
-            this.itemdescriptioncolumn.Visible = false;
-            this.itemdescriptioncolumn.Width = 125;
-            // 
-            // conditioncolumn
-            // 
-            this.conditioncolumn.HeaderText = "Condition";
-            this.conditioncolumn.MinimumWidth = 6;
-            this.conditioncolumn.Name = "conditioncolumn";
-            this.conditioncolumn.Visible = false;
-            this.conditioncolumn.Width = 125;
-            // 
-            // productnamecolumn
-            // 
-            this.productnamecolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.productnamecolumn.HeaderText = "Product Name";
-            this.productnamecolumn.MinimumWidth = 6;
-            this.productnamecolumn.Name = "productnamecolumn";
-            // 
-            // qtycolumn
-            // 
-            this.qtycolumn.HeaderText = "Qty";
-            this.qtycolumn.MinimumWidth = 6;
-            this.qtycolumn.Name = "qtycolumn";
-            // 
-            // unitidcolumn
-            // 
-            this.unitidcolumn.HeaderText = "unitid";
-            this.unitidcolumn.MinimumWidth = 6;
-            this.unitidcolumn.Name = "unitidcolumn";
-            this.unitidcolumn.Visible = false;
-            this.unitidcolumn.Width = 125;
-            // 
-            // unitnamecolumn
-            // 
-            this.unitnamecolumn.HeaderText = "Unit";
-            this.unitnamecolumn.MinimumWidth = 6;
-            this.unitnamecolumn.Name = "unitnamecolumn";
-            // 
-            // pricecolumn
-            // 
-            this.pricecolumn.HeaderText = "C Price";
-            this.pricecolumn.MinimumWidth = 6;
-            this.pricecolumn.Name = "pricecolumn";
-            this.pricecolumn.Width = 125;
-            // 
-            // lowestpricecolumn
-            // 
-            this.lowestpricecolumn.HeaderText = "L Price";
-            this.lowestpricecolumn.MinimumWidth = 6;
-            this.lowestpricecolumn.Name = "lowestpricecolumn";
-            this.lowestpricecolumn.Width = 125;
-            // 
-            // standardpricecolumn
-            // 
-            this.standardpricecolumn.HeaderText = "S Price";
-            this.standardpricecolumn.MinimumWidth = 6;
-            this.standardpricecolumn.Name = "standardpricecolumn";
-            this.standardpricecolumn.Width = 125;
-            // 
-            // salepricecolumn
-            // 
-            this.salepricecolumn.HeaderText = "Price";
-            this.salepricecolumn.MinimumWidth = 6;
-            this.salepricecolumn.Name = "salepricecolumn";
-            this.salepricecolumn.Width = 125;
-            // 
-            // discountcolumn
-            // 
-            this.discountcolumn.HeaderText = "Diss";
-            this.discountcolumn.MinimumWidth = 6;
-            this.discountcolumn.Name = "discountcolumn";
-            this.discountcolumn.Width = 125;
-            // 
-            // vatcolumn
-            // 
-            this.vatcolumn.HeaderText = "VAT";
-            this.vatcolumn.MinimumWidth = 6;
-            this.vatcolumn.Name = "vatcolumn";
-            this.vatcolumn.Width = 125;
-            // 
-            // totalcolumn
-            // 
-            this.totalcolumn.HeaderText = "Total";
-            this.totalcolumn.MinimumWidth = 6;
-            this.totalcolumn.Name = "totalcolumn";
-            this.totalcolumn.Width = 125;
-            // 
             // PurchaseInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1001,9 +1026,8 @@
             this.MinimizeBox = false;
             this.Name = "PurchaseInvoice";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Purchase Invoice - Future Art Broadcast Trading LLC";
+            this.Text = "PURCHASE INVOICE";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PurchaseInvoice_FormClosing);
             this.Load += new System.EventHandler(this.PurchaseInvoice_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PurchaseInvoice_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
@@ -1096,5 +1120,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn discountcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn vatcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn warehouseidcolumn;
+        private System.Windows.Forms.Label itemwisedescriptionlbl;
     }
 }
