@@ -48,7 +48,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(564, 45);
+            this.panel1.Size = new System.Drawing.Size(570, 45);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -59,7 +59,7 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(564, 45);
+            this.label1.Size = new System.Drawing.Size(570, 45);
             this.label1.TabIndex = 0;
             this.label1.Text = "SALES TYPE";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -134,7 +134,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(564, 206);
+            this.ClientSize = new System.Drawing.Size(570, 224);
             this.Controls.Add(this.exitbtn);
             this.Controls.Add(this.checkBoxTax);
             this.Controls.Add(this.savebtn);
@@ -147,6 +147,7 @@
             this.Name = "SaleType";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SALE TYPE - FUTURE ART BROADCAST TRADING LLC";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaleType_KeyDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

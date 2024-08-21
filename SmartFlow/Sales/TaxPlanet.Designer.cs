@@ -157,6 +157,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(922, 497);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel2);
@@ -169,6 +170,7 @@
             this.Name = "TaxPlanet";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TaxPlanet";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TaxPlanet_KeyDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTaxPlanet)).EndInit();
             this.panel2.ResumeLayout(false);

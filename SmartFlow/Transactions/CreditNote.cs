@@ -1,4 +1,9 @@
-﻿using System;
+﻿using SmartFlow.Common;
+using SmartFlow.Common.CommonForms;
+using SmartFlow.Common.Forms;
+using SmartFlow.Sales;
+using SmartFlow.Transactions.CommonForm;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,34 +26,6 @@ namespace SmartFlow.Transactions
         {
             invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
             invoicenotxtbox.Text = GenerateNextInvoiceNumber();
-        }
-        private bool AreDataGridViewRowsEmpty()
-        {
-            foreach (DataGridViewRow row in dgvCreditNote.Rows)
-            {
-                if (row.IsNewRow)
-                {
-                    continue;
-                }
-
-                bool isEmpty = true;
-
-                foreach (DataGridViewCell cell in row.Cells)
-                {
-                    if (cell.Value != null && !string.IsNullOrWhiteSpace(cell.Value.ToString()))
-                    {
-                        isEmpty = false;
-                        break;
-                    }
-                }
-
-                if (!isEmpty)
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
         private string CheckInvoiceBeforeInsert()
         {
@@ -123,9 +100,214 @@ namespace SmartFlow.Transactions
         {
             if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
-                e.Handled = true;
+                if (AreAnyTextBoxesFilled())
+                {
+                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Close();
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    this.Close();
+                    e.Handled = true;
+                }
             }
+        }
+        private void accountnametxtbox_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(accountnametxtbox.Text) && !string.IsNullOrWhiteSpace(accountnametxtbox.Text) &&
+                !string.IsNullOrEmpty(accountidlbl.Text) && !string.IsNullOrWhiteSpace(accountidlbl.Text))
+            {
+                if (currencynamelbl.Text == "currencynamelbl" && currencysymbollbl.Text == "currencysymbollbl" &&
+                    currencyconversionratelbl.Text == "currencyconversionratelbl" && currencyconversionratelbl.Text == "currencyconversionratelbl")
+                {
+                    Form openForm = CommonFunction.IsFormOpen(typeof(CurrencySelection));
+                    if (openForm == null)
+                    {
+                        CurrencySelection currencySelection = new CurrencySelection();
+                        currencySelection.ShowDialog();
+                        UpdateCurrencyTextBox();
+                    }
+                    else
+                    {
+                        openForm.BringToFront();
+                    }
+                }
+            }
+        }
+        private void UpdateCurrencyTextBox()
+        {
+            if (GlobalVariables.currencyidglobal > 0 && GlobalVariables.currencynameglobal != null && GlobalVariables.currencysymbolglobal != null &&
+                GlobalVariables.currencyconversionrateglobal > 0)
+            {
+                currencyidlbl.Text = GlobalVariables.currencyidglobal.ToString();
+                currencyconversionratelbl.Text = GlobalVariables.currencyconversionrateglobal.ToString();
+                currencynamelbl.Text = GlobalVariables.currencynameglobal.ToString();
+                currencysymbollbl.Text = GlobalVariables.currencysymbolglobal.ToString();
+            }
+        }
+        private void amounttxtbox_Leave(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(amounttxtbox.Text) && !string.IsNullOrWhiteSpace(amounttxtbox.Text))
+            {
+                Form openForm = CommonFunction.IsFormOpen(typeof(DebitAndCreditForm));
+                if (openForm == null)
+                {
+                    DebitAndCreditForm debitAndCreditForm = new DebitAndCreditForm();
+                    debitAndCreditForm.ShowDialog();
+                }
+                else
+                {
+                    openForm.BringToFront();
+                }
+
+                string transactionsymbol = null;
+                int accountid = Convert.ToInt32(accountidlbl.Text);
+                string accountname = accountnametxtbox.Text;
+                string accountCode = accountcodetxtbox.Text;
+
+                if (GlobalVariables.iscreditglobal == true)
+                {
+                    decimal paymentamountcredit = decimal.Parse(amounttxtbox.Text);
+                    transactionsymbol = "C";
+                    dgvCreditNote.Rows.Add(null, transactionsymbol, accountname, accountCode, accountid, GlobalVariables.isdebitglobal, GlobalVariables.iscreditglobal,
+                        null, paymentamountcredit, GlobalVariables.shortdescriptionglobal);
+                }
+
+                else if (GlobalVariables.isdebitglobal == true)
+
+                {
+                    decimal paymentamountdebit = decimal.Parse(amounttxtbox.Text);
+                    transactionsymbol = "D";
+                    dgvCreditNote.Rows.Add(null, transactionsymbol, accountname, accountCode, accountid, GlobalVariables.isdebitglobal, GlobalVariables.iscreditglobal,
+                        paymentamountdebit, null, GlobalVariables.shortdescriptionglobal);
+                }
+
+                accountcodetxtbox.Text = string.Empty;
+                accountnametxtbox.Text = string.Empty;
+                amounttxtbox.Text = string.Empty;
+                accountidlbl.Text = string.Empty;
+                GlobalVariables.iscreditglobal = false;
+                GlobalVariables.isdebitglobal = false;
+                GlobalVariables.shortdescriptionglobal = null;
+
+                accountnametxtbox.Focus();
+            }
+        }
+        private void closebtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void savebtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(accountcodetxtbox.Text.Trim().Length == 0 && accountnametxtbox.Text.Trim().Length == 0)
+                {
+                    errorProvider.SetError(accountnametxtbox,"Please Enter Account Name.");
+                    accountnametxtbox.Focus();
+                    return;
+                }
+
+                if(amounttxtbox.Text.Trim().Length == 0)
+                {
+                    errorProvider.SetError(amounttxtbox,"Please Enter Amount.");
+                    amounttxtbox.Focus();
+                    return;
+                }
+
+                if(dgvCreditNote.Rows.Count == 0)
+                {
+                    errorProvider.SetError(dgvCreditNote,"No Data Available.");
+                    dgvCreditNote.Focus();
+                    return;
+                }
+
+                string transactionCode = Guid.NewGuid().ToString();
+                string longdescription = CommonFunction.CleanText(longdescriptiontxtbox.Text);
+
+                string query = string.Format("INSERT INTO TransactionTable (InvoiceNo,InvoiceDate,TransactionCode,LongDescription,CurrencyId,CurrencyName,CurrencySymbol," +
+                    "ConversionRate,CreatedAt,CreatedDay) VALUES ('" + invoicenotxtbox.Text + "'," +
+                    "'" + invoicedatetxtbox.Text + "','" + transactionCode + "','" + longdescription + "','" + currencyidlbl.Text + "'," +
+                    "'" + currencynamelbl.Text + "','" + currencysymbollbl.Text + "','" + currencyconversionratelbl.Text + "'," +
+                    "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')");
+                int transactionid = DatabaseAccess.InsertId(query);
+
+                if (transactionid > 0) 
+                {
+                    foreach (DataGridViewRow row in dgvCreditNote.Rows)
+                    {
+                        if (row.IsNewRow) { continue; }
+
+                        int accountid = Convert.ToInt32(row.Cells["accountidcolumn"].Value.ToString());
+                        string accountCode = row.Cells["accountcodecolumn"].Value.ToString();
+                        string accountName = row.Cells["accountcolumn"].Value.ToString();
+                        bool isdebit = Convert.ToBoolean(row.Cells["isdebitcolumn"].Value.ToString());
+                        bool iscredit = Convert.ToBoolean(row.Cells["iscreditcolumn"].Value.ToString());
+                        string shortdescription = row.Cells["shortnarationcolumn"].Value.ToString();
+                        decimal debitamount = decimal.Parse(row.Cells["debitcolumn"].Value.ToString());
+                        decimal creditamount = decimal.Parse(row.Cells["creditcolumn"].Value.ToString());
+
+                        string querysubdata = string.Format("INSERT INTO TransactionDetailTable (TransactionId,TransactionCode,AccountId,AccountCode,AccountName,IsDebit," +
+                        "IsCredit,ShortDescription,DebitAmount,CreditAmount) VALUES ('" + transactionid + "','" + transactionCode + "','" + accountid + "'," +
+                        "'" + accountCode + "','" + accountName + "','" + isdebit + "','" + iscredit + "','" + debitamount + "','" + creditamount + "')");
+                        bool subdatainsert = DatabaseAccess.Insert(querysubdata);
+                    }
+                }
+
+            }catch(Exception ex) { throw ex; }
+        }
+        private void accountnametxtbox_MouseClick(object sender, MouseEventArgs e)
+        {
+            Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
+            if(openForm == null)
+            {
+                AccountSelectionForm accountSelectionForm = new AccountSelectionForm();
+                accountSelectionForm.ShowDialog();
+                UpdateAccountInfo();
+            }
+            else
+            {
+                openForm.BringToFront();
+            }
+        }
+        private void accountnametxtbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) 
+            {
+                Form openForm = CommonFunction.IsFormOpen(typeof(AllAccountsSelection));
+                if (openForm == null)
+                {
+                    AccountSelectionForm accountSelectionForm = new AccountSelectionForm();
+                    accountSelectionForm.ShowDialog();
+                    UpdateAccountInfo();
+                }
+                else
+                {
+                    openForm.BringToFront();
+                }
+            }
+        }
+        private void UpdateAccountInfo()
+        {
+            if(!string.IsNullOrEmpty(GlobalVariables.accountnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.accountnameglobal) && 
+                GlobalVariables.accountidglobal > 0)
+            {
+                accountnametxtbox.Text = GlobalVariables.accountnameglobal;
+                accountidlbl.Text = GlobalVariables.accountidglobal.ToString();
+            }
+        }
+        private bool AreAnyTextBoxesFilled()
+        {
+            if (accountnametxtbox.Text.Trim().Length > 0) { return true; }
+            if (amounttxtbox.Text.Trim().Length > 0) { return true; }
+            if (longdescriptiontxtbox.Text.Trim().Length > 0) { return true; }
+            if (dgvCreditNote.Rows.Count > 0) { return true; }
+            return false; // No TextBox is filled
         }
     }
 

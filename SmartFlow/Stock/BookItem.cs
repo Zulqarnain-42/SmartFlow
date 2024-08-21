@@ -76,6 +76,8 @@ namespace SmartFlow.Stock
                     return;
                 }
 
+                string importantNotes = CommonFunction.CleanText(importantnotestxtbox.Text);
+
             }catch (Exception ex) { throw ex; }
         }
         private void selectwarehousetxtbox_MouseClick(object sender, MouseEventArgs e)
@@ -92,11 +94,32 @@ namespace SmartFlow.Stock
         }
         private void BookItem_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape) 
+            if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
-                e.Handled = true;
+                if (AreAnyTextBoxesFilled())
+                {
+                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Close();
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    this.Close();
+                    e.Handled = true;
+                }
             }
+        }
+        private bool AreAnyTextBoxesFilled()
+        {
+            if (invoicenotxtbox.Text.Trim().Length > 0) { return true; }
+            if (selectwarehousetxtbox.Text.Trim().Length > 0) { return true; }
+            if (bookinglocationtxtbox.Text.Trim().Length > 0) { return true; }
+            if (importantnotestxtbox.Text.Trim().Length > 0) { return true; }
+            return false; // No TextBox is filled
         }
     }
 }

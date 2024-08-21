@@ -105,6 +105,8 @@
             this.totaldiscounttxtbox = new System.Windows.Forms.TextBox();
             this.totalvattxtbox = new System.Windows.Forms.TextBox();
             this.nettotaltxtbox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -1000,12 +1002,38 @@
             this.nettotaltxtbox.TabIndex = 150;
             this.nettotaltxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(628, 718);
+            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(178, 23);
+            this.label2.TabIndex = 151;
+            this.label2.Text = "Shipment Received By";
+            // 
+            // textBox1
+            // 
+            this.textBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.textBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(816, 713);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(402, 32);
+            this.textBox1.TabIndex = 152;
+            // 
             // PurchaseInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1768, 757);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.nettotaltxtbox);
             this.Controls.Add(this.totalvattxtbox);
             this.Controls.Add(this.totaldiscounttxtbox);
@@ -1122,5 +1150,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn totalcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn warehouseidcolumn;
         private System.Windows.Forms.Label itemwisedescriptionlbl;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label2;
     }
 }

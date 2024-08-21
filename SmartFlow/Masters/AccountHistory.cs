@@ -61,8 +61,8 @@ namespace SmartFlow.Masters
                     if (dataTable.Rows.Count > 0)
                     {
                         accountdatagridview.DataSource = dataTable;
-                        accountdatagridview.Columns[0].Width = 100;
-                        accountdatagridview.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        accountdatagridview.Columns[0].Width = 50;
+                        accountdatagridview.Columns[1].Width = 150;
                         accountdatagridview.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                         accountdatagridview.Columns[3].Width = 100;
                         accountdatagridview.Columns[4].Width = 100;
@@ -238,29 +238,6 @@ namespace SmartFlow.Masters
             queryBuilder.Append(" ORDER BY RelevanceScore DESC");
 
             return queryBuilder.ToString();
-        }
-        private void AccountHistory_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (AreAnyTextBoxesFilled())
-            {
-                DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
-                                                      "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.No)
-                {
-                    e.Cancel = true; // Cancel the closing event
-                }
-            }
-        }
-        private bool AreAnyTextBoxesFilled()
-        {
-            foreach (Control control in this.Controls)
-            {
-                if (control is TextBox textBox && !string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    return true; // At least one TextBox is filled
-                }
-            }
-            return false; // No TextBox is filled
         }
     }
 }

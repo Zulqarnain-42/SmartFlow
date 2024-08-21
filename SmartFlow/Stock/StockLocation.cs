@@ -78,14 +78,21 @@ namespace SmartFlow
         {
             if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
-                e.Handled = true; // Prevent further processing of the key event
-            }
-
-            if(e.Control && e.KeyCode == Keys.R)
-            {
-                FillGrid("");
-                e.Handled = true;
+                if (AreAnyTextBoxesFilled())
+                {
+                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Close();
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    this.Close();
+                    e.Handled = true;
+                }
             }
         }
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -270,6 +277,8 @@ namespace SmartFlow
                         return;
                     }
 
+                    string locationName = CommonFunction.CleanText(locationnametxtbox.Text);
+
                     string query = string.Format("SELECT LocationID,WarehouseID,LocationName,RackNumber,ShortName FROM LocationTable " +
                         "WHERE WarehouseID = '" + warehouseidlbl.Text + "' AND RackNumber = '" + racknotxtbox.Text + "'");
                     DataTable dataTablelocation = DatabaseAccess.Retrive(query);
@@ -279,7 +288,7 @@ namespace SmartFlow
                         {
                             if (dataTablelocation.Rows[0]["WarehouseID"].ToString() == warehouseidlbl.Text.ToString()
                                 && dataTablelocation.Rows[0]["RackNumber"].ToString() == racknotxtbox.Text
-                                && dataTablelocation.Rows[0]["LocationName"].ToString() == locationnametxtbox.Text
+                                && dataTablelocation.Rows[0]["LocationName"].ToString() == locationName
                                 && dataTablelocation.Rows[0]["ShortName"].ToString() == shortnametxtbox.Text)
                             {
                                 MessageBox.Show("Location Already Exist!");
@@ -295,7 +304,7 @@ namespace SmartFlow
                                     "UpdatedDay = '{5}' " +
                                     "WHERE  LocationID = '{6}'",
                                     warehouseidlbl.Text,
-                                    locationnametxtbox.Text.Trim(),
+                                    locationName,
                                     racknotxtbox.Text.Trim(),
                                     shortnametxtbox.Text.Trim(),
                                     DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss"),
@@ -326,7 +335,7 @@ namespace SmartFlow
                                     "UpdatedDay = '{5}' " +
                                     "WHERE  LocationID = '{6}'",
                                     warehouseidlbl.Text,
-                                    locationnametxtbox.Text.Trim(),
+                                    locationName,
                                     racknotxtbox.Text.Trim(),
                                     shortnametxtbox.Text.Trim(),
                                     DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss"),
@@ -366,6 +375,8 @@ namespace SmartFlow
                         return;
                     }
 
+                    string locationName = CommonFunction.CleanText(locationnametxtbox.Text);
+
                     string query = string.Format("SELECT LocationID,WarehouseID,LocationName,RackNumber,ShortName FROM LocationTable " +
                         "WHERE WarehouseID = '" + warehouseidlbl.Text + "' AND RackNumber = '" + racknotxtbox.Text + "'");
                     DataTable dataTablelocation = DatabaseAccess.Retrive(query);
@@ -381,7 +392,7 @@ namespace SmartFlow
                             query = string.Format("INSERT INTO LocationTable " +
                         "(WarehouseID,LocationName,RackNumber,ShortName,Code,CreatedAt,CreatedDay) VALUES " +
                         "('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
-                        warehouseidlbl.Text, locationnametxtbox.Text.Trim(),
+                        warehouseidlbl.Text, locationName,
                         racknotxtbox.Text.Trim(), shortnametxtbox.Text.Trim(), Guid.NewGuid(),
                         DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss"), DateTime.Now.DayOfWeek);
 
@@ -403,7 +414,7 @@ namespace SmartFlow
                         query = string.Format("INSERT INTO LocationTable " +
                         "(WarehouseID,LocationName,RackNumber,ShortName,Code,CreatedAt,CreatedDay) VALUES " +
                         "('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
-                        warehouseidlbl.Text, locationnametxtbox.Text.Trim(),
+                        warehouseidlbl.Text, locationName,
                         racknotxtbox.Text.Trim(), shortnametxtbox.Text.Trim(), Guid.NewGuid(),
                         DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss"), DateTime.Now.DayOfWeek);
 
@@ -466,27 +477,12 @@ namespace SmartFlow
                 selectwarehousetxtbox.Text = GlobalVariables.warehousenameglobal.ToString();
             }catch (Exception ex) { throw ex; }
         }
-        private void StockLocation_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (AreAnyTextBoxesFilled())
-            {
-                DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
-                                                      "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.No)
-                {
-                    e.Cancel = true; // Cancel the closing event
-                }
-            }
-        }
         private bool AreAnyTextBoxesFilled()
         {
-            foreach (Control control in this.Controls)
-            {
-                if (control is TextBox textBox && !string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    return true; // At least one TextBox is filled
-                }
-            }
+            if (selectwarehousetxtbox.Text.Trim().Length > 0) { return true; }
+            if (locationnametxtbox.Text.Trim().Length > 0) { return true; }
+            if (racknotxtbox.Text.Trim().Length > 0) { return true; }
+            if (shortnametxtbox.Text.Trim().Length > 0) { return true; }
             return false; // No TextBox is filled
         }
     }

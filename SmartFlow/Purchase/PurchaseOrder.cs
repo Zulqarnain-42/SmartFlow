@@ -2,7 +2,6 @@
 using SmartFlow.Common;
 using SmartFlow.Common.CommonForms;
 using SmartFlow.Common.Forms;
-using SmartFlow.Purchase.ReportViewer;
 using SmartFlow.Sales;
 using SmartFlow.Sales.CommonForm;
 using System;
@@ -15,17 +14,32 @@ namespace SmartFlow.Purchase
     {
         private int invoiceCounter = 1;
         private decimal Initializer = 0;
+        private DataTable _dtinvoice;
+        private DataTable _dtinvoicedetails;
         public PurchaseOrder()
         {
             InitializeComponent();
         }
+        public PurchaseOrder(DataTable dtinvoice, DataTable dtinvoicedetails)
+        {
+            InitializeComponent();
+            this._dtinvoice = dtinvoice;
+            this._dtinvoicedetails = dtinvoicedetails;
+        }
         private void PurchaseOrderInvoice_Load(object sender, EventArgs e)
         {
-            nettotaltxtbox.Text = Initializer.ToString("N2");
-            totalvattxtbox.Text = Initializer.ToString("N2");
-            totaldiscounttxtbox.Text = Initializer.ToString("N2");
-            invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            invoicenotxtbox.Text = GenerateNextInvoiceNumber();
+            if(_dtinvoice!=null && _dtinvoice.Rows.Count>0 && _dtinvoicedetails!=null && _dtinvoicedetails.Rows.Count > 0)
+            {
+
+            }
+            else
+            {
+                nettotaltxtbox.Text = Initializer.ToString("N2");
+                totalvattxtbox.Text = Initializer.ToString("N2");
+                totaldiscounttxtbox.Text = Initializer.ToString("N2");
+                invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                invoicenotxtbox.Text = GenerateNextInvoiceNumber();
+            }
         }
         private string GenerateNextInvoiceNumber()
         {
@@ -168,8 +182,8 @@ namespace SmartFlow.Purchase
                 int supplierId = Convert.ToInt32(supplieridlbl.Text);
                 string suppliercode = codetxtbox.Text;
                 string supplierName = selectsuppliertxtbox.Text;
-                string naration = narationtxtbox.Text;
-                string invoicespecialnote = invoicespecialnotelbl.Text;
+                string naration = CommonFunction.CleanText(narationtxtbox.Text);
+                string invoicespecialnote = CommonFunction.CleanText(invoicespecialnotelbl.Text);
                 int currencyid = Convert.ToInt32(currencyidlbl.Text);
                 string currencyName = currencynamelbl.Text;
                 string currencySymbol = currencysymbollbl.Text;
@@ -215,8 +229,6 @@ namespace SmartFlow.Purchase
                 if (isInserted)
                 {
                     this.Close();
-                    OrderReportView orderReportView = new OrderReportView();
-                    orderReportView.Show();
                 }
             }catch(Exception ex) { throw ex; }
         }

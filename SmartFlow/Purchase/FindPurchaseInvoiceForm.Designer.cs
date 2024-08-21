@@ -133,6 +133,7 @@
             this.invoicenotxtbox.Name = "invoicenotxtbox";
             this.invoicenotxtbox.Size = new System.Drawing.Size(374, 32);
             this.invoicenotxtbox.TabIndex = 6;
+            this.invoicenotxtbox.Leave += new System.EventHandler(this.invoicenotxtbox_Leave);
             // 
             // label2
             // 
@@ -192,6 +193,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FIND PURCHASE INVOICE - FUTURE ART BROADCAST TRADING LLC";
             this.Load += new System.EventHandler(this.FindPurchaseInvoiceForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FindPurchaseInvoiceForm_KeyDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

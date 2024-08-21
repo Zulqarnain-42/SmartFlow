@@ -52,7 +52,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.searchtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchtxtbox.Location = new System.Drawing.Point(89, 74);
+            this.searchtxtbox.Location = new System.Drawing.Point(89, 61);
             this.searchtxtbox.Name = "searchtxtbox";
             this.searchtxtbox.Size = new System.Drawing.Size(822, 32);
             this.searchtxtbox.TabIndex = 0;
@@ -65,7 +65,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.searchlbl.AutoSize = true;
             this.searchlbl.Font = new System.Drawing.Font("Calibri", 11F);
-            this.searchlbl.Location = new System.Drawing.Point(9, 76);
+            this.searchlbl.Location = new System.Drawing.Point(9, 66);
             this.searchlbl.Name = "searchlbl";
             this.searchlbl.Size = new System.Drawing.Size(66, 23);
             this.searchlbl.TabIndex = 3;
@@ -124,6 +124,7 @@
             // 
             // closebtn
             // 
+            this.closebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.closebtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.closebtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.closebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -138,6 +139,7 @@
             // 
             // newbtn
             // 
+            this.newbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.newbtn.BackColor = System.Drawing.Color.SpringGreen;
             this.newbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.newbtn.Font = new System.Drawing.Font("Impact", 12F);
@@ -190,7 +192,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ACCOUNT HISTORY - FUTURE ART BROADCAST TRADING LLC";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccountHistory_FormClosing);
             this.Load += new System.EventHandler(this.AccountHistory_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AccountHistory_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.accountdatagridview)).EndInit();

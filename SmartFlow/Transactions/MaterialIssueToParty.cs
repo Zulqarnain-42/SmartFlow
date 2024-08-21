@@ -1,4 +1,9 @@
-﻿using System;
+﻿using SmartFlow.Common;
+using SmartFlow.Common.CommonForms;
+using SmartFlow.Common.Forms;
+using SmartFlow.Sales;
+using SmartFlow.Sales.CommonForm;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +17,8 @@ namespace SmartFlow.Transactions
 {
     public partial class MaterialIssueToParty : Form
     {
+        private decimal intializer = 0;
+        private int invoiceCounter = 1;
         public MaterialIssueToParty()
         {
             InitializeComponent();
@@ -20,9 +27,425 @@ namespace SmartFlow.Transactions
         {
             if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
-                e.Handled = true; // Prevent further processing of the key event
+                if (AreAnyTextBoxesFilled())
+                {
+                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Close();
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    this.Close();
+                    e.Handled = true;
+                }
             }
+        }
+        private bool AreAnyTextBoxesFilled()
+        {
+            if (selectcustomertxtbox.Text.Trim().Length > 0) { return true; }
+            if (salemantxtbox.Text.Trim().Length > 0) { return true; }
+            if (selectproducttxtbox.Text.Trim().Length > 0) { return true; }
+            if (dgvsaleproducts.Rows.Count > 0) { return true; }
+            return false; // No TextBox is filled
+        }
+        private void selectcustomertxtbox_MouseClick(object sender, MouseEventArgs e)
+        {
+            Form openForm = CommonFunction.IsFormOpen(typeof(CustomerSelectionForm));
+            if (openForm == null) 
+            {
+                CustomerSelectionForm customerSelectionForm = new CustomerSelectionForm();
+                customerSelectionForm.ShowDialog();
+                UpdateCustomerInfo();
+            }
+            else
+            {
+                openForm.BringToFront();
+            }
+        }
+        private void UpdateCustomerInfo()
+        {
+            if(!string.IsNullOrEmpty(GlobalVariables.customercodeglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.customercodeglobal) && 
+                !string.IsNullOrEmpty(GlobalVariables.customermobileglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.customermobileglobal) && 
+                !string.IsNullOrEmpty(GlobalVariables.customernameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.customernameglobal) && 
+                GlobalVariables.customeridglobal > 0)
+            {
+                accountcodetxtbox.Text = GlobalVariables.customercodeglobal;
+                selectcustomertxtbox.Text = GlobalVariables.customernameglobal;
+                reftxtbox.Text = GlobalVariables.customerrefrencegloba;
+                mobiletxtbox.Text = GlobalVariables.customermobileglobal;
+                customeridlbl.Text = GlobalVariables.customeridglobal.ToString();
+            }
+        }
+        private void selectcustomertxtbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                Form openForm = CommonFunction.IsFormOpen(typeof(CustomerSelectionForm));
+                if(openForm == null)
+                {
+                    CustomerSelectionForm customerSelection = new CustomerSelectionForm();
+                    customerSelection.ShowDialog();
+                    UpdateCustomerInfo();
+                }
+                else
+                {
+                    openForm.BringToFront();
+                }
+            }
+        }
+        private void selectcustomertxtbox_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(accountcodetxtbox.Text) && !string.IsNullOrWhiteSpace(accountcodetxtbox.Text) &&
+                !string.IsNullOrEmpty(selectcustomertxtbox.Text) && !string.IsNullOrWhiteSpace(selectcustomertxtbox.Text) &&
+                !string.IsNullOrEmpty(mobiletxtbox.Text) && !string.IsNullOrWhiteSpace(mobiletxtbox.Text))
+            {
+                Form openForm = CommonFunction.IsFormOpen(typeof(CurrencySelection));
+                if (openForm == null)
+                {
+                    CurrencySelection currencySelection = new CurrencySelection();
+                    currencySelection.ShowDialog();
+                    UpdateCurrencyInfo();
+                }
+                else
+                {
+                    openForm.BringToFront(); 
+                }
+            }
+        }
+        private void UpdateCurrencyInfo()
+        {
+            if(!string.IsNullOrEmpty(GlobalVariables.currencynameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.currencynameglobal) && 
+                !string.IsNullOrEmpty(GlobalVariables.currencysymbolglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.currencysymbolglobal) && 
+                GlobalVariables.currencyconversionrateglobal > 0 && GlobalVariables.currencyidglobal > 0)
+            {
+                currencyidlbl.Text = GlobalVariables.currencyidglobal.ToString();
+                currencynamelbl.Text = GlobalVariables.currencynameglobal.ToString();
+                currencyconversionratelbl.Text = GlobalVariables.currencyconversionrateglobal.ToString();
+                currencysymbollbl.Text = GlobalVariables.currencysymbolglobal.ToString();
+            }
+        }
+        private void salemantxtbox_MouseClick(object sender, MouseEventArgs e)
+        {
+            Form openForm = CommonFunction.IsFormOpen(typeof(SalesPersonSelection));
+            if(openForm == null)
+            {
+                SalesPersonSelection salesPersonSelection = new SalesPersonSelection();
+                salesPersonSelection.ShowDialog();
+                UpdateSalesPersonInfo();
+            }
+            else
+            {
+                openForm.BringToFront();
+            }
+        }
+        private void UpdateSalesPersonInfo()
+        {
+            if(!string.IsNullOrEmpty(GlobalVariables.salespersonnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.salespersonnameglobal) && 
+                GlobalVariables.salespersonidglobal > 0)
+            {
+                salemantxtbox.Text = GlobalVariables.salespersonnameglobal.ToString();
+                salespersonidlbl.Text = GlobalVariables.salespersonidglobal.ToString();
+            }
+        }
+        private void narationtxtbox_Leave(object sender, EventArgs e)
+        {
+            Form openForm = CommonFunction.IsFormOpen(typeof(InvoiceNoteForm));
+            if (openForm == null) 
+            {
+                InvoiceNoteForm invoiceNoteForm = new InvoiceNoteForm();
+                invoiceNoteForm.ShowDialog();
+            }
+            else
+            {
+                openForm.BringToFront(); 
+            }
+        }
+        private void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
+        {
+            Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+            if(openForm == null)
+            {
+                ProductSelectionForm productSelectionForm = new ProductSelectionForm();
+                productSelectionForm.ShowDialog();
+                UpdateProductInfo();
+            }
+            else
+            {
+                openForm.BringToFront();
+            }
+        }
+        private void selectproducttxtbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) 
+            {
+                Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+                if(openForm == null)
+                {
+                    ProductSelectionForm productSelection = new ProductSelectionForm();
+                    productSelection.ShowDialog();
+                    UpdateProductInfo();
+                }
+                else
+                {
+                    openForm.BringToFront();
+                }
+            }
+        }
+        private void UpdateProductInfo()
+        {
+            if(GlobalVariables.productidglobal > 0 && !string.IsNullOrEmpty(GlobalVariables.productmfrglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.productmfrglobal) && 
+                !string.IsNullOrEmpty(GlobalVariables.productnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.productnameglobal))
+            {
+                mfrtxtbox.Text = GlobalVariables.productmfrglobal;
+                selectproducttxtbox.Text = GlobalVariables.productnameglobal;
+                productidlbl.Text = GlobalVariables.productidglobal.ToString();
+            }
+        }
+        private void selectproducttxtbox_Leave(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(productidlbl.Text) && !string.IsNullOrWhiteSpace(productidlbl.Text) && 
+                !string.IsNullOrEmpty(mfrtxtbox.Text) && !string.IsNullOrWhiteSpace(mfrtxtbox.Text))
+            {
+                Form openForm = CommonFunction.IsFormOpen(typeof(ProductQtyWarehouse));
+                if (openForm == null)
+                {
+                    string productmfr = mfrtxtbox.Text;
+                    int productid = Convert.ToInt32(productidlbl.Text);
+                    ProductQtyWarehouse productQtyWarehouse = new ProductQtyWarehouse(productmfr, productid);
+                    productQtyWarehouse.ShowDialog();
+                    UpdateWarehouseInfo();
+                }
+                else
+                {
+                    openForm.BringToFront();
+                }
+            }
+        }
+        private void UpdateWarehouseInfo()
+        {
+            if(!string.IsNullOrEmpty(GlobalVariables.warehousenameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.warehousenameglobal) && 
+                GlobalVariables.warehouseidglobal > 0)
+            {
+                warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
+                itemwisedescriptionlbl.Text = GlobalVariables.productitemwisedescriptiongloabl.ToString();
+            }
+        }
+        private void pricetxtbox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(selectproducttxtbox.Text) && !string.IsNullOrWhiteSpace(selectproducttxtbox.Text) &&
+                    !string.IsNullOrEmpty(mfrtxtbox.Text) && !string.IsNullOrWhiteSpace(mfrtxtbox.Text) &&
+                    !string.IsNullOrEmpty(qtytxtbox.Text) && !string.IsNullOrWhiteSpace(qtytxtbox.Text) &&
+                    !string.IsNullOrEmpty(pricetxtbox.Text) && !string.IsNullOrWhiteSpace(pricetxtbox.Text))
+                {
+                    int itemqty = Convert.ToInt32(qtytxtbox.Text);
+                    float itemPrice = float.Parse(pricetxtbox.Text);
+                    float totalamount = itemqty * itemPrice;
+
+                    if (GlobalVariables.saletypeistaxable)
+                    {
+                        VATForm vATForm = new VATForm(totalamount);
+                        vATForm.ShowDialog();
+                    }
+                    else
+                    {
+                        DiscountForm discountForm = new DiscountForm(totalamount);
+                        discountForm.ShowDialog();
+                    }
+
+                    string mfr = mfrtxtbox.Text;
+                    string warehouseid = warehouseidlbl.Text;
+                    string itemWiseDescription = itemwisedescriptionlbl.Text;
+                    string productid = productidlbl.Text;
+                    string productname = selectproducttxtbox.Text;
+                    string qty = qtytxtbox.Text;
+                    decimal price = decimal.Parse(pricetxtbox.Text);
+                    int unitid = Convert.ToInt32(GlobalVariables.unitidglobal.ToString());
+                    string unitname = GlobalVariables.unitnameglobal.ToString();
+                    decimal vatAmount = GlobalVariables.productitemwisevatamount;
+
+                    if (vatAmount > 0)
+                    {
+                        totalvattxtbox.Visible = true;
+                        totalvatlbl.Visible = true;
+                    }
+
+                    decimal discount = GlobalVariables.productdiscountamountitemwise;
+                    if (discount > 0)
+                    {
+                        totaldiscounttxtbox.Visible = true;
+                        totaldiscountlbl.Visible = true;
+                    }
+
+                    decimal finalitemwise = GlobalVariables.productfinalamountwithvatanddiscountitemwise;
+                    int quantity = Convert.ToInt32(qty);
+                    bool productExists = false;
+                    foreach(DataGridViewRow row in dgvsaleproducts.Rows)
+                    {
+                        if (!row.IsNewRow)
+                        {
+                            if (row.Cells["ProductID"].Value != null && row.Cells["ProductID"].Value.ToString() == productidlbl.Text.ToString())
+                            {
+                                int currentQuantity = Convert.ToInt32(row.Cells["qtycolumn"].Value);
+                                row.Cells["qtycolumn"].Value = currentQuantity + Convert.ToInt32(qtytxtbox.Text);
+                                productExists = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!productExists)
+                    {
+                        dgvsaleproducts.Rows.Add(mfr, warehouseid, itemWiseDescription, productid, productname, qty, unitid, unitname, price.ToString("N2"),
+                            vatAmount.ToString("N2"), discount.ToString("N2"), finalitemwise.ToString("N2"));
+                    }
+
+                    mfrtxtbox.Text = string.Empty;
+                    selectproducttxtbox.Text = string.Empty;
+                    productidlbl.Text = string.Empty;
+                    qtytxtbox.Text = string.Empty;
+                    pricetxtbox.Text = string.Empty;
+                    GlobalVariables.unitidglobal = 0;
+                    GlobalVariables.productitemwisevatamount = 0;
+                    GlobalVariables.productdiscountamountitemwise = 0;
+                    GlobalVariables.productfinalamountwithvatanddiscountitemwise = 0;
+                    selectproducttxtbox.Focus();
+                }
+            }catch (Exception ex) { throw ex; }
+        }
+        private void MaterialIssueToParty_Load(object sender, EventArgs e)
+        {
+            invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            shippingchargestxtbox.Text = intializer.ToString("N2");
+            invoicenotxtbox.Text = GenerateNextInvoiceNumber();
+        }
+        private string GenerateNextInvoiceNumber()
+        {
+            try
+            {
+                string lastInvoiceNumber = GetLastInvoiceNumber();
+                string newInvoiceNumber;
+
+                if (lastInvoiceNumber == null)
+                {
+
+                    // Generate the invoice number using the current date and a sequential number
+                    string sequentialPart = invoiceCounter.ToString("D5"); // Assuming a 5-digit sequential number
+
+                    // Increment the invoice counter for the next invoice
+                    invoiceCounter++;
+
+                    // Concatenate the date part and sequential part to form the invoice number
+                    newInvoiceNumber = $"{sequentialPart}";
+
+                    return newInvoiceNumber;
+                    // If no previous invoice number, start with the first one
+                }
+                else
+                {
+                    // Extract the sequential part from the last invoice number
+                    string sequentialPart = lastInvoiceNumber.Substring(lastInvoiceNumber.LastIndexOf('-') + 1);
+                    int lastSequentialNumber = int.Parse(sequentialPart);
+                    // Increment the sequential number
+                    int nextSequentialNumber = lastSequentialNumber + 1;
+
+                    // Generate the new invoice number
+                    newInvoiceNumber = $"{nextSequentialNumber:D5}";
+                }
+
+                return newInvoiceNumber;
+            }
+            catch (Exception ex) { throw ex; }
+        }
+        private string GetLastInvoiceNumber()
+        {
+            string lastInvoiceNumber = null;
+            try
+            {
+                string query = "SELECT TOP 1 InvoiceNo FROM InvoiceTable WHERE InvoiceNo LIKE 'DE-%' ORDER BY InvoiceNo DESC";
+                DataTable invoiceData = DatabaseAccess.Retrive(query);
+                if (invoiceData.Rows.Count > 0)
+                {
+                    lastInvoiceNumber = invoiceData.Rows[0]["InvoiceNo"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            return lastInvoiceNumber;
+        }
+        private string CheckInvoiceBeforeInsert()
+        {
+            try
+            {
+                string lastInvoiceNumber = GetLastInvoiceNumber();
+                string newInvoiceNumber = invoicenotxtbox.Text;
+
+                if (String.Compare(newInvoiceNumber, lastInvoiceNumber) <= 0)
+                {
+                    return GenerateNextInvoiceNumber();
+                }
+                else
+                {
+                    return invoicenotxtbox.Text;
+                }
+            }
+            catch (Exception ex) { throw ex; }
+        }
+        private void dgvsaleproducts_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.D)
+            {
+                int productid = Convert.ToInt32(dgvsaleproducts.CurrentRow.Cells[0].Value);
+                if (productid > 0) 
+                {
+                    foreach(DataGridViewRow row in dgvsaleproducts.SelectedRows)
+                    {
+                        if (!row.IsNewRow)
+                        {
+                            dgvsaleproducts.Rows.Remove(row);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Select One Row.");
+                }
+            }
+        }
+        private void dgvsaleproducts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if(dgvsaleproducts!= null)
+                {
+                    if (dgvsaleproducts.Rows.Count > 0)
+                    {
+                        if(dgvsaleproducts.SelectedRows.Count == 1)
+                        {
+                            mfrtxtbox.Text = dgvsaleproducts.CurrentRow.Cells[0].Value.ToString();
+                            selectproducttxtbox.Text = dgvsaleproducts.CurrentRow.Cells[0].Value.ToString();
+                            qtytxtbox.Text = dgvsaleproducts.CurrentRow.Cells[0].Value.ToString();
+                            pricetxtbox.Text = dgvsaleproducts.CurrentRow.Cells[0].Value.ToString();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please Select One Row.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No Record Available.");
+                }
+            }catch(Exception ex) { throw ex; }
         }
     }
 }

@@ -52,7 +52,7 @@
             // 
             this.searchtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchtxtbox.Location = new System.Drawing.Point(94, 60);
+            this.searchtxtbox.Location = new System.Drawing.Point(94, 57);
             this.searchtxtbox.Name = "searchtxtbox";
             this.searchtxtbox.Size = new System.Drawing.Size(822, 32);
             this.searchtxtbox.TabIndex = 0;
@@ -62,7 +62,7 @@
             // 
             this.searchlbl.AutoSize = true;
             this.searchlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchlbl.Location = new System.Drawing.Point(6, 63);
+            this.searchlbl.Location = new System.Drawing.Point(6, 62);
             this.searchlbl.Name = "searchlbl";
             this.searchlbl.Size = new System.Drawing.Size(66, 23);
             this.searchlbl.TabIndex = 3;

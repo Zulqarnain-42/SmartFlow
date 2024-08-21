@@ -44,6 +44,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.selectwarehousetxtbox = new System.Windows.Forms.TextBox();
             this.warehouseidlbl = new System.Windows.Forms.Label();
+            this.sampleexcelfilebtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExcel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.panel1.SuspendLayout();
@@ -218,12 +219,22 @@
             this.warehouseidlbl.Text = "Warehouseid";
             this.warehouseidlbl.Visible = false;
             // 
+            // sampleexcelfilebtn
+            // 
+            this.sampleexcelfilebtn.Location = new System.Drawing.Point(12, 698);
+            this.sampleexcelfilebtn.Name = "sampleexcelfilebtn";
+            this.sampleexcelfilebtn.Size = new System.Drawing.Size(271, 30);
+            this.sampleexcelfilebtn.TabIndex = 61;
+            this.sampleexcelfilebtn.Text = "DOWNLOAD SAMPLE FILE";
+            this.sampleexcelfilebtn.UseVisualStyleBackColor = true;
+            // 
             // UploadExcel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1594, 740);
+            this.Controls.Add(this.sampleexcelfilebtn);
             this.Controls.Add(this.warehouseidlbl);
             this.Controls.Add(this.selectwarehousetxtbox);
             this.Controls.Add(this.panel1);
@@ -271,5 +282,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox selectwarehousetxtbox;
         private System.Windows.Forms.Label warehouseidlbl;
+        private System.Windows.Forms.Button sampleexcelfilebtn;
     }
 }

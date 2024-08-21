@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartFlow.Stock;
+using System;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
@@ -120,7 +121,8 @@ namespace SmartFlow.Masters
         private string BuildSearchQueryAccounts(string searchTerm)
         {
             string[] terms = searchTerm.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            StringBuilder queryBuilder = new StringBuilder("SELECT AccountSubControlID [ID], AccountSubControlName [Name], OpeningBalanceDebit [DEBIT], OpeningBalanceCredit [CREDIT] FROM AccountSubControlTable WHERE");
+            StringBuilder queryBuilder = new StringBuilder("SELECT AccountSubControlID [ID], AccountSubControlName [Name], " +
+                "OpeningBalanceDebit [DEBIT], OpeningBalanceCredit [CREDIT] FROM AccountSubControlTable WHERE");
 
             for (int i = 0; i < terms.Length; i++)
             {
@@ -160,6 +162,32 @@ namespace SmartFlow.Masters
                 }
             }
             return false; // No TextBox is filled
+        }
+        private void dataGridViewopeningbalance_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (dataGridViewopeningbalance.Rows.Count > 0)
+                {
+                    if (dataGridViewopeningbalance.SelectedRows.Count == 1)
+                    {
+                        UpdateOpeningBalance updateOpening = new UpdateOpeningBalance(Convert.ToInt32(dataGridViewopeningbalance.CurrentRow.Cells[0].Value),
+                            dataGridViewopeningbalance.CurrentRow.Cells[1].Value.ToString());
+                        updateOpening.FormClosed += delegate
+                        {
+                            currentRowIndex = dataGridViewopeningbalance.CurrentCell.RowIndex;
+                            currentCellIndex = dataGridViewopeningbalance.CurrentCell.ColumnIndex;
+                            FillGrid("");
+                        };
+                        updateOpening.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please Select One Row.");
+                    }
+                }
+            }
+            catch (Exception ex) { throw ex; }
         }
     }
 }

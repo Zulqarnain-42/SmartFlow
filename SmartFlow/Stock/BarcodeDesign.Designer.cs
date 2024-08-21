@@ -36,10 +36,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.productmfrlbl = new System.Windows.Forms.Label();
-            this.productidlbl = new System.Windows.Forms.Label();
             this.selectproducttxtbox = new System.Windows.Forms.TextBox();
             this.addbtn = new System.Windows.Forms.Button();
+            this.productmfrlbl = new System.Windows.Forms.Label();
+            this.productidlbl = new System.Windows.Forms.Label();
             this.generatebtn = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dgvbarcodeproducts = new System.Windows.Forms.DataGridView();
@@ -122,6 +122,31 @@
             this.panel2.Size = new System.Drawing.Size(1117, 87);
             this.panel2.TabIndex = 47;
             // 
+            // selectproducttxtbox
+            // 
+            this.selectproducttxtbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.selectproducttxtbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.selectproducttxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.selectproducttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectproducttxtbox.Location = new System.Drawing.Point(173, 6);
+            this.selectproducttxtbox.Name = "selectproducttxtbox";
+            this.selectproducttxtbox.Size = new System.Drawing.Size(500, 32);
+            this.selectproducttxtbox.TabIndex = 0;
+            this.selectproducttxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectproducttxtbox_MouseClick);
+            this.selectproducttxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.selectproducttxtbox_KeyDown);
+            // 
+            // addbtn
+            // 
+            this.addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addbtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addbtn.Location = new System.Drawing.Point(1000, 6);
+            this.addbtn.Name = "addbtn";
+            this.addbtn.Size = new System.Drawing.Size(105, 70);
+            this.addbtn.TabIndex = 2;
+            this.addbtn.Text = "ADD";
+            this.addbtn.UseVisualStyleBackColor = true;
+            this.addbtn.Click += new System.EventHandler(this.addbtn_Click);
+            // 
             // productmfrlbl
             // 
             this.productmfrlbl.AutoSize = true;
@@ -141,30 +166,6 @@
             this.productidlbl.TabIndex = 50;
             this.productidlbl.Text = "productid";
             this.productidlbl.Visible = false;
-            // 
-            // selectproducttxtbox
-            // 
-            this.selectproducttxtbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.selectproducttxtbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.selectproducttxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.selectproducttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectproducttxtbox.Location = new System.Drawing.Point(173, 6);
-            this.selectproducttxtbox.Name = "selectproducttxtbox";
-            this.selectproducttxtbox.Size = new System.Drawing.Size(500, 32);
-            this.selectproducttxtbox.TabIndex = 0;
-            this.selectproducttxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectproducttxtbox_MouseClick);
-            // 
-            // addbtn
-            // 
-            this.addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addbtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addbtn.Location = new System.Drawing.Point(1000, 6);
-            this.addbtn.Name = "addbtn";
-            this.addbtn.Size = new System.Drawing.Size(105, 70);
-            this.addbtn.TabIndex = 2;
-            this.addbtn.Text = "ADD";
-            this.addbtn.UseVisualStyleBackColor = true;
-            this.addbtn.Click += new System.EventHandler(this.addbtn_Click);
             // 
             // generatebtn
             // 
@@ -255,7 +256,6 @@
             this.Name = "BarcodeDesign";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Barcode Design - Future Art Broadcast Trading LLC";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BarcodeDesign_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BarcodeDesign_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.panel1.ResumeLayout(false);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartFlow.Common;
+using System;
 using System.Data;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -44,18 +45,8 @@ namespace SmartFlow.Masters
                         return;
                     }
 
-                    string title = nametxtbox.Text;
-                    string includes = includestxtbox.Text;
-
-                    if (title.Contains("'") || title.Contains("\""))
-                    {
-                        title = Regex.Replace(title, @"[""']", "");
-                    }
-
-                    if (includes.Contains("'") || includes.Contains("\""))
-                    {
-                        includes = Regex.Replace(includes, @"[""']", "");
-                    }
+                    string title = CommonFunction.CleanText(nametxtbox.Text);
+                    string includes = CommonFunction.CleanText(includestxtbox.Text);
 
                     string query = string.Format(@"SELECT ProductID,ProductName,ProductCode," +
                         "SaleUnitPrice,LowestPrice FROM ProductTable WHERE ProductName = '%" + title + "%' " +
@@ -64,7 +55,7 @@ namespace SmartFlow.Masters
                         "AND Length = '" + lengthtextBox.Text + "' AND Width = '" + widthtextBox.Text + "' " +
                         "AND Height = '" + heighttextBox.Text + "' AND Weight = '" + weighttextBox.Text + "' " +
                         "AND StandardPrice = '" + standardpricetxtbox.Text + "' " +
-                        "AND WholeSalePrice = '" + wholesalepricetxtbox.Text+ "' AND LowestPrice = '" + lowestpricetxtbox.Text + "' " +
+                        "AND WholeSalePrice = '" + wholesalepricetxtbox.Text + "' AND LowestPrice = '" + lowestpricetxtbox.Text + "' " +
                         "AND SaleUnitPrice = '" + salepricetxtbox.Text + "' AND HSCode = '" + hscodetxtbox.Text + "' AND SecondMFr = '" + secondmfrtxtbox.Text + "' " +
                         "AND COO = '" + cootxtbox.Text + "'");
 
@@ -95,8 +86,12 @@ namespace SmartFlow.Masters
                                         "Height = '" + heighttextBox.Text + "'," +
                                         "Weight = '" + weighttextBox.Text + "'," +
                                         "IsBundle = '" + checkBox1.Checked + "'," +
-                                        "Barcode = '" + randomNumber + "',DiscountPercentage = '" + discountpercentagetxtbox.Text + "', COO = '" + cootxtbox.Text + "'," +
-                                        "MFR = '" + mfrtextBox.Text + "',HSCode = '" + hscodetxtbox.Text + "',SecondMFr = '" + secondmfrtxtbox.Text + "'" +
+                                        "Barcode = '" + randomNumber + "'," +
+                                        "DiscountPercentage = '" + discountpercentagetxtbox.Text + "', " +
+                                        "COO = '" + cootxtbox.Text + "'," +
+                                        "MFR = '" + mfrtextBox.Text + "'," +
+                                        "HSCode = '" + hscodetxtbox.Text + "'," +
+                                        "SecondMFr = '" + secondmfrtxtbox.Text + "'" +
                                         " WHERE ProductID = " + productid.Text + "";
                                 DeleteBundleData(Convert.ToInt32(productid.Text));
                                 AddDataToDatabase(Convert.ToInt32(productid.Text), productcodelbl.Text);
@@ -118,8 +113,11 @@ namespace SmartFlow.Masters
                                            "Width = '" + widthtextBox.Text + "'," +
                                            "Height = '" + heighttextBox.Text + "'," +
                                            "Weight = '" + weighttextBox.Text + "'," +
-                                           "IsBundle = '" + checkBox1.Checked + "',HSCode = '" + hscodetxtbox.Text + "'," +
-                                           "MFR = '" + mfrtextBox.Text + "',DiscountPercentage = '" + discountpercentagetxtbox.Text + "', COO = '" + cootxtbox.Text + "'," +
+                                           "IsBundle = '" + checkBox1.Checked + "'," +
+                                           "HSCode = '" + hscodetxtbox.Text + "'," +
+                                           "MFR = '" + mfrtextBox.Text + "'," +
+                                           "DiscountPercentage = '" + discountpercentagetxtbox.Text + "', " +
+                                           "COO = '" + cootxtbox.Text + "'," +
                                            "SecondMFr = '" + secondmfrtxtbox.Text + "'" +
                                            " WHERE ProductID = " + productid.Text + "";
                                 DeleteBundleData(Convert.ToInt32(productid.Text));
@@ -159,8 +157,12 @@ namespace SmartFlow.Masters
                                     "Height = '" + heighttextBox.Text.Trim() + "'," +
                                     "Weight = '" + weighttextBox.Text.Trim() + "'," +
                                     "IsBundle = '" + checkBox1.Checked + "'," +
-                                    "Barcode = '" + randomNumber + "',DiscountPercentage = '" + discountpercentagetxtbox.Text.Trim() + "',COO = '"+cootxtbox.Text+"'," +
-                                    "MFR = '" + mfrtextBox.Text.Trim() + "',HSCode = '" + hscodetxtbox.Text + "',SecondMFr = '" + secondmfrtxtbox.Text + "'" +
+                                    "Barcode = '" + randomNumber + "'," +
+                                    "DiscountPercentage = '" + discountpercentagetxtbox.Text.Trim() + "'," +
+                                    "COO = '" + cootxtbox.Text + "'," +
+                                    "MFR = '" + mfrtextBox.Text.Trim() + "'," +
+                                    "HSCode = '" + hscodetxtbox.Text + "'," +
+                                    "SecondMFr = '" + secondmfrtxtbox.Text + "'" +
                                     " WHERE ProductID = " + productid.Text + "";
                             DeleteBundleData(Convert.ToInt32(productid.Text));
                             AddDataToDatabase(Convert.ToInt32(productid.Text), productcodelbl.Text);
@@ -183,8 +185,12 @@ namespace SmartFlow.Masters
                                     "Width = '" + widthtextBox.Text.Trim() + "'," +
                                     "Height = '" + heighttextBox.Text.Trim() + "'," +
                                     "IsBundle = '" + checkBox1.Checked + "'," +
-                                    "Weight = '" + weighttextBox.Text.Trim() + "',DiscountPercentage = '" + discountpercentagetxtbox.Text.Trim() + "',COO = '" + cootxtbox.Text + "'" +
-                                    "MFR = '" + mfrtextBox.Text.Trim() + "',HSCode = '" + hscodetxtbox.Text + "',SecondMFr = '" + secondmfrtxtbox.Text + "'" +
+                                    "Weight = '" + weighttextBox.Text.Trim() + "'," +
+                                    "DiscountPercentage = '" + discountpercentagetxtbox.Text.Trim() + "'," +
+                                    "COO = '" + cootxtbox.Text + "'" +
+                                    "MFR = '" + mfrtextBox.Text.Trim() + "'," +
+                                    "HSCode = '" + hscodetxtbox.Text + "'," +
+                                    "SecondMFr = '" + secondmfrtxtbox.Text + "'" +
                                     " WHERE ProductID = " + productid.Text + "";
                             DeleteBundleData(Convert.ToInt32(productid.Text));
                             AddDataToDatabase(Convert.ToInt32(productid.Text), productcodelbl.Text);
@@ -258,7 +264,7 @@ namespace SmartFlow.Masters
                                         "'" + eantextBox.Text.Trim() + "','" + lengthtextBox.Text.Trim() + "','" + widthtextBox.Text.Trim() + "'," +
                                         "'" + heighttextBox.Text.Trim() + "','" + weighttextBox.Text.Trim() + "'," +
                                         "'" + mfrtextBox.Text.Trim() + "','" + productcode + "','" + randomNumber + "','" + discountpercentagetxtbox.Text.Trim() + "'," +
-                                        "'" + checkBox1.Checked + "','" + hscodetxtbox.Text + "','" + secondmfrtxtbox.Text + "','"+cootxtbox.Text+"'); SELECT SCOPE_IDENTITY();";
+                                        "'" + checkBox1.Checked + "','" + hscodetxtbox.Text + "','" + secondmfrtxtbox.Text + "','" + cootxtbox.Text + "'); SELECT SCOPE_IDENTITY();";
 
                             int result = DatabaseAccess.InsertId(query);
                             if (result > 0)
@@ -286,7 +292,7 @@ namespace SmartFlow.Masters
                                 "'" + eantextBox.Text.Trim() + "','" + lengthtextBox.Text.Trim() + "','" + widthtextBox.Text.Trim() + "','" + heighttextBox.Text.Trim() + "'," +
                                 "'" + weighttextBox.Text.Trim() + "'," +
                                 "'" + mfrtextBox.Text.Trim() + "','" + productcode + "','" + randomNumber + "','" + discountpercentagetxtbox.Text.Trim() + "'," +
-                                "'" + checkBox1.Checked + "','" + hscodetxtbox.Text + "','" + secondmfrtxtbox.Text + "','"+cootxtbox.Text+"'); SELECT SCOPE_IDENTITY();";
+                                "'" + checkBox1.Checked + "','" + hscodetxtbox.Text + "','" + secondmfrtxtbox.Text + "','" + cootxtbox.Text + "'); SELECT SCOPE_IDENTITY();";
 
                         int result = DatabaseAccess.InsertId(query);
                         if (result > 0)
@@ -396,10 +402,23 @@ namespace SmartFlow.Masters
         {
             if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
-                e.Handled = true; // Prevent further processing of the key event
+                if (AreAnyTextBoxesFilled())
+                {
+                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Close();
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    this.Close();
+                    e.Handled = true;
+                }
             }
-        }
+        }    
         private void CreateProduct_Load(object sender, EventArgs e)
         {
             string labeldata = productid.Text;
@@ -487,6 +506,27 @@ namespace SmartFlow.Masters
         private void nametxtbox_TextChanged(object sender, EventArgs e)
         {
             nametxtbox.Text = nametxtbox.Text.Replace(Environment.NewLine, " ");
+        }
+        private bool AreAnyTextBoxesFilled()
+        {
+            if (nametxtbox.Text.Trim().Length > 0) { return true; }
+            if (stockalerttxtbox.Text.Trim().Length > 0) { return true; }
+            if (mfrtextBox.Text.Trim().Length > 0) { return true; }
+            if (upctextBox.Text.Trim().Length > 0) { return true; }
+            if (eantextBox.Text.Trim().Length > 0) { return true; }
+            if (lengthtextBox.Text.Trim().Length > 0) { return true; }
+            if (widthtextBox.Text.Trim().Length > 0) { return true; }
+            if (heighttextBox.Text.Trim().Length > 0) { return true; }
+            if (weighttextBox.Text.Trim().Length > 0) { return true; }
+            if (cootxtbox.Text.Trim().Length > 0) { return true; }
+            if (standardpricetxtbox.Text.Trim().Length > 0) { return true; }
+            if (wholesalepricetxtbox.Text.Trim().Length > 0) { return true; }
+            if (lowestpricetxtbox.Text.Trim().Length > 0) { return true; }
+            if (salepricetxtbox.Text.Trim().Length > 0) { return true; }
+            if (discountpercentagetxtbox.Text.Trim().Length > 0) { return true; }
+            if (hscodetxtbox.Text.Trim().Length > 0) { return true; }
+            if (secondmfrtxtbox.Text.Trim().Length > 0) { return true; }
+            return false; // No TextBox is filled
         }
     }
 }

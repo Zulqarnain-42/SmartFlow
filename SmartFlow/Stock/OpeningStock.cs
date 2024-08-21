@@ -177,28 +177,5 @@ namespace SmartFlow.Stock
 
             return queryBuilder.ToString();
         }
-        private void OpeningStock_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (AreAnyTextBoxesFilled())
-            {
-                DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
-                                                      "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.No)
-                {
-                    e.Cancel = true; // Cancel the closing event
-                }
-            }
-        }
-        private bool AreAnyTextBoxesFilled()
-        {
-            foreach (Control control in this.Controls)
-            {
-                if (control is TextBox textBox && !string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    return true; // At least one TextBox is filled
-                }
-            }
-            return false; // No TextBox is filled
-        }
     }
 }

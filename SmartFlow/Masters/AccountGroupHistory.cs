@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartFlow.Common;
+using System;
 using System.Data;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -10,6 +11,8 @@ namespace SmartFlow.Masters
     {
         private int currentRowIndex;
         private int currentCellIndex;
+        private int accountheadid = 0;
+        private string accountheadname = null;
         public AccountGroupHistory()
         {
             InitializeComponent();
@@ -18,14 +21,21 @@ namespace SmartFlow.Masters
         {
             if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
-                e.Handled = true;
-            }
-
-            if(e.Control && e.KeyCode == Keys.R)
-            {
-                FillGrid("");
-                e.Handled = true;
+                if (AreAnyTextBoxesFilled())
+                {
+                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Close();
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    this.Close();
+                    e.Handled = true;
+                }
             }
         }
         private void FillGrid(string searchvalue)
@@ -36,17 +46,13 @@ namespace SmartFlow.Masters
                 DataTable dataTable = new DataTable();
                 if (string.IsNullOrEmpty(searchvalue) && string.IsNullOrWhiteSpace(searchvalue))
                 {
-                    query = "SELECT AccountControlTable.AccountControlID [ID],AccountHeadTable.AccountHeadName [Account Head]," +
-                        "AccountControlTable.AccountControlName [Account Name]," +
-                        "AccountControlTable.CreatedAt [Created],AccountControlTable.CreatedDay [Day]" +
-                        "FROM AccountControlTable INNER JOIN AccountHeadTable ON AccountHeadTable.AccountHeadID = AccountControlTable.AccountHead_ID";
+                    query = "SELECT AccountControlID [ID],AccountHeadName [ACCOUNT HEAD],AccountControlName [ACCOUNT NAME],CreatedAt [CREATED],CreatedDay [DAY]," +
+                        "AccountHead_ID [HEAD ID] FROM AccountControlTable";
                 }
                 else
                 {
-                    /*query = "SELECT AccountControlTable.AccountControlID,AccountControlTable.AccountControlName," +
-                        "AccountHeadTable.AccountHeadName,AccountControlTable.CreatedAt,AccountControlTable.CreatedDay " +
-                        "FROM AccountControlTable INNER JOIN AccountHeadTable ON AccountHeadTable.AccountHeadID = AccountControlTable.AccountHead_ID " +
-                        "WHERE AccountControlTable.AccountControlName LIKE '%" + searchtxtbox.Text.Trim()+"%'";*/
+                    query = "SELECT AccountControlID [ID],AccountHeadName [ACCOUNT HEAD],AccountControlName [ACCOUNT NAME],CreatedAt [CREATED],CreatedDay [DAY]," +
+                        "AccountHead_ID [HEAD ID] FROM AccountControlTable WHERE AccountControlName LIKE '%" + searchvalue + "%'";
 
                     query = BuildSearchQueryAccountGroup(searchvalue);
                 }
@@ -62,6 +68,7 @@ namespace SmartFlow.Masters
                         accountgroupdatagridview.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                         accountgroupdatagridview.Columns[3].Width = 100;
                         accountgroupdatagridview.Columns[4].Width = 100;
+                        accountgroupdatagridview.Columns[5].Visible = false;
 
                     }
                     else
@@ -91,30 +98,6 @@ namespace SmartFlow.Masters
         private void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
             FillGrid(searchtxtbox.Text.Trim());
-        }
-        private void accountgroupdatagridview_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if(accountgroupdatagridview != null)
-                {
-                    if (accountgroupdatagridview.Rows.Count > 0)
-                    {
-                        if(accountgroupdatagridview.SelectedRows.Count == 1)
-                        {
-                            
-                        }
-                        else
-                        {
-                            MessageBox.Show("Please Select One Record.");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("No Record Available.");
-                    }
-                }
-            }catch (Exception ex) { throw ex; }
         }
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -188,77 +171,73 @@ namespace SmartFlow.Masters
         {
             try
             {
-                if (savebtn.Text == "Update")
+                errorProvider.Clear();
+
+                if (groupnametxtbox.Text.Trim().Length == 0)
                 {
-                    errorProvider.Clear();
+                    errorProvider.SetError(groupnametxtbox, "Please Enter Group Name");
+                    groupnametxtbox.Focus();
+                    return;
+                }
+                
+                if(!rbassets.Checked && !rbequity.Checked && !rbexpense.Checked && !rbliabilities.Checked && !rbrevenue.Checked)
+                {
+                    errorProvider.SetError(rbassets,"Please Select One Radio");
+                    rbassets.Focus();
+                    return;
+                }
 
-                    if (groupnametxtbox.Text.Trim().Length == 0)
+                if (rbassets.Checked)
+                {
+                    accountheadid = 1;
+                    accountheadname = "ASSETS";
+                }
+                else if (rbliabilities.Checked)
+                {
+                    accountheadid = 2;
+                    accountheadname = "LIABILITIES";
+                }
+                else if (rbequity.Checked)
+                {
+                    accountheadid = 3;
+                    accountheadname = "EQUITY";
+                }
+                else if (rbexpense.Checked)
+                {
+                    accountheadid = 4;
+                    accountheadname = "EXPENSES";
+                }
+                else if (rbrevenue.Checked)
+                {
+                    accountheadid = 5;
+                    accountheadname = "REVENUE";
+                }
+
+                string groupname = groupnametxtbox.Text;
+                string alias = aliastxtbox.Text;
+                string query = string.Empty;
+                query = string.Format("SELECT AccountControlName,AccountHead_ID,Alias,AccountHeadName FROM AccountControlTable " +
+                    "WHERE AccountControlName LIKE '" + groupname + "'");
+                DataTable dtdata = DatabaseAccess.Retrive(query);
+                if (dtdata != null && dtdata.Rows.Count > 0)
+                {
+                    if (dtdata.Rows[0]["AccountControlName"].ToString() == groupname
+                        && dtdata.Rows[0]["Alias"].ToString() == alias
+                        && dtdata.Rows[0]["AccountHeadName"].ToString() == accountheadname)
                     {
-                        errorProvider.SetError(groupnametxtbox, "Please Enter Group Name");
-                        groupnametxtbox.Focus();
-                        return;
+                        MessageBox.Show("Account Already Exist");
                     }
-
-                    if (aliastxtbox.Text.Trim().Length == 0)
+                    else
                     {
-                        errorProvider.SetError(aliastxtbox, "Please Enter Alias");
-                        aliastxtbox.Focus();
-                        return;
-                    }
-
-                    if (selectprimarygrouptxtbox.Text.Trim().Length == 0)
-                    {
-                        errorProvider.SetError(selectprimarygrouptxtbox, "");
-                        selectprimarygrouptxtbox.Focus();
-                        return;
-                    }
-
-                    string groupname = groupnametxtbox.Text;
-                    string alias = aliastxtbox.Text;
-
-                    groupname = Regex.Replace(groupname, "[^a-zA-Z0-9 ]", "");
-                    alias = Regex.Replace(alias, "[^a-zA-Z0-9 ]", "");
-
-                    string query = string.Empty;
-                    query = string.Format("SELECT AccountControlName,AccountHead_ID,Alias FROM AccountControlTable " +
-                        "WHERE AccountControlName LIKE '" + groupname + "'");
-                    DataTable dtdata = DatabaseAccess.Retrive(query);
-                    if (dtdata != null)
-                    {
-                        if (dtdata.Rows.Count > 0)
-                        {
-                            if (dtdata.Rows[0]["AccountControlName"].ToString() == groupname
-                                && dtdata.Rows[0]["AccountHead_ID"].ToString() == selectprimarygrouptxtbox.Text.ToString()
-                                && dtdata.Rows[0]["Alias"].ToString() == alias)
-                            {
-                                MessageBox.Show("Account Already Exist");
-                            }
-                            else
-                            {
-                                query = string.Format("UPDATE AccountControlTable SET AccountControlName = '" + groupname + "'" +
-                        ",AccountHead_ID = '" + selectprimarygrouptxtbox.Text + "'" +
-                        ",UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "',Alias = '" + alias + "',UpdatedDay = '" + DateTime.Now.DayOfWeek + "'" +
-                        " WHERE AccountControlID = '" + accountgroupid.Text + "'");
-
-                                bool result = DatabaseAccess.Update(query);
-                                if (result)
-                                {
-                                    MessageBox.Show("Updated Successfully!");
-                                    FillGrid("");
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Something is wrong");
-                                }
-                            }
-                        }
-                        else
+                        if (savebtn.Text == "Update")
                         {
                             query = string.Format("UPDATE AccountControlTable SET AccountControlName = '" + groupname + "'" +
-                        ",AccountHead_ID = '" + selectprimarygrouptxtbox.Text + "'" +
-                        ",UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "',Alias = '" + alias + "',UpdatedDay = '" + DateTime.Now.DayOfWeek + "'" +
-                        " WHERE AccountControlID = '" + accountgroupid.Text + "'");
-
+                                ",AccountHead_ID = '" + accountheadid + "'" +
+                                ",UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "',Alias = '" + alias + "'," +
+                                "UpdatedDay = '" + DateTime.Now.DayOfWeek + "'," +
+                                "AccountHeadName = '" + accountheadname+"'" +
+                                " WHERE AccountControlID = '" + accountgroupid.Text + "'");
+                            
                             bool result = DatabaseAccess.Update(query);
                             if (result)
                             {
@@ -270,96 +249,11 @@ namespace SmartFlow.Masters
                                 MessageBox.Show("Something is wrong");
                             }
                         }
-                    }
-                    else
-                    {
-                        query = string.Format("UPDATE AccountControlTable SET AccountControlName = '" + groupname + "'" +
-                      ",AccountHead_ID = '" + selectprimarygrouptxtbox.Text + "'" +
-                      ",UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "',Alias = '" + alias + "',UpdatedDay = '" + DateTime.Now.DayOfWeek + "'" +
-                      " WHERE AccountControlID = '" + accountgroupid.Text + "'");
-
-                        bool result = DatabaseAccess.Update(query);
-                        if (result)
-                        {
-                            MessageBox.Show("Updated Successfully!");
-                            FillGrid("");
-                        }
                         else
                         {
-                            MessageBox.Show("Something is wrong");
-                        }
-                    }
-
-                }
-                else
-                {
-                    errorProvider.Clear();
-
-                    if (groupnametxtbox.Text.Trim().Length == 0)
-                    {
-                        errorProvider.SetError(groupnametxtbox, "Please Enter Group Name.");
-                        groupnametxtbox.Focus();
-                        return;
-                    }
-
-                    if (aliastxtbox.Text.Trim().Length == 0)
-                    {
-                        errorProvider.SetError(aliastxtbox, "Please Enter Alias.");
-                        aliastxtbox.Focus();
-                        return;
-                    }
-
-                    if (selectprimarygrouptxtbox.Text.Trim().Length == 0)
-                    {
-                        errorProvider.SetError(selectprimarygrouptxtbox, "Please Select Primary Group.");
-                        selectprimarygrouptxtbox.Focus();
-                        return;
-                    }
-
-
-                    string groupname = groupnametxtbox.Text;
-                    string alias = aliastxtbox.Text;
-
-                    groupname = Regex.Replace(groupname, "[^a-zA-Z0-9 ]", "");
-                    alias = Regex.Replace(alias, "[^a-zA-Z0-9 ]", "");
-
-                    string query = string.Empty;
-                    query = string.Format("SELECT AccountControlName,AccountHead_ID,Alias FROM AccountControlTable " +
-                        "WHERE AccountControlName LIKE '" + groupname + "'");
-                    DataTable dtdata = DatabaseAccess.Retrive(query);
-                    if (dtdata != null)
-                    {
-                        if (dtdata.Rows.Count > 0)
-                        {
-                            if (dtdata.Rows[0]["AccountControlName"].ToString() == groupname
-                                && dtdata.Rows[0]["AccountHead_ID"].ToString() == selectprimarygrouptxtbox.Text.ToString()
-                                && dtdata.Rows[0]["Alias"].ToString() == alias)
-                            {
-                                MessageBox.Show("Account Already Exist");
-                            }
-                            else
-                            {
-                                query = string.Format("INSERT INTO AccountControlTable (AccountControlName,Alias,AccountHead_ID,AccountControlCode,CreatedAt,CreatedDay) VALUES " +
-                                        "('" + groupname + "','" + alias + "','" + selectprimarygrouptxtbox.Text + "','" + Guid.NewGuid() + "'," +
+                            query = string.Format("INSERT INTO AccountControlTable (AccountControlName,Alias,AccountHead_ID,AccountHeadName,AccountControlCode,CreatedAt,CreatedDay) VALUES " +
+                                        "('" + groupname + "','" + alias + "','" + accountheadid + "','" + accountheadname + "','" + Guid.NewGuid() + "'," +
                                         "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')");
-                                bool result = DatabaseAccess.Insert(query);
-
-                                if (result)
-                                {
-                                    MessageBox.Show("Saved Successfully!");
-                                    FillGrid("");
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Something is wrong.");
-                                }
-                            }
-                        }
-                        else
-                        {
-                            query = string.Format("INSERT INTO AccountControlTable (AccountControlName,Alias,AccountHead_ID,AccountControlCode,CreatedAt,CreatedDay) VALUES " +
-                                    "('" + groupname + "','" + alias + "','" + selectprimarygrouptxtbox.Text + "','" + Guid.NewGuid() + "'," +
-                                    "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')");
                             bool result = DatabaseAccess.Insert(query);
 
                             if (result)
@@ -373,22 +267,22 @@ namespace SmartFlow.Masters
                             }
                         }
                     }
+                }
+                else
+                {
+                    query = string.Format("INSERT INTO AccountControlTable (AccountControlName,Alias,AccountHead_ID,AccountHeadName,AccountControlCode,CreatedAt,CreatedDay) VALUES " +
+                                        "('" + groupname + "','" + alias + "','" + accountheadid + "','" + accountheadname + "','" + Guid.NewGuid() + "'," +
+                                        "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')");
+                    bool result = DatabaseAccess.Insert(query);
+
+                    if (result)
+                    {
+                        MessageBox.Show("Saved Successfully!");
+                        FillGrid("");
+                    }
                     else
                     {
-                        query = string.Format("INSERT INTO AccountControlTable (AccountControlName,Alias,AccountHead_ID,AccountControlCode,CreatedAt,CreatedDay) VALUES " +
-                                "('" + groupname + "','" + alias + "','" + selectprimarygrouptxtbox.Text + "','" + Guid.NewGuid() + "'," +
-                                "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')");
-                        bool result = DatabaseAccess.Insert(query);
-
-                        if (result)
-                        {
-                            MessageBox.Show("Saved Successfully!");
-                            FillGrid("");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Something is wrong.");
-                        }
+                        MessageBox.Show("Something is wrong.");
                     }
                 }
 
@@ -438,28 +332,51 @@ namespace SmartFlow.Masters
 
             return queryBuilder.ToString();
         }
-        private void AccountGroupHistory_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (AreAnyTextBoxesFilled())
-            {
-                DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
-                                                      "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.No)
-                {
-                    e.Cancel = true; // Cancel the closing event
-                }
-            }
-        }
         private bool AreAnyTextBoxesFilled()
         {
-            foreach (Control control in this.Controls)
-            {
-                if (control is TextBox textBox && !string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    return true; // At least one TextBox is filled
-                }
-            }
+            if(groupnametxtbox.Text.Trim().Length > 0) { return true; }
             return false; // No TextBox is filled
+        }
+        private void accountgroupdatagridview_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                rbassets.Enabled = false;
+                rbequity.Enabled = false;
+                rbexpense.Enabled = false;
+                rbliabilities.Enabled = false;
+                rbrevenue.Enabled = false;
+
+                DataGridViewRow row = accountgroupdatagridview.Rows[e.RowIndex];
+                accountgroupid.Text = row.Cells["ID"].Value.ToString();
+                groupnametxtbox.Text = row.Cells["Account Name"].Value.ToString();
+                accountheadname = row.Cells["ACCOUNT HEAD"].Value.ToString();
+                if (accountheadname == "ASSETS")
+                {
+                    rbassets.Checked = true;
+                }else if(accountheadname == "LIABILITIES")
+                {
+                    rbliabilities.Checked = true;
+                }else if(accountheadname == "EQUITY")
+                {
+                    rbequity.Checked = true;
+                }else if(accountheadname == "EXPENSES")
+                {
+                    rbexpense.Checked = true;
+                }else if(accountheadname == "REVENUE")
+                {
+                    rbrevenue.Checked = true;
+                }
+                else 
+                {
+                    rbassets.Enabled = true;
+                    rbequity.Enabled = true;
+                    rbexpense.Enabled = true;
+                    rbliabilities.Enabled = true;
+                    rbrevenue.Enabled = true;
+                }
+                savebtn.Text = "Update";
+            }
         }
     }
 }

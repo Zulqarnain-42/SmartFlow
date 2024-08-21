@@ -331,7 +331,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stock Location - Future Art Broadcast Trading LLC";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StockLocation_FormClosing);
             this.Load += new System.EventHandler(this.StockLocation_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StockLocation_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.locationdatagridview)).EndInit();

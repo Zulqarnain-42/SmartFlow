@@ -117,6 +117,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AvailabilityForm";
             this.Text = "Product Availability Form";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AvailabilityForm_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();

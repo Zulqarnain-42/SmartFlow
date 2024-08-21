@@ -107,8 +107,21 @@ namespace SmartFlow.Stock
         {
             if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
-                e.Handled = true; // Prevent further processing of the key event
+                if (AreAnyTextBoxesFilled())
+                {
+                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Close();
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    this.Close();
+                    e.Handled = true;
+                }
             }
         }
         private void selectwarehousetxtbox_MouseClick(object sender, MouseEventArgs e)
@@ -139,6 +152,12 @@ namespace SmartFlow.Stock
         {
             selectwarehousetxtbox.Text = GlobalVariables.warehousenameglobal.ToString();
             warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
+        }
+        private bool AreAnyTextBoxesFilled()
+        {
+            if (selectwarehousetxtbox.Text.Trim().Length > 0) { return true; }
+            if (qtytxtbox.Text.Trim().Length > 0) { return true; }
+            return false; // No TextBox is filled
         }
     }
 }

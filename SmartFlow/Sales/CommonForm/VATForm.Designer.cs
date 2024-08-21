@@ -321,6 +321,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ITEM WISE VAT";
             this.Load += new System.EventHandler(this.VATForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.VATForm_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();

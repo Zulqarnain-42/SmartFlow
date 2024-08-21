@@ -2,7 +2,6 @@
 using SmartFlow.Common.CommonForms;
 using SmartFlow.Common.Forms;
 using SmartFlow.Purchase;
-using SmartFlow.Purchase.ReportViewer;
 using SmartFlow.Sales;
 using SmartFlow.Sales.CommonForm;
 using System;
@@ -14,14 +13,29 @@ namespace SmartFlow
     public partial class PurchaseReturnInvoice : Form
     {
         private int invoiceCounter = 1;
+        private DataTable _dtinvoice;
+        private DataTable _dtinvoicedetails;
         public PurchaseReturnInvoice()
         {
             InitializeComponent();
         }
+        public PurchaseReturnInvoice(DataTable dtinvoice,DataTable dtinvoicedetails)
+        {
+            InitializeComponent();
+            this._dtinvoice = dtinvoice;
+            this._dtinvoicedetails = dtinvoicedetails;
+        }
         private void PurchaseReturnInvoice_Load(object sender, EventArgs e)
         {
-            invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            invoicenotxtbox.Text = GenerateNextInvoiceNumber();
+            if(_dtinvoice!=null && _dtinvoice.Rows.Count>0 && _dtinvoicedetails!=null && _dtinvoicedetails.Rows.Count > 0)
+            {
+
+            }
+            else
+            {
+                invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                invoicenotxtbox.Text = GenerateNextInvoiceNumber();
+            }
         }
         private string GenerateNextInvoiceNumber()
         {
@@ -520,8 +534,8 @@ namespace SmartFlow
                 int supplierId = Convert.ToInt32(supplieridlbl.Text);
                 string suppliercode = suppliercodetxtbox.Text;
                 string supplierName = selectsuppliertxtbox.Text;
-                string naration = narationtxtbox.Text;
-                string invoicespecialnote = invoicespecialnotelbl.Text;
+                string naration = CommonFunction.CleanText(narationtxtbox.Text);
+                string invoicespecialnote = CommonFunction.CleanText(invoicespecialnotelbl.Text);
                 int currencyid = Convert.ToInt32(currencyidlbl.Text);
                 string currencyName = currencynamelbl.Text;
                 string currencySymbol = currencysymbollbl.Text;
@@ -573,8 +587,6 @@ namespace SmartFlow
                 if (isInserted)
                 {
                     this.Close();
-                    ReturnReportViewer returnReportViewer = new ReturnReportViewer();
-                    returnReportViewer.Show();
                 }
 
             }

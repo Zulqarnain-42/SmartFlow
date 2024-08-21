@@ -46,9 +46,10 @@ namespace SmartFlow.Stock
 
                 string query = string.Empty;
                 string invoiceno = damageidlbl.Text;
+                string description = CommonFunction.CleanText(descriptiontxtbox.Text);
 
                 query = string.Format("INSERT INTO StockCustomizedTable (Code,CreatedAt,CreatedDay,InvoiceNo,Description) VALUES ('" + Guid.NewGuid() + "'," +
-                        "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + invoiceno + "','"+descriptiontxtbox.Text+"');" +
+                        "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + invoiceno + "','" + description + "');" +
                         " SELECT SCOPE_IDENTITY();");
 
                 int stockcustomid = DatabaseAccess.InsertId(query);
@@ -73,8 +74,6 @@ namespace SmartFlow.Stock
                                 "'" + negativeQuantity + "','" + stockcustomid + "','" + negativeQuantity + "')");
                             bool result = DatabaseAccess.Insert(insertstock);
                         }
-
-                        
                     }
                 }
                 MessageBox.Show("Saved Successfully!");
@@ -86,8 +85,21 @@ namespace SmartFlow.Stock
         {
             if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
-                e.Handled = true; // Prevent further processing of the key event
+                if (AreAnyTextBoxesFilled())
+                {
+                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Close();
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    this.Close();
+                    e.Handled = true;
+                }
             }
         }
         private void addbtn_Click(object sender, EventArgs e)
@@ -271,27 +283,11 @@ namespace SmartFlow.Stock
             warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
             selectwarehousefromtxtbox.Text = GlobalVariables.warehousenameglobal.ToString();
         }
-        private void DamageEntry_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (AreAnyTextBoxesFilled())
-            {
-                DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
-                                                      "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.No)
-                {
-                    e.Cancel = true; // Cancel the closing event
-                }
-            }
-        }
         private bool AreAnyTextBoxesFilled()
         {
-            foreach (Control control in this.Controls)
-            {
-                if (control is TextBox textBox && !string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    return true; // At least one TextBox is filled
-                }
-            }
+            if (selectwarehousefromtxtbox.Text.Trim().Length > 0) { return true; }
+            if (productmfrtxtbox.Text.Trim().Length > 0) { return true; }
+            if (qtytxtbox.Text.Trim().Length > 0) { return true; }
             return false; // No TextBox is filled
         }
     }

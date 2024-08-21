@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartFlow.Common;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -38,7 +39,8 @@ namespace SmartFlow.Setting
         {
             try
             {
-                string insertterms = "INSERT INTO TermsConditionTable (TermsConditions) VALUES ('"+termstxtbox.Text+"')";
+                string terms = CommonFunction.CleanText(termstxtbox.Text);
+                string insertterms = "INSERT INTO TermsConditionTable (TermsConditions) VALUES ('" + terms + "')";
 
                 bool result = DatabaseAccess.Insert(insertterms);
                 if (result)
@@ -56,31 +58,26 @@ namespace SmartFlow.Setting
         {
             if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
-                e.Handled = true; // Prevent further processing of the key event
-            }
-        }
-        private void Terms_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (AreAnyTextBoxesFilled())
-            {
-                DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
-                                                      "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.No)
+                if (AreAnyTextBoxesFilled())
                 {
-                    e.Cancel = true; // Cancel the closing event
+                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Close();
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    this.Close();
+                    e.Handled = true;
                 }
             }
         }
         private bool AreAnyTextBoxesFilled()
         {
-            foreach (Control control in this.Controls)
-            {
-                if (control is TextBox textBox && !string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    return true; // At least one TextBox is filled
-                }
-            }
+            if (termstxtbox.Text.Trim().Length > 0) { return true; }
             return false; // No TextBox is filled
         }
     }

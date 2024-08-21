@@ -126,9 +126,10 @@ namespace SmartFlow.Stock
 
                 string addtransferdata = string.Empty;
                 string invoiceno = stocktransferidlbl.Text;
+                string description = CommonFunction.CleanText(descriptiontxtbox.Text);
 
                 addtransferdata = string.Format("INSERT INTO StockCustomizedTable (Code,CreatedAt,CreatedDay,InvoiceNo,Description) VALUES ('" + Guid.NewGuid() + "'," +
-                                "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + invoiceno + "','" + descriptiontxtbox.Text + "'); " +
+                                "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + invoiceno + "','" + description + "'); " +
                                 "SELECT SCOPE_IDENTITY();");
                 int stockcustomid = DatabaseAccess.InsertId(addtransferdata);
                 int warehouseid = Convert.ToInt32(warehousetoidlbl.Text);
@@ -252,8 +253,21 @@ namespace SmartFlow.Stock
         {
             if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
-                e.Handled = true; // Prevent further processing of the key event
+                if (AreAnyTextBoxesFilled())
+                {
+                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Close();
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    this.Close();
+                    e.Handled = true;
+                }
             }
         }
         private void mfrtxtbox_MouseClick(object sender, MouseEventArgs e)
@@ -340,27 +354,14 @@ namespace SmartFlow.Stock
             selectwarehousetotxtbox.Text = GlobalVariables.warehousenameglobal.ToString();
             warehousetoidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
         }
-        private void StockTransfer_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (AreAnyTextBoxesFilled())
-            {
-                DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
-                                                      "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.No)
-                {
-                    e.Cancel = true; // Cancel the closing event
-                }
-            }
-        }
         private bool AreAnyTextBoxesFilled()
         {
-            foreach (Control control in this.Controls)
-            {
-                if (control is TextBox textBox && !string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    return true; // At least one TextBox is filled
-                }
-            }
+            if (selectwarehousefromtxtbox.Text.Trim().Length > 0) { return true; }
+            if (mfrtxtbox.Text.Trim().Length > 0) { return true;}
+            if (selectwarehousetotxtbox.Text.Trim().Length > 0) { return true;}
+            if (qtytxtbox.Text.Trim().Length > 0) { return true;}
+            if (descriptiontxtbox.Text.Trim().Length > 0) { return true; }
+            if (dgvproducts.Rows.Count > 0) { return true; }
             return false; // No TextBox is filled
         }
         private void selectwarehousetotxtbox_KeyDown(object sender, KeyEventArgs e)

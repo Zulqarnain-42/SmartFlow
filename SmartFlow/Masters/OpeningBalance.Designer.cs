@@ -58,6 +58,7 @@
             this.dataGridViewopeningbalance.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewopeningbalance.Size = new System.Drawing.Size(1588, 652);
             this.dataGridViewopeningbalance.TabIndex = 0;
+            this.dataGridViewopeningbalance.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewopeningbalance_CellDoubleClick);
             this.dataGridViewopeningbalance.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dataGridViewopeningbalance_Scroll);
             // 
             // panel1

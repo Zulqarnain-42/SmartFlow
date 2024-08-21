@@ -108,6 +108,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SearchSaleInvoice";
             this.Text = "Search Sale Invoice";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchSaleInvoice_KeyDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

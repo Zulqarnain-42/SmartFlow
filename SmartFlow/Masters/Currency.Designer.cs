@@ -190,7 +190,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "Currency";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CURRENCY - FUTURE ART BROADCAST TRADING LLC";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Currency_KeyDown);
             this.panel1.ResumeLayout(false);

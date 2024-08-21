@@ -108,7 +108,6 @@
             this.Name = "Terms";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Terms";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Terms_FormClosing);
             this.Load += new System.EventHandler(this.Terms_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Terms_KeyDown);
             this.panel1.ResumeLayout(false);

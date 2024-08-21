@@ -4,7 +4,6 @@ using SmartFlow.Common.Forms;
 using SmartFlow.Purchase;
 using SmartFlow.Sales;
 using SmartFlow.Sales.CommonForm;
-using SmartFlow.Sales.ReportViewer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,21 +20,36 @@ namespace SmartFlow
         private decimal qty = 0;
         private decimal total = 0;
         private int invoiceCounter = 1;
+        private DataTable _dtinvoice;
+        private DataTable _dtinvoicedetails;
         public SaleQuotationInvoice()
         {
             InitializeComponent();  
         }
+        public SaleQuotationInvoice(DataTable dtinvoice,DataTable dtinvoicedetails)
+        {
+            InitializeComponent();
+            this._dtinvoice = dtinvoice;
+            this._dtinvoicedetails = dtinvoicedetails;
+        }
         private void SaleQuotationInvoice_Load(object sender, EventArgs e)
         {
-            invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            validuntiltxtbox.Text = DateTime.Now.AddDays(10).ToString("dd/MM/yyyy");
-            qtytxtbox.Text = qty.ToString("0");
-            pricetxtbox.Text = price.ToString("0.00");
-            nettotaltxtbox.Text = total.ToString("0.00");
-            totaldiscounttxtbox.Text = total.ToString("0.00");
-            totalvattxtbox.Text = total.ToString("0.00");
-            invoicenotxtbox.Text = GenerateNextInvoiceNumber();
-            shippingchargestxtbox.Text = total.ToString("N2");
+            if (_dtinvoice != null && _dtinvoice.Rows.Count > 0 && _dtinvoicedetails != null && _dtinvoicedetails.Rows.Count > 0)
+            {
+
+            }
+            else
+            {
+                invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                validuntiltxtbox.Text = DateTime.Now.AddDays(10).ToString("dd/MM/yyyy");
+                qtytxtbox.Text = qty.ToString("0");
+                pricetxtbox.Text = price.ToString("0.00");
+                nettotaltxtbox.Text = total.ToString("0.00");
+                totaldiscounttxtbox.Text = total.ToString("0.00");
+                totalvattxtbox.Text = total.ToString("0.00");
+                invoicenotxtbox.Text = GenerateNextInvoiceNumber();
+                shippingchargestxtbox.Text = total.ToString("N2");
+            }
         }
         private string GenerateNextInvoiceNumber()
         {
@@ -638,8 +652,8 @@ namespace SmartFlow
                 decimal currencyconversionrate = decimal.Parse(currencyconversionratelbl.Text);
                 string currencyname = currencynamelbl.Text;
                 string currencysymbol = currencysymbollbl.Text;
-                string naration = narationtxtbox.Text;
-                string invoicespecialnotes = invoicespeicalnotelbl.Text;
+                string naration = CommonFunction.CleanText(narationtxtbox.Text);
+                string invoicespecialnotes = CommonFunction.CleanText(invoicespeicalnotelbl.Text);
                 float nettotal = float.Parse(nettotaltxtbox.Text);
                 float totalvat = float.Parse(totalvattxtbox.Text);
                 float totaldiscount = 0;
@@ -698,8 +712,6 @@ namespace SmartFlow
                 if (detailadded)
                 {
                     this.Close();
-                    SaleQuotationReportViewer saleQuotationReportViewer = new SaleQuotationReportViewer();
-                    saleQuotationReportViewer.Show();
                 }
             }
             catch (Exception ex) { throw ex; }

@@ -67,39 +67,6 @@ namespace SmartFlow
             salereturnInvoice.MdiParent = this;
             salereturnInvoice.Show();
         }
-        private void unitsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form openForm = CommonFunction.IsFormOpen(typeof(Unit));
-            if(openForm == null)
-            {
-                Unit unit = new Unit();
-                unit.MdiParent = this;
-                unit.Show();
-            }
-            else { openForm.BringToFront(); }
-        }
-        private void customerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form openForm = CommonFunction.IsFormOpen(typeof(Customers));
-            if(openForm == null)
-            {
-                Customers customer = new Customers();
-                customer.MdiParent = this;
-                customer.Show();
-            }
-            else { openForm.BringToFront(); }
-        }
-        private void supplierToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form openForm = CommonFunction.IsFormOpen(typeof(Supplier));
-            if(openForm == null)
-            {
-                Supplier supplier = new Supplier();
-                supplier.MdiParent = this;
-                supplier.Show();
-            }
-            else { openForm.BringToFront(); }
-        }
         private void stockTransferToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(StockTransfer));
@@ -108,17 +75,6 @@ namespace SmartFlow
                 StockTransfer stockTransfer = new StockTransfer();
                 stockTransfer.MdiParent = this;
                 stockTransfer.Show();
-            }
-            else { openForm.BringToFront(); }
-        }
-        private void employeeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form openForm = CommonFunction.IsFormOpen(typeof(EmployeeTable));
-            if(openForm == null)
-            {
-                EmployeeTable employeeTable = new EmployeeTable();
-                employeeTable.MdiParent = this;
-                employeeTable.Show();
             }
             else { openForm.BringToFront(); }
         }
@@ -424,17 +380,6 @@ namespace SmartFlow
             purchaseQuotationInvoice.MdiParent = this;
             purchaseQuotationInvoice.Show();
         }
-        private void accountHeadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form openForm = CommonFunction.IsFormOpen(typeof(AccountHead));
-            if(openForm == null)
-            {
-                AccountHead accountHead = new AccountHead();
-                accountHead.MdiParent = this;
-                accountHead.Show();
-            }
-            else { openForm.BringToFront(); }
-        }
         private void termsConditionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(Terms));
@@ -507,16 +452,6 @@ namespace SmartFlow
             GroupingAccount groupingAccount = new GroupingAccount();
             groupingAccount.Show();
         }
-        private void customerGroupingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CustomerGrouping customerGrouping = new CustomerGrouping();
-            customerGrouping.Show();
-        }
-        private void supplierGroupingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SupplierGrouping supplierGrouping = new SupplierGrouping();
-            supplierGrouping.Show();
-        }
         private void purchaseTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PurchaseType purchaseType = new PurchaseType();
@@ -559,6 +494,47 @@ namespace SmartFlow
             materialReceivedFromParty.MdiParent = this;
             materialReceivedFromParty.Show();
         }
+        private void bookingItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BookItem bookItem = new BookItem();
+            bookItem.MdiParent = this;
+            bookItem.Show();
+        }
+        private void taxPlanetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TaxPlanet taxPlanet = new TaxPlanet();
+            taxPlanet.ShowDialog();
+        }
+        private void allToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string hiddendata = "Sale";
+            FromToDateSearchForm fromtodateform = new FromToDateSearchForm(hiddendata);
+            fromtodateform.MdiParent = this;
+            fromtodateform.Show();
+        }
+        private void allPurchaseQuotationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string hiddendata = "Purchase";
+            FromToDateSearchForm fromtodateform = new FromToDateSearchForm(hiddendata);
+            fromtodateform.MdiParent = this;
+            fromtodateform.Show();
+        }
+        private void databaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            databaseConnection.ShowDialog();
+        }
+        private void fileSavingPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileManager fileManager = new FileManager();
+            fileManager.ShowDialog();
+        }
+        private void updateAccountsUsingExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExcelAccounts excelAccounts = new ExcelAccounts();
+            excelAccounts.MdiParent = this;
+            excelAccounts.Show();
+        }
         private void packingListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PackingList packingList = new PackingList();
@@ -570,59 +546,6 @@ namespace SmartFlow
             DeliveryNote deliveryNote = new DeliveryNote();
             deliveryNote.MdiParent = this;
             deliveryNote.Show();
-        }
-        private void bookingItemsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            BookItem bookItem = new BookItem();
-            bookItem.MdiParent = this;
-            bookItem.Show();
-        }
-        private void allSalesQuotationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FromToDateSearchForm fromtodateform = new FromToDateSearchForm();
-            fromtodateform.MdiParent = this;
-            fromtodateform.Show();
-        }
-        private void taxPlanetToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TaxPlanet taxPlanet = new TaxPlanet();
-            taxPlanet.ShowDialog();
-        }
-        private void allToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FromToDateSearchForm fromtodateform = new FromToDateSearchForm();
-            fromtodateform.MdiParent = this;
-            fromtodateform.Show();
-        }
-        private void allSalesReturnToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FromToDateSearchForm fromtodateform = new FromToDateSearchForm();
-            fromtodateform.MdiParent = this;
-            fromtodateform.Show();
-        }
-        private void allPurchaseQuotationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FromToDateSearchForm fromtodateform = new FromToDateSearchForm();
-            fromtodateform.MdiParent = this;
-            fromtodateform.Show();
-        }
-        private void allPurchaseOrderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FromToDateSearchForm fromtodateform = new FromToDateSearchForm();
-            fromtodateform.MdiParent = this;
-            fromtodateform.Show();
-        }
-        private void allPurchaseInvoicesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FromToDateSearchForm fromtodateform = new FromToDateSearchForm();
-            fromtodateform.MdiParent = this;
-            fromtodateform.Show();
-        }
-        private void allPurchaseReturnToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FromToDateSearchForm fromtodateform = new FromToDateSearchForm();
-            fromtodateform.MdiParent = this;
-            fromtodateform.Show();
         }
     }
 }

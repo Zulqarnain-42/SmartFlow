@@ -1,16 +1,11 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-using SmartFlow.Common;
+﻿using SmartFlow.Common;
 using SmartFlow.Common.CommonForms;
 using SmartFlow.Common.Forms;
-using SmartFlow.Masters;
-using SmartFlow.Purchase.ReportViewer;
 using SmartFlow.Sales;
 using SmartFlow.Sales.CommonForm;
 using System;
 using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using ZXing;
 
 namespace SmartFlow.Purchase
 {
@@ -18,18 +13,32 @@ namespace SmartFlow.Purchase
     {
         private int invoiceCounter = 1;
         private decimal initalizer = 0;
+        private DataTable _dtinvoice;
+        private DataTable _dtinvoicedetails;
         public PurchaseInvoice()
         {
             InitializeComponent();
-            
+        }
+        public PurchaseInvoice(DataTable dtinvoice,DataTable dtinvoicedetails)
+        {
+            InitializeComponent();
+            this._dtinvoice = dtinvoice;
+            this._dtinvoicedetails = dtinvoicedetails;
         }
         private void PurchaseInvoice_Load(object sender, EventArgs e)
         {
-            totaldiscounttxtbox.Text = initalizer.ToString("N2");
-            totalvattxtbox.Text = initalizer.ToString("N2");
-            shippingchargestxtbox.Text = initalizer.ToString("N2");
-            invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            invoicenotxtbox.Text = GenerateNextInvoiceNumber();
+            if (_dtinvoice != null && _dtinvoice.Rows.Count > 0 && _dtinvoicedetails != null && _dtinvoicedetails.Rows.Count > 0)
+            {
+
+            }
+            else
+            {
+                totaldiscounttxtbox.Text = initalizer.ToString("N2");
+                totalvattxtbox.Text = initalizer.ToString("N2");
+                shippingchargestxtbox.Text = initalizer.ToString("N2");
+                invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                invoicenotxtbox.Text = GenerateNextInvoiceNumber();
+            }
         }
         private string GenerateNextInvoiceNumber()
         {
@@ -131,8 +140,8 @@ namespace SmartFlow.Purchase
                 string invoiceRef = invoicerefrencetxtbox.Text;
                 int purchaseTypeid = Convert.ToInt32(purchasetypeidlbl.Text);
                 string purchaseType = purchasetypetxtbox.Text;
-                string naration = narationtxtbox.Text;
-                string specialNotes = invoicespecialnotelbl.Text;
+                string naration = CommonFunction.CleanText(narationtxtbox.Text);
+                string specialNotes = CommonFunction.CleanText(invoicespecialnotelbl.Text);
                 int currencyId = Convert.ToInt32(currencyidlbl.Text);
                 string currencyName = currencynamelbl.Text;
                 string currencySymbol = currencysymbollbl.Text;
@@ -206,8 +215,6 @@ namespace SmartFlow.Purchase
                 if(isInserted == true)
                 {
                     this.Close();
-                    InvoiceReportView invoiceReportView = new InvoiceReportView();
-                    invoiceReportView.Show();
                 }
                 else
                 {

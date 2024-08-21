@@ -252,6 +252,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ITEM WISE DISCOUNT";
             this.Load += new System.EventHandler(this.DiscountForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DiscountForm_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);

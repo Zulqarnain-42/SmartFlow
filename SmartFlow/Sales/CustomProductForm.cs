@@ -16,5 +16,10 @@ namespace SmartFlow.Sales
         {
             InitializeComponent();
         }
+
+        private void CustomProductForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

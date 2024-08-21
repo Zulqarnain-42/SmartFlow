@@ -58,11 +58,11 @@
             this.productbarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productquantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.closebtn = new System.Windows.Forms.Button();
             this.savebtn = new System.Windows.Forms.Button();
             this.descriptiontxtbox = new System.Windows.Forms.RichTextBox();
             this.descriptionlbl = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.closebtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvproducts)).BeginInit();
@@ -391,6 +391,19 @@
             this.panel3.Size = new System.Drawing.Size(1448, 607);
             this.panel3.TabIndex = 3;
             // 
+            // closebtn
+            // 
+            this.closebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.closebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.closebtn.Location = new System.Drawing.Point(1145, 528);
+            this.closebtn.Name = "closebtn";
+            this.closebtn.Size = new System.Drawing.Size(291, 45);
+            this.closebtn.TabIndex = 8;
+            this.closebtn.Text = "CLOSE";
+            this.closebtn.UseVisualStyleBackColor = true;
+            this.closebtn.Click += new System.EventHandler(this.closebtn_Click);
+            // 
             // savebtn
             // 
             this.savebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -432,19 +445,6 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // closebtn
-            // 
-            this.closebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.closebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.closebtn.Location = new System.Drawing.Point(1145, 528);
-            this.closebtn.Name = "closebtn";
-            this.closebtn.Size = new System.Drawing.Size(291, 45);
-            this.closebtn.TabIndex = 8;
-            this.closebtn.Text = "CLOSE";
-            this.closebtn.UseVisualStyleBackColor = true;
-            this.closebtn.Click += new System.EventHandler(this.closebtn_Click);
-            // 
             // StockTransfer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -462,7 +462,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MultipleTransfer";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StockTransfer_FormClosing);
             this.Load += new System.EventHandler(this.StockTransfer_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StockTransfer_KeyDown);
             this.panel1.ResumeLayout(false);

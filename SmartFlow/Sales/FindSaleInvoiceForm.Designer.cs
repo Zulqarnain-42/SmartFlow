@@ -96,6 +96,7 @@
             this.invoicenotxtbox.Name = "invoicenotxtbox";
             this.invoicenotxtbox.Size = new System.Drawing.Size(374, 32);
             this.invoicenotxtbox.TabIndex = 56;
+            this.invoicenotxtbox.Leave += new System.EventHandler(this.invoicenotxtbox_Leave);
             // 
             // label3
             // 
@@ -192,6 +193,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Find Invoice Form";
             this.Load += new System.EventHandler(this.FindSaleInvoiceForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FindSaleInvoiceForm_KeyDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

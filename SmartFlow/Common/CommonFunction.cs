@@ -151,6 +151,31 @@ namespace SmartFlow.Common
                 }
             }catch (Exception ex) { throw ex; }
         }
+        public static void GetAccountGroupInfo(string searchvalue, DataGridView dgv)
+        {
+            try
+            {
+                string query = string.Empty;
+                DataTable dt = new DataTable();
+                if (string.IsNullOrEmpty(searchvalue) && String.IsNullOrWhiteSpace(searchvalue))
+                {
+                    query = "SELECT AccountControlID [ID],AccountControlName [Account Name],AccountHead_ID,Alias FROM AccountControlTable";
+                }
+                else
+                {
+                    query = "SELECT AccountControlID [ID],AccountControlName [Account Name],AccountHead_ID,Alias FROM AccountControlTable" +
+                        "WHERE AccountControlName LIKE '%" + searchvalue + "%'";
+                }
+
+                dt = DatabaseAccess.Retrive(query);
+                if (dt.Rows.Count > 0)
+                {
+                    dgv.DataSource = dt;
+                    dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                }
+            }
+            catch (Exception ex) { throw ex; }
+        }
         public static void GetSalesTypeInfo(string searchvalue, DataGridView dgv)
         {
             try
@@ -400,6 +425,37 @@ namespace SmartFlow.Common
 
             }
             catch (Exception ex) { throw ex; }
+        }
+        public static string CleanText(string input)
+        {
+            // Step 1: Remove apostrophe
+            string result = "";
+            foreach (char c in input)
+            {
+                if (c != '\'')
+                {
+                    result += c;
+                }
+            }
+
+            // Step 2: Remove extra spaces
+            string finalResult = "";
+            bool lastWasSpace = false;
+            foreach (char c in result)
+            {
+                if (c != ' ')
+                {
+                    finalResult += c;
+                    lastWasSpace = false;
+                }
+                else if (!lastWasSpace)
+                {
+                    finalResult += ' ';
+                    lastWasSpace = true;
+                }
+            }
+
+            return finalResult.Trim();
         }
     }
 }

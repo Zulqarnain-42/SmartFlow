@@ -1,6 +1,7 @@
 ﻿
 
 using DocumentFormat.OpenXml.Bibliography;
+using System;
 
 namespace SmartFlow.Common
 {
@@ -31,8 +32,8 @@ namespace SmartFlow.Common
         public static string suppliercodeglobal = null;
 
         public static int accountidglobal = 0;
+        public static int accountheadidglobal = 0;
         public static string accountnameglobal = null;
-
 
         public static int customeridglobal = 0;
         public static string customernameglobal = null;
@@ -69,5 +70,17 @@ namespace SmartFlow.Common
 
         public static int productinventoryglobal = 0;
         public static string availabilitystatus = null;
+
+        public static bool isdebitglobal = false;
+        public static bool iscreditglobal = false;
+        public static string shortdescriptionglobal = null;
+
+        public static string employeeNationalityGlobal = null;
+        public static string employeeEducationGlobal = null;
+        public static DateTime employeedateofjoiningGlobal = DateTime.Now;
+        public static string employeeDesignationGlobal = null;
+        public static string employeeDepartmentGlobal = null;
+        public static string employeeContractTypeGlobal = null;
+        public static DateTime employeeContractExpiryGlobal = DateTime.Now;
     }
 }

@@ -59,11 +59,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "CustomProductForm";
             this.Text = "Create Custom Product";
+            this.Load += new System.EventHandler(this.CustomProductForm_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

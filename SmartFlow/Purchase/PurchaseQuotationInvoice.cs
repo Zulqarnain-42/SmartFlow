@@ -1,4 +1,4 @@
-﻿using CrystalDecisions.CrystalReports.Engine;
+﻿
 using DocumentFormat.OpenXml.Spreadsheet;
 using SmartFlow.Common;
 using SmartFlow.Common.CommonForms;
@@ -16,14 +16,69 @@ namespace SmartFlow.Purchase
     public partial class PurchaseQuotationInvoice : Form
     {
         private int invoiceCounter = 1;
+        private DataTable _dtinvoice;
+        private DataTable _dtinvoicedetails;
         public PurchaseQuotationInvoice()
         {
             InitializeComponent();
         }
+        public PurchaseQuotationInvoice(DataTable dtInvoice,DataTable dtInvoiceDetail)
+        {
+            InitializeComponent();
+            this._dtinvoice = dtInvoice;
+            this._dtinvoicedetails = dtInvoiceDetail;
+        }
         private void PurchaseQuotationInvoice_Load(object sender, EventArgs e)
         {
-            invoicenotxtbox.Text = GenerateNextInvoiceNumber();
-            invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            if (_dtinvoice != null && _dtinvoice.Rows.Count > 0 && _dtinvoicedetails!=null && _dtinvoicedetails.Rows.Count > 0)
+            {
+                DataRow row = _dtinvoice.Rows[0];
+                invoicenotxtbox.Text = row["InvoiceNo"].ToString();
+                invoicedatetxtbox.Text = Convert.ToDateTime(row["invoicedate"]).ToString("dd/MM/yyyy");
+                purchasetypetxtbox.Text = row["InvoiceTypeName"].ToString();
+                purchasetypeidlbl.Text = row["InvoiceTypeid"].ToString();
+                selectsuppliertxtbox.Text = row["ClientName"].ToString();
+                currencyidlbl.Text = row["Currencyid"].ToString();
+                currencynamelbl.Text = row["CurrencyName"].ToString();
+                currencysymbollbl.Text = row["CurrencySymbol"].ToString();
+                currencyconversionratelbl.Text = row["ConversionRate"].ToString();
+                nettotaltxtbox.Text = row["NetTotal"].ToString();
+                if (row["TotalVat"].ToString() != null)
+                {
+                    totalvattxtbox.Visible = true;
+                    totalvattxtbox.Text = row["TotalVat"].ToString();
+                }
+
+                if(row["TotalDiscount"].ToString() != null)
+                {
+                    totaldiscounttxtbox.Visible = true;
+                    totaldiscounttxtbox.Text = row["TotalDiscount"].ToString();
+                }
+                
+                narationtxtbox.Text = row["Narration"].ToString();
+                foreach (DataRow invoiceDetailsRow in _dtinvoicedetails.Rows)
+                {
+                    int detailsRowIndex = dgvpurchaseproducts.Rows.Add();
+                    dgvpurchaseproducts.Rows[detailsRowIndex].Cells["mfrcolumn"].Value = invoiceDetailsRow["MFR"];
+                    dgvpurchaseproducts.Rows[detailsRowIndex].Cells["itemdescriptioncolumn"].Value = invoiceDetailsRow["ItemDescription"];
+                    dgvpurchaseproducts.Rows[detailsRowIndex].Cells["productconditioncolumn"].Value = invoiceDetailsRow["ProductCondition"];
+                    dgvpurchaseproducts.Rows[detailsRowIndex].Cells["productid"].Value = invoiceDetailsRow["Productid"];
+                    dgvpurchaseproducts.Rows[detailsRowIndex].Cells["productnamecolumn"].Value = invoiceDetailsRow["ProductName"];
+                    dgvpurchaseproducts.Rows[detailsRowIndex].Cells["qtycolumn"].Value = invoiceDetailsRow["Quantity"];
+                    dgvpurchaseproducts.Rows[detailsRowIndex].Cells["unitidcolumn"].Value = invoiceDetailsRow["Unitid"];
+                    dgvpurchaseproducts.Rows[detailsRowIndex].Cells["unitnamecolumn"].Value = invoiceDetailsRow["Unitid"];
+                    dgvpurchaseproducts.Rows[detailsRowIndex].Cells["vatcolumn"].Value = invoiceDetailsRow["ItemWiseVAT"];
+                    dgvpurchaseproducts.Rows[detailsRowIndex].Cells["discountcolumn"].Value = invoiceDetailsRow["ItemWiseDiscount"];
+                    dgvpurchaseproducts.Rows[detailsRowIndex].Cells["pricecolumn"].Value = invoiceDetailsRow["UnitSalePrice"];
+                    dgvpurchaseproducts.Rows[detailsRowIndex].Cells["totalcolumn"].Value = invoiceDetailsRow["ItemTotal"];
+                    dgvpurchaseproducts.Rows[detailsRowIndex].Cells["warehouseidcolumn"].Value = invoiceDetailsRow["Warehouseid"];
+                }
+            }
+            else
+            {
+                invoicenotxtbox.Text = GenerateNextInvoiceNumber();
+                invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            }
         }
         private string GenerateNextInvoiceNumber()
         {
@@ -137,8 +192,8 @@ namespace SmartFlow.Purchase
                 int supplierId = Convert.ToInt32(supplieridlbl.Text);
                 string suppliercode = codetxtbox.Text;
                 string supplierName = selectsuppliertxtbox.Text;
-                string naration = narationtxtbox.Text;
-                string invoicespecialnote = invoicespecialnotelbl.Text;
+                string naration = CommonFunction.CleanText(narationtxtbox.Text);
+                string invoicespecialnote = CommonFunction.CleanText(invoicespecialnotelbl.Text);
                 int currencyid = Convert.ToInt32(currencyidlbl.Text);
                 string currencyName = currencynamelbl.Text;
                 string currencySymbol = currencysymbollbl.Text;

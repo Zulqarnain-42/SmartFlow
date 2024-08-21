@@ -13,7 +13,7 @@ namespace SmartFlow
             if(conn == null)
             {
                 /*conn = new SqlConnection(@"Data Source=10.255.254.241,1433;Initial Catalog=SmartFlow;User id=fabt;Password=Fabt101;");*/
-                conn = new SqlConnection(@"Data Source=DESKTOP-1D6LU8Q\SQLEXPRESS;Initial Catalog=Smart;Integrated Security=True;Encrypt=False");
+                conn = new SqlConnection(@"Data Source=DESKTOP-1D6LU8Q\SQLEXPRESS;Initial Catalog=SmartFlow;Integrated Security=True;Encrypt=False");
             }
 
             if(conn.State != System.Data.ConnectionState.Open)
@@ -39,10 +39,7 @@ namespace SmartFlow
                     return false;
                 }
             }
-            catch
-            {
-                throw;
-            }
+            catch { throw; }
             finally { conn.Close(); }
         }
         public static int InsertId(string query)
@@ -61,7 +58,8 @@ namespace SmartFlow
                     return 0;
                 }
             }
-            catch(Exception ex) { throw ex; }finally { conn.Close(); }
+            catch(Exception ex) { throw ex; }
+            finally { conn.Close(); }
         }
         public static bool Update(String query)
         {
@@ -79,10 +77,8 @@ namespace SmartFlow
                     return false;
                 }
             }
-            catch
-            {
-                throw;
-            }finally { conn.Close(); }
+            catch { throw; }
+            finally { conn.Close(); }
         }
         public static bool Delete(String query)
         {
@@ -100,10 +96,7 @@ namespace SmartFlow
                     return false;
                 }
             }
-            catch
-            {
-                throw;
-            }
+            catch { throw; }
             finally { conn.Close(); }
         }
         public static DataTable Retrive(String query)
@@ -115,10 +108,7 @@ namespace SmartFlow
                 da.Fill(dt);
                 return dt;
             }
-            catch
-            {
-                throw;
-            }
+            catch { throw; }
             finally { conn.Close(); }
         }
     }

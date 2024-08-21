@@ -92,7 +92,7 @@
             this.closebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.closebtn.Location = new System.Drawing.Point(665, 613);
             this.closebtn.Name = "closebtn";
-            this.closebtn.Size = new System.Drawing.Size(544, 40);
+            this.closebtn.Size = new System.Drawing.Size(575, 40);
             this.closebtn.TabIndex = 20;
             this.closebtn.Text = "Close";
             this.closebtn.UseVisualStyleBackColor = false;
@@ -108,7 +108,7 @@
             this.savebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.savebtn.Location = new System.Drawing.Point(665, 567);
             this.savebtn.Name = "savebtn";
-            this.savebtn.Size = new System.Drawing.Size(544, 40);
+            this.savebtn.Size = new System.Drawing.Size(575, 40);
             this.savebtn.TabIndex = 19;
             this.savebtn.Text = "Save";
             this.savebtn.UseVisualStyleBackColor = false;

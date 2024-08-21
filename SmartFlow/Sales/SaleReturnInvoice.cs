@@ -3,7 +3,6 @@ using SmartFlow.Common.CommonForms;
 using SmartFlow.Common.Forms;
 using SmartFlow.Purchase;
 using SmartFlow.Sales;
-using SmartFlow.Sales.ReportViewer;
 using System;
 using System.Data;
 using System.Text;
@@ -15,14 +14,29 @@ namespace SmartFlow
     {
         private decimal vatAmount = 0;
         private int invoiceCounter = 1;
+        private DataTable _dtinvoice;
+        private DataTable _dtinvoicedetails;
         public SaleReturnInvoice()
         {
             InitializeComponent();
         }
+        public SaleReturnInvoice(DataTable dtinvoice,DataTable dtinvoicedetails)
+        {
+            InitializeComponent();
+            this._dtinvoice = dtinvoice;
+            this._dtinvoicedetails = dtinvoicedetails;
+        }
         private void SaleReturnInvoice_Load(object sender, EventArgs e)
         {
-            invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            invoicenotxtbox.Text = GenerateNextInvoiceNumber();
+            if (_dtinvoice != null && _dtinvoice.Rows.Count > 0 && _dtinvoicedetails != null && _dtinvoicedetails.Rows.Count > 0)
+            {
+
+            }
+            else
+            {
+                invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                invoicenotxtbox.Text = GenerateNextInvoiceNumber();
+            }
         }
         private string GenerateNextInvoiceNumber()
         {
@@ -475,8 +489,8 @@ namespace SmartFlow
                 decimal currencyconversionrate = decimal.Parse(currencyconversionratelbl.Text);
                 string currencyname = currencynamelbl.Text;
                 string currencysymbol = currencysymbollbl.Text;
-                string naration = narationtxtbox.Text;
-                string invoicespecialnotes = invoicespecialnotelbl.Text;
+                string naration = CommonFunction.CleanText(narationtxtbox.Text);
+                string invoicespecialnotes = CommonFunction.CleanText(invoicespecialnotelbl.Text);
                 float nettotal = float.Parse(nettotaltxtbox.Text);
                 float totalvat = float.Parse(totalvattxtbox.Text);
                 float totaldiscount = 0;
@@ -529,8 +543,6 @@ namespace SmartFlow
                 if (detailadded)
                 {
                     this.Close();
-                    SaleReturnReportViewer saleReturnReportViewer = new SaleReturnReportViewer();
-                    saleReturnReportViewer.Show();
                 }
             }
             catch (Exception ex) { throw ex; }

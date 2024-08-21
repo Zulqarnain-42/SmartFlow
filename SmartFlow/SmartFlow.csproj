@@ -175,6 +175,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CommonForms\AccountGroupSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\CommonForms\AccountGroupSelectionForm.Designer.cs">
+      <DependentUpon>AccountGroupSelectionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\CommonForms\AccountSelectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -261,23 +267,11 @@
     <Compile Include="Masters\AccountGroupHistory.Designer.cs">
       <DependentUpon>AccountGroupHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Masters\AccountHead.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\AccountHead.Designer.cs">
-      <DependentUpon>AccountHead.cs</DependentUpon>
-    </Compile>
     <Compile Include="Masters\AccountHistory.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Masters\AccountHistory.Designer.cs">
       <DependentUpon>AccountHistory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Masters\CreateCustomer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\CreateCustomer.Designer.cs">
-      <DependentUpon>CreateCustomer.cs</DependentUpon>
     </Compile>
     <Compile Include="Masters\CreateProduct.cs">
       <SubType>Form</SubType>
@@ -285,29 +279,23 @@
     <Compile Include="Masters\CreateProduct.Designer.cs">
       <DependentUpon>CreateProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="Masters\CreateSupplier.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\CreateSupplier.Designer.cs">
-      <DependentUpon>CreateSupplier.cs</DependentUpon>
-    </Compile>
     <Compile Include="Masters\Currency.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Masters\Currency.Designer.cs">
       <DependentUpon>Currency.cs</DependentUpon>
     </Compile>
-    <Compile Include="Masters\CustomerGrouping.cs">
+    <Compile Include="Masters\Employee.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Masters\CustomerGrouping.Designer.cs">
-      <DependentUpon>CustomerGrouping.cs</DependentUpon>
+    <Compile Include="Masters\Employee.Designer.cs">
+      <DependentUpon>Employee.cs</DependentUpon>
     </Compile>
-    <Compile Include="Masters\Customers.cs">
+    <Compile Include="Masters\ExcelAccounts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Masters\Customers.Designer.cs">
-      <DependentUpon>Customers.cs</DependentUpon>
+    <Compile Include="Masters\ExcelAccounts.Designer.cs">
+      <DependentUpon>ExcelAccounts.cs</DependentUpon>
     </Compile>
     <Compile Include="Masters\GroupingAccount.cs">
       <SubType>Form</SubType>
@@ -333,23 +321,77 @@
     <Compile Include="Masters\PurchaseType.Designer.cs">
       <DependentUpon>PurchaseType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Masters\ReportViewer\AccountGroupListReportViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\ReportViewer\AccountGroupListReportViewer.Designer.cs">
+      <DependentUpon>AccountGroupListReportViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\ReportViewer\AccountListReportViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\ReportViewer\AccountListReportViewer.Designer.cs">
+      <DependentUpon>AccountListReportViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\ReportViewer\CustomerListReportViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\ReportViewer\CustomerListReportViewer.Designer.cs">
+      <DependentUpon>CustomerListReportViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\ReportViewer\ProductListReportViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\ReportViewer\ProductListReportViewer.Designer.cs">
+      <DependentUpon>ProductListReportViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\ReportViewer\Reports\AccountGroupListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountGroupListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Masters\ReportViewer\Reports\AccountListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Masters\ReportViewer\Reports\CustomerListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Masters\ReportViewer\Reports\ProductListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Masters\ReportViewer\Reports\SupplierListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupplierListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Masters\ReportViewer\SupplierListReportViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\ReportViewer\SupplierListReportViewer.Designer.cs">
+      <DependentUpon>SupplierListReportViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Masters\SaleType.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Masters\SaleType.Designer.cs">
       <DependentUpon>SaleType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Masters\Supplier.cs">
+    <Compile Include="Masters\UpdateOpeningBalance.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Masters\Supplier.Designer.cs">
-      <DependentUpon>Supplier.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Masters\SupplierGrouping.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\SupplierGrouping.Designer.cs">
-      <DependentUpon>SupplierGrouping.cs</DependentUpon>
+    <Compile Include="Masters\UpdateOpeningBalance.Designer.cs">
+      <DependentUpon>UpdateOpeningBalance.cs</DependentUpon>
     </Compile>
     <Compile Include="Masters\UploadExcel.cs">
       <SubType>Form</SubType>
@@ -363,17 +405,17 @@
     <Compile Include="Payroll\ChangePassword.Designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Payroll\Employee.cs">
+    <Compile Include="Payroll\ReportViewer\EmployeListReportViewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Payroll\Employee.Designer.cs">
-      <DependentUpon>Employee.cs</DependentUpon>
+    <Compile Include="Payroll\ReportViewer\EmployeListReportViewer.Designer.cs">
+      <DependentUpon>EmployeListReportViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Payroll\EmployeeTable.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Payroll\EmployeeTable.Designer.cs">
-      <DependentUpon>EmployeeTable.cs</DependentUpon>
+    <Compile Include="Payroll\ReportViewer\Reports\EmployeeListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Purchase\FindPurchaseInvoiceForm.cs">
       <SubType>Form</SubType>
@@ -399,30 +441,6 @@
     <Compile Include="Purchase\PurchaseQuotationInvoice.Designer.cs">
       <DependentUpon>PurchaseQuotationInvoice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchase\ReportViewer\QuotationReportView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Purchase\ReportViewer\QuotationReportView.Designer.cs">
-      <DependentUpon>QuotationReportView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Purchase\ReportViewer\Reports\PurchaseInvoiceRepo.cs">
-      <DependentUpon>PurchaseInvoiceRepo.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Purchase\ReportViewer\Reports\PurchaseReturnRepo.cs">
-      <DependentUpon>PurchaseReturnRepo.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Purchase\ReportViewer\Reports\PurchaseOrderRepo.cs">
-      <DependentUpon>PurchaseOrderRepo.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Purchase\ReportViewer\InvoiceReportView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -435,11 +453,41 @@
     <Compile Include="Purchase\ReportViewer\OrderReportView.Designer.cs">
       <DependentUpon>OrderReportView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchase\ReportViewer\ReturnReportViewer.cs">
+    <Compile Include="Purchase\ReportViewer\QuotationReportView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Purchase\ReportViewer\ReturnReportViewer.Designer.cs">
-      <DependentUpon>ReturnReportViewer.cs</DependentUpon>
+    <Compile Include="Purchase\ReportViewer\QuotationReportView.Designer.cs">
+      <DependentUpon>QuotationReportView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ReportViewer\Reports\PurchaseReturnReport.cs">
+      <DependentUpon>PurchaseReturnReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Purchase\ReportViewer\Reports\PurchaseOrderReport.cs">
+      <DependentUpon>PurchaseOrderReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Purchase\ReportViewer\Reports\PurchaseQuotationReport.cs">
+      <DependentUpon>PurchaseQuotationReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Purchase\ReportViewer\Reports\PurchaseInvoiceReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PurchaseInvoiceReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Purchase\ReportViewer\ReturnReportView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ReportViewer\ReturnReportView.Designer.cs">
+      <DependentUpon>ReturnReportView.cs</DependentUpon>
     </Compile>
     <Compile Include="Purchase\WarehouseSelection.cs">
       <SubType>Form</SubType>
@@ -537,71 +585,59 @@
     <Compile Include="Sales\PackingList.Designer.cs">
       <DependentUpon>PackingList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\ReportViewer\Reports\SaleInvoicePlanetRepo.cs">
-      <DependentUpon>SaleInvoicePlanetRepo.rpt</DependentUpon>
+    <Compile Include="Sales\ReportViewer\DeliveryNoteView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ReportViewer\DeliveryNoteView.Designer.cs">
+      <DependentUpon>DeliveryNoteView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ReportViewer\PackingListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ReportViewer\PackingListView.Designer.cs">
+      <DependentUpon>PackingListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ReportViewer\Reports\SaleInvoiceReport.cs">
+      <DependentUpon>SaleInvoiceReport.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Sales\ReportViewer\Reports\SalerReturnRepo.cs">
-      <DependentUpon>SalerReturnRepo.rpt</DependentUpon>
+    <Compile Include="Sales\ReportViewer\Reports\SaleReturnReport.cs">
+      <DependentUpon>SaleReturnReport.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Sales\ReportViewer\Reports\SaleOrderRepo.cs">
-      <DependentUpon>SaleOrderRepo.rpt</DependentUpon>
+    <Compile Include="Sales\ReportViewer\Reports\SaleQuotationReport.cs">
+      <DependentUpon>SaleQuotationReport.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Sales\ReportViewer\Reports\SalesQuotationRepo.cs">
-      <DependentUpon>SalesQuotationRepo.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Sales\ReportViewer\Reports\SaleInvoiceRepo.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SaleInvoiceRepo.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Sales\ReportViewer\DeliveryReportViewer.cs">
+    <Compile Include="Sales\ReportViewer\SaleInvoiceView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sales\ReportViewer\DeliveryReportViewer.Designer.cs">
-      <DependentUpon>DeliveryReportViewer.cs</DependentUpon>
+    <Compile Include="Sales\ReportViewer\SaleInvoiceView.Designer.cs">
+      <DependentUpon>SaleInvoiceView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\ReportViewer\PackingListReportViewer.cs">
+    <Compile Include="Sales\ReportViewer\SaleQuotationView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sales\ReportViewer\PackingListReportViewer.Designer.cs">
-      <DependentUpon>PackingListReportViewer.cs</DependentUpon>
+    <Compile Include="Sales\ReportViewer\SaleQuotationView.Designer.cs">
+      <DependentUpon>SaleQuotationView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\ReportViewer\PlanetReportViewer.cs">
+    <Compile Include="Sales\ReportViewer\SaleReturnView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sales\ReportViewer\PlanetReportViewer.Designer.cs">
-      <DependentUpon>PlanetReportViewer.cs</DependentUpon>
+    <Compile Include="Sales\ReportViewer\SaleReturnView.Designer.cs">
+      <DependentUpon>SaleReturnView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\ReportViewer\SaleInvoiceReportViewer.cs">
+    <Compile Include="Sales\ReportViewer\TaxPlanetView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sales\ReportViewer\SaleInvoiceReportViewer.Designer.cs">
-      <DependentUpon>SaleInvoiceReportViewer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sales\ReportViewer\SaleQuotationReportViewer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sales\ReportViewer\SaleQuotationReportViewer.Designer.cs">
-      <DependentUpon>SaleQuotationReportViewer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sales\ReportViewer\SaleReturnReportViewer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sales\ReportViewer\SaleReturnReportViewer.Designer.cs">
-      <DependentUpon>SaleReturnReportViewer.cs</DependentUpon>
+    <Compile Include="Sales\ReportViewer\TaxPlanetView.Designer.cs">
+      <DependentUpon>TaxPlanetView.cs</DependentUpon>
     </Compile>
     <Compile Include="Sales\TaxPlanet.cs">
       <SubType>Form</SubType>
@@ -609,13 +645,24 @@
     <Compile Include="Sales\TaxPlanet.Designer.cs">
       <DependentUpon>TaxPlanet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Setting\DatabaseConnection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\DatabaseConnection.Designer.cs">
+      <DependentUpon>DatabaseConnection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\FileManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\FileManager.Designer.cs">
+      <DependentUpon>FileManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Setting\Terms.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Setting\Terms.Designer.cs">
       <DependentUpon>Terms.cs</DependentUpon>
     </Compile>
-    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Stock\BarcodeDesign.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -667,47 +714,119 @@
     <Compile Include="Stock\OpeningStock.Designer.cs">
       <DependentUpon>OpeningStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="Stock\CommonForm\PrintedBarcode.cs">
+    <Compile Include="Stock\ReportViewer\BookItemViewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Stock\CommonForm\PrintedBarcode.Designer.cs">
-      <DependentUpon>PrintedBarcode.cs</DependentUpon>
+    <Compile Include="Stock\ReportViewer\BookItemViewer.Designer.cs">
+      <DependentUpon>BookItemViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Stock\Reports\BookedItemRepo.cs">
-      <DependentUpon>BookedItemRepo.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Stock\ReportViewer\DamageEntryViewer.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Stock\Reports\DamageItemRepo.cs">
-      <DependentUpon>DamageItemRepo.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Stock\ReportViewer\DamageEntryViewer.Designer.cs">
+      <DependentUpon>DamageEntryViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Stock\Reports\OpenBoxProductRepo.cs">
-      <DependentUpon>OpenBoxProductRepo.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Stock\ReportViewer\OpenBoxProductViewer.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Stock\Reports\StockTransferRepo.cs">
-      <DependentUpon>StockTransferRepo.rpt</DependentUpon>
+    <Compile Include="Stock\ReportViewer\OpenBoxProductViewer.Designer.cs">
+      <DependentUpon>OpenBoxProductViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\PrintedBarcodeViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\PrintedBarcodeViewer.Designer.cs">
+      <DependentUpon>PrintedBarcodeViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\ProductOpeningStockViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\ProductOpeningStockViewer.Designer.cs">
+      <DependentUpon>ProductOpeningStockViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\QtyUsingMFRViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\QtyUsingMFRViewer.Designer.cs">
+      <DependentUpon>QtyUsingMFRViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\QtyUsingScannerViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\QtyUsingScannerViewer.Designer.cs">
+      <DependentUpon>QtyUsingScannerViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\Reports\BookItemReport.cs">
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <DependentUpon>BookItemReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\Reports\DamageEntryReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DamageEntryReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\Reports\OpenBoxProductReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OpenBoxProductReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\Reports\PrintedBarcodeReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintedBarcodeReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\Reports\ProductOpeningStockReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductOpeningStockReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\Reports\QuantityUsingMfrReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuantityUsingMfrReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\Reports\QuantityUsingScannerReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuantityUsingScannerReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\Reports\StockLocationReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StockLocationReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\Reports\StockTransferReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StockTransferReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\StockLocationViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\StockLocationViewer.Designer.cs">
+      <DependentUpon>StockLocationViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\StockTransferViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\ReportViewer\StockTransferViewer.Designer.cs">
+      <DependentUpon>StockTransferViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Stock\StockLocation.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Stock\StockLocation.Designer.cs">
       <DependentUpon>StockLocation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Masters\Unit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\Unit.Designer.cs">
-      <DependentUpon>Unit.cs</DependentUpon>
     </Compile>
     <Compile Include="Stock\DamageEntry.cs">
       <SubType>Form</SubType>
@@ -751,6 +870,12 @@
     <Compile Include="Stock\Warehouse.Designer.cs">
       <DependentUpon>Warehouse.cs</DependentUpon>
     </Compile>
+    <Compile Include="Transactions\CommonForm\DebitAndCreditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\CommonForm\DebitAndCreditForm.Designer.cs">
+      <DependentUpon>DebitAndCreditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Transactions\CreditNote.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -793,48 +918,93 @@
     <Compile Include="Transactions\Receipts.Designer.cs">
       <DependentUpon>Receipts.cs</DependentUpon>
     </Compile>
-    <Compile Include="Transactions\Reports\CreditNoteRepo.cs">
-      <DependentUpon>CreditNoteRepo.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Transactions\ReportViewer\CreditNoteReportView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Transactions\Reports\DebitNoteRepo.cs">
-      <DependentUpon>DebitNoteRepo.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Transactions\ReportViewer\CreditNoteReportView.Designer.cs">
+      <DependentUpon>CreditNoteReportView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Transactions\Reports\JournalRepo.cs">
-      <DependentUpon>JournalRepo.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Transactions\ReportViewer\DebitNoteReportView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Transactions\Reports\MaterialIssuedRepo.cs">
-      <DependentUpon>MaterialIssuedRepo.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Transactions\ReportViewer\DebitNoteReportView.Designer.cs">
+      <DependentUpon>DebitNoteReportView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Transactions\Reports\MaterialReceiveRepo.cs">
-      <DependentUpon>MaterialReceiveRepo.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Transactions\ReportViewer\JournalReportView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Transactions\Reports\PaymentVoucher.cs">
-      <DependentUpon>PaymentVoucher.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Transactions\ReportViewer\JournalReportView.Designer.cs">
+      <DependentUpon>JournalReportView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Transactions\Reports\ReceiptsVoucher.cs">
-      <DependentUpon>ReceiptsVoucher.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Transactions\ReportViewer\MaterialIssueReportView.cs">
+      <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Transactions\ReportViewer\MaterialIssueReportView.Designer.cs">
+      <DependentUpon>MaterialIssueReportView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ReportViewer\MaterialReceivedReportView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ReportViewer\MaterialReceivedReportView.Designer.cs">
+      <DependentUpon>MaterialReceivedReportView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ReportViewer\PaymentReportView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ReportViewer\PaymentReportView.Designer.cs">
+      <DependentUpon>PaymentReportView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ReportViewer\ReceiptReportView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ReportViewer\ReceiptReportView.Designer.cs">
+      <DependentUpon>ReceiptReportView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ReportViewer\Reports\CreditNoteReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreditNoteReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Transactions\ReportViewer\Reports\DebitNoteReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DebitNoteReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Transactions\ReportViewer\Reports\JournalReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JournalReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Transactions\ReportViewer\Reports\MaterialIssueReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaterialIssueReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Transactions\ReportViewer\Reports\MaterialReceivedReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaterialReceivedReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Transactions\ReportViewer\Reports\PaymentReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PaymentReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Transactions\ReportViewer\Reports\ReceiptReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReceiptReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="Common\CommonForms\AccountGroupSelectionForm.resx">
+      <DependentUpon>AccountGroupSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Common\CommonForms\AccountSelectionForm.resx">
       <DependentUpon>AccountSelectionForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -877,29 +1047,20 @@
     <EmbeddedResource Include="Masters\AccountGroupHistory.resx">
       <DependentUpon>AccountGroupHistory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Masters\AccountHead.resx">
-      <DependentUpon>AccountHead.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Masters\AccountHistory.resx">
       <DependentUpon>AccountHistory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Masters\CreateCustomer.resx">
-      <DependentUpon>CreateCustomer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\CreateProduct.resx">
       <DependentUpon>CreateProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Masters\CreateSupplier.resx">
-      <DependentUpon>CreateSupplier.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Masters\Currency.resx">
       <DependentUpon>Currency.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Masters\CustomerGrouping.resx">
-      <DependentUpon>CustomerGrouping.cs</DependentUpon>
+    <EmbeddedResource Include="Masters\Employee.resx">
+      <DependentUpon>Employee.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Masters\Customers.resx">
-      <DependentUpon>Customers.cs</DependentUpon>
+    <EmbeddedResource Include="Masters\ExcelAccounts.resx">
+      <DependentUpon>ExcelAccounts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\GroupingAccount.resx">
       <DependentUpon>GroupingAccount.cs</DependentUpon>
@@ -916,14 +1077,46 @@
     <EmbeddedResource Include="Masters\PurchaseType.resx">
       <DependentUpon>PurchaseType.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Masters\ReportViewer\AccountGroupListReportViewer.resx">
+      <DependentUpon>AccountGroupListReportViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\ReportViewer\AccountListReportViewer.resx">
+      <DependentUpon>AccountListReportViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\ReportViewer\CustomerListReportViewer.resx">
+      <DependentUpon>CustomerListReportViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\ReportViewer\ProductListReportViewer.resx">
+      <DependentUpon>ProductListReportViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\ReportViewer\Reports\AccountGroupListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AccountGroupListReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\ReportViewer\Reports\AccountListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AccountListReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\ReportViewer\Reports\CustomerListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CustomerListReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\ReportViewer\Reports\ProductListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ProductListReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\ReportViewer\Reports\SupplierListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SupplierListReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\ReportViewer\SupplierListReportViewer.resx">
+      <DependentUpon>SupplierListReportViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Masters\SaleType.resx">
       <DependentUpon>SaleType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Masters\Supplier.resx">
-      <DependentUpon>Supplier.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Masters\SupplierGrouping.resx">
-      <DependentUpon>SupplierGrouping.cs</DependentUpon>
+    <EmbeddedResource Include="Masters\UpdateOpeningBalance.resx">
+      <DependentUpon>UpdateOpeningBalance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\UploadExcel.resx">
       <DependentUpon>UploadExcel.cs</DependentUpon>
@@ -931,11 +1124,12 @@
     <EmbeddedResource Include="Payroll\ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Payroll\Employee.resx">
-      <DependentUpon>Employee.cs</DependentUpon>
+    <EmbeddedResource Include="Payroll\ReportViewer\EmployeListReportViewer.resx">
+      <DependentUpon>EmployeListReportViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Payroll\EmployeeTable.resx">
-      <DependentUpon>EmployeeTable.cs</DependentUpon>
+    <EmbeddedResource Include="Payroll\ReportViewer\Reports\EmployeeListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EmployeeListReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\FindPurchaseInvoiceForm.resx">
       <DependentUpon>FindPurchaseInvoiceForm.cs</DependentUpon>
@@ -952,30 +1146,33 @@
     <EmbeddedResource Include="Purchase\PurchaseReturnInvoice.resx">
       <DependentUpon>PurchaseReturnInvoice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Purchase\ReportViewer\QuotationReportView.resx">
-      <DependentUpon>QuotationReportView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Purchase\ReportViewer\Reports\PurchaseInvoiceRepo.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>PurchaseInvoiceRepo.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Purchase\ReportViewer\Reports\PurchaseQuotationRepo.rpt" />
-    <EmbeddedResource Include="Purchase\ReportViewer\Reports\PurchaseReturnRepo.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>PurchaseReturnRepo.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Purchase\ReportViewer\Reports\PurchaseOrderRepo.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>PurchaseOrderRepo.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Purchase\ReportViewer\InvoiceReportView.resx">
       <DependentUpon>InvoiceReportView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\ReportViewer\OrderReportView.resx">
       <DependentUpon>OrderReportView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Purchase\ReportViewer\ReturnReportViewer.resx">
-      <DependentUpon>ReturnReportViewer.cs</DependentUpon>
+    <EmbeddedResource Include="Purchase\ReportViewer\QuotationReportView.resx">
+      <DependentUpon>QuotationReportView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ReportViewer\Reports\PurchaseReturnReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PurchaseReturnReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ReportViewer\Reports\PurchaseOrderReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PurchaseOrderReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ReportViewer\Reports\PurchaseQuotationReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PurchaseQuotationReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ReportViewer\Reports\PurchaseInvoiceReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PurchaseInvoiceReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ReportViewer\ReturnReportView.resx">
+      <DependentUpon>ReturnReportView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\WarehouseSelection.resx">
       <DependentUpon>WarehouseSelection.cs</DependentUpon>
@@ -1025,43 +1222,35 @@
     <EmbeddedResource Include="Sales\PackingList.resx">
       <DependentUpon>PackingList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ReportViewer\Reports\SaleInvoicePlanetRepo.rpt">
+    <EmbeddedResource Include="Sales\ReportViewer\DeliveryNoteView.resx">
+      <DependentUpon>DeliveryNoteView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ReportViewer\PackingListView.resx">
+      <DependentUpon>PackingListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ReportViewer\Reports\SaleInvoiceReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SaleInvoicePlanetRepo.cs</LastGenOutput>
+      <LastGenOutput>SaleInvoiceReport.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ReportViewer\Reports\SalerReturnRepo.rpt">
+    <EmbeddedResource Include="Sales\ReportViewer\Reports\SaleReturnReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SalerReturnRepo.cs</LastGenOutput>
+      <LastGenOutput>SaleReturnReport.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ReportViewer\Reports\SaleOrderRepo.rpt">
+    <EmbeddedResource Include="Sales\ReportViewer\Reports\SaleQuotationReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SaleOrderRepo.cs</LastGenOutput>
+      <LastGenOutput>SaleQuotationReport.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ReportViewer\Reports\SalesQuotationRepo.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SalesQuotationRepo.cs</LastGenOutput>
+    <EmbeddedResource Include="Sales\ReportViewer\SaleInvoiceView.resx">
+      <DependentUpon>SaleInvoiceView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ReportViewer\Reports\SaleInvoiceRepo.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SaleInvoiceRepo.cs</LastGenOutput>
+    <EmbeddedResource Include="Sales\ReportViewer\SaleQuotationView.resx">
+      <DependentUpon>SaleQuotationView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ReportViewer\DeliveryReportViewer.resx">
-      <DependentUpon>DeliveryReportViewer.cs</DependentUpon>
+    <EmbeddedResource Include="Sales\ReportViewer\SaleReturnView.resx">
+      <DependentUpon>SaleReturnView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ReportViewer\PackingListReportViewer.resx">
-      <DependentUpon>PackingListReportViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ReportViewer\PlanetReportViewer.resx">
-      <DependentUpon>PlanetReportViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ReportViewer\SaleInvoiceReportViewer.resx">
-      <DependentUpon>SaleInvoiceReportViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ReportViewer\SaleQuotationReportViewer.resx">
-      <DependentUpon>SaleQuotationReportViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ReportViewer\SaleReturnReportViewer.resx">
-      <DependentUpon>SaleReturnReportViewer.cs</DependentUpon>
+    <EmbeddedResource Include="Sales\ReportViewer\TaxPlanetView.resx">
+      <DependentUpon>TaxPlanetView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\SaleInvoice.resx">
       <DependentUpon>SaleInvoice.cs</DependentUpon>
@@ -1074,6 +1263,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\TaxPlanet.resx">
       <DependentUpon>TaxPlanet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\DatabaseConnection.resx">
+      <DependentUpon>DatabaseConnection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\FileManager.resx">
+      <DependentUpon>FileManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Setting\Terms.resx">
       <DependentUpon>Terms.cs</DependentUpon>
@@ -1099,30 +1294,71 @@
     <EmbeddedResource Include="Stock\OpeningStock.resx">
       <DependentUpon>OpeningStock.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Stock\CommonForm\PrintedBarcode.resx">
-      <DependentUpon>PrintedBarcode.cs</DependentUpon>
+    <EmbeddedResource Include="Stock\ReportViewer\BookItemViewer.resx">
+      <DependentUpon>BookItemViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Stock\Reports\BookedItemRepo.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>BookedItemRepo.cs</LastGenOutput>
+    <EmbeddedResource Include="Stock\ReportViewer\DamageEntryViewer.resx">
+      <DependentUpon>DamageEntryViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Stock\Reports\DamageItemRepo.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>DamageItemRepo.cs</LastGenOutput>
+    <EmbeddedResource Include="Stock\ReportViewer\OpenBoxProductViewer.resx">
+      <DependentUpon>OpenBoxProductViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Stock\Reports\OpenBoxProductRepo.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>OpenBoxProductRepo.cs</LastGenOutput>
+    <EmbeddedResource Include="Stock\ReportViewer\PrintedBarcodeViewer.resx">
+      <DependentUpon>PrintedBarcodeViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Stock\Reports\StockTransferRepo.rpt">
+    <EmbeddedResource Include="Stock\ReportViewer\ProductOpeningStockViewer.resx">
+      <DependentUpon>ProductOpeningStockViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\ReportViewer\QtyUsingMFRViewer.resx">
+      <DependentUpon>QtyUsingMFRViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\ReportViewer\QtyUsingScannerViewer.resx">
+      <DependentUpon>QtyUsingScannerViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\ReportViewer\Reports\BookItemReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>StockTransferRepo.cs</LastGenOutput>
+      <LastGenOutput>BookItemReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\ReportViewer\Reports\DamageEntryReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DamageEntryReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\ReportViewer\Reports\OpenBoxProductReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OpenBoxProductReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\ReportViewer\Reports\PrintedBarcodeReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintedBarcodeReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\ReportViewer\Reports\ProductOpeningStockReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ProductOpeningStockReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\ReportViewer\Reports\QuantityUsingMfrReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>QuantityUsingMfrReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\ReportViewer\Reports\QuantityUsingScannerReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>QuantityUsingScannerReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\ReportViewer\Reports\StockLocationReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StockLocationReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\ReportViewer\Reports\StockTransferReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StockTransferReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\ReportViewer\StockLocationViewer.resx">
+      <DependentUpon>StockLocationViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\ReportViewer\StockTransferViewer.resx">
+      <DependentUpon>StockTransferViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Stock\StockLocation.resx">
       <DependentUpon>StockLocation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Masters\Unit.resx">
-      <DependentUpon>Unit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Stock\DamageEntry.resx">
       <DependentUpon>DamageEntry.cs</DependentUpon>
@@ -1145,6 +1381,9 @@
     <EmbeddedResource Include="Stock\Warehouse.resx">
       <DependentUpon>Warehouse.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\CommonForm\DebitAndCreditForm.resx">
+      <DependentUpon>DebitAndCreditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Transactions\CreditNote.resx">
       <DependentUpon>CreditNote.cs</DependentUpon>
     </EmbeddedResource>
@@ -1166,33 +1405,54 @@
     <EmbeddedResource Include="Transactions\Receipts.resx">
       <DependentUpon>Receipts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Transactions\Reports\CreditNoteRepo.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CreditNoteRepo.cs</LastGenOutput>
+    <EmbeddedResource Include="Transactions\ReportViewer\CreditNoteReportView.resx">
+      <DependentUpon>CreditNoteReportView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Transactions\Reports\DebitNoteRepo.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>DebitNoteRepo.cs</LastGenOutput>
+    <EmbeddedResource Include="Transactions\ReportViewer\DebitNoteReportView.resx">
+      <DependentUpon>DebitNoteReportView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Transactions\Reports\JournalRepo.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>JournalRepo.cs</LastGenOutput>
+    <EmbeddedResource Include="Transactions\ReportViewer\JournalReportView.resx">
+      <DependentUpon>JournalReportView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Transactions\Reports\MaterialIssuedRepo.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MaterialIssuedRepo.cs</LastGenOutput>
+    <EmbeddedResource Include="Transactions\ReportViewer\MaterialIssueReportView.resx">
+      <DependentUpon>MaterialIssueReportView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Transactions\Reports\MaterialReceiveRepo.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MaterialReceiveRepo.cs</LastGenOutput>
+    <EmbeddedResource Include="Transactions\ReportViewer\MaterialReceivedReportView.resx">
+      <DependentUpon>MaterialReceivedReportView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Transactions\Reports\PaymentVoucher.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>PaymentVoucher.cs</LastGenOutput>
+    <EmbeddedResource Include="Transactions\ReportViewer\PaymentReportView.resx">
+      <DependentUpon>PaymentReportView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Transactions\Reports\ReceiptsVoucher.rpt">
+    <EmbeddedResource Include="Transactions\ReportViewer\ReceiptReportView.resx">
+      <DependentUpon>ReceiptReportView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ReportViewer\Reports\CreditNoteReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ReceiptsVoucher.cs</LastGenOutput>
+      <LastGenOutput>CreditNoteReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ReportViewer\Reports\DebitNoteReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DebitNoteReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ReportViewer\Reports\JournalReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>JournalReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ReportViewer\Reports\MaterialIssueReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaterialIssueReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ReportViewer\Reports\MaterialReceivedReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaterialReceivedReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ReportViewer\Reports\PaymentReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PaymentReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ReportViewer\Reports\ReceiptReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReceiptReport.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -1208,29 +1468,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="General\Reports\" />
-    <Folder Include="Masters\Reports\" />
-    <Folder Include="Payroll\Reports\" />
-    <Folder Include="Setting\Reports\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="SqlServerTypes\x64\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

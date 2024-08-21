@@ -114,6 +114,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "PurchaseType";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PurchaseType_KeyDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

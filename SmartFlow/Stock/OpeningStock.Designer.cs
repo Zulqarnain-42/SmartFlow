@@ -145,7 +145,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stock";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OpeningStock_FormClosing);
             this.Load += new System.EventHandler(this.OpeningStock_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OpeningStock_KeyDown);
             this.panel1.ResumeLayout(false);

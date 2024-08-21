@@ -320,7 +320,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UPDATE INVENTORY USING SCANNER";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.QtyUsingScanner_FormClosing);
             this.Load += new System.EventHandler(this.QtyUsingScanner_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.QtyUsingScanner_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvinventory)).EndInit();

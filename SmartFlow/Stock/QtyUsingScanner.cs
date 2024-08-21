@@ -39,9 +39,10 @@ namespace SmartFlow.Stock
 
                 string query = string.Empty;
                 string invoiceno = qtyusingscanneridlbl.Text;
+                string importantNotes = CommonFunction.CleanText(importantnotestxtbox.Text);
 
                 query = string.Format("INSERT INTO StockCustomizedTable (Code,CreatedAt,CreatedDay,InvoiceNo,Description) VALUES ('" + Guid.NewGuid() + "'," +
-                    "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + invoiceno + "','" + importantnotestxtbox.Text + "'); " +
+                    "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + invoiceno + "','" + importantNotes + "'); " +
                     "SELECT SCOPE_IDENTITY();");
                 int stockcustomid = DatabaseAccess.InsertId(query);
                 int warehouseid = Convert.ToInt32(warehouseidlbl.Text);
@@ -99,8 +100,21 @@ namespace SmartFlow.Stock
         {
             if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
-                e.Handled = true; // Prevent further processing of the key event
+                if (AreAnyTextBoxesFilled())
+                {
+                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Close();
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    this.Close();
+                    e.Handled = true;
+                }
             }
         }
         private void searchDatabase(string barcode)
@@ -269,19 +283,6 @@ namespace SmartFlow.Stock
             }
 
             return lastInvoiceNumber;
-        }
-        private void QtyUsingScanner_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (AreAnyTextBoxesFilled())
-            {
-                DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
-                                                      "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.No)
-                {
-                    e.Cancel = true; // Cancel the closing event
-                }
-            }
-
         }
         private bool AreAnyTextBoxesFilled()
         {

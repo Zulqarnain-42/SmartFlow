@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace SmartFlow.Payroll
 {
@@ -12,32 +14,81 @@ namespace SmartFlow.Payroll
         {
             if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
-                e.Handled = true; // Prevent further processing of the key event
-            }
-        }
-        private void ChangePassword_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (AreAnyTextBoxesFilled())
-            {
-                DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
-                                                      "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.No)
+                if (AreAnyTextBoxesFilled())
                 {
-                    e.Cancel = true; // Cancel the closing event
+                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Close();
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    this.Close();
+                    e.Handled = true;
                 }
             }
         }
         private bool AreAnyTextBoxesFilled()
         {
-            foreach (Control control in this.Controls)
-            {
-                if (control is TextBox textBox && !string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    return true; // At least one TextBox is filled
-                }
-            }
+            if (oldpasswordtxtbox.Text.Trim().Length > 0) { return true; }
+            if (newpasswordtxtbox.Text.Trim().Length > 0) { return true; }
+            if (confirmpasswordtxtbox.Text.Trim().Length > 0) { return true; }
             return false; // No TextBox is filled
+        }
+        private void savebtn_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                errorProvider.Clear();
+                if(oldpasswordtxtbox.Text.Trim().Length == 0)
+                {
+                    errorProvider.SetError(oldpasswordtxtbox,"Please Enter Old Password.");
+                    oldpasswordtxtbox.Focus();
+                    return;
+                }
+
+                if(newpasswordtxtbox.Text.Trim().Length == 0)
+                {
+                    errorProvider.SetError(newpasswordtxtbox,"Please Enter New Password.");
+                    newpasswordtxtbox.Focus();
+                    return;
+                }
+
+                if(confirmpasswordtxtbox.Text.Trim().Length == 0)
+                {
+                    errorProvider.SetError(confirmpasswordtxtbox,"Please Enter Confirm Password.");
+                    confirmpasswordtxtbox.Focus();
+                    return;
+                }
+
+                if(newpasswordtxtbox.Text != confirmpasswordtxtbox.Text)
+                {
+                    errorProvider.SetError(confirmpasswordtxtbox,"Password Does Not Matched.");
+                    confirmpasswordtxtbox.Focus();
+                    return;
+                }
+
+
+            }catch(Exception ex) { throw ex; }
+        }
+        private void oldpasswordtxtbox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                errorProvider.Clear();
+                if (oldpasswordtxtbox.Text.Trim().Length == 0)
+                {
+                    string query = string.Format("");
+                    DataTable oldpassworddata = DatabaseAccess.Retrive(query);
+                    if (oldpassworddata != null && oldpassworddata.Rows.Count > 0)
+                    {
+
+                    }
+                }
+            }catch(Exception ex) { throw ex; }
         }
     }
 }

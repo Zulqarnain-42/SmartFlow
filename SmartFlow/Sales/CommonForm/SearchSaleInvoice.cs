@@ -49,5 +49,32 @@ namespace SmartFlow.Sales.CommonForm
             }
             catch (Exception ex) { throw ex; }
         }
+
+        private void SearchSaleInvoice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (AreAnyTextBoxesFilled())
+                {
+                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.Close();
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    this.Close();
+                    e.Handled = true;
+                }
+            }
+        }
+        private bool AreAnyTextBoxesFilled()
+        {
+            if (saleinvoicenotxtbox.Text.Trim().Length > 0) { return true; }
+            return false; // No TextBox is filled
+        }
     }
 }

@@ -223,7 +223,6 @@
             this.Name = "Warehouse";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Warehouse - Future Art Broadcast Trading LLC";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Warehouse_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Warehouse_KeyDown);
             this.gridViewMenuStrip.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
