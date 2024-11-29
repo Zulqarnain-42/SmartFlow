@@ -45,7 +45,7 @@ namespace SmartFlow.Common.CommonForms
                         }
                     }
                 }
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void dgvsalesperson_KeyDown(object sender, KeyEventArgs e)
         {
@@ -61,7 +61,7 @@ namespace SmartFlow.Common.CommonForms
                         this.Close();
                     }
                 }
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void searchtxtbox_KeyDown(object sender, KeyEventArgs e)
         {
@@ -84,7 +84,7 @@ namespace SmartFlow.Common.CommonForms
                     e.Handled = true;
                     e.SuppressKeyPress = true;
                 }
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
     }
 }

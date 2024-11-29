@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.selectwarehousefromtxtbox = new System.Windows.Forms.TextBox();
             this.addbtn = new System.Windows.Forms.Button();
@@ -53,6 +53,7 @@
             this.descriptionlbl = new System.Windows.Forms.Label();
             this.dgvproducts = new System.Windows.Forms.DataGridView();
             this.productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productmfr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productupc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,25 +69,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1445, 45);
             this.panel1.TabIndex = 0;
             // 
-            // label1
+            // headinglbl
             // 
-            this.label1.BackColor = System.Drawing.Color.Black;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1445, 45);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "DAMAGE ENTRY";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1445, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "DAMAGE ENTRY";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel2
             // 
@@ -341,6 +342,7 @@
             this.dgvproducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvproducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.productid,
+            this.productmfr,
             this.productname,
             this.productupc,
             this.productprice,
@@ -364,6 +366,14 @@
             this.productid.MinimumWidth = 6;
             this.productid.Name = "productid";
             this.productid.Width = 125;
+            // 
+            // productmfr
+            // 
+            this.productmfr.HeaderText = "MFR";
+            this.productmfr.MinimumWidth = 6;
+            this.productmfr.Name = "productmfr";
+            this.productmfr.Visible = false;
+            this.productmfr.Width = 125;
             // 
             // productname
             // 
@@ -418,7 +428,7 @@
             this.MinimizeBox = false;
             this.Name = "DamageEntry";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Damage Entry";
+            this.Text = "DAMAGE ENTRY";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.DamageEntry_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DamageEntry_KeyDown);
@@ -436,7 +446,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox qtytxtbox;
@@ -460,6 +470,7 @@
         private System.Windows.Forms.Label warehouseidlbl;
         private System.Windows.Forms.DataGridView dgvproducts;
         private System.Windows.Forms.DataGridViewTextBoxColumn productid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productmfr;
         private System.Windows.Forms.DataGridViewTextBoxColumn productname;
         private System.Windows.Forms.DataGridViewTextBoxColumn productupc;
         private System.Windows.Forms.DataGridViewTextBoxColumn productprice;

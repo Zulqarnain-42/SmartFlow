@@ -131,7 +131,7 @@
             this.KeyPreview = true;
             this.Name = "TransactionInfoProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transaction Info Product";
+            this.Text = "TRANSACTION INFO PRODUCT";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TransactionInfoProduct_FormClosed);
             this.Load += new System.EventHandler(this.TransactionInfoProduct_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TransactionInfoProduct_KeyDown);

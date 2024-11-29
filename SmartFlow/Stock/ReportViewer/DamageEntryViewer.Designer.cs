@@ -52,7 +52,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "DamageEntryViewer";
-            this.Text = "DAMAGE ENTRY VIEWER - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "DAMAGE ENTRY VIEWER";
             this.Load += new System.EventHandler(this.DamageEntryViewer_Load);
             this.ResumeLayout(false);
 

@@ -35,7 +35,7 @@
             this.gridViewMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.warehouseidlbl = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -120,25 +120,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1594, 45);
             this.panel1.TabIndex = 15;
             // 
-            // label1
+            // headinglbl
             // 
-            this.label1.BackColor = System.Drawing.Color.Black;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1594, 45);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "STOCK LOCATION";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1594, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "STOCK LOCATION";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel2
             // 
@@ -329,7 +329,7 @@
             this.MinimizeBox = false;
             this.Name = "StockLocation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Stock Location - Future Art Broadcast Trading LLC";
+            this.Text = "STOCK LOCATION";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.StockLocation_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StockLocation_KeyDown);
@@ -352,7 +352,7 @@
         private System.Windows.Forms.ContextMenuStrip gridViewMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label locationid;

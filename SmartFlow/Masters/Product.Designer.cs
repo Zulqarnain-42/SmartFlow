@@ -36,12 +36,13 @@
             this.gridViewMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.productDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
             this.closebtn = new System.Windows.Forms.Button();
             this.newbtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.productsGridView)).BeginInit();
             this.gridViewMenuStrip.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -96,7 +97,7 @@
             this.productsGridView.RowHeadersWidth = 51;
             this.productsGridView.RowTemplate.Height = 24;
             this.productsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.productsGridView.Size = new System.Drawing.Size(1594, 612);
+            this.productsGridView.Size = new System.Drawing.Size(1532, 612);
             this.productsGridView.TabIndex = 1;
             this.productsGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productsGridView_CellDoubleClick);
             this.productsGridView.Scroll += new System.Windows.Forms.ScrollEventHandler(this.productsGridView_Scroll);
@@ -107,9 +108,10 @@
             this.gridViewMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem,
             this.productHistoryToolStripMenuItem,
-            this.deleteToolStripMenuItem});
+            this.toolStripMenuItem1,
+            this.productDetailsToolStripMenuItem});
             this.gridViewMenuStrip.Name = "gridViewMenuStrip";
-            this.gridViewMenuStrip.Size = new System.Drawing.Size(181, 76);
+            this.gridViewMenuStrip.Size = new System.Drawing.Size(181, 82);
             // 
             // editToolStripMenuItem
             // 
@@ -124,12 +126,17 @@
             this.productHistoryToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.productHistoryToolStripMenuItem.Text = "Product History";
             // 
-            // deleteToolStripMenuItem
+            // toolStripMenuItem1
             // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
-            this.deleteToolStripMenuItem.Text = "Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // productDetailsToolStripMenuItem
+            // 
+            this.productDetailsToolStripMenuItem.Name = "productDetailsToolStripMenuItem";
+            this.productDetailsToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.productDetailsToolStripMenuItem.Text = "Product Details";
+            this.productDetailsToolStripMenuItem.Click += new System.EventHandler(this.productDetailsToolStripMenuItem_Click);
             // 
             // panel3
             // 
@@ -140,7 +147,7 @@
             this.panel3.Controls.Add(this.newbtn);
             this.panel3.Location = new System.Drawing.Point(0, 714);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1594, 56);
+            this.panel3.Size = new System.Drawing.Size(1532, 56);
             this.panel3.TabIndex = 10;
             // 
             // closebtn
@@ -150,7 +157,7 @@
             this.closebtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.closebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closebtn.Font = new System.Drawing.Font("Impact", 12F);
-            this.closebtn.Location = new System.Drawing.Point(1197, 5);
+            this.closebtn.Location = new System.Drawing.Point(1135, 5);
             this.closebtn.Name = "closebtn";
             this.closebtn.Size = new System.Drawing.Size(192, 48);
             this.closebtn.TabIndex = 1;
@@ -164,7 +171,7 @@
             this.newbtn.BackColor = System.Drawing.Color.SpringGreen;
             this.newbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.newbtn.Font = new System.Drawing.Font("Impact", 12F);
-            this.newbtn.Location = new System.Drawing.Point(1395, 5);
+            this.newbtn.Location = new System.Drawing.Point(1333, 5);
             this.newbtn.Name = "newbtn";
             this.newbtn.Size = new System.Drawing.Size(192, 48);
             this.newbtn.TabIndex = 0;
@@ -174,46 +181,42 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1594, 45);
+            this.panel1.Size = new System.Drawing.Size(1532, 45);
             this.panel1.TabIndex = 11;
             // 
-            // label1
+            // headinglbl
             // 
-            this.label1.BackColor = System.Drawing.Color.Black;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1594, 45);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "PRODUCT";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1532, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "PRODUCT";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Product
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1594, 770);
+            this.ClientSize = new System.Drawing.Size(1532, 770);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.searchtxtbox);
             this.Controls.Add(this.searchlbl);
             this.Controls.Add(this.productsGridView);
             this.Controls.Add(this.panel3);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Product";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "PRODUCT LIST - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "PRODUCT LIST";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Product_FormClosing);
             this.Load += new System.EventHandler(this.Product_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Product_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.productsGridView)).EndInit();
@@ -235,8 +238,9 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         public System.Windows.Forms.DataGridView productsGridView;
         private System.Windows.Forms.ToolStripMenuItem productHistoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label headinglbl;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem productDetailsToolStripMenuItem;
     }
 }

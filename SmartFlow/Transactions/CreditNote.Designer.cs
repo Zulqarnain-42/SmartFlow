@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.invoicedatetxtbox = new System.Windows.Forms.MaskedTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -86,25 +86,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1682, 45);
             this.panel1.TabIndex = 124;
             // 
-            // label4
+            // headinglbl
             // 
-            this.label4.BackColor = System.Drawing.Color.Black;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(0, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(1682, 45);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "CREDIT NOTE";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1682, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "CREDIT NOTE";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -465,7 +465,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "CreditNote";
-            this.Text = "CreditNote";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "CREDIT NOTE";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.CreditNote_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CreditNote_KeyDown);
@@ -484,7 +485,7 @@
 
         private System.Windows.Forms.MaskedTextBox invoicedatetxtbox;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

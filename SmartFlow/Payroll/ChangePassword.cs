@@ -72,7 +72,7 @@ namespace SmartFlow.Payroll
                 }
 
 
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void oldpasswordtxtbox_Leave(object sender, EventArgs e)
         {
@@ -88,7 +88,7 @@ namespace SmartFlow.Payroll
 
                     }
                 }
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
     }
 }

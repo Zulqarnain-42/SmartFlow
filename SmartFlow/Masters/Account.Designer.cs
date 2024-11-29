@@ -69,7 +69,7 @@
             this.vatnolbl = new System.Windows.Forms.Label();
             this.gstlbl = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label16 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.selectaccountgrouptxtbox = new System.Windows.Forms.TextBox();
             this.addresstxtbox = new System.Windows.Forms.RichTextBox();
             this.websitetxtbox = new System.Windows.Forms.TextBox();
@@ -96,6 +96,9 @@
             this.emaillbl = new System.Windows.Forms.Label();
             this.banknametxtbox = new System.Windows.Forms.TextBox();
             this.accountheadidlbl = new System.Windows.Forms.Label();
+            this.customerradio = new System.Windows.Forms.RadioButton();
+            this.supplierradio = new System.Windows.Forms.RadioButton();
+            this.employeeradio = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.panel1.SuspendLayout();
             this.refrencepersongroupbox.SuspendLayout();
@@ -103,7 +106,6 @@
             // 
             // namelbl
             // 
-            this.namelbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.namelbl.AutoSize = true;
             this.namelbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.namelbl.Location = new System.Drawing.Point(10, 56);
@@ -114,7 +116,6 @@
             // 
             // printnamelbl
             // 
-            this.printnamelbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.printnamelbl.AutoSize = true;
             this.printnamelbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.printnamelbl.Location = new System.Drawing.Point(10, 85);
@@ -125,7 +126,6 @@
             // 
             // accountgrouplbl
             // 
-            this.accountgrouplbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.accountgrouplbl.AutoSize = true;
             this.accountgrouplbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accountgrouplbl.Location = new System.Drawing.Point(10, 114);
@@ -136,7 +136,6 @@
             // 
             // addresslbl
             // 
-            this.addresslbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addresslbl.AutoSize = true;
             this.addresslbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addresslbl.Location = new System.Drawing.Point(10, 177);
@@ -147,7 +146,6 @@
             // 
             // countrylbl
             // 
-            this.countrylbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.countrylbl.AutoSize = true;
             this.countrylbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.countrylbl.Location = new System.Drawing.Point(10, 241);
@@ -158,7 +156,6 @@
             // 
             // statelbl
             // 
-            this.statelbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.statelbl.AutoSize = true;
             this.statelbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statelbl.Location = new System.Drawing.Point(10, 357);
@@ -169,7 +166,6 @@
             // 
             // mobilenolbl
             // 
-            this.mobilenolbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.mobilenolbl.AutoSize = true;
             this.mobilenolbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mobilenolbl.Location = new System.Drawing.Point(497, 177);
@@ -180,7 +176,6 @@
             // 
             // nametxtbox
             // 
-            this.nametxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nametxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.nametxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nametxtbox.Location = new System.Drawing.Point(180, 51);
@@ -191,7 +186,6 @@
             // 
             // printnametxtbox
             // 
-            this.printnametxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.printnametxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.printnametxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.printnametxtbox.Location = new System.Drawing.Point(180, 80);
@@ -201,7 +195,6 @@
             // 
             // countrytxtbox
             // 
-            this.countrytxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.countrytxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.countrytxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.countrytxtbox.Location = new System.Drawing.Point(180, 236);
@@ -211,7 +204,6 @@
             // 
             // statetxtbox
             // 
-            this.statetxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.statetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.statetxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statetxtbox.Location = new System.Drawing.Point(180, 352);
@@ -221,7 +213,6 @@
             // 
             // mobilenotxtbox
             // 
-            this.mobilenotxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.mobilenotxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mobilenotxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mobilenotxtbox.Location = new System.Drawing.Point(763, 172);
@@ -264,7 +255,6 @@
             // 
             // accountidlbl
             // 
-            this.accountidlbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.accountidlbl.AutoSize = true;
             this.accountidlbl.Location = new System.Drawing.Point(69, 57);
             this.accountidlbl.Name = "accountidlbl";
@@ -275,7 +265,6 @@
             // 
             // faxtxtbox
             // 
-            this.faxtxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.faxtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.faxtxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.faxtxtbox.Location = new System.Drawing.Point(763, 231);
@@ -285,7 +274,6 @@
             // 
             // locationtxtbox
             // 
-            this.locationtxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.locationtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.locationtxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.locationtxtbox.Location = new System.Drawing.Point(180, 323);
@@ -295,7 +283,6 @@
             // 
             // areatxtbox
             // 
-            this.areatxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.areatxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.areatxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.areatxtbox.Location = new System.Drawing.Point(180, 294);
@@ -305,7 +292,6 @@
             // 
             // emiratesidtxtbox
             // 
-            this.emiratesidtxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.emiratesidtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.emiratesidtxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.emiratesidtxtbox.Location = new System.Drawing.Point(763, 201);
@@ -315,7 +301,6 @@
             // 
             // faxlbl
             // 
-            this.faxlbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.faxlbl.AutoSize = true;
             this.faxlbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.faxlbl.Location = new System.Drawing.Point(497, 236);
@@ -326,7 +311,6 @@
             // 
             // locationlbl
             // 
-            this.locationlbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.locationlbl.AutoSize = true;
             this.locationlbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.locationlbl.Location = new System.Drawing.Point(10, 328);
@@ -337,7 +321,6 @@
             // 
             // trnlbl
             // 
-            this.trnlbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.trnlbl.AutoSize = true;
             this.trnlbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.trnlbl.Location = new System.Drawing.Point(497, 143);
@@ -348,7 +331,6 @@
             // 
             // arealbl
             // 
-            this.arealbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.arealbl.AutoSize = true;
             this.arealbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.arealbl.Location = new System.Drawing.Point(10, 299);
@@ -359,7 +341,6 @@
             // 
             // emiratesidlbl
             // 
-            this.emiratesidlbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.emiratesidlbl.AutoSize = true;
             this.emiratesidlbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.emiratesidlbl.Location = new System.Drawing.Point(497, 206);
@@ -370,7 +351,6 @@
             // 
             // accountnotxtbox
             // 
-            this.accountnotxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.accountnotxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.accountnotxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accountnotxtbox.Location = new System.Drawing.Point(763, 323);
@@ -380,7 +360,6 @@
             // 
             // trntxtbox
             // 
-            this.trntxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.trntxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.trntxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.trntxtbox.Location = new System.Drawing.Point(763, 138);
@@ -390,7 +369,6 @@
             // 
             // postalcodetxtbox
             // 
-            this.postalcodetxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.postalcodetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.postalcodetxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.postalcodetxtbox.Location = new System.Drawing.Point(180, 265);
@@ -400,7 +378,6 @@
             // 
             // servicetaxnotxtbox
             // 
-            this.servicetaxnotxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.servicetaxnotxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.servicetaxnotxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.servicetaxnotxtbox.Location = new System.Drawing.Point(763, 109);
@@ -410,7 +387,6 @@
             // 
             // vatnotxtbox
             // 
-            this.vatnotxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.vatnotxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.vatnotxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.vatnotxtbox.Location = new System.Drawing.Point(763, 80);
@@ -420,7 +396,6 @@
             // 
             // gstnotxtbox
             // 
-            this.gstnotxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.gstnotxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.gstnotxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gstnotxtbox.Location = new System.Drawing.Point(763, 51);
@@ -430,7 +405,6 @@
             // 
             // isemailallowedcheckbox
             // 
-            this.isemailallowedcheckbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.isemailallowedcheckbox.AutoSize = true;
             this.isemailallowedcheckbox.Font = new System.Drawing.Font("Calibri", 9F);
             this.isemailallowedcheckbox.Location = new System.Drawing.Point(1136, 107);
@@ -442,7 +416,6 @@
             // 
             // issmsallowedcheckbox
             // 
-            this.issmsallowedcheckbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.issmsallowedcheckbox.AutoSize = true;
             this.issmsallowedcheckbox.Font = new System.Drawing.Font("Calibri", 9F);
             this.issmsallowedcheckbox.Location = new System.Drawing.Point(1136, 73);
@@ -454,7 +427,6 @@
             // 
             // beneficarybankaccountnamelbl
             // 
-            this.beneficarybankaccountnamelbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.beneficarybankaccountnamelbl.AutoSize = true;
             this.beneficarybankaccountnamelbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.beneficarybankaccountnamelbl.Location = new System.Drawing.Point(497, 328);
@@ -465,7 +437,6 @@
             // 
             // beneficarybanknamelbl
             // 
-            this.beneficarybanknamelbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.beneficarybanknamelbl.AutoSize = true;
             this.beneficarybanknamelbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.beneficarybanknamelbl.Location = new System.Drawing.Point(497, 299);
@@ -476,7 +447,6 @@
             // 
             // postalcodelbl
             // 
-            this.postalcodelbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.postalcodelbl.AutoSize = true;
             this.postalcodelbl.Font = new System.Drawing.Font("Calibri", 9F);
             this.postalcodelbl.Location = new System.Drawing.Point(10, 270);
@@ -487,7 +457,6 @@
             // 
             // servicetaxnolbl
             // 
-            this.servicetaxnolbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.servicetaxnolbl.AutoSize = true;
             this.servicetaxnolbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.servicetaxnolbl.Location = new System.Drawing.Point(497, 114);
@@ -498,7 +467,6 @@
             // 
             // vatnolbl
             // 
-            this.vatnolbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.vatnolbl.AutoSize = true;
             this.vatnolbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.vatnolbl.Location = new System.Drawing.Point(497, 85);
@@ -509,7 +477,6 @@
             // 
             // gstlbl
             // 
-            this.gstlbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.gstlbl.AutoSize = true;
             this.gstlbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gstlbl.Location = new System.Drawing.Point(497, 56);
@@ -520,29 +487,28 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label16);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1477, 45);
             this.panel1.TabIndex = 37;
             // 
-            // label16
+            // headinglbl
             // 
-            this.label16.BackColor = System.Drawing.Color.Black;
-            this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label16.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label16.Location = new System.Drawing.Point(0, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(1477, 45);
-            this.label16.TabIndex = 0;
-            this.label16.Text = "ACCOUNT";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1477, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "ACCOUNT";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // selectaccountgrouptxtbox
             // 
-            this.selectaccountgrouptxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.selectaccountgrouptxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.selectaccountgrouptxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectaccountgrouptxtbox.Location = new System.Drawing.Point(180, 109);
@@ -565,7 +531,6 @@
             // 
             // websitetxtbox
             // 
-            this.websitetxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.websitetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.websitetxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.websitetxtbox.Location = new System.Drawing.Point(180, 439);
@@ -575,7 +540,6 @@
             // 
             // websitelbl
             // 
-            this.websitelbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.websitelbl.AutoSize = true;
             this.websitelbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.websitelbl.Location = new System.Drawing.Point(10, 444);
@@ -596,7 +560,6 @@
             // 
             // descriptionlbl
             // 
-            this.descriptionlbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.descriptionlbl.AutoSize = true;
             this.descriptionlbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.descriptionlbl.Location = new System.Drawing.Point(1133, 156);
@@ -607,7 +570,6 @@
             // 
             // creditlimitlbl
             // 
-            this.creditlimitlbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.creditlimitlbl.AutoSize = true;
             this.creditlimitlbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.creditlimitlbl.Location = new System.Drawing.Point(10, 500);
@@ -618,7 +580,6 @@
             // 
             // paymenttermlbl
             // 
-            this.paymenttermlbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.paymenttermlbl.AutoSize = true;
             this.paymenttermlbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.paymenttermlbl.Location = new System.Drawing.Point(10, 529);
@@ -629,7 +590,6 @@
             // 
             // creditlimittxtbox
             // 
-            this.creditlimittxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.creditlimittxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.creditlimittxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.creditlimittxtbox.Location = new System.Drawing.Point(180, 495);
@@ -639,7 +599,6 @@
             // 
             // paymenttermstxtbox
             // 
-            this.paymenttermstxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.paymenttermstxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.paymenttermstxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.paymenttermstxtbox.Location = new System.Drawing.Point(180, 524);
@@ -649,7 +608,6 @@
             // 
             // dayslbl
             // 
-            this.dayslbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dayslbl.AutoSize = true;
             this.dayslbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dayslbl.Location = new System.Drawing.Point(430, 529);
@@ -660,7 +618,6 @@
             // 
             // discountpercentagelbl
             // 
-            this.discountpercentagelbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.discountpercentagelbl.AutoSize = true;
             this.discountpercentagelbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.discountpercentagelbl.Location = new System.Drawing.Point(497, 400);
@@ -671,7 +628,6 @@
             // 
             // discounttxtbox
             // 
-            this.discounttxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.discounttxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.discounttxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.discounttxtbox.Location = new System.Drawing.Point(763, 395);
@@ -697,7 +653,6 @@
             // 
             // refrencepersonmobiletxtbox
             // 
-            this.refrencepersonmobiletxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.refrencepersonmobiletxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.refrencepersonmobiletxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refrencepersonmobiletxtbox.Location = new System.Drawing.Point(263, 75);
@@ -707,7 +662,6 @@
             // 
             // refrencepersonemailtxtbox
             // 
-            this.refrencepersonemailtxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.refrencepersonemailtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.refrencepersonemailtxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refrencepersonemailtxtbox.Location = new System.Drawing.Point(263, 46);
@@ -717,7 +671,6 @@
             // 
             // refrencepersonnametxtbox
             // 
-            this.refrencepersonnametxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.refrencepersonnametxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.refrencepersonnametxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refrencepersonnametxtbox.Location = new System.Drawing.Point(263, 17);
@@ -727,7 +680,6 @@
             // 
             // refrencepersonmobilelbl
             // 
-            this.refrencepersonmobilelbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.refrencepersonmobilelbl.AutoSize = true;
             this.refrencepersonmobilelbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refrencepersonmobilelbl.Location = new System.Drawing.Point(12, 80);
@@ -738,7 +690,6 @@
             // 
             // refrencepersonemaillbl
             // 
-            this.refrencepersonemaillbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.refrencepersonemaillbl.AutoSize = true;
             this.refrencepersonemaillbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refrencepersonemaillbl.Location = new System.Drawing.Point(12, 51);
@@ -749,7 +700,6 @@
             // 
             // refrencepersonnamelbl
             // 
-            this.refrencepersonnamelbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.refrencepersonnamelbl.AutoSize = true;
             this.refrencepersonnamelbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refrencepersonnamelbl.Location = new System.Drawing.Point(12, 22);
@@ -771,18 +721,19 @@
             // 
             // accountcodelbl
             // 
-            this.accountcodelbl.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.accountcodelbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.accountcodelbl.AutoSize = true;
-            this.accountcodelbl.Location = new System.Drawing.Point(1338, 445);
+            this.accountcodelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.accountcodelbl.ForeColor = System.Drawing.Color.Red;
+            this.accountcodelbl.Location = new System.Drawing.Point(1308, 57);
             this.accountcodelbl.Name = "accountcodelbl";
-            this.accountcodelbl.Size = new System.Drawing.Size(99, 16);
+            this.accountcodelbl.Size = new System.Drawing.Size(157, 25);
             this.accountcodelbl.TabIndex = 59;
             this.accountcodelbl.Text = "accountcodelbl";
             this.accountcodelbl.Visible = false;
             // 
             // emailtxtbox
             // 
-            this.emailtxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.emailtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.emailtxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.emailtxtbox.Location = new System.Drawing.Point(180, 381);
@@ -792,7 +743,6 @@
             // 
             // emaillbl
             // 
-            this.emaillbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.emaillbl.AutoSize = true;
             this.emaillbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.emaillbl.Location = new System.Drawing.Point(10, 386);
@@ -803,7 +753,6 @@
             // 
             // banknametxtbox
             // 
-            this.banknametxtbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.banknametxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.banknametxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.banknametxtbox.Location = new System.Drawing.Point(763, 294);
@@ -822,12 +771,51 @@
             this.accountheadidlbl.Text = "accountheadidlbl";
             this.accountheadidlbl.Visible = false;
             // 
+            // customerradio
+            // 
+            this.customerradio.AutoSize = true;
+            this.customerradio.Location = new System.Drawing.Point(1136, 410);
+            this.customerradio.Name = "customerradio";
+            this.customerradio.Size = new System.Drawing.Size(85, 20);
+            this.customerradio.TabIndex = 64;
+            this.customerradio.TabStop = true;
+            this.customerradio.Text = "Customer";
+            this.customerradio.UseVisualStyleBackColor = true;
+            this.customerradio.Visible = false;
+            // 
+            // supplierradio
+            // 
+            this.supplierradio.AutoSize = true;
+            this.supplierradio.Location = new System.Drawing.Point(1136, 436);
+            this.supplierradio.Name = "supplierradio";
+            this.supplierradio.Size = new System.Drawing.Size(78, 20);
+            this.supplierradio.TabIndex = 65;
+            this.supplierradio.TabStop = true;
+            this.supplierradio.Text = "Supplier";
+            this.supplierradio.UseVisualStyleBackColor = true;
+            this.supplierradio.Visible = false;
+            // 
+            // employeeradio
+            // 
+            this.employeeradio.AutoSize = true;
+            this.employeeradio.Location = new System.Drawing.Point(1136, 462);
+            this.employeeradio.Name = "employeeradio";
+            this.employeeradio.Size = new System.Drawing.Size(90, 20);
+            this.employeeradio.TabIndex = 66;
+            this.employeeradio.TabStop = true;
+            this.employeeradio.Text = "Employee";
+            this.employeeradio.UseVisualStyleBackColor = true;
+            this.employeeradio.Visible = false;
+            // 
             // Account
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1477, 581);
+            this.Controls.Add(this.employeeradio);
+            this.Controls.Add(this.supplierradio);
+            this.Controls.Add(this.customerradio);
             this.Controls.Add(this.accountheadidlbl);
             this.Controls.Add(this.banknametxtbox);
             this.Controls.Add(this.emailtxtbox);
@@ -893,7 +881,8 @@
             this.MinimizeBox = false;
             this.Name = "Account";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ACCOUNT - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "ACCOUNT";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Account_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Account_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
@@ -946,7 +935,7 @@
         private System.Windows.Forms.TextBox vatnotxtbox;
         private System.Windows.Forms.TextBox gstnotxtbox;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.TextBox selectaccountgrouptxtbox;
         private System.Windows.Forms.RichTextBox addresstxtbox;
         private System.Windows.Forms.TextBox websitetxtbox;
@@ -973,5 +962,8 @@
         private System.Windows.Forms.Label emaillbl;
         private System.Windows.Forms.TextBox banknametxtbox;
         private System.Windows.Forms.Label accountheadidlbl;
+        private System.Windows.Forms.RadioButton employeeradio;
+        private System.Windows.Forms.RadioButton supplierradio;
+        private System.Windows.Forms.RadioButton customerradio;
     }
 }

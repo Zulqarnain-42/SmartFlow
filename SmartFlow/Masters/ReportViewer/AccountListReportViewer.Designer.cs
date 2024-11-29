@@ -52,7 +52,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AccountListReportViewer";
-            this.Text = "ACCOUNT LIST REPORT VIEWER - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "ACCOUNT LIST REPORT VIEWER";
             this.Load += new System.EventHandler(this.AccountListReportViewer_Load);
             this.ResumeLayout(false);
 

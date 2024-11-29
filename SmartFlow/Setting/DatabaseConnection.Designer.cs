@@ -188,7 +188,9 @@
             this.Controls.Add(this.servernamelbl);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.Name = "DatabaseConnection";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATABASE CONNECTION";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DatabaseConnection_KeyDown);
             this.panel1.ResumeLayout(false);

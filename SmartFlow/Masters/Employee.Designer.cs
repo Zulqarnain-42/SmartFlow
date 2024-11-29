@@ -46,6 +46,7 @@
             this.savebtn = new System.Windows.Forms.Button();
             this.contractexpirydate = new System.Windows.Forms.MaskedTextBox();
             this.dateofjoiningdate = new System.Windows.Forms.MaskedTextBox();
+            this.employeeidlbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -235,12 +236,22 @@
             this.dateofjoiningdate.TabIndex = 113;
             this.dateofjoiningdate.ValidatingType = typeof(System.DateTime);
             // 
+            // employeeidlbl
+            // 
+            this.employeeidlbl.AutoSize = true;
+            this.employeeidlbl.Location = new System.Drawing.Point(69, 304);
+            this.employeeidlbl.Name = "employeeidlbl";
+            this.employeeidlbl.Size = new System.Drawing.Size(93, 16);
+            this.employeeidlbl.TabIndex = 114;
+            this.employeeidlbl.Text = "employeeidlbl";
+            // 
             // Employee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(740, 446);
+            this.Controls.Add(this.employeeidlbl);
             this.Controls.Add(this.dateofjoiningdate);
             this.Controls.Add(this.contractexpirydate);
             this.Controls.Add(this.closebtn);
@@ -259,8 +270,10 @@
             this.Controls.Add(this.nationalitylbl);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.Name = "Employee";
-            this.Text = "Employee";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "EMPLOYEE";
             this.Load += new System.EventHandler(this.Employee_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -288,5 +301,6 @@
         private System.Windows.Forms.Button savebtn;
         private System.Windows.Forms.MaskedTextBox contractexpirydate;
         private System.Windows.Forms.MaskedTextBox dateofjoiningdate;
+        private System.Windows.Forms.Label employeeidlbl;
     }
 }

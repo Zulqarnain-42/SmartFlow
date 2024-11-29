@@ -69,7 +69,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.selectcustomertxtbox = new System.Windows.Forms.TextBox();
             this.warehouseidlbl = new System.Windows.Forms.Label();
             this.productidlbl = new System.Windows.Forms.Label();
@@ -529,25 +529,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1768, 45);
             this.panel1.TabIndex = 93;
             // 
-            // label6
+            // headinglbl
             // 
-            this.label6.BackColor = System.Drawing.Color.Black;
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label6.Location = new System.Drawing.Point(0, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(1768, 45);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "SALE QUOTATION INVOICE";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1768, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "SALE QUOTATION INVOICE";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // selectcustomertxtbox
             // 
@@ -617,6 +617,7 @@
             this.newbtn.TabIndex = 8;
             this.newbtn.Text = "NEW";
             this.newbtn.UseVisualStyleBackColor = true;
+            this.newbtn.Click += new System.EventHandler(this.newbtn_Click);
             // 
             // savebtn
             // 
@@ -942,7 +943,7 @@
             this.MinimizeBox = false;
             this.Name = "SaleQuotationInvoice";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sale Quotation Invoice - Future Art Broadcast Trading LLC";
+            this.Text = "SALE QUOTATION INVOICE";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.SaleQuotationInvoice_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaleQuotationInvoice_KeyDown);
@@ -983,7 +984,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.TextBox selectcustomertxtbox;
         private System.Windows.Forms.TextBox selectproducttxtbox;
         private System.Windows.Forms.Label warehouseidlbl;

@@ -1,5 +1,4 @@
-﻿using SmartFlow.Common;
-using System;
+﻿using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -33,26 +32,18 @@ namespace SmartFlow.Setting
                     }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
             {
-                string terms = CommonFunction.CleanText(termstxtbox.Text);
+                string terms = termstxtbox.Text;
                 string insertterms = "INSERT INTO TermsConditionTable (TermsConditions) VALUES ('" + terms + "')";
 
-                bool result = DatabaseAccess.Insert(insertterms);
-                if (result)
-                {
-                    MessageBox.Show("Saved Successfully!");
-                }
-                else
-                {
-                    MessageBox.Show("Something is wrong.");
-                }
+                
 
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void Terms_KeyDown(object sender, KeyEventArgs e)
         {

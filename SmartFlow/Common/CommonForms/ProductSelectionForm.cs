@@ -1,5 +1,4 @@
 ﻿using SmartFlow.Masters;
-using SmartFlow.Sales;
 using System;
 using System.Windows.Forms;
 
@@ -47,7 +46,7 @@ namespace SmartFlow.Common.Forms
                     }
                 }
             }
-            catch(Exception ex) { throw ex; }
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void dgvproducts_KeyDown(object sender, KeyEventArgs e)
         {
@@ -67,7 +66,7 @@ namespace SmartFlow.Common.Forms
                         this.Close();
                     }
                 }
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void ProductSelectionForm_KeyDown(object sender, KeyEventArgs e)
         {
@@ -118,20 +117,9 @@ namespace SmartFlow.Common.Forms
             if (openForm == null)
             {
                 CreateProduct createProduct = new CreateProduct();
-                createProduct.ShowDialog();
-            }
-            else
-            {
-                openForm.BringToFront();
-            }
-        }
-        private void customproductbtn_Click(object sender, EventArgs e)
-        {
-            Form openForm = CommonFunction.IsFormOpen(typeof(CustomProductForm));
-            if (openForm == null)
-            {
-                CustomProductForm customProductForm = new CustomProductForm();
-                customProductForm.ShowDialog();
+                createProduct.MdiParent = this.MdiParent;
+                CommonFunction.DisposeOnClose(createProduct);
+                createProduct.Show();
             }
             else
             {

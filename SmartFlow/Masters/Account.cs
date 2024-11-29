@@ -1,6 +1,7 @@
 ﻿using SmartFlow.Common;
 using SmartFlow.Common.CommonForms;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -41,332 +42,42 @@ namespace SmartFlow.Masters
                     return;
                 }
 
-                string accountname = nametxtbox.Text;
-                string printname = printnametxtbox.Text;
-                string address = addresstxtbox.Text;
-                int salemanid = 0;
-                bool result = false;
-
-                string query = string.Empty;
-                query = string.Format("SELECT AccountSubControlID,AccountHead_ID,AccountControl_ID,User_ID,AccountSubControlName," +
-                    "AccountSubControlCode,CompanyID,CreatedAt,UpdatedAt,AddedBy,CreatedDay,UpdatedDay,PrintName,Address,Country," +
-                    "Email,MobileNo,OpeningBalanceCredit,OpeningBalanceDebit,CodeAccount,Area,Description,TRN,GSTNO,VATNO,Location," +
-                    "State,PostalCode,Fax,Website,CreditLimit,PaymentTerms,DiscountPercentage,RefrencePersonName,RefrencePersonMobile," +
-                    "RefrencePersonEmail,IsAllowedSMS,IsAllowedEmail,EmiratesId,ServiceTaxNo,BankName,BankAccountNo " +
-                    "FROM AccountSubControlTable WHERE AccountSubControlName = '" + accountname + "'");
-
-                DataTable dtdata = DatabaseAccess.Retrive(query);
-                if (dtdata != null && dtdata.Rows.Count > 0)
+                if(emailtxtbox.Text.Trim().Length == 0)
                 {
-                    if (dtdata.Rows[0]["AccountSubControlName"].ToString() == accountname
-                        && dtdata.Rows[0]["PrintName"].ToString() == printname
-                        && dtdata.Rows[0]["Address"].ToString() == address
-                        && dtdata.Rows[0]["AccountControl_ID"].ToString() == accountgroupidlbl.Text
-                        && dtdata.Rows[0]["Country"].ToString() == countrytxtbox.Text
-                        && dtdata.Rows[0]["PostalCode"].ToString() == postalcodetxtbox.Text
-                        && dtdata.Rows[0]["Area"].ToString() == areatxtbox.Text
-                        && dtdata.Rows[0]["Location"].ToString() == locationtxtbox.Text
-                        && dtdata.Rows[0]["TRN"].ToString() == trntxtbox.Text
-                        && dtdata.Rows[0]["Fax"].ToString() == faxtxtbox.Text
-                        && dtdata.Rows[0]["Website"].ToString() == websitetxtbox.Text
-                        && dtdata.Rows[0]["CreditLimit"].ToString() == creditlimittxtbox.Text
-                        && dtdata.Rows[0]["PaymentTerms"].ToString() == paymenttermstxtbox.Text
-                        && dtdata.Rows[0]["GSTNO"].ToString() == gstnotxtbox.Text
-                        && dtdata.Rows[0]["VATNO"].ToString() == vatnotxtbox.Text
-                        && dtdata.Rows[0]["ServiceTaxNo"].ToString() == servicetaxnotxtbox.Text
-                        && dtdata.Rows[0]["EmiratesId"].ToString() == emiratesidtxtbox.Text
-                        && dtdata.Rows[0]["BankAccountNo"].ToString() == accountnotxtbox.Text
-                        && dtdata.Rows[0]["DiscountPercentage"].ToString() == discounttxtbox.Text
-                        && dtdata.Rows[0]["RefrencePersonName"].ToString() == refrencepersonnametxtbox.Text
-                        && dtdata.Rows[0]["RefrencePersonEmail"].ToString() == refrencepersonemailtxtbox.Text
-                        && dtdata.Rows[0]["RefrencePersonMobile"].ToString() == refrencepersonmobiletxtbox.Text
-                        && dtdata.Rows[0]["Description"].ToString() == descriptiontxtbox.Text
-                        && dtdata.Rows[0]["Country"].ToString() == countrytxtbox.Text.Trim().ToString()
-                        && dtdata.Rows[0]["Email"].ToString() == statetxtbox.Text.Trim().ToString()
-                        && dtdata.Rows[0]["MobileNo"].ToString() == mobilenotxtbox.Text.Trim().ToString())
-                    {
-                        MessageBox.Show("Account Already Exists");
-                    }
+                    errorProvider.SetError(emailtxtbox,"Please Enter Email.");
+                    emailtxtbox.Focus();
+                    return;
+                }
 
-                    else
-                    {
-                        if (savebtn.Text == "Update")
-                        {
-                            query = "UPDATE AccountSubControlTable SET AccountHead_ID = '" + accountheadidlbl.Text + "'," +
-                                "AccountControl_ID = '" + accountgroupidlbl.Text + "'," +
-                                "AccountSubControlName = '" + accountname + "'," +
-                                "UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                                "UpdatedDay = '" + DateTime.Now.DayOfWeek + "'," +
-                                "PrintName = '" + printname + "'," +
-                                "Address = '" + address + "'," +
-                                "Country = '" + countrytxtbox.Text + "'," +
-                                "Email = '" + statetxtbox.Text + "'," +
-                                "MobileNo = '" + mobilenotxtbox.Text + "'," +
-                                "Area = '" + areatxtbox.Text + "'," +
-                                "Description = '" + descriptiontxtbox.Text + "'," +
-                                "TRN = '" + trntxtbox.Text + "'," +
-                                "GSTNO = '" + gstnotxtbox.Text + "'," +
-                                "VATNO = '" + vatnotxtbox.Text + "'," +
-                                "Location = '" + locationtxtbox.Text + "'," +
-                                "PostalCode = '" + postalcodetxtbox.Text + "'," +
-                                "Fax = '" + faxtxtbox.Text + "'," +
-                                "Website = '" + websitetxtbox.Text + "'," +
-                                "CreditLimit = '" + creditlimittxtbox.Text + "'," +
-                                "PaymentTerms = '" + paymenttermstxtbox.Text + "'," +
-                                "DiscountPercentage = '" + discounttxtbox.Text + "'," +
-                                "RefrencePersonName = '" + refrencepersonnametxtbox.Text + "'," +
-                                "RefrencePersonMobile = '" + refrencepersonmobiletxtbox.Text + "'," +
-                                "RefrencePersonEmail = '" + refrencepersonemailtxtbox.Text + "'," +
-                                "IsAllowedSMS = '" + issmsallowedcheckbox.Checked + "'," +
-                                "IsAllowedEmail = '" + isemailallowedcheckbox.Checked + "'," +
-                                "EmiratesId = '" + emiratesidtxtbox.Text + "'," +
-                                "ServiceTaxNo = '" + servicetaxnotxtbox.Text + "'," +
-                                "BankName = '" + banknametxtbox.Text + "'," +
-                                "BankAccountNo =  '" + accountnotxtbox.Text + "'" +
-                                "WHERE AccountSubControlID = '" + accountidlbl.Text + "'";
+                if(mobilenotxtbox.Text.Trim().Length == 0)
+                {
+                    errorProvider.SetError(mobilenotxtbox,"Please Enter Mobile No.");
+                    mobilenotxtbox.Focus();
+                    return;
+                }
 
-                            result = DatabaseAccess.Update(query);
-                            if (result)
-                            {
-                                MessageBox.Show("Updated Successfully!");
-                            }
-                            else
-                            {
-                                MessageBox.Show("Something is wrong");
-                            }
-                        }
-                        else
-                        {
-                            if (selectaccountgrouptxtbox.Text == "Customers" || selectaccountgrouptxtbox.Text == "Reseller")
-                            {
-                                string subquery = string.Format("INSERT INTO AccountSubControlTable (AccountHead_ID,AccountControl_ID," +
-                                    "AccountSubControlName,AccountSubControlCode,CreatedAt,CreatedDay,PrintName,Address,Country," +
-                                    "Email,MobileNo,CodeAccount,Area,Description,TRN,GSTNO,VATNO,Location,PostalCode,Fax,Website," +
-                                    "CreditLimit,PaymentTerms,DiscountPercentage,RefrencePersonName,RefrencePersonMobile,RefrencePersonEmail," +
-                                    "IsAllowedSMS,IsAllowedEmail,EmiratesId,ServiceTaxNo,BankName,BankAccountNo,IsCustomer,IsSupplier,IsEmployee) VALUES " +
-                                    "('" + accountheadidlbl.Text + "','" + accountgroupidlbl.Text + "','" + nametxtbox.Text + "','" + Guid.NewGuid() + "'," +
-                                    "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + printname + "'," +
-                                    "'" + address + "','" + countrytxtbox.Text + "','" + statetxtbox.Text + "','" + mobilenotxtbox.Text + "','" + accountcodelbl.Text + "'," +
-                                    "'" + areatxtbox.Text + "'," +
-                                    "'" + descriptiontxtbox.Text + "','" + trntxtbox.Text + "','" + gstnotxtbox.Text + "','" + vatnotxtbox.Text + "','" + locationtxtbox.Text + "'," +
-                                    "'" + postalcodetxtbox.Text + "','" + faxtxtbox.Text + "','" + websitetxtbox.Text + "','" + creditlimittxtbox.Text + "'," +
-                                    "'" + paymenttermstxtbox.Text + "','" + discounttxtbox.Text + "','" + refrencepersonnametxtbox.Text + "'," +
-                                    "'" + refrencepersonmobiletxtbox.Text + "','" + refrencepersonemailtxtbox.Text + "'," +
-                                    "'" + issmsallowedcheckbox.Checked + "','" + isemailallowedcheckbox.Checked + "','" + emiratesidtxtbox.Text + "'," +
-                                    "'" + servicetaxnotxtbox.Text + "','" + trntxtbox.Text + "','" + accountnotxtbox.Text + "','" + true + "','" + false + "','" + false + "')");
-                                result = DatabaseAccess.Insert(subquery);
-                            }
-                            else if (selectaccountgrouptxtbox.Text == "Suppliers")
-                            {
-                                string subquery = string.Format("INSERT INTO AccountSubControlTable (AccountHead_ID,AccountControl_ID," +
-                                    "AccountSubControlName,AccountSubControlCode,CreatedAt,CreatedDay,PrintName,Address,Country," +
-                                    "Email,MobileNo,CodeAccount,Area,Description,TRN,GSTNO,VATNO,Location,PostalCode,Fax,Website," +
-                                    "CreditLimit,PaymentTerms,DiscountPercentage,RefrencePersonName,RefrencePersonMobile,RefrencePersonEmail," +
-                                    "IsAllowedSMS,IsAllowedEmail,EmiratesId,ServiceTaxNo,BankName,BankAccountNo,IsCustomer,IsSupplier,IsEmployee) VALUES " +
-                                    "('" + accountheadidlbl.Text + "','" + accountgroupidlbl.Text + "','" + nametxtbox.Text + "','" + Guid.NewGuid() + "'," +
-                                    "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + printname + "'," +
-                                    "'" + address + "','" + countrytxtbox.Text + "','" + statetxtbox.Text + "','" + mobilenotxtbox.Text + "','" + accountcodelbl.Text + "'," +
-                                    "'" + areatxtbox.Text + "'," +
-                                    "'" + descriptiontxtbox.Text + "','" + trntxtbox.Text + "','" + gstnotxtbox.Text + "','" + vatnotxtbox.Text + "','" + locationtxtbox.Text + "'," +
-                                    "'" + postalcodetxtbox.Text + "','" + faxtxtbox.Text + "','" + websitetxtbox.Text + "','" + creditlimittxtbox.Text + "'," +
-                                    "'" + paymenttermstxtbox.Text + "','" + discounttxtbox.Text + "','" + refrencepersonnametxtbox.Text + "'," +
-                                    "'" + refrencepersonmobiletxtbox.Text + "','" + refrencepersonemailtxtbox.Text + "'," +
-                                    "'" + issmsallowedcheckbox.Checked + "','" + isemailallowedcheckbox.Checked + "','" + emiratesidtxtbox.Text + "'," +
-                                     "'" + servicetaxnotxtbox.Text + "','" + trntxtbox.Text + "','" + accountnotxtbox.Text + "','" + false + "','" + true + "','" + false + "')");
-                                result = DatabaseAccess.Insert(subquery);
-                            }
-                            else if (selectaccountgrouptxtbox.Text == "Employee")
-                            {
-                                string subquery = string.Format("INSERT INTO AccountSubControlTable (AccountHead_ID,AccountControl_ID," +
-                                    "AccountSubControlName,AccountSubControlCode,CreatedAt,CreatedDay,PrintName,Address,Country," +
-                                    "Email,MobileNo,CodeAccount,Area,Description,TRN,GSTNO,VATNO,Location,PostalCode,Fax,Website," +
-                                    "CreditLimit,PaymentTerms,DiscountPercentage,RefrencePersonName,RefrencePersonMobile,RefrencePersonEmail," +
-                                    "IsAllowedSMS,IsAllowedEmail,EmiratesId,ServiceTaxNo,BankName,BankAccountNo,IsCustomer,IsSupplier,IsEmployee) VALUES " +
-                                    "('" + accountheadidlbl.Text + "','" + accountgroupidlbl.Text + "','" + nametxtbox.Text + "','" + Guid.NewGuid() + "'," +
-                                    "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + printname + "'," +
-                                    "'" + address + "','" + countrytxtbox.Text + "','" + statetxtbox.Text + "','" + mobilenotxtbox.Text + "','" + accountcodelbl.Text + "'," +
-                                    "'" + areatxtbox.Text + "'," +
-                                    "'" + descriptiontxtbox.Text + "','" + trntxtbox.Text + "','" + gstnotxtbox.Text + "','" + vatnotxtbox.Text + "','" + locationtxtbox.Text + "'," +
-                                    "'" + postalcodetxtbox.Text + "','" + faxtxtbox.Text + "','" + websitetxtbox.Text + "','" + creditlimittxtbox.Text + "'," +
-                                    "'" + paymenttermstxtbox.Text + "','" + discounttxtbox.Text + "','" + refrencepersonnametxtbox.Text + "'," +
-                                    "'" + refrencepersonmobiletxtbox.Text + "','" + refrencepersonemailtxtbox.Text + "'," +
-                                    "'" + issmsallowedcheckbox.Checked + "','" + isemailallowedcheckbox.Checked + "','" + emiratesidtxtbox.Text + "'," +
-                                    "'" + servicetaxnotxtbox.Text + "','" + trntxtbox.Text + "','" + accountnotxtbox.Text + "','" + false + "','" + false + "','" + true + "')");
-                                result = DatabaseAccess.Insert(subquery);
-                            }
-                            else
-                            {
-                                string subquery = string.Format("INSERT INTO AccountSubControlTable (AccountHead_ID,AccountControl_ID," +
-                                    "AccountSubControlName,AccountSubControlCode,CreatedAt,CreatedDay,PrintName,Address,Country," +
-                                    "Email,MobileNo,CodeAccount,Area,Description,TRN,GSTNO,VATNO,Location,PostalCode,Fax,Website," +
-                                    "CreditLimit,PaymentTerms,DiscountPercentage,RefrencePersonName,RefrencePersonMobile,RefrencePersonEmail," +
-                                    "IsAllowedSMS,IsAllowedEmail,EmiratesId,ServiceTaxNo,BankName,BankAccountNo,IsCustomer,IsSupplier,IsEmployee) VALUES " +
-                                    "('" + accountheadidlbl.Text + "','" + accountgroupidlbl.Text + "','" + nametxtbox.Text + "','" + Guid.NewGuid() + "'," +
-                                    "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + printname + "'," +
-                                    "'" + address + "','" + countrytxtbox.Text + "','" + statetxtbox.Text + "','" + mobilenotxtbox.Text + "','" + accountcodelbl.Text + "'," +
-                                    "'" + areatxtbox.Text + "'," +
-                                    "'" + descriptiontxtbox.Text + "','" + trntxtbox.Text + "','" + gstnotxtbox.Text + "','" + vatnotxtbox.Text + "','" + locationtxtbox.Text + "'," +
-                                    "'" + postalcodetxtbox.Text + "','" + faxtxtbox.Text + "','" + websitetxtbox.Text + "','" + creditlimittxtbox.Text + "'," +
-                                    "'" + paymenttermstxtbox.Text + "','" + discounttxtbox.Text + "','" + refrencepersonnametxtbox.Text + "'," +
-                                    "'" + refrencepersonmobiletxtbox.Text + "','" + refrencepersonemailtxtbox.Text + "'," +
-                                    "'" + issmsallowedcheckbox.Checked + "','" + isemailallowedcheckbox.Checked + "','" + emiratesidtxtbox.Text + "'," +
-                                    "'" + servicetaxnotxtbox.Text + "','" + trntxtbox.Text + "','" + accountnotxtbox.Text + "','" + false + "','" + false + "','" + false + "')");
-                                result = DatabaseAccess.Insert(subquery);
-                            }
-                            
-                            if (result)
-                            {
-                                MessageBox.Show("Saved Successfully!");
-                            }
-                            else
-                            {
-                                MessageBox.Show("Something is wrong.");
-                            }
-                        }
-                    }
+                string duplicateinfo = CheckDuplicate();
+                if (duplicateinfo != null) 
+                {
+                    MessageBox.Show(duplicateinfo, "Duplicate Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
                     if (savebtn.Text == "Update")
                     {
-                        query = "UPDATE AccountSubControlTable SET AccountHead_ID = ," +
-                            "AccountControl_ID = ," +
-                            "AccountSubControlName = '" + accountname + "'," +
-                            "UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                            "UpdatedDay = '" + DateTime.Now.DayOfWeek + "'," +
-                            "PrintName = '" + printname + "'," +
-                            "Address = '" + address + "'," +
-                            "Country = '" + countrytxtbox.Text + "'," +
-                            "Email = '" + statetxtbox.Text + "'," +
-                            "MobileNo = '" + mobilenotxtbox.Text + "'," +
-                            "CodeAccount = ," +
-                            "Area = '" + areatxtbox.Text + "'," +
-                            "Description = '" + descriptiontxtbox.Text + "'," +
-                            "TRN = '" + trntxtbox.Text + "'," +
-                            "GSTNO = '" + gstnotxtbox.Text + "'," +
-                            "VATNO = '" + vatnotxtbox.Text + "'," +
-                            "Location = '" + locationtxtbox.Text + "'," +
-                            "PostalCode = '" + postalcodetxtbox.Text + "'," +
-                            "Fax = '" + faxtxtbox.Text + "'," +
-                            "Website = '" + websitetxtbox.Text + "'," +
-                            "CreditLimit = '" + creditlimittxtbox.Text + "'," +
-                            "PaymentTerms = '" + paymenttermstxtbox.Text + "'," +
-                            "DiscountPercentage = '" + discounttxtbox.Text + "'," +
-                            "RefrencePersonName = '" + refrencepersonnametxtbox.Text + "'," +
-                            "RefrencePersonMobile = '" + refrencepersonmobiletxtbox.Text + "'," +
-                            "RefrencePersonEmail = '" + refrencepersonemailtxtbox.Text + "'," +
-                            "IsAllowedSMS = '" + issmsallowedcheckbox.Checked + "'," +
-                            "IsAllowedEmail = '" + isemailallowedcheckbox.Checked + "'," +
-                            "EmiratesId = '" + emiratesidtxtbox.Text + "'," +
-                            "ServiceTaxNo = '" + servicetaxnotxtbox.Text + "'," +
-                            "BankName = '" + trntxtbox.Text + "'," +
-                            "BankAccountNo =  '" + accountnotxtbox.Text + "'" +
-                            "WHERE ";
-
-                        result = DatabaseAccess.Update(query);
-                        if (result)
-                        {
-                            MessageBox.Show("Updated Successfully!");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Something is wrong");
-                        }
+                        bool isupdated = UpdateAccountSubControl();
+                        if (isupdated) { MessageBox.Show("Updated Successfully"); }
                     }
                     else
                     {
-                        if (selectaccountgrouptxtbox.Text == "Customers" || selectaccountgrouptxtbox.Text == "Reseller")
-                        {
-                            string subquery = string.Format("INSERT INTO AccountSubControlTable (AccountHead_ID,AccountControl_ID," +
-                                "AccountSubControlName,AccountSubControlCode,CreatedAt,CreatedDay,PrintName,Address,Country," +
-                                "Email,MobileNo,CodeAccount,Area,Description,TRN,GSTNO,VATNO,Location,PostalCode,Fax,Website," +
-                                "CreditLimit,PaymentTerms,DiscountPercentage,RefrencePersonName,RefrencePersonMobile,RefrencePersonEmail," +
-                                "IsAllowedSMS,IsAllowedEmail,EmiratesId,ServiceTaxNo,BankName,BankAccountNo,IsCustomer,IsSupplier,IsEmployee) VALUES " +
-                                "('" + accountheadidlbl.Text + "','" + accountgroupidlbl.Text + "','" + nametxtbox.Text + "','" + Guid.NewGuid() + "'," +
-                                "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + printname + "'," +
-                                "'" + address + "','" + countrytxtbox.Text + "','" + statetxtbox.Text + "','" + mobilenotxtbox.Text + "','" + accountcodelbl.Text + "'," +
-                                "'" + areatxtbox.Text + "'," +
-                                "'" + descriptiontxtbox.Text + "','" + trntxtbox.Text + "','" + gstnotxtbox.Text + "','" + vatnotxtbox.Text + "','" + locationtxtbox.Text + "'," +
-                                "'" + postalcodetxtbox.Text + "','" + faxtxtbox.Text + "','" + websitetxtbox.Text + "','" + creditlimittxtbox.Text + "'," +
-                                "'" + paymenttermstxtbox.Text + "','" + discounttxtbox.Text + "','" + refrencepersonnametxtbox.Text + "'," +
-                                "'" + refrencepersonmobiletxtbox.Text + "','" + refrencepersonemailtxtbox.Text + "'," +
-                                "'" + issmsallowedcheckbox.Checked + "','" + isemailallowedcheckbox.Checked + "','" + emiratesidtxtbox.Text + "'," +
-                                "'" + servicetaxnotxtbox.Text + "','" + trntxtbox.Text + "','" + accountnotxtbox.Text + "','" + true + "','" + false + "','" + false + "')");
-                            result = DatabaseAccess.Insert(subquery);
-                        }
-                        else if (selectaccountgrouptxtbox.Text == "Suppliers")
-                        {
-                            string subquery = string.Format("INSERT INTO AccountSubControlTable (AccountHead_ID,AccountControl_ID," +
-                                "AccountSubControlName,AccountSubControlCode,CreatedAt,CreatedDay,PrintName,Address,Country," +
-                                "Email,MobileNo,CodeAccount,Area,Description,TRN,GSTNO,VATNO,Location,PostalCode,Fax,Website," +
-                                "CreditLimit,PaymentTerms,DiscountPercentage,RefrencePersonName,RefrencePersonMobile,RefrencePersonEmail," +
-                                "IsAllowedSMS,IsAllowedEmail,EmiratesId,ServiceTaxNo,BankName,BankAccountNo,IsCustomer,IsSupplier,IsEmployee) VALUES " +
-                                "('" + accountheadidlbl.Text + "','" + accountgroupidlbl.Text + "','" + nametxtbox.Text + "','" + Guid.NewGuid() + "'," +
-                                "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + printname + "'," +
-                                "'" + address + "','" + countrytxtbox.Text + "','" + statetxtbox.Text + "','" + mobilenotxtbox.Text + "','" + accountcodelbl.Text + "'," +
-                                "'" + areatxtbox.Text + "'," +
-                                "'" + descriptiontxtbox.Text + "','" + trntxtbox.Text + "','" + gstnotxtbox.Text + "','" + vatnotxtbox.Text + "','" + locationtxtbox.Text + "'," +
-                                "'" + postalcodetxtbox.Text + "','" + faxtxtbox.Text + "','" + websitetxtbox.Text + "','" + creditlimittxtbox.Text + "'," +
-                                "'" + paymenttermstxtbox.Text + "','" + discounttxtbox.Text + "','" + refrencepersonnametxtbox.Text + "'," +
-                                "'" + refrencepersonmobiletxtbox.Text + "','" + refrencepersonemailtxtbox.Text + "'," +
-                                "'" + issmsallowedcheckbox.Checked + "','" + isemailallowedcheckbox.Checked + "','" + emiratesidtxtbox.Text + "'," +
-                                 "'" + servicetaxnotxtbox.Text + "','" + trntxtbox.Text + "','" + accountnotxtbox.Text + "','" + false + "','" + true + "','" + false + "')");
-                            result = DatabaseAccess.Insert(subquery);
-                        }
-                        else if (selectaccountgrouptxtbox.Text == "Employee")
-                        {
-                            string subquery = string.Format("INSERT INTO AccountSubControlTable (AccountHead_ID,AccountControl_ID," +
-                                "AccountSubControlName,AccountSubControlCode,CreatedAt,CreatedDay,PrintName,Address,Country," +
-                                "Email,MobileNo,CodeAccount,Area,Description,TRN,GSTNO,VATNO,Location,PostalCode,Fax,Website," +
-                                "CreditLimit,PaymentTerms,DiscountPercentage,RefrencePersonName,RefrencePersonMobile,RefrencePersonEmail," +
-                                "IsAllowedSMS,IsAllowedEmail,EmiratesId,ServiceTaxNo,BankName,BankAccountNo,IsCustomer,IsSupplier,IsEmployee) VALUES " +
-                                "('" + accountheadidlbl.Text + "','" + accountgroupidlbl.Text + "','" + nametxtbox.Text + "','" + Guid.NewGuid() + "'," +
-                                "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + printname + "'," +
-                                "'" + address + "','" + countrytxtbox.Text + "','" + statetxtbox.Text + "','" + mobilenotxtbox.Text + "','" + accountcodelbl.Text + "'," +
-                                "'" + areatxtbox.Text + "'," +
-                                "'" + descriptiontxtbox.Text + "','" + trntxtbox.Text + "','" + gstnotxtbox.Text + "','" + vatnotxtbox.Text + "','" + locationtxtbox.Text + "'," +
-                                "'" + postalcodetxtbox.Text + "','" + faxtxtbox.Text + "','" + websitetxtbox.Text + "','" + creditlimittxtbox.Text + "'," +
-                                "'" + paymenttermstxtbox.Text + "','" + discounttxtbox.Text + "','" + refrencepersonnametxtbox.Text + "'," +
-                                "'" + refrencepersonmobiletxtbox.Text + "','" + refrencepersonemailtxtbox.Text + "'," +
-                                "'" + issmsallowedcheckbox.Checked + "','" + isemailallowedcheckbox.Checked + "','" + emiratesidtxtbox.Text + "'," +
-                                "'" + servicetaxnotxtbox.Text + "','" + trntxtbox.Text + "','" + accountnotxtbox.Text + "','" + false + "','" + false + "','" + true + "')");
-                            result = DatabaseAccess.Insert(subquery);
-                        }
-                        else
-                        {
-                            string subquery = string.Format("INSERT INTO AccountSubControlTable (AccountHead_ID,AccountControl_ID," +
-                                "AccountSubControlName,AccountSubControlCode,CreatedAt,CreatedDay,PrintName,Address,Country," +
-                                "Email,MobileNo,CodeAccount,Area,Description,TRN,GSTNO,VATNO,Location,PostalCode,Fax,Website," +
-                                "CreditLimit,PaymentTerms,DiscountPercentage,RefrencePersonName,RefrencePersonMobile,RefrencePersonEmail," +
-                                "IsAllowedSMS,IsAllowedEmail,EmiratesId,ServiceTaxNo,BankName,BankAccountNo,IsCustomer,IsSupplier,IsEmployee) VALUES " +
-                                "('" + accountheadidlbl.Text + "','" + accountgroupidlbl.Text + "','" + nametxtbox.Text + "','" + Guid.NewGuid() + "'," +
-                                "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + printname + "'," +
-                                "'" + address + "','" + countrytxtbox.Text + "','" + statetxtbox.Text + "','" + mobilenotxtbox.Text + "','" + accountcodelbl.Text + "'," +
-                                "'" + areatxtbox.Text + "'," +
-                                "'" + descriptiontxtbox.Text + "','" + trntxtbox.Text + "','" + gstnotxtbox.Text + "','" + vatnotxtbox.Text + "','" + locationtxtbox.Text + "'," +
-                                "'" + postalcodetxtbox.Text + "','" + faxtxtbox.Text + "','" + websitetxtbox.Text + "','" + creditlimittxtbox.Text + "'," +
-                                "'" + paymenttermstxtbox.Text + "','" + discounttxtbox.Text + "','" + refrencepersonnametxtbox.Text + "'," +
-                                "'" + refrencepersonmobiletxtbox.Text + "','" + refrencepersonemailtxtbox.Text + "'," +
-                                "'" + issmsallowedcheckbox.Checked + "','" + isemailallowedcheckbox.Checked + "','" + emiratesidtxtbox.Text + "'," +
-                                "'" + servicetaxnotxtbox.Text + "','" + trntxtbox.Text + "','" + accountnotxtbox.Text + "','" + false + "','" + false + "','" + false + "')");
-                            result = DatabaseAccess.Insert(subquery);
-                        }
-
-                        
-                        if (result)
-                        {
-                            MessageBox.Show("Saved Successfully!");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Something is wrong.");
-                        }
+                        bool isInserted = InsertAccountSubControl();
+                        if (isInserted) { MessageBox.Show("Saved Successfully."); }
                     }
-                }
+                }   
             }
             catch (Exception ex)
             {
-                throw ex;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         static string GenerateRandomAccountCode(string intializer)
@@ -392,6 +103,180 @@ namespace SmartFlow.Masters
             }
             return serialNumber = String.Concat(intializer, serialNumber); ;
         }
+
+        private bool UpdateAccountSubControl()
+        {
+            string tableName = "AccountSubControlTable";
+            string whereClause = "AccountSubControlID = '"+ accountidlbl.Text + "'";
+
+            var columnData = new Dictionary<string, object>
+            {
+                { "AccountHead_ID", accountheadidlbl.Text },
+                { "AccountControl_ID", accountgroupidlbl.Text },
+                { "AccountSubControlName", nametxtbox.Text },
+                { "UpdatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                { "UpdatedDay", DateTime.Now.DayOfWeek },
+                { "PrintName", printnametxtbox.Text },
+                { "Address", addresstxtbox.Text },
+                { "Country", countrytxtbox.Text },
+                { "State", statetxtbox.Text },
+                { "Email", emailtxtbox.Text },
+                { "MobileNo", mobilenotxtbox.Text },
+                { "Area", areatxtbox.Text },
+                { "Description", descriptiontxtbox.Text },
+                { "TRN", trntxtbox.Text },
+                { "GSTNO", gstnotxtbox.Text },
+                { "VATNO", vatnotxtbox.Text },
+                { "Location", locationtxtbox.Text },
+                { "PostalCode", postalcodetxtbox.Text },
+                { "Fax", faxtxtbox.Text },
+                { "Website", websitetxtbox.Text },
+                { "CreditLimit", creditlimittxtbox.Text },
+                { "PaymentTerm", paymenttermstxtbox.Text },
+                { "DiscountPercentage", discounttxtbox.Text },
+                { "RefrencePersonName", refrencepersonnametxtbox.Text },
+                { "RefrencePersonMobile", refrencepersonmobiletxtbox.Text },
+                { "RefrencePersonEmail", refrencepersonemailtxtbox.Text },
+                { "IsAllowedSMS", issmsallowedcheckbox.Checked },
+                { "IsAllowedEmail", isemailallowedcheckbox.Checked },
+                { "EmiratesId", emiratesidtxtbox.Text },
+                { "ServiceTaxNo", servicetaxnotxtbox.Text },
+                { "BankName", banknametxtbox.Text },
+                { "BankAccountNo", accountnotxtbox.Text }
+            };
+
+            bool isUpdated = DatabaseAccess.ExecuteQuery(tableName, "UPDATE", columnData, whereClause);
+            return isUpdated;
+        }
+
+        private bool InsertAccountSubControl()
+        {
+            string tableName = "AccountSubControlTable";
+
+            var columnData = new Dictionary<string, object>
+            {
+                { "AccountHead_ID", accountheadidlbl.Text },
+                { "AccountControl_ID", accountgroupidlbl.Text },
+                { "AccountSubControlName", nametxtbox.Text },
+                { "AccountSubControlCode", Guid.NewGuid().ToString() },
+                { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                { "CodeAccount", accountcodelbl.Text },
+                { "PrintName", printnametxtbox.Text },
+                { "Address", addresstxtbox.Text },
+                { "Country", countrytxtbox.Text },
+                { "State", statetxtbox.Text },
+                { "Email", emailtxtbox.Text },
+                { "MobileNo", mobilenotxtbox.Text },
+                { "Area", areatxtbox.Text },
+                { "Description", descriptiontxtbox.Text },
+                { "TRN", trntxtbox.Text },
+                { "GSTNO", gstnotxtbox.Text },
+                { "VATNO", vatnotxtbox.Text },
+                { "Location", locationtxtbox.Text },
+                { "PostalCode", postalcodetxtbox.Text },
+                { "Fax", faxtxtbox.Text },
+                { "Website", websitetxtbox.Text },
+                { "CreditLimit", creditlimittxtbox.Text },
+                { "PaymentTerm", paymenttermstxtbox.Text },
+                { "DiscountPercentage", discounttxtbox.Text },
+                { "RefrencePersonName", refrencepersonnametxtbox.Text },
+                { "RefrencePersonMobile", refrencepersonmobiletxtbox.Text },
+                { "RefrencePersonEmail", refrencepersonemailtxtbox.Text },
+                { "IsAllowedSMS", issmsallowedcheckbox.Checked },
+                { "IsAllowedEmail", isemailallowedcheckbox.Checked },
+                { "EmiratesId", emiratesidtxtbox.Text },
+                { "ServiceTaxNo", servicetaxnotxtbox.Text },
+                { "BankName", banknametxtbox.Text },
+                { "BankAccountNo", accountnotxtbox.Text },
+                { "IsCustomer", customerradio.Checked },
+                { "IsSupplier", supplierradio.Checked },
+                { "IsEmployee", employeeradio.Checked },
+            };
+
+            bool isInserted = DatabaseAccess.ExecuteQuery(tableName, "INSERT", columnData);
+            return isInserted;
+        }
+
+        private string CheckDuplicate()
+        {
+            string query = string.Format(@"SELECT AccountSubControlID,AccountHead_ID,AccountControl_ID,User_ID,AccountSubControlName,
+            CompanyID,PrintName,Address,Country,Email,MobileNo,TRN,GSTNO,VATNO,Location,State,PostalCode,Fax,Website,
+            EmiratesId,ServiceTaxNo,BankName,BankAccountNo FROM AccountSubControlTable WHERE AccountSubControlName = @AccountSubControlName");
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "AccountSubControlName", nametxtbox.Text }
+            };
+
+            DataTable dt = DatabaseAccess.RetrieveData(query, parameters);
+
+            if(dt!=null && dt.Rows.Count > 0)
+            {
+                string accountName = dt.Rows[0]["AccountSubControlName"].ToString();
+                string address = dt.Rows[0]["Address"].ToString();
+                string country = dt.Rows[0]["Country"].ToString();
+                string email = dt.Rows[0]["Email"].ToString();
+                string mobileno = dt.Rows[0]["MobileNo"].ToString();
+                string trn = dt.Rows[0]["TRN"].ToString();
+                string gstno = dt.Rows[0]["GSTNO"].ToString();
+                string vatno = dt.Rows[0]["VATNO"].ToString();
+                string emiratesid = dt.Rows[0]["EmiratesId"].ToString();
+
+                if(nametxtbox.Text == accountName && addresstxtbox.Text == address)
+                {
+                    return $"Duplicate found: Account Name = {accountName}, Address = {address}.";
+                }
+
+                if(nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country)
+                {
+                    return $"Duplicate found: Account Name = {accountName}, Address = {address}, Country = {country}.";
+                }
+
+                if(nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country && emailtxtbox.Text == email)
+                {
+                    return $"Duplicate found: Account Name = {accountName}, Address = {address}, Country = {country}, Email = {email}.";
+                }
+
+                if(nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country && emailtxtbox.Text == email && 
+                    mobilenotxtbox.Text == mobileno)
+                {
+                    return $"Duplicate found: Account Name = {accountName}, Address = {address}, Country = {country}, Email = {email}, " +
+                        $"Mobile No = {mobileno}.";
+                }
+
+                if(nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country && emailtxtbox.Text == email && 
+                    mobilenotxtbox.Text == mobileno && trntxtbox.Text == trn)
+                {
+                    return $"Duplicate found: Account Name = {accountName}, Address = {address}, Country = {country}, Email = {email}, " +
+                        $"Mobile No = {mobileno}, TRN = {trn}.";
+                }
+
+                if (nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country && emailtxtbox.Text == email &&
+                    mobilenotxtbox.Text == mobileno && trntxtbox.Text == trn && gstnotxtbox.Text == gstno)
+                {
+                    return $"Duplicate found: Account Name = {accountName}, Address = {address}, Country = {country}, Email = {email}, " +
+                        $"Mobile No = {mobileno}, TRN = {trn}, GST NO = {gstno}.";
+                }
+
+                if (nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country && emailtxtbox.Text == email &&
+                    mobilenotxtbox.Text == mobileno && trntxtbox.Text == trn && gstnotxtbox.Text == gstno && vatnotxtbox.Text == vatno)
+                {
+                    return $"Duplicate found: Account Name = {accountName}, Address = {address}, Country = {country}, Email = {email}, " +
+                        $"Mobile No = {mobileno}, TRN = {trn}, GST NO = {gstno}, VAT NO = {vatno}.";
+                }
+
+                if (nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country && emailtxtbox.Text == email &&
+                   mobilenotxtbox.Text == mobileno && trntxtbox.Text == trn && gstnotxtbox.Text == gstno && vatnotxtbox.Text == vatno 
+                   && emiratesidtxtbox.Text == emiratesid)
+                {
+                    return $"Duplicate found: Account Name = {accountName}, Address = {address}, Country = {country}, Email = {email}, " +
+                        $"Mobile No = {mobileno}, TRN = {trn}, GST NO = {gstno}, VAT NO = {vatno}, Emirates Id = {emiratesid}.";
+                }
+            }
+            return null;
+        }
+
         private void Account_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -431,11 +316,17 @@ namespace SmartFlow.Masters
             {
                 string query = string.Format("SELECT AccountSubControlID,AccountHead_ID,AccountControl_ID,User_ID,AccountSubControlName,AccountSubControlCode,CompanyID," +
                     "CreatedAt,UpdatedAt,AddedBy,CreatedDay,UpdatedDay,PrintName,Address,Country,Email,MobileNo,OpeningBalanceCredit,OpeningBalanceDebit,CodeAccount,Area," +
-                    "Description,TRN,GSTNO,VATNO,Location,State,PostalCode,Fax,Website,CreditLimit,PaymentTerms,DiscountPercentage,RefrencePersonName,RefrencePersonMobile," +
+                    "Description,TRN,GSTNO,VATNO,Location,State,PostalCode,Fax,Website,CreditLimit,PaymentTerm,DiscountPercentage,RefrencePersonName,RefrencePersonMobile," +
                     "RefrencePersonEmail,IsAllowedSMS,IsAllowedEmail,EmiratesId,ServiceTaxNo,BankName,BankAccountNo,IsCustomer,IsSupplier,IsEmployee " +
-                    "FROM AccountSubControlTable WHERE AccountSubControlID = '" + id + "'");
-                DataTable dataTable = new DataTable();
-                dataTable = DatabaseAccess.Retrive(query);
+                    "FROM AccountSubControlTable WHERE AccountSubControlID = @AccountSubControlID");
+
+                var parameters = new Dictionary<string, object>
+                {
+                    { "AccountSubControlID", id }
+                };
+
+                DataTable dataTable = DatabaseAccess.RetrieveData(query, parameters);
+
                 if (dataTable != null)
                 {
                     if (dataTable.Rows.Count > 0)
@@ -467,7 +358,7 @@ namespace SmartFlow.Masters
                         faxtxtbox.Text = dataTable.Rows[0]["Fax"].ToString();
                         websitetxtbox.Text = dataTable.Rows[0]["Website"].ToString();
                         creditlimittxtbox.Text = dataTable.Rows[0]["CreditLimit"].ToString();
-                        paymenttermstxtbox.Text = dataTable.Rows[0]["PaymentTerms"].ToString();
+                        paymenttermstxtbox.Text = dataTable.Rows[0]["PaymentTerm"].ToString();
                         gstnotxtbox.Text = dataTable.Rows[0]["GSTNO"].ToString();
                         vatnotxtbox.Text = dataTable.Rows[0]["VATNO"].ToString();
                         servicetaxnotxtbox.Text = dataTable.Rows[0]["ServiceTaxNo"].ToString();
@@ -478,15 +369,17 @@ namespace SmartFlow.Masters
                         refrencepersonnametxtbox.Text = dataTable.Rows[0]["RefrencePersonName"].ToString();
                         refrencepersonemailtxtbox.Text = dataTable.Rows[0]["RefrencePersonEmail"].ToString();
                         refrencepersonmobiletxtbox.Text = dataTable.Rows[0]["RefrencePersonMobile"].ToString();
-                        issmsallowedcheckbox.Checked = Convert.ToBoolean(dataTable.Rows[0]["IsAllowedSMS"].ToString());
-                        isemailallowedcheckbox.Checked = Convert.ToBoolean(dataTable.Rows[0]["IsAllowedEmail"].ToString());
+                        issmsallowedcheckbox.Checked = Convert.ToBoolean(dataTable.Rows[0]["IsAllowedSMS"]);
+                        isemailallowedcheckbox.Checked = Convert.ToBoolean(dataTable.Rows[0]["IsAllowedEmail"]);
                         descriptiontxtbox.Text = dataTable.Rows[0]["Description"].ToString();
+                        accountcodelbl.Visible = true;
                         accountcodelbl.Text = dataTable.Rows[0]["CodeAccount"].ToString();
+                        
                     }
                     savebtn.Text = "Update";
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void selectaccountgrouptxtbox_MouseClick(object sender, MouseEventArgs e)
         {
@@ -495,16 +388,24 @@ namespace SmartFlow.Masters
                 Form openForm = CommonFunction.IsFormOpen(typeof(AccountGroupSelectionForm));
                 if(openForm == null)
                 {
-                    AccountGroupSelectionForm accountSelection = new AccountGroupSelectionForm();
+                    AccountGroupSelectionForm accountSelection = new AccountGroupSelectionForm
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterParent,
+                    };
+                    accountSelection.FormClosed += delegate
+                    {
+                        UpdateAccountInfo();
+                    };
+                    CommonFunction.DisposeOnClose(accountSelection);
                     accountSelection.ShowDialog();
-                    UpdateAccountInfo();
                 }
                 else
                 {
                     openForm.BringToFront();
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void UpdateAccountInfo()
         {
@@ -548,9 +449,17 @@ namespace SmartFlow.Masters
                 Form openForm = CommonFunction.IsFormOpen(typeof(AccountGroupSelectionForm));
                 if (openForm == null)
                 {
-                    AccountGroupSelectionForm accountSelection = new AccountGroupSelectionForm();
+                    AccountGroupSelectionForm accountSelection = new AccountGroupSelectionForm
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterParent,
+                    };
+                    accountSelection.FormClosed += delegate
+                    {
+                        UpdateAccountInfo();
+                    };
+                    CommonFunction.DisposeOnClose(accountSelection);
                     accountSelection.ShowDialog();
-                    UpdateAccountInfo();
                 }
                 else
                 {
@@ -558,7 +467,6 @@ namespace SmartFlow.Masters
                 }
             }
         }
-
         private void selectaccountgrouptxtbox_Leave(object sender, EventArgs e)
         {
             if(!string.IsNullOrEmpty(selectaccountgrouptxtbox.Text) && !string.IsNullOrWhiteSpace(selectaccountgrouptxtbox.Text) && 
@@ -568,21 +476,28 @@ namespace SmartFlow.Masters
                 {
                     string initialize = "CU";
                     accountcodelbl.Text = GenerateRandomAccountCode(initialize);
+                    customerradio.Checked = true;
+                    accountcodelbl.Visible = true;
                 }
                 else if (selectaccountgrouptxtbox.Text == "Suppliers")
                 {
                     string initialize = "SU";
                     accountcodelbl.Text = GenerateRandomAccountCode(initialize);
+                    supplierradio.Checked = true;
+                    accountcodelbl.Visible = true;
                 }
                 else if(selectaccountgrouptxtbox.Text == "Employee")
                 {
                     string initialize = "EM";
                     accountcodelbl.Text = GenerateRandomAccountCode(initialize);
+                    employeeradio.Checked = true;
+                    accountcodelbl.Visible = true;
                 }
                 else
                 {
                     string initialize = "AC";
                     accountcodelbl.Text = GenerateRandomAccountCode(initialize);
+                    accountcodelbl.Visible = true;
                 }
             }
         }

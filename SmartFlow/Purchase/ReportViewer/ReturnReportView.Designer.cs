@@ -52,7 +52,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ReturnReportView";
-            this.Text = "PURCHASE RETURN REPORT VIEWER - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "PURCHASE RETURN REPORT VIEWER";
             this.Load += new System.EventHandler(this.ReturnReportView_Load);
             this.ResumeLayout(false);
 

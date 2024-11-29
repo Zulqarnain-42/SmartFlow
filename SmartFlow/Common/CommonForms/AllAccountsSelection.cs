@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Common.CommonForms
@@ -42,7 +35,7 @@ namespace SmartFlow.Common.CommonForms
                         }
                     }
                 }
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void dgvallaccountselection_KeyDown(object sender, KeyEventArgs e)
         {
@@ -56,7 +49,7 @@ namespace SmartFlow.Common.CommonForms
                         this.Close();
                     }
                 }
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void AllAccountsSelection_KeyDown(object sender, KeyEventArgs e)
         {

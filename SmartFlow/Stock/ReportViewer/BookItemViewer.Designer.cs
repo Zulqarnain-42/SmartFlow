@@ -52,7 +52,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "BookItemViewer";
-            this.Text = "BOOK ITEM REPORT VIEWER - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "BOOK ITEM REPORT VIEWER";
             this.Load += new System.EventHandler(this.BookItemViewer_Load);
             this.ResumeLayout(false);
 

@@ -2,17 +2,10 @@
 using SmartFlow.Common.CommonForms;
 using SmartFlow.Common;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 
 namespace SmartFlow.Masters
 {
@@ -64,7 +57,7 @@ namespace SmartFlow.Masters
                     }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         static bool IsProcessOpen(string processName)
         {
@@ -84,16 +77,25 @@ namespace SmartFlow.Masters
                 Form openForm = CommonFunction.IsFormOpen(typeof(AccountGroupSelectionForm));
                 if (openForm == null)
                 {
-                    AccountGroupSelectionForm selectionForm = new AccountGroupSelectionForm();
+                    AccountGroupSelectionForm selectionForm = new AccountGroupSelectionForm
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterScreen,
+                    };
+
+                    selectionForm.FormClosed += delegate
+                    {
+                        UpdateAccountGroupInfo();
+                    };
+                    CommonFunction.DisposeOnClose(selectionForm);
                     selectionForm.ShowDialog();
-                    UpdateAccountGroupInfo();
                 }
                 else
                 {
                     openForm.BringToFront();
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void UpdateAccountGroupInfo()
@@ -145,7 +147,7 @@ namespace SmartFlow.Masters
 
                     if (!row.IsNewRow)
                     {
-                        string accountname = CommonFunction.CleanText(Convert.ToString(row.Cells[0].Value));
+                        string accountname = null;
                         string getaccounthead = "SELECT AccountControlID,AccountControlName,AccountHead_ID,AccountControlCode,Alias FROM AccountControlTable " +
                         "WHERE AccountControlID = '" + accountgroupid + "'";
 
@@ -165,7 +167,6 @@ namespace SmartFlow.Masters
                                 "'" + Guid.NewGuid() + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + accountCode + "'); " +
                                 "SELECT SCOPE_IDENTITY();";
 
-                                subacountid = DatabaseAccess.InsertId(query);
                             }
                         }
                         if (accountgroupName == "Customers" || accountgroupName == "Reseller")
@@ -176,7 +177,6 @@ namespace SmartFlow.Masters
                                     "AccountSubControlId,AccountControlId) VALUES ('" + accountname + "','" + accountCode + "'," +
                                     "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "'," +
                                     "'" + subacountid + "','" + accountgroupid + "')";
-                                result = DatabaseAccess.Insert(addcustomer);
 
                             }
                             else
@@ -191,7 +191,6 @@ namespace SmartFlow.Masters
                                 string addsupplier = "INSERT INTO SupplierTable (SupplierName,SupplierCode,CreatedAt,CreatedDay,AccountSubControlId," +
                                     "AccountControlId) VALUES ('" + accountname + "','" + accountCode + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
                                     "'" + DateTime.Now.DayOfWeek + "','" + subacountid + "','" + accountgroupid + "')";
-                                result = DatabaseAccess.Insert(addsupplier);
                             }
                             else
                             {
@@ -205,7 +204,7 @@ namespace SmartFlow.Masters
                     MessageBox.Show("Saved Successfully.");
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         static string GenerateRandomAccountCode(string intializer)

@@ -1,5 +1,4 @@
-﻿using SmartFlow.Common;
-using System;
+﻿using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -10,6 +9,11 @@ namespace SmartFlow.Masters
         public SaleType()
         {
             InitializeComponent();
+        }
+        public SaleType(int saletypeid)
+        {
+            InitializeComponent();
+            this.saletypeidlbl.Text = saletypeid.ToString();
         }
         private void savebtn_Click(object sender, EventArgs e)
         {
@@ -22,52 +26,65 @@ namespace SmartFlow.Masters
                     saletypetxtbox.Focus();
                     return;
                 }
-
-                string saletype = CommonFunction.CleanText(saletypetxtbox.Text);
-
-                string query = string.Format("SELECT SaleTypeID,Name,Code,CreatedAt,CreatedDay,UpdatedAt,UpdatedDay,UserId,CompanyId,AddedBy,IsActive " +
-                    "FROM SaleTypeTable WHERE Name LIKE '" + saletype + "'");
-                DataTable datasaleType = DatabaseAccess.Retrive(query);
-
-                if(datasaleType.Rows.Count == 0)
+                
+                if(savebtn.Text == "UPDATE")
                 {
-                    string query2 = string.Empty;
-
-                    if (checkBoxactive.Checked && checkBoxTax.Checked)
+                    string updatesaletype = string.Empty;
+                    if(checkBoxactive.Checked && checkBoxTax.Checked)
                     {
-                        query2 = "INSERT INTO SaleTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + saletype + "','" + Guid.NewGuid() + "'," +
-                        "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + true + "','" + true + "')";
+                        updatesaletype = "UPDATE SaleTypeTable SET Name = '" + saletypetxtbox.Text + "'," +
+                            "UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
+                            "UpdatedDay = '" + DateTime.Now.DayOfWeek + "',IsActive = '" + true + "',IsTaxable = '" + true + "' WHERE SaleTypeID = '" + saletypeidlbl.Text + "'";
                     }
                     else if(checkBoxactive.Checked && !checkBoxTax.Checked)
                     {
-                        query2 = "INSERT INTO SaleTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + saletype + "','" + Guid.NewGuid() + "'," +
-                        "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + true + "','" + false + "')";
+                        updatesaletype = "UPDATE SaleTypeTable SET Name = '" + saletypetxtbox.Text + "'," +
+                           "UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
+                           "UpdatedDay = '" + DateTime.Now.DayOfWeek + "',IsActive = '" + true + "',IsTaxable = '" + false + "' WHERE SaleTypeID = '" + saletypeidlbl.Text + "'";
                     }
                     else if(!checkBoxactive.Checked && checkBoxTax.Checked)
                     {
-                        query2 = "INSERT INTO SaleTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + saletype + "','" + Guid.NewGuid() + "'," +
-                        "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + false + "','" + true + "')";
+                        updatesaletype = "UPDATE SaleTypeTable SET Name = '" + saletypetxtbox.Text + "'," +
+                           "UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
+                           "UpdatedDay = '" + DateTime.Now.DayOfWeek + "',IsActive = '" + false + "',IsTaxable = '" + true + "' WHERE SaleTypeID = '" + saletypeidlbl.Text + "'";
                     }
                     else
                     {
-                        query2 = "INSERT INTO SaleTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + saletype + "','" + Guid.NewGuid() + "'," +
-                        "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + false + "','" + false + "')";
+                        updatesaletype = "UPDATE SaleTypeTable SET Name = '" + saletypetxtbox.Text + "'," +
+                           "UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
+                           "UpdatedDay = '" + DateTime.Now.DayOfWeek + "',IsActive = '" + false + "',IsTaxable = '" + false + "' WHERE SaleTypeID = '" + saletypeidlbl.Text + "'";
                     }
-                    bool result = DatabaseAccess.Insert(query2);
-                    if (result) 
-                    {
-                        MessageBox.Show("Inserted Successfully!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Something is wrong.");
-                    }
+
+                    
                 }
                 else
                 {
-                    MessageBox.Show("Sale Type Already Exist.");
+                    string query2 = string.Empty;
+                    if (checkBoxactive.Checked && checkBoxTax.Checked)
+                    {
+                        query2 = "INSERT INTO SaleTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + saletypetxtbox.Text + "','" + Guid.NewGuid() + "'," +
+                            "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + true + "','" + true + "')";
+                    }
+                    else if (checkBoxactive.Checked && !checkBoxTax.Checked)
+                    {
+                        query2 = "INSERT INTO SaleTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + saletypetxtbox.Text + "','" + Guid.NewGuid() + "'," +
+                            "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + true + "','" + false + "')";
+                    }
+                    else if (!checkBoxactive.Checked && checkBoxTax.Checked)
+                    {
+                        query2 = "INSERT INTO SaleTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + saletypetxtbox.Text + "','" + Guid.NewGuid() + "'," +
+                            "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + false + "','" + true + "')";
+                    }
+                    else
+                    {
+                        query2 = "INSERT INTO SaleTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + saletypetxtbox.Text + "','" + Guid.NewGuid() + "'," +
+                            "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + false + "','" + false + "')";
+                    }
+
+                    
                 }
-            }catch(Exception ex) { throw ex; }
+                
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void exitbtn_Click(object sender, EventArgs e)
         {
@@ -98,6 +115,36 @@ namespace SmartFlow.Masters
                     e.Handled = true;
                 }
             }
+        }
+
+        private void SaleType_Load(object sender, EventArgs e)
+        {
+            string labeldata = saletypeidlbl.Text;
+            bool isInteger = int.TryParse(labeldata, out int result);
+            if (isInteger)
+            {
+                FindRecord(result);
+            }
+        }
+
+        private void FindRecord(int saletypeid)
+        {
+            try
+            {
+                string query = "SELECT SaleTypeID,Name,Code,UpdatedAt,UpdatedDay,IsActive,IsTaxable FROM SaleTypeTable WHERE SaleTypeID = '" + saletypeid + "'";
+                DataTable dtsaletype = DatabaseAccess.Retrive(query);
+
+                if (dtsaletype != null && dtsaletype.Rows.Count > 0) 
+                {
+                    saletypeidlbl.Text = dtsaletype.Rows[0]["SaleTypeID"].ToString();
+                    saletypetxtbox.Text = dtsaletype.Rows[0]["Name"].ToString();
+                    saletypecodelbl.Text = dtsaletype.Rows[0]["Code"].ToString();
+                    checkBoxactive.Checked = Convert.ToBoolean(dtsaletype.Rows[0]["IsActive"].ToString());
+                    checkBoxTax.Checked = Convert.ToBoolean(dtsaletype.Rows[0]["IsTaxable"].ToString());
+                }
+
+                savebtn.Text = "UPDATE";
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
     }
 }

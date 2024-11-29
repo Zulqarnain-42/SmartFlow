@@ -52,7 +52,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SaleQuotationView";
-            this.Text = "SALE QUOTATION REPORT VIEWER - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "SALE QUOTATION REPORT VIEWER";
             this.Load += new System.EventHandler(this.SaleQuotationView_Load);
             this.ResumeLayout(false);
 

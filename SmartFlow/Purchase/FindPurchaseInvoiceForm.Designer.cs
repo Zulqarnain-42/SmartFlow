@@ -35,9 +35,9 @@
             this.lporadio = new System.Windows.Forms.RadioButton();
             this.purchaseinvoiceradio = new System.Windows.Forms.RadioButton();
             this.purchasereturnradio = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
+            this.invoicenolbl = new System.Windows.Forms.Label();
             this.invoicenotxtbox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.datelbl = new System.Windows.Forms.Label();
             this.searchbtn = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.invoicedatetxtbox = new System.Windows.Forms.MaskedTextBox();
@@ -58,7 +58,7 @@
             // 
             this.headinglbl.BackColor = System.Drawing.Color.Black;
             this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
             this.headinglbl.Name = "headinglbl";
@@ -115,15 +115,15 @@
             this.purchasereturnradio.Text = "PURCHASE RETURN ";
             this.purchasereturnradio.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // invoicenolbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(60, 175);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 23);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "INVOICE NO";
+            this.invoicenolbl.AutoSize = true;
+            this.invoicenolbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invoicenolbl.Location = new System.Drawing.Point(60, 175);
+            this.invoicenolbl.Name = "invoicenolbl";
+            this.invoicenolbl.Size = new System.Drawing.Size(106, 23);
+            this.invoicenolbl.TabIndex = 5;
+            this.invoicenolbl.Text = "INVOICE NO";
             // 
             // invoicenotxtbox
             // 
@@ -135,15 +135,15 @@
             this.invoicenotxtbox.TabIndex = 6;
             this.invoicenotxtbox.Leave += new System.EventHandler(this.invoicenotxtbox_Leave);
             // 
-            // label2
+            // datelbl
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(60, 213);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 23);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "DATE";
+            this.datelbl.AutoSize = true;
+            this.datelbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.datelbl.Location = new System.Drawing.Point(60, 213);
+            this.datelbl.Name = "datelbl";
+            this.datelbl.Size = new System.Drawing.Size(50, 23);
+            this.datelbl.TabIndex = 7;
+            this.datelbl.Text = "DATE";
             // 
             // searchbtn
             // 
@@ -180,18 +180,19 @@
             this.ClientSize = new System.Drawing.Size(622, 326);
             this.Controls.Add(this.invoicedatetxtbox);
             this.Controls.Add(this.searchbtn);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.datelbl);
             this.Controls.Add(this.invoicenotxtbox);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.invoicenolbl);
             this.Controls.Add(this.purchasereturnradio);
             this.Controls.Add(this.purchaseinvoiceradio);
             this.Controls.Add(this.lporadio);
             this.Controls.Add(this.purchasequoteradio);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.Name = "FindPurchaseInvoiceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FIND PURCHASE INVOICE - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "FIND PURCHASE INVOICE";
             this.Load += new System.EventHandler(this.FindPurchaseInvoiceForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FindPurchaseInvoiceForm_KeyDown);
             this.panel1.ResumeLayout(false);
@@ -209,9 +210,9 @@
         private System.Windows.Forms.RadioButton lporadio;
         private System.Windows.Forms.RadioButton purchaseinvoiceradio;
         private System.Windows.Forms.RadioButton purchasereturnradio;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label invoicenolbl;
         private System.Windows.Forms.TextBox invoicenotxtbox;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label datelbl;
         private System.Windows.Forms.Button searchbtn;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.MaskedTextBox invoicedatetxtbox;

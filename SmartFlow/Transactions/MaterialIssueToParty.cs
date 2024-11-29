@@ -4,13 +4,7 @@ using SmartFlow.Common.Forms;
 using SmartFlow.Sales;
 using SmartFlow.Sales.CommonForm;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Transactions
@@ -57,9 +51,19 @@ namespace SmartFlow.Transactions
             Form openForm = CommonFunction.IsFormOpen(typeof(CustomerSelectionForm));
             if (openForm == null) 
             {
-                CustomerSelectionForm customerSelectionForm = new CustomerSelectionForm();
-                customerSelectionForm.ShowDialog();
-                UpdateCustomerInfo();
+                CustomerSelectionForm customerSelectionForm = new CustomerSelectionForm
+                {
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterParent,
+                };
+
+                customerSelectionForm.FormClosed += delegate
+                {
+                    UpdateCustomerInfo();
+                };
+                CommonFunction.DisposeOnClose(customerSelectionForm);
+                customerSelectionForm.Show();
+                
             }
             else
             {
@@ -87,9 +91,18 @@ namespace SmartFlow.Transactions
                 Form openForm = CommonFunction.IsFormOpen(typeof(CustomerSelectionForm));
                 if(openForm == null)
                 {
-                    CustomerSelectionForm customerSelection = new CustomerSelectionForm();
-                    customerSelection.ShowDialog();
-                    UpdateCustomerInfo();
+                    CustomerSelectionForm customerSelection = new CustomerSelectionForm
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterParent,
+                    };
+
+                    customerSelection.FormClosed += delegate
+                    {
+                        UpdateCustomerInfo();
+                    };
+                    CommonFunction.DisposeOnClose(customerSelection);
+                    customerSelection.Show();
                 }
                 else
                 {
@@ -106,9 +119,18 @@ namespace SmartFlow.Transactions
                 Form openForm = CommonFunction.IsFormOpen(typeof(CurrencySelection));
                 if (openForm == null)
                 {
-                    CurrencySelection currencySelection = new CurrencySelection();
-                    currencySelection.ShowDialog();
-                    UpdateCurrencyInfo();
+                    CurrencySelection currencySelection = new CurrencySelection
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterParent,
+                    };
+
+                    currencySelection.FormClosed += delegate
+                    {
+                        UpdateCurrencyInfo();
+                    };
+                    CommonFunction.DisposeOnClose(currencySelection);
+                    currencySelection.Show();
                 }
                 else
                 {
@@ -133,9 +155,19 @@ namespace SmartFlow.Transactions
             Form openForm = CommonFunction.IsFormOpen(typeof(SalesPersonSelection));
             if(openForm == null)
             {
-                SalesPersonSelection salesPersonSelection = new SalesPersonSelection();
-                salesPersonSelection.ShowDialog();
-                UpdateSalesPersonInfo();
+                SalesPersonSelection salesPersonSelection = new SalesPersonSelection
+                {
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterParent,
+                };
+
+                salesPersonSelection.FormClosed += delegate
+                {
+                    UpdateSalesPersonInfo();
+                };
+                CommonFunction.DisposeOnClose(salesPersonSelection);
+                salesPersonSelection.Show();
+                
             }
             else
             {
@@ -156,8 +188,13 @@ namespace SmartFlow.Transactions
             Form openForm = CommonFunction.IsFormOpen(typeof(InvoiceNoteForm));
             if (openForm == null) 
             {
-                InvoiceNoteForm invoiceNoteForm = new InvoiceNoteForm();
-                invoiceNoteForm.ShowDialog();
+                InvoiceNoteForm invoiceNoteForm = new InvoiceNoteForm
+                {
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterParent,
+                };
+                CommonFunction.DisposeOnClose(invoiceNoteForm);
+                invoiceNoteForm.Show();
             }
             else
             {
@@ -169,9 +206,18 @@ namespace SmartFlow.Transactions
             Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
             if(openForm == null)
             {
-                ProductSelectionForm productSelectionForm = new ProductSelectionForm();
-                productSelectionForm.ShowDialog();
-                UpdateProductInfo();
+                ProductSelectionForm productSelectionForm = new ProductSelectionForm
+                {
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterParent,
+                };
+
+                productSelectionForm.FormClosed += delegate
+                {
+                    UpdateProductInfo();
+                };
+                CommonFunction.DisposeOnClose(productSelectionForm);
+                productSelectionForm.Show();
             }
             else
             {
@@ -185,9 +231,17 @@ namespace SmartFlow.Transactions
                 Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
                 if(openForm == null)
                 {
-                    ProductSelectionForm productSelection = new ProductSelectionForm();
-                    productSelection.ShowDialog();
-                    UpdateProductInfo();
+                    ProductSelectionForm productSelection = new ProductSelectionForm
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterParent,
+                    };
+                    productSelection.FormClosed += delegate
+                    {
+                        UpdateProductInfo();
+                    };
+                    CommonFunction.DisposeOnClose(productSelection);
+                    productSelection.Show();
                 }
                 else
                 {
@@ -215,9 +269,17 @@ namespace SmartFlow.Transactions
                 {
                     string productmfr = mfrtxtbox.Text;
                     int productid = Convert.ToInt32(productidlbl.Text);
-                    ProductQtyWarehouse productQtyWarehouse = new ProductQtyWarehouse(productmfr, productid);
-                    productQtyWarehouse.ShowDialog();
-                    UpdateWarehouseInfo();
+                    ProductQtyWarehouse productQtyWarehouse = new ProductQtyWarehouse(productmfr, productid)
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterParent,
+                    };
+                    productQtyWarehouse.FormClosed += delegate
+                    {
+                        UpdateWarehouseInfo();
+                    };
+                    CommonFunction.DisposeOnClose(productQtyWarehouse);
+                    productQtyWarehouse.Show();
                 }
                 else
                 {
@@ -249,12 +311,24 @@ namespace SmartFlow.Transactions
 
                     if (GlobalVariables.saletypeistaxable)
                     {
-                        VATForm vATForm = new VATForm(totalamount);
+                        VATForm vATForm = new VATForm(totalamount)
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        };
+
+                        CommonFunction.DisposeOnClose(vATForm);
                         vATForm.ShowDialog();
                     }
                     else
                     {
-                        DiscountForm discountForm = new DiscountForm(totalamount);
+                        DiscountForm discountForm = new DiscountForm(totalamount)
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        };
+
+                        CommonFunction.DisposeOnClose(discountForm);
                         discountForm.ShowDialog();
                     }
 
@@ -316,7 +390,7 @@ namespace SmartFlow.Transactions
                     GlobalVariables.productfinalamountwithvatanddiscountitemwise = 0;
                     selectproducttxtbox.Focus();
                 }
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void MaterialIssueToParty_Load(object sender, EventArgs e)
         {
@@ -360,7 +434,11 @@ namespace SmartFlow.Transactions
 
                 return newInvoiceNumber;
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                return null;
+            }
         }
         private string GetLastInvoiceNumber()
         {
@@ -376,7 +454,7 @@ namespace SmartFlow.Transactions
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return lastInvoiceNumber;
@@ -397,7 +475,11 @@ namespace SmartFlow.Transactions
                     return invoicenotxtbox.Text;
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
         private void dgvsaleproducts_KeyDown(object sender, KeyEventArgs e)
         {
@@ -445,7 +527,7 @@ namespace SmartFlow.Transactions
                 {
                     MessageBox.Show("No Record Available.");
                 }
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
     }
 }

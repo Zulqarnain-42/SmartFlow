@@ -33,7 +33,7 @@
             this.headinglbl = new System.Windows.Forms.Label();
             this.debitamountradio = new System.Windows.Forms.RadioButton();
             this.creditamountradio = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
+            this.totalamountlbl = new System.Windows.Forms.Label();
             this.amounttxtbox = new System.Windows.Forms.TextBox();
             this.savebtn = new System.Windows.Forms.Button();
             this.exitbtn = new System.Windows.Forms.Button();
@@ -57,7 +57,7 @@
             // 
             this.headinglbl.BackColor = System.Drawing.Color.Black;
             this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
             this.headinglbl.Name = "headinglbl";
@@ -88,14 +88,14 @@
             this.creditamountradio.Text = "CREDIT AMOUNT";
             this.creditamountradio.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // totalamountlbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(96, 157);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 16);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "TOTAL AMOUNT ";
+            this.totalamountlbl.AutoSize = true;
+            this.totalamountlbl.Location = new System.Drawing.Point(96, 157);
+            this.totalamountlbl.Name = "totalamountlbl";
+            this.totalamountlbl.Size = new System.Drawing.Size(116, 16);
+            this.totalamountlbl.TabIndex = 3;
+            this.totalamountlbl.Text = "TOTAL AMOUNT ";
             // 
             // amounttxtbox
             // 
@@ -161,11 +161,12 @@
             this.Controls.Add(this.exitbtn);
             this.Controls.Add(this.savebtn);
             this.Controls.Add(this.amounttxtbox);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.totalamountlbl);
             this.Controls.Add(this.creditamountradio);
             this.Controls.Add(this.debitamountradio);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.Name = "UpdateOpeningBalance";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UPDATE OPENING BALANCE";
@@ -183,7 +184,7 @@
         private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.RadioButton debitamountradio;
         private System.Windows.Forms.RadioButton creditamountradio;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label totalamountlbl;
         private System.Windows.Forms.TextBox amounttxtbox;
         private System.Windows.Forms.Button savebtn;
         private System.Windows.Forms.Button exitbtn;

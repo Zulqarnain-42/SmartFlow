@@ -30,8 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.openboxproductqtylbl = new System.Windows.Forms.Label();
             this.selectwarehousefromtxtbox = new System.Windows.Forms.TextBox();
             this.addbtn = new System.Windows.Forms.Button();
             this.qtytextbox = new System.Windows.Forms.TextBox();
@@ -48,6 +50,7 @@
             this.productidlbl = new System.Windows.Forms.Label();
             this.openboxproductidlbl = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.closebtn = new System.Windows.Forms.Button();
             this.openboxproductpricelbl = new System.Windows.Forms.Label();
             this.savebtn = new System.Windows.Forms.Button();
             this.openboxproductbarcodelbl = new System.Windows.Forms.Label();
@@ -65,7 +68,6 @@
             this.productqty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productpricelbl = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.closebtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -75,28 +77,30 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1448, 45);
             this.panel1.TabIndex = 0;
             // 
-            // label1
+            // headinglbl
             // 
-            this.label1.BackColor = System.Drawing.Color.Black;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1448, 45);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "OPEN BOX PRODUCTS";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1448, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "OPEN BOX PRODUCTS";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.openboxproductqtylbl);
             this.panel2.Controls.Add(this.selectwarehousefromtxtbox);
             this.panel2.Controls.Add(this.addbtn);
             this.panel2.Controls.Add(this.qtytextbox);
@@ -112,13 +116,34 @@
             this.panel2.Size = new System.Drawing.Size(1448, 128);
             this.panel2.TabIndex = 1;
             // 
+            // textBox1
+            // 
+            this.textBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.textBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(254, 82);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(360, 32);
+            this.textBox1.TabIndex = 34;
+            // 
+            // openboxproductqtylbl
+            // 
+            this.openboxproductqtylbl.AutoSize = true;
+            this.openboxproductqtylbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openboxproductqtylbl.Location = new System.Drawing.Point(10, 87);
+            this.openboxproductqtylbl.Name = "openboxproductqtylbl";
+            this.openboxproductqtylbl.Size = new System.Drawing.Size(175, 23);
+            this.openboxproductqtylbl.TabIndex = 35;
+            this.openboxproductqtylbl.Text = "OPEN BOX QUANTITY";
+            // 
             // selectwarehousefromtxtbox
             // 
             this.selectwarehousefromtxtbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.selectwarehousefromtxtbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.selectwarehousefromtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.selectwarehousefromtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectwarehousefromtxtbox.Location = new System.Drawing.Point(254, 22);
+            this.selectwarehousefromtxtbox.Location = new System.Drawing.Point(254, 6);
             this.selectwarehousefromtxtbox.Name = "selectwarehousefromtxtbox";
             this.selectwarehousefromtxtbox.Size = new System.Drawing.Size(360, 32);
             this.selectwarehousefromtxtbox.TabIndex = 0;
@@ -140,7 +165,7 @@
             // 
             this.qtytextbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.qtytextbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.qtytextbox.Location = new System.Drawing.Point(957, 60);
+            this.qtytextbox.Location = new System.Drawing.Point(950, 44);
             this.qtytextbox.Name = "qtytextbox";
             this.qtytextbox.Size = new System.Drawing.Size(360, 32);
             this.qtytextbox.TabIndex = 3;
@@ -149,7 +174,7 @@
             // 
             this.qtylbl.AutoSize = true;
             this.qtylbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.qtylbl.Location = new System.Drawing.Point(620, 65);
+            this.qtylbl.Location = new System.Drawing.Point(620, 49);
             this.qtylbl.Name = "qtylbl";
             this.qtylbl.Size = new System.Drawing.Size(281, 23);
             this.qtylbl.TabIndex = 33;
@@ -161,7 +186,7 @@
             this.openboxproducttxtbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.openboxproducttxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.openboxproducttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openboxproducttxtbox.Location = new System.Drawing.Point(254, 60);
+            this.openboxproducttxtbox.Location = new System.Drawing.Point(254, 44);
             this.openboxproducttxtbox.Name = "openboxproducttxtbox";
             this.openboxproducttxtbox.Size = new System.Drawing.Size(360, 32);
             this.openboxproducttxtbox.TabIndex = 1;
@@ -173,7 +198,7 @@
             this.remainingproductmfrtxtbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.remainingproductmfrtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.remainingproductmfrtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remainingproductmfrtxtbox.Location = new System.Drawing.Point(957, 22);
+            this.remainingproductmfrtxtbox.Location = new System.Drawing.Point(950, 6);
             this.remainingproductmfrtxtbox.Name = "remainingproductmfrtxtbox";
             this.remainingproductmfrtxtbox.Size = new System.Drawing.Size(360, 32);
             this.remainingproductmfrtxtbox.TabIndex = 2;
@@ -183,7 +208,7 @@
             // 
             this.remainingboxproductlbl.AutoSize = true;
             this.remainingboxproductlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remainingboxproductlbl.Location = new System.Drawing.Point(620, 27);
+            this.remainingboxproductlbl.Location = new System.Drawing.Point(620, 11);
             this.remainingboxproductlbl.Name = "remainingboxproductlbl";
             this.remainingboxproductlbl.Size = new System.Drawing.Size(324, 23);
             this.remainingboxproductlbl.TabIndex = 23;
@@ -193,7 +218,7 @@
             // 
             this.selectopenproductlbl.AutoSize = true;
             this.selectopenproductlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectopenproductlbl.Location = new System.Drawing.Point(10, 65);
+            this.selectopenproductlbl.Location = new System.Drawing.Point(10, 49);
             this.selectopenproductlbl.Name = "selectopenproductlbl";
             this.selectopenproductlbl.Size = new System.Drawing.Size(228, 23);
             this.selectopenproductlbl.TabIndex = 21;
@@ -203,7 +228,7 @@
             // 
             this.warehousefromlbl.AutoSize = true;
             this.warehousefromlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.warehousefromlbl.Location = new System.Drawing.Point(10, 27);
+            this.warehousefromlbl.Location = new System.Drawing.Point(10, 11);
             this.warehousefromlbl.Name = "warehousefromlbl";
             this.warehousefromlbl.Size = new System.Drawing.Size(163, 23);
             this.warehousefromlbl.TabIndex = 17;
@@ -293,6 +318,19 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1448, 600);
             this.panel3.TabIndex = 2;
+            // 
+            // closebtn
+            // 
+            this.closebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.closebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.closebtn.Location = new System.Drawing.Point(1145, 552);
+            this.closebtn.Name = "closebtn";
+            this.closebtn.Size = new System.Drawing.Size(291, 45);
+            this.closebtn.TabIndex = 38;
+            this.closebtn.Text = "CLOSE";
+            this.closebtn.UseVisualStyleBackColor = true;
+            this.closebtn.Click += new System.EventHandler(this.closebtn_Click);
             // 
             // openboxproductpricelbl
             // 
@@ -467,19 +505,6 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // closebtn
-            // 
-            this.closebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.closebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.closebtn.Location = new System.Drawing.Point(1145, 552);
-            this.closebtn.Name = "closebtn";
-            this.closebtn.Size = new System.Drawing.Size(291, 45);
-            this.closebtn.TabIndex = 38;
-            this.closebtn.Text = "CLOSE";
-            this.closebtn.UseVisualStyleBackColor = true;
-            this.closebtn.Click += new System.EventHandler(this.closebtn_Click);
-            // 
             // OpenBoxProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -495,8 +520,7 @@
             this.MinimizeBox = false;
             this.Name = "OpenBoxProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OpenBoxProduct";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Text = "OPEN BOX PRODUCTS";
             this.Load += new System.EventHandler(this.OpenBoxProduct_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OpenBoxProduct_KeyDown);
             this.panel1.ResumeLayout(false);
@@ -513,7 +537,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label selectopenproductlbl;
         private System.Windows.Forms.Label warehousefromlbl;
@@ -549,5 +573,7 @@
         private System.Windows.Forms.TextBox selectwarehousefromtxtbox;
         private System.Windows.Forms.Label warehouseidlbl;
         private System.Windows.Forms.Button closebtn;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label openboxproductqtylbl;
     }
 }

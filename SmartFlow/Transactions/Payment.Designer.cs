@@ -54,7 +54,7 @@
             this.creditcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shortnarationcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.invoicedatetxtbox = new System.Windows.Forms.MaskedTextBox();
             this.currencyconversionratelbl = new System.Windows.Forms.Label();
             this.currencysymbollbl = new System.Windows.Forms.Label();
@@ -66,6 +66,8 @@
             this.accountnametxtbox = new System.Windows.Forms.TextBox();
             this.accountcodetxtbox = new System.Windows.Forms.TextBox();
             this.accountcodeandname = new System.Windows.Forms.Label();
+            this.paymentvoucheridlbl = new System.Windows.Forms.Label();
+            this.transactioncodelbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -305,25 +307,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1682, 45);
             this.panel1.TabIndex = 54;
             // 
-            // label4
+            // headinglbl
             // 
-            this.label4.BackColor = System.Drawing.Color.Black;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(0, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(1682, 45);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "PAYMENT VOUCHER";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1682, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "PAYMENT VOUCHER";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // invoicedatetxtbox
             // 
@@ -439,12 +441,34 @@
             this.accountcodeandname.TabIndex = 152;
             this.accountcodeandname.Text = "Acc. Code/Name";
             // 
+            // paymentvoucheridlbl
+            // 
+            this.paymentvoucheridlbl.AutoSize = true;
+            this.paymentvoucheridlbl.Location = new System.Drawing.Point(1079, 139);
+            this.paymentvoucheridlbl.Name = "paymentvoucheridlbl";
+            this.paymentvoucheridlbl.Size = new System.Drawing.Size(132, 16);
+            this.paymentvoucheridlbl.TabIndex = 157;
+            this.paymentvoucheridlbl.Text = "paymentvoucheridlbl";
+            this.paymentvoucheridlbl.Visible = false;
+            // 
+            // transactioncodelbl
+            // 
+            this.transactioncodelbl.AutoSize = true;
+            this.transactioncodelbl.Location = new System.Drawing.Point(1167, 54);
+            this.transactioncodelbl.Name = "transactioncodelbl";
+            this.transactioncodelbl.Size = new System.Drawing.Size(117, 16);
+            this.transactioncodelbl.TabIndex = 158;
+            this.transactioncodelbl.Text = "transactioncodelbl";
+            this.transactioncodelbl.Visible = false;
+            // 
             // Payment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1682, 770);
+            this.Controls.Add(this.transactioncodelbl);
+            this.Controls.Add(this.paymentvoucheridlbl);
             this.Controls.Add(this.amounttxtbox);
             this.Controls.Add(this.amountlbl);
             this.Controls.Add(this.accountnametxtbox);
@@ -473,7 +497,7 @@
             this.MinimizeBox = false;
             this.Name = "Payment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Payment - Future Art Broadcast Trading LLC";
+            this.Text = "PAYMENT";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Payment_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Payment_KeyDown);
@@ -505,7 +529,7 @@
         private System.Windows.Forms.TextBox longdescriptiontxtbox;
         private System.Windows.Forms.DataGridView dgvPayment;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.MaskedTextBox invoicedatetxtbox;
         private System.Windows.Forms.Label currencyconversionratelbl;
         private System.Windows.Forms.Label currencysymbollbl;
@@ -527,5 +551,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn debitcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn creditcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn shortnarationcolumn;
+        private System.Windows.Forms.Label paymentvoucheridlbl;
+        private System.Windows.Forms.Label transactioncodelbl;
     }
 }

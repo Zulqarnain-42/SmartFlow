@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.warehouseselectionlbl = new System.Windows.Forms.Label();
             this.dgvwarehouseselection = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvwarehouseselection)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // warehouseselectionlbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(160, 23);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Select a Warehouse";
+            this.warehouseselectionlbl.AutoSize = true;
+            this.warehouseselectionlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.warehouseselectionlbl.Location = new System.Drawing.Point(12, 45);
+            this.warehouseselectionlbl.Name = "warehouseselectionlbl";
+            this.warehouseselectionlbl.Size = new System.Drawing.Size(160, 23);
+            this.warehouseselectionlbl.TabIndex = 0;
+            this.warehouseselectionlbl.Text = "Select a Warehouse";
             // 
             // dgvwarehouseselection
             // 
@@ -68,25 +68,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 45);
             this.panel1.TabIndex = 2;
             // 
-            // label2
+            // headinglbl
             // 
-            this.label2.BackColor = System.Drawing.Color.Black;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(800, 45);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "WAREHOUSE SELECTION";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(800, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "WAREHOUSE SELECTION";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // WarehouseSelection
             // 
@@ -96,14 +96,14 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgvwarehouseselection);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.warehouseselectionlbl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "WarehouseSelection";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Warehouse Selection";
+            this.Text = "WAREHOUSE SELECTION";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.WarehouseSelection_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvwarehouseselection)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -114,9 +114,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label warehouseselectionlbl;
         private System.Windows.Forms.DataGridView dgvwarehouseselection;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label headinglbl;
     }
 }

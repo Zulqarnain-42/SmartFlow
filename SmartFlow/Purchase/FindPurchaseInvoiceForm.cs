@@ -1,4 +1,4 @@
-﻿using SmartFlow.Masters;
+﻿using SmartFlow.Common;
 using System;
 using System.Data;
 using System.Text.RegularExpressions;
@@ -47,6 +47,7 @@ namespace SmartFlow.Purchase
                         {
                             this.Close();
                             PurchaseQuotationInvoice purchaseQuotationInvoice = new PurchaseQuotationInvoice(dataInvoice,dtInvoiceDetails);
+                            CommonFunction.DisposeOnClose(purchaseQuotationInvoice);
                             purchaseQuotationInvoice.Show();
                         }
                     }
@@ -78,6 +79,7 @@ namespace SmartFlow.Purchase
                         {
                             this.Close();
                             PurchaseOrder purchaseOrder = new PurchaseOrder(dataInvoice, dtInvoiceDetails);
+                            CommonFunction.DisposeOnClose(purchaseOrder);
                             purchaseOrder.Show();
                         }
                     }
@@ -109,6 +111,7 @@ namespace SmartFlow.Purchase
                         {
                             this.Close();
                             PurchaseInvoice purchaseInvoice = new PurchaseInvoice(dataInvoice, dtInvoiceDetails);
+                            CommonFunction.DisposeOnClose(purchaseInvoice);
                             purchaseInvoice.Show();
                         }
                     }
@@ -140,6 +143,7 @@ namespace SmartFlow.Purchase
                         {
                             this.Close();
                             PurchaseReturnInvoice purchaseReturnInvoice = new PurchaseReturnInvoice(dataInvoice, dtInvoiceDetails);
+                            CommonFunction.DisposeOnClose(purchaseReturnInvoice);
                             purchaseReturnInvoice.Show();
                         }
                     }
@@ -152,7 +156,7 @@ namespace SmartFlow.Purchase
                 {
                     MessageBox.Show("Select Purchase Type Radio");
                 }
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void FindPurchaseInvoiceForm_Load(object sender, EventArgs e)
         {

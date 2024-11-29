@@ -52,7 +52,7 @@
             // 
             this.purchasetypeselectionlbl.BackColor = System.Drawing.Color.Black;
             this.purchasetypeselectionlbl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.purchasetypeselectionlbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.purchasetypeselectionlbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.purchasetypeselectionlbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.purchasetypeselectionlbl.Location = new System.Drawing.Point(0, 0);
             this.purchasetypeselectionlbl.Name = "purchasetypeselectionlbl";
@@ -125,7 +125,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "PurchaseTypeSelection";
-            this.Text = "PURCHASE TYPE SELECTION - FUTURE ART BROADCAST TRADING LLC";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "PURCHASE TYPE SELECTION";
             this.Load += new System.EventHandler(this.PurchaseTypeSelection_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PurchaseTypeSelection_KeyDown);
             this.panel1.ResumeLayout(false);

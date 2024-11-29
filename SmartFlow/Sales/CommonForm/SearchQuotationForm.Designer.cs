@@ -108,7 +108,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SearchQuotationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Search Quotation";
+            this.Text = "SEARCH QUOTATION FORM";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchQuotationForm_KeyDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();

@@ -53,7 +53,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "PrintedBarcodeViewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "PRINTED BARCODE - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "PRINTED BARCODE";
             this.Load += new System.EventHandler(this.PrintedBarcodeViewer_Load);
             this.ResumeLayout(false);
 

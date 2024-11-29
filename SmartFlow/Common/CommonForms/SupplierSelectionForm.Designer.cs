@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.searchtxtbox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.searchlbl = new System.Windows.Forms.Label();
             this.dgvsupplier = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -43,25 +43,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1232, 45);
             this.panel1.TabIndex = 0;
             // 
-            // label2
+            // headinglbl
             // 
-            this.label2.BackColor = System.Drawing.Color.Black;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(1232, 45);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "SEARCH FOR SUPPLIER";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1232, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "SEARCH FOR SUPPLIER";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // searchtxtbox
             // 
@@ -74,15 +74,15 @@
             this.searchtxtbox.TextChanged += new System.EventHandler(this.searchtxtbox_TextChanged);
             this.searchtxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchtxtbox_KeyDown);
             // 
-            // label1
+            // searchlbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 24);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "SEARCH";
+            this.searchlbl.AutoSize = true;
+            this.searchlbl.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchlbl.Location = new System.Drawing.Point(12, 16);
+            this.searchlbl.Name = "searchlbl";
+            this.searchlbl.Size = new System.Drawing.Size(75, 24);
+            this.searchlbl.TabIndex = 0;
+            this.searchlbl.Text = "SEARCH";
             // 
             // dgvsupplier
             // 
@@ -108,7 +108,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.searchtxtbox);
-            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.searchlbl);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 45);
             this.panel2.Name = "panel2";
@@ -137,7 +137,7 @@
             this.KeyPreview = true;
             this.Name = "SupplierSelectionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SUPPLIER SELECTION FORM - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "SUPPLIER SELECTION FORM";
             this.Load += new System.EventHandler(this.SupplierSelectionForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SupplierSelectionForm_KeyDown);
             this.panel1.ResumeLayout(false);
@@ -153,10 +153,10 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox searchtxtbox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label searchlbl;
         private System.Windows.Forms.DataGridView dgvsupplier;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.Panel panel3;
     }
 }

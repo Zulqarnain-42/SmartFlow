@@ -34,14 +34,14 @@
             this.savebtn = new System.Windows.Forms.Button();
             this.exitbtn = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.warehouseselectionlbl = new System.Windows.Forms.Label();
+            this.locationselection = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.sheetselectionlbl = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.txtfilename = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.selectwarehousetxtbox = new System.Windows.Forms.TextBox();
             this.warehouseidlbl = new System.Windows.Forms.Label();
             this.sampleexcelfilebtn = new System.Windows.Forms.Button();
@@ -116,26 +116,26 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // label1
+            // warehouseselectionlbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 305);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 23);
-            this.label1.TabIndex = 52;
-            this.label1.Text = "Select a warehouse";
+            this.warehouseselectionlbl.AutoSize = true;
+            this.warehouseselectionlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.warehouseselectionlbl.Location = new System.Drawing.Point(12, 305);
+            this.warehouseselectionlbl.Name = "warehouseselectionlbl";
+            this.warehouseselectionlbl.Size = new System.Drawing.Size(158, 23);
+            this.warehouseselectionlbl.TabIndex = 52;
+            this.warehouseselectionlbl.Text = "Select a warehouse";
             // 
-            // label2
+            // locationselection
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(9, 364);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(138, 23);
-            this.label2.TabIndex = 53;
-            this.label2.Text = "Select a Location";
-            this.label2.Visible = false;
+            this.locationselection.AutoSize = true;
+            this.locationselection.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.locationselection.Location = new System.Drawing.Point(9, 364);
+            this.locationselection.Name = "locationselection";
+            this.locationselection.Size = new System.Drawing.Size(138, 23);
+            this.locationselection.TabIndex = 53;
+            this.locationselection.Text = "Select a Location";
+            this.locationselection.Visible = false;
             // 
             // comboBox1
             // 
@@ -147,15 +147,15 @@
             this.comboBox1.TabIndex = 54;
             this.comboBox1.Visible = false;
             // 
-            // label3
+            // sheetselectionlbl
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 246);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(119, 23);
-            this.label3.TabIndex = 55;
-            this.label3.Text = "Select a Sheet ";
+            this.sheetselectionlbl.AutoSize = true;
+            this.sheetselectionlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sheetselectionlbl.Location = new System.Drawing.Point(12, 246);
+            this.sheetselectionlbl.Name = "sheetselectionlbl";
+            this.sheetselectionlbl.Size = new System.Drawing.Size(119, 23);
+            this.sheetselectionlbl.TabIndex = 55;
+            this.sheetselectionlbl.Text = "Select a Sheet ";
             // 
             // comboBox2
             // 
@@ -179,25 +179,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1594, 45);
             this.panel1.TabIndex = 58;
             // 
-            // label4
+            // headinglbl
             // 
-            this.label4.BackColor = System.Drawing.Color.Black;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(0, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(1594, 45);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "UPLOAD USING EXCEL";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1594, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "UPLOAD USING EXCEL";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // selectwarehousetxtbox
             // 
@@ -221,6 +221,7 @@
             // 
             // sampleexcelfilebtn
             // 
+            this.sampleexcelfilebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.sampleexcelfilebtn.Location = new System.Drawing.Point(12, 698);
             this.sampleexcelfilebtn.Name = "sampleexcelfilebtn";
             this.sampleexcelfilebtn.Size = new System.Drawing.Size(271, 30);
@@ -240,10 +241,10 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtfilename);
             this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.sheetselectionlbl);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.locationselection);
+            this.Controls.Add(this.warehouseselectionlbl);
             this.Controls.Add(this.exitbtn);
             this.Controls.Add(this.savebtn);
             this.Controls.Add(this.dataGridViewExcel);
@@ -273,13 +274,13 @@
         private System.Windows.Forms.Button exitbtn;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label locationselection;
+        private System.Windows.Forms.Label warehouseselectionlbl;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label sheetselectionlbl;
         private System.Windows.Forms.TextBox txtfilename;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.TextBox selectwarehousetxtbox;
         private System.Windows.Forms.Label warehouseidlbl;
         private System.Windows.Forms.Button sampleexcelfilebtn;

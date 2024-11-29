@@ -52,7 +52,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MaterialReceivedReportView";
-            this.Text = "MATERIAL RECEIVED REPORT VIEWER - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "MATERIAL RECEIVED REPORT VIEWER";
             this.Load += new System.EventHandler(this.MaterialReceivedReportView_Load);
             this.ResumeLayout(false);
 

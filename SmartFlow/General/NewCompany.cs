@@ -1,4 +1,7 @@
-﻿using System;
+﻿using SmartFlow.Common;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
@@ -7,155 +10,95 @@ namespace SmartFlow.General
 {
     public partial class NewCompany : Form
     {
+        private int companyid = 0;
         public NewCompany()
         {
             InitializeComponent();
+        }
+
+        public NewCompany(int companyID)
+        {
+            InitializeComponent();
+            this.companyid = companyID;
         }
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
             {
                 errorProvider.Clear();
-                if (companynametxtbox.Text.Trim().Length == 0)
+                string[] companyData = new string[]
                 {
-                    errorProvider.SetError(companynametxtbox, "Please Enter Company Name.");
-                    companynametxtbox.Focus();
-                    return;
-                }
-
-                if (mailingnametxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(mailingnametxtbox, "Please Enter Mail Name.");
-                    mailingnametxtbox.Focus();
-                    return;
-                }
-
-                if (licensenotxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(licensenotxtbox, "Please Enter License No.");
-                    licensenotxtbox.Focus();
-                    return;
-                }
-
-                if (vatnotxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(vatnotxtbox, "Please Enter Vat No.");
-                    vatnotxtbox.Focus();
-                    return;
-                }
-
-                if (addresstxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(addresstxtbox, "Please Enter Address");
-                    addresstxtbox.Focus();
-                    return;
-                }
-
-                if (statetxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(statetxtbox, "Please Enter State");
-                    statetxtbox.Focus();
-                    return;
-                }
-
-                if (countrytxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(countrytxtbox, "Please Enter Country");
-                    countrytxtbox.Focus();
-                    return;
-                }
-
-                if (telephonetxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(telephonetxtbox, "Please Enter Telephone");
-                    telephonetxtbox.Focus();
-                    return;
-                }
-
-                if (emailtxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(emailtxtbox, "Please Enter Email");
-                    emailtxtbox.Focus();
-                    return;
-                }
-
-                if (banknametxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(banknametxtbox, "Please Enter Bank Name");
-                    banknametxtbox.Focus();
-                    return;
-                }
-
-                if (accountnotxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(accountnotxtbox, "Please Enter Account No");
-                    accountnotxtbox.Focus();
-                    return;
-                }
-
-                if (branchtxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(branchtxtbox, "Please Enter Branch");
-                    branchtxtbox.Focus();
-                    return;
-                }
-
-                if (usernametxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(usernametxtbox, "Please Enter Username");
-                    usernametxtbox.Focus();
-                    return;
-                }
-
-                if (passwordtxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(passwordtxtbox, "Please Enter Password.");
-                    passwordtxtbox.Focus();
-                    return;
-                }
-
-                if (confirmpasswordtxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(confirmpasswordtxtbox, "Please Enter Confirm Password");
-                    confirmpasswordtxtbox.Focus();
-                    return;
-                }
-
-                if (adminemailtxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(adminemailtxtbox, "Please Enter Admin Email");
-                    adminemailtxtbox.Focus();
-                    return;
-                }
-
-                if(passwordtxtbox.Text != confirmpasswordtxtbox.Text)
-                {
-                    errorProvider.SetError(confirmpasswordtxtbox, "Password Did Not Matched!");
-                    confirmpasswordtxtbox.Focus();
-                    return;
-                }
+                    companynametxtbox.Text,
+                    mailingnametxtbox.Text,
+                    addresstxtbox.Text,
+                    address2txtbox.Text,
+                    statetxtbox.Text,
+                    countrytxtbox.Text,
+                    telephonetxtbox.Text,
+                    faxnumbertxtbox.Text,
+                    emailtxtbox.Text,
+                    pincodetxtbox.Text,
+                    trntxtbox.Text,
+                    licensenotxtbox.Text,
+                    gstnotxtbox.Text,
+                    vatnotxtbox.Text,
+                    banknametxtbox.Text,
+                    accountnotxtbox.Text,
+                    branchtxtbox.Text,
+                    // Add more text boxes as needed
+                };
 
                 string query = string.Empty;
                 string companyCode = Guid.NewGuid().ToString();
-                query = "INSERT INTO CompanyTable (CompnayCode,Name,MailingName,LisenceNo,GSTNO,VATNO,Address1,Address2," +
-                    "CountryId,Telephone,FaxNumber,EmailOne,PinCode,BankName,AccNO,BranchCode,CreatedAt,CreatedDay) VALUES " +
-                    "('" + companyCode + "','" + companynametxtbox.Text + "','" + mailingnametxtbox.Text + "','" + licensenotxtbox.Text + "'," +
-                    "'" + gstnotxtbox.Text + "','" + vatnotxtbox.Text + "','" + addresstxtbox.Text + "','" + address2txtbox.Text + "'," +
-                    "'" + pincodetxtbox.Text + "','" + countrytxtbox.Text + "','" + telephonetxtbox.Text + "','" + faxnumbertxtbox.Text + "'," +
-                    "'" + emailtxtbox.Text + "','" + banknametxtbox.Text + "','" + accountnotxtbox.Text + "','" + branchtxtbox.Text + "'," +
-                    "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')";
 
-                bool result = DatabaseAccess.Insert(query);
-                if (result)
+                string tableName = "CompanyTable";
+                var columnData = new Dictionary<string, object>
                 {
-                    string hashedPassword = HashPassword(passwordtxtbox.Text);
-                    string adduserquery = "INSERT INTO UserTable (Email,UserName,Password,UserCode,CompanyID,CreatedAt,CreatedDay) VALUES " +
-                        "('" + adminemailtxtbox.Text + "','" + usernametxtbox.Text + "','" + hashedPassword + "','" + Guid.NewGuid() + "','" + companyCode + "'," +
-                        "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')";
-                    bool useradded = DatabaseAccess.Insert(adduserquery);
+                    { "CompnayCode", companyCode },
+                    { "Name", companynametxtbox.Text },
+                    { "MailingName", mailingnametxtbox.Text },
+                    { "LisenceNo", licensenotxtbox.Text },
+                    { "GSTNO", gstnotxtbox.Text },
+                    { "VATNO", vatnotxtbox.Text },
+                    { "Address1", addresstxtbox.Text },
+                    { "Address2", address2txtbox.Text },
+                    { "PostalCode", postalcodetxtbox.Text },
+                    { "Country", countrytxtbox.Text },
+                    { "Telephone", telephonetxtbox.Text },
+                    { "FaxNumber", faxnumbertxtbox.Text },
+                    { "EmailOne", emailtxtbox.Text },
+                    { "PinCode", pincodetxtbox.Text },
+                    { "BankName", banknametxtbox.Text },
+                    { "AccNO", accountnotxtbox.Text },
+                    { "BranchCode", branchtxtbox.Text },
+                    { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                    { "CreatedDay", DateTime.Now.DayOfWeek },
+                    { "State", statetxtbox.Text }
+                };
+
+                bool isInserted = DatabaseAccess.ExecuteQuery(tableName, "INSERT", columnData);
+
+                if (isInserted)
+                {
+                    string hashedPassword = CommonFunction.HashPassword(passwordtxtbox.Text);
+
+                    tableName = "UserTable";
+                    columnData = new Dictionary<string, object>
+                    {
+                        { "Email" , adminemailtxtbox.Text },
+                        { "UserName" , usernametxtbox.Text },
+                        { "Password" , hashedPassword },
+                        { "UserCode" , Guid.NewGuid() },
+                        { "CompanyID" , companyCode },
+                        { "CreatedAt" , DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                        { "CreatedDay" , DateTime.Now.DayOfWeek.ToString() }
+                    };
+
+                    bool useradded = DatabaseAccess.ExecuteQuery(tableName, "INSERT", columnData);
 
                     if (useradded)
                     {
+                        SaveInputsToFile(companyData);
                         MessageBox.Show("Company Created Successfully.");
                     }
                     else
@@ -168,23 +111,15 @@ namespace SmartFlow.General
                     MessageBox.Show("Something is Wrong.");
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
-        public static string HashPassword(string password)
+        
+        private void SaveInputsToFile(string[] inputs)
         {
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                // ComputeHash - returns byte array
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+            string filePath = "companyData.txt";
 
-                // Convert byte array to a string
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    builder.Append(bytes[i].ToString("x2"));
-                }
-                return builder.ToString();
-            }
+            // Write all inputs to the text file, each on a new line
+            File.WriteAllLines(filePath, inputs);
         }
         private void companynametxtbox_TextChanged(object sender, EventArgs e)
         {
@@ -212,6 +147,10 @@ namespace SmartFlow.General
                 }
             }
             return false; // No TextBox is filled
+        }
+        private void closebtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

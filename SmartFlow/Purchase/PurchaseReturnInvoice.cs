@@ -1,7 +1,6 @@
 ﻿using SmartFlow.Common;
 using SmartFlow.Common.CommonForms;
 using SmartFlow.Common.Forms;
-using SmartFlow.Purchase;
 using SmartFlow.Sales;
 using SmartFlow.Sales.CommonForm;
 using System;
@@ -77,7 +76,11 @@ namespace SmartFlow
 
                 return newInvoiceNumber;
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
         private string GetLastInvoiceNumber()
         {
@@ -93,7 +96,7 @@ namespace SmartFlow
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return lastInvoiceNumber;
@@ -114,7 +117,11 @@ namespace SmartFlow
                     return invoicenotxtbox.Text;
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
         private void PurchaseReturnInvoice_KeyDown(object sender, KeyEventArgs e)
         {
@@ -167,9 +174,17 @@ namespace SmartFlow
             Form openForm = CommonFunction.IsFormOpen(typeof(SupplierSelectionForm));
             if (openForm == null)
             {
-                SupplierSelectionForm supplierSelection = new SupplierSelectionForm();
+                SupplierSelectionForm supplierSelection = new SupplierSelectionForm
+                {
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterParent,
+                };
+                supplierSelection.FormClosed += delegate
+                {
+                    UpdateSupplierTextBox();
+                };
+                CommonFunction.DisposeOnClose(supplierSelection);
                 supplierSelection.ShowDialog();
-                UpdateSupplierTextBox();
             }
             else
             {
@@ -203,9 +218,18 @@ namespace SmartFlow
                 Form openForm = CommonFunction.IsFormOpen(typeof(SupplierSelectionForm));
                 if (openForm == null)
                 {
-                    SupplierSelectionForm supplierSelection = new SupplierSelectionForm();
+                    SupplierSelectionForm supplierSelection = new SupplierSelectionForm
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterParent,
+                    };
+
+                    supplierSelection.FormClosed += delegate
+                    {
+                        UpdateSupplierTextBox();
+                    };
+                    CommonFunction.DisposeOnClose(supplierSelection);
                     supplierSelection.ShowDialog();
-                    UpdateSupplierTextBox();
                 }
                 else
                 {
@@ -218,9 +242,18 @@ namespace SmartFlow
             Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
             if(openForm == null)
             {
-                ProductSelectionForm productSelection = new ProductSelectionForm();
+                ProductSelectionForm productSelection = new ProductSelectionForm
+                {
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterParent,
+                };
+
+                productSelection.FormClosed += delegate
+                {
+                    UpdateProductTextBox();
+                };
+                CommonFunction.DisposeOnClose(productSelection);
                 productSelection.ShowDialog();
-                UpdateProductTextBox();
             }
             else
             {
@@ -246,9 +279,18 @@ namespace SmartFlow
                 Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
                 if (openForm == null)
                 {
-                    ProductSelectionForm productSelectionForm = new ProductSelectionForm();
+                    ProductSelectionForm productSelectionForm = new ProductSelectionForm
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterParent,
+                    };
+
+                    productSelectionForm.FormClosed += delegate
+                    {
+                        UpdateProductTextBox();
+                    };
+                    CommonFunction.DisposeOnClose(productSelectionForm);
                     productSelectionForm.ShowDialog();
-                    UpdateProductTextBox();
                 }
                 else
                 {
@@ -324,9 +366,18 @@ namespace SmartFlow
             Form openForm = CommonFunction.IsFormOpen(typeof(CurrencySelection));
             if (openForm == null)
             {
-                CurrencySelection currencySelection = new CurrencySelection();
+                CurrencySelection currencySelection = new CurrencySelection
+                {
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterParent,
+                };
+
+                currencySelection.FormClosed += delegate
+                {
+                    UpdateCurrencyTextBox();
+                };
+                CommonFunction.DisposeOnClose(currencySelection);
                 currencySelection.ShowDialog();
-                UpdateCurrencyTextBox();
             }
             else
             {
@@ -354,9 +405,18 @@ namespace SmartFlow
                 {
                     string productmfr = mfrtxtbox.Text;
                     int productid = Convert.ToInt32(productidlbl.Text);
-                    ProductQtyWarehouse productQtyWarehouse = new ProductQtyWarehouse(productmfr, productid);
+                    ProductQtyWarehouse productQtyWarehouse = new ProductQtyWarehouse(productmfr, productid)
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterParent,
+                    };
+
+                    productQtyWarehouse.FormClosed += delegate
+                    {
+                        UpdateWarehouseinfo();
+                    };
+                    CommonFunction.DisposeOnClose(productQtyWarehouse);
                     productQtyWarehouse.ShowDialog();
-                    UpdateWarehouseinfo();
                 }
                 else
                 {
@@ -378,9 +438,18 @@ namespace SmartFlow
             Form openForm = CommonFunction.IsFormOpen(typeof(PurchaseTypeSelection));
             if (openForm == null)
             {
-                PurchaseTypeSelection purchaseTypeSelection = new PurchaseTypeSelection();
+                PurchaseTypeSelection purchaseTypeSelection = new PurchaseTypeSelection
+                {
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterParent,
+                };
+
+                purchaseTypeSelection.FormClosed += delegate
+                {
+                    UpdatePurchaseTypeTxtBox();
+                };
+                CommonFunction.DisposeOnClose(purchaseTypeSelection);
                 purchaseTypeSelection.ShowDialog();
-                UpdatePurchaseTypeTxtBox();
             }
             else
             {
@@ -403,9 +472,18 @@ namespace SmartFlow
                 Form openForm = CommonFunction.IsFormOpen(typeof(PurchaseTypeSelection));
                 if (openForm == null) 
                 {
-                    PurchaseTypeSelection purchaseType = new PurchaseTypeSelection();
+                    PurchaseTypeSelection purchaseType = new PurchaseTypeSelection
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterParent,
+                    };
+
+                    purchaseType.FormClosed += delegate
+                    {
+                        UpdatePurchaseTypeTxtBox();
+                    };
+                    CommonFunction.DisposeOnClose(purchaseType);
                     purchaseType.ShowDialog();
-                    UpdatePurchaseTypeTxtBox();
                 }
                 else
                 {
@@ -418,7 +496,12 @@ namespace SmartFlow
             Form openForm = CommonFunction.IsFormOpen(typeof(InvoiceNoteForm));
             if (openForm == null)
             {
-                InvoiceNoteForm invoiceNoteForm = new InvoiceNoteForm();
+                InvoiceNoteForm invoiceNoteForm = new InvoiceNoteForm
+                {
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterParent,
+                };
+                CommonFunction.DisposeOnClose(invoiceNoteForm);
                 invoiceNoteForm.ShowDialog();
             }
             else
@@ -440,12 +523,22 @@ namespace SmartFlow
 
                     if (GlobalVariables.purchasetypeistaxable)
                     {
-                        VATForm vATForm = new VATForm(totalamount);
+                        VATForm vATForm = new VATForm(totalamount)
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        };
+                        CommonFunction.DisposeOnClose(vATForm);
                         vATForm.ShowDialog();
                     }
                     else
                     {
-                        DiscountForm discountForm = new DiscountForm(totalamount);
+                        DiscountForm discountForm = new DiscountForm(totalamount)
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        };
+                        CommonFunction.DisposeOnClose(discountForm);
                         discountForm.ShowDialog();
                     }
                     string mfr = mfrtxtbox.Text;
@@ -459,7 +552,6 @@ namespace SmartFlow
                     string unitname = GlobalVariables.unitnameglobal.ToString();
                     string itemdescription = itemwisedescriptionlbl.Text;
                     int warehouseid = Convert.ToInt32(warehouseidlbl.Text);
-                    string productcondition = "NEW";
 
                     if (vat > 0)
                     {
@@ -503,7 +595,7 @@ namespace SmartFlow
                     pricetxtbox.Text = string.Empty;
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
         }
         private void savebtn_Click(object sender, EventArgs e)
@@ -534,8 +626,8 @@ namespace SmartFlow
                 int supplierId = Convert.ToInt32(supplieridlbl.Text);
                 string suppliercode = suppliercodetxtbox.Text;
                 string supplierName = selectsuppliertxtbox.Text;
-                string naration = CommonFunction.CleanText(narationtxtbox.Text);
-                string invoicespecialnote = CommonFunction.CleanText(invoicespecialnotelbl.Text);
+                string naration = narationtxtbox.Text;
+                string invoicespecialnote = invoicespecialnotelbl.Text;
                 int currencyid = Convert.ToInt32(currencyidlbl.Text);
                 string currencyName = currencynamelbl.Text;
                 string currencySymbol = currencysymbollbl.Text;
@@ -552,7 +644,7 @@ namespace SmartFlow
                     "'" + currencyName + "','" + currencySymbol + "','" + currencyconversionRate + "','" + purchaseTypeid + "','" + false + "','" + purchaseType + "'," +
                     "'" + GlobalVariables.purchasetypeistaxable + "')");
 
-                bool insertquote = DatabaseAccess.Insert(addpurchasequote);
+                bool insertquote = false;
 
                 if (insertquote)
                 {
@@ -577,7 +669,6 @@ namespace SmartFlow
                             "'" + productid + "','" + quantity + "','" + costprice + "','" + productname + "','" + mfr + "','" + discount + "','" + vat + "'," +
                             "'" + itemdescription + "','" + warehouseid + "','" + total + "','" + unitid + "','" + true + "')");
 
-                        bool insertprod = DatabaseAccess.Insert(addproductdetails);
 
                     }
 
@@ -590,7 +681,7 @@ namespace SmartFlow
                 }
 
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
     }
 }

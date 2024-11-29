@@ -65,7 +65,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.codetxtbox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.selectcustomertxtbox = new System.Windows.Forms.TextBox();
             this.warehouseidlbl = new System.Windows.Forms.Label();
             this.productidlbl = new System.Windows.Forms.Label();
@@ -466,25 +466,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1768, 45);
             this.panel1.TabIndex = 97;
             // 
-            // label7
+            // headinglbl
             // 
-            this.label7.BackColor = System.Drawing.Color.Black;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label7.Location = new System.Drawing.Point(0, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(1768, 45);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "SALE RETURN INVOICE";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1768, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "SALE RETURN INVOICE";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // selectcustomertxtbox
             // 
@@ -541,6 +541,7 @@
             this.newbtn.TabIndex = 106;
             this.newbtn.Text = "NEW";
             this.newbtn.UseVisualStyleBackColor = true;
+            this.newbtn.Click += new System.EventHandler(this.newbtn_Click);
             // 
             // savebtn
             // 
@@ -693,6 +694,7 @@
             this.currencyidlbl.Size = new System.Drawing.Size(83, 16);
             this.currencyidlbl.TabIndex = 135;
             this.currencyidlbl.Text = "currencyidlbl";
+            this.currencyidlbl.Visible = false;
             // 
             // currencynamelbl
             // 
@@ -702,6 +704,7 @@
             this.currencynamelbl.Size = new System.Drawing.Size(106, 16);
             this.currencynamelbl.TabIndex = 136;
             this.currencynamelbl.Text = "currencynamelbl";
+            this.currencynamelbl.Visible = false;
             // 
             // currencysymbollbl
             // 
@@ -711,6 +714,7 @@
             this.currencysymbollbl.Size = new System.Drawing.Size(116, 16);
             this.currencysymbollbl.TabIndex = 137;
             this.currencysymbollbl.Text = "currencysymbollbl";
+            this.currencysymbollbl.Visible = false;
             // 
             // currencyconversionratelbl
             // 
@@ -720,6 +724,7 @@
             this.currencyconversionratelbl.Size = new System.Drawing.Size(161, 16);
             this.currencyconversionratelbl.TabIndex = 138;
             this.currencyconversionratelbl.Text = "currencyconversionratelbl";
+            this.currencyconversionratelbl.Visible = false;
             // 
             // invoicespecialnotelbl
             // 
@@ -729,6 +734,7 @@
             this.invoicespecialnotelbl.Size = new System.Drawing.Size(134, 16);
             this.invoicespecialnotelbl.TabIndex = 139;
             this.invoicespecialnotelbl.Text = "invoicespecialnotelbl";
+            this.invoicespecialnotelbl.Visible = false;
             // 
             // saletypeidlbl
             // 
@@ -738,6 +744,7 @@
             this.saletypeidlbl.Size = new System.Drawing.Size(84, 16);
             this.saletypeidlbl.TabIndex = 140;
             this.saletypeidlbl.Text = "saletypeidlbl";
+            this.saletypeidlbl.Visible = false;
             // 
             // customeridlbl
             // 
@@ -747,6 +754,7 @@
             this.customeridlbl.Size = new System.Drawing.Size(87, 16);
             this.customeridlbl.TabIndex = 141;
             this.customeridlbl.Text = "customeridlbl";
+            this.customeridlbl.Visible = false;
             // 
             // SaleReturnInvoice
             // 
@@ -798,7 +806,7 @@
             this.MinimizeBox = false;
             this.Name = "SaleReturnInvoice";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sale Return Invoice - Future Art Broadcast Trading LLC";
+            this.Text = "SALE RETURN INVOICE";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.SaleReturnInvoice_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaleReturnInvoice_KeyDown);
@@ -838,7 +846,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox codetxtbox;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.TextBox selectcustomertxtbox;
         private System.Windows.Forms.TextBox selectproducttxtbox;
         private System.Windows.Forms.Label productidlbl;

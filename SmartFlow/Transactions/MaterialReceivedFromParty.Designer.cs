@@ -67,7 +67,7 @@
             this.warehouseidlbl = new System.Windows.Forms.Label();
             this.selectcustomertxtbox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.mobiletxtbox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -124,6 +124,7 @@
             this.productserialnolbl.Size = new System.Drawing.Size(114, 16);
             this.productserialnolbl.TabIndex = 231;
             this.productserialnolbl.Text = "productserialnolbl";
+            this.productserialnolbl.Visible = false;
             // 
             // productserialnodilbl
             // 
@@ -133,6 +134,7 @@
             this.productserialnodilbl.Size = new System.Drawing.Size(125, 16);
             this.productserialnodilbl.TabIndex = 230;
             this.productserialnodilbl.Text = "productserialnodilbl";
+            this.productserialnodilbl.Visible = false;
             // 
             // invoicespecialnotelbl
             // 
@@ -512,25 +514,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1772, 38);
             this.panel1.TabIndex = 201;
             // 
-            // label7
+            // headinglbl
             // 
-            this.label7.BackColor = System.Drawing.Color.Black;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label7.Location = new System.Drawing.Point(0, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(1772, 38);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "MATERIAL RECEIVED FROM PARTY";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1772, 38);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "MATERIAL RECEIVED FROM PARTY";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // mobiletxtbox
             // 
@@ -884,8 +886,10 @@
             this.Controls.Add(this.invoicenotxtbox);
             this.Controls.Add(this.accountcodetxtbox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.Name = "MaterialReceivedFromParty";
-            this.Text = "MATERIAL RECEIVED FROM PARTY - FUTURE ART BROADCAST TRADING LLC";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "MATERIAL RECEIVED FROM PARTY";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MaterialReceivedFromParty_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MaterialReceivedFromParty_KeyDown);
@@ -941,7 +945,7 @@
         private System.Windows.Forms.Label warehouseidlbl;
         private System.Windows.Forms.TextBox selectcustomertxtbox;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.TextBox mobiletxtbox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TabControl tabControl1;

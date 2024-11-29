@@ -55,11 +55,11 @@ namespace SmartFlow.Purchase
             this.pricetxtbox = new System.Windows.Forms.TextBox();
             this.qtytxtbox = new System.Windows.Forms.TextBox();
             this.selectproducttxtbox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.pricelbl = new System.Windows.Forms.Label();
+            this.qtylbl = new System.Windows.Forms.Label();
+            this.productnamelbl = new System.Windows.Forms.Label();
             this.mfrtxtbox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.mfrlbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.itemwisedescriptionlbl = new System.Windows.Forms.Label();
             this.warehouseidlbl = new System.Windows.Forms.Label();
@@ -83,10 +83,10 @@ namespace SmartFlow.Purchase
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.savebtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.totaldiscountlbl = new System.Windows.Forms.Label();
             this.totalvatlbl = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.nettotallbl = new System.Windows.Forms.Label();
             this.totaldiscounttxtbox = new System.Windows.Forms.TextBox();
             this.totalvattxtbox = new System.Windows.Forms.TextBox();
             this.nettotaltxtbox = new System.Windows.Forms.TextBox();
@@ -311,11 +311,11 @@ namespace SmartFlow.Purchase
             this.panel3.Controls.Add(this.pricetxtbox);
             this.panel3.Controls.Add(this.qtytxtbox);
             this.panel3.Controls.Add(this.selectproducttxtbox);
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.label4);
-            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.pricelbl);
+            this.panel3.Controls.Add(this.qtylbl);
+            this.panel3.Controls.Add(this.productnamelbl);
             this.panel3.Controls.Add(this.mfrtxtbox);
-            this.panel3.Controls.Add(this.label2);
+            this.panel3.Controls.Add(this.mfrlbl);
             this.panel3.Location = new System.Drawing.Point(6, 8);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1724, 81);
@@ -360,36 +360,36 @@ namespace SmartFlow.Purchase
             this.selectproducttxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.selectproducttxtbox_KeyDown);
             this.selectproducttxtbox.Leave += new System.EventHandler(this.selectproducttxtbox_Leave);
             // 
-            // label5
+            // pricelbl
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pricelbl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1563, 6);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(48, 23);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Price";
+            this.pricelbl.AutoSize = true;
+            this.pricelbl.Location = new System.Drawing.Point(1563, 6);
+            this.pricelbl.Name = "pricelbl";
+            this.pricelbl.Size = new System.Drawing.Size(48, 23);
+            this.pricelbl.TabIndex = 5;
+            this.pricelbl.Text = "Price";
             // 
-            // label4
+            // qtylbl
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.qtylbl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1403, 6);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 23);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "QTY";
+            this.qtylbl.AutoSize = true;
+            this.qtylbl.Location = new System.Drawing.Point(1403, 6);
+            this.qtylbl.Name = "qtylbl";
+            this.qtylbl.Size = new System.Drawing.Size(41, 23);
+            this.qtylbl.TabIndex = 4;
+            this.qtylbl.Text = "QTY";
             // 
-            // label3
+            // productnamelbl
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(196, 7);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(120, 23);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Product Name";
+            this.productnamelbl.AutoSize = true;
+            this.productnamelbl.Location = new System.Drawing.Point(196, 7);
+            this.productnamelbl.Name = "productnamelbl";
+            this.productnamelbl.Size = new System.Drawing.Size(120, 23);
+            this.productnamelbl.TabIndex = 2;
+            this.productnamelbl.Text = "Product Name";
             // 
             // mfrtxtbox
             // 
@@ -401,14 +401,14 @@ namespace SmartFlow.Purchase
             this.mfrtxtbox.Size = new System.Drawing.Size(181, 32);
             this.mfrtxtbox.TabIndex = 4;
             // 
-            // label2
+            // mfrlbl
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 23);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "MFR";
+            this.mfrlbl.AutoSize = true;
+            this.mfrlbl.Location = new System.Drawing.Point(8, 7);
+            this.mfrlbl.Name = "mfrlbl";
+            this.mfrlbl.Size = new System.Drawing.Size(45, 23);
+            this.mfrlbl.TabIndex = 0;
+            this.mfrlbl.Text = "MFR";
             // 
             // panel2
             // 
@@ -654,25 +654,25 @@ namespace SmartFlow.Purchase
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1768, 45);
             this.panel1.TabIndex = 51;
             // 
-            // label6
+            // headinglbl
             // 
-            this.label6.BackColor = System.Drawing.Color.Black;
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label6.Location = new System.Drawing.Point(0, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(1768, 45);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "PURCHASE ORDER";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1768, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "PURCHASE ORDER";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // totaldiscountlbl
             // 
@@ -700,16 +700,16 @@ namespace SmartFlow.Purchase
             this.totalvatlbl.Text = "TOTAL VAT";
             this.totalvatlbl.Visible = false;
             // 
-            // label14
+            // nettotallbl
             // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(1268, 70);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(94, 23);
-            this.label14.TabIndex = 128;
-            this.label14.Text = "NET TOTAL";
+            this.nettotallbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nettotallbl.AutoSize = true;
+            this.nettotallbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nettotallbl.Location = new System.Drawing.Point(1268, 70);
+            this.nettotallbl.Name = "nettotallbl";
+            this.nettotallbl.Size = new System.Drawing.Size(94, 23);
+            this.nettotallbl.TabIndex = 128;
+            this.nettotallbl.Text = "NET TOTAL";
             // 
             // totaldiscounttxtbox
             // 
@@ -763,7 +763,7 @@ namespace SmartFlow.Purchase
             this.Controls.Add(this.totaldiscounttxtbox);
             this.Controls.Add(this.totaldiscountlbl);
             this.Controls.Add(this.totalvatlbl);
-            this.Controls.Add(this.label14);
+            this.Controls.Add(this.nettotallbl);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.newbtn);
             this.Controls.Add(this.tabControl1);
@@ -775,7 +775,7 @@ namespace SmartFlow.Purchase
             this.MinimizeBox = false;
             this.Name = "PurchaseOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Purchase Order Invoice - Future Art Broadcast Trading LLC";
+            this.Text = "PURCHASE ORDER INVOICE";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.PurchaseOrderInvoice_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PurchaseOrderInvoice_KeyDown);
@@ -802,11 +802,11 @@ namespace SmartFlow.Purchase
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.DataGridView dgvpurchaseproducts;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label pricelbl;
+        private System.Windows.Forms.Label qtylbl;
+        private System.Windows.Forms.Label productnamelbl;
         private System.Windows.Forms.TextBox mfrtxtbox;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label mfrlbl;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox codetxtbox;
         private System.Windows.Forms.Label label8;
@@ -815,7 +815,7 @@ namespace SmartFlow.Purchase
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Button savebtn;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label headinglbl;
         private TextBox selectproducttxtbox;
         private TextBox selectsuppliertxtbox;
         private Label productidlbl;
@@ -826,7 +826,7 @@ namespace SmartFlow.Purchase
         private MaskedTextBox invoicedatetxtbox;
         private Label totaldiscountlbl;
         private Label totalvatlbl;
-        private Label label14;
+        private Label nettotallbl;
         private TextBox qtytxtbox;
         private TextBox pricetxtbox;
         private Label currencyconversionratelbl;

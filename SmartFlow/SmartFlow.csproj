@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -8,12 +9,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>SmartFlow</RootNamespace>
     <AssemblyName>SmartFlow</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,6 +49,12 @@
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="DocumentFormat.OpenXml, Version=2.16.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.16.0\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
@@ -91,6 +99,8 @@
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.DirectoryServices" />
@@ -122,14 +132,12 @@
     <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
       <Private>True</Private>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
-      <Private>True</Private>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -144,7 +152,6 @@
     </Reference>
     <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
-      <Private>True</Private>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Text.RegularExpressions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -217,6 +224,12 @@
     <Compile Include="Common\CommonForms\PurchaseTypeSelection.Designer.cs">
       <DependentUpon>PurchaseTypeSelection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\CommonForms\RoleSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\CommonForms\RoleSelectionForm.Designer.cs">
+      <DependentUpon>RoleSelectionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\CommonForms\SalesPersonSelection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -279,11 +292,29 @@
     <Compile Include="Masters\CreateProduct.Designer.cs">
       <DependentUpon>CreateProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="Masters\Currency.cs">
+    <Compile Include="Masters\CreateRight.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Masters\Currency.Designer.cs">
-      <DependentUpon>Currency.cs</DependentUpon>
+    <Compile Include="Masters\CreateRight.Designer.cs">
+      <DependentUpon>CreateRight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\CreateRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\CreateRole.Designer.cs">
+      <DependentUpon>CreateRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\CreateUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\CreateUser.Designer.cs">
+      <DependentUpon>CreateUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\CurrencyList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\CurrencyList.Designer.cs">
+      <DependentUpon>CurrencyList.cs</DependentUpon>
     </Compile>
     <Compile Include="Masters\Employee.cs">
       <SubType>Form</SubType>
@@ -302,6 +333,24 @@
     </Compile>
     <Compile Include="Masters\GroupingAccount.Designer.cs">
       <DependentUpon>GroupingAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\ListGroupingAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\ListGroupingAccount.Designer.cs">
+      <DependentUpon>ListGroupingAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\ListPurchaseType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\ListPurchaseType.Designer.cs">
+      <DependentUpon>ListPurchaseType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\ListSaleType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\ListSaleType.Designer.cs">
+      <DependentUpon>ListSaleType.cs</DependentUpon>
     </Compile>
     <Compile Include="Masters\OpeningBalance.cs">
       <SubType>Form</SubType>
@@ -387,6 +436,18 @@
     <Compile Include="Masters\SaleType.Designer.cs">
       <DependentUpon>SaleType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Masters\SystemUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\SystemUsers.Designer.cs">
+      <DependentUpon>SystemUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\UnitList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\UnitList.Designer.cs">
+      <DependentUpon>UnitList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Masters\UpdateOpeningBalance.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -398,6 +459,18 @@
     </Compile>
     <Compile Include="Masters\UploadExcel.Designer.cs">
       <DependentUpon>UploadExcel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\UserRights.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\UserRights.Designer.cs">
+      <DependentUpon>UserRights.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\UserRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\UserRoles.Designer.cs">
+      <DependentUpon>UserRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Payroll\ChangePassword.cs">
       <SubType>Form</SubType>
@@ -495,6 +568,12 @@
     <Compile Include="Purchase\WarehouseSelection.Designer.cs">
       <DependentUpon>WarehouseSelection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\ItemWiseInventoyReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\ItemWiseInventoyReport.Designer.cs">
+      <DependentUpon>ItemWiseInventoyReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\CommonForm\AvailabilityForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -542,12 +621,6 @@
     </Compile>
     <Compile Include="Sales\CommonForm\VATForm.Designer.cs">
       <DependentUpon>VATForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sales\CustomProductForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sales\CustomProductForm.Designer.cs">
-      <DependentUpon>CustomProductForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Sales\DeliveryNote.cs">
       <SubType>Form</SubType>
@@ -708,6 +781,12 @@
     <Compile Include="Stock\BookItem.Designer.cs">
       <DependentUpon>BookItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Stock\ListWarehouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\ListWarehouse.Designer.cs">
+      <DependentUpon>ListWarehouse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Stock\OpeningStock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -840,6 +919,12 @@
     <Compile Include="Stock\OpenBoxProduct.Designer.cs">
       <DependentUpon>OpenBoxProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Stock\StockManageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\StockManageForm.Designer.cs">
+      <DependentUpon>StockManageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Stock\StockTransfer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -864,12 +949,6 @@
     <Compile Include="Stock\UpdateQuantity.Designer.cs">
       <DependentUpon>UpdateQuantity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Stock\Warehouse.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Stock\Warehouse.Designer.cs">
-      <DependentUpon>Warehouse.cs</DependentUpon>
-    </Compile>
     <Compile Include="Transactions\CommonForm\DebitAndCreditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -887,6 +966,12 @@
     </Compile>
     <Compile Include="Transactions\DebitNote.Designer.cs">
       <DependentUpon>DebitNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\FindTransactionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\FindTransactionForm.Designer.cs">
+      <DependentUpon>FindTransactionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Transactions\Journal.cs">
       <SubType>Form</SubType>
@@ -1023,6 +1108,9 @@
     <EmbeddedResource Include="Common\CommonForms\PurchaseTypeSelection.resx">
       <DependentUpon>PurchaseTypeSelection.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Common\CommonForms\RoleSelectionForm.resx">
+      <DependentUpon>RoleSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Common\CommonForms\SalesPersonSelection.resx">
       <DependentUpon>SalesPersonSelection.cs</DependentUpon>
     </EmbeddedResource>
@@ -1053,8 +1141,17 @@
     <EmbeddedResource Include="Masters\CreateProduct.resx">
       <DependentUpon>CreateProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Masters\Currency.resx">
-      <DependentUpon>Currency.cs</DependentUpon>
+    <EmbeddedResource Include="Masters\CreateRight.resx">
+      <DependentUpon>CreateRight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\CreateRole.resx">
+      <DependentUpon>CreateRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\CreateUser.resx">
+      <DependentUpon>CreateUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\CurrencyList.resx">
+      <DependentUpon>CurrencyList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Employee.resx">
       <DependentUpon>Employee.cs</DependentUpon>
@@ -1064,6 +1161,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\GroupingAccount.resx">
       <DependentUpon>GroupingAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\ListGroupingAccount.resx">
+      <DependentUpon>ListGroupingAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\ListPurchaseType.resx">
+      <DependentUpon>ListPurchaseType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\ListSaleType.resx">
+      <DependentUpon>ListSaleType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\OpeningBalance.resx">
       <DependentUpon>OpeningBalance.cs</DependentUpon>
@@ -1115,11 +1221,23 @@
     <EmbeddedResource Include="Masters\SaleType.resx">
       <DependentUpon>SaleType.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Masters\SystemUsers.resx">
+      <DependentUpon>SystemUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\UnitList.resx">
+      <DependentUpon>UnitList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Masters\UpdateOpeningBalance.resx">
       <DependentUpon>UpdateOpeningBalance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\UploadExcel.resx">
       <DependentUpon>UploadExcel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\UserRights.resx">
+      <DependentUpon>UserRights.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\UserRoles.resx">
+      <DependentUpon>UserRoles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Payroll\ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
@@ -1177,6 +1295,9 @@
     <EmbeddedResource Include="Purchase\WarehouseSelection.resx">
       <DependentUpon>WarehouseSelection.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ItemWiseInventoyReport.resx">
+      <DependentUpon>ItemWiseInventoyReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sales\CommonForm\AvailabilityForm.resx">
       <DependentUpon>AvailabilityForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1200,9 +1321,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\CommonForm\VATForm.resx">
       <DependentUpon>VATForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sales\CustomProductForm.resx">
-      <DependentUpon>CustomProductForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\DeliveryNote.resx">
       <DependentUpon>DeliveryNote.cs</DependentUpon>
@@ -1287,9 +1405,13 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Stock\BookItem.resx">
       <DependentUpon>BookItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock\ListWarehouse.resx">
+      <DependentUpon>ListWarehouse.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Stock\OpeningStock.resx">
       <DependentUpon>OpeningStock.cs</DependentUpon>
@@ -1366,6 +1488,9 @@
     <EmbeddedResource Include="Stock\OpenBoxProduct.resx">
       <DependentUpon>OpenBoxProduct.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Stock\StockManageForm.resx">
+      <DependentUpon>StockManageForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Stock\StockTransfer.resx">
       <DependentUpon>StockTransfer.cs</DependentUpon>
     </EmbeddedResource>
@@ -1378,9 +1503,6 @@
     <EmbeddedResource Include="Stock\UpdateQuantity.resx">
       <DependentUpon>UpdateQuantity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Stock\Warehouse.resx">
-      <DependentUpon>Warehouse.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Transactions\CommonForm\DebitAndCreditForm.resx">
       <DependentUpon>DebitAndCreditForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1389,6 +1511,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Transactions\DebitNote.resx">
       <DependentUpon>DebitNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\FindTransactionForm.resx">
+      <DependentUpon>FindTransactionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Transactions\Journal.resx">
       <DependentUpon>Journal.cs</DependentUpon>
@@ -1468,9 +1593,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
 </Project>

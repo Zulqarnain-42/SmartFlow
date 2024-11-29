@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Common.CommonForms
@@ -53,21 +46,18 @@ namespace SmartFlow.Common.CommonForms
         {
             try
             {
-                if (dgvaccountgroupselection != null)
+                if (dgvaccountgroupselection != null && dgvaccountgroupselection.Rows.Count > 0)
                 {
-                    if (dgvaccountgroupselection.Rows.Count > 0)
+                    if (dgvaccountgroupselection.SelectedRows.Count == 1)
                     {
-                        if (dgvaccountgroupselection.SelectedRows.Count == 1)
-                        {
-                            GlobalVariables.accountidglobal = Convert.ToInt32(dgvaccountgroupselection.CurrentRow.Cells[0].Value);
-                            GlobalVariables.accountnameglobal = dgvaccountgroupselection.CurrentRow.Cells[1].Value.ToString();
-                            GlobalVariables.accountheadidglobal = Convert.ToInt32(dgvaccountgroupselection.CurrentRow.Cells["AccountHead_ID"].Value);
-                            this.Close();
-                        }
+                        GlobalVariables.accountidglobal = Convert.ToInt32(dgvaccountgroupselection.CurrentRow.Cells[0].Value);
+                        GlobalVariables.accountnameglobal = dgvaccountgroupselection.CurrentRow.Cells[1].Value.ToString();
+                        GlobalVariables.accountheadidglobal = Convert.ToInt32(dgvaccountgroupselection.CurrentRow.Cells["AccountHead_ID"].Value);
+                        this.Close();
                     }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void dgvaccountgroupselection_KeyDown(object sender, KeyEventArgs e)
         {
@@ -85,7 +75,7 @@ namespace SmartFlow.Common.CommonForms
                     }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void AccountGroupSelectionForm_KeyDown(object sender, KeyEventArgs e)
         {

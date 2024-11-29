@@ -4,13 +4,7 @@ using SmartFlow.Common.Forms;
 using SmartFlow.Sales;
 using SmartFlow.Transactions.CommonForm;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Transactions
@@ -43,7 +37,11 @@ namespace SmartFlow.Transactions
                     return invoicenotxtbox.Text;
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
         private string GenerateNextInvoiceNumber()
         {
@@ -75,7 +73,11 @@ namespace SmartFlow.Transactions
 
                 return newInvoiceNumber;
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                return null;
+            }
         }
         private string GetLastInvoiceNumber()
         {
@@ -91,7 +93,7 @@ namespace SmartFlow.Transactions
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return lastInvoiceNumber;
@@ -128,9 +130,19 @@ namespace SmartFlow.Transactions
                     Form openForm = CommonFunction.IsFormOpen(typeof(CurrencySelection));
                     if (openForm == null)
                     {
-                        CurrencySelection currencySelection = new CurrencySelection();
-                        currencySelection.ShowDialog();
-                        UpdateCurrencyTextBox();
+                        CurrencySelection currencySelection = new CurrencySelection
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        };
+
+                        currencySelection.FormClosed += delegate
+                        {
+                            UpdateCurrencyTextBox();
+                        };
+                        CommonFunction.DisposeOnClose(currencySelection);
+                        currencySelection.Show();
+
                     }
                     else
                     {
@@ -157,8 +169,13 @@ namespace SmartFlow.Transactions
                 Form openForm = CommonFunction.IsFormOpen(typeof(DebitAndCreditForm));
                 if (openForm == null)
                 {
-                    DebitAndCreditForm debitAndCreditForm = new DebitAndCreditForm();
-                    debitAndCreditForm.ShowDialog();
+                    DebitAndCreditForm debitAndCreditForm = new DebitAndCreditForm
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterParent,
+                    };
+                    CommonFunction.DisposeOnClose(debitAndCreditForm);
+                    debitAndCreditForm.Show();
                 }
                 else
                 {
@@ -228,14 +245,14 @@ namespace SmartFlow.Transactions
                 }
 
                 string transactionCode = Guid.NewGuid().ToString();
-                string longdescription = CommonFunction.CleanText(longdescriptiontxtbox.Text);
+                string longdescription = longdescriptiontxtbox.Text;
 
                 string query = string.Format("INSERT INTO TransactionTable (InvoiceNo,InvoiceDate,TransactionCode,LongDescription,CurrencyId,CurrencyName,CurrencySymbol," +
                     "ConversionRate,CreatedAt,CreatedDay) VALUES ('" + invoicenotxtbox.Text + "'," +
                     "'" + invoicedatetxtbox.Text + "','" + transactionCode + "','" + longdescription + "','" + currencyidlbl.Text + "'," +
                     "'" + currencynamelbl.Text + "','" + currencysymbollbl.Text + "','" + currencyconversionratelbl.Text + "'," +
                     "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')");
-                int transactionid = DatabaseAccess.InsertId(query);
+                int transactionid = 0;
 
                 if (transactionid > 0) 
                 {
@@ -255,20 +272,28 @@ namespace SmartFlow.Transactions
                         string querysubdata = string.Format("INSERT INTO TransactionDetailTable (TransactionId,TransactionCode,AccountId,AccountCode,AccountName,IsDebit," +
                         "IsCredit,ShortDescription,DebitAmount,CreditAmount) VALUES ('" + transactionid + "','" + transactionCode + "','" + accountid + "'," +
                         "'" + accountCode + "','" + accountName + "','" + isdebit + "','" + iscredit + "','" + debitamount + "','" + creditamount + "')");
-                        bool subdatainsert = DatabaseAccess.Insert(querysubdata);
                     }
                 }
 
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void accountnametxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
             if(openForm == null)
             {
-                AccountSelectionForm accountSelectionForm = new AccountSelectionForm();
-                accountSelectionForm.ShowDialog();
-                UpdateAccountInfo();
+                AccountSelectionForm accountSelectionForm = new AccountSelectionForm
+                {
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterParent,
+                };
+
+                accountSelectionForm.FormClosed += delegate
+                {
+                    UpdateAccountInfo();
+                };
+                CommonFunction.DisposeOnClose(accountSelectionForm);
+                accountSelectionForm.Show();
             }
             else
             {
@@ -282,9 +307,17 @@ namespace SmartFlow.Transactions
                 Form openForm = CommonFunction.IsFormOpen(typeof(AllAccountsSelection));
                 if (openForm == null)
                 {
-                    AccountSelectionForm accountSelectionForm = new AccountSelectionForm();
-                    accountSelectionForm.ShowDialog();
-                    UpdateAccountInfo();
+                    AccountSelectionForm accountSelectionForm = new AccountSelectionForm
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterParent,
+                    };
+                    accountSelectionForm.FormClosed += delegate
+                    {
+                        UpdateAccountInfo();
+                    };
+                    CommonFunction.DisposeOnClose(accountSelectionForm);
+                    accountSelectionForm.Show();
                 }
                 else
                 {

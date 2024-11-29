@@ -1,7 +1,6 @@
-﻿using SmartFlow.Common;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ZXing;
 
@@ -18,6 +17,12 @@ namespace SmartFlow.Masters
         {
             InitializeComponent();
             productid.Text = ProductID.ToString();
+        }
+        public CreateProduct(int ProductID,string formtitle)
+        {
+            InitializeComponent();
+            productid.Text = ProductID.ToString();
+            headinglbl.Text = formtitle;
         }
         private void closebtn_Click(object sender, EventArgs e)
         {
@@ -38,174 +43,39 @@ namespace SmartFlow.Masters
                         return;
                     }
 
-                    if (stockalerttxtbox.Text.Trim().Length == 0)
+                    if(mfrtextBox.Text.Trim().Length == 0)
                     {
-                        errorProvider.SetError(stockalerttxtbox, "Please Enter Stock Alert.");
-                        stockalerttxtbox.Focus();
+                        errorProvider.SetError(mfrtextBox, "Please Enter Mfr.");
+                        mfrtextBox.Focus(); 
                         return;
                     }
+                    string duplicateinfo = checkduplicate();
 
-                    string title = CommonFunction.CleanText(nametxtbox.Text);
-                    string includes = CommonFunction.CleanText(includestxtbox.Text);
-
-                    string query = string.Format(@"SELECT ProductID,ProductName,ProductCode," +
-                        "SaleUnitPrice,LowestPrice FROM ProductTable WHERE ProductName = '%" + title + "%' " +
-                        "AND StockTrasholdQty = '" + stockalerttxtbox.Text + "' " +
-                        "AND MFR = '" + mfrtextBox.Text + "' AND UPC = '" + upctextBox.Text + "' AND EAN = '" + eantextBox.Text + "' " +
-                        "AND Length = '" + lengthtextBox.Text + "' AND Width = '" + widthtextBox.Text + "' " +
-                        "AND Height = '" + heighttextBox.Text + "' AND Weight = '" + weighttextBox.Text + "' " +
-                        "AND StandardPrice = '" + standardpricetxtbox.Text + "' " +
-                        "AND WholeSalePrice = '" + wholesalepricetxtbox.Text + "' AND LowestPrice = '" + lowestpricetxtbox.Text + "' " +
-                        "AND SaleUnitPrice = '" + salepricetxtbox.Text + "' AND HSCode = '" + hscodetxtbox.Text + "' AND SecondMFr = '" + secondmfrtxtbox.Text + "' " +
-                        "AND COO = '" + cootxtbox.Text + "'");
-
-                    DataTable dt = DatabaseAccess.Retrive(query);
-                    if (dt != null)
+                    if (duplicateinfo != null)
                     {
-                        if (dt.Rows.Count > 0)
-                        {
-                            MessageBox.Show("Item Exist Already.");
-                        }
-                        else
-                        {
-                            if (randomNumber > 0)
-                            {
-                                query = "UPDATE ProductTable SET " +
-                                        "ProductName = '" + title + "'," +
-                                        "SaleUnitPrice = '" + salepricetxtbox.Text + "'," +
-                                        "LowestPrice = '" + lowestpricetxtbox.Text + "'," +
-                                        "WholeSalePrice = '" + wholesalepricetxtbox.Text + "'," +
-                                        "StandardPrice = '" + standardpricetxtbox.Text + "'," +
-                                        "StockTrasholdQty = '" + stockalerttxtbox.Text + "'," +
-                                        "UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                                        "UpdatedDay = '" + DateTime.Now.DayOfWeek + "'," +
-                                        "UPC = '" + upctextBox.Text + "'," +
-                                        "EAN = '" + eantextBox.Text + "'," +
-                                        "Length = '" + lengthtextBox.Text + "'," +
-                                        "Width = '" + widthtextBox.Text + "'," +
-                                        "Height = '" + heighttextBox.Text + "'," +
-                                        "Weight = '" + weighttextBox.Text + "'," +
-                                        "IsBundle = '" + checkBox1.Checked + "'," +
-                                        "Barcode = '" + randomNumber + "'," +
-                                        "DiscountPercentage = '" + discountpercentagetxtbox.Text + "', " +
-                                        "COO = '" + cootxtbox.Text + "'," +
-                                        "MFR = '" + mfrtextBox.Text + "'," +
-                                        "HSCode = '" + hscodetxtbox.Text + "'," +
-                                        "SecondMFr = '" + secondmfrtxtbox.Text + "'" +
-                                        " WHERE ProductID = " + productid.Text + "";
-                                DeleteBundleData(Convert.ToInt32(productid.Text));
-                                AddDataToDatabase(Convert.ToInt32(productid.Text), productcodelbl.Text);
-                            }
-                            else
-                            {
-                                query = "UPDATE ProductTable SET " +
-                                           "ProductName = '" + title + "'," +
-                                           "SaleUnitPrice = '" + salepricetxtbox.Text + "'," +
-                                           "LowestPrice = '" + lowestpricetxtbox.Text + "'," +
-                                           "WholeSalePrice = '" + wholesalepricetxtbox.Text + "'," +
-                                           "StandardPrice = '" + standardpricetxtbox.Text + "'," +
-                                           "StockTrasholdQty = '" + stockalerttxtbox.Text + "'," +
-                                           "UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                                           "UpdatedDay = '" + DateTime.Now.DayOfWeek + "'," +
-                                           "UPC = '" + upctextBox.Text + "'," +
-                                           "EAN = '" + eantextBox.Text + "'," +
-                                           "Length = '" + lengthtextBox.Text + "'," +
-                                           "Width = '" + widthtextBox.Text + "'," +
-                                           "Height = '" + heighttextBox.Text + "'," +
-                                           "Weight = '" + weighttextBox.Text + "'," +
-                                           "IsBundle = '" + checkBox1.Checked + "'," +
-                                           "HSCode = '" + hscodetxtbox.Text + "'," +
-                                           "MFR = '" + mfrtextBox.Text + "'," +
-                                           "DiscountPercentage = '" + discountpercentagetxtbox.Text + "', " +
-                                           "COO = '" + cootxtbox.Text + "'," +
-                                           "SecondMFr = '" + secondmfrtxtbox.Text + "'" +
-                                           " WHERE ProductID = " + productid.Text + "";
-                                DeleteBundleData(Convert.ToInt32(productid.Text));
-                                AddDataToDatabase(Convert.ToInt32(productid.Text), productcodelbl.Text);
-
-                            }
-
-                            bool result = DatabaseAccess.Update(query);
-                            if (result)
-                            {
-                                MessageBox.Show("Item Updated Successfully!");
-                                this.Close();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Something is wrong.");
-                            }
-                        }
+                        MessageBox.Show(duplicateinfo, "Duplicate Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
                         if (randomNumber > 0)
                         {
-                            query = "UPDATE ProductTable SET " +
-                                    "ProductName = '" + title + "'," +
-                                    "SaleUnitPrice = '" + salepricetxtbox.Text.Trim() + "'," +
-                                    "LowestPrice = '" + lowestpricetxtbox.Text.Trim() + "'," +
-                                    "WholeSalePrice = '" + wholesalepricetxtbox.Text.Trim() + "'," +
-                                    "StandardPrice = '" + standardpricetxtbox.Text.Trim() + "'," +
-                                    "StockTrasholdQty = '" + stockalerttxtbox.Text.Trim() + "'," +
-                                    "UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                                    "UpdatedDay = '" + DateTime.Now.DayOfWeek + "'," +
-                                    "UPC = '" + upctextBox.Text.Trim() + "'," +
-                                    "EAN = '" + eantextBox.Text.Trim() + "'," +
-                                    "Length = '" + lengthtextBox.Text.Trim() + "'," +
-                                    "Width = '" + widthtextBox.Text.Trim() + "'," +
-                                    "Height = '" + heighttextBox.Text.Trim() + "'," +
-                                    "Weight = '" + weighttextBox.Text.Trim() + "'," +
-                                    "IsBundle = '" + checkBox1.Checked + "'," +
-                                    "Barcode = '" + randomNumber + "'," +
-                                    "DiscountPercentage = '" + discountpercentagetxtbox.Text.Trim() + "'," +
-                                    "COO = '" + cootxtbox.Text + "'," +
-                                    "MFR = '" + mfrtextBox.Text.Trim() + "'," +
-                                    "HSCode = '" + hscodetxtbox.Text + "'," +
-                                    "SecondMFr = '" + secondmfrtxtbox.Text + "'" +
-                                    " WHERE ProductID = " + productid.Text + "";
-                            DeleteBundleData(Convert.ToInt32(productid.Text));
-                            AddDataToDatabase(Convert.ToInt32(productid.Text), productcodelbl.Text);
-
+                            string updateresult = UpdateProduct();
+                            if (updateresult == "Product updated successfully!")
+                            {
+                                DeleteBundleData(Convert.ToInt32(productid.Text));
+                                AddDataToDatabase(Convert.ToInt32(productid.Text), productcodelbl.Text);
+                                MessageBox.Show("Item Updated Successfully!");
+                            }
                         }
                         else
                         {
-                            query = "UPDATE ProductTable SET " +
-                                    "ProductName = '" + title + "'," +
-                                    "SaleUnitPrice = '" + salepricetxtbox.Text.Trim() + "'," +
-                                    "LowestPrice = '" + lowestpricetxtbox.Text.Trim() + "'," +
-                                    "WholeSalePrice = '" + wholesalepricetxtbox.Text.Trim() + "'," +
-                                    "StandardPrice = '" + standardpricetxtbox.Text.Trim() + "'," +
-                                    "StockTrasholdQty = '" + stockalerttxtbox.Text.Trim() + "'," +
-                                    "UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                                    "UpdatedDay = '" + DateTime.Now.DayOfWeek + "'," +
-                                    "UPC = '" + upctextBox.Text.Trim() + "'," +
-                                    "EAN = '" + eantextBox.Text.Trim() + "'," +
-                                    "Length = '" + lengthtextBox.Text.Trim() + "'," +
-                                    "Width = '" + widthtextBox.Text.Trim() + "'," +
-                                    "Height = '" + heighttextBox.Text.Trim() + "'," +
-                                    "IsBundle = '" + checkBox1.Checked + "'," +
-                                    "Weight = '" + weighttextBox.Text.Trim() + "'," +
-                                    "DiscountPercentage = '" + discountpercentagetxtbox.Text.Trim() + "'," +
-                                    "COO = '" + cootxtbox.Text + "'" +
-                                    "MFR = '" + mfrtextBox.Text.Trim() + "'," +
-                                    "HSCode = '" + hscodetxtbox.Text + "'," +
-                                    "SecondMFr = '" + secondmfrtxtbox.Text + "'" +
-                                    " WHERE ProductID = " + productid.Text + "";
-                            DeleteBundleData(Convert.ToInt32(productid.Text));
-                            AddDataToDatabase(Convert.ToInt32(productid.Text), productcodelbl.Text);
-
-                        }
-
-                        bool result = DatabaseAccess.Update(query);
-                        if (result)
-                        {
-                            MessageBox.Show("Item Updated Successfully!");
-                            this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Something is wrong.");
+                            string updateresult = UpdateProduct();
+                            if(updateresult == "Product updated successfully!")
+                            {
+                                DeleteBundleData(Convert.ToInt32(productid.Text));
+                                AddDataToDatabase(Convert.ToInt32(productid.Text), productcodelbl.Text);
+                                MessageBox.Show("Item Updated Successfully!");
+                            }
                         }
                     }
                 }
@@ -220,172 +90,361 @@ namespace SmartFlow.Masters
                         return;
                     }
 
-                    if (stockalerttxtbox.Text.Trim().Length == 0)
+                    if(mfrtextBox.Text.Trim().Length == 0)
                     {
-                        errorProvider.SetError(stockalerttxtbox, "Please Enter Stock Alert.");
-                        stockalerttxtbox.Focus();
+                        errorProvider.SetError(mfrtextBox, "Please Enter Mfr");
+                        mfrtextBox.Focus();
                         return;
                     }
+                    string duplicateinfo = checkduplicate();
 
-                    string title = nametxtbox.Text;
-                    string includes = includestxtbox.Text;
-
-                    if (title.Contains("'") || title.Contains("\""))
+                    if (duplicateinfo != null)
                     {
-                        title = Regex.Replace(title, @"[""']", "");
-                    }
-
-                    if (includes.Contains("'") || includes.Contains("\""))
-                    {
-                        includes = Regex.Replace(includes, @"[""']", "");
-                    }
-
-                    string productcode = Guid.NewGuid().ToString();
-
-                    string query = string.Format("SELECT ProductName,UPC,MFR FROM ProductTable WHERE MFR = '" + mfrtextBox.Text.Trim() + "' AND UPC = '" + upctextBox.Text + "' " +
-                        "AND ProductName = '" + nametxtbox.Text + "'");
-                    DataTable dt = DatabaseAccess.Retrive(query);
-                    if (dt != null)
-                    {
-                        if (dt.Rows.Count > 0)
-                        {
-                            MessageBox.Show("Item Exist Already");
-                        }
-                        else
-                        {
-                            query = "INSERT INTO ProductTable (ProductName,SaleUnitPrice,LowestPrice,WholeSalePrice," +
-                                        "StandardPrice,StockTrasholdQty,CreatedAt,CreatedDay,UPC,EAN,Length,Width,Height," +
-                                        "Weight,MFR,ProductCode,Barcode,DiscountPercentage,IsBundle,HSCode,SecondMFr,COO) VALUES " +
-                                        "('" + title + "'," +
-                                        "'" + salepricetxtbox.Text.Trim() + "'," +
-                                        "'" + lowestpricetxtbox.Text.Trim() + "','" + wholesalepricetxtbox.Text.Trim() + "','" + standardpricetxtbox.Text.Trim() + "'," +
-                                        "'" + stockalerttxtbox.Text.Trim() + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                                        "'" + DateTime.Now.DayOfWeek + "','" + upctextBox.Text.Trim() + "'," +
-                                        "'" + eantextBox.Text.Trim() + "','" + lengthtextBox.Text.Trim() + "','" + widthtextBox.Text.Trim() + "'," +
-                                        "'" + heighttextBox.Text.Trim() + "','" + weighttextBox.Text.Trim() + "'," +
-                                        "'" + mfrtextBox.Text.Trim() + "','" + productcode + "','" + randomNumber + "','" + discountpercentagetxtbox.Text.Trim() + "'," +
-                                        "'" + checkBox1.Checked + "','" + hscodetxtbox.Text + "','" + secondmfrtxtbox.Text + "','" + cootxtbox.Text + "'); SELECT SCOPE_IDENTITY();";
-
-                            int result = DatabaseAccess.InsertId(query);
-                            if (result > 0)
-                            {
-                                AddDataToDatabase(result, productcode);
-                                MessageBox.Show("Item Added Successfully!");
-                                this.Close();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Something is wrong");
-                            }
-                        }
+                        MessageBox.Show(duplicateinfo, "Duplicate Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
-                        query = "INSERT INTO ProductTable (ProductName,SaleUnitPrice,LowestPrice,WholeSalePrice," +
-                                "StandardPrice,StockTrasholdQty,CreatedAt,BrandID,CreatedDay,UPC,EAN,Length,Width,Height,Weight,MFR," +
-                                "ProductCode,Barcode,DiscountPercentage,IsBundle,HSCode,SecondMFr,COO) VALUES " +
-                                "('" + title + "'," +
-                                "'" + salepricetxtbox.Text.Trim() + "'," +
-                                "'" + lowestpricetxtbox.Text.Trim() + "','" + wholesalepricetxtbox.Text.Trim() + "','" + standardpricetxtbox.Text.Trim() + "'," +
-                                "'" + stockalerttxtbox.Text.Trim() + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                                "'" + DateTime.Now.DayOfWeek + "','" + upctextBox.Text.Trim() + "'," +
-                                "'" + eantextBox.Text.Trim() + "','" + lengthtextBox.Text.Trim() + "','" + widthtextBox.Text.Trim() + "','" + heighttextBox.Text.Trim() + "'," +
-                                "'" + weighttextBox.Text.Trim() + "'," +
-                                "'" + mfrtextBox.Text.Trim() + "','" + productcode + "','" + randomNumber + "','" + discountpercentagetxtbox.Text.Trim() + "'," +
-                                "'" + checkBox1.Checked + "','" + hscodetxtbox.Text + "','" + secondmfrtxtbox.Text + "','" + cootxtbox.Text + "'); SELECT SCOPE_IDENTITY();";
+                        decimal saleUnitPrice = TryParseDecimal(salepricetxtbox.Text.Trim());
+                        decimal lowestPrice = TryParseDecimal(lowestpricetxtbox.Text.Trim());
+                        decimal wholeSalePrice = TryParseDecimal(wholesalepricetxtbox.Text.Trim());
+                        decimal standardPrice = TryParseDecimal(standardpricetxtbox.Text.Trim());
+                        int stockThresholdQty = TryParseInt(stockalerttxtbox.Text.Trim());
+                        decimal length = TryParseDecimal(lengthtextBox.Text.Trim());
+                        decimal width = TryParseDecimal(widthtextBox.Text.Trim());
+                        decimal height = TryParseDecimal(heighttextBox.Text.Trim());
+                        decimal weight = TryParseDecimal(weighttextBox.Text.Trim());
+                        decimal discountPercentage = TryParseDecimal(discountpercentagetxtbox.Text.Trim());
+                        // Data to insert
 
-                        int result = DatabaseAccess.InsertId(query);
+                        var data = new Dictionary<string, object>
+                        {
+                            { "ProductName", nametxtbox.Text  },
+                            { "SaleUnitPrice", saleUnitPrice },
+                            { "LowestPrice", lowestPrice },
+                            { "WholeSalePrice", wholeSalePrice },
+                            { "StandardPrice", standardPrice },
+                            { "StockTrasholdQty", stockThresholdQty },
+                            { "CreatedAt", DateTime.Now },
+                            { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                            { "UPC", upctextBox.Text.Trim() },
+                            { "EAN", eantextBox.Text.Trim() },
+                            { "Length", length },
+                            { "Width", width },
+                            { "Height", height },
+                            { "Weight", weight },
+                            { "MFR", mfrtextBox.Text.Trim() },
+                            { "ProductCode", Guid.NewGuid() },
+                            { "Barcode", randomNumber },
+                            { "DiscountPercentage", discountPercentage },
+                            { "IsBundle", checkBox1.Checked },
+                            { "HSCode", hscodetxtbox.Text.Trim() },
+                            { "SecondMFr", secondmfrtxtbox.Text.Trim() },
+                            { "COO", cootxtbox.Text.Trim() },
+                            { "SecondUpc", secondupctxtbox.Text.Trim() },
+                            { "ThirdMfr", thirdmfrtxtbox.Text.Trim() },
+                            { "ThirdUPC", thirdupctxtbox.Text.Trim() },
+                            { "IsCustomProduct", isCustomcheck.Checked }
+                        };
+                        
+                        // Insert data and get the result
+
+                        int result = DatabaseAccess.InsertDataId("ProductTable", data);
                         if (result > 0)
                         {
-                            AddDataToDatabase(result,productcode);
+                            AddDataToDatabase(result, data["ProductCode"].ToString());
                             MessageBox.Show("Item Added Successfully!");
                             this.Close();
                         }
                         else
                         {
-                            MessageBox.Show("Something is wrong");
+                            MessageBox.Show("Failed to add the item.");
                         }
                     }
                 }
-                
             }catch (Exception ex)
             {
-                throw ex;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private string checkduplicate()
+        {
+            string query = string.Format(@"SELECT ProductID,ProductName,MFR,UPC,EAN,SecondMFr,SecondUpc,ProductCode," +
+                        "SaleUnitPrice,LowestPrice,ThirdMfr,ThirdUPC,IsCustomProduct FROM ProductTable WHERE MFR = @MFR " +
+                        "AND UPC = @UPC AND EAN = @EAN " +
+                        "AND SecondMFr = @SecondMFr AND SecondUpc = @SecondUpc");
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "MFR", mfrtextBox.Text },
+                { "UPC" , upctextBox.Text },
+                { "EAN" , eantextBox.Text },
+                { "SecondMFr" , secondmfrtxtbox.Text },
+                { "SecondUpc" , secondupctxtbox.Text },
+                { "ThirdMfr" , thirdmfrtxtbox.Text },
+                { "ThirdUPC" , thirdupctxtbox.Text },
+                { "IsCustomProduct", isCustomcheck.Checked }
+            };
+
+            DataTable dt = DatabaseAccess.RetrieveData(query, parameters);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                string productTitle = dt.Rows[0]["ProductName"].ToString();
+                string productmfr = dt.Rows[0]["MFR"].ToString();
+                string productUpc = dt.Rows[0]["UPC"].ToString();
+                string productean = dt.Rows[0]["EAN"].ToString();
+                string productsecondmfr = dt.Rows[0]["SecondMFr"].ToString();
+                string productsecondupc = dt.Rows[0]["SecondUpc"].ToString();
+                string productthirdmfr = dt.Rows[0]["ThirdMfr"].ToString();
+                string productthirdupc = dt.Rows[0]["ThirdUPC"].ToString();
+                bool isCustom = Convert.ToBoolean(dt.Rows[0]["IsCustomProduct"]);
+
+                if (nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr)
+                {
+                    return $"Duplicate found: Product Name = {productTitle}, MFR = {productmfr}.";
+                }
+
+                if (nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr && isCustomcheck.Checked == isCustom)
+                {
+                    return $"Duplicate found: Product Name = {productTitle}, MFR = {productmfr}, Custom Product = {isCustom}.";
+                }
+
+                if (nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr && upctextBox.Text == productUpc && isCustomcheck.Checked == isCustom)
+                {
+                    return $"Duplicate found: Product Name = {productTitle}, MFR = {productmfr}, UPC = {productUpc}, Custom Product = {isCustom}.";
+                }
+
+                if(nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr && upctextBox.Text == productUpc && eantextBox.Text == productean 
+                    && isCustomcheck.Checked == isCustom)
+                {
+                    return $"Duplicate found: Product Name = {productTitle}, MFR = {productmfr}, UPC = {productUpc}, EAN = {productean}, Custom Product = {isCustom}.";
+                }
+
+                if(nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr && upctextBox.Text == productUpc && eantextBox.Text == productean 
+                    && secondmfrtxtbox.Text == productsecondmfr && secondupctxtbox.Text == productsecondupc && isCustomcheck.Checked == isCustom)
+                {
+                    return $"Duplicate found: Product Name = {productTitle}, MFR = {productmfr}, UPC = {productUpc}, EAN = {productean}," +
+                        $"SecondMFR = {productsecondmfr}, SecondUPC = {productsecondupc}, Custom Product = {isCustom}.";
+                }
+
+                if (nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr && upctextBox.Text == productUpc && eantextBox.Text == productean
+                    && secondmfrtxtbox.Text == productsecondmfr && isCustomcheck.Checked == isCustom)
+                {
+                    return $"Duplicate found: Product Name = {productTitle}, MFR = {productmfr}, UPC = {productUpc}, EAN = {productean}," +
+                        $"SecondMFR = {productsecondmfr}, Custom Product = {isCustom}.";
+                }
+
+                if(nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr && upctextBox.Text == productUpc && eantextBox.Text == productean && 
+                    secondmfrtxtbox.Text == productsecondmfr && secondupctxtbox.Text == productsecondupc && thirdmfrtxtbox.Text == productthirdmfr && 
+                    thirdupctxtbox.Text == productthirdupc && isCustomcheck.Checked == isCustom)
+                {
+                    return $"Duplicate found: Product Name = {productTitle}, MFR = {productmfr}, UPC = {productUpc}, EAN = {productean}," +
+                        $"SecondMFR = {productsecondmfr}, SecondUPC = {productsecondupc}, ThirdMfr = {productthirdmfr}, ThirdUpc = {productthirdupc}, Custom Product = {isCustom}.";
+                }
+
+                if (nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr && upctextBox.Text == productUpc && eantextBox.Text == productean &&
+                    secondmfrtxtbox.Text == productsecondmfr && secondupctxtbox.Text == productsecondupc && thirdmfrtxtbox.Text == productthirdmfr 
+                    && isCustomcheck.Checked == isCustom)
+                {
+                    return $"Duplicate found: Product Name = {productTitle}, MFR = {productmfr}, UPC = {productUpc}, EAN = {productean}," +
+                        $"SecondMFR = {productsecondmfr}, SecondUPC = {productsecondupc}, ThirdMfr = {productthirdmfr}, Custom Product = {isCustom}.";
+                }
+
+            }
+            return null;
+        }
+
+        private string UpdateProduct()
+        {
+            string tableName = "ProductTable";
+            string whereClause = "ProductID = '" + productid.Text + "'";
+
+            decimal saleUnitPrice = TryParseDecimal(salepricetxtbox.Text.Trim());
+            decimal lowestPrice = TryParseDecimal(lowestpricetxtbox.Text.Trim());
+            decimal wholeSalePrice = TryParseDecimal(wholesalepricetxtbox.Text.Trim());
+            decimal standardPrice = TryParseDecimal(standardpricetxtbox.Text.Trim());
+            int stockThresholdQty = TryParseInt(stockalerttxtbox.Text.Trim());
+            decimal length = TryParseDecimal(lengthtextBox.Text.Trim());
+            decimal width = TryParseDecimal(widthtextBox.Text.Trim());
+            decimal height = TryParseDecimal(heighttextBox.Text.Trim());
+            decimal weight = TryParseDecimal(weighttextBox.Text.Trim());
+            decimal discountPercentage = TryParseDecimal(discountpercentagetxtbox.Text.Trim());
+
+            var columnData = new Dictionary<string, object>
+            {
+                { "ProductName", nametxtbox.Text  },
+                { "SaleUnitPrice", saleUnitPrice },
+                { "LowestPrice", lowestPrice },
+                { "WholeSalePrice", wholeSalePrice },
+                { "StandardPrice", standardPrice },
+                { "StockTrasholdQty", stockThresholdQty },
+                { "CreatedAt", DateTime.Now },
+                { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                { "UPC", upctextBox.Text.Trim() },
+                { "EAN", eantextBox.Text.Trim() },
+                { "Length", length },
+                { "Width", width },
+                { "Height", height },
+                { "Weight", weight },
+                { "MFR", mfrtextBox.Text.Trim() },
+                { "ProductCode", Guid.NewGuid() },
+                { "DiscountPercentage", discountPercentage },
+                { "IsBundle", checkBox1.Checked },
+                { "HSCode", hscodetxtbox.Text.Trim() },
+                { "SecondMFr", secondmfrtxtbox.Text.Trim() },
+                { "COO", cootxtbox.Text.Trim() },
+                { "SecondUpc", secondupctxtbox.Text.Trim() },
+                { "ThirdMfr", thirdmfrtxtbox.Text.Trim() },
+                { "ThirdUPC", thirdupctxtbox.Text.Trim() },
+                { "IsCustomProduct", isCustomcheck.Checked }
+            };
+
+            bool isUpdated = DatabaseAccess.ExecuteQuery(tableName, "UPDATE", columnData, whereClause);
+
+            return isUpdated ? "Product updated successfully!" : "Failed to update the product.";
+        }
+
+        private decimal TryParseDecimal(string input)
+        {
+            if (decimal.TryParse(input, out decimal result))
+                return result;
+
+            return 0; // Default value if parsing fails
+        }
+
+        private int TryParseInt(string input)
+        {
+            if (int.TryParse(input, out int result))
+                return result;
+
+            return 0; // Default value if parsing fails
+        }
+
         private void FindRecord(int productid)
         {
             try
             {
                 bool isChecked = false;
                 string query = string.Format("SELECT ProductID,ProductName,ProductCode,SaleUnitPrice,LowestPrice,WholeSalePrice,StandardPrice," +
-                    "StockTrasholdQty,StockCode,CompanyID,UPC,EAN,Length,Width,Height" +
-                    ",Weight,MFR,Barcode,ProductCode,DiscountPercentage,IsBundle,HSCode,SecondMFr,COO FROM ProductTable WHERE ProductID = " + productid + "");
-                DataTable dataTable = new DataTable();
-                dataTable = DatabaseAccess.Retrive(query);
+                    "StockTrasholdQty,StockCode,CompanyID,UPC,EAN,Length,Width,Height,Weight,MFR,Barcode,ProductCode,DiscountPercentage,IsBundle," +
+                    "HSCode,SecondMFr,COO,SecondUpc,ThirdMfr,ThirdUPC,IsCustomProduct FROM ProductTable WHERE ProductID = @ProductID");
 
-                if (dataTable != null)
+                var parameters = new Dictionary<string, object>
                 {
-                    if (dataTable.Rows.Count > 0)
+                    { "ProductID", productid }
+                };
+
+                DataTable dataTable = DatabaseAccess.RetrieveData(query, parameters);
+
+                if (dataTable != null && dataTable.Rows.Count > 0)
+                {
+                    productcodelbl.Text = dataTable.Rows[0]["ProductCode"].ToString();
+                    nametxtbox.Text = dataTable.Rows[0]["ProductName"].ToString();
+                    stockalerttxtbox.Text = dataTable.Rows[0]["StockTrasholdQty"].ToString();
+                    mfrtextBox.Text = dataTable.Rows[0]["MFR"].ToString();
+                    upctextBox.Text = dataTable.Rows[0]["UPC"].ToString();
+                    eantextBox.Text = dataTable.Rows[0]["EAN"].ToString();
+                    lengthtextBox.Text = dataTable.Rows[0]["Length"].ToString();
+                    widthtextBox.Text = dataTable.Rows[0]["Width"].ToString();
+                    heighttextBox.Text = dataTable.Rows[0]["Height"].ToString();
+                    weighttextBox.Text = dataTable.Rows[0]["Weight"].ToString();
+                    standardpricetxtbox.Text = dataTable.Rows[0]["StandardPrice"].ToString();
+                    wholesalepricetxtbox.Text = dataTable.Rows[0]["WholeSalePrice"].ToString();
+                    lowestpricetxtbox.Text = dataTable.Rows[0]["LowestPrice"].ToString();
+                    salepricetxtbox.Text = dataTable.Rows[0]["SaleUnitPrice"].ToString();
+                    string barcode = dataTable.Rows[0]["Barcode"].ToString();
+                    discountpercentagetxtbox.Text = dataTable.Rows[0]["DiscountPercentage"].ToString();
+                    isChecked = Convert.ToBoolean(dataTable.Rows[0]["IsBundle"].ToString());
+                    hscodetxtbox.Text = dataTable.Rows[0]["HSCode"].ToString();
+                    secondmfrtxtbox.Text = dataTable.Rows[0]["SecondMFr"].ToString();
+                    cootxtbox.Text = dataTable.Rows[0]["COO"].ToString();
+                    secondupctxtbox.Text = dataTable.Rows[0]["SecondUpc"].ToString();
+                    thirdmfrtxtbox.Text = dataTable.Rows[0]["ThirdMfr"].ToString();
+                    thirdupctxtbox.Text = dataTable.Rows[0]["ThirdUPC"].ToString();
+                    isCustomcheck.Checked = Convert.ToBoolean(dataTable.Rows[0]["IsCustomProduct"]);
+
+                    
+                    if(isChecked != false)
                     {
-                        productcodelbl.Text = dataTable.Rows[0]["ProductCode"].ToString();
-                        nametxtbox.Text = dataTable.Rows[0]["ProductName"].ToString();
-                        stockalerttxtbox.Text = dataTable.Rows[0]["StockTrasholdQty"].ToString();
-                        mfrtextBox.Text = dataTable.Rows[0]["MFR"].ToString();
-                        upctextBox.Text = dataTable.Rows[0]["UPC"].ToString();
-                        eantextBox.Text = dataTable.Rows[0]["EAN"].ToString();
-                        lengthtextBox.Text = dataTable.Rows[0]["Length"].ToString();
-                        widthtextBox.Text = dataTable.Rows[0]["Width"].ToString();
-                        heighttextBox.Text = dataTable.Rows[0]["Height"].ToString();
-                        weighttextBox.Text = dataTable.Rows[0]["Weight"].ToString();
-                        standardpricetxtbox.Text = dataTable.Rows[0]["StandardPrice"].ToString();
-                        wholesalepricetxtbox.Text = dataTable.Rows[0]["WholeSalePrice"].ToString();
-                        lowestpricetxtbox.Text = dataTable.Rows[0]["LowestPrice"].ToString();
-                        salepricetxtbox.Text = dataTable.Rows[0]["SaleUnitPrice"].ToString();
-                        string barcode = dataTable.Rows[0]["Barcode"].ToString();
-                        discountpercentagetxtbox.Text = dataTable.Rows[0]["DiscountPercentage"].ToString();
-                        isChecked = Convert.ToBoolean(dataTable.Rows[0]["IsBundle"].ToString());
-                        hscodetxtbox.Text = dataTable.Rows[0]["HSCode"].ToString();
-                        secondmfrtxtbox.Text = dataTable.Rows[0]["SecondMFr"].ToString();
-                        cootxtbox.Text = dataTable.Rows[0]["COO"].ToString();
+                        checkBox1.Checked = isChecked;
+                        FillBundleDataGridView(productid);
+                    }
 
-                        if(isChecked != false)
+                    if (isCustomcheck.Checked != false) 
+                    {
+                        isCustomcheck.Enabled = true;
+                    }
+                    else
+                    {
+                        isCustomcheck.Enabled = false;
+                    }
+                    
+                    if (string.IsNullOrEmpty(barcode))
+                    {
+                        GenerateBarcode();
+                    }
+                    else
+                    {
+                        var writer = new BarcodeWriter
                         {
-                            checkBox1.Checked = isChecked;
-                            FillBundleDataGridView(productid);
-                        }
-
-                        if (string.IsNullOrEmpty(barcode))
-                        {
-                            GenerateBarcode();
-                        }
-                        else
-                        {
-                            var writer = new BarcodeWriter
+                            Format = BarcodeFormat.CODE_128,
+                            Options = new ZXing.Common.EncodingOptions
                             {
-                                Format = BarcodeFormat.CODE_128,
-                                Options = new ZXing.Common.EncodingOptions
-                                {
-                                    Height = 50,
-                                    Width = 80,
-                                }
-                            };
-                            var barcodeImage = writer.Write(barcode.ToString());
-                            pictureBox1.Image = barcodeImage;
-                        }
+                                Height = 50,
+                                Width = 80,
+                            }
+                        };
+                        var barcodeImage = writer.Write(barcode.ToString());
+                        pictureBox1.Image = barcodeImage;
+                    }
+                    if(headinglbl.Text == "Product Details")
+                    {
+                        productcodelbl.Enabled = false;
+                        nametxtbox.Enabled = false;
+                        stockalerttxtbox.Enabled = false;
+                        mfrtextBox.Enabled = false;
+                        upctextBox.Enabled = false;
+                        eantextBox.Enabled = false;
+                        lengthtextBox.Enabled = false;
+                        widthtextBox.Enabled = false;
+                        heighttextBox.Enabled = false;
+                        weighttextBox.Enabled = false;
+                        standardpricetxtbox.Enabled = false;
+                        wholesalepricetxtbox.Enabled = false;
+                        lowestpricetxtbox.Enabled = false;
+                        salepricetxtbox.Enabled = false;
+                        discountpercentagetxtbox.Enabled = false;
+                        hscodetxtbox.Enabled = false;
+                        secondmfrtxtbox.Enabled = false;
+                        cootxtbox.Enabled = false;
+                        savebtn.Visible = false;
+                        checkBox1.Enabled = false;
+                        includestxtbox.Enabled = false;
+                        secondupctxtbox.Enabled = false;
+                        thirdmfrtxtbox.Enabled = false;
+                        thirdupctxtbox.Enabled = false;
+                        isCustomcheck.Enabled = false;
+                        qtycheckbtn.Enabled = true;
+                    }
+                    else 
+                    {
+                        isCustomcheck.Enabled = false;
+                        qtycheckbtn.Enabled = true;
+                        savebtn.Text = "Update";
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void FillBundleDataGridView(int productid)
         {
             try
             {
-                string querybundle = "SELECT IncludeItem FROM ProductBundleTable WHERE ProductId = '"+productid+"'";
+                string querybundle = "SELECT IncludeItem FROM ProductBundleTable WHERE ProductId = '" + productid + "'";
                 DataTable bundledata = DatabaseAccess.Retrive(querybundle);
                 if (bundledata != null)
                 {
@@ -396,8 +455,9 @@ namespace SmartFlow.Masters
                 }
 
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
+
         private void CreateProduct_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -419,12 +479,12 @@ namespace SmartFlow.Masters
                 }
             }
         }    
+
         private void CreateProduct_Load(object sender, EventArgs e)
         {
             string labeldata = productid.Text;
-            if(labeldata != "productid")
+            if (labeldata != "productid")
             {
-                savebtn.Text = "Update";
                 FindRecord(Convert.ToInt32(productid.Text));
             }
             else
@@ -432,6 +492,7 @@ namespace SmartFlow.Masters
                 GenerateBarcode();
             }
         }
+
         private void GenerateBarcode()
         {
             var writer = new BarcodeWriter
@@ -475,37 +536,65 @@ namespace SmartFlow.Masters
             var barcodeImage = writer.Write(randomNumber.ToString());
             pictureBox1.Image = barcodeImage;
         }
+
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             includestxtbox.Text = "";
             includestxtbox.Visible = checkBox1.Checked;
             includelbl.Visible = checkBox1.Checked;
         }
+
         private void AddDataToDatabase(int productid,string productcode)
         {
             try
             {
-                if(includestxtbox.Text.Trim().Length > 0)
+                if (includestxtbox.Text.Trim().Length > 0)
                 {
-                    string addquery = "INSERT INTO ProductBundleTable (ProductId,IncludeItem,ProductCode,CreatedAt,CreatedDay) " +
-                            "VALUES ('" + productid + "','" + includestxtbox.Text.Trim() + "','" + productcode + "'," +
-                            "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')";
-                    DatabaseAccess.Insert(addquery);
+                    string tableName = "ProductBundleTable";
+
+                    var columnData = new Dictionary<string, object>
+                    {
+                        { "ProductId", productid  },
+                        { "IncludeItem", includestxtbox.Text },
+                        { "ProductCode", productcode },
+                        { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                        { "CreatedDay", DateTime.Now.DayOfWeek }
+                    };
+
+                    DatabaseAccess.ExecuteQuery(tableName, "INSERT", columnData);
                 }
             }catch (Exception ex) { throw ex; }
         }
+
         private void DeleteBundleData(int productid)
         {
             try
             {
-                string delbundlequery = "DELETE FROM ProductBundleTable WHERE ProductId = '"+productid+"'";
-                DatabaseAccess.Delete(delbundlequery);
+                string tableName = "ProductBundleTable";
+                string whereClause = "ProductId = @ProductID";
+
+                var columnData = new Dictionary<string, object>
+                {
+                    { "ProductID", productid }
+                };
+
+                DatabaseAccess.ExecuteQuery(tableName, "DELETE", columnData, whereClause);
 
             }catch (Exception ex) { throw ex; }
         }
         private void nametxtbox_TextChanged(object sender, EventArgs e)
         {
-            nametxtbox.Text = nametxtbox.Text.Replace(Environment.NewLine, " ");
+            // Save the current caret position
+            int currentPosition = nametxtbox.SelectionStart;
+
+            // Apply text transformations
+            string newText = nametxtbox.Text.TrimStart().Replace(Environment.NewLine, " ");
+
+            // Set the transformed text back
+            nametxtbox.Text = newText;
+
+            // Adjust the caret position to account for transformations
+            nametxtbox.SelectionStart = Math.Min(currentPosition, nametxtbox.Text.Length);
         }
         private bool AreAnyTextBoxesFilled()
         {
@@ -528,5 +617,80 @@ namespace SmartFlow.Masters
             if (secondmfrtxtbox.Text.Trim().Length > 0) { return true; }
             return false; // No TextBox is filled
         }
+        private void qtycheckbtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(!string.IsNullOrEmpty(productid.Text) && !string.IsNullOrWhiteSpace(productid.Text))
+                {
+                    string checkstock = string.Format("SELECT ProductID, SUM(Quantity) AS TotalQuantity FROM StockTable " +
+                    "WHERE ProductID = '" + productid.Text + "' GROUP BY ProductID;");
+                    DataTable stockqty = DatabaseAccess.Retrive(checkstock);
+                    if (stockqty.Rows.Count > 0 && stockqty != null)
+                    {
+                        string totalQty = stockqty.Rows[0]["TotalQuantity"].ToString();
+                        qtylbl.Visible = true;
+                        qtylbl.Text = "In Stock: " + totalQty;
+                    }
+                    else
+                    {
+                        qtylbl.Visible = true;
+                        // If no stock quantity is found, you can set the label to show "0" or any other message
+                        qtylbl.Text = "Out Of Stock: 0";
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void isCustomcheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (isCustomcheck.Checked)
+            {
+                mfrtextBox.Enabled = false;
+                secondmfrtxtbox.Enabled = false;
+                thirdmfrtxtbox.Enabled = false;
+                upctextBox.Enabled = false;
+                secondupctxtbox.Enabled = false;
+                thirdupctxtbox.Enabled = false;
+
+                if(string.IsNullOrEmpty(mfrtextBox.Text))
+                {
+                    mfrtextBox.Text = GenerateUniqueCode();
+                }
+            }
+            else
+            {
+                mfrtextBox.Enabled = true;
+                secondmfrtxtbox.Enabled = true;
+                thirdmfrtxtbox.Enabled = true;
+                upctextBox.Enabled = true;
+                secondupctxtbox.Enabled = true;
+                thirdupctxtbox.Enabled = true;
+                mfrtextBox.Text = string.Empty;
+            }
+        }
+
+        private string GenerateUniqueCode()
+        {
+            string generatedCode;
+            bool isCodeUnique;
+
+            do
+            {
+                // Generate a random 8-digit code with prefix "FAB"
+                Random random = new Random();
+                int randomNumber = random.Next(10000, 100000); // 8-digit range
+                generatedCode = "FAB" + randomNumber;
+
+                // Check if the code exists in the database
+                isCodeUnique = DatabaseAccess.CheckIfCodeExistsInDatabase(generatedCode);
+
+            } while (!isCodeUnique); // Repeat if the code is not unique
+
+            return generatedCode;
+        }
+
+        
     }
 }

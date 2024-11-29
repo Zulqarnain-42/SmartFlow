@@ -74,7 +74,13 @@ namespace SmartFlow.Sales
                     GlobalVariables.warehousenameglobal = dgvInventory.CurrentRow.Cells["Warehouse Name"].Value.ToString();
                     if (Convert.ToInt32(dgvInventory.CurrentRow.Cells["Quantity"].Value) == 0)
                     {
-                        AvailabilityForm availabilityForm = new AvailabilityForm();
+                        AvailabilityForm availabilityForm = new AvailabilityForm
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterScreen,
+                        };
+
+                        CommonFunction.DisposeOnClose(availabilityForm);
                         availabilityForm.ShowDialog();
                     }
                     else
@@ -87,7 +93,12 @@ namespace SmartFlow.Sales
         }
         private void ProductQtyWarehouse_FormClosed(object sender, FormClosedEventArgs e)
         {
-            TransactionInfoProduct transactionInfoProduct = new TransactionInfoProduct(_productmfr, _productid);
+            TransactionInfoProduct transactionInfoProduct = new TransactionInfoProduct(_productmfr, _productid)
+            {
+                WindowState = FormWindowState.Normal,
+                StartPosition = FormStartPosition.CenterScreen,
+            };
+            CommonFunction.DisposeOnClose(transactionInfoProduct);
             transactionInfoProduct.ShowDialog();
         }
     }

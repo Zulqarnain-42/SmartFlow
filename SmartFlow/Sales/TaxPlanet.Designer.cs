@@ -56,7 +56,7 @@
             // 
             this.headinglbl.BackColor = System.Drawing.Color.Black;
             this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
             this.headinglbl.Name = "headinglbl";
@@ -167,9 +167,10 @@
             this.Controls.Add(this.searchtxtbox);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.Name = "TaxPlanet";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TaxPlanet";
+            this.Text = "TAX PLANET";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TaxPlanet_KeyDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTaxPlanet)).EndInit();

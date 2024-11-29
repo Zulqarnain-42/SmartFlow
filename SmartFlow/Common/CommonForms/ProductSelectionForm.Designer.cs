@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.searchtxtbox = new System.Windows.Forms.TextBox();
             this.searchlbl = new System.Windows.Forms.Label();
             this.dgvproducts = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.customproductbtn = new System.Windows.Forms.Button();
             this.newproductbtn = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
@@ -45,25 +44,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1232, 45);
             this.panel1.TabIndex = 0;
             // 
-            // label1
+            // headinglbl
             // 
-            this.label1.BackColor = System.Drawing.Color.Black;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1232, 45);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "SEARCH FOR PRODUCT";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1232, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "SEARCH FOR PRODUCT";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // searchtxtbox
             // 
@@ -109,7 +108,6 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.customproductbtn);
             this.panel3.Controls.Add(this.newproductbtn);
             this.panel3.Controls.Add(this.searchtxtbox);
             this.panel3.Controls.Add(this.searchlbl);
@@ -118,16 +116,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1232, 60);
             this.panel3.TabIndex = 2;
-            // 
-            // customproductbtn
-            // 
-            this.customproductbtn.Location = new System.Drawing.Point(874, 5);
-            this.customproductbtn.Name = "customproductbtn";
-            this.customproductbtn.Size = new System.Drawing.Size(170, 44);
-            this.customproductbtn.TabIndex = 3;
-            this.customproductbtn.Text = "CUSTOM PRODUCT";
-            this.customproductbtn.UseVisualStyleBackColor = true;
-            this.customproductbtn.Click += new System.EventHandler(this.customproductbtn_Click);
             // 
             // newproductbtn
             // 
@@ -161,7 +149,7 @@
             this.KeyPreview = true;
             this.Name = "ProductSelectionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "PRODUCT SELECTION FORM - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "PRODUCT SELECTION";
             this.Load += new System.EventHandler(this.ProductSelectionForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ProductSelectionForm_KeyDown);
             this.panel1.ResumeLayout(false);
@@ -179,10 +167,9 @@
         private System.Windows.Forms.TextBox searchtxtbox;
         private System.Windows.Forms.Label searchlbl;
         private System.Windows.Forms.DataGridView dgvproducts;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button customproductbtn;
         private System.Windows.Forms.Button newproductbtn;
     }
 }

@@ -43,7 +43,7 @@ namespace SmartFlow.Common.CommonForms
                     }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void dgvstocklocation_KeyDown(object sender, KeyEventArgs e)
         {
@@ -60,7 +60,7 @@ namespace SmartFlow.Common.CommonForms
                         this.Close();
                     }
                 }
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void StockLocationSelection_KeyDown(object sender, KeyEventArgs e)
         {

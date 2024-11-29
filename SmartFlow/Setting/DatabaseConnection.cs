@@ -1,12 +1,4 @@
-﻿using SmartFlow.Common;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 namespace SmartFlow.Setting
@@ -56,20 +48,12 @@ namespace SmartFlow.Setting
                     return;
                 }
 
-                string serverName = CommonFunction.CleanText(servernametxtbox.Text);
-                string dbName = CommonFunction.CleanText(databasenametxtbox.Text);
+                string serverName = servernametxtbox.Text;
+                string dbName = databasenametxtbox.Text;
 
                 string query = string.Format("");
-                bool result = DatabaseAccess.Insert(query);
-                if (result) 
-                {
-                    MessageBox.Show("Saved Successfully!");
-                }
-                else
-                {
-                    MessageBox.Show("Something is wrong.");
-                }
-            }catch (Exception ex) { throw ex; }
+                
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private bool AreAnyTextBoxesFilled()
         {

@@ -131,7 +131,7 @@
             this.KeyPreview = true;
             this.Name = "DebitAndCreditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DEBIT AND CREDIT - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "DEBIT AND CREDIT";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DebitAndCreditForm_KeyDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();

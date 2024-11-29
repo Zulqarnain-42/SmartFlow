@@ -1,8 +1,8 @@
 ﻿using SmartFlow.Common;
 using SmartFlow.Purchase;
 using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SmartFlow.Stock
@@ -13,6 +13,7 @@ namespace SmartFlow.Stock
         public QtyUsingScanner()
         {
             InitializeComponent();
+            dgvinventory.CellDoubleClick += dgvinventory_CellDoubleClick;
         }
         private void exitbtn_Click(object sender, EventArgs e)
         {
@@ -39,12 +40,19 @@ namespace SmartFlow.Stock
 
                 string query = string.Empty;
                 string invoiceno = qtyusingscanneridlbl.Text;
-                string importantNotes = CommonFunction.CleanText(importantnotestxtbox.Text);
+                string importantNotes = importantnotestxtbox.Text;
 
-                query = string.Format("INSERT INTO StockCustomizedTable (Code,CreatedAt,CreatedDay,InvoiceNo,Description) VALUES ('" + Guid.NewGuid() + "'," +
-                    "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + invoiceno + "','" + importantNotes + "'); " +
-                    "SELECT SCOPE_IDENTITY();");
-                int stockcustomid = DatabaseAccess.InsertId(query);
+                string tableName = "StockCustomizedTable";
+                var columnData = new Dictionary<string, object>
+                {
+                    { "Code", Guid.NewGuid().ToString() },
+                    { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                    { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                    { "InvoiceNo", invoiceno },
+                    { "Description", importantNotes }
+                };
+
+                int stockcustomid = DatabaseAccess.InsertDataId(tableName, columnData);
                 int warehouseid = Convert.ToInt32(warehouseidlbl.Text);
 
                 bool result = false;
@@ -65,10 +73,20 @@ namespace SmartFlow.Stock
 
                             if (quantity > 0)
                             {
-                                query = string.Format("INSERT INTO StockTable (Product_ID,Quantity,CreatedAt,CreatedDay,WarehouseId) VALUES " +
-                                    "('" + productid + "','" + quantity + "','" + System.DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + System.DateTime.Now.DayOfWeek + "'," +
-                                    "'" + warehouseid + "')");
-                                result = DatabaseAccess.Insert(query);
+                                tableName = "StockTable";
+
+                                var subtableData = new Dictionary<string, object>
+                                {
+                                    { "ProductID", productid },
+                                    { "ProductMfr", mfr },
+                                    { "Quantity", quantity },
+                                    { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                                    { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                                    { "WarehouseId", warehouseid },
+                                    { "StockCustom_ID", stockcustomid }
+                                };
+
+                                result = DatabaseAccess.ExecuteQuery(tableName, "INSERT", subtableData); 
                                 if (result)
                                 {
                                     int count = 0;
@@ -80,10 +98,17 @@ namespace SmartFlow.Stock
                                         while (start < diff)
                                         {
                                             string serialnumber = GenerateRandomSerialNumber();
-                                            string query1 = string.Format("INSERT INTO SerialNoTable (ProductId,SerialNo,CreatedAt,CreatedDay) " +
-                                        "VALUES ('" + productid + "','" + serialnumber + "','" + System.DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                                        "'" + System.DateTime.Now.DayOfWeek + "')");
-                                            DatabaseAccess.Insert(query1);
+                                            tableName = "SerialNoTable";
+
+                                            var serialColumnData = new Dictionary<string, object>
+                                            {
+                                                { "ProductId", productid },
+                                                { "SerialNo", serialnumber },
+                                                { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                                                { "CreatedDay", DateTime.Now.DayOfWeek }
+                                            };
+
+                                            DatabaseAccess.ExecuteQuery(tableName, "INSERT", serialColumnData);
                                             start++;
                                         }
                                     }
@@ -91,10 +116,14 @@ namespace SmartFlow.Stock
                             }
                         }
                     }
+
                     MessageBox.Show("Inventory Updated");
+                    dgvinventory.Rows.Clear();
+                    importantnotestxtbox.Clear();
+                    selectwarehousetxtbox.Clear();
                 }
             }
-            catch(Exception ex) { throw ex; }
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void QtyUsingScanner_KeyDown(object sender, KeyEventArgs e)
         {
@@ -117,14 +146,27 @@ namespace SmartFlow.Stock
                 }
             }
         }
+
         private void searchDatabase(string barcode)
         {
             string query = "SELECT ProductID,ProductName,StandardPrice,UPC,EAN,MFR,Barcode " +
-                "FROM ProductTable WHERE Barcode LIKE '" + barcode + "'";
+                "FROM ProductTable WHERE Barcode LIKE '" + barcode + "' OR UPC LIKE '" + barcode + "' OR MFR LIKE '" + barcode + "' " +
+                "OR SecondUpc LIKE '" + barcode + "' OR EAN LIKE '" + barcode + "'";
 
             DataTable dataTable = DatabaseAccess.Retrive(query);
             string productid = null, mfr = null, title = null, upc = null, price = null, systembarcode = null;
             int quantity = 0;
+            string radiostatus = null;
+            
+            if (useditemradio.Checked)
+            {
+                radiostatus = "USED";
+            }
+            else
+            {
+                radiostatus = "NEW";
+            }
+
             if (dataTable.Rows.Count>0)
             {
                 bool productExists = false;
@@ -138,6 +180,9 @@ namespace SmartFlow.Stock
                             // Increment the quantity
                             int currentQuantity = Convert.ToInt32(row.Cells["Quantity"].Value);
                             row.Cells["Quantity"].Value = currentQuantity + 1;
+                            dgvinventory.ClearSelection();
+                            row.Selected = true;
+                            dgvinventory.FirstDisplayedScrollingRowIndex = row.Index;
                             productExists = true;
                             break;
                         }
@@ -157,27 +202,33 @@ namespace SmartFlow.Stock
                         quantity = 1;
                     }
 
-                    dgvinventory.Rows.Add(productid, title, price, upc, mfr, systembarcode,quantity);
-                }  
+                    int newRowIndex = dgvinventory.Rows.Add(productid, title, price, upc, mfr, systembarcode, quantity);
+                    dgvinventory.ClearSelection();
+                    // Highlight and scroll to the new row
+                    DataGridViewRow newRow = dgvinventory.Rows[newRowIndex];
+                    newRow.Selected = true;
+
+                    // Scroll to the new row to make sure it's visible
+                    dgvinventory.FirstDisplayedScrollingRowIndex = newRowIndex;
+                    searchtextbox.Clear();
+                }
             }
             else
             {
-                MessageBox.Show("UPC Not Available");
+                MessageBox.Show("UPC IS NOT AVAILABLE");
             }
         }
         private void searchtextbox_TextChanged(object sender, EventArgs e)
         {
-            if(searchtextbox.Text.Length >= 8)
-            {
-                string searchvalue = searchtextbox.Text;
-                searchtextbox.Clear();
-                searchDatabase(searchvalue);
-            }
-            
+            // Restart the timer on every character entered
+            timerBarcode.Stop(); // Stop the timer in case it's already running
+            timerBarcode.Start(); // Start the timer again
         }
         private void QtyUsingScanner_Load(object sender, EventArgs e)
         {
             qtyusingscanneridlbl.Text = GenerateNextInvoiceNumber();
+            timerBarcode.Interval = 300;
+            timerBarcode.Tick += timerBarcode_Tick;
         }
         static string GenerateRandomSerialNumber()
         {
@@ -263,7 +314,11 @@ namespace SmartFlow.Stock
 
                 return newInvoiceNumber;
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
         private string GetLastInvoiceNumber()
         {
@@ -279,7 +334,7 @@ namespace SmartFlow.Stock
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return lastInvoiceNumber;
@@ -302,9 +357,18 @@ namespace SmartFlow.Stock
                 {
                     if (warehousedata.Rows.Count > 0)
                     {
-                        WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
-                        warehouseSelection.ShowDialog();
-                        UpdateWarehouseTxtBox();
+                        WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata)
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        };
+
+                        warehouseSelection.FormClosed += delegate
+                        {
+                            UpdateWarehouseTxtBox();
+                        };
+                        CommonFunction.DisposeOnClose(warehouseSelection);
+                        warehouseSelection.Show();
                     }
                 }
             }
@@ -315,8 +379,66 @@ namespace SmartFlow.Stock
         }
         private void UpdateWarehouseTxtBox()
         {
-            selectwarehousetxtbox.Text = GlobalVariables.warehousenameglobal;
-            warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
+            if(GlobalVariables.warehousenameglobal != null && GlobalVariables.warehouseidglobal > 0)
+            {
+                selectwarehousetxtbox.Text = GlobalVariables.warehousenameglobal;
+                warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
+            }
+        }
+
+        private void timerBarcode_Tick(object sender, EventArgs e)
+        {
+            // Stop the timer to avoid repetitive actions
+            timerBarcode.Stop();
+
+            // Process the scanned barcode
+            string barcode = searchtextbox.Text.Trim();
+
+            if (!string.IsNullOrEmpty(barcode))
+            {
+                // Perform your desired action with the barcode (e.g., search in database)
+                searchDatabase(barcode);
+
+                // Clear the TextBox after processing (optional)
+                searchtextbox.Clear();
+            }
+        }
+
+        private void dgvinventory_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if the click was in the "Quantity" column
+            if (dgvinventory.Columns[e.ColumnIndex].Name == "quantity" && e.RowIndex >= 0)
+            {
+                // Put the cell in edit mode
+                dgvinventory.BeginEdit(true);
+            }
+        }
+
+        private void dgvinventory_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvinventory.Columns[e.ColumnIndex].Name == "quantity" && e.RowIndex >= 0)
+            {
+                // Validate the input (ensure it's an integer, etc.)
+                if (!int.TryParse(dgvinventory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString(), out int quantity))
+                {
+                    MessageBox.Show("Please enter a valid quantity.");
+                    dgvinventory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 1; // Reset to default
+                }
+            }
+        }
+
+        private void useditemradio_CheckedChanged(object sender, EventArgs e)
+        {
+            if(useditemradio.Checked == true)
+            {
+                refrencetxtbox.Visible = true;
+                usedproductrefrencelbl.Visible = true;
+            }
+            else
+            {
+                refrencetxtbox.Visible = false;
+                usedproductrefrencelbl.Visible = false;
+            }
         }
     }
 }

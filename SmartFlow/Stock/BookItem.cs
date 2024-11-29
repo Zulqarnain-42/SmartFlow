@@ -1,13 +1,8 @@
 ﻿using SmartFlow.Common;
+using SmartFlow.Common.Forms;
 using SmartFlow.Purchase;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Stock
@@ -17,6 +12,11 @@ namespace SmartFlow.Stock
         public BookItem()
         {
             InitializeComponent();
+        }
+        public BookItem(int bookitem)
+        {
+            InitializeComponent();
+            this.bookitemidlbl.Text = bookitem.ToString();
         }
         private void BookItem_Load(object sender, EventArgs e)
         {
@@ -44,7 +44,7 @@ namespace SmartFlow.Stock
 
                     }
                 }
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void closebtn_Click(object sender, EventArgs e)
         {
@@ -76,21 +76,43 @@ namespace SmartFlow.Stock
                     return;
                 }
 
-                string importantNotes = CommonFunction.CleanText(importantnotestxtbox.Text);
+                string importantNotes = importantnotestxtbox.Text;
 
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void selectwarehousetxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
-            if(openForm == null)
+            if (openForm == null)
             {
+                string getwarehousedata = "SELECT WarehouseID,Name,Address,City,Code FROM WarehouseTable";
+                DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
 
+                if (warehousedata != null)
+                {
+                    if (warehousedata.Rows.Count > 0)
+                    {
+                        WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
+                        warehouseSelection.MdiParent = this.MdiParent;
+                        
+                        warehouseSelection.FormClosed += delegate
+                        {
+                            UpdateWarehouseTxtBox();
+                        };
+                        CommonFunction.DisposeOnClose(warehouseSelection);
+                        warehouseSelection.Show();
+                    }
+                }
             }
             else
             {
                 openForm.BringToFront();
             }
+        }
+        private void UpdateWarehouseTxtBox()
+        {
+            selectwarehousetxtbox.Text = GlobalVariables.warehousenameglobal;
+            warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
         }
         private void BookItem_KeyDown(object sender, KeyEventArgs e)
         {
@@ -120,6 +142,47 @@ namespace SmartFlow.Stock
             if (bookinglocationtxtbox.Text.Trim().Length > 0) { return true; }
             if (importantnotestxtbox.Text.Trim().Length > 0) { return true; }
             return false; // No TextBox is filled
+        }
+
+        private void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
+        {
+            Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+            if (openForm == null)
+            {
+                ProductSelectionForm productSelection = new ProductSelectionForm();
+                productSelection.MdiParent = this.MdiParent;
+                
+                productSelection.FormClosed += delegate
+                {
+                    UpdateProductTextBox();
+                };
+                CommonFunction.DisposeOnClose(productSelection);
+                productSelection.Show();
+            }
+            else
+            {
+                openForm.BringToFront();
+            }
+        }
+        private void UpdateProductTextBox()
+        {
+            if (!string.IsNullOrEmpty(GlobalVariables.productnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.productnameglobal) &&
+                !string.IsNullOrEmpty(GlobalVariables.productmfrglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.productmfrglobal) &&
+                GlobalVariables.productidglobal > 0)
+            {
+                selectproducttxtbox.Text = GlobalVariables.productnameglobal.ToString();
+                productidlbl.Text = GlobalVariables.productidglobal.ToString();
+                mfrtxtbox.Text = GlobalVariables.productmfrglobal.ToString();
+            }
+        }
+
+        private void addrowbtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
     }
 }

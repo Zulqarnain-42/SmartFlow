@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Masters
@@ -41,19 +34,12 @@ namespace SmartFlow.Masters
                     return;
                 }
 
-                bool result = false;
-
                 if (debitamountradio.Checked)
                 {
                     string querydebitamount = string.Format("UPDATE AccountSubControlTable SET OpeningBalanceDebit = '" + amounttxtbox.Text + "' " +
                         "WHERE AccountSubControlID = '" + accountidlbl.Text + "'");
 
-                    result = DatabaseAccess.Update(querydebitamount);
-                    if (result) 
-                    {
-                        MessageBox.Show("Updated Successfully.");
-                        this.Close();
-                    }
+                    
                 }
 
                 if (creditamountradio.Checked)
@@ -61,14 +47,9 @@ namespace SmartFlow.Masters
                     string querycreditamount = string.Format("UPDATE AccountSubControlTable SET OpeningBalanceCredit = '" + amounttxtbox.Text + "' " +
                         "WHERE AccountSubControlID = '" + accountidlbl.Text + "'");
 
-                    result = DatabaseAccess.Update(querycreditamount);
-                    if (result) 
-                    {
-                        MessageBox.Show("Updated Successfully.");
-                        this.Close();
-                    }
+                    
                 }
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private bool AreAnyTextBoxesFilled()
         {

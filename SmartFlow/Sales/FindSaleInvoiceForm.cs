@@ -1,13 +1,7 @@
-﻿using SmartFlow.Purchase;
+﻿using SmartFlow.Common;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Sales
@@ -60,6 +54,7 @@ namespace SmartFlow.Sales
                         {
                             this.Close();
                             SaleQuotationInvoice saleQuotationInvoice = new SaleQuotationInvoice(dataInvoice, dtInvoiceDetails);
+                            CommonFunction.DisposeOnClose(saleQuotationInvoice);
                             saleQuotationInvoice.Show();
                         }
                     }
@@ -121,6 +116,7 @@ namespace SmartFlow.Sales
                         {
                             this.Close();
                             SaleInvoice saleInvoice = new SaleInvoice(dataInvoice, dtInvoiceDetails);
+                            CommonFunction.DisposeOnClose(saleInvoice);
                             saleInvoice.Show();
                         }
                     }
@@ -152,6 +148,7 @@ namespace SmartFlow.Sales
                         {
                             this.Close();
                             SaleReturnInvoice saleReturnInvoice = new SaleReturnInvoice(dataInvoice,dtInvoiceDetails);
+                            CommonFunction.DisposeOnClose(saleReturnInvoice);
                             saleReturnInvoice.Show();
                         }
                     }
@@ -166,7 +163,7 @@ namespace SmartFlow.Sales
                 }
                 
 
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void FindSaleInvoiceForm_Load(object sender, EventArgs e)
         {

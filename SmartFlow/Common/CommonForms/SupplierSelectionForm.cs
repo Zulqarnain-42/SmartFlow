@@ -38,7 +38,7 @@ namespace SmartFlow.Common.Forms
                         }
                     }
                 }
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void dgvsupplier_KeyDown(object sender, KeyEventArgs e)
         {
@@ -56,7 +56,7 @@ namespace SmartFlow.Common.Forms
                         this.Close();
                     }
                 }
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void SupplierSelectionForm_KeyDown(object sender, KeyEventArgs e)
         {

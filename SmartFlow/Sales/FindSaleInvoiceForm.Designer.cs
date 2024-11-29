@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.searchbtn = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.datelbl = new System.Windows.Forms.Label();
             this.invoicenotxtbox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.invoicenolbl = new System.Windows.Forms.Label();
             this.salereturnradio = new System.Windows.Forms.RadioButton();
             this.saleinvoiceradio = new System.Windows.Forms.RadioButton();
             this.saleorderradio = new System.Windows.Forms.RadioButton();
@@ -47,25 +47,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(622, 45);
             this.panel1.TabIndex = 0;
             // 
-            // label1
+            // headinglbl
             // 
-            this.label1.BackColor = System.Drawing.Color.Black;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(622, 45);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "FIND A SALE INVOICE";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(622, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "FIND A SALE INVOICE";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // searchbtn
             // 
@@ -78,15 +78,15 @@
             this.searchbtn.UseVisualStyleBackColor = true;
             this.searchbtn.Click += new System.EventHandler(this.searchbtn_Click);
             // 
-            // label2
+            // datelbl
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(56, 205);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 23);
-            this.label2.TabIndex = 57;
-            this.label2.Text = "DATE";
+            this.datelbl.AutoSize = true;
+            this.datelbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.datelbl.Location = new System.Drawing.Point(56, 205);
+            this.datelbl.Name = "datelbl";
+            this.datelbl.Size = new System.Drawing.Size(50, 23);
+            this.datelbl.TabIndex = 57;
+            this.datelbl.Text = "DATE";
             // 
             // invoicenotxtbox
             // 
@@ -98,15 +98,15 @@
             this.invoicenotxtbox.TabIndex = 56;
             this.invoicenotxtbox.Leave += new System.EventHandler(this.invoicenotxtbox_Leave);
             // 
-            // label3
+            // invoicenolbl
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(56, 167);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 23);
-            this.label3.TabIndex = 55;
-            this.label3.Text = "INVOICE NO";
+            this.invoicenolbl.AutoSize = true;
+            this.invoicenolbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invoicenolbl.Location = new System.Drawing.Point(56, 167);
+            this.invoicenolbl.Name = "invoicenolbl";
+            this.invoicenolbl.Size = new System.Drawing.Size(106, 23);
+            this.invoicenolbl.TabIndex = 55;
+            this.invoicenolbl.Text = "INVOICE NO";
             // 
             // salereturnradio
             // 
@@ -180,18 +180,19 @@
             this.ClientSize = new System.Drawing.Size(622, 326);
             this.Controls.Add(this.invoicedatetxtbox);
             this.Controls.Add(this.searchbtn);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.datelbl);
             this.Controls.Add(this.invoicenotxtbox);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.invoicenolbl);
             this.Controls.Add(this.salereturnradio);
             this.Controls.Add(this.saleinvoiceradio);
             this.Controls.Add(this.saleorderradio);
             this.Controls.Add(this.salequotationradio);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.Name = "FindSaleInvoiceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Find Invoice Form";
+            this.Text = "FIND INVOICE FORM";
             this.Load += new System.EventHandler(this.FindSaleInvoiceForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FindSaleInvoiceForm_KeyDown);
             this.panel1.ResumeLayout(false);
@@ -204,11 +205,11 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.Button searchbtn;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label datelbl;
         private System.Windows.Forms.TextBox invoicenotxtbox;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label invoicenolbl;
         private System.Windows.Forms.RadioButton salereturnradio;
         private System.Windows.Forms.RadioButton saleinvoiceradio;
         private System.Windows.Forms.RadioButton saleorderradio;

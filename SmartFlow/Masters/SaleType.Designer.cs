@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.salestypelbl = new System.Windows.Forms.Label();
             this.saletypetxtbox = new System.Windows.Forms.TextBox();
             this.savebtn = new System.Windows.Forms.Button();
@@ -38,31 +38,33 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.checkBoxTax = new System.Windows.Forms.CheckBox();
             this.exitbtn = new System.Windows.Forms.Button();
+            this.saletypeidlbl = new System.Windows.Forms.Label();
+            this.saletypecodelbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(570, 45);
             this.panel1.TabIndex = 0;
             // 
-            // label1
+            // headinglbl
             // 
-            this.label1.BackColor = System.Drawing.Color.Black;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(570, 45);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "SALES TYPE";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(570, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "SALES TYPE";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // salestypelbl
             // 
@@ -129,12 +131,34 @@
             this.exitbtn.UseVisualStyleBackColor = true;
             this.exitbtn.Click += new System.EventHandler(this.exitbtn_Click);
             // 
+            // saletypeidlbl
+            // 
+            this.saletypeidlbl.AutoSize = true;
+            this.saletypeidlbl.Location = new System.Drawing.Point(35, 91);
+            this.saletypeidlbl.Name = "saletypeidlbl";
+            this.saletypeidlbl.Size = new System.Drawing.Size(84, 16);
+            this.saletypeidlbl.TabIndex = 5;
+            this.saletypeidlbl.Text = "saletypeidlbl";
+            this.saletypeidlbl.Visible = false;
+            // 
+            // saletypecodelbl
+            // 
+            this.saletypecodelbl.AutoSize = true;
+            this.saletypecodelbl.Location = new System.Drawing.Point(13, 111);
+            this.saletypecodelbl.Name = "saletypecodelbl";
+            this.saletypecodelbl.Size = new System.Drawing.Size(104, 16);
+            this.saletypecodelbl.TabIndex = 6;
+            this.saletypecodelbl.Text = "saletypecodelbl";
+            this.saletypecodelbl.Visible = false;
+            // 
             // SaleType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(570, 224);
+            this.Controls.Add(this.saletypecodelbl);
+            this.Controls.Add(this.saletypeidlbl);
             this.Controls.Add(this.exitbtn);
             this.Controls.Add(this.checkBoxTax);
             this.Controls.Add(this.savebtn);
@@ -146,7 +170,8 @@
             this.KeyPreview = true;
             this.Name = "SaleType";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SALE TYPE - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "SALE TYPE";
+            this.Load += new System.EventHandler(this.SaleType_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaleType_KeyDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
@@ -158,7 +183,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.Label salestypelbl;
         private System.Windows.Forms.TextBox saletypetxtbox;
         private System.Windows.Forms.Button savebtn;
@@ -166,5 +191,7 @@
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.CheckBox checkBoxTax;
         private System.Windows.Forms.Button exitbtn;
+        private System.Windows.Forms.Label saletypeidlbl;
+        private System.Windows.Forms.Label saletypecodelbl;
     }
 }

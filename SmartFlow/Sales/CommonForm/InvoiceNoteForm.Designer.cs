@@ -99,7 +99,7 @@
             this.KeyPreview = true;
             this.Name = "InvoiceNoteForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Invoice Note";
+            this.Text = "INVOICE NOTE";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InvoiceNoteForm_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

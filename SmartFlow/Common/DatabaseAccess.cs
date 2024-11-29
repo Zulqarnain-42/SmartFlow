@@ -1,104 +1,155 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace SmartFlow
 {
-    
     public class DatabaseAccess
     {
+        
         public static SqlConnection conn;
-        private static SqlConnection ConnOpen() 
+        private static string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        /*private static string connectionString = @"Data Source=10.255.254.241,1433;Initial Catalog=SmartFlow;User id=fabt;Password=Fabt101;";*/
+        /*private static string connectionString = @"Data Source=DESKTOP-1D6LU8Q\SQLEXPRESS;Initial Catalog=19112024;Integrated Security=True;Encrypt=False;";*/
+        private static SqlConnection ConnOpen()
         {
-            if(conn == null)
-            {
-                /*conn = new SqlConnection(@"Data Source=10.255.254.241,1433;Initial Catalog=SmartFlow;User id=fabt;Password=Fabt101;");*/
-                conn = new SqlConnection(@"Data Source=DESKTOP-1D6LU8Q\SQLEXPRESS;Initial Catalog=SmartFlow;Integrated Security=True;Encrypt=False");
-            }
-
-            if(conn.State != System.Data.ConnectionState.Open)
+            conn = new SqlConnection(connectionString);
+            if (conn.State != System.Data.ConnectionState.Open)
             {
                 conn.Open();
             }
-
             return conn;
         }
-        public static bool Insert(String query)
+
+        public static bool ExecuteQuery(string tableName, string operation, Dictionary<string, object> columnData, string whereClause = null)
         {
             try
             {
-                int noofrows = 0;
-                SqlCommand cmd = new SqlCommand(query, ConnOpen());
-                noofrows = cmd.ExecuteNonQuery();
-                if (noofrows > 0)
+                if (string.IsNullOrWhiteSpace(tableName) || string.IsNullOrWhiteSpace(operation))
+                    throw new ArgumentException("Table name and operation must be provided.");
+
+                string query = string.Empty;
+
+                // Dynamically construct the query based on the operation
+                if (operation.ToUpper() == "INSERT")
                 {
-                    return true;
+                    string columns = string.Join(", ", columnData.Keys);
+                    string values = string.Join(", ", columnData.Keys.Select(key => "@" + key));
+                    query = $"INSERT INTO {tableName} ({columns}) VALUES ({values})";
+                }
+                else if (operation.ToUpper() == "UPDATE")
+                {
+                    if (string.IsNullOrWhiteSpace(whereClause))
+                        throw new ArgumentException("WHERE clause is required for UPDATE operations.");
+
+                    string setClause = string.Join(", ", columnData.Keys.Select(key => $"{key} = @{key}"));
+                    query = $"UPDATE {tableName} SET {setClause} WHERE {whereClause}";
+                }
+                else if (operation.ToUpper() == "DELETE")
+                {
+                    if (string.IsNullOrWhiteSpace(whereClause))
+                        throw new ArgumentException("WHERE clause is required for DELETE operations.");
+
+                    query = $"DELETE FROM {tableName} WHERE {whereClause}";
                 }
                 else
                 {
-                    return false;
+                    throw new ArgumentException("Unsupported operation. Use INSERT, UPDATE, or DELETE.");
+                }
+
+                // Execute the query
+                using (SqlConnection conn = ConnOpen())
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    foreach (var param in columnData)
+                    {
+                        cmd.Parameters.AddWithValue("@" + param.Key, param.Value ?? DBNull.Value);
+                    }
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
                 }
             }
-            catch { throw; }
-            finally { conn.Close(); }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            finally
+            {
+                conn.Close();   
+            }
         }
-        public static int InsertId(string query)
+
+        public static int InsertDataId(string tableName, Dictionary<string, object> columnData)
         {
             try
             {
-                int generatedId = 0;
-                SqlCommand cmd = new SqlCommand(query,ConnOpen());
-                generatedId = Convert.ToInt32(cmd.ExecuteScalar());
-                if (generatedId > 0)
+                // Build the column and parameter lists dynamically
+                string columns = string.Join(", ", columnData.Keys);
+                string parameters = string.Join(", ", columnData.Keys.Select(key => $"@{key}"));
+
+                // Create the query
+                string query = $"INSERT INTO {tableName} ({columns}) VALUES ({parameters}); SELECT SCOPE_IDENTITY();";
+                
+                using (SqlConnection conn = ConnOpen())
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    return generatedId;
-                }
-                else
-                {
-                    return 0;
+                    // Add parameters
+                    foreach (var kvp in columnData)
+                    {
+                        cmd.Parameters.AddWithValue($"@{kvp.Key}", kvp.Value ?? DBNull.Value);
+                    }
+                    // Execute and return the new record ID
+                    return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
-            catch(Exception ex) { throw ex; }
+            catch (Exception ex)
+            {
+                // Log or handle exceptions as needed
+                Console.WriteLine($"Error: {ex.Message}");
+                return -1; // Indicate failure
+            }
             finally { conn.Close(); }
         }
-        public static bool Update(String query)
+
+        public static DataTable RetrieveData(string query, Dictionary<string, object> parameters = null)
         {
             try
             {
-                int noofrows = 0;
-                SqlCommand cmd = new SqlCommand(query, ConnOpen());
-                noofrows = cmd.ExecuteNonQuery();
-                if (noofrows > 0)
+                using (SqlConnection conn = ConnOpen()) // Ensure ConnOpen() returns an open SqlConnection
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    return true;
-                }
-                else
-                {
-                    return false;
+                    // Add parameters if provided
+                    if (parameters != null)
+                    {
+                        foreach (var param in parameters)
+                        {
+                            cmd.Parameters.AddWithValue(param.Key, param.Value ?? DBNull.Value);
+                        }
+                    }
+
+                    // Execute query and fill DataTable
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        return dt;
+                    }
                 }
             }
-            catch { throw; }
-            finally { conn.Close(); }
-        }
-        public static bool Delete(String query)
-        {
-            try
+            catch (Exception ex)
             {
-                int noofrows = 0;
-                SqlCommand cmd = new SqlCommand(query, ConnOpen());
-                noofrows = cmd.ExecuteNonQuery();
-                if (noofrows > 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
             }
-            catch { throw; }
             finally { conn.Close(); }
         }
+
         public static DataTable Retrive(String query)
         {
             try
@@ -108,7 +159,36 @@ namespace SmartFlow
                 da.Fill(dt);
                 return dt;
             }
-            catch { throw; }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+            finally { conn.Close(); }
+        }
+
+        public static bool CheckIfCodeExistsInDatabase(string code)
+        {
+            try
+            {
+                bool exists = false;
+                using (SqlConnection connection = ConnOpen())
+                {
+                    string query = "SELECT COUNT(*) FROM ProductTable WHERE MFR LIKE @Code";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Code", code);
+                        int count = (int)command.ExecuteScalar(); // Check if the code exists
+                        exists = count > 0; // If count > 0, the code exists
+                    }
+                }
+                return !exists; // Return true if the code is unique (not exists)
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             finally { conn.Close(); }
         }
     }

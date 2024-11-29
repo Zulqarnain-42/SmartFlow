@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartFlow.Common;
+using System;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
@@ -7,8 +8,6 @@ namespace SmartFlow.Masters
 {
     public partial class AccountHistory : Form
     {
-        private int currentRowIndex;
-        private int currentCellIndex;
         public AccountHistory()
         {
             InitializeComponent();
@@ -28,11 +27,13 @@ namespace SmartFlow.Masters
         private void newbtn_Click(object sender, EventArgs e)
         {
             Account account = new Account();
-            account.Show();
+            account.MdiParent = this.MdiParent;
             account.FormClosed += delegate
             {
                 FillGrid("");
             };
+            CommonFunction.DisposeOnClose(account);
+            account.Show();
         }
         private void FillGrid(string searchvalue)
         {
@@ -42,11 +43,11 @@ namespace SmartFlow.Masters
                 DataTable dataTable = new DataTable();
                 if (string.IsNullOrEmpty(searchvalue) && string.IsNullOrWhiteSpace(searchvalue))
                 {
-                    query = "SELECT AccountSubControlTable.AccountSubControlID [ID],AccountControlTable.AccountControlName [Control Name]," +
-                        "AccountSubControlTable.AccountSubControlName [Account Name],AccountSubControlTable.CreatedAt [Created]," +
-                        "AccountSubControlTable.CreatedDay [Day]" +
-                        ",AccountSubControlTable.Address [Address],AccountSubControlTable.Country [Country]" +
-                        ",AccountSubControlTable.Email [Email],AccountSubControlTable.MobileNo [Mobile] FROM AccountSubControlTable " +
+                    query = "SELECT AccountSubControlTable.AccountSubControlID [ID],AccountSubControlTable.CodeAccount [Code]," +
+                        "AccountSubControlTable.AccountSubControlName [Account Name]," +
+                        "AccountSubControlTable.MobileNo [Mobile]," +
+                        "AccountSubControlTable.Email [Email],AccountSubControlTable.CreatedAt [Created],AccountSubControlTable.CreatedDay [Day] " +
+                        "FROM AccountSubControlTable " +
                         "INNER JOIN AccountControlTable ON AccountControlTable.AccountControlID = AccountSubControlTable.AccountControl_ID";
                 }
                 else
@@ -68,8 +69,6 @@ namespace SmartFlow.Masters
                         accountdatagridview.Columns[4].Width = 100;
                         accountdatagridview.Columns[5].Width = 100;
                         accountdatagridview.Columns[6].Width = 100;
-                        accountdatagridview.Columns[7].Width = 100;
-                        accountdatagridview.Columns[8].Width = 100;
                     }
                     else
                     {
@@ -82,14 +81,14 @@ namespace SmartFlow.Masters
                 }
 
                 // Restore the cursor position
-                if (currentRowIndex >= 0 && currentCellIndex >= 0 &&
-                    currentRowIndex < accountdatagridview.Rows.Count &&
-                    currentCellIndex < accountdatagridview.Rows[currentRowIndex].Cells.Count)
+                if (GlobalVariables.currentRowIndex >= 0 && GlobalVariables.currentCellIndex >= 0 &&
+                    GlobalVariables.currentRowIndex < accountdatagridview.Rows.Count &&
+                    GlobalVariables.currentCellIndex < accountdatagridview.Rows[GlobalVariables.currentRowIndex].Cells.Count)
                 {
-                    accountdatagridview.CurrentCell = accountdatagridview.Rows[currentRowIndex].Cells[currentCellIndex];
+                    accountdatagridview.CurrentCell = accountdatagridview.Rows[GlobalVariables.currentRowIndex].Cells[GlobalVariables.currentCellIndex];
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void AccountHistory_Load(object sender, EventArgs e)
         {
@@ -110,12 +109,14 @@ namespace SmartFlow.Masters
                         if(accountdatagridview.SelectedRows.Count == 1)
                         {
                             Account account = new Account(Convert.ToInt32(accountdatagridview.CurrentRow.Cells[0].Value));
+                            account.MdiParent = this.MdiParent;
                             account.FormClosed += delegate
                             {
-                                currentRowIndex = accountdatagridview.CurrentCell.RowIndex;
-                                currentCellIndex = accountdatagridview.CurrentCell.ColumnIndex;
+                                GlobalVariables.currentRowIndex = accountdatagridview.CurrentCell.RowIndex;
+                                GlobalVariables.currentCellIndex = accountdatagridview.CurrentCell.ColumnIndex;
                                 FillGrid("");
                             };
+                            CommonFunction.DisposeOnClose(account);
                             account.Show();
                         }
                         else
@@ -128,7 +129,7 @@ namespace SmartFlow.Masters
                         MessageBox.Show("No Record Available.");
                     }
                 }
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void accountdatagridview_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -141,12 +142,14 @@ namespace SmartFlow.Masters
                         if (accountdatagridview.SelectedRows.Count == 1)
                         {
                             Account account = new Account(Convert.ToInt32(accountdatagridview.CurrentRow.Cells[0].Value));
+                            account.MdiParent = this.MdiParent;
                             account.FormClosed += delegate
                             {
-                                currentRowIndex = accountdatagridview.CurrentCell.RowIndex;
-                                currentCellIndex = accountdatagridview.CurrentCell.ColumnIndex;
+                                GlobalVariables.currentRowIndex = accountdatagridview.CurrentCell.RowIndex;
+                                GlobalVariables.currentCellIndex = accountdatagridview.CurrentCell.ColumnIndex;
                                 FillGrid("");
                             };
+                            CommonFunction.DisposeOnClose(account);
                             account.Show();
                         }
                         else
@@ -159,7 +162,7 @@ namespace SmartFlow.Masters
                         MessageBox.Show("No Record Available.");
                     }
                 }
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private int GetFirstVisibleRowIndex(DataGridView dataGridView)
         {
@@ -201,29 +204,19 @@ namespace SmartFlow.Masters
             int firstVisibleCellIndex = GetFirstVisibleCellIndex(accountdatagridview);
             if (firstVisibleRowIndex >= 0)
             {
-                currentRowIndex = firstVisibleRowIndex;
-                currentCellIndex = firstVisibleCellIndex;
+                GlobalVariables.currentRowIndex = firstVisibleRowIndex;
+                GlobalVariables.currentCellIndex = firstVisibleCellIndex;
             }
         }
+
         private string BuildSearchQueryAccountSubControl(string searchTerm)
         {
             string[] terms = searchTerm.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            StringBuilder queryBuilder = new StringBuilder("SELECT AccountSubControlTable.AccountSubControlID [ID],AccountControlTable.AccountControlName [Control Name],AccountSubControlTable.AccountSubControlName [Account Head],AccountSubControlTable.CreatedAt [Created],AccountSubControlTable.CreatedDay [Day],AccountSubControlTable.Address [Address],AccountSubControlTable.Country [Country],AccountSubControlTable.Email [Email],AccountSubControlTable.MobileNo [Mobile], (");
-
-            for (int i = 0; i < terms.Length; i++)
-            {
-                string term = terms[i];
-                if (i > 0)
-                {
-                    queryBuilder.Append(" + ");
-                }
-                queryBuilder.Append($"(CASE WHEN AccountControlTable.AccountControlName LIKE '%{term}%' THEN 1 ELSE 0 END)");
-                queryBuilder.Append($" + (CASE WHEN AccountSubControlTable.AccountSubControlName LIKE '%{term}%' THEN 1 ELSE 0 END)");
-                queryBuilder.Append($" + (CASE WHEN AccountSubControlTable.Email LIKE '%{term}%' THEN 1 ELSE 0 END)");
-                queryBuilder.Append($" + (CASE WHEN AccountSubControlTable.MobileNo LIKE '%{term}%' THEN 1 ELSE 0 END)");
-            }
-
-            queryBuilder.Append(") AS RelevanceScore FROM AccountSubControlTable INNER JOIN AccountControlTable ON AccountControlTable.AccountControlID = AccountSubControlTable.AccountControl_ID WHERE");
+            StringBuilder queryBuilder = new StringBuilder("SELECT AccountSubControlTable.AccountSubControlID [ID],AccountSubControlTable.CodeAccount [Code], " +
+                "AccountSubControlTable.AccountSubControlName [Account Name], AccountSubControlTable.MobileNo [Mobile]," +
+                "AccountSubControlTable.Email [Email], " +
+                "AccountSubControlTable.CreatedAt [Created], AccountSubControlTable.CreatedDay [Day] " +
+                "FROM AccountSubControlTable INNER JOIN AccountControlTable ON AccountControlTable.AccountControlID = AccountSubControlTable.AccountControl_ID WHERE");
 
             for (int i = 0; i < terms.Length; i++)
             {
@@ -232,10 +225,11 @@ namespace SmartFlow.Masters
                 {
                     queryBuilder.Append(" AND");
                 }
-                queryBuilder.Append($" (AccountControlTable.AccountControlName LIKE '%{term}%' OR AccountSubControlTable.AccountSubControlName LIKE '%{term}%' OR AccountSubControlTable.Email LIKE '%{term}%' OR AccountSubControlTable.MobileNo LIKE '%{term}%')");
+                queryBuilder.Append($" (AccountControlTable.AccountControlName LIKE '%{term}%' OR AccountSubControlTable.AccountSubControlName " +
+                    $"LIKE '%{term}%' OR AccountSubControlTable.Email LIKE '%{term}%' OR AccountSubControlTable.MobileNo LIKE '%{term}%')");
             }
 
-            queryBuilder.Append(" ORDER BY RelevanceScore DESC");
+            // Note: RelevanceScore calculation and ORDER BY clause have been removed
 
             return queryBuilder.ToString();
         }

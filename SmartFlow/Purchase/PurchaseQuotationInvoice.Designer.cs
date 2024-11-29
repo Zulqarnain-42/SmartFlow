@@ -81,10 +81,10 @@
             this.mfrtxtbox = new System.Windows.Forms.TextBox();
             this.mfrlbl = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.totaldiscountlbl = new System.Windows.Forms.Label();
             this.totalvatlbl = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.nettotallbl = new System.Windows.Forms.Label();
             this.totaldiscounttxtbox = new System.Windows.Forms.TextBox();
             this.totalvattxtbox = new System.Windows.Forms.TextBox();
             this.nettotaltxtbox = new System.Windows.Forms.TextBox();
@@ -650,25 +650,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1768, 45);
             this.panel1.TabIndex = 39;
             // 
-            // label6
+            // headinglbl
             // 
-            this.label6.BackColor = System.Drawing.Color.Black;
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label6.Location = new System.Drawing.Point(0, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(1768, 45);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "PURCHASE QUOTATION INVOICE";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1768, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "PURCHASE QUOTATION INVOICE";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // totaldiscountlbl
             // 
@@ -696,16 +696,16 @@
             this.totalvatlbl.Text = "TOTAL VAT";
             this.totalvatlbl.Visible = false;
             // 
-            // label14
+            // nettotallbl
             // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(1268, 73);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(94, 23);
-            this.label14.TabIndex = 140;
-            this.label14.Text = "NET TOTAL";
+            this.nettotallbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nettotallbl.AutoSize = true;
+            this.nettotallbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nettotallbl.Location = new System.Drawing.Point(1268, 73);
+            this.nettotallbl.Name = "nettotallbl";
+            this.nettotallbl.Size = new System.Drawing.Size(94, 23);
+            this.nettotallbl.TabIndex = 140;
+            this.nettotallbl.Text = "NET TOTAL";
             // 
             // totaldiscounttxtbox
             // 
@@ -759,7 +759,7 @@
             this.Controls.Add(this.totaldiscounttxtbox);
             this.Controls.Add(this.totaldiscountlbl);
             this.Controls.Add(this.totalvatlbl);
-            this.Controls.Add(this.label14);
+            this.Controls.Add(this.nettotallbl);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.newbtn);
@@ -771,7 +771,7 @@
             this.MinimizeBox = false;
             this.Name = "PurchaseQuotationInvoice";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Purchase Quotation Invoice - Future Art Broadcast Trading LLC";
+            this.Text = "PURCHASE QUOTATION INVOICE";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.PurchaseQuotationInvoice_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PurchaseQuotationInvoice_KeyDown);
@@ -812,7 +812,7 @@
         private System.Windows.Forms.Label qtylbl;
         private System.Windows.Forms.TextBox codetxtbox;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.TextBox selectproducttxtbox;
         private System.Windows.Forms.TextBox selectsuppliertxtbox;
         private System.Windows.Forms.Label productidlbl;
@@ -822,7 +822,7 @@
         private System.Windows.Forms.MaskedTextBox invoicedatetxtbox;
         private System.Windows.Forms.Label totaldiscountlbl;
         private System.Windows.Forms.Label totalvatlbl;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label nettotallbl;
         private System.Windows.Forms.Label purchasetypeidlbl;
         private System.Windows.Forms.Label currencyconversionratelbl;
         private System.Windows.Forms.Label currencysymbollbl;

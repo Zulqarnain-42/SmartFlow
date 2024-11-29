@@ -53,7 +53,7 @@
             // 
             this.headinglbl.BackColor = System.Drawing.Color.Black;
             this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
             this.headinglbl.Name = "headinglbl";
@@ -127,6 +127,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AccountGroupSelectionForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ACCOUNT GROUP SELECTION";
             this.Load += new System.EventHandler(this.AccountGroupSelectionForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AccountGroupSelectionForm_KeyDown);

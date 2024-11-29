@@ -39,6 +39,8 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.checkBoxTax = new System.Windows.Forms.CheckBox();
             this.exitbtn = new System.Windows.Forms.Button();
+            this.purchasetypeidlbl = new System.Windows.Forms.Label();
+            this.purchasetypecodelbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
@@ -99,11 +101,23 @@
             this.exitbtn.UseVisualStyleBackColor = true;
             this.exitbtn.Click += new System.EventHandler(this.exitbtn_Click);
             // 
+            // purchasetypeidlbl
+            // 
+            resources.ApplyResources(this.purchasetypeidlbl, "purchasetypeidlbl");
+            this.purchasetypeidlbl.Name = "purchasetypeidlbl";
+            // 
+            // purchasetypecodelbl
+            // 
+            resources.ApplyResources(this.purchasetypecodelbl, "purchasetypecodelbl");
+            this.purchasetypecodelbl.Name = "purchasetypecodelbl";
+            // 
             // PurchaseType
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.Controls.Add(this.purchasetypecodelbl);
+            this.Controls.Add(this.purchasetypeidlbl);
             this.Controls.Add(this.exitbtn);
             this.Controls.Add(this.checkBoxTax);
             this.Controls.Add(this.savebtn);
@@ -114,6 +128,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "PurchaseType";
+            this.Load += new System.EventHandler(this.PurchaseType_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PurchaseType_KeyDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
@@ -133,5 +148,7 @@
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.CheckBox checkBoxTax;
         private System.Windows.Forms.Button exitbtn;
+        private System.Windows.Forms.Label purchasetypeidlbl;
+        private System.Windows.Forms.Label purchasetypecodelbl;
     }
 }

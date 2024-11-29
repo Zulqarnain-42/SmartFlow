@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label7 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.productserialnolbl = new System.Windows.Forms.Label();
             this.productserialnodilbl = new System.Windows.Forms.Label();
             this.invoicespecialnotelbl = new System.Windows.Forms.Label();
@@ -103,18 +103,18 @@
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label7
+            // headinglbl
             // 
-            this.label7.BackColor = System.Drawing.Color.Black;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label7.Location = new System.Drawing.Point(0, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(1772, 38);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "MATERIAL ISSUED TO PARTY";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1772, 38);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "MATERIAL ISSUED TO PARTY";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // productserialnolbl
             // 
@@ -124,6 +124,7 @@
             this.productserialnolbl.Size = new System.Drawing.Size(114, 16);
             this.productserialnolbl.TabIndex = 185;
             this.productserialnolbl.Text = "productserialnolbl";
+            this.productserialnolbl.Visible = false;
             // 
             // productserialnodilbl
             // 
@@ -133,6 +134,7 @@
             this.productserialnodilbl.Size = new System.Drawing.Size(125, 16);
             this.productserialnodilbl.TabIndex = 184;
             this.productserialnodilbl.Text = "productserialnodilbl";
+            this.productserialnodilbl.Visible = false;
             // 
             // invoicespecialnotelbl
             // 
@@ -396,7 +398,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -867,8 +869,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "MaterialIssueToParty";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "MATERIAL ISSUE TO PARTY - FUTURE ART BROADCAST TRADING LLC";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "MATERIAL ISSUE TO PARTY";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MaterialIssueToParty_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MaterialIssueToParty_KeyDown);
@@ -886,7 +888,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.Label productserialnolbl;
         private System.Windows.Forms.Label productserialnodilbl;
         private System.Windows.Forms.Label invoicespecialnotelbl;

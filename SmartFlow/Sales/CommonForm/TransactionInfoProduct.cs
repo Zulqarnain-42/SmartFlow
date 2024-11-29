@@ -86,7 +86,12 @@ namespace SmartFlow.Sales.CommonForm
         }
         private void TransactionInfoProduct_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ItemWiseDescription itemWiseDescription = new ItemWiseDescription(_productid, _productmfr);
+            ItemWiseDescription itemWiseDescription = new ItemWiseDescription(_productid, _productmfr)
+            {
+                WindowState = FormWindowState.Normal,
+                StartPosition = FormStartPosition.CenterScreen,
+            };
+            CommonFunction.DisposeOnClose(itemWiseDescription);
             itemWiseDescription.ShowDialog();
         }
     }

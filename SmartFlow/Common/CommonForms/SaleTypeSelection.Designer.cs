@@ -52,7 +52,7 @@
             // 
             this.salestypeselectionlbl.BackColor = System.Drawing.Color.Black;
             this.salestypeselectionlbl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.salestypeselectionlbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.salestypeselectionlbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.salestypeselectionlbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.salestypeselectionlbl.Location = new System.Drawing.Point(0, 0);
             this.salestypeselectionlbl.Name = "salestypeselectionlbl";
@@ -126,7 +126,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "SaleTypeSelection";
-            this.Text = "SALE TYPE SELECTION - FUTURE ART BROADCAST TRADING LLC";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "SALE TYPE SELECTION";
             this.Load += new System.EventHandler(this.SaleTypeSelection_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaleTypeSelection_KeyDown);
             this.panel1.ResumeLayout(false);

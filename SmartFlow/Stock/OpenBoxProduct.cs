@@ -3,7 +3,6 @@ using SmartFlow.Common.Forms;
 using SmartFlow.Purchase;
 using System;
 using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SmartFlow.Stock
@@ -55,7 +54,11 @@ namespace SmartFlow.Stock
 
                 return newInvoiceNumber;
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
         private string GetLastInvoiceNumber()
         {
@@ -71,7 +74,7 @@ namespace SmartFlow.Stock
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return lastInvoiceNumber;
@@ -101,13 +104,13 @@ namespace SmartFlow.Stock
 
                 string addopenboxproductdata = string.Empty;
                 string invoiceno = openboxproductidlbl.Text;
-                string description = CommonFunction.CleanText(descriptiontxtbox.Text);
+                string description = descriptiontxtbox.Text;
 
                 addopenboxproductdata = string.Format("INSERT INTO StockCustomizedTable (Code,CreatedAt,CreatedDay,InvoiceNo,Description) VALUES ('" + Guid.NewGuid() + "'," +
                     "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + invoiceno + "','" + description + "'); " +
                     "SELECT SCOPE_IDENTITY();");
 
-                int stockcustomid = DatabaseAccess.InsertId(addopenboxproductdata);
+                int stockcustomid = 1;
                 int warehouseid = Convert.ToInt32(warehouseidlbl.Text);
 
                 if (stockcustomid > 0)
@@ -118,11 +121,11 @@ namespace SmartFlow.Stock
                     string openboxprodprice = openboxproductpricelbl.Text;
                     string openboxprodbarcode = openboxproductbarcodelbl.Text;
 
-                    string insertopenboxproducts = string.Format("INSERT INTO StockTable (Product_ID,Quantity,CreatedAt,CreatedDay,WarehouseId," +
+                    string insertopenboxproducts = string.Format("INSERT INTO StockTable (ProductID,Quantity,CreatedAt,CreatedDay,WarehouseId," +
                         "StockCustom_ID,MinusOpenBoxQuantity) VALUES ('" + openboxproid + "','" + -1 + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
                         "'" + DateTime.Now.DayOfWeek + "','" + warehouseid + "','" + stockcustomid + "','" + -1 + "')");
 
-                    bool result = DatabaseAccess.Insert(insertopenboxproducts);
+                    bool result = false;
 
                     if (result)
                     {
@@ -137,11 +140,11 @@ namespace SmartFlow.Stock
                                 string barcode = Convert.ToString(row.Cells[4].Value);
                                 int quantity = Convert.ToInt32(row.Cells[5].Value);
 
-                                string insertproducts = string.Format("INSERT INTO StockTable (Product_ID,Quantity,CreatedAt,CreatedDay,WarehouseId," +
+                                string insertproducts = string.Format("INSERT INTO StockTable (ProductID,Quantity,CreatedAt,CreatedDay,WarehouseId," +
                                 "StockCustom_ID,AddOpenBoxQuantity) VALUES ('" + productid + "','" + quantity + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
                                 "'" + DateTime.Now.DayOfWeek + "','" + warehouseid + "','" + stockcustomid + "','" + quantity + "')");
 
-                                bool result1 = DatabaseAccess.Insert(insertproducts);
+                                bool result1 = false;
 
                                 if (result1) 
                                 {
@@ -157,7 +160,7 @@ namespace SmartFlow.Stock
                                             string query1 = string.Format("INSERT INTO SerialNoTable (ProductId,SerialNo,CreatedAt,CreatedDay) " +
                                         "VALUES ('" + productid + "','" + serialnumber + "','" + System.DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
                                         "'" + System.DateTime.Now.DayOfWeek + "')");
-                                            DatabaseAccess.Insert(query1);
+
                                             start++;
                                         }
                                     }
@@ -169,7 +172,7 @@ namespace SmartFlow.Stock
                     }
                 }
 
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         static string GenerateRandomSerialNumber()
         {
@@ -238,7 +241,7 @@ namespace SmartFlow.Stock
                 qtytextbox.Text = string.Empty;
                 remainingproductmfrtxtbox.Focus();
 
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void dgvproducts_KeyDown(object sender, KeyEventArgs e)
         {
@@ -295,8 +298,14 @@ namespace SmartFlow.Stock
                     if (warehousedata.Rows.Count > 0)
                     {
                         WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
-                        warehouseSelection.ShowDialog();
-                        UpdateWarehouseTextBox();
+                        warehouseSelection.MdiParent = this.MdiParent;
+                        
+                        warehouseSelection.FormClosed += delegate
+                        {
+                            UpdateWarehouseTextBox();
+                        };
+                        CommonFunction.DisposeOnClose(warehouseSelection);
+                        warehouseSelection.Show();
                     }
                 }
             }
@@ -315,9 +324,18 @@ namespace SmartFlow.Stock
             Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
             if (openForm == null) 
             {
-                ProductSelectionForm productSelectionForm = new ProductSelectionForm();
+                ProductSelectionForm productSelectionForm = new ProductSelectionForm
+                {
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterScreen,
+                };
+                
+                productSelectionForm.FormClosed += delegate
+                {
+                    UpdateProductTextBox();
+                };
+                CommonFunction.DisposeOnClose(productSelectionForm);
                 productSelectionForm.ShowDialog();
-                UpdateProductTextBox();
             }
             else
             {
@@ -338,9 +356,19 @@ namespace SmartFlow.Stock
             Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
             if (openForm == null)
             {
-                ProductSelectionForm productSelectionForm = new ProductSelectionForm();
+                ProductSelectionForm productSelectionForm = new ProductSelectionForm
+                {
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterScreen,
+                };
+
+                productSelectionForm.FormClosed += delegate
+                {
+                    UpdateOpenBoxProductTextBox();
+                };
+
+                CommonFunction.DisposeOnClose(productSelectionForm);
                 productSelectionForm.ShowDialog();
-                UpdateOpenBoxProductTextBox();
             }
             else
             {
@@ -368,5 +396,36 @@ namespace SmartFlow.Stock
         {
             this.Close();
         }
+
+        /*private bool InsertOpenBoxProducts()
+        {
+            string tableName = "";
+            var columnData = new Dictionary<string, object>
+            {
+                { "Code", Guid.NewGuid().ToString() },
+                { "CreatedAt", DateTime.Now.ToString() },
+                { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                { "InvoiceNo", openboxproductidlbl.Text },
+                { "Description", descriptiontxtbox.Text }
+            };
+
+            int result = DatabaseAccess.InsertDataId(tableName, columnData);
+
+            if (result == 0) 
+            {
+                string subtable = "";
+
+                var subcolumnData = new Dictionary<string, object>
+                {
+                    { "ProductID", },
+                    { "Quantity", },
+                    { "CreatedAt", },
+                    { "CreatedDay", },
+                    { "WarehouseId", },
+                    { "StockCustom_ID", },
+                    { "MinusOpenBoxQuantity", }
+                };
+            }
+        }*/
     }
 }

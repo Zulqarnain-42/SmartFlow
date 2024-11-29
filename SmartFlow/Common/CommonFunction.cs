@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Common
@@ -33,8 +32,10 @@ namespace SmartFlow.Common
                     dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
-            catch (Exception ex) { 
-                throw ex; }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public static void GetItemSerialNo(string searchvalue, int searchid, DataGridView dgv)
         {
@@ -53,7 +54,7 @@ namespace SmartFlow.Common
                     }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         public static void GetCustomer(string searchvalue, DataGridView dgv)
         {
@@ -78,7 +79,7 @@ namespace SmartFlow.Common
                     dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         public static void GetProduct(string searchvalue, DataGridView dgv)
         {
@@ -102,7 +103,7 @@ namespace SmartFlow.Common
                     dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         public static void GetStockLocation(string searchvalue,DataGridView dgv) 
         {
@@ -125,7 +126,7 @@ namespace SmartFlow.Common
                     dgv.DataSource = dt;
                     dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         public static void GetAccountInfo(string searchvalue,DataGridView dgv)
         {
@@ -149,7 +150,7 @@ namespace SmartFlow.Common
                     dgv.DataSource = dt;
                     dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         public static void GetAccountGroupInfo(string searchvalue, DataGridView dgv)
         {
@@ -174,7 +175,32 @@ namespace SmartFlow.Common
                     dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+        public static void GetRoleInfo(string searchvalue, DataGridView dgv)
+        {
+            try
+            {
+                string query = string.Empty;
+                DataTable dt = new DataTable();
+                if (string.IsNullOrEmpty(searchvalue) && String.IsNullOrWhiteSpace(searchvalue))
+                {
+                    query = "SELECT RoleId [ID],RoleName [Role Name] FROM RoleTable";
+                }
+                else
+                {
+                    query = "SELECT RoleId [ID],RoleName [Role Name] FROM RoleTable" +
+                        "WHERE RoleName LIKE '%" + searchvalue + "%'";
+                }
+
+                dt = DatabaseAccess.Retrive(query);
+                if (dt.Rows.Count > 0)
+                {
+                    dgv.DataSource = dt;
+                    dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         public static void GetSalesTypeInfo(string searchvalue, DataGridView dgv)
         {
@@ -199,7 +225,7 @@ namespace SmartFlow.Common
                     dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         public static void GetPurchaseTypeInfo(string searchvalue,DataGridView dgv)
         {
@@ -223,7 +249,7 @@ namespace SmartFlow.Common
                     dgv.DataSource = dt;
                     dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         public static void GetSalesManInfo(string searchvalue,DataGridView dgv)
         {
@@ -247,7 +273,7 @@ namespace SmartFlow.Common
                     dgv.DataSource = dt;
                     dgv.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         public static void GetAllAccountInfo(string searchvalue, DataGridView dgv)
         {
@@ -271,7 +297,7 @@ namespace SmartFlow.Common
                     dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         public static void GetProductQtyWarehouse(DataGridView dgv,string productmfr,int productid)
         {
@@ -280,14 +306,14 @@ namespace SmartFlow.Common
                 string getproductinventoryquery = string.Format("SELECT StockTable.WarehouseID [ID],WarehouseTable.Name [Warehouse Name]," +
                     "SUM(COALESCE(StockTable.[Quantity],0)) + COALESCE(ProductTable.Quantity, 0) + COALESCE(InvoiceDetailsTable.Quantity, 0) AS Quantity " +
                     "FROM StockTable INNER JOIN WarehouseTable ON WarehouseTable.WarehouseID = StockTable.Warehouseid " +
-                    "LEFT JOIN ProductTable ON ProductTable.ProductID = StockTable.Product_ID " +
+                    "LEFT JOIN ProductTable ON ProductTable.ProductID = StockTable.ProductID " +
                     "AND ProductTable.WarehouseID = WarehouseTable.WarehouseID " +
-                    "LEFT JOIN InvoiceDetailsTable ON InvoiceDetailsTable.Productid = StockTable.Product_ID " +
+                    "LEFT JOIN InvoiceDetailsTable ON InvoiceDetailsTable.Productid = StockTable.ProductID " +
                     "AND InvoiceDetailsTable.Productid = ProductTable.ProductID " +
-                    "AND InvoiceDetailsTable.Warehouseid = WarehouseTable.WarehouseID WHERE StockTable.Product_ID = '" + productid + "' " +
+                    "AND InvoiceDetailsTable.Warehouseid = WarehouseTable.WarehouseID WHERE StockTable.ProductID = '" + productid + "' " +
                     "AND StockTable.Warehouseid IN (SELECT WarehouseID FROM WarehouseTable) " +
-                    "GROUP BY StockTable.Product_ID,StockTable.Warehouseid,WarehouseTable.Name,ProductTable.Quantity,InvoiceDetailsTable.Quantity " +
-                    "ORDER BY StockTable.Product_ID");
+                    "GROUP BY StockTable.ProductID,StockTable.Warehouseid,WarehouseTable.Name,ProductTable.Quantity,InvoiceDetailsTable.Quantity " +
+                    "ORDER BY StockTable.ProductID");
                 
                 DataTable datainventory = DatabaseAccess.Retrive(getproductinventoryquery);
                 if (datainventory != null && datainventory.Rows.Count > 0) 
@@ -310,7 +336,7 @@ namespace SmartFlow.Common
                     }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         public static void GetTransactionInfoProduct(DataGridView dgv,string productmfr,int productid)
         {
@@ -328,7 +354,7 @@ namespace SmartFlow.Common
                 {
                     dgv.DataSource= datatransaction;
                 }
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         public static string BuildSearchQueryProduct(string searchTerm)
         {
@@ -397,8 +423,74 @@ namespace SmartFlow.Common
                 combo.ValueMember = "CurrencyId";
                 combo.DisplayMember = "Name";
 
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
+
+        public static void FillUserType(ComboBox combo)
+        {
+            try
+            {
+                DataTable dtUserType = new DataTable();
+                dtUserType.Columns.Add("RightId");
+                dtUserType.Columns.Add("RightName");
+
+                DataTable dt = DatabaseAccess.Retrive("SELECT RightId,RightName FROM RightsTable");
+
+                if(dt!=null && dt.Rows.Count > 0)
+                {
+                    foreach(DataRow usertype in dt.Rows)
+                    {
+                        dtUserType.Rows.Add(usertype["RightId"], usertype["RightName"]);
+                    }
+                }
+
+                combo.DataSource = dtUserType;
+                combo.ValueMember = "RightId";
+                combo.DisplayMember = "RightName";
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        public static void FillEmployeeData(ComboBox combo)
+        {
+            try
+            {
+                DataTable dtemployee = new DataTable();
+                dtemployee.Columns.Add("AccountSubControlID");
+                dtemployee.Columns.Add("AccountSubControlName");
+
+                DataTable dt = DatabaseAccess.Retrive("SELECT AccountSubControlID,AccountSubControlName FROM AccountSubControlTable Where IsEmployee = '" + true + "'");
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow employee in dt.Rows) 
+                    {
+                        dtemployee.Rows.Add(employee["AccountSubControlID"], employee["AccountSubControlName"]);
+                    }
+                }
+
+                combo.DataSource = dtemployee;
+                combo.ValueMember = "AccountSubControlID";
+                combo.DisplayMember = "AccountSubControlName";
+
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        public static string HashPassword(string password)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                // Convert byte array to a string
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
+
         public static void FillUnitData(ComboBox combo)
         {
             try
@@ -424,38 +516,35 @@ namespace SmartFlow.Common
                 combo.DisplayMember = "UnitName";
 
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
-        public static string CleanText(string input)
+
+        public static void ShiftFocusOnEnter(KeyEventArgs e, Control currentControl)
         {
-            // Step 1: Remove apostrophe
-            string result = "";
-            foreach (char c in input)
+            if (e.KeyCode == Keys.Enter)
             {
-                if (c != '\'')
+                e.SuppressKeyPress = true; // Prevent the "ding" sound
+                var parent = currentControl.Parent;
+                if (parent != null)
                 {
-                    result += c;
+                    // Get all controls in the parent container
+                    var controls = parent.Controls.Cast<Control>()
+                                        .Where(c => c.TabIndex > currentControl.TabIndex)
+                                        .OrderBy(c => c.TabIndex);
+
+                    // Focus the next control
+                    var nextControl = controls.FirstOrDefault();
+                    nextControl?.Focus();
                 }
             }
+        }
 
-            // Step 2: Remove extra spaces
-            string finalResult = "";
-            bool lastWasSpace = false;
-            foreach (char c in result)
+        public static void DisposeOnClose(Form form)
+        {
+            form.FormClosed += (sender, e) =>
             {
-                if (c != ' ')
-                {
-                    finalResult += c;
-                    lastWasSpace = false;
-                }
-                else if (!lastWasSpace)
-                {
-                    finalResult += ' ';
-                    lastWasSpace = true;
-                }
-            }
-
-            return finalResult.Trim();
+                form.Dispose();
+            };
         }
     }
 }

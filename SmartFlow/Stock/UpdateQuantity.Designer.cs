@@ -59,7 +59,7 @@
             // 
             this.headinglbl.BackColor = System.Drawing.Color.Black;
             this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
             this.headinglbl.Name = "headinglbl";
@@ -71,7 +71,8 @@
             // productid
             // 
             this.productid.AutoSize = true;
-            this.productid.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productid.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productid.ForeColor = System.Drawing.Color.Blue;
             this.productid.Location = new System.Drawing.Point(94, 60);
             this.productid.Name = "productid";
             this.productid.Size = new System.Drawing.Size(108, 23);
@@ -82,20 +83,22 @@
             // productname
             // 
             this.productname.AutoSize = true;
-            this.productname.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productname.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productname.ForeColor = System.Drawing.Color.Blue;
             this.productname.Location = new System.Drawing.Point(94, 85);
             this.productname.Name = "productname";
-            this.productname.Size = new System.Drawing.Size(51, 23);
+            this.productname.Size = new System.Drawing.Size(50, 23);
             this.productname.TabIndex = 2;
             this.productname.Text = "TITLE";
             // 
             // productmfr
             // 
             this.productmfr.AutoSize = true;
-            this.productmfr.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productmfr.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productmfr.ForeColor = System.Drawing.Color.Blue;
             this.productmfr.Location = new System.Drawing.Point(94, 110);
             this.productmfr.Name = "productmfr";
-            this.productmfr.Size = new System.Drawing.Size(45, 23);
+            this.productmfr.Size = new System.Drawing.Size(47, 23);
             this.productmfr.TabIndex = 3;
             this.productmfr.Text = "MFR";
             // 
@@ -133,10 +136,11 @@
             // openingstocklbl
             // 
             this.openingstocklbl.AutoSize = true;
-            this.openingstocklbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openingstocklbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openingstocklbl.ForeColor = System.Drawing.Color.Blue;
             this.openingstocklbl.Location = new System.Drawing.Point(94, 135);
             this.openingstocklbl.Name = "openingstocklbl";
-            this.openingstocklbl.Size = new System.Drawing.Size(138, 23);
+            this.openingstocklbl.Size = new System.Drawing.Size(139, 23);
             this.openingstocklbl.TabIndex = 7;
             this.openingstocklbl.Text = "OPENING STOCK";
             // 
@@ -197,7 +201,7 @@
             this.MinimizeBox = false;
             this.Name = "UpdateQuantity";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Update Quantity";
+            this.Text = "UPDATE QUANTITY";
             this.Load += new System.EventHandler(this.UpdateQuantity_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UpdateQuantity_KeyDown);
             this.panel1.ResumeLayout(false);

@@ -1,16 +1,14 @@
 ﻿using SmartFlow.Common;
 using SmartFlow.Purchase;
 using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SmartFlow
 {
     public partial class StockLocation : Form
     {
-        private int currentRowIndex;
-        private int currentCellIndex;
         public StockLocation()
         {
             InitializeComponent();
@@ -61,14 +59,14 @@ namespace SmartFlow
                 }
 
                 // Restore the cursor position
-                if (currentRowIndex >= 0 && currentCellIndex >= 0 &&
-                    currentRowIndex < locationdatagridview.Rows.Count &&
-                    currentCellIndex < locationdatagridview.Rows[currentRowIndex].Cells.Count)
+                if (GlobalVariables.currentRowIndex >= 0 && GlobalVariables.currentCellIndex >= 0 &&
+                    GlobalVariables.currentRowIndex < locationdatagridview.Rows.Count &&
+                    GlobalVariables.currentCellIndex < locationdatagridview.Rows[GlobalVariables.currentRowIndex].Cells.Count)
                 {
-                    locationdatagridview.CurrentCell = locationdatagridview.Rows[currentRowIndex].Cells[currentCellIndex];
+                    locationdatagridview.CurrentCell = locationdatagridview.Rows[GlobalVariables.currentRowIndex].Cells[GlobalVariables.currentCellIndex];
                 }
             }
-            catch(Exception ex) { throw ex; }
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void StockLocation_Load(object sender, EventArgs e)
         {
@@ -150,7 +148,7 @@ namespace SmartFlow
                     }
                 }
             }
-            catch(Exception ex) { throw ex; }
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void locationdatagridview_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -205,7 +203,7 @@ namespace SmartFlow
                         MessageBox.Show("No Record Available");
                     }
                 }
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void locationdatagridview_Scroll(object sender, ScrollEventArgs e)
         {
@@ -213,8 +211,8 @@ namespace SmartFlow
             int firstVisibleCellIndex = GetFirstVisibleCellIndex(locationdatagridview);
             if (firstVisibleRowIndex >= 0)
             {
-                currentRowIndex = firstVisibleRowIndex;
-                currentCellIndex = firstVisibleCellIndex;
+                GlobalVariables.currentRowIndex = firstVisibleRowIndex;
+                GlobalVariables.currentCellIndex = firstVisibleCellIndex;
             }
         }
         private int GetFirstVisibleRowIndex(DataGridView dataGridView)
@@ -259,179 +257,52 @@ namespace SmartFlow
         {
             try
             {
-                if (createlocationsavebtn.Text == "Update")
+                errorProvider.Clear();
+
+                if (selectwarehousetxtbox.Text.Trim().Length == 0)
                 {
-                    errorProvider.Clear();
+                    errorProvider.SetError(selectwarehousetxtbox, "Please Select Warehouse");
+                    selectwarehousetxtbox.Focus();
+                    return;
+                }
 
-                    if (selectwarehousetxtbox.Text.Trim().Length == 0)
-                    {
-                        errorProvider.SetError(selectwarehousetxtbox, "Please Select Warehouse");
-                        selectwarehousetxtbox.Focus();
-                        return;
-                    }
+                if (racknotxtbox.Text.Trim().Length == 0)
+                {
+                    errorProvider.SetError(racknotxtbox, "Please Enter Rack No");
+                    locationnametxtbox.Focus();
+                    return;
+                }
 
-                    if (racknotxtbox.Text.Trim().Length == 0)
-                    {
-                        errorProvider.SetError(racknotxtbox, "Please Enter Rack No");
-                        locationnametxtbox.Focus();
-                        return;
-                    }
-
-                    string locationName = CommonFunction.CleanText(locationnametxtbox.Text);
-
-                    string query = string.Format("SELECT LocationID,WarehouseID,LocationName,RackNumber,ShortName FROM LocationTable " +
-                        "WHERE WarehouseID = '" + warehouseidlbl.Text + "' AND RackNumber = '" + racknotxtbox.Text + "'");
-                    DataTable dataTablelocation = DatabaseAccess.Retrive(query);
-                    if (dataTablelocation != null)
-                    {
-                        if (dataTablelocation.Rows.Count > 0)
-                        {
-                            if (dataTablelocation.Rows[0]["WarehouseID"].ToString() == warehouseidlbl.Text.ToString()
-                                && dataTablelocation.Rows[0]["RackNumber"].ToString() == racknotxtbox.Text
-                                && dataTablelocation.Rows[0]["LocationName"].ToString() == locationName
-                                && dataTablelocation.Rows[0]["ShortName"].ToString() == shortnametxtbox.Text)
-                            {
-                                MessageBox.Show("Location Already Exist!");
-                            }
-                            else
-                            {
-                                query = string.Format("UPDATE LocationTable SET " +
-                                    "WarehouseID = '{0}' ," +
-                                    "LocationName = '{1}'," +
-                                    "RackNumber = '{2}'," +
-                                    "ShortName = '{3}'," +
-                                    "UpdatedAt = '{4}'," +
-                                    "UpdatedDay = '{5}' " +
-                                    "WHERE  LocationID = '{6}'",
-                                    warehouseidlbl.Text,
-                                    locationName,
-                                    racknotxtbox.Text.Trim(),
-                                    shortnametxtbox.Text.Trim(),
-                                    DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss"),
-                                    DateTime.Now.DayOfWeek,
-                                    locationid.Text);
-
-                                bool result = DatabaseAccess.Update(query);
-                                if (result)
-                                {
-                                    MessageBox.Show("Updated Successfully!");
-                                    ResetData();
-                                    FillGrid("");
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Something is Wrong!");
-                                }
-                            }
-                        }
-                        else
-                        {
-                            query = string.Format("UPDATE LocationTable SET " +
-                                    "WarehouseID = '{0}' ," +
-                                    "LocationName = '{1}'," +
-                                    "RackNumber = '{2}'," +
-                                    "ShortName = '{3}'," +
-                                    "UpdatedAt = '{4}'," +
-                                    "UpdatedDay = '{5}' " +
-                                    "WHERE  LocationID = '{6}'",
-                                    warehouseidlbl.Text,
-                                    locationName,
-                                    racknotxtbox.Text.Trim(),
-                                    shortnametxtbox.Text.Trim(),
-                                    DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss"),
-                                    DateTime.Now.DayOfWeek,
-                                    locationid.Text);
-
-                            bool result = DatabaseAccess.Update(query);
-                            if (result)
-                            {
-                                MessageBox.Show("Updated Successfully!");
-                                ResetData();
-                                FillGrid("");
-                            }
-                            else
-                            {
-                                MessageBox.Show("Something is Wrong!");
-                            }
-                        }
-                    }
-
+                string duplicateinfo = CheckDuplicate();
+                if (duplicateinfo != null) 
+                {
+                    MessageBox.Show(duplicateinfo, "Duplicate Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    errorProvider.Clear();
-
-                    if (selectwarehousetxtbox.Text.Trim().Length == 0)
+                    if (createlocationsavebtn.Text == "Update")
                     {
-                        errorProvider.SetError(selectwarehousetxtbox, "Please Select Warehouse");
-                        selectwarehousetxtbox.Focus();
-                        return;
-                    }
-
-                    if (racknotxtbox.Text.Trim().Length == 0)
-                    {
-                        errorProvider.SetError(racknotxtbox, "Please Enter Rack No");
-                        locationnametxtbox.Focus();
-                        return;
-                    }
-
-                    string locationName = CommonFunction.CleanText(locationnametxtbox.Text);
-
-                    string query = string.Format("SELECT LocationID,WarehouseID,LocationName,RackNumber,ShortName FROM LocationTable " +
-                        "WHERE WarehouseID = '" + warehouseidlbl.Text + "' AND RackNumber = '" + racknotxtbox.Text + "'");
-                    DataTable dataTablelocation = DatabaseAccess.Retrive(query);
-
-                    if (dataTablelocation != null)
-                    {
-                        if (dataTablelocation.Rows.Count > 0)
+                        bool isUpdated = UpdateStockLocation();
+                        if (isUpdated) 
                         {
-                            MessageBox.Show("Location Already Exist");
-                        }
-                        else
-                        {
-                            query = string.Format("INSERT INTO LocationTable " +
-                        "(WarehouseID,LocationName,RackNumber,ShortName,Code,CreatedAt,CreatedDay) VALUES " +
-                        "('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
-                        warehouseidlbl.Text, locationName,
-                        racknotxtbox.Text.Trim(), shortnametxtbox.Text.Trim(), Guid.NewGuid(),
-                        DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss"), DateTime.Now.DayOfWeek);
-
-                            bool result = DatabaseAccess.Insert(query);
-                            if (result)
-                            {
-                                MessageBox.Show("Saved Successfully!");
-                                ResetData();
-                                FillGrid("");
-                            }
-                            else
-                            {
-                                MessageBox.Show("Something is Wrong!");
-                            }
+                            MessageBox.Show("Updated Successfully.");
+                            FillGrid("");
+                            ResetData();
                         }
                     }
                     else
                     {
-                        query = string.Format("INSERT INTO LocationTable " +
-                        "(WarehouseID,LocationName,RackNumber,ShortName,Code,CreatedAt,CreatedDay) VALUES " +
-                        "('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
-                        warehouseidlbl.Text, locationName,
-                        racknotxtbox.Text.Trim(), shortnametxtbox.Text.Trim(), Guid.NewGuid(),
-                        DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss"), DateTime.Now.DayOfWeek);
-
-                        bool result = DatabaseAccess.Insert(query);
-                        if (result)
+                        bool isInserted = InsertStocklocation();
+                        if (isInserted)
                         {
-                            MessageBox.Show("Saved Successfully!");
-                            ResetData();
+                            MessageBox.Show("Saved Successfully.");
                             FillGrid("");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Something is Wrong!");
+                            ResetData();
                         }
                     }
                 }
-            }catch (Exception ex) { throw ex; }
+                
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void ResetData()
         {
@@ -457,8 +328,15 @@ namespace SmartFlow
                         if (warehousedata.Rows.Count > 0)
                         {
                             WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
-                            warehouseSelection.ShowDialog();
-                            UpdateWarehouseTextBox();
+                            warehouseSelection.MdiParent = this.MdiParent;
+                            
+                            warehouseSelection.FormClosed += delegate
+                            {
+                                UpdateWarehouseTextBox();
+                            };
+
+                            CommonFunction.DisposeOnClose(warehouseSelection);
+                            warehouseSelection.Show();
                         }
                     }
                     
@@ -467,15 +345,18 @@ namespace SmartFlow
                 {
                     openForm.BringToFront();
                 }
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void UpdateWarehouseTextBox()
         {
             try
             {
-                warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
-                selectwarehousetxtbox.Text = GlobalVariables.warehousenameglobal.ToString();
-            }catch (Exception ex) { throw ex; }
+                if(GlobalVariables.warehouseidglobal > 0 && GlobalVariables.warehousenameglobal != null)
+                {
+                    warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
+                    selectwarehousetxtbox.Text = GlobalVariables.warehousenameglobal.ToString();
+                } 
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private bool AreAnyTextBoxesFilled()
         {
@@ -484,6 +365,62 @@ namespace SmartFlow
             if (racknotxtbox.Text.Trim().Length > 0) { return true; }
             if (shortnametxtbox.Text.Trim().Length > 0) { return true; }
             return false; // No TextBox is filled
+        }
+        private string CheckDuplicate()
+        {
+            string query = string.Format(@"SELECT LocationID,WarehouseID,LocationName,RackNumber,ShortName,Code,CompanyID,CreatedAt,UpdatedAt,
+                AddedBy,CreatedDay,UpdatedDay FROM LocationTable WHERE WarehouseID = @WarehouseID AND LocationName LIKE @LocationName AND RackNumber LIKE @RackNumber");
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "WarehouseID", warehouseidlbl.Text },
+                { "LocationName", locationnametxtbox.Text },
+                { "RackNumber", racknotxtbox.Text }
+            };
+
+            DataTable dt = DatabaseAccess.RetrieveData(query, parameters);
+            if(dt!=null && dt.Rows.Count > 0)
+            {
+                return $"Duplicate found: Unit Name = {dt.Rows[0]["UnitName"].ToString()}.";
+            }
+
+            return null;
+        }
+
+        private bool InsertStocklocation()
+        {
+            string tablename = "LocationTable";
+            var columnData = new Dictionary<string, object>
+            {
+                { "WarehouseID",warehouseidlbl.Text },
+                { "LocationName",locationnametxtbox.Text },
+                { "RackNumber", racknotxtbox.Text },
+                { "ShortName",shortnametxtbox.Text},
+                { "Code",Guid.NewGuid().ToString()},
+                { "CreatedAt",DateTime.Now.ToString()},
+                { "CreatedDay",DateTime.Now.DayOfWeek.ToString()}
+            };
+
+            bool isInserted = DatabaseAccess.ExecuteQuery(tablename, "INSERT", columnData);
+            return isInserted;
+        }
+
+        private bool UpdateStockLocation()
+        {
+            string tableName = "LocationTable";
+            string whereClause = "LocationID = '" + locationid.Text + "'";
+            var columnData = new Dictionary<string, object>
+            {
+                { "WarehouseID",warehouseidlbl.Text },
+                { "LocationName",locationnametxtbox.Text },
+                { "RackNumber", racknotxtbox.Text },
+                { "ShortName",shortnametxtbox.Text},
+                { "UpdatedAt",DateTime.Now.ToString()},
+                { "UpdatedDay",DateTime.Now.DayOfWeek.ToString()}
+            };
+
+            bool isUpdated = DatabaseAccess.ExecuteQuery(tableName, "UPDATE", columnData, whereClause);
+            return isUpdated;
         }
     }
 }

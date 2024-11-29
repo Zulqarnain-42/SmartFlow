@@ -1,4 +1,4 @@
-﻿using SmartFlow.Stock;
+﻿using SmartFlow.Common;
 using System;
 using System.Data;
 using System.Text;
@@ -8,8 +8,6 @@ namespace SmartFlow.Masters
 {
     public partial class OpeningBalance : Form
     {
-        private int currentRowIndex;
-        private int currentCellIndex;
         public OpeningBalance()
         {
             InitializeComponent();
@@ -47,8 +45,8 @@ namespace SmartFlow.Masters
                         dataGridViewopeningbalance.DataSource = dataTable;
                         dataGridViewopeningbalance.Columns[0].Width = 100;
                         dataGridViewopeningbalance.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                        dataGridViewopeningbalance.Columns[2].Width = 200;
-                        dataGridViewopeningbalance.Columns[3].Width = 200;
+                        dataGridViewopeningbalance.Columns[2].Width = 150;
+                        dataGridViewopeningbalance.Columns[3].Width = 150;
                     }
                     else
                     {
@@ -61,14 +59,14 @@ namespace SmartFlow.Masters
                 }
 
                 // Restore the cursor position
-                if (currentRowIndex >= 0 && currentCellIndex >= 0 &&
-                    currentRowIndex < dataGridViewopeningbalance.Rows.Count &&
-                    currentCellIndex < dataGridViewopeningbalance.Rows[currentRowIndex].Cells.Count)
+                if (GlobalVariables.currentRowIndex >= 0 && GlobalVariables.currentCellIndex >= 0 &&
+                    GlobalVariables.currentRowIndex < dataGridViewopeningbalance.Rows.Count &&
+                    GlobalVariables.currentCellIndex < dataGridViewopeningbalance.Rows[GlobalVariables.currentRowIndex].Cells.Count)
                 {
-                    dataGridViewopeningbalance.CurrentCell = dataGridViewopeningbalance.Rows[currentRowIndex].Cells[currentCellIndex];
+                    dataGridViewopeningbalance.CurrentCell = dataGridViewopeningbalance.Rows[GlobalVariables.currentRowIndex].Cells[GlobalVariables.currentCellIndex];
                 }
             }
-            catch(Exception ex) { throw ex; }
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void OpeningBalance_Load(object sender, EventArgs e)
         {
@@ -80,8 +78,8 @@ namespace SmartFlow.Masters
             int firstVisibleCellIndex = GetFirstVisibleCellIndex(dataGridViewopeningbalance);
             if (firstVisibleRowIndex >= 0)
             {
-                currentRowIndex = firstVisibleRowIndex;
-                currentCellIndex = firstVisibleCellIndex;
+                GlobalVariables.currentRowIndex = firstVisibleRowIndex;
+                GlobalVariables.currentCellIndex = firstVisibleCellIndex;
             }
         }
         private int GetFirstVisibleRowIndex(DataGridView dataGridView)
@@ -171,15 +169,29 @@ namespace SmartFlow.Masters
                 {
                     if (dataGridViewopeningbalance.SelectedRows.Count == 1)
                     {
-                        UpdateOpeningBalance updateOpening = new UpdateOpeningBalance(Convert.ToInt32(dataGridViewopeningbalance.CurrentRow.Cells[0].Value),
-                            dataGridViewopeningbalance.CurrentRow.Cells[1].Value.ToString());
-                        updateOpening.FormClosed += delegate
+                        if (Convert.ToInt32(dataGridViewopeningbalance.CurrentRow.Cells[2].Value) > 0 || 
+                            Convert.ToInt32(dataGridViewopeningbalance.CurrentRow.Cells[3].Value) > 0)
                         {
-                            currentRowIndex = dataGridViewopeningbalance.CurrentCell.RowIndex;
-                            currentCellIndex = dataGridViewopeningbalance.CurrentCell.ColumnIndex;
-                            FillGrid("");
-                        };
-                        updateOpening.Show();
+                            MessageBox.Show("Opening Balance Updated");
+                        }
+                        else
+                        {
+                            UpdateOpeningBalance updateOpening = new UpdateOpeningBalance(Convert.ToInt32(dataGridViewopeningbalance.CurrentRow.Cells[0].Value),
+                            dataGridViewopeningbalance.CurrentRow.Cells[1].Value.ToString())
+                            {
+                                WindowState = FormWindowState.Normal,
+                                StartPosition = FormStartPosition.CenterParent,
+                            };
+
+                            updateOpening.FormClosed += delegate
+                            {
+                                GlobalVariables.currentRowIndex = dataGridViewopeningbalance.CurrentCell.RowIndex;
+                                GlobalVariables.currentCellIndex = dataGridViewopeningbalance.CurrentCell.ColumnIndex;
+                                FillGrid("");
+                            };
+                            CommonFunction.DisposeOnClose(updateOpening);
+                            updateOpening.ShowDialog();
+                        }
                     }
                     else
                     {
@@ -187,7 +199,7 @@ namespace SmartFlow.Masters
                     }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
     }
 }

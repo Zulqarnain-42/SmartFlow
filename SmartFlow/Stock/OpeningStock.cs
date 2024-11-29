@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartFlow.Common;
+using System;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
@@ -7,8 +8,6 @@ namespace SmartFlow.Stock
 {
     public partial class OpeningStock : Form
     {
-        private int currentRowIndex;
-        private int currentCellIndex;
         public OpeningStock()
         {
             InitializeComponent();
@@ -21,8 +20,7 @@ namespace SmartFlow.Stock
                 
                 if(string.IsNullOrEmpty(searchvalue) && string.IsNullOrWhiteSpace(searchvalue))
                 {
-                    query = string.Format("SELECT ProductID [ID],ProductName [TITLE],StandardPrice [PRICE],CreatedAt [CREATED],UPC,MFR,Barcode [BARCODE],Quantity [QUANTITY] " +
-                        "FROM ProductTable");
+                    query = string.Format("SELECT ProductID [ID],ProductName [TITLE],UPC,EAN,MFR,Barcode [BARCODE] FROM ProductTable");
                 }
                 else
                 {
@@ -34,14 +32,12 @@ namespace SmartFlow.Stock
                 if (datatableProduct.Rows.Count > 0)
                 {
                     dgvProducts.DataSource = datatableProduct;
-                    dgvProducts.Columns[0].Width = 100;
+                    dgvProducts.Columns[0].Width = 50;
                     dgvProducts.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dgvProducts.Columns[2].Width = 150;
-                    dgvProducts.Columns[3].Width = 150;
-                    dgvProducts.Columns[4].Width = 200;
-                    dgvProducts.Columns[5].Width = 200;
-                    dgvProducts.Columns[6].Width = 200;
-                    dgvProducts.Columns[7].Width = 200;
+                    dgvProducts.Columns[2].Width = 100;
+                    dgvProducts.Columns[3].Width = 100;
+                    dgvProducts.Columns[4].Width = 100;
+                    dgvProducts.Columns[5].Width = 80;
                 }
                 else
                 {
@@ -49,14 +45,14 @@ namespace SmartFlow.Stock
                 }
 
                 // Restore the cursor position
-                if (currentRowIndex >= 0 && currentCellIndex >= 0 &&
-                    currentRowIndex < dgvProducts.Rows.Count &&
-                    currentCellIndex < dgvProducts.Rows[currentRowIndex].Cells.Count)
+                if (GlobalVariables.currentRowIndex >= 0 && GlobalVariables.currentCellIndex >= 0 &&
+                    GlobalVariables.currentRowIndex < dgvProducts.Rows.Count &&
+                    GlobalVariables.currentCellIndex < dgvProducts.Rows[GlobalVariables.currentRowIndex].Cells.Count)
                 {
-                    dgvProducts.CurrentCell = dgvProducts.Rows[currentRowIndex].Cells[currentCellIndex];
+                    dgvProducts.CurrentCell = dgvProducts.Rows[GlobalVariables.currentRowIndex].Cells[GlobalVariables.currentCellIndex];
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void OpeningStock_Load(object sender, EventArgs e)
         {
@@ -70,15 +66,23 @@ namespace SmartFlow.Stock
                 {
                     if(dgvProducts.SelectedRows.Count == 1)
                     {
-                        UpdateQuantity updateQuantity = new UpdateQuantity(Convert.ToInt32(dgvProducts.CurrentRow.Cells[0].Value), 
-                            dgvProducts.CurrentRow.Cells[1].Value.ToString(), dgvProducts.CurrentRow.Cells[5].Value.ToString(), 
-                            Convert.ToInt32(dgvProducts.CurrentRow.Cells[7].Value));
+                        int productid = Convert.ToInt32(dgvProducts.CurrentRow.Cells[0].Value);
+                        string producttitle = dgvProducts.CurrentRow.Cells[1].Value.ToString();
+                        string mfr = dgvProducts.CurrentRow.Cells[4].Value.ToString();
+
+                        UpdateQuantity updateQuantity = new UpdateQuantity(productid,producttitle,mfr)
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        }; 
+
                         updateQuantity.FormClosed += delegate
                         {
-                            currentRowIndex = dgvProducts.CurrentCell.RowIndex;
-                            currentCellIndex = dgvProducts.CurrentCell.ColumnIndex;
+                            GlobalVariables.currentRowIndex = dgvProducts.CurrentCell.RowIndex;
+                            GlobalVariables.currentCellIndex = dgvProducts.CurrentCell.ColumnIndex;
                             FillGrid("");
                         };
+                        CommonFunction.DisposeOnClose(updateQuantity);
                         updateQuantity.Show();
                     }
                     else
@@ -86,7 +90,7 @@ namespace SmartFlow.Stock
                         MessageBox.Show("Please Select One Row.");
                     }
                 }
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
@@ -98,8 +102,8 @@ namespace SmartFlow.Stock
             int firstVisibleCellIndex = GetFirstVisibleCellIndex(dgvProducts);
             if (firstVisibleRowIndex >= 0)
             {
-                currentRowIndex = firstVisibleRowIndex;
-                currentCellIndex = firstVisibleCellIndex;
+                GlobalVariables.currentRowIndex = firstVisibleRowIndex;
+                GlobalVariables.currentCellIndex = firstVisibleCellIndex;
             }
         }
         private int GetFirstVisibleCellIndex(DataGridView dataGridView)
@@ -147,21 +151,8 @@ namespace SmartFlow.Stock
         private string BuildSearchQuery(string searchTerm)
         {
             string[] terms = searchTerm.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            StringBuilder queryBuilder = new StringBuilder("SELECT ProductID [ID],ProductName [Title],StandardPrice [Price],UPC,EAN,MFR,Barcode, (");
-
-            for (int i = 0; i < terms.Length; i++)
-            {
-                string term = terms[i];
-                if (i > 0)
-                {
-                    queryBuilder.Append(" + ");
-                }
-                queryBuilder.Append($"(CASE WHEN ProductName LIKE '%{term}%' THEN 1 ELSE 0 END)");
-                queryBuilder.Append($" + (CASE WHEN MFR LIKE '%{term}%' THEN 1 ELSE 0 END)");
-                queryBuilder.Append($" + (CASE WHEN UPC LIKE '%{term}%' THEN 1 ELSE 0 END)");
-            }
-
-            queryBuilder.Append(") AS RelevanceScore FROM ProductTable WHERE");
+            StringBuilder queryBuilder = new StringBuilder("SELECT ProductID [ID], ProductName [Title], UPC, EAN, MFR," +
+                " Barcode FROM ProductTable WHERE");
 
             for (int i = 0; i < terms.Length; i++)
             {
@@ -173,7 +164,7 @@ namespace SmartFlow.Stock
                 queryBuilder.Append($" (ProductName LIKE '%{term}%' OR MFR LIKE '%{term}%' OR UPC LIKE '%{term}%')");
             }
 
-            queryBuilder.Append(" ORDER BY RelevanceScore DESC");
+            // Note: RelevanceScore calculation and ORDER BY clause have been removed
 
             return queryBuilder.ToString();
         }

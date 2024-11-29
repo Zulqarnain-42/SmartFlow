@@ -52,7 +52,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SaleInvoiceView";
-            this.Text = "SALE INVOICE VIEWER - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "SALE INVOICE VIEWER";
             this.Load += new System.EventHandler(this.SaleInvoiceView_Load);
             this.ResumeLayout(false);
 

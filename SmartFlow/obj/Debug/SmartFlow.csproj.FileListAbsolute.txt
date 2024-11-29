@@ -8,6 +8,8 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\CrystalDecisions.Report
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\CrystalDecisions.Shared.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\CrystalDecisions.Windows.Forms.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\EntityFramework.dll
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ExcelDataReader.DataSet.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ExcelDataReader.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ExcelNumberFormat.dll
@@ -44,6 +46,8 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\CrystalDecisions.Report
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\stdole.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ClosedXML.xml
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\DocumentFormat.OpenXml.xml
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\EntityFramework.xml
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ExcelDataReader.pdb
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ExcelDataReader.xml
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ExcelDataReader.DataSet.pdb
@@ -108,6 +112,7 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Common.Forms.
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Common.CommonForms.FromToDateSearchForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Common.Forms.ProductSelectionForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Common.CommonForms.PurchaseTypeSelection.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Common.CommonForms.RoleSelectionForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Common.CommonForms.SalesPersonSelection.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Common.CommonForms.SaleTypeSelection.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Common.CommonForms.StockLocationSelection.resources
@@ -118,9 +123,15 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.Accou
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.AccountGroupHistory.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.AccountHistory.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.CreateProduct.resources
-C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.Currency.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.CreateRole.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.CreateUser.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.CurrencyList.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.Employee.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.ExcelAccounts.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.GroupingAccount.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.ListGroupingAccount.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.ListPurchaseType.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.ListSaleType.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.OpeningBalance.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.Product.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.PurchaseType.resources
@@ -130,8 +141,11 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.Repor
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.ReportViewer.ProductListReportViewer.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.ReportViewer.SupplierListReportViewer.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.SaleType.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.SystemUsers.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.UpdateOpeningBalance.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.UploadExcel.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.UserRights.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.UserRoles.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Payroll.ChangePassword.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Payroll.EmployeListReportViewer.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.FindPurchaseInvoiceForm.resources
@@ -144,6 +158,7 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.Repo
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.ReportViewer.QuotationReportView.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.ReportViewer.ReturnReportView.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.WarehouseSelection.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Reports.ItemWiseInventoyReport.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonForm.AvailabilityForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CurrencySelection.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonForm.DiscountForm.resources
@@ -152,7 +167,6 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonF
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonForm.SearchSaleInvoice.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonForm.TransactionInfoProduct.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonForm.VATForm.resources
-C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CustomProductForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.DeliveryNote.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.FindSaleInvoiceForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.InvoiceNoteForm.resources
@@ -176,6 +190,7 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.Barcode
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Dashboard.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Properties.Resources.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.BookItem.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.ListWarehouse.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.OpeningStock.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.ReportViewer.BookItemViewer.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.ReportViewer.DamageEntryViewer.resources
@@ -189,14 +204,15 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.ReportV
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.StockLocation.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.DamageEntry.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.OpenBoxProduct.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.StockManageForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.StockTransfer.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.QtyUsingMfr.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.QtyUsingScanner.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.UpdateQuantity.resources
-C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Warehouse.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.CommonForm.DebitAndCreditForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.CreditNote.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.DebitNote.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.FindTransactionForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.Journal.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.MaterialIssueToParty.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.MaterialReceivedFromParty.resources
@@ -216,4 +232,5 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\aa\SmartFlow.resources.
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.csproj.Up2Date
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.exe
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.pdb
-C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.Employee.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.UnitList.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.CreateRight.resources

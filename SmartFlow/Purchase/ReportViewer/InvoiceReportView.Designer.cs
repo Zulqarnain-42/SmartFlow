@@ -53,7 +53,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "InvoiceReportView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "PURCHASE INVOICE REPORT VIEWER - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "PURCHASE INVOICE REPORT VIEWER";
             this.Load += new System.EventHandler(this.InvoiceReportView_Load);
             this.ResumeLayout(false);
 

@@ -1,13 +1,9 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
-using SmartFlow.Common;
-using SmartFlow.Common.CommonForms;
+﻿using SmartFlow.Common;
 using SmartFlow.Common.Forms;
 using SmartFlow.Sales;
-using SmartFlow.Sales.CommonForm;
 using SmartFlow.Transactions.CommonForm;
 using System;
 using System.Data;
-using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
 namespace SmartFlow.Transactions
@@ -18,6 +14,11 @@ namespace SmartFlow.Transactions
         public Payment()
         {
             InitializeComponent();
+        }
+        public Payment(int paymentid)
+        {
+            InitializeComponent();
+            this.paymentvoucheridlbl.Text = paymentid.ToString();
         }
         private void closebtn_Click(object sender, EventArgs e)
         {
@@ -32,13 +33,13 @@ namespace SmartFlow.Transactions
                 string invoiceNo = invoicenotxtbox.Text;
                 DateTime inoviceDate = DateTime.Parse(invoicedatetxtbox.Text);
                 string transactionCode = Guid.NewGuid().ToString();
-                string longdescription = CommonFunction.CleanText(longdescriptiontxtbox.Text);
+                string longdescription = longdescriptiontxtbox.Text;
 
                 string query = string.Format("INSERT INTO TransactionTable (InvoiceNo,InvoiceDate,TransactionCode,LongDescription,CurrencyId,CurrencyName,CurrencySymbol," +
                     "ConversionRate,CreatedAt,CreatedDay) VALUES ('" + invoiceNo + "','" + inoviceDate + "','" + transactionCode + "','" + longdescription + "'," +
                     "'" + currencyidlbl.Text + "','" + currencynamelbl.Text + "','" + currencysymbollbl.Text + "','" + currencyconversionratelbl.Text + "'," +
                     "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "') SELECT SCOPE_IDENTITY();");
-                int transactionid = DatabaseAccess.InsertId(query);
+                int transactionid = 0;
 
                 if (transactionid > 0)
                 {
@@ -60,8 +61,6 @@ namespace SmartFlow.Transactions
                         "ShortDescription,DebitAmount,CreditAmount,DebitOrCredit) VALUES ('" + transactionid + "','" + transactionCode + "','" + accountid + "'," +
                         "'" + accountCode + "','" + accountName + "','" + isdebitentry + "','" + iscreditentry + "','" + shortdescription + "','" + debitamount + "'," +
                         "'" + creditamount + "','" + debitorcredit + "')");
-
-                        bool result = DatabaseAccess.Insert(subquery);
                     }
                 }
                 else
@@ -69,13 +68,43 @@ namespace SmartFlow.Transactions
                     MessageBox.Show("Something is wrong!");
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             
         }
         private void Payment_Load(object sender, EventArgs e)
         {
             invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
             invoicenotxtbox.Text = GenerateNextInvoiceNumber();
+            string labeldata = paymentvoucheridlbl.Text;
+            bool isInteger = int.TryParse(labeldata, out int result);
+            if (isInteger)
+            {
+                FindRecord(result);
+            }
+        }
+        private void FindRecord(int paymentid)
+        {
+            try
+            {
+                string query = string.Format("SELECT TransactionId,InvoiceNo,Date,TransactionCode,LongDescription,CurrencyId,CurrencyName,CurrencySymbol,ConversionRate,CreatedAt," +
+                    "UpdatedAt,CreatedDay,UpdatedDay,UserId,AddedBy,CompanyId FROM TransactionTable WHERE TransactionId = '" + paymentid + "'");
+                DataTable dtpayment = DatabaseAccess.Retrive(query);
+
+                if (dtpayment != null && dtpayment.Rows.Count > 0)
+                {
+                    paymentvoucheridlbl.Text = dtpayment.Rows[0]["TransactionId"].ToString();
+                    invoicedatetxtbox.Text = dtpayment.Rows[0]["Date"].ToString();
+                    invoicenotxtbox.Text = dtpayment.Rows[0]["InvoiceNo"].ToString();
+                    longdescriptiontxtbox.Text = dtpayment.Rows[0]["LongDescription"].ToString();
+                    currencyidlbl.Text = dtpayment.Rows[0]["CurrencyId"].ToString();
+                    currencynamelbl.Text = dtpayment.Rows[0]["CurrencyName"].ToString();
+                    currencysymbollbl.Text = dtpayment.Rows[0]["CurrencySymbol"].ToString();
+                    currencyconversionratelbl.Text = dtpayment.Rows[0]["ConversionRate"].ToString();
+                    transactioncodelbl.Text = dtpayment.Rows[0]["TransactionCode"].ToString();
+
+
+                }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void Payment_KeyDown(object sender, KeyEventArgs e)
         {
@@ -149,7 +178,11 @@ namespace SmartFlow.Transactions
                     return invoicenotxtbox.Text;
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                return null;
+            }
         }
         private string GetLastInvoiceNumber()
         {
@@ -165,7 +198,7 @@ namespace SmartFlow.Transactions
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return lastInvoiceNumber;
@@ -210,7 +243,11 @@ namespace SmartFlow.Transactions
 
                 return newInvoiceNumber;
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
         private void accountnametxtbox_Leave(object sender, EventArgs e)
         {
@@ -223,9 +260,18 @@ namespace SmartFlow.Transactions
                     Form openForm = CommonFunction.IsFormOpen(typeof(CurrencySelection));
                     if (openForm == null)
                     {
-                        CurrencySelection currencySelection = new CurrencySelection();
-                        currencySelection.ShowDialog();
-                        UpdateCurrencyInfo();
+                        CurrencySelection currencySelection = new CurrencySelection
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        };
+
+                        currencySelection.FormClosed += delegate
+                        {
+                            UpdateCurrencyInfo();
+                        };
+                        CommonFunction.DisposeOnClose(currencySelection);
+                        currencySelection.Show();
                     }
                     else
                     {
@@ -253,8 +299,14 @@ namespace SmartFlow.Transactions
                 Form openForm = CommonFunction.IsFormOpen(typeof(DebitAndCreditForm));
                 if (openForm == null)
                 {
-                    DebitAndCreditForm debitAndCreditForm = new DebitAndCreditForm();
-                    debitAndCreditForm.ShowDialog();
+                    DebitAndCreditForm debitAndCreditForm = new DebitAndCreditForm
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterParent,
+                    };
+
+/*                    CommonFunction.DisposeOnClose(debitAndCreditForm);*/
+                    debitAndCreditForm.Show();
                 }
                 else
                 {
@@ -299,9 +351,18 @@ namespace SmartFlow.Transactions
             Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
             if (openForm == null)
             {
-                AccountSelectionForm accountSelectionForm = new AccountSelectionForm();
-                accountSelectionForm.ShowDialog();
-                UpdateAccountInfo();
+                AccountSelectionForm accountSelectionForm = new AccountSelectionForm
+                {
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterParent,
+                };
+
+                accountSelectionForm.FormClosed += delegate
+                {
+                    UpdateAccountInfo();
+                };
+                CommonFunction.DisposeOnClose(accountSelectionForm);
+                accountSelectionForm.Show();
             }
             else
             {
@@ -339,9 +400,17 @@ namespace SmartFlow.Transactions
                 Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
                 if(openForm == null)
                 {
-                    AccountSelectionForm accountSelection = new AccountSelectionForm();
-                    accountSelection.ShowDialog();
-                    UpdateAccountInfo();
+                    AccountSelectionForm accountSelection = new AccountSelectionForm
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterParent,
+                    };
+                    accountSelection.FormClosed += delegate
+                    {
+                        UpdateAccountInfo();
+                    };
+                    CommonFunction.DisposeOnClose(accountSelection);
+                    accountSelection.Show();
                 }
                 else
                 {

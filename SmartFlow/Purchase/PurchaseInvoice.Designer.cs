@@ -76,7 +76,7 @@
             this.newbtn = new System.Windows.Forms.Button();
             this.savebtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.itemwisedescriptionlbl = new System.Windows.Forms.Label();
             this.narationtxtbox = new System.Windows.Forms.TextBox();
@@ -90,7 +90,7 @@
             this.supplieridlbl = new System.Windows.Forms.Label();
             this.invoicedatetxtbox = new System.Windows.Forms.MaskedTextBox();
             this.purchasetypetxtbox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.purchasetypelbl = new System.Windows.Forms.Label();
             this.productidlbl = new System.Windows.Forms.Label();
             this.suppliersearchresult = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -99,13 +99,13 @@
             this.invoicenolbl = new System.Windows.Forms.Label();
             this.totaldiscountlbl = new System.Windows.Forms.Label();
             this.totalvatlbl = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.nettotallbl = new System.Windows.Forms.Label();
             this.shippingchargestxtbox = new System.Windows.Forms.MaskedTextBox();
-            this.label15 = new System.Windows.Forms.Label();
+            this.freightcharges = new System.Windows.Forms.Label();
             this.totaldiscounttxtbox = new System.Windows.Forms.TextBox();
             this.totalvattxtbox = new System.Windows.Forms.TextBox();
             this.nettotaltxtbox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.shipmentreceivedlbl = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -629,7 +629,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
@@ -637,19 +637,19 @@
             this.panel1.Size = new System.Drawing.Size(1768, 45);
             this.panel1.TabIndex = 71;
             // 
-            // label1
+            // headinglbl
             // 
-            this.label1.BackColor = System.Drawing.Color.Black;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1768, 45);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "PURCHASE INVOICE";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1768, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "PURCHASE INVOICE";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel3
             // 
@@ -665,7 +665,7 @@
             this.panel3.Controls.Add(this.supplieridlbl);
             this.panel3.Controls.Add(this.invoicedatetxtbox);
             this.panel3.Controls.Add(this.purchasetypetxtbox);
-            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.purchasetypelbl);
             this.panel3.Controls.Add(this.productidlbl);
             this.panel3.Controls.Add(this.warehouseidlbl);
             this.panel3.Controls.Add(this.suppliersearchresult);
@@ -809,16 +809,16 @@
             this.purchasetypetxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectpurchasetype_MouseClick);
             this.purchasetypetxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.selectpurchasetype_KeyDown);
             // 
-            // label3
+            // purchasetypelbl
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(769, 77);
-            this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(121, 23);
-            this.label3.TabIndex = 80;
-            this.label3.Text = "Purchase Type";
+            this.purchasetypelbl.AutoSize = true;
+            this.purchasetypelbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.purchasetypelbl.Location = new System.Drawing.Point(769, 77);
+            this.purchasetypelbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.purchasetypelbl.Name = "purchasetypelbl";
+            this.purchasetypelbl.Size = new System.Drawing.Size(121, 23);
+            this.purchasetypelbl.TabIndex = 80;
+            this.purchasetypelbl.Text = "Purchase Type";
             // 
             // productidlbl
             // 
@@ -922,17 +922,17 @@
             this.totalvatlbl.Text = "TOTAL VAT";
             this.totalvatlbl.Visible = false;
             // 
-            // label14
+            // nettotallbl
             // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(1269, 73);
-            this.label14.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(94, 23);
-            this.label14.TabIndex = 134;
-            this.label14.Text = "NET TOTAL";
+            this.nettotallbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nettotallbl.AutoSize = true;
+            this.nettotallbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nettotallbl.Location = new System.Drawing.Point(1269, 73);
+            this.nettotallbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.nettotallbl.Name = "nettotallbl";
+            this.nettotallbl.Size = new System.Drawing.Size(94, 23);
+            this.nettotallbl.TabIndex = 134;
+            this.nettotallbl.Text = "NET TOTAL";
             // 
             // shippingchargestxtbox
             // 
@@ -949,17 +949,17 @@
             this.shippingchargestxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.shippingchargestxtbox.ValidatingType = typeof(int);
             // 
-            // label15
+            // freightcharges
             // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(9, 718);
-            this.label15.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(217, 23);
-            this.label15.TabIndex = 140;
-            this.label15.Text = "Freight && Shipping Charges";
+            this.freightcharges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.freightcharges.AutoSize = true;
+            this.freightcharges.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.freightcharges.Location = new System.Drawing.Point(9, 718);
+            this.freightcharges.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.freightcharges.Name = "freightcharges";
+            this.freightcharges.Size = new System.Drawing.Size(217, 23);
+            this.freightcharges.TabIndex = 140;
+            this.freightcharges.Text = "Freight && Shipping Charges";
             // 
             // totaldiscounttxtbox
             // 
@@ -1002,17 +1002,17 @@
             this.nettotaltxtbox.TabIndex = 150;
             this.nettotaltxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label2
+            // shipmentreceivedlbl
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(628, 718);
-            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(178, 23);
-            this.label2.TabIndex = 151;
-            this.label2.Text = "Shipment Received By";
+            this.shipmentreceivedlbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.shipmentreceivedlbl.AutoSize = true;
+            this.shipmentreceivedlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shipmentreceivedlbl.Location = new System.Drawing.Point(628, 718);
+            this.shipmentreceivedlbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.shipmentreceivedlbl.Name = "shipmentreceivedlbl";
+            this.shipmentreceivedlbl.Size = new System.Drawing.Size(178, 23);
+            this.shipmentreceivedlbl.TabIndex = 151;
+            this.shipmentreceivedlbl.Text = "Shipment Received By";
             // 
             // textBox1
             // 
@@ -1033,15 +1033,15 @@
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1768, 757);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.shipmentreceivedlbl);
             this.Controls.Add(this.nettotaltxtbox);
             this.Controls.Add(this.totalvattxtbox);
             this.Controls.Add(this.totaldiscounttxtbox);
             this.Controls.Add(this.shippingchargestxtbox);
-            this.Controls.Add(this.label15);
+            this.Controls.Add(this.freightcharges);
             this.Controls.Add(this.totaldiscountlbl);
             this.Controls.Add(this.totalvatlbl);
-            this.Controls.Add(this.label14);
+            this.Controls.Add(this.nettotallbl);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.savebtn);
@@ -1098,7 +1098,7 @@
         private System.Windows.Forms.Label warehouseidlbl;
         private System.Windows.Forms.Button savebtn;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox selectsuppliertxtbox;
         private System.Windows.Forms.TextBox selectproducttxtbox;
@@ -1109,13 +1109,13 @@
         private System.Windows.Forms.Label invoicenolbl;
         private System.Windows.Forms.Label productidlbl;
         private System.Windows.Forms.TextBox purchasetypetxtbox;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label purchasetypelbl;
         private System.Windows.Forms.MaskedTextBox invoicedatetxtbox;
         private System.Windows.Forms.Label totaldiscountlbl;
         private System.Windows.Forms.Label totalvatlbl;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label nettotallbl;
         private System.Windows.Forms.MaskedTextBox shippingchargestxtbox;
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label freightcharges;
         private System.Windows.Forms.Label purchasetypeidlbl;
         private System.Windows.Forms.Label invoicespecialnotelbl;
         private System.Windows.Forms.Label currencyconversionratelbl;
@@ -1151,6 +1151,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn warehouseidcolumn;
         private System.Windows.Forms.Label itemwisedescriptionlbl;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label shipmentreceivedlbl;
     }
 }

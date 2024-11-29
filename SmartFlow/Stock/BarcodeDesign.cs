@@ -1,5 +1,4 @@
-﻿
-using SmartFlow.Common;
+﻿using SmartFlow.Common;
 using SmartFlow.Common.Forms;
 using SmartFlow.Stock.Reports;
 using System;
@@ -44,8 +43,14 @@ namespace SmartFlow.Stock
             if (openForm == null) 
             { 
                 ProductSelectionForm productSelection = new ProductSelectionForm();
-                productSelection.ShowDialog();
-                UpdateProductTextBox();
+                productSelection.MdiParent = this.MdiParent;
+                
+                productSelection.FormClosed += delegate
+                {
+                    UpdateProductTextBox();
+                };
+                CommonFunction.DisposeOnClose(productSelection);
+                productSelection.Show();
             }
             else
             {
@@ -107,7 +112,7 @@ namespace SmartFlow.Stock
                 selectproducttxtbox.Focus();
 
                 
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void generatebtn_Click(object sender, EventArgs e)
         {
@@ -142,7 +147,7 @@ namespace SmartFlow.Stock
                     }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         public void GenerateBarcodes(DataTable dataTable)
         {
@@ -171,6 +176,7 @@ namespace SmartFlow.Stock
 
             this.Close();
             PrintedBarcodeViewer printedBarcode = new PrintedBarcodeViewer(dataTable);
+            CommonFunction.DisposeOnClose(printedBarcode);
             printedBarcode.Show();
         }
         private bool AreAnyTextBoxesFilled()
@@ -186,9 +192,18 @@ namespace SmartFlow.Stock
                 Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
                 if (openForm == null) 
                 {
-                    ProductSelectionForm productSelection = new ProductSelectionForm();
+                    ProductSelectionForm productSelection = new ProductSelectionForm
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterScreen,
+                    };
+                    
+                    productSelection.FormClosed += delegate
+                    {
+                        UpdateProductTextBox();
+                    };
+                    CommonFunction.DisposeOnClose(productSelection);
                     productSelection.ShowDialog();
-                    UpdateProductTextBox();
                 }
                 else
                 {

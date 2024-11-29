@@ -100,7 +100,7 @@
             this.KeyPreview = true;
             this.Name = "ItemWiseDescription";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Item Wise Description";
+            this.Text = "ITEM WISE DESCRIPTION";
             this.Load += new System.EventHandler(this.ItemWiseDescription_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ItemWiseDescription_KeyDown);
             this.panel1.ResumeLayout(false);

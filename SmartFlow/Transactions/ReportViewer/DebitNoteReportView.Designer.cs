@@ -52,7 +52,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "DebitNoteReportView";
-            this.Text = "DEBIT NOTE REPORT VIEWER - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "DEBIT NOTE REPORT VIEWER";
             this.Load += new System.EventHandler(this.DebitNoteReportView_Load);
             this.ResumeLayout(false);
 

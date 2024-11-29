@@ -35,6 +35,7 @@
             // 
             this.crystalReportViewer1.ActiveViewIndex = -1;
             this.crystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default;
             this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crystalReportViewer1.Location = new System.Drawing.Point(0, 0);
             this.crystalReportViewer1.Name = "crystalReportViewer1";
@@ -51,7 +52,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "QuotationReportView";
-            this.Text = "PURCHASE QUOTATION REPORT VIEWER - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "PURCHASE QUOTATION REPORT VIEWER";
             this.Load += new System.EventHandler(this.QuotationReportView_Load);
             this.ResumeLayout(false);
 

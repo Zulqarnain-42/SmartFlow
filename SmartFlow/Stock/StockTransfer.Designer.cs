@@ -83,7 +83,7 @@
             // 
             this.multiplestocktransferlbl.BackColor = System.Drawing.Color.Black;
             this.multiplestocktransferlbl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.multiplestocktransferlbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.multiplestocktransferlbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.multiplestocktransferlbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.multiplestocktransferlbl.Location = new System.Drawing.Point(0, 0);
             this.multiplestocktransferlbl.Name = "multiplestocktransferlbl";
@@ -168,7 +168,6 @@
             this.qtytxtbox.Name = "qtytxtbox";
             this.qtytxtbox.Size = new System.Drawing.Size(374, 30);
             this.qtytxtbox.TabIndex = 3;
-            this.qtytxtbox.Leave += new System.EventHandler(this.qtytxtbox_Leave);
             // 
             // quantitylbl
             // 
@@ -460,7 +459,7 @@
             this.MinimizeBox = false;
             this.Name = "StockTransfer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MultipleTransfer";
+            this.Text = "STOCK TRANSFER";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.StockTransfer_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StockTransfer_KeyDown);

@@ -52,7 +52,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "CreditNoteReportView";
-            this.Text = "CREDIT NOTE REPORT VIEWER - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "CREDIT NOTE REPORT VIEWER";
             this.Load += new System.EventHandler(this.CreditNoteReportView_Load);
             this.ResumeLayout(false);
 

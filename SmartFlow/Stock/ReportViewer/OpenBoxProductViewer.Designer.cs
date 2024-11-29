@@ -52,7 +52,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "OpenBoxProductViewer";
-            this.Text = "OPEN BOX PRODUCT REPORT VIEWER - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "OPEN BOX PRODUCT REPORT VIEWER";
             this.Load += new System.EventHandler(this.OpenBoxProductViewer_Load);
             this.ResumeLayout(false);
 

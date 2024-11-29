@@ -12,13 +12,12 @@ namespace SmartFlow.Stock
         {
             InitializeComponent();
         }
-        public UpdateQuantity(int prodid,string title,string mfr,int qty)
+        public UpdateQuantity(int prodid,string title,string mfr)
         {
             InitializeComponent();
             productid.Text = prodid.ToString();
             productname.Text = title;
             productmfr.Text = mfr;
-            openingstocklbl.Text = "OPENING STOCK - " + qty.ToString();
         }
         private void savebtn_Click(object sender, EventArgs e)
         {
@@ -41,7 +40,7 @@ namespace SmartFlow.Stock
 
                     string updateqty = string.Format("UPDATE ProductTable SET Quantity = '" + qtytxtbox.Text + "',WarehouseID = '" + warehouseidlbl.Text + "' " +
                         "WHERE ProductID = '" + productid.Text + "'");
-                    bool result = DatabaseAccess.Update(updateqty);
+                    bool result = false;
 
                     if (result)
                     {
@@ -57,7 +56,7 @@ namespace SmartFlow.Stock
                                 string query1 = string.Format("INSERT INTO SerialNoTable (ProductId,SerialNo,CreatedAt,CreatedDay) " +
                             "VALUES ('" + productid + "','" + serialnumber + "','" + System.DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
                             "'" + System.DateTime.Now.DayOfWeek + "')");
-                                DatabaseAccess.Insert(query1);
+
                                 start++;
                             }
                         }
@@ -67,7 +66,7 @@ namespace SmartFlow.Stock
                 }
                 
 
-            }catch(Exception ex) { throw ex; }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         static string GenerateRandomSerialNumber()
         {
@@ -137,8 +136,15 @@ namespace SmartFlow.Stock
                     if (warehousedata.Rows.Count > 0)
                     {
                         WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
-                        warehouseSelection.ShowDialog();
-                        UpdateWarehouseFromTextBox();
+                        warehouseSelection.MdiParent = this.MdiParent;
+                        
+                        warehouseSelection.FormClosed += delegate
+                        {
+                            UpdateWarehouseFromTextBox();
+                        };
+
+                        CommonFunction.DisposeOnClose(warehouseSelection);
+                        warehouseSelection.Show();
                     }
                 }
 
@@ -150,8 +156,11 @@ namespace SmartFlow.Stock
         }
         private void UpdateWarehouseFromTextBox()
         {
-            selectwarehousetxtbox.Text = GlobalVariables.warehousenameglobal.ToString();
-            warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
+            if(GlobalVariables.warehousenameglobal != null && GlobalVariables.warehouseidglobal > 0)
+            {
+                selectwarehousetxtbox.Text = GlobalVariables.warehousenameglobal.ToString();
+                warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
+            }
         }
         private bool AreAnyTextBoxesFilled()
         {

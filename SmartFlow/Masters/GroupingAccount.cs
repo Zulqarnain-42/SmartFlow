@@ -1,10 +1,9 @@
 ﻿using SmartFlow.Common;
 using System;
 using System.Windows.Forms;
-using SmartFlow.Common.CommonForms;
 using SmartFlow.Common.Forms;
 using System.Data;
-using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace SmartFlow.Masters
 {
@@ -14,14 +13,29 @@ namespace SmartFlow.Masters
         {
             InitializeComponent();
         }
+        public GroupingAccount(int groupingaccountid)
+        {
+            InitializeComponent();
+            this.groupingaccountidlbl.Text = groupingaccountid.ToString();
+        }
         private void selectaccounttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
             if (openForm == null)
             {
-                AccountSelectionForm allaccountselection = new AccountSelectionForm();
+                AccountSelectionForm allaccountselection = new AccountSelectionForm
+                {
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterParent,
+                };
+
+                
+                allaccountselection.FormClosed += delegate
+                {
+                    UpdateAccountInfo();
+                };
+                CommonFunction.DisposeOnClose(allaccountselection);
                 allaccountselection.ShowDialog();
-                UpdateAccountInfo();
             }
             else
             {
@@ -44,9 +58,18 @@ namespace SmartFlow.Masters
                 Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
                 if (openForm == null) 
                 {
-                    AccountSelectionForm allAccountsSelection = new AccountSelectionForm();
+                    AccountSelectionForm allAccountsSelection = new AccountSelectionForm
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterParent,
+                    };
+                    
+                    allAccountsSelection.FormClosed += delegate
+                    {
+                        UpdateAccountInfo();
+                    };
+                    CommonFunction.DisposeOnClose(allAccountsSelection);
                     allAccountsSelection.ShowDialog();
-                    UpdateAccountInfo();
                 }
                 else
                 {
@@ -117,7 +140,7 @@ namespace SmartFlow.Masters
                 selectaccounttxtbox.Text = string.Empty;
                 selectaccounttxtbox.Focus();
 
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void savebtn_Click(object sender, EventArgs e)
         {
@@ -131,49 +154,110 @@ namespace SmartFlow.Masters
                     groupingnametxtbox.Focus();
                     return;
                 }
-
-                string groupingName = CommonFunction.CleanText(groupingnametxtbox.Text);
-
-                DataTable dtgrouping = DatabaseAccess.Retrive("SELECT AccountGroupid,GroupName,Description FROM AccountGroupingTable WHERE GroupName " +
-                    "LIKE '" + groupingName + "'");
-                if(dtgrouping!=null && dtgrouping.Rows.Count > 0)
+                
+                if(savebtn.Text == "UPDATE")
                 {
-                    MessageBox.Show("Group Already Exist.");
+                    bool isupdated = UpdateGrouping();
+                    if (isupdated) { MessageBox.Show("Updated Successfully!"); }
                 }
                 else
                 {
-                    bool result = false;
-                    string groupingaccounttype = "Account Grouping";
-                    string accountgroupcode = Guid.NewGuid().ToString();
-                    string addgroup = string.Format("INSERT INTO AccountGroupingTable (GroupName,Description,CreatedAt,CreatedDay,GroupingCode,AccountGroupingType) " +
-                        "VALUES ('" + groupingName + "','" + descriptiontxtbox.Text + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                        "'" + DateTime.Now.DayOfWeek + "','" + accountgroupcode + "','" + groupingaccounttype + "'); SELECT SCOPE_IDENTITY();");
-
-                    int groupaccountid = DatabaseAccess.InsertId(addgroup);
-
-                    if(groupaccountid > 0)
-                    {
-                        foreach(DataGridViewRow row in dgvgroupingaccount.Rows)
-                        {
-                            if(row.IsNewRow) { continue; }
-
-                            int accountid = Convert.ToInt32(row.Cells["accountidcolumn"].Value.ToString());
-                            string accountname = row.Cells["accountnamecolumn"].Value.ToString();
-
-                            string groupaccountdetail = string.Format("INSERT INTO AccountGroupingDetailsTable (AccountId,AccountName,AccountGroupId,AccountGroupCode) " +
-                                "VALUES ('" + accountid + "','" + accountname + "','" + groupaccountid + "','" + accountgroupcode + "')");
-
-                            result = DatabaseAccess.Insert(groupaccountdetail);
-                        }
-
-                        if (result)
-                        {
-                            MessageBox.Show("Saved Successfully.");
-                        }
-                    }
+                    bool isInserted = InsertGrouping();
+                    if (isInserted) { MessageBox.Show("Saved Successfully!"); }
                 }
-            }catch (Exception ex) { throw ex; }
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
+
+        private bool UpdateGrouping()
+        {
+            // Update AccountGroupingTable
+            string tableName = "AccountGroupingTable";
+            string whereClause = "AccountGroupid = '" + groupingaccountidlbl.Text + "'";
+
+            var columnData = new Dictionary<string, object>
+            {
+                { "GroupName", groupingnametxtbox.Text },
+                { "Description", descriptiontxtbox.Text },
+                { "UpdatedAt", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") },
+                { "UpdatedDay", DateTime.Now.DayOfWeek.ToString() }
+            };
+
+            // Call the common function for the update
+            bool result = DatabaseAccess.ExecuteQuery(tableName, "UPDATE", columnData, whereClause);
+
+            if (result)
+            {
+                // Insert into AccountGroupingDetailsTable for each DataGridView row
+                foreach (DataGridViewRow row in dgvgroupingaccount.Rows)
+                {
+
+                    if (row.IsNewRow) continue;
+
+                    int accountId = Convert.ToInt32(row.Cells["accountidcolumn"].Value);
+                    string accountName = row.Cells["accountnamecolumn"].Value.ToString();
+
+                    var detailData = new Dictionary<string, object>
+                    {
+                        { "AccountId", accountId },
+                        { "AccountName", accountName },
+                        { "AccountGroupId", groupingaccountidlbl },
+                    };
+
+                    result = DatabaseAccess.ExecuteQuery("AccountGroupingDetailsTable", "UPDATE", detailData);
+                }
+                return result;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool InsertGrouping()
+        {
+            // Update AccountGroupingTable
+            string tableName = "AccountGroupingTable";
+
+            var columnData = new Dictionary<string, object>
+            {
+                { "GroupName", groupingnametxtbox.Text },
+                { "Description", descriptiontxtbox.Text },
+                { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") },
+                { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                { "GroupingCode", Guid.NewGuid().ToString() }
+            };
+
+            // Call the common function for the update
+            int result = DatabaseAccess.InsertDataId(tableName, columnData);
+
+            if (result > 0)
+            {
+                string subtableName = "AccountGroupingDetailsTable";
+                // Insert into AccountGroupingDetailsTable for each DataGridView row
+                foreach (DataGridViewRow row in dgvgroupingaccount.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    int accountId = Convert.ToInt32(row.Cells["accountidcolumn"].Value);
+                    string accountName = row.Cells["accountnamecolumn"].Value.ToString();
+
+                    var detailData = new Dictionary<string, object>
+                    {
+                        { "AccountId", accountId },
+                        { "AccountName", accountName },
+                        { "AccountGroupId", result }
+                    };
+
+                    bool subresult = DatabaseAccess.ExecuteQuery(subtableName, "UPDATE", detailData);
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private void dgvgroupingaccount_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.D)
@@ -203,6 +287,77 @@ namespace SmartFlow.Masters
             if (selectaccounttxtbox.Text.Trim().Length > 0) { return true; }
             if (dgvgroupingaccount.Rows.Count > 0) { return true; }
             return false; // No TextBox is filled
+        }
+        private void GroupingAccount_Load(object sender, EventArgs e)
+        {
+            string labeldata = groupingaccountidlbl.Text;
+            bool isInteger = int.TryParse(labeldata, out int result);
+            if (isInteger)
+            {
+                FindRecord(result);
+            }
+        }
+        private void FindRecord(int groupingid)
+        {
+            try
+            {
+                string query = string.Format("SELECT AccountGroupid,GroupName,Description,CreatedAt,CreatedDay,UpdatedAt,UpdatedDay,CompanyId,AddedBy,UserId," +
+                    "GroupingCode FROM AccountGroupingTable WHERE AccountGroupid = '" + groupingid + "'");
+
+                DataTable dtlistgrouping = DatabaseAccess.Retrive(query);
+
+                if(dtlistgrouping != null && dtlistgrouping.Rows.Count > 0)
+                {
+                    groupingnametxtbox.Text = dtlistgrouping.Rows[0]["GroupName"].ToString();
+                    descriptiontxtbox.Text = dtlistgrouping.Rows[0]["Description"].ToString();
+                    groupingaccountidlbl.Text = dtlistgrouping.Rows[0]["AccountGroupid"].ToString();
+                    groupingcodelbl.Text = dtlistgrouping.Rows[0]["GroupingCode"].ToString();
+
+                    string querydetails = string.Format("SELECT AccountId [accountidcolumn],AccountName [accountnamecolumn] FROM AccountGroupingDetailsTable " +
+                        "WHERE AccountGroupId = '" + groupingid + "'");
+
+                    DataTable dtlistdetails = DatabaseAccess.Retrive(querydetails);
+
+                    if(dtlistdetails != null && dtlistdetails.Rows.Count > 0)
+                    {
+                        dgvgroupingaccount.Rows.Clear();
+
+                        // Loop through each DataRow in the DataTable
+                        foreach (DataRow row in dtlistdetails.Rows)
+                        {
+                            // Add a new row to the DataGridView
+                            int rowIndex = dgvgroupingaccount.Rows.Add();
+
+                            // Assign values to the corresponding DataGridView columns
+                            dgvgroupingaccount.Rows[rowIndex].Cells["accountidcolumn"].Value = row["accountidcolumn"];
+                            dgvgroupingaccount.Rows[rowIndex].Cells["accountnamecolumn"].Value = row["accountnamecolumn"];
+                        }
+                    }
+
+                    savebtn.Text = "UPDATE";
+                }
+
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+        private void rEMOVEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Check if the current cell is not null and belongs to a valid row
+                if (dgvgroupingaccount.CurrentCell != null && dgvgroupingaccount.CurrentCell.RowIndex >= 0)
+                {
+                    // Confirm deletion (optional)
+                    var confirmResult = MessageBox.Show("Are you sure to delete this row?",
+                                                         "Confirm Delete",
+                                                         MessageBoxButtons.YesNo);
+                    if (confirmResult == DialogResult.Yes)
+                    {
+                        // Remove the selected row
+                        dgvgroupingaccount.Rows.RemoveAt(dgvgroupingaccount.CurrentCell.RowIndex);
+                    }
+                }
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
     }
 }

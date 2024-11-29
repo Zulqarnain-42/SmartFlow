@@ -116,7 +116,8 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AvailabilityForm";
-            this.Text = "Product Availability Form";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "PRODUCT AVAILABILITY FORM";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AvailabilityForm_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

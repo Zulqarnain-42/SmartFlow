@@ -52,7 +52,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "DeliveryNoteView";
-            this.Text = "DELIVERY NOTE - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "DELIVERY NOTE";
             this.Load += new System.EventHandler(this.DeliveryNoteView_Load);
             this.ResumeLayout(false);
 

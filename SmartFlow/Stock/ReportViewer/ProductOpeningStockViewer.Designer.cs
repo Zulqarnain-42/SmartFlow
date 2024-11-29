@@ -52,7 +52,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ProductOpeningStockViewer";
-            this.Text = "PRODUCT OPENING STOCK VIEWER - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "PRODUCT OPENING STOCK VIEWER";
             this.Load += new System.EventHandler(this.ProductOpeningStockViewer_Load);
             this.ResumeLayout(false);
 

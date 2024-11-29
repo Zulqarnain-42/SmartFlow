@@ -34,7 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.qtybarcode = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.selectproducttxtbox = new System.Windows.Forms.TextBox();
             this.addbtn = new System.Windows.Forms.Button();
@@ -89,25 +89,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1117, 45);
             this.panel1.TabIndex = 46;
             // 
-            // label2
+            // headinglbl
             // 
-            this.label2.BackColor = System.Drawing.Color.Black;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(1117, 45);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "BARCODE DESIGN";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1117, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "BARCODE DESIGN";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel2
             // 
@@ -255,7 +255,7 @@
             this.MinimizeBox = false;
             this.Name = "BarcodeDesign";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Barcode Design - Future Art Broadcast Trading LLC";
+            this.Text = "BARCODE DESIGN";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BarcodeDesign_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -275,7 +275,7 @@
         private System.Windows.Forms.TextBox qtybarcode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button addbtn;
         private System.Windows.Forms.TextBox selectproducttxtbox;

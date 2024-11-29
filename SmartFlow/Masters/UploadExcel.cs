@@ -56,7 +56,7 @@ namespace SmartFlow.Masters
                     }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void savebtn_Click(object sender, EventArgs e)
         {
@@ -75,7 +75,14 @@ namespace SmartFlow.Masters
                 {
                     if (!row.IsNewRow)
                     {
-                        string mfr = Convert.ToString(row.Cells[0].Value);
+                        string productName = Convert.ToString(row.Cells[0].Value);
+                        string mfr = Convert.ToString(row.Cells[1].Value);
+                        string productupc = Convert.ToString(row.Cells[2].Value);
+                        float lengtht = float.Parse(row.Cells[3].Value.ToString());
+                        float width = float.Parse(row.Cells[4].Value.ToString());
+                        float height = float.Parse(row.Cells[5].Value.ToString());
+                        float weight = float.Parse(row.Cells[6].Value.ToString());
+                        float standardprice = float.Parse(row.Cells[7].Value.ToString());
                         string quantity = Convert.ToString(row.Cells[2].Value);
                         string serialnumber = Convert.ToString(row.Cells[1].Value);
                         int anynumber;
@@ -98,7 +105,7 @@ namespace SmartFlow.Masters
                                             "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
                                             "'" + DateTime.Now.DayOfWeek + "')");
 
-                                        result = DatabaseAccess.Insert(query);
+                                        result = false;
                                         if (result)
                                         {
                                             string query1 = string.Empty;
@@ -111,7 +118,7 @@ namespace SmartFlow.Masters
                                                     serialnumber = GenerateRandomSerialNumber();
                                                     query1 = string.Format("INSERT INTO SerialNoTable (ProductCode,SerialNo,CreatedAt,CreatedDay) " +
                                                 "VALUES ('" + dataTable.Rows[0]["ProductCode"].ToString() + "','" + serialnumber + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')");
-                                                    DatabaseAccess.Insert(query1);
+
                                                     start++;
                                                 }
                                             }
@@ -130,7 +137,7 @@ namespace SmartFlow.Masters
                                                         "VALUES ('" + dataTable.Rows[0]["ProductCode"].ToString() + "','" + cleanedValue + "'," +
                                                         "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
                                                         "'" + DateTime.Now.DayOfWeek + "')");
-                                                            DatabaseAccess.Insert(query1);
+
                                                         }
                                                     }
                                                 }
@@ -145,7 +152,7 @@ namespace SmartFlow.Masters
                                                         serialnumber = GenerateRandomSerialNumber();
                                                         query1 = string.Format("INSERT INTO SerialNoTable (ProductCode,SerialNo,CreatedAt,CreatedDay) " +
                                                     "VALUES ('" + dataTable.Rows[0]["ProductCode"].ToString() + "','" + serialnumber + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')");
-                                                        DatabaseAccess.Insert(query1);
+
                                                         start++;
                                                     }
                                                 }
@@ -159,7 +166,7 @@ namespace SmartFlow.Masters
                                         query = string.Format("INSERT INTO ProductTable (ProductCode,UPC,MFR,ProductName,CreatedAt,CreatedDay) " +
                                             "VALUES ('{0}','{1}','{2}','{3}','{4}')", productcode , quantity, mfr, serialnumber, DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss"),
                                             DateTime.Now.DayOfWeek);
-                                        result = DatabaseAccess.Insert(query);
+                                        result = false;
                                         if (result)
                                         {
                                             MessageBox.Show("Done");
@@ -174,7 +181,7 @@ namespace SmartFlow.Masters
                                                     query1 = string.Format("INSERT INTO SerialNoTable (ProductCode,SerialNo,CreatedAt,CreatedDay) " +
                                                 "VALUES ('" + productcode + "','" + serialnumber + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
                                                 "'" + DateTime.Now.DayOfWeek + "')");
-                                                    DatabaseAccess.Insert(query1);
+
                                                     start++;
                                                 }
                                             }
@@ -193,7 +200,7 @@ namespace SmartFlow.Masters
                                                         "VALUES ('" + productcode + "','" + cleanedValue + "'," +
                                                         "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
                                                         "'" + DateTime.Now.DayOfWeek + "')");
-                                                            DatabaseAccess.Insert(query1);
+ 
                                                         }
                                                     }
                                                 }
@@ -209,7 +216,7 @@ namespace SmartFlow.Masters
                                                         query1 = string.Format("INSERT INTO SerialNoTable (ProductCode,SerialNo,CreatedAt,CreatedDay) " +
                                                     "VALUES ('" + productcode + "','" + serialnumber + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
                                                     "'" + DateTime.Now.DayOfWeek + "')");
-                                                        DatabaseAccess.Insert(query1);
+
                                                         start++;
                                                     }
                                                 }
@@ -222,7 +229,7 @@ namespace SmartFlow.Masters
                                 {
                                     query = string.Format("INSERT INTO ProductTable (ProductCode,Quantity,MFR,CreatedAt,CreatedDay) VALUES ('{0}','{1}','{2}','{3}','{4}')", 
                                         productcode, quantity, mfr, DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss"),DateTime.Now.DayOfWeek);
-                                    result = DatabaseAccess.Insert(query);
+                                    result = false;
                                     if (result)
                                     {
                                         string query1 = string.Empty;
@@ -235,7 +242,7 @@ namespace SmartFlow.Masters
                                                 serialnumber = GenerateRandomSerialNumber();
                                                 query1 = string.Format("INSERT INTO SerialNoTable (ProductCode,SerialNo,CreatedAt,CreatedDay) " +
                                             "VALUES ('" + productcode + "','" + serialnumber + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')");
-                                                DatabaseAccess.Insert(query1);
+
                                                 start++;
                                             }
                                         }
@@ -254,7 +261,7 @@ namespace SmartFlow.Masters
                                                     "VALUES ('" + productcode + "','" + cleanedValue + "'," +
                                                     "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
                                                     "'" + DateTime.Now.DayOfWeek + "')");
-                                                        DatabaseAccess.Insert(query1);
+
                                                     }
                                                 }
                                             }
@@ -269,7 +276,7 @@ namespace SmartFlow.Masters
                                                     serialnumber = GenerateRandomSerialNumber();
                                                     query1 = string.Format("INSERT INTO SerialNoTable (ProductCode,SerialNo,CreatedAt,CreatedDay) " +
                                                 "VALUES ('" + productcode + "','" + serialnumber + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')");
-                                                    DatabaseAccess.Insert(query1);
+
                                                     start++;
                                                 }
                                             }
@@ -287,7 +294,7 @@ namespace SmartFlow.Masters
                     MessageBox.Show("Saved Successfully!");
                 }
             }
-            catch(Exception ex) { throw ex; }
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void exitbtn_Click(object sender, EventArgs e)
         {
@@ -363,7 +370,9 @@ namespace SmartFlow.Masters
             if (openForm == null) 
             {
                 WarehouseSelection warehouseSelection = new WarehouseSelection();
-                warehouseSelection.ShowDialog();
+                warehouseSelection.MdiParent = this.MdiParent;
+                CommonFunction.DisposeOnClose(warehouseSelection);
+                warehouseSelection.Show();
             }
             else
             {

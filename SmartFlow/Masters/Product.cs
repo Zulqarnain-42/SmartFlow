@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartFlow.Common;
+using System;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
@@ -7,8 +8,6 @@ namespace SmartFlow.Masters
 {
     public partial class Product : Form
     {
-        private int currentRowIndex;
-        private int currentCellIndex;
         public Product()
         {
             InitializeComponent();
@@ -16,11 +15,13 @@ namespace SmartFlow.Masters
         private void newbtn_Click(object sender, EventArgs e)
         {
             CreateProduct createProduct = new CreateProduct();
-            createProduct.Show();
+            createProduct.MdiParent = this.MdiParent;
             createProduct.FormClosed += delegate
             {
                 FillGrid("");
             };
+            CommonFunction.DisposeOnClose(createProduct);
+            createProduct.Show();
         }
         private void closebtn_Click(object sender, EventArgs e)
         {
@@ -34,7 +35,7 @@ namespace SmartFlow.Masters
                 DataTable dt = new DataTable();
                 if (string.IsNullOrEmpty(searchvalue) && string.IsNullOrWhiteSpace(searchvalue))
                 {
-                    query = "SELECT ProductID [ID],ProductName [Title],StandardPrice [Price],UPC,EAN,MFR,Barcode FROM ProductTable";
+                    query = "SELECT ProductID [ID],ProductName [Title],UPC,EAN,MFR,Barcode FROM ProductTable";
                 }
                 else
                 {
@@ -48,11 +49,10 @@ namespace SmartFlow.Masters
                     if (dt.Rows.Count > 0)
                     {
                         productsGridView.DataSource = dt;
-                        productsGridView.Columns[0].Width = 100;
+                        productsGridView.Columns[0].Width = 50;
                         productsGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                         productsGridView.Columns[2].Width = 100;
                         productsGridView.Columns[3].Width = 100;
-                        productsGridView.Columns[4].Width = 100;
                     }
                     else
                     {
@@ -65,14 +65,14 @@ namespace SmartFlow.Masters
                 }
 
                 // Restore the cursor position
-                if (currentRowIndex >= 0 && currentCellIndex >= 0 &&
-                    currentRowIndex < productsGridView.Rows.Count &&
-                    currentCellIndex < productsGridView.Rows[currentRowIndex].Cells.Count)
+                if (GlobalVariables.currentRowIndex >= 0 &&GlobalVariables.currentRowIndex >= 0 &&
+                    GlobalVariables.currentRowIndex < productsGridView.Rows.Count &&
+                    GlobalVariables.currentCellIndex < productsGridView.Rows[GlobalVariables.currentRowIndex].Cells.Count)
                 {
-                    productsGridView.CurrentCell = productsGridView.Rows[currentRowIndex].Cells[currentCellIndex];
+                    productsGridView.CurrentCell = productsGridView.Rows[GlobalVariables.currentRowIndex].Cells[GlobalVariables.currentCellIndex];
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void Product_Load(object sender, EventArgs e)
         {
@@ -89,12 +89,6 @@ namespace SmartFlow.Masters
                 this.Close();
                 e.Handled = true; // Prevent further processing of the key event
             }
-
-            if(e.KeyCode == Keys.R)
-            {
-                FillGrid("");
-                e.Handled = true;
-            }
         }
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -107,13 +101,18 @@ namespace SmartFlow.Masters
                         if (productsGridView.SelectedRows.Count == 1)
                         {
                             CreateProduct createProduct = new CreateProduct(Convert.ToInt32(productsGridView.CurrentRow.Cells[0].Value));
+                            createProduct.MdiParent = this.MdiParent;
                             createProduct.FormClosed += delegate
                             {
-                                currentRowIndex = productsGridView.CurrentCell.RowIndex;
-                                currentCellIndex = productsGridView.CurrentCell.ColumnIndex;
+                                if (productsGridView.CurrentCell.RowIndex > 0 && productsGridView.CurrentCell.ColumnIndex > 0)
+                                {
+                                    GlobalVariables.currentRowIndex = productsGridView.CurrentCell.RowIndex;
+                                    GlobalVariables.currentCellIndex = productsGridView.CurrentCell.ColumnIndex;
+                                }
                                 FillGrid("");
                             };
-                            createProduct.Show();
+                            CommonFunction.DisposeOnClose(createProduct);
+                            createProduct.ShowDialog();
                         }
                         else
                         {
@@ -128,7 +127,7 @@ namespace SmartFlow.Masters
             }
             catch(Exception ex)
             {
-                throw ex;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void productsGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -142,12 +141,17 @@ namespace SmartFlow.Masters
                         if (productsGridView.SelectedRows.Count == 1)
                         {
                             CreateProduct createProduct = new CreateProduct(Convert.ToInt32(productsGridView.CurrentRow.Cells[0].Value));
+                            createProduct.MdiParent = this.MdiParent;
                             createProduct.FormClosed += delegate
                             {
-                                currentRowIndex = productsGridView.CurrentCell.RowIndex;
-                                currentCellIndex = productsGridView.CurrentCell.ColumnIndex;
+                                if(productsGridView.CurrentCell.RowIndex > 0 && productsGridView.CurrentCell.ColumnIndex > 0)
+                                {
+                                    GlobalVariables.currentRowIndex = productsGridView.CurrentCell.RowIndex;
+                                    GlobalVariables.currentCellIndex = productsGridView.CurrentCell.ColumnIndex;
+                                }
                                 FillGrid("");
                             };
+                            CommonFunction.DisposeOnClose(createProduct);
                             createProduct.Show();
                         }
                         else
@@ -161,8 +165,9 @@ namespace SmartFlow.Masters
                     }
                 }
             }
-            catch(Exception ex) { throw ex; }
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
+
         private int GetFirstVisibleRowIndex(DataGridView dataGridView)
         {
             int firstDisplayedRowIndex = dataGridView.FirstDisplayedScrollingRowIndex;
@@ -181,8 +186,8 @@ namespace SmartFlow.Masters
             int firstVisibleCellIndex = GetFirstVisibleCellIndex(productsGridView);
             if (firstVisibleRowIndex >= 0)
             {
-                currentRowIndex = firstVisibleRowIndex;
-                currentCellIndex = firstVisibleCellIndex;
+                GlobalVariables.currentRowIndex = firstVisibleRowIndex;
+                GlobalVariables.currentCellIndex = firstVisibleCellIndex;
             }
         }
         private int GetFirstVisibleCellIndex(DataGridView dataGridView)
@@ -207,7 +212,28 @@ namespace SmartFlow.Masters
 
             return dataGridView.Columns.Count - 1;
         }
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        private string BuildSearchQuery(string searchTerm)
+        {
+            string[] terms = searchTerm.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            StringBuilder queryBuilder = new StringBuilder("SELECT ProductID [ID], ProductName [Title], UPC, EAN, MFR," +
+                " Barcode FROM ProductTable WHERE");
+
+            for (int i = 0; i < terms.Length; i++)
+            {
+                string term = terms[i];
+                if (i > 0)
+                {
+                    queryBuilder.Append(" AND");
+                }
+                queryBuilder.Append($" (ProductName LIKE '%{term}%' OR MFR LIKE '%{term}%' OR UPC LIKE '%{term}%')");
+            }
+
+            // Note: RelevanceScore calculation and ORDER BY clause have been removed
+
+            return queryBuilder.ToString();
+        }
+
+        private void productDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -217,14 +243,17 @@ namespace SmartFlow.Masters
                     {
                         if (productsGridView.SelectedRows.Count == 1)
                         {
-                            if (MessageBox.Show("Are you sure you want to delete selected record!", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            string title = "Product Details";
+                            CreateProduct createProduct = new CreateProduct(Convert.ToInt32(productsGridView.CurrentRow.Cells[0].Value),title);
+                            createProduct.MdiParent = this.MdiParent;
+                            createProduct.FormClosed += delegate
                             {
-                                currentRowIndex = productsGridView.CurrentCell.RowIndex;
-                                currentCellIndex = productsGridView.CurrentCell.ColumnIndex;
-                                string query = "DELETE FROM ProductTable WHERE ProductID = '"+ Convert.ToInt32(productsGridView.CurrentRow.Cells[0].Value) + "'";
-                                DatabaseAccess.Delete(query);
+                                GlobalVariables.currentRowIndex = productsGridView.CurrentCell.RowIndex;
+                                GlobalVariables.currentCellIndex = productsGridView.CurrentCell.ColumnIndex;
                                 FillGrid("");
-                            }
+                            };
+                            CommonFunction.DisposeOnClose(createProduct);
+                            createProduct.ShowDialog();
                         }
                         else
                         {
@@ -237,63 +266,7 @@ namespace SmartFlow.Masters
                     }
                 }
             }
-            catch (Exception ex) { throw ex; }
-        }
-        private string BuildSearchQuery(string searchTerm)
-        {
-            string[] terms = searchTerm.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            StringBuilder queryBuilder = new StringBuilder("SELECT ProductID [ID],ProductName [Title],StandardPrice [Price],UPC,EAN,MFR,Barcode, (");
-
-            for (int i = 0; i < terms.Length; i++)
-            {
-                string term = terms[i];
-                if (i > 0)
-                {
-                    queryBuilder.Append(" + ");
-                }
-                queryBuilder.Append($"(CASE WHEN ProductName LIKE '%{term}%' THEN 1 ELSE 0 END)");
-                queryBuilder.Append($" + (CASE WHEN MFR LIKE '%{term}%' THEN 1 ELSE 0 END)");
-                queryBuilder.Append($" + (CASE WHEN UPC LIKE '%{term}%' THEN 1 ELSE 0 END)");
-            }
-
-            queryBuilder.Append(") AS RelevanceScore FROM ProductTable WHERE");
-
-            for (int i = 0; i < terms.Length; i++)
-            {
-                string term = terms[i];
-                if (i > 0)
-                {
-                    queryBuilder.Append(" AND");
-                }
-                queryBuilder.Append($" (ProductName LIKE '%{term}%' OR MFR LIKE '%{term}%' OR UPC LIKE '%{term}%')");
-            }
-
-            queryBuilder.Append(" ORDER BY RelevanceScore DESC");
-
-            return queryBuilder.ToString();
-        }
-        private void Product_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (AreAnyTextBoxesFilled())
-            {
-                DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
-                                                      "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.No)
-                {
-                    e.Cancel = true; // Cancel the closing event
-                }
-            }
-        }
-        private bool AreAnyTextBoxesFilled()
-        {
-            foreach (Control control in this.Controls)
-            {
-                if (control is TextBox textBox && !string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    return true; // At least one TextBox is filled
-                }
-            }
-            return false; // No TextBox is filled
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
     }
 }

@@ -117,8 +117,10 @@
             this.Controls.Add(this.basepathlbl);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.Name = "FileManager";
-            this.Text = "FILE MANAGER - FUTURE ART BROADCAST TRADING LLC";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "FILE MANAGER";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FileManager_KeyDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();

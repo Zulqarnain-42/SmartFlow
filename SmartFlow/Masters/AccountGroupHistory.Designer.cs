@@ -41,16 +41,16 @@
             this.aliaslbl = new System.Windows.Forms.Label();
             this.groupnamelbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.closebtn = new System.Windows.Forms.Button();
-            this.rbassets = new System.Windows.Forms.RadioButton();
-            this.rbliabilities = new System.Windows.Forms.RadioButton();
-            this.rbequity = new System.Windows.Forms.RadioButton();
-            this.rbexpense = new System.Windows.Forms.RadioButton();
             this.rbrevenue = new System.Windows.Forms.RadioButton();
+            this.rbexpense = new System.Windows.Forms.RadioButton();
+            this.rbequity = new System.Windows.Forms.RadioButton();
+            this.rbliabilities = new System.Windows.Forms.RadioButton();
+            this.rbassets = new System.Windows.Forms.RadioButton();
+            this.closebtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.accountgroupdatagridview)).BeginInit();
             this.gridViewMenuStrip.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -207,7 +207,7 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.headinglbl);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -215,18 +215,18 @@
             this.panel2.Size = new System.Drawing.Size(1540, 46);
             this.panel2.TabIndex = 16;
             // 
-            // label2
+            // headinglbl
             // 
-            this.label2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(1540, 46);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "ACCOUNT GROUPS";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1540, 46);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "ACCOUNT GROUPS";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // errorProvider
             // 
@@ -265,6 +265,66 @@
             this.panel5.Size = new System.Drawing.Size(1540, 685);
             this.panel5.TabIndex = 18;
             // 
+            // rbrevenue
+            // 
+            this.rbrevenue.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.rbrevenue.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbrevenue.Location = new System.Drawing.Point(1257, 269);
+            this.rbrevenue.Name = "rbrevenue";
+            this.rbrevenue.Size = new System.Drawing.Size(199, 26);
+            this.rbrevenue.TabIndex = 47;
+            this.rbrevenue.TabStop = true;
+            this.rbrevenue.Text = "REVENUE";
+            this.rbrevenue.UseVisualStyleBackColor = true;
+            // 
+            // rbexpense
+            // 
+            this.rbexpense.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.rbexpense.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbexpense.Location = new System.Drawing.Point(1257, 237);
+            this.rbexpense.Name = "rbexpense";
+            this.rbexpense.Size = new System.Drawing.Size(201, 26);
+            this.rbexpense.TabIndex = 46;
+            this.rbexpense.TabStop = true;
+            this.rbexpense.Text = "EXPENSES";
+            this.rbexpense.UseVisualStyleBackColor = true;
+            // 
+            // rbequity
+            // 
+            this.rbequity.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.rbequity.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbequity.Location = new System.Drawing.Point(1257, 205);
+            this.rbequity.Name = "rbequity";
+            this.rbequity.Size = new System.Drawing.Size(184, 26);
+            this.rbequity.TabIndex = 45;
+            this.rbequity.TabStop = true;
+            this.rbequity.Text = "EQUITY";
+            this.rbequity.UseVisualStyleBackColor = true;
+            // 
+            // rbliabilities
+            // 
+            this.rbliabilities.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.rbliabilities.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbliabilities.Location = new System.Drawing.Point(1257, 173);
+            this.rbliabilities.Name = "rbliabilities";
+            this.rbliabilities.Size = new System.Drawing.Size(210, 26);
+            this.rbliabilities.TabIndex = 44;
+            this.rbliabilities.TabStop = true;
+            this.rbliabilities.Text = "LIABILITIES";
+            this.rbliabilities.UseVisualStyleBackColor = true;
+            // 
+            // rbassets
+            // 
+            this.rbassets.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.rbassets.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbassets.Location = new System.Drawing.Point(1257, 141);
+            this.rbassets.Name = "rbassets";
+            this.rbassets.Size = new System.Drawing.Size(180, 26);
+            this.rbassets.TabIndex = 43;
+            this.rbassets.TabStop = true;
+            this.rbassets.Text = "ASSETS";
+            this.rbassets.UseVisualStyleBackColor = true;
+            // 
             // closebtn
             // 
             this.closebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -279,66 +339,6 @@
             this.closebtn.Text = "CLOSE";
             this.closebtn.UseVisualStyleBackColor = false;
             this.closebtn.Click += new System.EventHandler(this.closebtn_Click);
-            // 
-            // rbassets
-            // 
-            this.rbassets.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.rbassets.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbassets.Location = new System.Drawing.Point(1257, 141);
-            this.rbassets.Name = "rbassets";
-            this.rbassets.Size = new System.Drawing.Size(180, 26);
-            this.rbassets.TabIndex = 43;
-            this.rbassets.TabStop = true;
-            this.rbassets.Text = "ASSETS";
-            this.rbassets.UseVisualStyleBackColor = true;
-            // 
-            // rbliabilities
-            // 
-            this.rbliabilities.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.rbliabilities.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbliabilities.Location = new System.Drawing.Point(1257, 173);
-            this.rbliabilities.Name = "rbliabilities";
-            this.rbliabilities.Size = new System.Drawing.Size(210, 26);
-            this.rbliabilities.TabIndex = 44;
-            this.rbliabilities.TabStop = true;
-            this.rbliabilities.Text = "LIABILITIES";
-            this.rbliabilities.UseVisualStyleBackColor = true;
-            // 
-            // rbequity
-            // 
-            this.rbequity.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.rbequity.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbequity.Location = new System.Drawing.Point(1257, 205);
-            this.rbequity.Name = "rbequity";
-            this.rbequity.Size = new System.Drawing.Size(184, 26);
-            this.rbequity.TabIndex = 45;
-            this.rbequity.TabStop = true;
-            this.rbequity.Text = "EQUITY";
-            this.rbequity.UseVisualStyleBackColor = true;
-            // 
-            // rbexpense
-            // 
-            this.rbexpense.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.rbexpense.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbexpense.Location = new System.Drawing.Point(1257, 237);
-            this.rbexpense.Name = "rbexpense";
-            this.rbexpense.Size = new System.Drawing.Size(201, 26);
-            this.rbexpense.TabIndex = 46;
-            this.rbexpense.TabStop = true;
-            this.rbexpense.Text = "EXPENSES";
-            this.rbexpense.UseVisualStyleBackColor = true;
-            // 
-            // rbrevenue
-            // 
-            this.rbrevenue.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.rbrevenue.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbrevenue.Location = new System.Drawing.Point(1257, 269);
-            this.rbrevenue.Name = "rbrevenue";
-            this.rbrevenue.Size = new System.Drawing.Size(199, 26);
-            this.rbrevenue.TabIndex = 47;
-            this.rbrevenue.TabStop = true;
-            this.rbrevenue.Text = "REVENUE";
-            this.rbrevenue.UseVisualStyleBackColor = true;
             // 
             // AccountGroupHistory
             // 
@@ -356,7 +356,7 @@
             this.MinimizeBox = false;
             this.Name = "AccountGroupHistory";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ACCOUNT GROUPS - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "ACCOUNT GROUPS";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.AccountGroupHistory_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AccountGroupHistory_KeyDown);
@@ -385,7 +385,7 @@
         private System.Windows.Forms.Label aliaslbl;
         private System.Windows.Forms.Label groupnamelbl;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;

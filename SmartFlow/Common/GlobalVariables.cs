@@ -1,13 +1,10 @@
-﻿
-
-using DocumentFormat.OpenXml.Bibliography;
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SmartFlow.Common
 {
     public static class GlobalVariables
     {
-
         public static int currencyidglobal = 0;
         public static string currencynameglobal = null;
         public static string currencysymbolglobal = null;
@@ -82,5 +79,34 @@ namespace SmartFlow.Common
         public static string employeeDepartmentGlobal = null;
         public static string employeeContractTypeGlobal = null;
         public static DateTime employeeContractExpiryGlobal = DateTime.Now;
+
+        public static int roleidglobal = 0;
+        public static string rolenameglobal = null;
+
+        public static int currentRowIndex;
+        public static int currentCellIndex;
+    }
+
+    public class InvoiceItem
+    {
+        public decimal unitPrice { get; set; }
+        public int quantity { get; set; }
+        public decimal netAmount { get; set; }
+        public decimal vatAmount { get; set; }
+        public decimal grossAmount { get; set; }
+        public string description { get; set; }
+        public string code { get; set; }
+        public string serialNumber { get; set; }
+        public int vatCode { get; set; }
+    }
+
+    public class Invoice
+    {
+        public string Date { get; set; }
+        public string InvoiceNo { get; set; }
+        public decimal AmountWithoutTax { get; set; }
+        public decimal Tax { get; set; }
+        public decimal AmountWithTax { get; set; }
+        public List<InvoiceItem> items { get; set; }
     }
 }

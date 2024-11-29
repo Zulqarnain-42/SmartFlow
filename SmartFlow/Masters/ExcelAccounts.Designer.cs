@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.headinglbl = new System.Windows.Forms.Label();
             this.selectfilebtn = new System.Windows.Forms.Button();
             this.txtfilename = new System.Windows.Forms.TextBox();
             this.selectAccounttxtbox = new System.Windows.Forms.TextBox();
             this.sheetCombo = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.sheetselectionlbl = new System.Windows.Forms.Label();
+            this.accountgroupselectionlbl = new System.Windows.Forms.Label();
             this.exitbtn = new System.Windows.Forms.Button();
             this.savebtn = new System.Windows.Forms.Button();
             this.dataGridViewExcel = new System.Windows.Forms.DataGridView();
@@ -50,25 +50,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1594, 45);
             this.panel1.TabIndex = 0;
             // 
-            // label1
+            // headinglbl
             // 
-            this.label1.BackColor = System.Drawing.Color.Black;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1594, 45);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "UPLOAD ACCOUNTS USING EXCEL";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(1594, 45);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "UPLOAD ACCOUNTS USING EXCEL";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // selectfilebtn
             // 
@@ -112,25 +112,25 @@
             this.sheetCombo.TabIndex = 62;
             this.sheetCombo.SelectedIndexChanged += new System.EventHandler(this.sheetCombo_SelectedIndexChanged);
             // 
-            // label3
+            // sheetselectionlbl
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(11, 227);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(119, 23);
-            this.label3.TabIndex = 61;
-            this.label3.Text = "Select a Sheet ";
+            this.sheetselectionlbl.AutoSize = true;
+            this.sheetselectionlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sheetselectionlbl.Location = new System.Drawing.Point(11, 227);
+            this.sheetselectionlbl.Name = "sheetselectionlbl";
+            this.sheetselectionlbl.Size = new System.Drawing.Size(119, 23);
+            this.sheetselectionlbl.TabIndex = 61;
+            this.sheetselectionlbl.Text = "Select a Sheet ";
             // 
-            // label2
+            // accountgroupselectionlbl
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(11, 286);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(175, 23);
-            this.label2.TabIndex = 60;
-            this.label2.Text = "Select Account Group";
+            this.accountgroupselectionlbl.AutoSize = true;
+            this.accountgroupselectionlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.accountgroupselectionlbl.Location = new System.Drawing.Point(11, 286);
+            this.accountgroupselectionlbl.Name = "accountgroupselectionlbl";
+            this.accountgroupselectionlbl.Size = new System.Drawing.Size(175, 23);
+            this.accountgroupselectionlbl.TabIndex = 60;
+            this.accountgroupselectionlbl.Text = "Select Account Group";
             // 
             // exitbtn
             // 
@@ -198,6 +198,7 @@
             // 
             // sampleexcelfilebtn
             // 
+            this.sampleexcelfilebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.sampleexcelfilebtn.Location = new System.Drawing.Point(12, 698);
             this.sampleexcelfilebtn.Name = "sampleexcelfilebtn";
             this.sampleexcelfilebtn.Size = new System.Drawing.Size(271, 30);
@@ -218,13 +219,15 @@
             this.Controls.Add(this.savebtn);
             this.Controls.Add(this.selectAccounttxtbox);
             this.Controls.Add(this.sheetCombo);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.sheetselectionlbl);
+            this.Controls.Add(this.accountgroupselectionlbl);
             this.Controls.Add(this.txtfilename);
             this.Controls.Add(this.selectfilebtn);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.Name = "ExcelAccounts";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UPLOAD ACCOUNTS USING EXCEL";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
@@ -238,13 +241,13 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.Button selectfilebtn;
         private System.Windows.Forms.TextBox txtfilename;
         private System.Windows.Forms.TextBox selectAccounttxtbox;
         private System.Windows.Forms.ComboBox sheetCombo;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label sheetselectionlbl;
+        private System.Windows.Forms.Label accountgroupselectionlbl;
         private System.Windows.Forms.Button exitbtn;
         private System.Windows.Forms.Button savebtn;
         private System.Windows.Forms.DataGridView dataGridViewExcel;

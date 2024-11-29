@@ -107,7 +107,8 @@
             this.Controls.Add(this.quotationnolbl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SearchSaleInvoice";
-            this.Text = "Search Sale Invoice";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "SEARCH SALE INVOICE";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchSaleInvoice_KeyDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();

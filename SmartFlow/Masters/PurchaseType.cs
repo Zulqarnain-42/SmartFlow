@@ -1,5 +1,4 @@
-﻿using SmartFlow.Common;
-using System;
+﻿using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -10,6 +9,11 @@ namespace SmartFlow.Masters
         public PurchaseType()
         {
             InitializeComponent();
+        }
+        public PurchaseType(int purchaseid)
+        {
+            InitializeComponent();
+            this.purchasetypeidlbl.Text = purchaseid.ToString();
         }
         private void savebtn_Click(object sender, EventArgs e)
         {
@@ -22,53 +26,70 @@ namespace SmartFlow.Masters
                     purchasetypetxtbox.Focus();
                     return;
                 }
-
-                string purchasetype = CommonFunction.CleanText(purchasetypetxtbox.Text);
-
-                string query = string.Format("SELECT PurchaseTpeID,Name,Code,CreatedAt,CreatedDay,UpdatedAt,UpdatedDay,UserId,CompanyId,AddedBy,IsActive " +
-                    "FROM PurchaseTypeTable WHERE Name LIKE '" + purchasetype + "'");
-                DataTable datasaleType = DatabaseAccess.Retrive(query);
-
-                if (datasaleType.Rows.Count == 0)
+                
+                if(savebtn.Text == "UPDATE")
                 {
-                    string query2 = string.Empty;
-
+                    string updatepurchasetype = string.Empty;
+                    
                     if (checkBoxactive.Checked && checkBoxTax.Checked)
                     {
-                        query2 = "INSERT INTO PurchaseTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + purchasetype + "','" + Guid.NewGuid() + "'," +
-                        "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + true + "','" + true + "')";
+                        updatepurchasetype = string.Format("UPDATE PurchaseTypeTable SET Name = '" + purchasetypetxtbox.Text + "'," +
+                            "UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
+                            "UpdatedDay = '" + DateTime.Now.DayOfWeek + "',IsActive = '" + true + "'," +
+                            "IsTaxable = '" + true + "' WHERE PurchaseTpeID = '" + purchasetypeidlbl.Text + "'");
                     }
-                    else if (checkBoxactive.Checked && !checkBoxTax.Checked)
+                    else if(checkBoxactive.Checked && !checkBoxTax.Checked)
                     {
-                        query2 = "INSERT INTO PurchaseTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + purchasetype + "','" + Guid.NewGuid() + "'," +
-                        "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + true + "','" + false + "')";
+                        updatepurchasetype = string.Format("UPDATE PurchaseTypeTable SET Name = '" + purchasetypetxtbox.Text + "'," +
+                            "UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
+                            "UpdatedDay = '" + DateTime.Now.DayOfWeek + "',IsActive = '" + true + "'," +
+                            "IsTaxable = '" + false + "' WHERE PurchaseTpeID = '" + purchasetypeidlbl.Text + "'");
                     }
-                    else if (!checkBoxactive.Checked && checkBoxTax.Checked)
+                    else if(!checkBoxactive.Checked && checkBoxTax.Checked)
                     {
-                        query2 = "INSERT INTO PurchaseTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + purchasetype + "','" + Guid.NewGuid() + "'," +
-                        "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + false + "','" + true + "')";
+                        updatepurchasetype = string.Format("UPDATE PurchaseTypeTable SET Name = '" + purchasetypetxtbox.Text + "'," +
+                            "UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
+                            "UpdatedDay = '" + DateTime.Now.DayOfWeek + "',IsActive = '" + false + "'," +
+                            "IsTaxable = '" + true + "' WHERE PurchaseTpeID = '" + purchasetypeidlbl.Text + "'");
                     }
                     else
                     {
-                        query2 = "INSERT INTO PurchaseTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + purchasetype + "','" + Guid.NewGuid() + "'," +
-                        "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + false + "','" + false + "')";
+                        updatepurchasetype = string.Format("UPDATE PurchaseTypeTable SET Name = '" + purchasetypetxtbox.Text + "'," +
+                            "UpdatedAt = '" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
+                            "UpdatedDay = '" + DateTime.Now.DayOfWeek + "',IsActive = '" + false + "'," +
+                            "IsTaxable = '" + false + "' WHERE PurchaseTpeID = '" + purchasetypeidlbl.Text + "'");
                     }
-                    bool result = DatabaseAccess.Insert(query2);
-                    if (result)
-                    {
-                        MessageBox.Show("Inserted Successfully!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Something is wrong.");
-                    }
+                    
+                    
                 }
                 else
                 {
-                    MessageBox.Show("Sale Type Already Exist.");
+                    string query2 = string.Empty;
+                    
+                    if (checkBoxactive.Checked && checkBoxTax.Checked)
+                    {
+                        query2 = "INSERT INTO PurchaseTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + purchasetypetxtbox.Text + "','" + Guid.NewGuid() + "'," +
+                            "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + true + "','" + true + "')";
+                    }
+                    else if (checkBoxactive.Checked && !checkBoxTax.Checked)
+                    {
+                        query2 = "INSERT INTO PurchaseTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + purchasetypetxtbox.Text + "','" + Guid.NewGuid() + "'," +
+                            "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + true + "','" + false + "')";
+                    }
+                    else if (!checkBoxactive.Checked && checkBoxTax.Checked)
+                    {
+                        query2 = "INSERT INTO PurchaseTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + purchasetypetxtbox.Text + "','" + Guid.NewGuid() + "'," +
+                            "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + false + "','" + true + "')";
+                    }
+                    else
+                    {
+                        query2 = "INSERT INTO PurchaseTypeTable (Name,Code,CreatedAt,CreatedDay,IsActive,IsTaxable) VALUES ('" + purchasetypetxtbox.Text + "','" + Guid.NewGuid() + "'," +
+                            "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + false + "','" + false + "')";
+                    }
+                    
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void exitbtn_Click(object sender, EventArgs e)
         {
@@ -99,6 +120,36 @@ namespace SmartFlow.Masters
                     e.Handled = true;
                 }
             }
+        }
+
+        private void PurchaseType_Load(object sender, EventArgs e)
+        {
+            string labeldata = purchasetypeidlbl.Text;
+            bool isInteger = int.TryParse(labeldata, out int result);
+            if (isInteger)
+            {
+                FindRecord(result);
+            }
+        }
+
+        private void FindRecord(int purchasetypeid)
+        {
+            try
+            {
+                string query = string.Format("SELECT PurchaseTpeID,Name,Code,IsActive,IsTaxable FROM PurchaseTypeTable WHERE PurchaseTpeID = '" + purchasetypeid + "'");
+                DataTable dtpurchasetype = DatabaseAccess.Retrive(query);
+
+                if (dtpurchasetype != null && dtpurchasetype.Rows.Count > 0)
+                {
+                    purchasetypeidlbl.Text = dtpurchasetype.Rows[0]["PurchaseTpeID"].ToString();
+                    purchasetypetxtbox.Text = dtpurchasetype.Rows[0]["Name"].ToString();
+                    purchasetypecodelbl.Text = dtpurchasetype.Rows[0]["Code"].ToString();
+                    checkBoxactive.Checked = Convert.ToBoolean(dtpurchasetype.Rows[0]["IsActive"].ToString());
+                    checkBoxTax.Checked = Convert.ToBoolean(dtpurchasetype.Rows[0]["IsTaxable"].ToString());
+                }
+
+                savebtn.Text = "UPDATE";
+            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
     }
 }

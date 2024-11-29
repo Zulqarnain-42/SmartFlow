@@ -129,7 +129,7 @@
             this.KeyPreview = true;
             this.Name = "CurrencySelection";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Currency Selection";
+            this.Text = "CURRENCY SELECTION";
             this.Load += new System.EventHandler(this.CurrencySelection_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

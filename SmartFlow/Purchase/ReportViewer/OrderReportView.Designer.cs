@@ -53,7 +53,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "OrderReportView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "PURCHASE ORDER REPORT VIEWER - FUTURE ART BROADCAST TRADING LLC";
+            this.Text = "PURCHASE ORDER REPORT VIEWER";
             this.Load += new System.EventHandler(this.OrderReportView_Load);
             this.ResumeLayout(false);
 

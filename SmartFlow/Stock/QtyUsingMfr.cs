@@ -1,8 +1,8 @@
 ﻿using SmartFlow.Common;
 using SmartFlow.Purchase;
 using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SmartFlow.Stock
@@ -13,6 +13,7 @@ namespace SmartFlow.Stock
         public QtyUsingMfr()
         {
             InitializeComponent();
+            dgvinventory.CellDoubleClick += dgvinventory_CellDoubleClick;
         }
         private void searchbtn_Click(object sender, EventArgs e)
         {
@@ -21,6 +22,16 @@ namespace SmartFlow.Stock
             string getproductdata = string.Format("SELECT ProductID,ProductName,StandardPrice,MFR,Barcode,UPC FROM ProductTable WHERE MFR = '" + searchvalue + "'");
             DataTable datatableproduct = DatabaseAccess.Retrive(getproductdata);
             string productid = null, productname = null, standardprice = null, mfr = null, barcode = null, upc = null;
+            string radiostatus = null;
+            if (useditemradio.Checked)
+            {
+                radiostatus = "USED";
+            }
+            else
+            {
+                radiostatus = "NEW";
+            }
+
             int quantity = 0;
             if (datatableproduct.Rows.Count > 0)
             {
@@ -30,11 +41,15 @@ namespace SmartFlow.Stock
                     if (!row.IsNewRow)
                     {
                         // Assuming the ProductID column index is 0 and Quantity column index is 2
-                        if (row.Cells["ProductID"].Value != null && row.Cells["ProductID"].Value.ToString() == datatableproduct.Rows[0]["ProductID"].ToString())
+                        if (row.Cells["ProductID"].Value != null && row.Cells["ProductID"].Value.ToString() == datatableproduct.Rows[0]["ProductID"].ToString() &&
+                            row.Cells["productstatus"].Value.ToString() == radiostatus)
                         {
                             // Increment the quantity
                             int currentQuantity = Convert.ToInt32(row.Cells["productquantity"].Value);
                             row.Cells["productquantity"].Value = currentQuantity + 1;
+                            dgvinventory.ClearSelection();
+                            row.Selected = true;
+                            dgvinventory.FirstDisplayedScrollingRowIndex = row.Index;
                             productExists = true;
                             break;
                         }
@@ -51,7 +66,15 @@ namespace SmartFlow.Stock
                     upc = datatableproduct.Rows[0]["UPC"].ToString();
                     quantity = 1;
 
-                    dgvinventory.Rows.Add(productid, productname, upc, standardprice, mfr, barcode, quantity);
+                    int newRowIndex = dgvinventory.Rows.Add(productid, productname, upc, standardprice, mfr, barcode, quantity);
+                    dgvinventory.ClearSelection();
+                    // Highlight and scroll to the new row
+                    DataGridViewRow newRow = dgvinventory.Rows[newRowIndex];
+                    newRow.Selected = true;
+
+                    // Scroll to the new row to make sure it's visible
+                    dgvinventory.FirstDisplayedScrollingRowIndex = newRowIndex;
+                    searchtextbox.Clear();
                 }
             }
             else
@@ -85,13 +108,19 @@ namespace SmartFlow.Stock
                 string query = string.Empty;
                 bool result = false;
                 string invoiceno = qtyusingmfridlbl.Text;
-                string importantNotes = CommonFunction.CleanText(importantnotestxtbox.Text);
+                string importantNotes = importantnotestxtbox.Text;
+                string tableName = "StockCustomizedTable";
 
-                query = string.Format("INSERT INTO StockCustomizedTable (Code,CreatedAt,CreatedDay,InvoiceNo,Description) VALUES ('" + Guid.NewGuid() + "'," +
-                        "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + invoiceno + "','" + importantNotes + "'); " +
-                        "SELECT SCOPE_IDENTITY();");
+                var columnData = new Dictionary<string, object>
+                {
+                    { "Code", Guid.NewGuid().ToString() },
+                    { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                    { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                    { "InvoiceNo", invoiceno },
+                    { "Description", importantNotes }
+                };
 
-                int stockcustomid = DatabaseAccess.InsertId(query);
+                int stockcustomid = DatabaseAccess.InsertDataId(tableName, columnData);
                 int warehouseid = Convert.ToInt32(warehouseidlbl.Text);
 
                 foreach (DataGridViewRow row in dgvinventory.Rows)
@@ -108,10 +137,20 @@ namespace SmartFlow.Stock
 
                         if (quantity > 0 && stockcustomid > 0)
                         {
-                            query = string.Format("INSERT INTO StockTable (Product_ID,Quantity,CreatedAt,CreatedDay,WarehouseId,StockCustom_ID) VALUES " +
-                               "('" + productid + "','" + quantity + "','" + System.DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + System.DateTime.Now.DayOfWeek + "'," +
-                               "'" + warehouseid + "','" + stockcustomid + "')");
-                            result = DatabaseAccess.Insert(query);
+                            tableName = "StockTable";
+
+                            var stockColumnData = new Dictionary<string, object>
+                            {
+                                { "ProductID", productid },
+                                { "ProductMfr", mfr },
+                                { "Quantity", quantity },
+                                { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                                { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                                { "WarehouseId", warehouseid },
+                                { "StockCustom_ID", stockcustomid }
+                            };
+
+                            result = DatabaseAccess.ExecuteQuery(tableName, "INSERT", stockColumnData);
                             if (result)
                             {
                                 int count = 0;
@@ -123,10 +162,16 @@ namespace SmartFlow.Stock
                                     while (start < diff)
                                     {
                                         string serialnumber = GenerateRandomSerialNumber();
-                                        string query1 = string.Format("INSERT INTO SerialNoTable (ProductId,SerialNo,CreatedAt,CreatedDay) " +
-                                    "VALUES ('" + productid + "','" + serialnumber + "','" + System.DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                                    "'" + System.DateTime.Now.DayOfWeek + "')");
-                                        DatabaseAccess.Insert(query1);
+                                        tableName = "SerialNoTable";
+
+                                        var serialData = new Dictionary<string, object>
+                                        {
+                                            { "ProductId", productid },
+                                            { "SerialNo", serialnumber },
+                                            { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                                            { "CreatedDay", DateTime.Now.DayOfWeek.ToString() }
+                                        };
+                                        DatabaseAccess.ExecuteQuery(tableName, "INSERT", serialData);
                                         start++;
                                     }
                                 }
@@ -136,8 +181,11 @@ namespace SmartFlow.Stock
                 }
 
                 MessageBox.Show("Inventory Updated");
+                dgvinventory.Rows.Clear();
+                importantnotestxtbox.Clear();
+                selectwarehousetxtbox.Clear();
             }
-            catch(Exception ex) { throw ex; }
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             
         }
         private void QtyUsingMfr_KeyDown(object sender, KeyEventArgs e)
@@ -249,7 +297,11 @@ namespace SmartFlow.Stock
 
                 return newInvoiceNumber;
             }
-            catch(Exception ex) { throw ex; }
+            catch(Exception ex) 
+            { 
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
         private string GetLastInvoiceNumber()
         {
@@ -289,9 +341,17 @@ namespace SmartFlow.Stock
                 {
                     if (warehousedata.Rows.Count > 0)
                     {
-                        WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
-                        warehouseSelection.ShowDialog();
-                        UpdateWarehouseTxtBox();
+                        WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata)
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        }; 
+                        warehouseSelection.FormClosed += delegate
+                        {
+                            UpdateWarehouseTxtBox();
+                        };
+                        CommonFunction.DisposeOnClose(warehouseSelection);
+                        warehouseSelection.Show();
                     }
                 }
             }
@@ -304,6 +364,43 @@ namespace SmartFlow.Stock
         {
             selectwarehousetxtbox.Text = GlobalVariables.warehousenameglobal;
             warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
+        }
+
+        private void dgvinventory_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if the click was in the "Quantity" column
+            if (dgvinventory.Columns[e.ColumnIndex].Name == "productquantity" && e.RowIndex >= 0)
+            {
+                // Put the cell in edit mode
+                dgvinventory.BeginEdit(true);
+            }
+        }
+
+        private void dgvinventory_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvinventory.Columns[e.ColumnIndex].Name == "productquantity" && e.RowIndex >= 0)
+            {
+                // Validate the input (ensure it's an integer, etc.)
+                if (!int.TryParse(dgvinventory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString(), out int quantity))
+                {
+                    MessageBox.Show("Please enter a valid quantity.");
+                    dgvinventory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 1; // Reset to default
+                }
+            }
+        }
+
+        private void useditemradio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (useditemradio.Checked == true)
+            {
+                refrencetxtbox.Visible = true;
+                usedproductrefrencelbl.Visible = true;
+            }
+            else
+            {
+                refrencetxtbox.Visible = false;
+                usedproductrefrencelbl.Visible = false;
+            }
         }
     }
 }
