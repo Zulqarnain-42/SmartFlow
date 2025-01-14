@@ -106,7 +106,6 @@
             // searchtxtbox
             // 
             this.searchtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchtxtbox.Enabled = false;
             this.searchtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchtxtbox.Location = new System.Drawing.Point(109, 14);
             this.searchtxtbox.Name = "searchtxtbox";
@@ -119,7 +118,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1232, 653);
             this.Controls.Add(this.dgvaccountgroupselection);
             this.Controls.Add(this.panel2);

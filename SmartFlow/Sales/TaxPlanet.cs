@@ -1,14 +1,21 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using SmartFlow.Common;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Data.OleDb;
+using System.Net.Http;
+using System.Text;
 using System.Windows.Forms;
 
 namespace SmartFlow.Sales
 {
     public partial class TaxPlanet : Form
     {
-/*        string client_id = ConfigurationManager.AppSettings["client_id"];
-        string client_secret = ConfigurationManager.AppSettings["client_secret"];*/
+        string searchKeyword = string.Empty;
+        string client_id = ConfigurationManager.AppSettings["client_id"];
+        string client_secret = ConfigurationManager.AppSettings["client_secret"];
         public TaxPlanet()
         {
             InitializeComponent();
@@ -17,7 +24,7 @@ namespace SmartFlow.Sales
         private void searchbtn_Click(object sender, EventArgs e)
         {
             // Get the search keyword from the TextBox
-            string searchKeyword = searchtxtbox.Text.Trim();
+            searchKeyword = searchtxtbox.Text.Trim();
             if (string.IsNullOrEmpty(searchKeyword))
             {
                 MessageBox.Show("Invoice No is empty.");
@@ -31,35 +38,18 @@ namespace SmartFlow.Sales
         private void SearchData(string keyword)
         {
             // SQL query with a parameterized WHERE clause
-            string query = "SELECT Date,VchCode,VchNo,VchAmtBaseCur,VchSalePurcAmt,MasterCode1 FROM Tran1 WHERE VchNo LIKE @Keyword";
+            string query = "SELECT Invoiceid,InvoiceNo,invoicedate,ClientID,CreatedAt,CreatedDay,UpdatedAt,UpdatedDay,AddedBy,Companyid,Userid,InvoiceCode,NetTotal,ClientName," +
+                "TotalVat,TotalDiscount,FreightShippingCharges,InvoiceRefrence,IsPlanetInvoice,Currencyid,CurrencyName,ConversionRate,QuotationValidUntill,SalePerson," +
+                "ShipmentReceiveingPerson FROM InvoiceTable WHERE InvoiceNo LIKE '"+keyword+"'";
 
             try
             {
-                /*// Open the connection
-                connection.Open();
-                // Create a command object with a parameter
-                using (OleDbCommand command = new OleDbCommand(query, connection))
-                {
-                    // Add a parameter to the command
-                    command.Parameters.AddWithValue("@Keyword", "%" + keyword + "%");
-
-                    // Create a data adapter and fill the DataTable
-                    dataAdapter = new OleDbDataAdapter(command);
-                    dataTable.Clear(); // Clear existing data
-                    dataAdapter.Fill(dataTable);
-                }*/
+                DataTable dtinvoiceData = DatabaseAccess.Retrive(query);
+                dgvTaxPlanet.DataSource = dtinvoiceData;
             }
             catch (OleDbException ex)
             {
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Close the connection
-               /* if (connection.State == System.Data.ConnectionState.Open)
-                {
-                    connection.Close();
-                }*/
             }
         }
 
@@ -70,12 +60,13 @@ namespace SmartFlow.Sales
             {
                 // Get the data of the selected row
                 DataGridViewRow selectedRow = dgvTaxPlanet.Rows[e.RowIndex];
-                string VchCode = Convert.ToString(selectedRow.Cells["VchCode"].Value);
-                DateTime date = Convert.ToDateTime(selectedRow.Cells["Date"].Value);
-                string VchNo = Convert.ToString(selectedRow.Cells["VchNo"].Value);
-                string mastercode = Convert.ToString(selectedRow.Cells["MasterCode1"].Value);
-                double AmtWithVat = Convert.ToDouble(selectedRow.Cells["VchAmtBaseCur"].Value);
-                double AmtSalePurc = Convert.ToDouble(selectedRow.Cells["VchSalePurcAmt"].Value);
+                string VchCode = Convert.ToString(selectedRow.Cells["Invoiceid"].Value);
+                DateTime date = Convert.ToDateTime(selectedRow.Cells["invoicedate"].Value);
+                string VchNo = Convert.ToString(selectedRow.Cells["InvoiceNo"].Value);
+                string mastercode = Convert.ToString(selectedRow.Cells["InvoiceCode"].Value);
+                double AmtWithVat = Convert.ToDouble(selectedRow.Cells["NetTotal"].Value);
+                double AmtSalePurc = Convert.ToDouble(selectedRow.Cells["NetTotal"].Value) - Convert.ToDouble(selectedRow.Cells["TotalVat"].Value);
+
                 if (AmtWithVat != AmtSalePurc)
                 {
                     LoadDataToArray(VchCode);
@@ -88,74 +79,21 @@ namespace SmartFlow.Sales
         }
         private void LoadDataToArray(string VchCode)
         {
-            List<Dictionary<string, object>> dataList = new List<Dictionary<string, object>>();
-            // SQL query
-            string query = "SELECT Tran1.VchNo AS InvoiceNo," +
-                "Tran1.VchAmtBaseCur AS AmountWithTax," +
-                "Tran1.VchSalePurcAmt AS AmountWithoutTax," +
-                "Tran1.Date,VchVATSum.TaxAmt AS Tax," +
-                "Tran2.D1 AS quantity," +
-                "Tran2.D2 AS unitPrice," +
-                "Tran2.MasterCode1," +
-                "Tran2.D5 As grossAmount," +
-                "Tran2.D11 As vatAmount," +
-                "Tran2.D12 As vatCode " +
-                "FROM ((Tran1 " +
-                "INNER JOIN VchVATSum ON VchVATSum.VchCode=Tran1.VchCode) " +
-                "INNER JOIN Tran2 ON Tran2.VchCode = Tran1.VchCode)" +
-                "WHERE Tran1.VchCode like @Keyword " +
-                "GROUP BY Tran1.VchNo,Tran1.VchAmtBaseCur,Tran1.VchSalePurcAmt,Tran1.Date,VchVATSum.TaxAmt," +
-                "Tran2.MasterCode1,Tran2.D1,Tran2.D2,Tran2.D5,Tran2.D11,Tran2.D12";
-
             try
             {
-                /*// Open the connection
-
-                connection.Open();
-
-                // Create a command object
-                using (OleDbCommand command = new OleDbCommand(query, connection))
-                {
-                    // Add a parameter to the command
-                    command.Parameters.AddWithValue("@Keyword", "" + VchCode + "");
-
-                    using (OleDbDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Dictionary<string, object> rowData = new Dictionary<string, object>();
-                            // Populate the dictionary with data from the reader
-                            for (int i = 0; i < reader.FieldCount; i++)
-                            {
-                                rowData.Add(reader.GetName(i), reader[i]);
-                            }
-                            // Add the dictionary to the list
-                            dataList.Add(rowData);
-                        }
-                        getMasterData(dataList);
-                    }
-                }*/
+                string jsonString = DatabaseAccess.GetInvoiceJson(searchKeyword);
+                planetTokenAsync(jsonString);
             }
-            catch (OleDbException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            finally
-            {
-               /* // Close the connection
-                if (connection.State == System.Data.ConnectionState.Open)
-                {
-                    connection.Close();
-                }*/
-            }
-
         }
         private async void planetTokenAsync(string data)
         {
             try
             {
-               /* string apitokenhUrl = "https://auth.tax.planetpayment.ae/auth/realms/planet/protocol/openid-connect/token";
+                string apitokenhUrl = "https://auth.tax.planetpayment.ae/auth/realms/planet/protocol/openid-connect/token";
 
                 var formData = new Dictionary<string, string>
                 {
@@ -183,12 +121,54 @@ namespace SmartFlow.Sales
                     {
                         MessageBox.Show($"Error: {response.StatusCode} - {response.ReasonPhrase}", "API Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                }*/
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private async void planetnewtransaction(string data, AccessTokenResponse tokenResponse)
+        {
+            try
+            {
+                string apitransactionUrl = "https://frontoffice.tax.planetpayment.ae/services/transactions/api/v2/custom-mapping/new-transaction";
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                using (HttpClient client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + tokenResponse.access_token);
+                    HttpResponseMessage response = await client.PostAsync(apitransactionUrl, content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+                        TransactionApiResponseModel apiResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<TransactionApiResponseModel>(result);
+                        string redirectUrl = apiResponse.url;
+                        System.Diagnostics.Process.Start(redirectUrl);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public class TransactionApiResponseModel
+        {
+            public string url { get; set; }
+            public string transactionCode { get; set; }
+            public string transactionId { get; set; }
+            public string receiptNumber { get; set; }
+        }
+
+        public class AccessTokenResponse
+        {
+            public string access_token { get; set; }
+            // Add other properties as needed
         }
 
         private void findtransactionbtn_Click(object sender, EventArgs e)

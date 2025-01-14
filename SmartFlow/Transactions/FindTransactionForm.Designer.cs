@@ -80,6 +80,7 @@
             // creditradiobtn
             // 
             this.creditradiobtn.AutoSize = true;
+            this.creditradiobtn.Enabled = false;
             this.creditradiobtn.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.creditradiobtn.Location = new System.Drawing.Point(80, 134);
             this.creditradiobtn.Name = "creditradiobtn";
@@ -104,6 +105,7 @@
             // debitradiobtn
             // 
             this.debitradiobtn.AutoSize = true;
+            this.debitradiobtn.Enabled = false;
             this.debitradiobtn.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.debitradiobtn.Location = new System.Drawing.Point(264, 134);
             this.debitradiobtn.Name = "debitradiobtn";
@@ -116,6 +118,7 @@
             // journalradiobtn
             // 
             this.journalradiobtn.AutoSize = true;
+            this.journalradiobtn.Enabled = false;
             this.journalradiobtn.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.journalradiobtn.Location = new System.Drawing.Point(465, 90);
             this.journalradiobtn.Name = "journalradiobtn";
@@ -146,6 +149,7 @@
             this.searchbtn.TabIndex = 120;
             this.searchbtn.Text = "SEARCH";
             this.searchbtn.UseVisualStyleBackColor = true;
+            this.searchbtn.Click += new System.EventHandler(this.searchbtn_Click);
             // 
             // datelbl
             // 
@@ -180,7 +184,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(655, 364);
             this.Controls.Add(this.invoicedatetxtbox);
             this.Controls.Add(this.searchbtn);

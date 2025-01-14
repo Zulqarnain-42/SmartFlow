@@ -54,6 +54,7 @@
             this.Name = "InvoiceReportView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PURCHASE INVOICE REPORT VIEWER";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.InvoiceReportView_Load);
             this.ResumeLayout(false);
 

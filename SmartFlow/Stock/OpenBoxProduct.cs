@@ -65,7 +65,8 @@ namespace SmartFlow.Stock
             string lastInvoiceNumber = null;
             try
             {
-                string query = "SELECT TOP 1 InvoiceNo FROM StockCustomizedTable WHERE InvoiceNo LIKE 'OBP-%' ORDER BY InvoiceNo DESC";
+                string datePart = DateTime.Today.ToString("yyMMdd");
+                string query = $"SELECT TOP 1 InvoiceNo FROM StockCustomizedTable WHERE InvoiceNo LIKE 'OBP-{datePart}-%' ORDER BY InvoiceNo DESC";
                 DataTable invoiceData = DatabaseAccess.Retrive(query);
                 if (invoiceData.Rows.Count > 0)
                 {
@@ -287,32 +288,36 @@ namespace SmartFlow.Stock
         }
         private void selectwarehousefromtxtbox_MouseClick(object sender, MouseEventArgs e)
         {
-            Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
-            if (openForm == null) 
+            if (string.IsNullOrEmpty(selectwarehousefromtxtbox.Text))
             {
-                string getwarehousedata = "SELECT WarehouseID,Name,Address,City,Code FROM WarehouseTable";
-                DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
-
-                if (warehousedata != null)
+                Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
+                if (openForm == null)
                 {
-                    if (warehousedata.Rows.Count > 0)
+                    string getwarehousedata = "SELECT WarehouseID,Name,Address,City,Code FROM WarehouseTable";
+                    DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
+
+                    if (warehousedata != null)
                     {
-                        WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
-                        warehouseSelection.MdiParent = this.MdiParent;
-                        
-                        warehouseSelection.FormClosed += delegate
+                        if (warehousedata.Rows.Count > 0)
                         {
-                            UpdateWarehouseTextBox();
-                        };
-                        CommonFunction.DisposeOnClose(warehouseSelection);
-                        warehouseSelection.Show();
+                            WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
+                            warehouseSelection.MdiParent = this.MdiParent;
+
+                            warehouseSelection.FormClosed += delegate
+                            {
+                                UpdateWarehouseTextBox();
+                            };
+                            CommonFunction.DisposeOnClose(warehouseSelection);
+                            warehouseSelection.Show();
+                        }
                     }
                 }
+                else
+                {
+                    openForm.BringToFront();
+                }
             }
-            else
-            {
-                openForm.BringToFront();
-            }
+            
         }
         private void UpdateWarehouseTextBox()
         {
@@ -321,25 +326,28 @@ namespace SmartFlow.Stock
         }
         private void openboxproducttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
-            Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
-            if (openForm == null) 
+            if (string.IsNullOrEmpty(openboxproducttxtbox.Text))
             {
-                ProductSelectionForm productSelectionForm = new ProductSelectionForm
+                Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+                if (openForm == null)
                 {
-                    WindowState = FormWindowState.Normal,
-                    StartPosition = FormStartPosition.CenterScreen,
-                };
-                
-                productSelectionForm.FormClosed += delegate
+                    ProductSelectionForm productSelectionForm = new ProductSelectionForm
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterScreen,
+                    };
+
+                    productSelectionForm.FormClosed += delegate
+                    {
+                        UpdateProductTextBox();
+                    };
+                    CommonFunction.DisposeOnClose(productSelectionForm);
+                    productSelectionForm.ShowDialog();
+                }
+                else
                 {
-                    UpdateProductTextBox();
-                };
-                CommonFunction.DisposeOnClose(productSelectionForm);
-                productSelectionForm.ShowDialog();
-            }
-            else
-            {
-                openForm.BringToFront();
+                    openForm.BringToFront();
+                }
             }
         }
         private void UpdateProductTextBox()
@@ -353,27 +361,31 @@ namespace SmartFlow.Stock
         }
         private void remainingproductmfrtxtbox_MouseClick(object sender, MouseEventArgs e)
         {
-            Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
-            if (openForm == null)
+            if (string.IsNullOrEmpty(remainingboxproductlbl.Text))
             {
-                ProductSelectionForm productSelectionForm = new ProductSelectionForm
+                Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+                if (openForm == null)
                 {
-                    WindowState = FormWindowState.Normal,
-                    StartPosition = FormStartPosition.CenterScreen,
-                };
+                    ProductSelectionForm productSelectionForm = new ProductSelectionForm
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterScreen,
+                    };
 
-                productSelectionForm.FormClosed += delegate
+                    productSelectionForm.FormClosed += delegate
+                    {
+                        UpdateOpenBoxProductTextBox();
+                    };
+
+                    CommonFunction.DisposeOnClose(productSelectionForm);
+                    productSelectionForm.ShowDialog();
+                }
+                else
                 {
-                    UpdateOpenBoxProductTextBox();
-                };
-
-                CommonFunction.DisposeOnClose(productSelectionForm);
-                productSelectionForm.ShowDialog();
+                    openForm.BringToFront();
+                }
             }
-            else
-            {
-                openForm.BringToFront();
-            }
+            
         }
         private void UpdateOpenBoxProductTextBox()
         {

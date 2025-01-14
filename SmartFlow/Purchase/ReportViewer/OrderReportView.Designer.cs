@@ -54,6 +54,7 @@
             this.Name = "OrderReportView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PURCHASE ORDER REPORT VIEWER";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.OrderReportView_Load);
             this.ResumeLayout(false);
 

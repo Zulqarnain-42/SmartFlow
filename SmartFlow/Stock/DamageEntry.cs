@@ -50,45 +50,6 @@ namespace SmartFlow.Stock
                 {
                     MessageBox.Show("Saved Successfully!");
                 }
-
-                /*string query = string.Empty;
-                string invoiceno = damageidlbl.Text;
-                string description = descriptiontxtbox.Text;
-
-                query = string.Format("INSERT INTO StockCustomizedTable (Code,CreatedAt,CreatedDay,InvoiceNo,Description) VALUES ('" + Guid.NewGuid() + "'," +
-                        "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + invoiceno + "','" + description + "');" +
-                        " SELECT SCOPE_IDENTITY();");
-
-                int stockcustomid = 1;
-                int warehouseid = Convert.ToInt32(warehouseidlbl.Text);
-
-                foreach (DataGridViewRow row in dgvproducts.Rows)
-                {
-                    if (!row.IsNewRow)
-                    {
-                        string productid = Convert.ToString(row.Cells[0].Value);
-                        string productmfr = Convert.ToString(row.Cells[1].Value);
-                        string productname = Convert.ToString(row.Cells[2].Value);
-                        string upc = Convert.ToString(row.Cells[3].Value);
-                        string price = Convert.ToString(row.Cells[4].Value);
-                        string barcode = Convert.ToString(row.Cells[5].Value);
-                        
-                        int quantity = Convert.ToInt32(row.Cells[6].Value);
-                        int negativeQuantity = -Math.Abs(quantity);
-
-                        if (stockcustomid > 0)
-                        {
-                            string insertstock = string.Format("INSERT INTO StockTable (ProductID,CreatedAt,CreatedDay,WarehouseId,DamageQty," +
-                                "StockCustom_ID,Quantity,ProductMfr) VALUES ('" + productid + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                                "'" + DateTime.Now.DayOfWeek + "','" + warehouseid + "','" + negativeQuantity + "','" + stockcustomid + "'," +
-                                "'" + negativeQuantity + "','" + productmfr + "')");
-
-                            bool result = false;
-                        }
-                    }
-                }
-                MessageBox.Show("Saved Successfully!");
-                savebtn.Enabled = false;*/
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -117,6 +78,7 @@ namespace SmartFlow.Stock
         {
             try
             {
+                
                 errorProvider.Clear();
                 if (productmfrtxtbox.Text.Trim().Length == 0)
                 {
@@ -148,7 +110,7 @@ namespace SmartFlow.Stock
 
                 if (!productExists)
                 {
-                    dgvproducts.Rows.Add(productidlbl.Text,productmfrtxtbox.Text, productnamelbl.Text, upclbl.Text, productpricelbl.Text, 
+                    dgvproducts.Rows.Add(productidlbl.Text,productmfrtxtbox.Text, productnamelbl.Text, upclbl.Text, 
                         barcodelbl.Text, qtytxtbox.Text);
                 }
                 
@@ -157,6 +119,29 @@ namespace SmartFlow.Stock
                 productmfrtxtbox.Focus();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private string CheckInvoiceBeforeInsert()
+        {
+            try
+            {
+                string lastInvoiceNumber = GetLastInvoiceNumber();
+                string newInvoiceNumber = damageidlbl.Text;
+
+                if (String.Compare(newInvoiceNumber, lastInvoiceNumber) <= 0)
+                {
+                    return GenerateNextInvoiceNumber();
+                }
+                else
+                {
+                    return damageidlbl.Text;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
         private string GenerateNextInvoiceNumber()
         {
@@ -209,7 +194,8 @@ namespace SmartFlow.Stock
             string lastInvoiceNumber = null;
             try
             {
-                string query = "SELECT TOP 1 InvoiceNo FROM StockCustomizedTable WHERE InvoiceNo LIKE 'DE-%' ORDER BY InvoiceNo DESC";
+                string datePart = DateTime.Today.ToString("yyMMdd");
+                string query = $"SELECT TOP 1 InvoiceNo FROM StockCustomizedTable WHERE InvoiceNo LIKE 'DE-{datePart}-%' ORDER BY InvoiceNo DESC";
                 DataTable invoiceData = DatabaseAccess.Retrive(query);
                 if (invoiceData.Rows.Count > 0)
                 {
@@ -250,52 +236,64 @@ namespace SmartFlow.Stock
         }
         private void selectwarehousefromtxtbox_MouseClick(object sender, MouseEventArgs e)
         {
-            Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
-            if(openForm == null)
+            if (string.IsNullOrEmpty(selectwarehousefromtxtbox.Text))
             {
-                string getwarehousedata = "SELECT WarehouseID,Name,Address,City,Code FROM WarehouseTable";
-                DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
-
-                if (warehousedata != null)
+                Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
+                if (openForm == null)
                 {
-                    if (warehousedata.Rows.Count > 0)
-                    {
-                        WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
-                        warehouseSelection.MdiParent = this.MdiParent;
-                        
-                        warehouseSelection.FormClosed += delegate
-                        {
-                            UpdateWarehouseTextBox();
-                        };
+                    string getwarehousedata = "SELECT WarehouseID,Name,Address,City,Code FROM WarehouseTable";
+                    DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
 
-                        CommonFunction.DisposeOnClose(warehouseSelection);
-                        warehouseSelection.Show();
+                    if (warehousedata != null)
+                    {
+                        if (warehousedata.Rows.Count > 0)
+                        {
+                            WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata)
+                            {
+                                WindowState = FormWindowState.Normal,
+                                StartPosition = FormStartPosition.CenterScreen,
+                            };
+
+                            warehouseSelection.FormClosed += delegate
+                            {
+                                UpdateWarehouseTextBox();
+                            };
+
+                            CommonFunction.DisposeOnClose(warehouseSelection);
+                            warehouseSelection.Show();
+                        }
                     }
                 }
-            }
-            else
-            {
-                openForm.BringToFront();
+                else
+                {
+                    openForm.BringToFront();
+                }
             }
         }
         private void producttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
-            Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
-            if (openForm == null)
+            if (string.IsNullOrEmpty(productmfrtxtbox.Text))
             {
-                ProductSelectionForm productSelectionForm = new ProductSelectionForm();
-                productSelectionForm.MdiParent = this.MdiParent;
-                
-                productSelectionForm.FormClosed += delegate
+                Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+                if (openForm == null)
                 {
-                    UpdateProductTextBox();
-                };
-                CommonFunction.DisposeOnClose(productSelectionForm);
-                productSelectionForm.Show();
-            }
-            else
-            {
-                openForm.BringToFront();
+                    ProductSelectionForm productSelectionForm = new ProductSelectionForm()
+                    {
+                        WindowState = FormWindowState.Normal,
+                        StartPosition = FormStartPosition.CenterScreen,
+                    };
+
+                    productSelectionForm.FormClosed += delegate
+                    {
+                        UpdateProductTextBox();
+                    };
+                    CommonFunction.DisposeOnClose(productSelectionForm);
+                    productSelectionForm.ShowDialog();
+                }
+                else
+                {
+                    openForm.BringToFront();
+                }
             }
         }
         private void UpdateProductTextBox()
@@ -305,12 +303,14 @@ namespace SmartFlow.Stock
             productmfrtxtbox.Text = GlobalVariables.productmfrglobal.ToString();
             upclbl.Text = GlobalVariables.productupcglobal.ToString();
             barcodelbl.Text = GlobalVariables.productbarcodeglobal.ToString();
-            productpricelbl.Text = GlobalVariables.productpriceglobal.ToString();
         }
         private void UpdateWarehouseTextBox() 
         {
-            warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
-            selectwarehousefromtxtbox.Text = GlobalVariables.warehousenameglobal.ToString();
+            if(!string.IsNullOrEmpty(GlobalVariables.warehousenameglobal) && GlobalVariables.warehouseidglobal > 0)
+            {
+                warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
+                selectwarehousefromtxtbox.Text = GlobalVariables.warehousenameglobal.ToString();
+            }
         }
         private bool AreAnyTextBoxesFilled()
         {
@@ -322,13 +322,14 @@ namespace SmartFlow.Stock
 
         private bool InsertDamageEntry()
         {
+            string invoiceNo = CheckInvoiceBeforeInsert();
             string tableName = "StockCustomizedTable";
             var columnData = new Dictionary<string, object>
             {
                 { "Code", Guid.NewGuid().ToString() },
                 { "CreatedAt", DateTime.Now.ToString() },
                 { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
-                { "InvoiceNo", damageidlbl.Text },
+                { "InvoiceNo", invoiceNo },
                 { "Description", descriptiontxtbox.Text }
             };
 

@@ -20,61 +20,123 @@ namespace SmartFlow.Sales.CommonForm
         {
             try
             {
+                // Clear any previous error messages
                 errorProvider.Clear();
-                if(saleinvoicenotxtbox.Text.Trim().Length == 0)
+
+                // Validate Sale Invoice input
+                if (string.IsNullOrWhiteSpace(saleinvoicenotxtbox.Text))
                 {
-                    errorProvider.SetError(saleinvoicenotxtbox,"Please Enter Sale Invoice.");
+                    errorProvider.SetError(saleinvoicenotxtbox, "Please Enter Sale Invoice.");
                     saleinvoicenotxtbox.Focus();
                     return;
                 }
 
-                string saleNo = saleinvoicenotxtbox.Text;
-                string querysales = string.Format("SELECT InvoiceTable.Invoiceid,InvoiceTable.InvoiceNo,InvoiceTable.invoicedate,InvoiceTable.ClientID," +
-                    "InvoiceTable.Narration,InvoiceTable.CreatedAt,InvoiceTable.CreatedDay,InvoiceTable.UpdatedAt,InvoiceTable.UpdatedDay,InvoiceTable.AddedBy," +
-                    "InvoiceTable.Companyid,InvoiceTable.Userid,InvoiceTable.InvoiceCode,InvoiceTable.NetTotal,InvoiceTable.ClientName,InvoiceTable.TotalVat," +
-                    "InvoiceTable.TotalDiscount,InvoiceTable.FreightShippingCharges,InvoiceTable.TotalQty,InvoiceTable.PurchaseInvoiceRefrence," +
-                    "InvoiceTable.IsPlanetInvoice,InvoiceTable.Currencyid,InvoiceTable.CurrencyName,InvoiceTable.CurrencySymbol,InvoiceTable.ConversionRate," +
-                    "CustomerTable.CustomerCode,CustomerTable.ContactNo FROM InvoiceTable INNER JOIN CustomerTable ON CustomerTable.CustomerID = InvoiceTable.ClientID WHERE " +
-                    "InvoiceTable.InvoiceNo = '" + saleNo + "'");
-                DataTable salesData = DatabaseAccess.Retrive(querysales);
+                // Get the Sale Invoice number
+                string saleNo = saleinvoicenotxtbox.Text.Trim();
+
+                // Build the SQL query to fetch data
+                string querysales = @"SELECT 
+                                InvoiceTable.Invoiceid,
+                                InvoiceTable.InvoiceNo,
+                                InvoiceTable.invoicedate,
+                                InvoiceTable.ClientID,
+                                InvoiceTable.Narration,
+                                InvoiceTable.CreatedAt,
+                                InvoiceTable.CreatedDay,
+                                InvoiceTable.UpdatedAt,
+                                InvoiceTable.UpdatedDay,
+                                InvoiceTable.AddedBy,
+                                InvoiceTable.Companyid,
+                                InvoiceTable.Userid,
+                                InvoiceTable.InvoiceCode,
+                                InvoiceTable.NetTotal,
+                                InvoiceTable.ClientName,
+                                InvoiceTable.TotalVat,
+                                InvoiceTable.TotalDiscount,
+                                InvoiceTable.FreightShippingCharges,
+                                InvoiceTable.TotalQty,
+                                InvoiceTable.InvoiceRefrence,
+                                InvoiceTable.IsPlanetInvoice,
+                                InvoiceTable.Currencyid,
+                                InvoiceTable.CurrencyName,
+                                InvoiceTable.CurrencySymbol,
+                                InvoiceTable.ConversionRate,
+                                CustomerTable.CustomerCode,
+                                CustomerTable.ContactNo
+                            FROM InvoiceTable 
+                            INNER JOIN CustomerTable ON CustomerTable.CustomerID = InvoiceTable.ClientID 
+                            WHERE InvoiceTable.InvoiceNo = @SaleNo";
+
+                // Use parameters to prevent SQL injection
+                var parameters = new Dictionary<string, object>
+    {
+        { "@SaleNo", saleNo }
+    };
+
+                // Retrieve data using parameterized query
+                DataTable salesData = DatabaseAccess.Retrive(querysales, parameters);
+
+                // Check if data was found
                 if (salesData != null && salesData.Rows.Count > 0)
                 {
-
+                    // Data found, close the form
                     this.Close();
                 }
                 else
                 {
+                    // No data found, inform the user
                     MessageBox.Show("No Data Found For this Invoice No");
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex)
+            {
+                // Log the exception and display a user-friendly message
+                // LogError(ex); // Optional: You can implement a logging mechanism here
+                MessageBox.Show("An error occurred while processing the request. Please try again later.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void SearchSaleInvoice_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
+            try
             {
-                if (AreAnyTextBoxesFilled())
+                if (e.KeyCode == Keys.Escape)
                 {
-                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
-                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (result == DialogResult.Yes)
+                    // Check if any text boxes are filled
+                    if (AreAnyTextBoxesFilled())
                     {
+                        // Prompt user with confirmation message
+                        DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                                              "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                        // If user chooses "Yes", close the form
+                        if (result == DialogResult.Yes)
+                        {
+                            this.Close();
+                            e.Handled = true;  // Mark the event as handled to prevent further processing
+                        }
+                    }
+                    else
+                    {
+                        // No unsaved changes, close the form directly
                         this.Close();
-                        e.Handled = true;
+                        e.Handled = true;  // Mark the event as handled to prevent further processing
                     }
                 }
-                else
-                {
-                    this.Close();
-                    e.Handled = true;
-                }
             }
+            catch (Exception ex)
+            {
+                // Handle any exceptions that may occur during the process
+                MessageBox.Show($"An error occurred while trying to close the form: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
         private bool AreAnyTextBoxesFilled()
         {
-            if (saleinvoicenotxtbox.Text.Trim().Length > 0) { return true; }
-            return false; // No TextBox is filled
+            // Return true if the TextBox is not empty or whitespace
+            return !string.IsNullOrWhiteSpace(saleinvoicenotxtbox.Text);
         }
     }
 }

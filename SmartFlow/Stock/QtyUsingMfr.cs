@@ -19,18 +19,9 @@ namespace SmartFlow.Stock
         {
             string searchvalue = searchtextbox.Text.Trim();
             searchtextbox.Clear();
-            string getproductdata = string.Format("SELECT ProductID,ProductName,StandardPrice,MFR,Barcode,UPC FROM ProductTable WHERE MFR = '" + searchvalue + "'");
+            string getproductdata = string.Format("SELECT ProductID,ProductName,MFR,Barcode,UPC FROM ProductTable WHERE MFR = '" + searchvalue + "'");
             DataTable datatableproduct = DatabaseAccess.Retrive(getproductdata);
-            string productid = null, productname = null, standardprice = null, mfr = null, barcode = null, upc = null;
-            string radiostatus = null;
-            if (useditemradio.Checked)
-            {
-                radiostatus = "USED";
-            }
-            else
-            {
-                radiostatus = "NEW";
-            }
+            string productid = null, productname = null, mfr = null, barcode = null, upc = null;
 
             int quantity = 0;
             if (datatableproduct.Rows.Count > 0)
@@ -41,8 +32,7 @@ namespace SmartFlow.Stock
                     if (!row.IsNewRow)
                     {
                         // Assuming the ProductID column index is 0 and Quantity column index is 2
-                        if (row.Cells["ProductID"].Value != null && row.Cells["ProductID"].Value.ToString() == datatableproduct.Rows[0]["ProductID"].ToString() &&
-                            row.Cells["productstatus"].Value.ToString() == radiostatus)
+                        if (row.Cells["ProductID"].Value != null && row.Cells["ProductID"].Value.ToString() == datatableproduct.Rows[0]["ProductID"].ToString())
                         {
                             // Increment the quantity
                             int currentQuantity = Convert.ToInt32(row.Cells["productquantity"].Value);
@@ -60,13 +50,12 @@ namespace SmartFlow.Stock
                 {
                     productid = datatableproduct.Rows[0]["ProductID"].ToString();
                     productname = datatableproduct.Rows[0]["ProductName"].ToString();
-                    standardprice = datatableproduct.Rows[0]["StandardPrice"].ToString();
                     mfr = datatableproduct.Rows[0]["MFR"].ToString();
                     barcode = datatableproduct.Rows[0]["Barcode"].ToString();
                     upc = datatableproduct.Rows[0]["UPC"].ToString();
                     quantity = 1;
 
-                    int newRowIndex = dgvinventory.Rows.Add(productid, productname, upc, standardprice, mfr, barcode, quantity);
+                    int newRowIndex = dgvinventory.Rows.Add(productid, productname, upc, mfr, barcode, quantity);
                     dgvinventory.ClearSelection();
                     // Highlight and scroll to the new row
                     DataGridViewRow newRow = dgvinventory.Rows[newRowIndex];
@@ -107,7 +96,7 @@ namespace SmartFlow.Stock
 
                 string query = string.Empty;
                 bool result = false;
-                string invoiceno = qtyusingmfridlbl.Text;
+                string invoiceno = CheckInvoiceBeforeInsert();
                 string importantNotes = importantnotestxtbox.Text;
                 string tableName = "StockCustomizedTable";
 
@@ -129,11 +118,10 @@ namespace SmartFlow.Stock
                     {
                         string productid = Convert.ToString(row.Cells[0].Value);
                         string productname = Convert.ToString(row.Cells[1].Value);
-                        string price = Convert.ToString(row.Cells[3].Value);
                         string upc = Convert.ToString(row.Cells[2].Value);
-                        string mfr = Convert.ToString(row.Cells[4].Value);
-                        string barcode = Convert.ToString(row.Cells[5].Value);
-                        int quantity = Convert.ToInt32(row.Cells[6].Value);
+                        string mfr = Convert.ToString(row.Cells[3].Value);
+                        string barcode = Convert.ToString(row.Cells[4].Value);
+                        int quantity = Convert.ToInt32(row.Cells[5].Value);
 
                         if (quantity > 0 && stockcustomid > 0)
                         {
@@ -257,6 +245,29 @@ namespace SmartFlow.Stock
                 }
             }
         }
+
+        private string CheckInvoiceBeforeInsert()
+        {
+            try
+            {
+                string lastInvoiceNumber = GetLastInvoiceNumber();
+                string newInvoiceNumber = qtyusingmfridlbl.Text;
+
+                if (String.Compare(newInvoiceNumber, lastInvoiceNumber) <= 0)
+                {
+                    return GenerateNextInvoiceNumber();
+                }
+                else
+                {
+                    return qtyusingmfridlbl.Text;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
         private string GenerateNextInvoiceNumber()
         {
             try
@@ -308,7 +319,8 @@ namespace SmartFlow.Stock
             string lastInvoiceNumber = null;
             try
             {
-                string query = "SELECT TOP 1 InvoiceNo FROM StockCustomizedTable WHERE InvoiceNo LIKE 'QUM-%' ORDER BY InvoiceNo DESC";
+                string datePart = DateTime.Today.ToString("yyMMdd");
+                string query = $"SELECT TOP 1 InvoiceNo FROM StockCustomizedTable WHERE InvoiceNo LIKE 'QUM-{datePart}-%' ORDER BY InvoiceNo DESC";
                 DataTable invoiceData = DatabaseAccess.Retrive(query);
                 if (invoiceData.Rows.Count > 0)
                 {
@@ -331,33 +343,36 @@ namespace SmartFlow.Stock
         }
         private void selectwarehousetxtbox_MouseClick(object sender, MouseEventArgs e)
         {
-            Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
-            if (openForm == null)
+            if (string.IsNullOrEmpty(selectwarehousetxtbox.Text))
             {
-                string getwarehousedata = "SELECT WarehouseID,Name,Address,City,Code FROM WarehouseTable";
-                DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
-
-                if (warehousedata != null)
+                Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
+                if (openForm == null)
                 {
-                    if (warehousedata.Rows.Count > 0)
+                    string getwarehousedata = "SELECT WarehouseID,Name,Address,City,Code FROM WarehouseTable";
+                    DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
+
+                    if (warehousedata != null)
                     {
-                        WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata)
+                        if (warehousedata.Rows.Count > 0)
                         {
-                            WindowState = FormWindowState.Normal,
-                            StartPosition = FormStartPosition.CenterParent,
-                        }; 
-                        warehouseSelection.FormClosed += delegate
-                        {
-                            UpdateWarehouseTxtBox();
-                        };
-                        CommonFunction.DisposeOnClose(warehouseSelection);
-                        warehouseSelection.Show();
+                            WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata)
+                            {
+                                WindowState = FormWindowState.Normal,
+                                StartPosition = FormStartPosition.CenterParent,
+                            };
+                            warehouseSelection.FormClosed += delegate
+                            {
+                                UpdateWarehouseTxtBox();
+                            };
+                            CommonFunction.DisposeOnClose(warehouseSelection);
+                            warehouseSelection.Show();
+                        }
                     }
                 }
-            }
-            else
-            {
-                openForm.BringToFront();
+                else
+                {
+                    openForm.BringToFront();
+                }
             }
         }
         private void UpdateWarehouseTxtBox()
@@ -386,20 +401,6 @@ namespace SmartFlow.Stock
                     MessageBox.Show("Please enter a valid quantity.");
                     dgvinventory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 1; // Reset to default
                 }
-            }
-        }
-
-        private void useditemradio_CheckedChanged(object sender, EventArgs e)
-        {
-            if (useditemradio.Checked == true)
-            {
-                refrencetxtbox.Visible = true;
-                usedproductrefrencelbl.Visible = true;
-            }
-            else
-            {
-                refrencetxtbox.Visible = false;
-                usedproductrefrencelbl.Visible = false;
             }
         }
     }

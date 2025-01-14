@@ -1,9 +1,12 @@
-﻿using SmartFlow.Common;
+﻿using DocumentFormat.OpenXml.Office2013.Excel;
+using SmartFlow.Common;
 using SmartFlow.Common.CommonForms;
 using SmartFlow.Common.Forms;
 using SmartFlow.Sales;
 using SmartFlow.Transactions.CommonForm;
+using SmartFlow.Transactions.ReportViewer;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -119,49 +122,6 @@ namespace SmartFlow.Transactions
                 }
             }
         }
-        private void accountnametxtbox_Leave(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(accountnametxtbox.Text) && !string.IsNullOrWhiteSpace(accountnametxtbox.Text) &&
-                !string.IsNullOrEmpty(accountidlbl.Text) && !string.IsNullOrWhiteSpace(accountidlbl.Text))
-            {
-                if (currencynamelbl.Text == "currencynamelbl" && currencysymbollbl.Text == "currencysymbollbl" &&
-                    currencyconversionratelbl.Text == "currencyconversionratelbl" && currencyconversionratelbl.Text == "currencyconversionratelbl")
-                {
-                    Form openForm = CommonFunction.IsFormOpen(typeof(CurrencySelection));
-                    if (openForm == null)
-                    {
-                        CurrencySelection currencySelection = new CurrencySelection
-                        {
-                            WindowState = FormWindowState.Normal,
-                            StartPosition = FormStartPosition.CenterParent,
-                        };
-
-                        currencySelection.FormClosed += delegate
-                        {
-                            UpdateCurrencyTextBox();
-                        };
-                        CommonFunction.DisposeOnClose(currencySelection);
-                        currencySelection.Show();
-
-                    }
-                    else
-                    {
-                        openForm.BringToFront();
-                    }
-                }
-            }
-        }
-        private void UpdateCurrencyTextBox()
-        {
-            if (GlobalVariables.currencyidglobal > 0 && GlobalVariables.currencynameglobal != null && GlobalVariables.currencysymbolglobal != null &&
-                GlobalVariables.currencyconversionrateglobal > 0)
-            {
-                currencyidlbl.Text = GlobalVariables.currencyidglobal.ToString();
-                currencyconversionratelbl.Text = GlobalVariables.currencyconversionrateglobal.ToString();
-                currencynamelbl.Text = GlobalVariables.currencynameglobal.ToString();
-                currencysymbollbl.Text = GlobalVariables.currencysymbolglobal.ToString();
-            }
-        }
         private void amounttxtbox_Leave(object sender, EventArgs e)
         {
             if(!string.IsNullOrEmpty(amounttxtbox.Text) && !string.IsNullOrWhiteSpace(amounttxtbox.Text))
@@ -175,44 +135,66 @@ namespace SmartFlow.Transactions
                         StartPosition = FormStartPosition.CenterParent,
                     };
                     CommonFunction.DisposeOnClose(debitAndCreditForm);
-                    debitAndCreditForm.Show();
+                    debitAndCreditForm.FormClosed += delegate
+                    {
+                        string transactionsymbol = null;
+                        int accountid = Convert.ToInt32(accountidlbl.Text);
+                        string accountname = accountnametxtbox.Text;
+                        string accountCode = accountcodetxtbox.Text;
+
+                        bool productExists = false;
+                        foreach (DataGridViewRow row in dgvCreditNote.Rows)
+                        {
+                            if (!row.IsNewRow)
+                            {
+                                if (row.Cells["accountidcolumn"].Value != null && row.Cells["accountidcolumn"].Value.ToString() == accountid.ToString())
+                                {
+                                    MessageBox.Show("Account Already Selected");
+                                    productExists = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!productExists)
+                        {
+                            if (GlobalVariables.iscreditglobal == true)
+                            {
+                                decimal paymentamountcredit = decimal.Parse(amounttxtbox.Text);
+                                transactionsymbol = "C";
+                                dgvCreditNote.Rows.Add(null, transactionsymbol, accountname, accountCode, accountid, GlobalVariables.isdebitglobal, 
+                                    GlobalVariables.iscreditglobal,
+                                    null, paymentamountcredit, GlobalVariables.shortdescriptionglobal);
+                            }
+
+                            else if (GlobalVariables.isdebitglobal == true)
+
+                            {
+                                decimal paymentamountdebit = decimal.Parse(amounttxtbox.Text);
+                                transactionsymbol = "D";
+                                dgvCreditNote.Rows.Add(null, transactionsymbol, accountname, accountCode, accountid, GlobalVariables.isdebitglobal, 
+                                    GlobalVariables.iscreditglobal,
+                                    paymentamountdebit, null, GlobalVariables.shortdescriptionglobal);
+                            }
+
+                            accountcodetxtbox.Text = string.Empty;
+                            accountnametxtbox.Text = string.Empty;
+                            amounttxtbox.Text = string.Empty;
+                            accountidlbl.Text = string.Empty;
+                            GlobalVariables.iscreditglobal = false;
+                            GlobalVariables.isdebitglobal = false;
+                            GlobalVariables.shortdescriptionglobal = null;
+
+                            accountnametxtbox.Focus();
+                        }
+                        
+                    };
+                    debitAndCreditForm.ShowDialog();
                 }
                 else
                 {
                     openForm.BringToFront();
                 }
-
-                string transactionsymbol = null;
-                int accountid = Convert.ToInt32(accountidlbl.Text);
-                string accountname = accountnametxtbox.Text;
-                string accountCode = accountcodetxtbox.Text;
-
-                if (GlobalVariables.iscreditglobal == true)
-                {
-                    decimal paymentamountcredit = decimal.Parse(amounttxtbox.Text);
-                    transactionsymbol = "C";
-                    dgvCreditNote.Rows.Add(null, transactionsymbol, accountname, accountCode, accountid, GlobalVariables.isdebitglobal, GlobalVariables.iscreditglobal,
-                        null, paymentamountcredit, GlobalVariables.shortdescriptionglobal);
-                }
-
-                else if (GlobalVariables.isdebitglobal == true)
-
-                {
-                    decimal paymentamountdebit = decimal.Parse(amounttxtbox.Text);
-                    transactionsymbol = "D";
-                    dgvCreditNote.Rows.Add(null, transactionsymbol, accountname, accountCode, accountid, GlobalVariables.isdebitglobal, GlobalVariables.iscreditglobal,
-                        paymentamountdebit, null, GlobalVariables.shortdescriptionglobal);
-                }
-
-                accountcodetxtbox.Text = string.Empty;
-                accountnametxtbox.Text = string.Empty;
-                amounttxtbox.Text = string.Empty;
-                accountidlbl.Text = string.Empty;
-                GlobalVariables.iscreditglobal = false;
-                GlobalVariables.isdebitglobal = false;
-                GlobalVariables.shortdescriptionglobal = null;
-
-                accountnametxtbox.Focus();
             }
         }
         private void closebtn_Click(object sender, EventArgs e)
@@ -244,15 +226,27 @@ namespace SmartFlow.Transactions
                     return;
                 }
 
+                string invoiceNo = CheckInvoiceBeforeInsert();
                 string transactionCode = Guid.NewGuid().ToString();
                 string longdescription = longdescriptiontxtbox.Text;
 
-                string query = string.Format("INSERT INTO TransactionTable (InvoiceNo,InvoiceDate,TransactionCode,LongDescription,CurrencyId,CurrencyName,CurrencySymbol," +
-                    "ConversionRate,CreatedAt,CreatedDay) VALUES ('" + invoicenotxtbox.Text + "'," +
-                    "'" + invoicedatetxtbox.Text + "','" + transactionCode + "','" + longdescription + "','" + currencyidlbl.Text + "'," +
-                    "'" + currencynamelbl.Text + "','" + currencysymbollbl.Text + "','" + currencyconversionratelbl.Text + "'," +
-                    "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')");
-                int transactionid = 0;
+                string tableName = "TransactionTable";
+                var columnData = new Dictionary<string, object>
+                {
+                    { "InvoiceNo", invoiceNo },
+                    { "InvoiceDate", invoicedatetxtbox.Text },
+                    { "TransactionCode", transactionCode },
+                    { "LongDescription", longdescription },
+                    { "CurrencyId", currencyidlbl.Text },
+                    { "CurrencyName", currencynamelbl.Text },
+                    { "CurrencySymbol", currencysymbollbl.Text },
+                    { "ConversionRate", currencyconversionratelbl.Text },
+                    { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                    { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                    { "VoucherInfo", voucherInfotxtbox.Text }
+                };
+
+                int transactionid = DatabaseAccess.InsertDataId(tableName, columnData);
 
                 if (transactionid > 0) 
                 {
@@ -269,42 +263,36 @@ namespace SmartFlow.Transactions
                         decimal debitamount = decimal.Parse(row.Cells["debitcolumn"].Value.ToString());
                         decimal creditamount = decimal.Parse(row.Cells["creditcolumn"].Value.ToString());
 
-                        string querysubdata = string.Format("INSERT INTO TransactionDetailTable (TransactionId,TransactionCode,AccountId,AccountCode,AccountName,IsDebit," +
-                        "IsCredit,ShortDescription,DebitAmount,CreditAmount) VALUES ('" + transactionid + "','" + transactionCode + "','" + accountid + "'," +
-                        "'" + accountCode + "','" + accountName + "','" + isdebit + "','" + iscredit + "','" + debitamount + "','" + creditamount + "')");
+                        string subTable = "TransactionDetailTable";
+                        var subColumnData = new Dictionary<string, object>
+                        {
+                            { "TransactionId", transactionid },
+                            { "TransactionCode", transactionCode },
+                            { "AccountId", accountid },
+                            { "AccountCode", accountCode },
+                            { "AccountName", accountName },
+                            { "IsDebit", isdebit },
+                            { "IsCredit", iscredit },
+                            { "ShortDescription", shortdescription },
+                            { "DebitAmount", debitamount },
+                            { "CreditAmount", creditamount }
+                        };
+
+                        bool isInserted = DatabaseAccess.ExecuteQuery(subTable, "INSERT", subColumnData);
                     }
                 }
+
+                CreditNoteReportView creditNoteReportView = new CreditNoteReportView();
+                CommonFunction.DisposeOnClose(creditNoteReportView);
+                creditNoteReportView.Show();
 
             }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void accountnametxtbox_MouseClick(object sender, MouseEventArgs e)
         {
-            Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
-            if(openForm == null)
+            if (string.IsNullOrEmpty(accountnametxtbox.Text))
             {
-                AccountSelectionForm accountSelectionForm = new AccountSelectionForm
-                {
-                    WindowState = FormWindowState.Normal,
-                    StartPosition = FormStartPosition.CenterParent,
-                };
-
-                accountSelectionForm.FormClosed += delegate
-                {
-                    UpdateAccountInfo();
-                };
-                CommonFunction.DisposeOnClose(accountSelectionForm);
-                accountSelectionForm.Show();
-            }
-            else
-            {
-                openForm.BringToFront();
-            }
-        }
-        private void accountnametxtbox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter) 
-            {
-                Form openForm = CommonFunction.IsFormOpen(typeof(AllAccountsSelection));
+                Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
                 if (openForm == null)
                 {
                     AccountSelectionForm accountSelectionForm = new AccountSelectionForm
@@ -312,16 +300,45 @@ namespace SmartFlow.Transactions
                         WindowState = FormWindowState.Normal,
                         StartPosition = FormStartPosition.CenterParent,
                     };
+
                     accountSelectionForm.FormClosed += delegate
                     {
                         UpdateAccountInfo();
                     };
                     CommonFunction.DisposeOnClose(accountSelectionForm);
-                    accountSelectionForm.Show();
+                    accountSelectionForm.ShowDialog();
                 }
                 else
                 {
                     openForm.BringToFront();
+                }
+            }
+        }
+        private void accountnametxtbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) 
+            {
+                if (string.IsNullOrEmpty(accountnametxtbox.Text)) 
+                {
+                    Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
+                    if (openForm == null)
+                    {
+                        AccountSelectionForm accountSelectionForm = new AccountSelectionForm
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        };
+                        accountSelectionForm.FormClosed += delegate
+                        {
+                            UpdateAccountInfo();
+                        };
+                        CommonFunction.DisposeOnClose(accountSelectionForm);
+                        accountSelectionForm.ShowDialog();
+                    }
+                    else
+                    {
+                        openForm.BringToFront();
+                    }
                 }
             }
         }

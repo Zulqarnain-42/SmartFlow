@@ -36,11 +36,11 @@
             this.invoicenotxtbox = new System.Windows.Forms.TextBox();
             this.invoicenolbl = new System.Windows.Forms.Label();
             this.salereturnradio = new System.Windows.Forms.RadioButton();
-            this.saleinvoiceradio = new System.Windows.Forms.RadioButton();
-            this.saleorderradio = new System.Windows.Forms.RadioButton();
+            this.proformainvoicebtn = new System.Windows.Forms.RadioButton();
             this.salequotationradio = new System.Windows.Forms.RadioButton();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.invoicedatetxtbox = new System.Windows.Forms.MaskedTextBox();
+            this.saleinvoicebtn = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
@@ -112,7 +112,7 @@
             // 
             this.salereturnradio.AutoSize = true;
             this.salereturnradio.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.salereturnradio.Location = new System.Drawing.Point(362, 108);
+            this.salereturnradio.Location = new System.Drawing.Point(362, 101);
             this.salereturnradio.Name = "salereturnradio";
             this.salereturnradio.Size = new System.Drawing.Size(138, 27);
             this.salereturnradio.TabIndex = 54;
@@ -120,29 +120,17 @@
             this.salereturnradio.Text = "SALE RETURN ";
             this.salereturnradio.UseVisualStyleBackColor = true;
             // 
-            // saleinvoiceradio
+            // proformainvoicebtn
             // 
-            this.saleinvoiceradio.AutoSize = true;
-            this.saleinvoiceradio.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saleinvoiceradio.Location = new System.Drawing.Point(53, 108);
-            this.saleinvoiceradio.Name = "saleinvoiceradio";
-            this.saleinvoiceradio.Size = new System.Drawing.Size(139, 27);
-            this.saleinvoiceradio.TabIndex = 53;
-            this.saleinvoiceradio.TabStop = true;
-            this.saleinvoiceradio.Text = "SALE INVOICE";
-            this.saleinvoiceradio.UseVisualStyleBackColor = true;
-            // 
-            // saleorderradio
-            // 
-            this.saleorderradio.AutoSize = true;
-            this.saleorderradio.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saleorderradio.Location = new System.Drawing.Point(362, 68);
-            this.saleorderradio.Name = "saleorderradio";
-            this.saleorderradio.Size = new System.Drawing.Size(126, 27);
-            this.saleorderradio.TabIndex = 52;
-            this.saleorderradio.TabStop = true;
-            this.saleorderradio.Text = "SALE ORDER";
-            this.saleorderradio.UseVisualStyleBackColor = true;
+            this.proformainvoicebtn.AutoSize = true;
+            this.proformainvoicebtn.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.proformainvoicebtn.Location = new System.Drawing.Point(362, 68);
+            this.proformainvoicebtn.Name = "proformainvoicebtn";
+            this.proformainvoicebtn.Size = new System.Drawing.Size(194, 27);
+            this.proformainvoicebtn.TabIndex = 53;
+            this.proformainvoicebtn.TabStop = true;
+            this.proformainvoicebtn.Text = "PROFORMA INVOICE";
+            this.proformainvoicebtn.UseVisualStyleBackColor = true;
             // 
             // salequotationradio
             // 
@@ -172,24 +160,38 @@
             this.invoicedatetxtbox.TabIndex = 116;
             this.invoicedatetxtbox.ValidatingType = typeof(System.DateTime);
             // 
+            // saleinvoicebtn
+            // 
+            this.saleinvoicebtn.AutoSize = true;
+            this.saleinvoicebtn.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saleinvoicebtn.Location = new System.Drawing.Point(53, 101);
+            this.saleinvoicebtn.Name = "saleinvoicebtn";
+            this.saleinvoicebtn.Size = new System.Drawing.Size(139, 27);
+            this.saleinvoicebtn.TabIndex = 117;
+            this.saleinvoicebtn.TabStop = true;
+            this.saleinvoicebtn.Text = "SALE INVOICE";
+            this.saleinvoicebtn.UseVisualStyleBackColor = true;
+            // 
             // FindSaleInvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(622, 326);
+            this.Controls.Add(this.saleinvoicebtn);
             this.Controls.Add(this.invoicedatetxtbox);
             this.Controls.Add(this.searchbtn);
             this.Controls.Add(this.datelbl);
             this.Controls.Add(this.invoicenotxtbox);
             this.Controls.Add(this.invoicenolbl);
             this.Controls.Add(this.salereturnradio);
-            this.Controls.Add(this.saleinvoiceradio);
-            this.Controls.Add(this.saleorderradio);
+            this.Controls.Add(this.proformainvoicebtn);
             this.Controls.Add(this.salequotationradio);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FindSaleInvoiceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FIND INVOICE FORM";
@@ -211,10 +213,10 @@
         private System.Windows.Forms.TextBox invoicenotxtbox;
         private System.Windows.Forms.Label invoicenolbl;
         private System.Windows.Forms.RadioButton salereturnradio;
-        private System.Windows.Forms.RadioButton saleinvoiceradio;
-        private System.Windows.Forms.RadioButton saleorderradio;
+        private System.Windows.Forms.RadioButton proformainvoicebtn;
         private System.Windows.Forms.RadioButton salequotationradio;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.MaskedTextBox invoicedatetxtbox;
+        private System.Windows.Forms.RadioButton saleinvoicebtn;
     }
 }

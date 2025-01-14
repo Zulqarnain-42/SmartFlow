@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>SmartFlow</RootNamespace>
     <AssemblyName>SmartFlow</AssemblyName>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -37,6 +37,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Azure.Core, Version=1.38.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Core.1.38.0\lib\net472\Azure.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.Identity, Version=1.11.4.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Identity.1.11.4\lib\netstandard2.0\Azure.Identity.dll</HintPath>
+    </Reference>
     <Reference Include="ClosedXML, Version=0.102.2.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
       <HintPath>..\packages\ClosedXML.0.102.2\lib\netstandard2.0\ClosedXML.dll</HintPath>
     </Reference>
@@ -68,6 +74,36 @@
     <Reference Include="Irony, Version=1.0.11.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
       <HintPath>..\packages\Irony.NetCore.1.0.11\lib\net461\Irony.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.SqlClient, Version=5.0.0.0, Culture=neutral, PublicKeyToken=23ec7fc2d6eaa4a5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.SqlClient.5.2.2\lib\net462\Microsoft.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client, Version=4.61.3.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Identity.Client.4.61.3\lib\net462\Microsoft.Identity.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client.Extensions.Msal, Version=4.61.3.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Identity.Client.Extensions.Msal.4.61.3\lib\netstandard2.0\Microsoft.Identity.Client.Extensions.Msal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Abstractions.6.35.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.35.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.6.35.0\lib\net472\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.35.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
     </Reference>
@@ -98,14 +134,28 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.ClientModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ClientModel.1.0.0\lib\netstandard2.0\System.ClientModel.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=6.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.6.0.1\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Design" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.1\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Drawing.Common.8.0.4\lib\net462\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.35.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
@@ -113,13 +163,20 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.FileSystem.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.AccessControl.5.0.0\lib\net461\System.IO.FileSystem.AccessControl.dll</HintPath>
+    </Reference>
     <Reference Include="System.IO.Packaging, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Packaging.6.0.0\lib\net461\System.IO.Packaging.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="System.Memory.Data, Version=1.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.Data.1.0.2\lib\net461\System.Memory.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System.Messaging" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
       <Private>True</Private>
@@ -133,8 +190,17 @@
       <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
     </Reference>
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
@@ -150,14 +216,37 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Security.Cryptography.ProtectedData, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\net461\System.Security.Cryptography.ProtectedData.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.6.0.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Text.RegularExpressions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.RegularExpressions.4.3.1\lib\net463\System.Text.RegularExpressions.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
@@ -194,11 +283,11 @@
     <Compile Include="Common\CommonForms\AccountSelectionForm.Designer.cs">
       <DependentUpon>AccountSelectionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Common\CommonForms\AllAccountsSelection.cs">
+    <Compile Include="Common\CommonForms\CurrencySelection.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Common\CommonForms\AllAccountsSelection.Designer.cs">
-      <DependentUpon>AllAccountsSelection.cs</DependentUpon>
+    <Compile Include="Common\CommonForms\CurrencySelection.Designer.cs">
+      <DependentUpon>CurrencySelection.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\CommonForms\CustomerSelectionForm.cs">
       <SubType>Form</SubType>
@@ -206,47 +295,11 @@
     <Compile Include="Common\CommonForms\CustomerSelectionForm.Designer.cs">
       <DependentUpon>CustomerSelectionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Common\CommonForms\FromToDateSearchForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Common\CommonForms\FromToDateSearchForm.Designer.cs">
-      <DependentUpon>FromToDateSearchForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Common\CommonForms\ProductSelectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Common\CommonForms\ProductSelectionForm.Designer.cs">
       <DependentUpon>ProductSelectionForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Common\CommonForms\PurchaseTypeSelection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Common\CommonForms\PurchaseTypeSelection.Designer.cs">
-      <DependentUpon>PurchaseTypeSelection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Common\CommonForms\RoleSelectionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Common\CommonForms\RoleSelectionForm.Designer.cs">
-      <DependentUpon>RoleSelectionForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Common\CommonForms\SalesPersonSelection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Common\CommonForms\SalesPersonSelection.Designer.cs">
-      <DependentUpon>SalesPersonSelection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Common\CommonForms\SaleTypeSelection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Common\CommonForms\SaleTypeSelection.Designer.cs">
-      <DependentUpon>SaleTypeSelection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Common\CommonForms\StockLocationSelection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Common\CommonForms\StockLocationSelection.Designer.cs">
-      <DependentUpon>StockLocationSelection.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\CommonForms\SupplierSelectionForm.cs">
       <SubType>Form</SubType>
@@ -255,6 +308,7 @@
       <DependentUpon>SupplierSelectionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\CommonFunction.cs" />
+    <Compile Include="Common\CurrencyData.cs" />
     <Compile Include="Common\GlobalVariables.cs" />
     <Compile Include="General\NewCompany.cs">
       <SubType>Form</SubType>
@@ -292,36 +346,6 @@
     <Compile Include="Masters\CreateProduct.Designer.cs">
       <DependentUpon>CreateProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="Masters\CreateRight.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\CreateRight.Designer.cs">
-      <DependentUpon>CreateRight.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Masters\CreateRole.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\CreateRole.Designer.cs">
-      <DependentUpon>CreateRole.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Masters\CreateUser.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\CreateUser.Designer.cs">
-      <DependentUpon>CreateUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Masters\CurrencyList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\CurrencyList.Designer.cs">
-      <DependentUpon>CurrencyList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Masters\Employee.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\Employee.Designer.cs">
-      <DependentUpon>Employee.cs</DependentUpon>
-    </Compile>
     <Compile Include="Masters\ExcelAccounts.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -340,18 +364,6 @@
     <Compile Include="Masters\ListGroupingAccount.Designer.cs">
       <DependentUpon>ListGroupingAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="Masters\ListPurchaseType.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\ListPurchaseType.Designer.cs">
-      <DependentUpon>ListPurchaseType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Masters\ListSaleType.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\ListSaleType.Designer.cs">
-      <DependentUpon>ListSaleType.cs</DependentUpon>
-    </Compile>
     <Compile Include="Masters\OpeningBalance.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -364,11 +376,11 @@
     <Compile Include="Masters\Product.Designer.cs">
       <DependentUpon>Product.cs</DependentUpon>
     </Compile>
-    <Compile Include="Masters\PurchaseType.cs">
+    <Compile Include="Masters\ProductSerialNo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Masters\PurchaseType.Designer.cs">
-      <DependentUpon>PurchaseType.cs</DependentUpon>
+    <Compile Include="Masters\ProductSerialNo.Designer.cs">
+      <DependentUpon>ProductSerialNo.cs</DependentUpon>
     </Compile>
     <Compile Include="Masters\ReportViewer\AccountGroupListReportViewer.cs">
       <SubType>Form</SubType>
@@ -430,18 +442,6 @@
     <Compile Include="Masters\ReportViewer\SupplierListReportViewer.Designer.cs">
       <DependentUpon>SupplierListReportViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Masters\SaleType.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\SaleType.Designer.cs">
-      <DependentUpon>SaleType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Masters\SystemUsers.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\SystemUsers.Designer.cs">
-      <DependentUpon>SystemUsers.cs</DependentUpon>
-    </Compile>
     <Compile Include="Masters\UnitList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -459,36 +459,6 @@
     </Compile>
     <Compile Include="Masters\UploadExcel.Designer.cs">
       <DependentUpon>UploadExcel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Masters\UserRights.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\UserRights.Designer.cs">
-      <DependentUpon>UserRights.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Masters\UserRoles.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Masters\UserRoles.Designer.cs">
-      <DependentUpon>UserRoles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Payroll\ChangePassword.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Payroll\ChangePassword.Designer.cs">
-      <DependentUpon>ChangePassword.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Payroll\ReportViewer\EmployeListReportViewer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Payroll\ReportViewer\EmployeListReportViewer.Designer.cs">
-      <DependentUpon>EmployeListReportViewer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Payroll\ReportViewer\Reports\EmployeeListReport.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EmployeeListReport.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Purchase\FindPurchaseInvoiceForm.cs">
       <SubType>Form</SubType>
@@ -537,24 +507,28 @@
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Purchase\ReportViewer\Reports\PurchaseOrderReport.cs">
       <DependentUpon>PurchaseOrderReport.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Purchase\ReportViewer\Reports\PurchaseQuotationReport.cs">
       <DependentUpon>PurchaseQuotationReport.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Purchase\ReportViewer\Reports\PurchaseInvoiceReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PurchaseInvoiceReport.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Purchase\ReportViewer\ReturnReportView.cs">
       <SubType>Form</SubType>
@@ -568,35 +542,17 @@
     <Compile Include="Purchase\WarehouseSelection.Designer.cs">
       <DependentUpon>WarehouseSelection.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ItemWiseInventoyReport.cs">
+    <Compile Include="Report\BalanceSheet.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ItemWiseInventoyReport.Designer.cs">
-      <DependentUpon>ItemWiseInventoyReport.cs</DependentUpon>
+    <Compile Include="Report\BalanceSheet.Designer.cs">
+      <DependentUpon>BalanceSheet.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\CommonForm\AvailabilityForm.cs">
+    <Compile Include="Sales\CommonForm\ItemAvailability.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sales\CommonForm\AvailabilityForm.Designer.cs">
-      <DependentUpon>AvailabilityForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sales\CommonForm\CurrencySelection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sales\CommonForm\CurrencySelection.Designer.cs">
-      <DependentUpon>CurrencySelection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sales\CommonForm\DiscountForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sales\CommonForm\DiscountForm.Designer.cs">
-      <DependentUpon>DiscountForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sales\CommonForm\ItemWiseDescription.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sales\CommonForm\ItemWiseDescription.Designer.cs">
-      <DependentUpon>ItemWiseDescription.cs</DependentUpon>
+    <Compile Include="Sales\CommonForm\ItemAvailability.Designer.cs">
+      <DependentUpon>ItemAvailability.cs</DependentUpon>
     </Compile>
     <Compile Include="Sales\CommonForm\SearchQuotationForm.cs">
       <SubType>Form</SubType>
@@ -610,17 +566,17 @@
     <Compile Include="Sales\CommonForm\SearchSaleInvoice.Designer.cs">
       <DependentUpon>SearchSaleInvoice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\CommonForm\TransactionInfoProduct.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sales\CommonForm\TransactionInfoProduct.Designer.cs">
-      <DependentUpon>TransactionInfoProduct.cs</DependentUpon>
-    </Compile>
     <Compile Include="Sales\CommonForm\VATForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Sales\CommonForm\VATForm.Designer.cs">
       <DependentUpon>VATForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\CommonForm\WarehouseQty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\CommonForm\WarehouseQty.Designer.cs">
+      <DependentUpon>WarehouseQty.cs</DependentUpon>
     </Compile>
     <Compile Include="Sales\DeliveryNote.cs">
       <SubType>Form</SubType>
@@ -634,29 +590,17 @@
     <Compile Include="Sales\FindSaleInvoiceForm.Designer.cs">
       <DependentUpon>FindSaleInvoiceForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\CommonForm\InvoiceNoteForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sales\CommonForm\InvoiceNoteForm.Designer.cs">
-      <DependentUpon>InvoiceNoteForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sales\CommonForm\ItemSerialNo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sales\CommonForm\ItemSerialNo.Designer.cs">
-      <DependentUpon>ItemSerialNo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sales\CommonForm\ProductQtyWarehouse.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sales\CommonForm\ProductQtyWarehouse.Designer.cs">
-      <DependentUpon>ProductQtyWarehouse.cs</DependentUpon>
-    </Compile>
     <Compile Include="Sales\PackingList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Sales\PackingList.Designer.cs">
       <DependentUpon>PackingList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\PerformaInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\PerformaInvoice.Designer.cs">
+      <DependentUpon>PerformaInvoice.cs</DependentUpon>
     </Compile>
     <Compile Include="Sales\ReportViewer\DeliveryNoteView.cs">
       <SubType>Form</SubType>
@@ -670,10 +614,31 @@
     <Compile Include="Sales\ReportViewer\PackingListView.Designer.cs">
       <DependentUpon>PackingListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sales\ReportViewer\ProformaInvoiceView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ReportViewer\ProformaInvoiceView.Designer.cs">
+      <DependentUpon>ProformaInvoiceView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ReportViewer\Reports\SaleQuotationReport.cs">
+      <DependentUpon>SaleQuotationReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Sales\ReportViewer\Reports\SaleInvoiceReport.cs">
       <DependentUpon>SaleInvoiceReport.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Sales\ReportViewer\Reports\ProfermaInvoice.cs">
+      <DependentUpon>ProfermaInvoice.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Sales\ReportViewer\Reports\SaleReturnReport.cs">
@@ -681,12 +646,14 @@
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Sales\ReportViewer\Reports\SaleQuotationReport.cs">
-      <DependentUpon>SaleQuotationReport.rpt</DependentUpon>
+    <Compile Include="Sales\ReportViewer\Reports\SaleQuotationReportold.cs">
+      <DependentUpon>SaleQuotationReportold.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Sales\ReportViewer\SaleInvoiceView.cs">
       <SubType>Form</SubType>
@@ -901,12 +868,6 @@
     <Compile Include="Stock\ReportViewer\StockTransferViewer.Designer.cs">
       <DependentUpon>StockTransferViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Stock\StockLocation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Stock\StockLocation.Designer.cs">
-      <DependentUpon>StockLocation.cs</DependentUpon>
-    </Compile>
     <Compile Include="Stock\DamageEntry.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1075,17 +1036,19 @@
       <DependentUpon>MaterialReceivedReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Transactions\ReportViewer\Reports\ReceiptReport.cs">
+      <DependentUpon>ReceiptReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Transactions\ReportViewer\Reports\PaymentReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PaymentReport.rpt</DependentUpon>
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Transactions\ReportViewer\Reports\ReceiptReport.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReceiptReport.rpt</DependentUpon>
-      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <EmbeddedResource Include="Common\CommonForms\AccountGroupSelectionForm.resx">
       <DependentUpon>AccountGroupSelectionForm.cs</DependentUpon>
@@ -1093,32 +1056,14 @@
     <EmbeddedResource Include="Common\CommonForms\AccountSelectionForm.resx">
       <DependentUpon>AccountSelectionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Common\CommonForms\AllAccountsSelection.resx">
-      <DependentUpon>AllAccountsSelection.cs</DependentUpon>
+    <EmbeddedResource Include="Common\CommonForms\CurrencySelection.resx">
+      <DependentUpon>CurrencySelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Common\CommonForms\CustomerSelectionForm.resx">
       <DependentUpon>CustomerSelectionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Common\CommonForms\FromToDateSearchForm.resx">
-      <DependentUpon>FromToDateSearchForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Common\CommonForms\ProductSelectionForm.resx">
       <DependentUpon>ProductSelectionForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Common\CommonForms\PurchaseTypeSelection.resx">
-      <DependentUpon>PurchaseTypeSelection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Common\CommonForms\RoleSelectionForm.resx">
-      <DependentUpon>RoleSelectionForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Common\CommonForms\SalesPersonSelection.resx">
-      <DependentUpon>SalesPersonSelection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Common\CommonForms\SaleTypeSelection.resx">
-      <DependentUpon>SaleTypeSelection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Common\CommonForms\StockLocationSelection.resx">
-      <DependentUpon>StockLocationSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Common\CommonForms\SupplierSelectionForm.resx">
       <DependentUpon>SupplierSelectionForm.cs</DependentUpon>
@@ -1141,21 +1086,6 @@
     <EmbeddedResource Include="Masters\CreateProduct.resx">
       <DependentUpon>CreateProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Masters\CreateRight.resx">
-      <DependentUpon>CreateRight.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Masters\CreateRole.resx">
-      <DependentUpon>CreateRole.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Masters\CreateUser.resx">
-      <DependentUpon>CreateUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Masters\CurrencyList.resx">
-      <DependentUpon>CurrencyList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Masters\Employee.resx">
-      <DependentUpon>Employee.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Masters\ExcelAccounts.resx">
       <DependentUpon>ExcelAccounts.cs</DependentUpon>
     </EmbeddedResource>
@@ -1165,23 +1095,14 @@
     <EmbeddedResource Include="Masters\ListGroupingAccount.resx">
       <DependentUpon>ListGroupingAccount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Masters\ListPurchaseType.resx">
-      <DependentUpon>ListPurchaseType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Masters\ListSaleType.resx">
-      <DependentUpon>ListSaleType.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Masters\OpeningBalance.resx">
       <DependentUpon>OpeningBalance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Product.resx">
       <DependentUpon>Product.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Masters\PurchaseType.aa.resx">
-      <DependentUpon>PurchaseType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Masters\PurchaseType.resx">
-      <DependentUpon>PurchaseType.cs</DependentUpon>
+    <EmbeddedResource Include="Masters\ProductSerialNo.resx">
+      <DependentUpon>ProductSerialNo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\ReportViewer\AccountGroupListReportViewer.resx">
       <DependentUpon>AccountGroupListReportViewer.cs</DependentUpon>
@@ -1218,12 +1139,6 @@
     <EmbeddedResource Include="Masters\ReportViewer\SupplierListReportViewer.resx">
       <DependentUpon>SupplierListReportViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Masters\SaleType.resx">
-      <DependentUpon>SaleType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Masters\SystemUsers.resx">
-      <DependentUpon>SystemUsers.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Masters\UnitList.resx">
       <DependentUpon>UnitList.cs</DependentUpon>
     </EmbeddedResource>
@@ -1232,22 +1147,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\UploadExcel.resx">
       <DependentUpon>UploadExcel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Masters\UserRights.resx">
-      <DependentUpon>UserRights.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Masters\UserRoles.resx">
-      <DependentUpon>UserRoles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Payroll\ChangePassword.resx">
-      <DependentUpon>ChangePassword.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Payroll\ReportViewer\EmployeListReportViewer.resx">
-      <DependentUpon>EmployeListReportViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Payroll\ReportViewer\Reports\EmployeeListReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>EmployeeListReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\FindPurchaseInvoiceForm.resx">
       <DependentUpon>FindPurchaseInvoiceForm.cs</DependentUpon>
@@ -1276,18 +1175,22 @@
     <EmbeddedResource Include="Purchase\ReportViewer\Reports\PurchaseReturnReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PurchaseReturnReport.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\ReportViewer\Reports\PurchaseOrderReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PurchaseOrderReport.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\ReportViewer\Reports\PurchaseQuotationReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PurchaseQuotationReport.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\ReportViewer\Reports\PurchaseInvoiceReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PurchaseInvoiceReport.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\ReportViewer\ReturnReportView.resx">
       <DependentUpon>ReturnReportView.cs</DependentUpon>
@@ -1295,20 +1198,11 @@
     <EmbeddedResource Include="Purchase\WarehouseSelection.resx">
       <DependentUpon>WarehouseSelection.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ItemWiseInventoyReport.resx">
-      <DependentUpon>ItemWiseInventoyReport.cs</DependentUpon>
+    <EmbeddedResource Include="Report\BalanceSheet.resx">
+      <DependentUpon>BalanceSheet.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\CommonForm\AvailabilityForm.resx">
-      <DependentUpon>AvailabilityForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sales\CommonForm\CurrencySelection.resx">
-      <DependentUpon>CurrencySelection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sales\CommonForm\DiscountForm.resx">
-      <DependentUpon>DiscountForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sales\CommonForm\ItemWiseDescription.resx">
-      <DependentUpon>ItemWiseDescription.cs</DependentUpon>
+    <EmbeddedResource Include="Sales\CommonForm\ItemAvailability.resx">
+      <DependentUpon>ItemAvailability.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\CommonForm\SearchQuotationForm.resx">
       <DependentUpon>SearchQuotationForm.cs</DependentUpon>
@@ -1316,11 +1210,11 @@
     <EmbeddedResource Include="Sales\CommonForm\SearchSaleInvoice.resx">
       <DependentUpon>SearchSaleInvoice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\CommonForm\TransactionInfoProduct.resx">
-      <DependentUpon>TransactionInfoProduct.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Sales\CommonForm\VATForm.resx">
       <DependentUpon>VATForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\CommonForm\WarehouseQty.resx">
+      <DependentUpon>WarehouseQty.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\DeliveryNote.resx">
       <DependentUpon>DeliveryNote.cs</DependentUpon>
@@ -1328,17 +1222,11 @@
     <EmbeddedResource Include="Sales\FindSaleInvoiceForm.resx">
       <DependentUpon>FindSaleInvoiceForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\CommonForm\InvoiceNoteForm.resx">
-      <DependentUpon>InvoiceNoteForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sales\CommonForm\ItemSerialNo.resx">
-      <DependentUpon>ItemSerialNo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sales\CommonForm\ProductQtyWarehouse.resx">
-      <DependentUpon>ProductQtyWarehouse.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Sales\PackingList.resx">
       <DependentUpon>PackingList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\PerformaInvoice.resx">
+      <DependentUpon>PerformaInvoice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\ReportViewer\DeliveryNoteView.resx">
       <DependentUpon>DeliveryNoteView.cs</DependentUpon>
@@ -1346,17 +1234,33 @@
     <EmbeddedResource Include="Sales\ReportViewer\PackingListView.resx">
       <DependentUpon>PackingListView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ReportViewer\Reports\SaleInvoiceReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SaleInvoiceReport.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ReportViewer\Reports\SaleReturnReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SaleReturnReport.cs</LastGenOutput>
+    <EmbeddedResource Include="Sales\ReportViewer\ProformaInvoiceView.resx">
+      <DependentUpon>ProformaInvoiceView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\ReportViewer\Reports\SaleQuotationReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SaleQuotationReport.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ReportViewer\Reports\SaleInvoiceReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SaleInvoiceReport.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ReportViewer\Reports\ProfermaInvoice.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ProfermaInvoice.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ReportViewer\Reports\SaleReturnReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SaleReturnReport.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ReportViewer\Reports\SaleQuotationReportold.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SaleQuotationReportold.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\ReportViewer\SaleInvoiceView.resx">
       <DependentUpon>SaleInvoiceView.cs</DependentUpon>
@@ -1479,9 +1383,6 @@
     <EmbeddedResource Include="Stock\ReportViewer\StockTransferViewer.resx">
       <DependentUpon>StockTransferViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Stock\StockLocation.resx">
-      <DependentUpon>StockLocation.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Stock\DamageEntry.resx">
       <DependentUpon>DamageEntry.cs</DependentUpon>
     </EmbeddedResource>
@@ -1571,13 +1472,15 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>MaterialReceivedReport.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Transactions\ReportViewer\Reports\PaymentReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>PaymentReport.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Transactions\ReportViewer\Reports\ReceiptReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReceiptReport.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ReportViewer\Reports\PaymentReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PaymentReport.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -1596,6 +1499,7 @@
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -1603,6 +1507,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Data.SqlClient.SNI.5.2.0\build\net462\Microsoft.Data.SqlClient.SNI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Data.SqlClient.SNI.5.2.0\build\net462\Microsoft.Data.SqlClient.SNI.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.5.2.0\build\net462\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.5.2.0\build\net462\Microsoft.Data.SqlClient.SNI.targets')" />
 </Project>

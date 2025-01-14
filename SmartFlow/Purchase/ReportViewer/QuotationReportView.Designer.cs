@@ -53,6 +53,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "QuotationReportView";
             this.Text = "PURCHASE QUOTATION REPORT VIEWER";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.QuotationReportView_Load);
             this.ResumeLayout(false);
 

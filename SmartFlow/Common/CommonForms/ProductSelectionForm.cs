@@ -25,68 +25,163 @@ namespace SmartFlow.Common.Forms
         {
             try
             {
-                if (dgvproducts != null)
+                // Check if dgvproducts is not null and has rows
+                if (dgvproducts != null && dgvproducts.Rows.Count > 0)
                 {
-                    if (dgvproducts.Rows.Count > 0)
+                    // Check if exactly one row is selected
+                    if (dgvproducts.SelectedRows.Count == 1)
                     {
-                        if (dgvproducts.SelectedRows.Count == 1)
+                        // Get the selected row
+                        DataGridViewRow selectedRow = dgvproducts.CurrentRow;
+
+                        // Validate and assign product details
+                        if (selectedRow != null)
                         {
-                            GlobalVariables.productidglobal = Convert.ToInt32(dgvproducts.CurrentRow.Cells["ID"].Value);
-                            GlobalVariables.productnameglobal = dgvproducts.CurrentRow.Cells["TITLE"].Value.ToString();
-                            GlobalVariables.productmfrglobal = dgvproducts.CurrentRow.Cells["MFR"].Value.ToString();
-                            GlobalVariables.productpriceglobal = float.Parse(dgvproducts.CurrentRow.Cells["PRICE"].Value.ToString());
-                            GlobalVariables.productupcglobal = dgvproducts.CurrentRow.Cells["UPC"].Value.ToString();
-                            GlobalVariables.productbarcodeglobal = dgvproducts.CurrentRow.Cells["BARCODE"].Value.ToString();
+                            // Validate and safely parse product ID
+                            if (int.TryParse(selectedRow.Cells["ID"]?.Value?.ToString(), out int productId))
+                            {
+                                GlobalVariables.productidglobal = productId;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Invalid product ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            // Assign product name
+                            GlobalVariables.productnameglobal = selectedRow.Cells["TITLE"]?.Value?.ToString();
+
+                            // Validate and assign manufacturer
+                            GlobalVariables.productmfrglobal = selectedRow.Cells["MFR"]?.Value?.ToString() ?? "Unknown";
+
+                            // Validate and parse product price
+                            if (float.TryParse(selectedRow.Cells["PRICE"]?.Value?.ToString(), out float productPrice))
+                            {
+                                GlobalVariables.productpriceglobal = productPrice;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Invalid product price.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            // Assign product UPC and barcode
+                            GlobalVariables.productupcglobal = selectedRow.Cells["UPC"]?.Value?.ToString();
+                            GlobalVariables.productbarcodeglobal = selectedRow.Cells["BARCODE"]?.Value?.ToString();
+
+                            // Close the form
                             this.Close();
                         }
-                        else
-                        {
-                            MessageBox.Show("Select Only One Row.");
-                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Select Only One Row.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+                else
+                {
+                    MessageBox.Show("No data available in the product grid.", "Data Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex)
+            {
+                // Handle any unexpected exceptions and show the error message
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
         private void dgvproducts_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
-                if(e.KeyCode == Keys.Enter)
+                if (e.KeyCode == Keys.Enter)
                 {
-                    DataGridViewRow selectedrow = dgvproducts.CurrentRow;
-                    if (selectedrow != null)
+                    // Ensure that the DataGridView has a current row selected
+                    DataGridViewRow selectedRow = dgvproducts.CurrentRow;
+
+                    if (selectedRow != null)
                     {
-                        GlobalVariables.productidglobal = Convert.ToInt32(dgvproducts.CurrentRow.Cells["ID"].Value);
-                        GlobalVariables.productnameglobal = dgvproducts.CurrentRow.Cells["TITLE"].Value.ToString();
-                        GlobalVariables.productmfrglobal = dgvproducts.CurrentRow.Cells["MFR"].Value.ToString();
-                        GlobalVariables.productpriceglobal = float.Parse(dgvproducts.CurrentRow.Cells["PRICE"].Value.ToString());
-                        GlobalVariables.productupcglobal = dgvproducts.CurrentRow.Cells["UPC"].Value.ToString();
-                        GlobalVariables.productbarcodeglobal = dgvproducts.CurrentRow.Cells["BARCODE"].Value.ToString();
+                        // Validate and safely parse product ID
+                        if (int.TryParse(selectedRow.Cells["ID"]?.Value?.ToString(), out int productId))
+                        {
+                            GlobalVariables.productidglobal = productId;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid product ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        // Assign product name and manufacturer, with null checks
+                        GlobalVariables.productnameglobal = selectedRow.Cells["TITLE"]?.Value?.ToString() ?? "Unknown";
+                        GlobalVariables.productmfrglobal = selectedRow.Cells["MFR"]?.Value?.ToString() ?? "Unknown";
+
+                        // Validate and parse product price
+                        if (float.TryParse(selectedRow.Cells["PRICE"]?.Value?.ToString(), out float productPrice))
+                        {
+                            GlobalVariables.productpriceglobal = productPrice;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid product price.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        // Assign product UPC and barcode with null checks
+                        GlobalVariables.productupcglobal = selectedRow.Cells["UPC"]?.Value?.ToString();
+                        GlobalVariables.productbarcodeglobal = selectedRow.Cells["BARCODE"]?.Value?.ToString();
+
+                        // Close the form
                         this.Close();
                     }
+                    else
+                    {
+                        MessageBox.Show("No row selected.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
-            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            }
+            catch (Exception ex)
+            {
+                // Handle unexpected exceptions and display error message
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
         private void ProductSelectionForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
+            try
             {
-                // Check if there are any selected rows in the DataGridView
-                if (dgvproducts.SelectedRows.Count > 0)
+                if (e.KeyCode == Keys.Escape)
                 {
-                    dgvproducts.ClearSelection();
-                    GlobalVariables.productidglobal = 0;
-                    GlobalVariables.productnameglobal = null;
-                    GlobalVariables.productmfrglobal = null;
-                    GlobalVariables.productpriceglobal = 0;
-                    GlobalVariables.productupcglobal = null;
-                    GlobalVariables.productbarcodeglobal = null;
-                }
+                    // Check if there are any selected rows in the DataGridView
+                    if (dgvproducts.SelectedRows.Count > 0)
+                    {
+                        // Clear selection and reset global variables
+                        dgvproducts.ClearSelection();
+                        GlobalVariables.productidglobal = 0;
+                        GlobalVariables.productnameglobal = null;
+                        GlobalVariables.productmfrglobal = null;
+                        GlobalVariables.productpriceglobal = 0;
+                        GlobalVariables.productupcglobal = null;
+                        GlobalVariables.productbarcodeglobal = null;
+                    }
+                    else
+                    {
+                        // Optional: You can add a message to inform the user if no row is selected
+                        MessageBox.Show("No product selected to clear.", "Clear Selection", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
 
-                this.Close();
-                e.Handled = true; // Prevent further processing of the key event
+                    // Close the form
+                    this.Close();
+                    e.Handled = true; // Prevent further processing of the key event
+                }
             }
+            catch (Exception ex)
+            {
+                // Catch any unexpected errors and display an error message
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
         private void searchtxtbox_KeyDown(object sender, KeyEventArgs e)
         {
@@ -109,21 +204,6 @@ namespace SmartFlow.Common.Forms
 
                 e.Handled = true; // Prevent the beep sound on Enter key press
                 e.SuppressKeyPress = true; // Prevent the beep sound on Enter key press
-            }
-        }
-        private void newproductbtn_Click(object sender, EventArgs e)
-        {
-            Form openForm = CommonFunction.IsFormOpen(typeof(CreateProduct));
-            if (openForm == null)
-            {
-                CreateProduct createProduct = new CreateProduct();
-                createProduct.MdiParent = this.MdiParent;
-                CommonFunction.DisposeOnClose(createProduct);
-                createProduct.Show();
-            }
-            else
-            {
-                openForm.BringToFront();
             }
         }
     }

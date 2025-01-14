@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace SmartFlow.Masters
@@ -39,7 +40,19 @@ namespace SmartFlow.Masters
                     string querydebitamount = string.Format("UPDATE AccountSubControlTable SET OpeningBalanceDebit = '" + amounttxtbox.Text + "' " +
                         "WHERE AccountSubControlID = '" + accountidlbl.Text + "'");
 
-                    
+                    string tableName = "AccountSubControlTable";
+                    string whereClause = "AccountSubControlID = '" + accountidlbl.Text + "'";
+
+                    var columnData = new Dictionary<string, object>
+                    {
+                        { "OpeningBalanceDebit", amounttxtbox.Text }
+                    };
+
+                    bool isUpdated = DatabaseAccess.ExecuteQuery(tableName, "UPDATE", columnData, whereClause);
+                    if (isUpdated)
+                    {
+                        this.Close();
+                    }
                 }
 
                 if (creditamountradio.Checked)
@@ -47,7 +60,19 @@ namespace SmartFlow.Masters
                     string querycreditamount = string.Format("UPDATE AccountSubControlTable SET OpeningBalanceCredit = '" + amounttxtbox.Text + "' " +
                         "WHERE AccountSubControlID = '" + accountidlbl.Text + "'");
 
-                    
+                    string tableName = "AccountSubControlTable";
+                    string whereClause = "AccountSubControlID = '" + accountidlbl.Text + "'";
+
+                    var columnData = new Dictionary<string, object>
+                    {
+                        { "OpeningBalanceCredit", amounttxtbox.Text }
+                    };
+
+                    bool isUpdated = DatabaseAccess.ExecuteQuery(tableName, "UPDATE", columnData, whereClause);
+                    if (isUpdated)
+                    {
+                        this.Close();
+                    }
                 }
             }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }

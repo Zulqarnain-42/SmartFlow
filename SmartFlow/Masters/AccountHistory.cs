@@ -44,11 +44,11 @@ namespace SmartFlow.Masters
                 if (string.IsNullOrEmpty(searchvalue) && string.IsNullOrWhiteSpace(searchvalue))
                 {
                     query = "SELECT AccountSubControlTable.AccountSubControlID [ID],AccountSubControlTable.CodeAccount [Code]," +
-                        "AccountSubControlTable.AccountSubControlName [Account Name]," +
+                        "AccountSubControlTable.AccountSubControlName [Account Name],AccountSubControlTable.CompanyName [Company Name]," +
                         "AccountSubControlTable.MobileNo [Mobile]," +
-                        "AccountSubControlTable.Email [Email],AccountSubControlTable.CreatedAt [Created],AccountSubControlTable.CreatedDay [Day] " +
-                        "FROM AccountSubControlTable " +
-                        "INNER JOIN AccountControlTable ON AccountControlTable.AccountControlID = AccountSubControlTable.AccountControl_ID";
+                        "AccountSubControlTable.Email [Email],AccountSubControlTable.CreatedAt [Created]," +
+                        "AccountSubControlTable.CreatedDay [Day] " +
+                        "FROM AccountSubControlTable";
                 }
                 else
                 {
@@ -65,10 +65,11 @@ namespace SmartFlow.Masters
                         accountdatagridview.Columns[0].Width = 50;
                         accountdatagridview.Columns[1].Width = 150;
                         accountdatagridview.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                        accountdatagridview.Columns[3].Width = 100;
+                        accountdatagridview.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                         accountdatagridview.Columns[4].Width = 100;
                         accountdatagridview.Columns[5].Width = 100;
                         accountdatagridview.Columns[6].Width = 100;
+                        accountdatagridview.Columns[7].Width = 100;
                     }
                     else
                     {
@@ -213,7 +214,7 @@ namespace SmartFlow.Masters
         {
             string[] terms = searchTerm.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             StringBuilder queryBuilder = new StringBuilder("SELECT AccountSubControlTable.AccountSubControlID [ID],AccountSubControlTable.CodeAccount [Code], " +
-                "AccountSubControlTable.AccountSubControlName [Account Name], AccountSubControlTable.MobileNo [Mobile]," +
+                "AccountSubControlTable.AccountSubControlName [Account Name],AccountSubControlTable.CompanyName [Company Name],AccountSubControlTable.MobileNo [Mobile]," +
                 "AccountSubControlTable.Email [Email], " +
                 "AccountSubControlTable.CreatedAt [Created], AccountSubControlTable.CreatedDay [Day] " +
                 "FROM AccountSubControlTable INNER JOIN AccountControlTable ON AccountControlTable.AccountControlID = AccountSubControlTable.AccountControl_ID WHERE");

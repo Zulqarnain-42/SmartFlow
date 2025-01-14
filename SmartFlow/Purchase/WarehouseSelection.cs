@@ -31,14 +31,6 @@ namespace SmartFlow.Purchase
                 }
             }
         }
-        private void WarehouseSelection_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                this.Close();
-                e.Handled = true; // Prevent further processing of the key event
-            }
-        }
         private void dgvwarehouseselection_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvwarehouseselection != null)

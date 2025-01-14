@@ -33,7 +33,6 @@
             this.productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productupc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mfr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productbarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productquantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,12 +49,8 @@
             this.qtyusingmfridlbl = new System.Windows.Forms.Label();
             this.warehouselbl = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.refrencetxtbox = new System.Windows.Forms.TextBox();
-            this.usedproductrefrencelbl = new System.Windows.Forms.Label();
-            this.newitemradio = new System.Windows.Forms.RadioButton();
             this.importantnotestxtbox = new System.Windows.Forms.RichTextBox();
             this.importantnoteslbl = new System.Windows.Forms.Label();
-            this.useditemradio = new System.Windows.Forms.RadioButton();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvinventory)).BeginInit();
             this.panel1.SuspendLayout();
@@ -79,7 +74,6 @@
             this.productid,
             this.productname,
             this.productupc,
-            this.productprice,
             this.mfr,
             this.productbarcode,
             this.productquantity});
@@ -116,13 +110,6 @@
             this.productupc.MinimumWidth = 6;
             this.productupc.Name = "productupc";
             this.productupc.Width = 125;
-            // 
-            // productprice
-            // 
-            this.productprice.HeaderText = "PRICE";
-            this.productprice.MinimumWidth = 6;
-            this.productprice.Name = "productprice";
-            this.productprice.Width = 125;
             // 
             // mfr
             // 
@@ -288,13 +275,9 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.refrencetxtbox);
-            this.panel3.Controls.Add(this.usedproductrefrencelbl);
-            this.panel3.Controls.Add(this.newitemradio);
             this.panel3.Controls.Add(this.importantnotestxtbox);
             this.panel3.Controls.Add(this.importantnoteslbl);
             this.panel3.Controls.Add(this.dgvinventory);
-            this.panel3.Controls.Add(this.useditemradio);
             this.panel3.Controls.Add(this.exitbtn);
             this.panel3.Controls.Add(this.savebtn);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -303,51 +286,11 @@
             this.panel3.Size = new System.Drawing.Size(1594, 649);
             this.panel3.TabIndex = 57;
             // 
-            // refrencetxtbox
-            // 
-            this.refrencetxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.refrencetxtbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.refrencetxtbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.refrencetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.refrencetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.refrencetxtbox.Location = new System.Drawing.Point(1238, 468);
-            this.refrencetxtbox.Name = "refrencetxtbox";
-            this.refrencetxtbox.Size = new System.Drawing.Size(344, 32);
-            this.refrencetxtbox.TabIndex = 60;
-            this.refrencetxtbox.Visible = false;
-            // 
-            // usedproductrefrencelbl
-            // 
-            this.usedproductrefrencelbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.usedproductrefrencelbl.AutoSize = true;
-            this.usedproductrefrencelbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usedproductrefrencelbl.Location = new System.Drawing.Point(1234, 442);
-            this.usedproductrefrencelbl.Name = "usedproductrefrencelbl";
-            this.usedproductrefrencelbl.Size = new System.Drawing.Size(168, 23);
-            this.usedproductrefrencelbl.TabIndex = 62;
-            this.usedproductrefrencelbl.Text = "PRODUCT REFRENCE";
-            this.usedproductrefrencelbl.Visible = false;
-            // 
-            // newitemradio
-            // 
-            this.newitemradio.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.newitemradio.AutoSize = true;
-            this.newitemradio.Checked = true;
-            this.newitemradio.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newitemradio.Location = new System.Drawing.Point(1465, 32);
-            this.newitemradio.Name = "newitemradio";
-            this.newitemradio.Size = new System.Drawing.Size(113, 27);
-            this.newitemradio.TabIndex = 61;
-            this.newitemradio.TabStop = true;
-            this.newitemradio.Text = "NEW ITEM";
-            this.newitemradio.UseVisualStyleBackColor = true;
-            // 
             // importantnotestxtbox
             // 
             this.importantnotestxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.importantnotestxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.importantnotestxtbox.Location = new System.Drawing.Point(1238, 62);
+            this.importantnotestxtbox.Location = new System.Drawing.Point(1238, 29);
             this.importantnotestxtbox.Name = "importantnotestxtbox";
             this.importantnotestxtbox.Size = new System.Drawing.Size(344, 377);
             this.importantnotestxtbox.TabIndex = 57;
@@ -359,25 +302,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.importantnoteslbl.AutoSize = true;
             this.importantnoteslbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.importantnoteslbl.Location = new System.Drawing.Point(1238, 36);
+            this.importantnoteslbl.Location = new System.Drawing.Point(1238, 3);
             this.importantnoteslbl.Name = "importantnoteslbl";
             this.importantnoteslbl.Size = new System.Drawing.Size(160, 23);
             this.importantnoteslbl.TabIndex = 56;
             this.importantnoteslbl.Text = "IMPORTANT NOTES";
-            // 
-            // useditemradio
-            // 
-            this.useditemradio.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.useditemradio.AutoSize = true;
-            this.useditemradio.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.useditemradio.Location = new System.Drawing.Point(1465, 6);
-            this.useditemradio.Name = "useditemradio";
-            this.useditemradio.Size = new System.Drawing.Size(117, 27);
-            this.useditemradio.TabIndex = 60;
-            this.useditemradio.Text = "USED ITEM";
-            this.useditemradio.UseVisualStyleBackColor = true;
-            this.useditemradio.CheckedChanged += new System.EventHandler(this.useditemradio_CheckedChanged);
             // 
             // errorProvider
             // 
@@ -387,7 +316,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1594, 770);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -432,14 +361,9 @@
         private System.Windows.Forms.Label qtyusingmfridlbl;
         private System.Windows.Forms.TextBox selectwarehousetxtbox;
         private System.Windows.Forms.Label warehouseidlbl;
-        private System.Windows.Forms.RadioButton newitemradio;
-        private System.Windows.Forms.RadioButton useditemradio;
-        private System.Windows.Forms.TextBox refrencetxtbox;
-        private System.Windows.Forms.Label usedproductrefrencelbl;
         private System.Windows.Forms.DataGridViewTextBoxColumn productid;
         private System.Windows.Forms.DataGridViewTextBoxColumn productname;
         private System.Windows.Forms.DataGridViewTextBoxColumn productupc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productprice;
         private System.Windows.Forms.DataGridViewTextBoxColumn mfr;
         private System.Windows.Forms.DataGridViewTextBoxColumn productbarcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn productquantity;

@@ -100,11 +100,17 @@
             // 
             // dgvTaxPlanet
             // 
+            this.dgvTaxPlanet.AllowUserToAddRows = false;
+            this.dgvTaxPlanet.AllowUserToDeleteRows = false;
+            this.dgvTaxPlanet.AllowUserToResizeColumns = false;
+            this.dgvTaxPlanet.AllowUserToResizeRows = false;
             this.dgvTaxPlanet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTaxPlanet.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvTaxPlanet.Location = new System.Drawing.Point(12, 157);
             this.dgvTaxPlanet.Name = "dgvTaxPlanet";
             this.dgvTaxPlanet.RowHeadersWidth = 51;
             this.dgvTaxPlanet.RowTemplate.Height = 24;
+            this.dgvTaxPlanet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTaxPlanet.Size = new System.Drawing.Size(898, 293);
             this.dgvTaxPlanet.TabIndex = 7;
             this.dgvTaxPlanet.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTaxPlanet_CellClick);
@@ -157,7 +163,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(922, 497);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel2);

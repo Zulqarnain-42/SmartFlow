@@ -46,13 +46,7 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.updateOpeningBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripSeparator();
-            this.purchaseTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listPurchaseTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saleTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listSaleTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.updateAccountsUsingExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listCurrenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,6 +71,7 @@
             this.allPurchaseQuotationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesQuotationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.perfromaInvoiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.directSalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesReturnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
@@ -87,7 +82,6 @@
             this.taxPlanetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.warehouseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stockLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stockOpeningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stockTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.damageEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,8 +99,6 @@
             this.manageInventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.balanceSheetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dayBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemWiseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.termsConditionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,10 +126,7 @@
             this.additembtn = new System.Windows.Forms.Button();
             this.addaccountbtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.userRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.userRightsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.menuStrip.SuspendLayout();
             this.toolStripall.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -158,7 +147,8 @@
             this.settingToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1594, 28);
+            this.menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip.Size = new System.Drawing.Size(1595, 30);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -204,9 +194,7 @@
             this.mastersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.inventoryMastersToolStripMenuItem,
             this.accountMastersToolStripMenuItem,
-            this.listCurrenciesToolStripMenuItem,
-            this.unitToolStripMenuItem,
-            this.usersToolStripMenuItem});
+            this.unitToolStripMenuItem});
             this.mastersToolStripMenuItem.Name = "mastersToolStripMenuItem";
             this.mastersToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
             this.mastersToolStripMenuItem.Text = "Masters";
@@ -217,7 +205,7 @@
             this.productToolStripMenuItem,
             this.uploadUsingExcelToolStripMenuItem});
             this.inventoryMastersToolStripMenuItem.Name = "inventoryMastersToolStripMenuItem";
-            this.inventoryMastersToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.inventoryMastersToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
             this.inventoryMastersToolStripMenuItem.Text = "Product Masters";
             // 
             // productToolStripMenuItem
@@ -243,14 +231,9 @@
             this.toolStripMenuItem4,
             this.updateOpeningBalanceToolStripMenuItem,
             this.toolStripMenuItem12,
-            this.purchaseTypeToolStripMenuItem,
-            this.listPurchaseTypeToolStripMenuItem,
-            this.saleTypeToolStripMenuItem,
-            this.listSaleTypeToolStripMenuItem,
-            this.toolStripMenuItem2,
             this.updateAccountsUsingExcelToolStripMenuItem});
             this.accountMastersToolStripMenuItem.Name = "accountMastersToolStripMenuItem";
-            this.accountMastersToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.accountMastersToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
             this.accountMastersToolStripMenuItem.Text = "Account Masters";
             // 
             // accountGroupToolStripMenuItem
@@ -291,39 +274,6 @@
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
             this.toolStripMenuItem12.Size = new System.Drawing.Size(319, 6);
             // 
-            // purchaseTypeToolStripMenuItem
-            // 
-            this.purchaseTypeToolStripMenuItem.Name = "purchaseTypeToolStripMenuItem";
-            this.purchaseTypeToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
-            this.purchaseTypeToolStripMenuItem.Text = "Purchase Type";
-            this.purchaseTypeToolStripMenuItem.Click += new System.EventHandler(this.purchaseTypeToolStripMenuItem_Click);
-            // 
-            // listPurchaseTypeToolStripMenuItem
-            // 
-            this.listPurchaseTypeToolStripMenuItem.Name = "listPurchaseTypeToolStripMenuItem";
-            this.listPurchaseTypeToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
-            this.listPurchaseTypeToolStripMenuItem.Text = "List Purchase Type";
-            this.listPurchaseTypeToolStripMenuItem.Click += new System.EventHandler(this.listPurchaseTypeToolStripMenuItem_Click);
-            // 
-            // saleTypeToolStripMenuItem
-            // 
-            this.saleTypeToolStripMenuItem.Name = "saleTypeToolStripMenuItem";
-            this.saleTypeToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
-            this.saleTypeToolStripMenuItem.Text = "Sale Type";
-            this.saleTypeToolStripMenuItem.Click += new System.EventHandler(this.saleTypeToolStripMenuItem_Click);
-            // 
-            // listSaleTypeToolStripMenuItem
-            // 
-            this.listSaleTypeToolStripMenuItem.Name = "listSaleTypeToolStripMenuItem";
-            this.listSaleTypeToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
-            this.listSaleTypeToolStripMenuItem.Text = "List Sale Type";
-            this.listSaleTypeToolStripMenuItem.Click += new System.EventHandler(this.listSaleTypeToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(319, 6);
-            // 
             // updateAccountsUsingExcelToolStripMenuItem
             // 
             this.updateAccountsUsingExcelToolStripMenuItem.Name = "updateAccountsUsingExcelToolStripMenuItem";
@@ -331,17 +281,10 @@
             this.updateAccountsUsingExcelToolStripMenuItem.Text = "Update Accounts Using Excel";
             this.updateAccountsUsingExcelToolStripMenuItem.Click += new System.EventHandler(this.updateAccountsUsingExcelToolStripMenuItem_Click);
             // 
-            // listCurrenciesToolStripMenuItem
-            // 
-            this.listCurrenciesToolStripMenuItem.Name = "listCurrenciesToolStripMenuItem";
-            this.listCurrenciesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.listCurrenciesToolStripMenuItem.Text = "List Currencies";
-            this.listCurrenciesToolStripMenuItem.Click += new System.EventHandler(this.listCurrenciesToolStripMenuItem_Click);
-            // 
             // unitToolStripMenuItem
             // 
             this.unitToolStripMenuItem.Name = "unitToolStripMenuItem";
-            this.unitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.unitToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
             this.unitToolStripMenuItem.Text = "Unit";
             this.unitToolStripMenuItem.Click += new System.EventHandler(this.unitToolStripMenuItem_Click);
             // 
@@ -379,6 +322,7 @@
             // 
             // journalToolStripMenuItem1
             // 
+            this.journalToolStripMenuItem1.Enabled = false;
             this.journalToolStripMenuItem1.Name = "journalToolStripMenuItem1";
             this.journalToolStripMenuItem1.Size = new System.Drawing.Size(259, 26);
             this.journalToolStripMenuItem1.Text = "Journal";
@@ -386,6 +330,7 @@
             // 
             // creditNoteToolStripMenuItem1
             // 
+            this.creditNoteToolStripMenuItem1.Enabled = false;
             this.creditNoteToolStripMenuItem1.Name = "creditNoteToolStripMenuItem1";
             this.creditNoteToolStripMenuItem1.Size = new System.Drawing.Size(259, 26);
             this.creditNoteToolStripMenuItem1.Text = "Credit Note";
@@ -393,6 +338,7 @@
             // 
             // debitNoteToolStripMenuItem1
             // 
+            this.debitNoteToolStripMenuItem1.Enabled = false;
             this.debitNoteToolStripMenuItem1.Name = "debitNoteToolStripMenuItem1";
             this.debitNoteToolStripMenuItem1.Size = new System.Drawing.Size(259, 26);
             this.debitNoteToolStripMenuItem1.Text = "Debit Note";
@@ -405,6 +351,7 @@
             // 
             // matIssuedToPartyToolStripMenuItem
             // 
+            this.matIssuedToPartyToolStripMenuItem.Enabled = false;
             this.matIssuedToPartyToolStripMenuItem.Name = "matIssuedToPartyToolStripMenuItem";
             this.matIssuedToPartyToolStripMenuItem.Size = new System.Drawing.Size(259, 26);
             this.matIssuedToPartyToolStripMenuItem.Text = "Mat. Issued To Party";
@@ -412,6 +359,7 @@
             // 
             // matReceivedFromPartyToolStripMenuItem
             // 
+            this.matReceivedFromPartyToolStripMenuItem.Enabled = false;
             this.matReceivedFromPartyToolStripMenuItem.Name = "matReceivedFromPartyToolStripMenuItem";
             this.matReceivedFromPartyToolStripMenuItem.Size = new System.Drawing.Size(259, 26);
             this.matReceivedFromPartyToolStripMenuItem.Text = "Mat. Received From Party";
@@ -431,10 +379,10 @@
             // 
             // listTransactionInvoicesToolStripMenuItem
             // 
+            this.listTransactionInvoicesToolStripMenuItem.Enabled = false;
             this.listTransactionInvoicesToolStripMenuItem.Name = "listTransactionInvoicesToolStripMenuItem";
             this.listTransactionInvoicesToolStripMenuItem.Size = new System.Drawing.Size(259, 26);
             this.listTransactionInvoicesToolStripMenuItem.Text = "List Transaction Invoices";
-            this.listTransactionInvoicesToolStripMenuItem.Click += new System.EventHandler(this.listTransactionInvoicesToolStripMenuItem_Click);
             // 
             // purchaseToolStripMenuItem
             // 
@@ -498,15 +446,16 @@
             // 
             // allPurchaseQuotationToolStripMenuItem
             // 
+            this.allPurchaseQuotationToolStripMenuItem.Enabled = false;
             this.allPurchaseQuotationToolStripMenuItem.Name = "allPurchaseQuotationToolStripMenuItem";
             this.allPurchaseQuotationToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.allPurchaseQuotationToolStripMenuItem.Text = "List Purchase Invoices";
-            this.allPurchaseQuotationToolStripMenuItem.Click += new System.EventHandler(this.allPurchaseQuotationToolStripMenuItem_Click);
             // 
             // salesToolStripMenuItem
             // 
             this.salesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.salesQuotationToolStripMenuItem,
+            this.perfromaInvoiceToolStripMenuItem,
             this.directSalesToolStripMenuItem,
             this.salesReturnToolStripMenuItem,
             this.toolStripMenuItem6,
@@ -525,6 +474,13 @@
             this.salesQuotationToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
             this.salesQuotationToolStripMenuItem.Text = "Sales Quotation";
             this.salesQuotationToolStripMenuItem.Click += new System.EventHandler(this.salesQuotationToolStripMenuItem_Click);
+            // 
+            // perfromaInvoiceToolStripMenuItem
+            // 
+            this.perfromaInvoiceToolStripMenuItem.Name = "perfromaInvoiceToolStripMenuItem";
+            this.perfromaInvoiceToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
+            this.perfromaInvoiceToolStripMenuItem.Text = "Perfroma Invoice";
+            this.perfromaInvoiceToolStripMenuItem.Click += new System.EventHandler(this.perfromaInvoiceToolStripMenuItem_Click);
             // 
             // directSalesToolStripMenuItem
             // 
@@ -562,7 +518,6 @@
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
             this.allToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
             this.allToolStripMenuItem.Text = "List Sales Invoice";
-            this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
             // 
             // toolStripMenuItem17
             // 
@@ -571,6 +526,7 @@
             // 
             // taxPlanetToolStripMenuItem
             // 
+            this.taxPlanetToolStripMenuItem.DoubleClickEnabled = true;
             this.taxPlanetToolStripMenuItem.Name = "taxPlanetToolStripMenuItem";
             this.taxPlanetToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
             this.taxPlanetToolStripMenuItem.Text = "Tax Planet";
@@ -580,7 +536,6 @@
             // 
             this.stockToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.warehouseToolStripMenuItem,
-            this.stockLocationToolStripMenuItem,
             this.stockOpeningToolStripMenuItem,
             this.stockTransferToolStripMenuItem,
             this.damageEntryToolStripMenuItem,
@@ -606,13 +561,6 @@
             this.warehouseToolStripMenuItem.Size = new System.Drawing.Size(277, 26);
             this.warehouseToolStripMenuItem.Text = "Warehouse";
             this.warehouseToolStripMenuItem.Click += new System.EventHandler(this.warehouseToolStripMenuItem_Click);
-            // 
-            // stockLocationToolStripMenuItem
-            // 
-            this.stockLocationToolStripMenuItem.Name = "stockLocationToolStripMenuItem";
-            this.stockLocationToolStripMenuItem.Size = new System.Drawing.Size(277, 26);
-            this.stockLocationToolStripMenuItem.Text = "Stock Location";
-            this.stockLocationToolStripMenuItem.Click += new System.EventHandler(this.stockLocationToolStripMenuItem_Click);
             // 
             // stockOpeningToolStripMenuItem
             // 
@@ -718,9 +666,7 @@
             // reportsToolStripMenuItem
             // 
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.balanceSheetToolStripMenuItem,
-            this.dayBookToolStripMenuItem,
-            this.itemWiseReportToolStripMenuItem});
+            this.balanceSheetToolStripMenuItem});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
             this.reportsToolStripMenuItem.Text = "Reports";
@@ -728,21 +674,9 @@
             // balanceSheetToolStripMenuItem
             // 
             this.balanceSheetToolStripMenuItem.Name = "balanceSheetToolStripMenuItem";
-            this.balanceSheetToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
+            this.balanceSheetToolStripMenuItem.Size = new System.Drawing.Size(185, 26);
             this.balanceSheetToolStripMenuItem.Text = "Balance Sheet";
-            // 
-            // dayBookToolStripMenuItem
-            // 
-            this.dayBookToolStripMenuItem.Name = "dayBookToolStripMenuItem";
-            this.dayBookToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
-            this.dayBookToolStripMenuItem.Text = "Day Book";
-            // 
-            // itemWiseReportToolStripMenuItem
-            // 
-            this.itemWiseReportToolStripMenuItem.Name = "itemWiseReportToolStripMenuItem";
-            this.itemWiseReportToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
-            this.itemWiseReportToolStripMenuItem.Text = "Item Wise Report";
-            this.itemWiseReportToolStripMenuItem.Click += new System.EventHandler(this.itemWiseReportToolStripMenuItem_Click);
+            this.balanceSheetToolStripMenuItem.Click += new System.EventHandler(this.balanceSheetToolStripMenuItem_Click);
             // 
             // settingToolStripMenuItem
             // 
@@ -753,6 +687,7 @@
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             this.settingToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
             this.settingToolStripMenuItem.Text = "Setting";
+            this.settingToolStripMenuItem.Visible = false;
             // 
             // termsConditionsToolStripMenuItem
             // 
@@ -782,9 +717,9 @@
             this.toolStripall.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbLogin,
             this.tsbLogout});
-            this.toolStripall.Location = new System.Drawing.Point(0, 28);
+            this.toolStripall.Location = new System.Drawing.Point(0, 30);
             this.toolStripall.Name = "toolStripall";
-            this.toolStripall.Size = new System.Drawing.Size(1594, 51);
+            this.toolStripall.Size = new System.Drawing.Size(1595, 51);
             this.toolStripall.TabIndex = 2;
             this.toolStripall.Text = "toolStrip1";
             // 
@@ -817,19 +752,17 @@
             // changePasswordToolStripMenuItem
             // 
             this.changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
-            this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
-            this.changePasswordToolStripMenuItem.Text = "Change Password";
-            this.changePasswordToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
+            this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(139, 26);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(204, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(136, 6);
             // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(139, 26);
             this.logoutToolStripMenuItem.Text = "Logout";
             // 
             // panel1
@@ -852,18 +785,20 @@
             this.panel1.Controls.Add(this.addaccountbtn);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(1417, 79);
+            this.panel1.Location = new System.Drawing.Point(1394, 81);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(177, 874);
+            this.panel1.Size = new System.Drawing.Size(201, 880);
             this.panel1.TabIndex = 4;
             // 
             // itemledgerbtn
             // 
             this.itemledgerbtn.Enabled = false;
             this.itemledgerbtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemledgerbtn.Location = new System.Drawing.Point(7, 468);
+            this.itemledgerbtn.Location = new System.Drawing.Point(7, 505);
+            this.itemledgerbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemledgerbtn.Name = "itemledgerbtn";
-            this.itemledgerbtn.Size = new System.Drawing.Size(160, 30);
+            this.itemledgerbtn.Size = new System.Drawing.Size(181, 30);
             this.itemledgerbtn.TabIndex = 17;
             this.itemledgerbtn.Text = "D   ITEM LEDGER";
             this.itemledgerbtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -873,9 +808,10 @@
             // 
             this.itemsummarybtn.Enabled = false;
             this.itemsummarybtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemsummarybtn.Location = new System.Drawing.Point(7, 438);
+            this.itemsummarybtn.Location = new System.Drawing.Point(7, 475);
+            this.itemsummarybtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemsummarybtn.Name = "itemsummarybtn";
-            this.itemsummarybtn.Size = new System.Drawing.Size(160, 30);
+            this.itemsummarybtn.Size = new System.Drawing.Size(181, 30);
             this.itemsummarybtn.TabIndex = 16;
             this.itemsummarybtn.Text = "I   ITEM SUMMARY";
             this.itemsummarybtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -885,9 +821,10 @@
             // 
             this.accledgerbtn.Enabled = false;
             this.accledgerbtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.accledgerbtn.Location = new System.Drawing.Point(7, 408);
+            this.accledgerbtn.Location = new System.Drawing.Point(7, 446);
+            this.accledgerbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.accledgerbtn.Name = "accledgerbtn";
-            this.accledgerbtn.Size = new System.Drawing.Size(160, 30);
+            this.accledgerbtn.Size = new System.Drawing.Size(181, 30);
             this.accledgerbtn.TabIndex = 15;
             this.accledgerbtn.Text = "L   ACC. LEDGER";
             this.accledgerbtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -897,9 +834,10 @@
             // 
             this.accsummarybtn.Enabled = false;
             this.accsummarybtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.accsummarybtn.Location = new System.Drawing.Point(7, 378);
+            this.accsummarybtn.Location = new System.Drawing.Point(7, 415);
+            this.accsummarybtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.accsummarybtn.Name = "accsummarybtn";
-            this.accsummarybtn.Size = new System.Drawing.Size(160, 30);
+            this.accsummarybtn.Size = new System.Drawing.Size(181, 30);
             this.accsummarybtn.TabIndex = 14;
             this.accsummarybtn.Text = "A   ACC. SUMMARY";
             this.accsummarybtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -909,9 +847,10 @@
             // 
             this.stockstatusbtn.Enabled = false;
             this.stockstatusbtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stockstatusbtn.Location = new System.Drawing.Point(8, 348);
+            this.stockstatusbtn.Location = new System.Drawing.Point(8, 385);
+            this.stockstatusbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.stockstatusbtn.Name = "stockstatusbtn";
-            this.stockstatusbtn.Size = new System.Drawing.Size(160, 30);
+            this.stockstatusbtn.Size = new System.Drawing.Size(181, 30);
             this.stockstatusbtn.TabIndex = 13;
             this.stockstatusbtn.Text = "S   STOCK STATUS";
             this.stockstatusbtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -921,9 +860,10 @@
             // 
             this.trialbalancebtn.Enabled = false;
             this.trialbalancebtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.trialbalancebtn.Location = new System.Drawing.Point(7, 318);
+            this.trialbalancebtn.Location = new System.Drawing.Point(7, 354);
+            this.trialbalancebtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.trialbalancebtn.Name = "trialbalancebtn";
-            this.trialbalancebtn.Size = new System.Drawing.Size(160, 30);
+            this.trialbalancebtn.Size = new System.Drawing.Size(181, 30);
             this.trialbalancebtn.TabIndex = 12;
             this.trialbalancebtn.Text = "T   TRIAL BALANCE";
             this.trialbalancebtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -933,9 +873,10 @@
             // 
             this.balancesheetbtn.Enabled = false;
             this.balancesheetbtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.balancesheetbtn.Location = new System.Drawing.Point(7, 288);
+            this.balancesheetbtn.Location = new System.Drawing.Point(7, 325);
+            this.balancesheetbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.balancesheetbtn.Name = "balancesheetbtn";
-            this.balancesheetbtn.Size = new System.Drawing.Size(160, 30);
+            this.balancesheetbtn.Size = new System.Drawing.Size(181, 30);
             this.balancesheetbtn.TabIndex = 11;
             this.balancesheetbtn.Text = "B   BALANCE SHEET";
             this.balancesheetbtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -946,8 +887,9 @@
             this.addpurchasebtn.Enabled = false;
             this.addpurchasebtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addpurchasebtn.Location = new System.Drawing.Point(7, 239);
+            this.addpurchasebtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addpurchasebtn.Name = "addpurchasebtn";
-            this.addpurchasebtn.Size = new System.Drawing.Size(160, 30);
+            this.addpurchasebtn.Size = new System.Drawing.Size(181, 30);
             this.addpurchasebtn.TabIndex = 10;
             this.addpurchasebtn.Text = "F9   ADD PURCHASE";
             this.addpurchasebtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -959,8 +901,9 @@
             this.addsalesbtn.Enabled = false;
             this.addsalesbtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addsalesbtn.Location = new System.Drawing.Point(7, 209);
+            this.addsalesbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addsalesbtn.Name = "addsalesbtn";
-            this.addsalesbtn.Size = new System.Drawing.Size(160, 30);
+            this.addsalesbtn.Size = new System.Drawing.Size(181, 30);
             this.addsalesbtn.TabIndex = 9;
             this.addsalesbtn.Text = "F8   ADD SALES";
             this.addsalesbtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -972,8 +915,9 @@
             this.addjournalbtn.Enabled = false;
             this.addjournalbtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addjournalbtn.Location = new System.Drawing.Point(7, 180);
+            this.addjournalbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addjournalbtn.Name = "addjournalbtn";
-            this.addjournalbtn.Size = new System.Drawing.Size(160, 30);
+            this.addjournalbtn.Size = new System.Drawing.Size(181, 30);
             this.addjournalbtn.TabIndex = 8;
             this.addjournalbtn.Text = "F7   ADD JOURNAL";
             this.addjournalbtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -985,8 +929,9 @@
             this.addreceiptbtn.Enabled = false;
             this.addreceiptbtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addreceiptbtn.Location = new System.Drawing.Point(7, 150);
+            this.addreceiptbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addreceiptbtn.Name = "addreceiptbtn";
-            this.addreceiptbtn.Size = new System.Drawing.Size(160, 30);
+            this.addreceiptbtn.Size = new System.Drawing.Size(181, 30);
             this.addreceiptbtn.TabIndex = 7;
             this.addreceiptbtn.Text = "F6   ADD RECEIPT";
             this.addreceiptbtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -997,9 +942,10 @@
             // 
             this.addpaymentbtn.Enabled = false;
             this.addpaymentbtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addpaymentbtn.Location = new System.Drawing.Point(7, 120);
+            this.addpaymentbtn.Location = new System.Drawing.Point(7, 121);
+            this.addpaymentbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addpaymentbtn.Name = "addpaymentbtn";
-            this.addpaymentbtn.Size = new System.Drawing.Size(160, 30);
+            this.addpaymentbtn.Size = new System.Drawing.Size(181, 30);
             this.addpaymentbtn.TabIndex = 6;
             this.addpaymentbtn.Text = "F5   ADD PAYMENT";
             this.addpaymentbtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1011,8 +957,9 @@
             this.addmasterbtn.Enabled = false;
             this.addmasterbtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addmasterbtn.Location = new System.Drawing.Point(7, 90);
+            this.addmasterbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addmasterbtn.Name = "addmasterbtn";
-            this.addmasterbtn.Size = new System.Drawing.Size(160, 30);
+            this.addmasterbtn.Size = new System.Drawing.Size(181, 30);
             this.addmasterbtn.TabIndex = 4;
             this.addmasterbtn.Text = "F3   ADD MASTER";
             this.addmasterbtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1024,8 +971,9 @@
             this.additembtn.Enabled = false;
             this.additembtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.additembtn.Location = new System.Drawing.Point(7, 60);
+            this.additembtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.additembtn.Name = "additembtn";
-            this.additembtn.Size = new System.Drawing.Size(160, 30);
+            this.additembtn.Size = new System.Drawing.Size(181, 30);
             this.additembtn.TabIndex = 3;
             this.additembtn.Text = "F2   ADD ITEM";
             this.additembtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1037,8 +985,9 @@
             this.addaccountbtn.Enabled = false;
             this.addaccountbtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addaccountbtn.Location = new System.Drawing.Point(7, 30);
+            this.addaccountbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addaccountbtn.Name = "addaccountbtn";
-            this.addaccountbtn.Size = new System.Drawing.Size(160, 30);
+            this.addaccountbtn.Size = new System.Drawing.Size(181, 30);
             this.addaccountbtn.TabIndex = 2;
             this.addaccountbtn.Text = "F1   ADD ACCOUNT";
             this.addaccountbtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1049,54 +998,34 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 6);
+            this.label1.Location = new System.Drawing.Point(5, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(122, 21);
             this.label1.TabIndex = 0;
             this.label1.Text = "SHORTCUT KEYS";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // usersToolStripMenuItem
+            // panel2
             // 
-            this.usersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.userRolesToolStripMenuItem,
-            this.userRightsToolStripMenuItem,
-            this.listUserToolStripMenuItem});
-            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.usersToolStripMenuItem.Text = "Users";
-            // 
-            // userRolesToolStripMenuItem
-            // 
-            this.userRolesToolStripMenuItem.Name = "userRolesToolStripMenuItem";
-            this.userRolesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.userRolesToolStripMenuItem.Text = "User Roles";
-            this.userRolesToolStripMenuItem.Click += new System.EventHandler(this.userRolesToolStripMenuItem_Click);
-            // 
-            // userRightsToolStripMenuItem
-            // 
-            this.userRightsToolStripMenuItem.Name = "userRightsToolStripMenuItem";
-            this.userRightsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.userRightsToolStripMenuItem.Text = "User Rights";
-            this.userRightsToolStripMenuItem.Click += new System.EventHandler(this.userRightsToolStripMenuItem_Click);
-            // 
-            // listUserToolStripMenuItem
-            // 
-            this.listUserToolStripMenuItem.Name = "listUserToolStripMenuItem";
-            this.listUserToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.listUserToolStripMenuItem.Text = "List User";
-            this.listUserToolStripMenuItem.Click += new System.EventHandler(this.listUserToolStripMenuItem_Click);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 883);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1394, 78);
+            this.panel2.TabIndex = 5;
             // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1594, 953);
+            this.ClientSize = new System.Drawing.Size(1595, 961);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStripall);
             this.Controls.Add(this.menuStrip);
             this.KeyPreview = true;
-            this.MinimumSize = new System.Drawing.Size(1390, 1000);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MinimumSize = new System.Drawing.Size(1389, 996);
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DASHBOARD - FUTURE ART BROADCAST TRADING LLC";
@@ -1153,7 +1082,6 @@
         private System.Windows.Forms.ToolStripMenuItem updateOpeningBalanceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem productToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem balanceSheetToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem dayBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addOpenBoxProductsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem11;
         private System.Windows.Forms.ToolStripMenuItem addQuantityUsingScannerToolStripMenuItem;
@@ -1182,10 +1110,7 @@
         public System.Windows.Forms.ToolStripSplitButton tsbLogout;
         public System.Windows.Forms.ToolStripButton tsbLogin;
         public System.Windows.Forms.MenuStrip menuStrip;
-        private System.Windows.Forms.ToolStripMenuItem stockLocationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stockOpeningToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem purchaseTypeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saleTypeToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem findAnInvoiceToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
@@ -1203,7 +1128,6 @@
         private System.Windows.Forms.ToolStripMenuItem taxPlanetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem databaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fileSavingPathToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem updateAccountsUsingExcelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem packingListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deliveryNoteToolStripMenuItem;
@@ -1211,17 +1135,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
         private System.Windows.Forms.ToolStripMenuItem findAnInvoiceToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem listOfGroupingAccountToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listPurchaseTypeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listSaleTypeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listCurrenciesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listTransactionInvoicesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
         private System.Windows.Forms.ToolStripMenuItem manageInventoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem itemWiseReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem userRolesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem userRightsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listUserToolStripMenuItem;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ToolStripMenuItem perfromaInvoiceToolStripMenuItem;
     }
 }

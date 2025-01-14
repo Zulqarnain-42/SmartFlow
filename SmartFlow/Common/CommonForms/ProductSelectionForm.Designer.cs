@@ -34,7 +34,6 @@
             this.searchlbl = new System.Windows.Forms.Label();
             this.dgvproducts = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.newproductbtn = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvproducts)).BeginInit();
@@ -108,7 +107,6 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.newproductbtn);
             this.panel3.Controls.Add(this.searchtxtbox);
             this.panel3.Controls.Add(this.searchlbl);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -116,16 +114,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1232, 60);
             this.panel3.TabIndex = 2;
-            // 
-            // newproductbtn
-            // 
-            this.newproductbtn.Location = new System.Drawing.Point(1050, 5);
-            this.newproductbtn.Name = "newproductbtn";
-            this.newproductbtn.Size = new System.Drawing.Size(170, 44);
-            this.newproductbtn.TabIndex = 2;
-            this.newproductbtn.Text = "NEW PRODUCT";
-            this.newproductbtn.UseVisualStyleBackColor = true;
-            this.newproductbtn.Click += new System.EventHandler(this.newproductbtn_Click);
             // 
             // panel4
             // 
@@ -140,7 +128,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1232, 653);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -170,6 +158,5 @@
         private System.Windows.Forms.Label headinglbl;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button newproductbtn;
     }
 }

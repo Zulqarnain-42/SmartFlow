@@ -15,7 +15,6 @@ namespace SmartFlow.General
         {
             InitializeComponent();
         }
-
         public NewCompany(int companyID)
         {
             InitializeComponent();
@@ -113,7 +112,6 @@ namespace SmartFlow.General
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
-        
         private void SaveInputsToFile(string[] inputs)
         {
             string filePath = "companyData.txt";

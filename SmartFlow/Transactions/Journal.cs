@@ -2,7 +2,9 @@
 using SmartFlow.Common.Forms;
 using SmartFlow.Sales;
 using SmartFlow.Transactions.CommonForm;
+using SmartFlow.Transactions.ReportViewer;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -25,17 +27,28 @@ namespace SmartFlow.Transactions
             {
                 errorProvider.Clear();
 
-                string invoiceNo = invoicenotxtbox.Text;
+                string invoiceNo = CheckInvoiceBeforeInsert();
                 DateTime invoiceDate = DateTime.Parse(invoicedatetxtbox.Text);
                 string transactionCode = Guid.NewGuid().ToString();
                 string longdescription = longdescriptiontxtbox.Text;
 
-                string query = string.Format("INSERT INTO TransactionTable (InvoiceNo,InvoiceDate,TransactionCode,LongDescription,CurrencyId,CurrencyName," +
-                    "CurrencySymbol,ConversionRate,CreatedAt,CreatedDay) VALUES ('" + invoiceNo + "','" + invoiceDate + "','" + transactionCode + "'," +
-                    "'" + longdescription + "','" + currencyidlbl.Text + "','" + currencynamelbl.Text + "','" + currencysymbollbl.Text + "'," +
-                    "'" + currencyconversionratelbl.Text + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')" +
-                    "SELECT SCOPE_IDENTITY();");
-                int transactionid = 0;
+                string tableName = "TransactionTable";
+                var columnData = new Dictionary<string, object>
+                {
+                    { "InvoiceNo", invoicenotxtbox.Text },
+                    { "InvoiceDate", invoicedatetxtbox.Text },
+                    { "TransactionCode", transactionCode },
+                    { "LongDescription", longdescription },
+                    { "CurrencyId", currencyidlbl.Text },
+                    { "CurrencyName", currencynamelbl.Text },
+                    { "CurrencySymbol", currencysymbollbl.Text },
+                    { "ConversionRate", currencyconversionratelbl.Text },
+                    { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                    { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                    { "VoucherInfo", voucherinfotxtbox.Text }
+                };
+
+                int transactionid = DatabaseAccess.InsertDataId(tableName, columnData);
                 if (transactionid > 0)
                 {
                     foreach(DataGridViewRow row in dgvjournal.Rows)
@@ -52,11 +65,27 @@ namespace SmartFlow.Transactions
                         float creditamount = float.Parse(row.Cells["creditcolumn"].Value.ToString());
                         string debitorcredit = row.Cells["debitcreditcolumn"].Value.ToString();
 
-                        string subquery = string.Format("INSERT INTO TransactionDetailTable (TransactionId,TransactionCode,AccountId,AccountCode,AccountName,IsDebit," +
-                            "IsCredit,ShortDescription,DebitAmount,CreditAmount,DebitOrCredit) VALUES ('" + transactionid + "','" + transactionCode + "'," +
-                            "'" + accountid + "','" + accountCode + "','" + accountName + "','" + isdebitentry + "','" + iscreditentry + "','" + shortdescription + "'," +
-                            "'" + debitamount + "','" + creditamount + "','" + debitorcredit + "')");
+                        string subTable = "TransactionDetailTable";
+                        var subColumnData = new Dictionary<string, object>
+                        {
+                            { "TransactionId", transactionid },
+                            { "TransactionCode", transactionCode },
+                            { "AccountId", accountid },
+                            { "AccountCode", accountCode },
+                            { "AccountName", accountName },
+                            { "IsDebit", isdebitentry },
+                            { "IsCredit", iscreditentry },
+                            { "ShortDescription", shortdescription },
+                            { "DebitAmount", debitamount },
+                            { "CreditAmount", creditamount }
+                        };
+
+                        bool isInserted = DatabaseAccess.ExecuteQuery(subTable, "INSERT", subColumnData);
                     }
+
+                    JournalReportView journalReportView = new JournalReportView();
+                    CommonFunction.DisposeOnClose(journalReportView);
+                    journalReportView.Show();
                 }
                 else
                 {
@@ -187,49 +216,6 @@ namespace SmartFlow.Transactions
                 return null;
             }
         }
-        private void accountnametxtbox_Leave(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(accountnametxtbox.Text) && !string.IsNullOrWhiteSpace(accountnametxtbox.Text) &&
-                !string.IsNullOrEmpty(accountidlbl.Text) && !string.IsNullOrWhiteSpace(accountidlbl.Text))
-            {
-                if (currencynamelbl.Text == "currencynamelbl" && currencysymbollbl.Text == "currencysymbollbl" &&
-                    currencyconversionratelbl.Text == "currencyconversionratelbl" && currencyconversionratelbl.Text == "currencyconversionratelbl")
-                {
-                    Form openForm = CommonFunction.IsFormOpen(typeof(CurrencySelection));
-                    if (openForm == null)
-                    {
-                        CurrencySelection currencySelection = new CurrencySelection
-                        {
-                            WindowState = FormWindowState.Normal,
-                            StartPosition = FormStartPosition.CenterParent,
-                        };
-
-                        currencySelection.FormClosed += delegate
-                        {
-                            UpdateCurrencyInfo();
-                        };
-                        CommonFunction.DisposeOnClose(currencySelection);
-                        currencySelection.Show();
-                    }
-                    else
-                    {
-                        openForm.BringToFront();
-                    }
-                }
-            }
-        }
-        private void UpdateCurrencyInfo()
-        {
-            if(!string.IsNullOrEmpty(GlobalVariables.currencynameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.currencynameglobal) && 
-                !string.IsNullOrEmpty(GlobalVariables.currencysymbolglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.currencysymbolglobal) && 
-                GlobalVariables.currencyconversionrateglobal > 0 && GlobalVariables.currencyidglobal > 0)
-            {
-                currencynamelbl.Text = GlobalVariables.currencynameglobal;
-                currencyidlbl.Text = GlobalVariables.currencyidglobal.ToString();
-                currencysymbollbl.Text = GlobalVariables.currencysymbolglobal.ToString();
-                currencyconversionratelbl.Text = GlobalVariables.currencyconversionrateglobal.ToString();
-            }
-        }
         private void amounttxtbox_Leave(object sender, EventArgs e)
         {
             if(!string.IsNullOrEmpty(amounttxtbox.Text) && !string.IsNullOrWhiteSpace(amounttxtbox.Text))
@@ -243,73 +229,69 @@ namespace SmartFlow.Transactions
                         StartPosition = FormStartPosition.CenterParent,
                     };
                     CommonFunction.DisposeOnClose(debitAndCreditForm);
-                    debitAndCreditForm.Show();
+                    debitAndCreditForm.FormClosed += delegate
+                    {
+                        string transactionsymbol = null;
+                        int accountid = Convert.ToInt32(accountidlbl.Text);
+                        string accountname = accountnametxtbox.Text;
+                        string accountCode = accountcodetxtbox.Text;
+
+                        bool productExists = false;
+                        foreach (DataGridViewRow row in dgvjournal.Rows)
+                        {
+                            if (!row.IsNewRow)
+                            {
+                                if (row.Cells["accountidcolumn"].Value != null && row.Cells["accountidcolumn"].Value.ToString() == accountid.ToString())
+                                {
+                                    MessageBox.Show("Account Already Selected");
+                                    productExists = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!productExists)
+                        {
+                            if (GlobalVariables.iscreditglobal == true)
+                            {
+                                decimal paymentamountcredit = decimal.Parse(amounttxtbox.Text);
+                                transactionsymbol = "C";
+                                dgvjournal.Rows.Add(null, transactionsymbol, accountname, accountCode, accountid, GlobalVariables.isdebitglobal, GlobalVariables.iscreditglobal,
+                                    null, paymentamountcredit, GlobalVariables.shortdescriptionglobal);
+                            }
+
+                            else if (GlobalVariables.isdebitglobal == true)
+
+                            {
+                                decimal paymentamountdebit = decimal.Parse(amounttxtbox.Text);
+                                transactionsymbol = "D";
+                                dgvjournal.Rows.Add(null, transactionsymbol, accountname, accountCode, accountid, GlobalVariables.isdebitglobal, GlobalVariables.iscreditglobal,
+                                    paymentamountdebit, null, GlobalVariables.shortdescriptionglobal);
+                            }
+
+                            accountcodetxtbox.Text = string.Empty;
+                            accountnametxtbox.Text = string.Empty;
+                            amounttxtbox.Text = string.Empty;
+                            accountidlbl.Text = string.Empty;
+                            GlobalVariables.iscreditglobal = false;
+                            GlobalVariables.isdebitglobal = false;
+                            GlobalVariables.shortdescriptionglobal = null;
+
+                            accountnametxtbox.Focus();
+                        }
+                        
+                    };
+                    debitAndCreditForm.ShowDialog();
                 }
                 else
                 {
                     openForm.BringToFront();
                 }
-
-                string transactionsymbol = null;
-                int accountid = Convert.ToInt32(accountidlbl.Text);
-                string accountname = accountnametxtbox.Text;
-                string accountCode = accountcodetxtbox.Text;
-
-                if (GlobalVariables.iscreditglobal == true)
-                {
-                    decimal paymentamountcredit = decimal.Parse(amounttxtbox.Text);
-                    transactionsymbol = "C";
-                    dgvjournal.Rows.Add(null, transactionsymbol, accountname, accountCode, accountid, GlobalVariables.isdebitglobal, GlobalVariables.iscreditglobal,
-                        null, paymentamountcredit, GlobalVariables.shortdescriptionglobal);
-                }
-
-                else if (GlobalVariables.isdebitglobal == true)
-
-                {
-                    decimal paymentamountdebit = decimal.Parse(amounttxtbox.Text);
-                    transactionsymbol = "D";
-                    dgvjournal.Rows.Add(null, transactionsymbol, accountname, accountCode, accountid, GlobalVariables.isdebitglobal, GlobalVariables.iscreditglobal,
-                        paymentamountdebit, null, GlobalVariables.shortdescriptionglobal);
-                }
-
-                accountcodetxtbox.Text = string.Empty;
-                accountnametxtbox.Text = string.Empty;
-                amounttxtbox.Text = string.Empty;
-                accountidlbl.Text = string.Empty;
-                GlobalVariables.iscreditglobal = false;
-                GlobalVariables.isdebitglobal = false;
-                GlobalVariables.shortdescriptionglobal = null;
-
-                accountnametxtbox.Focus();
             }
         }
         private void accountnametxtbox_MouseClick(object sender, MouseEventArgs e)
         {
-            Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
-            if(openForm == null)
-            {
-                AccountSelectionForm accountSelectionForm = new AccountSelectionForm
-                {
-                    WindowState = FormWindowState.Normal,
-                    StartPosition = FormStartPosition.CenterParent,
-                };
-
-                accountSelectionForm.FormClosed += delegate
-                {
-                    UpdateAccountInfo();
-                };
-                CommonFunction.DisposeOnClose(accountSelectionForm);
-                accountSelectionForm.Show();
-                
-            }
-            else
-            {
-                openForm.BringToFront();
-            }
-        }
-        private void accountnametxtbox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter) 
+            if (string.IsNullOrEmpty(accountnametxtbox.Text))
             {
                 Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
                 if (openForm == null)
@@ -325,12 +307,42 @@ namespace SmartFlow.Transactions
                         UpdateAccountInfo();
                     };
                     CommonFunction.DisposeOnClose(accountSelectionForm);
-                    accountSelectionForm.Show();
+                    accountSelectionForm.ShowDialog();
 
                 }
                 else
                 {
                     openForm.BringToFront();
+                }
+            }
+        }
+        private void accountnametxtbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) 
+            {
+                if (string.IsNullOrEmpty(accountnametxtbox.Text))
+                {
+                    Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
+                    if (openForm == null)
+                    {
+                        AccountSelectionForm accountSelectionForm = new AccountSelectionForm
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        };
+
+                        accountSelectionForm.FormClosed += delegate
+                        {
+                            UpdateAccountInfo();
+                        };
+                        CommonFunction.DisposeOnClose(accountSelectionForm);
+                        accountSelectionForm.ShowDialog();
+
+                    }
+                    else
+                    {
+                        openForm.BringToFront();
+                    }
                 }
             }
         }

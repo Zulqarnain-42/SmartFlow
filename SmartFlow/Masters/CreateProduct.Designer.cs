@@ -84,6 +84,7 @@
             this.thirdupctxtbox = new System.Windows.Forms.TextBox();
             this.thirdupclbl = new System.Windows.Forms.Label();
             this.isCustomcheck = new System.Windows.Forms.CheckBox();
+            this.serialnobtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -456,7 +457,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox1.Location = new System.Drawing.Point(1050, 72);
+            this.pictureBox1.Location = new System.Drawing.Point(860, 74);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(158, 85);
             this.pictureBox1.TabIndex = 68;
@@ -464,7 +465,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(859, 72);
+            this.pictureBox2.Location = new System.Drawing.Point(665, 74);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(189, 183);
             this.pictureBox2.TabIndex = 69;
@@ -769,13 +770,24 @@
             this.isCustomcheck.UseVisualStyleBackColor = true;
             this.isCustomcheck.CheckedChanged += new System.EventHandler(this.isCustomcheck_CheckedChanged);
             // 
+            // serialnobtn
+            // 
+            this.serialnobtn.Location = new System.Drawing.Point(1054, 121);
+            this.serialnobtn.Name = "serialnobtn";
+            this.serialnobtn.Size = new System.Drawing.Size(159, 33);
+            this.serialnobtn.TabIndex = 92;
+            this.serialnobtn.Text = "CHECK SERIAL";
+            this.serialnobtn.UseVisualStyleBackColor = true;
+            this.serialnobtn.Click += new System.EventHandler(this.serialnobtn_Click);
+            // 
             // CreateProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1314, 730);
+            this.Controls.Add(this.serialnobtn);
             this.Controls.Add(this.isCustomcheck);
             this.Controls.Add(this.thirdupclbl);
             this.Controls.Add(this.thirdupctxtbox);
@@ -829,10 +841,7 @@
             this.Controls.Add(this.productnamelbl);
             this.Controls.Add(this.savebtn);
             this.Controls.Add(this.closebtn);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "CreateProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CREATE PRODUCT";
@@ -905,5 +914,6 @@
         private System.Windows.Forms.TextBox thirdupctxtbox;
         private System.Windows.Forms.Label thirdupclbl;
         private System.Windows.Forms.CheckBox isCustomcheck;
+        private System.Windows.Forms.Button serialnobtn;
     }
 }

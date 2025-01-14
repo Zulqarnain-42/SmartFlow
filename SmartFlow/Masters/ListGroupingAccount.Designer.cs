@@ -127,7 +127,6 @@
             this.Controls.Add(this.dgvlistgroupingaccount);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "ListGroupingAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

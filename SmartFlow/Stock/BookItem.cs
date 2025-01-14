@@ -82,31 +82,34 @@ namespace SmartFlow.Stock
         }
         private void selectwarehousetxtbox_MouseClick(object sender, MouseEventArgs e)
         {
-            Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
-            if (openForm == null)
+            if (string.IsNullOrEmpty(selectwarehousetxtbox.Text))
             {
-                string getwarehousedata = "SELECT WarehouseID,Name,Address,City,Code FROM WarehouseTable";
-                DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
-
-                if (warehousedata != null)
+                Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
+                if (openForm == null)
                 {
-                    if (warehousedata.Rows.Count > 0)
+                    string getwarehousedata = "SELECT WarehouseID,Name,Address,City,Code FROM WarehouseTable";
+                    DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
+
+                    if (warehousedata != null)
                     {
-                        WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
-                        warehouseSelection.MdiParent = this.MdiParent;
-                        
-                        warehouseSelection.FormClosed += delegate
+                        if (warehousedata.Rows.Count > 0)
                         {
-                            UpdateWarehouseTxtBox();
-                        };
-                        CommonFunction.DisposeOnClose(warehouseSelection);
-                        warehouseSelection.Show();
+                            WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
+                            warehouseSelection.MdiParent = this.MdiParent;
+
+                            warehouseSelection.FormClosed += delegate
+                            {
+                                UpdateWarehouseTxtBox();
+                            };
+                            CommonFunction.DisposeOnClose(warehouseSelection);
+                            warehouseSelection.Show();
+                        }
                     }
                 }
-            }
-            else
-            {
-                openForm.BringToFront();
+                else
+                {
+                    openForm.BringToFront();
+                }
             }
         }
         private void UpdateWarehouseTxtBox()
@@ -146,22 +149,25 @@ namespace SmartFlow.Stock
 
         private void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
-            Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
-            if (openForm == null)
+            if (string.IsNullOrEmpty(selectproducttxtbox.Text))
             {
-                ProductSelectionForm productSelection = new ProductSelectionForm();
-                productSelection.MdiParent = this.MdiParent;
-                
-                productSelection.FormClosed += delegate
+                Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+                if (openForm == null)
                 {
-                    UpdateProductTextBox();
-                };
-                CommonFunction.DisposeOnClose(productSelection);
-                productSelection.Show();
-            }
-            else
-            {
-                openForm.BringToFront();
+                    ProductSelectionForm productSelection = new ProductSelectionForm();
+                    productSelection.MdiParent = this.MdiParent;
+
+                    productSelection.FormClosed += delegate
+                    {
+                        UpdateProductTextBox();
+                    };
+                    CommonFunction.DisposeOnClose(productSelection);
+                    productSelection.Show();
+                }
+                else
+                {
+                    openForm.BringToFront();
+                }
             }
         }
         private void UpdateProductTextBox()

@@ -1,4 +1,5 @@
 ﻿using SmartFlow.Common;
+using SmartFlow.Purchase.ReportViewer;
 using System;
 using System.Data;
 using System.Text.RegularExpressions;
@@ -26,27 +27,37 @@ namespace SmartFlow.Purchase
 
                 if (purchasequoteradio.Checked)
                 {
-                    string query = string.Format("SELECT Invoiceid,InvoiceNo,invoicedate,ClientID,Narration,CreatedAt,CreatedDay," +
-                        "UpdatedAt,UpdatedDay,AddedBy,Companyid,Userid,InvoiceCode,NetTotal,ClientName,TotalVat,TotalDiscount," +
-                        "FreightShippingCharges,TotalQty,PurchaseInvoiceRefrence,IsPlanetInvoice,Currencyid,CurrencyName,CurrencySymbol," +
-                        "ConversionRate,InvoiceTypeid,IsSaleInvoice,InvoiceTypeName,IsTaxAble,QuotationValidUntill,InvoiceSpecialNote " +
-                        "FROM InvoiceTable WHERE InvoiceNo = '" + invoicenotxtbox.Text + "'");
+                    string query = string.Format("SELECT InvoiceTable.Invoiceid,InvoiceTable.InvoiceNo,InvoiceTable.invoicedate,InvoiceTable.ClientID," +
+                        "InvoiceTable.CreatedAt,InvoiceTable.CreatedDay,InvoiceTable.UpdatedAt,InvoiceTable.UpdatedDay,InvoiceTable.AddedBy,InvoiceTable.Companyid," +
+                        "InvoiceTable.Userid,InvoiceTable.InvoiceCode,InvoiceTable.NetTotal,InvoiceTable.ClientName,InvoiceTable.TotalVat,InvoiceTable.TotalDiscount," +
+                        "InvoiceTable.FreightShippingCharges,InvoiceTable.InvoiceRefrence,InvoiceTable.IsPlanetInvoice,InvoiceTable.Currencyid," +
+                        "InvoiceTable.CurrencyName,InvoiceTable.ConversionRate,InvoiceTable.QuotationValidUntill," +
+                        "InvoiceTable.SalePerson,AccountSubControlTable.MobileNo,AccountSubControlTable.Email,AccountSubControlTable.RefrencePersonName," +
+                        "AccountSubControlTable.AccountSubControlName,AccountSubControlTable.CodeAccount,AccountSubControlTable.CompanyName " +
+                        "FROM InvoiceTable INNER JOIN AccountSubControlTable " +
+                        "ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
                     DataTable dataInvoice = DatabaseAccess.Retrive(query);
 
+
                     if (dataInvoice.Rows.Count > 0)
                     {
-                        string subquery = string.Format("SELECT InvoiceDetailsId,InvoiceNo,Invoicecode,Productid,Quantity," +
-                            "UnitSalePrice,ItemSerialNo,ProductName,MFR,ItemWiseDiscount,ItemWiseVAT,ItemDescription,Warehouseid," +
-                            "PurchaseCostPrice,PurchaseLowestSalePrice,PurchaseStandardPrice,PurchaseItemSalePrice,SystemSerialNo," +
-                            "ItemTotal,Unitid,IncludeInventory,ProductCondition FROM InvoiceDetailsTable WHERE " +
-                            "InvoiceNo = '" + invoicenotxtbox.Text + "'");
+                        string subquery = string.Format("SELECT InvoiceDetailsTable.InvoiceDetailsId,InvoiceDetailsTable.InvoiceNo,InvoiceDetailsTable.Invoicecode," +
+                            "InvoiceDetailsTable.Productid, InvoiceDetailsTable.Quantity, InvoiceDetailsTable.UnitSalePrice, InvoiceDetailsTable.ItemSerialNoid," +
+                            "InvoiceDetailsTable.ProductName, InvoiceDetailsTable.MFR, InvoiceDetailsTable.ItemWiseDiscount, InvoiceDetailsTable.ItemWiseVAT," +
+                            "InvoiceDetailsTable.Warehouseid, InvoiceDetailsTable.PurchaseCostPrice, InvoiceDetailsTable.PurchaseLowestSalePrice," +
+                            "InvoiceDetailsTable.PurchaseStandardPrice, InvoiceDetailsTable.PurchaseItemSalePrice, InvoiceDetailsTable.SystemSerialNoid," +
+                            "InvoiceDetailsTable.ItemTotal, InvoiceDetailsTable.Unitid, InvoiceDetailsTable.AddInventory, InvoiceDetailsTable.ItemAvailability," +
+                            "InvoiceDetailsTable.Warehouseid, InvoiceDetailsTable.PricePerMeter, InvoiceDetailsTable.LengthInMeter, InvoiceDetailsTable.ItemDescription," +
+                            "InvoiceDetailsTable.MinusInventory, UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
+                            "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
                         DataTable dtInvoiceDetails = DatabaseAccess.Retrive(subquery);
                         if(dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
                         {
                             this.Close();
                             PurchaseQuotationInvoice purchaseQuotationInvoice = new PurchaseQuotationInvoice(dataInvoice,dtInvoiceDetails);
+                            purchaseQuotationInvoice.MdiParent = Application.OpenForms["Dashboard"];
                             CommonFunction.DisposeOnClose(purchaseQuotationInvoice);
                             purchaseQuotationInvoice.Show();
                         }
@@ -58,27 +69,36 @@ namespace SmartFlow.Purchase
                 }
                 else if (lporadio.Checked)
                 {
-                    string query = string.Format("SELECT Invoiceid,InvoiceNo,invoicedate,ClientID,Narration,CreatedAt,CreatedDay," +
-                        "UpdatedAt,UpdatedDay,AddedBy,Companyid,Userid,InvoiceCode,NetTotal,ClientName,TotalVat,TotalDiscount," +
-                        "FreightShippingCharges,TotalQty,PurchaseInvoiceRefrence,IsPlanetInvoice,Currencyid,CurrencyName,CurrencySymbol," +
-                        "ConversionRate,InvoiceTypeid,IsSaleInvoice,InvoiceTypeName,IsTaxAble,QuotationValidUntill,InvoiceSpecialNote " +
-                        "FROM InvoiceTable WHERE InvoiceNo = '" + invoicenotxtbox.Text + "'");
+                    string query = string.Format("SELECT InvoiceTable.Invoiceid,InvoiceTable.InvoiceNo,InvoiceTable.invoicedate,InvoiceTable.ClientID," +
+                        "InvoiceTable.CreatedAt,InvoiceTable.CreatedDay,InvoiceTable.UpdatedAt,InvoiceTable.UpdatedDay,InvoiceTable.AddedBy,InvoiceTable.Companyid," +
+                        "InvoiceTable.Userid,InvoiceTable.InvoiceCode,InvoiceTable.NetTotal,InvoiceTable.ClientName,InvoiceTable.TotalVat,InvoiceTable.TotalDiscount," +
+                        "InvoiceTable.FreightShippingCharges,InvoiceTable.InvoiceRefrence,InvoiceTable.IsPlanetInvoice,InvoiceTable.Currencyid," +
+                        "InvoiceTable.CurrencyName,InvoiceTable.ConversionRate,InvoiceTable.QuotationValidUntill," +
+                        "InvoiceTable.SalePerson,AccountSubControlTable.MobileNo,AccountSubControlTable.Email,AccountSubControlTable.RefrencePersonName," +
+                        "AccountSubControlTable.AccountSubControlName,AccountSubControlTable.CodeAccount,AccountSubControlTable.CompanyName " +
+                        "FROM InvoiceTable INNER JOIN AccountSubControlTable " +
+                        "ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
                     DataTable dataInvoice = DatabaseAccess.Retrive(query);
 
                     if (dataInvoice.Rows.Count > 0)
                     {
-                        string subquery = string.Format("SELECT InvoiceDetailsId,InvoiceNo,Invoicecode,Productid,Quantity," +
-                            "UnitSalePrice,ItemSerialNo,ProductName,MFR,ItemWiseDiscount,ItemWiseVAT,ItemDescription,Warehouseid," +
-                            "PurchaseCostPrice,PurchaseLowestSalePrice,PurchaseStandardPrice,PurchaseItemSalePrice,SystemSerialNo," +
-                            "ItemTotal,Unitid,IncludeInventory,ProductCondition FROM InvoiceDetailsTable WHERE " +
-                            "InvoiceNo = '" + invoicenotxtbox.Text + "'");
+                        string subquery = string.Format("SELECT InvoiceDetailsTable.InvoiceDetailsId,InvoiceDetailsTable.InvoiceNo,InvoiceDetailsTable.Invoicecode," +
+                            "InvoiceDetailsTable.Productid, InvoiceDetailsTable.Quantity, InvoiceDetailsTable.UnitSalePrice, InvoiceDetailsTable.ItemSerialNoid," +
+                            "InvoiceDetailsTable.ProductName, InvoiceDetailsTable.MFR, InvoiceDetailsTable.ItemWiseDiscount, InvoiceDetailsTable.ItemWiseVAT," +
+                            "InvoiceDetailsTable.Warehouseid, InvoiceDetailsTable.PurchaseCostPrice, InvoiceDetailsTable.PurchaseLowestSalePrice," +
+                            "InvoiceDetailsTable.PurchaseStandardPrice, InvoiceDetailsTable.PurchaseItemSalePrice, InvoiceDetailsTable.SystemSerialNoid," +
+                            "InvoiceDetailsTable.ItemTotal, InvoiceDetailsTable.Unitid, InvoiceDetailsTable.AddInventory, InvoiceDetailsTable.ItemAvailability," +
+                            "InvoiceDetailsTable.Warehouseid, InvoiceDetailsTable.PricePerMeter, InvoiceDetailsTable.LengthInMeter, InvoiceDetailsTable.ItemDescription," +
+                            "InvoiceDetailsTable.MinusInventory, UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
+                            "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
                         DataTable dtInvoiceDetails = DatabaseAccess.Retrive(subquery);
                         if (dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
                         {
                             this.Close();
                             PurchaseOrder purchaseOrder = new PurchaseOrder(dataInvoice, dtInvoiceDetails);
+                            purchaseOrder.MdiParent = Application.OpenForms["Dashboard"];
                             CommonFunction.DisposeOnClose(purchaseOrder);
                             purchaseOrder.Show();
                         }
@@ -90,27 +110,36 @@ namespace SmartFlow.Purchase
                 }
                 else if (purchaseinvoiceradio.Checked) 
                 {
-                    string query = string.Format("SELECT Invoiceid,InvoiceNo,invoicedate,ClientID,Narration,CreatedAt,CreatedDay," +
-                        "UpdatedAt,UpdatedDay,AddedBy,Companyid,Userid,InvoiceCode,NetTotal,ClientName,TotalVat,TotalDiscount," +
-                        "FreightShippingCharges,TotalQty,PurchaseInvoiceRefrence,IsPlanetInvoice,Currencyid,CurrencyName,CurrencySymbol," +
-                        "ConversionRate,InvoiceTypeid,IsSaleInvoice,InvoiceTypeName,IsTaxAble,QuotationValidUntill,InvoiceSpecialNote " +
-                        "FROM InvoiceTable WHERE InvoiceNo = '" + invoicenotxtbox.Text + "'");
+                    string query = string.Format("SELECT InvoiceTable.Invoiceid,InvoiceTable.InvoiceNo,InvoiceTable.invoicedate,InvoiceTable.ClientID," +
+                        "InvoiceTable.CreatedAt,InvoiceTable.CreatedDay,InvoiceTable.UpdatedAt,InvoiceTable.UpdatedDay,InvoiceTable.AddedBy,InvoiceTable.Companyid," +
+                        "InvoiceTable.Userid,InvoiceTable.InvoiceCode,InvoiceTable.NetTotal,InvoiceTable.ClientName,InvoiceTable.TotalVat,InvoiceTable.TotalDiscount," +
+                        "InvoiceTable.FreightShippingCharges,InvoiceTable.InvoiceRefrence,InvoiceTable.IsPlanetInvoice,InvoiceTable.Currencyid," +
+                        "InvoiceTable.CurrencyName,InvoiceTable.ConversionRate,InvoiceTable.QuotationValidUntill,InvoiceTable.ShipmentReceiveingPerson," +
+                        "InvoiceTable.SalePerson,AccountSubControlTable.MobileNo,AccountSubControlTable.Email,AccountSubControlTable.RefrencePersonName," +
+                        "AccountSubControlTable.AccountSubControlName,AccountSubControlTable.CodeAccount,AccountSubControlTable.CompanyName " +
+                        "FROM InvoiceTable INNER JOIN AccountSubControlTable " +
+                        "ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
                     DataTable dataInvoice = DatabaseAccess.Retrive(query);
 
                     if (dataInvoice.Rows.Count > 0)
                     {
-                        string subquery = string.Format("SELECT InvoiceDetailsId,InvoiceNo,Invoicecode,Productid,Quantity," +
-                            "UnitSalePrice,ItemSerialNo,ProductName,MFR,ItemWiseDiscount,ItemWiseVAT,ItemDescription,Warehouseid," +
-                            "PurchaseCostPrice,PurchaseLowestSalePrice,PurchaseStandardPrice,PurchaseItemSalePrice,SystemSerialNo," +
-                            "ItemTotal,Unitid,IncludeInventory,ProductCondition FROM InvoiceDetailsTable WHERE " +
-                            "InvoiceNo = '" + invoicenotxtbox.Text + "'");
+                        string subquery = string.Format("SELECT InvoiceDetailsTable.InvoiceDetailsId,InvoiceDetailsTable.InvoiceNo,InvoiceDetailsTable.Invoicecode," +
+                            "InvoiceDetailsTable.Productid, InvoiceDetailsTable.Quantity, InvoiceDetailsTable.UnitSalePrice, InvoiceDetailsTable.ItemSerialNoid," +
+                            "InvoiceDetailsTable.ProductName, InvoiceDetailsTable.MFR, InvoiceDetailsTable.ItemWiseDiscount, InvoiceDetailsTable.ItemWiseVAT," +
+                            "InvoiceDetailsTable.Warehouseid, InvoiceDetailsTable.PurchaseCostPrice, InvoiceDetailsTable.PurchaseLowestSalePrice," +
+                            "InvoiceDetailsTable.PurchaseStandardPrice, InvoiceDetailsTable.PurchaseItemSalePrice, InvoiceDetailsTable.SystemSerialNoid," +
+                            "InvoiceDetailsTable.ItemTotal, InvoiceDetailsTable.Unitid, InvoiceDetailsTable.AddInventory, InvoiceDetailsTable.ItemAvailability," +
+                            "InvoiceDetailsTable.Warehouseid, InvoiceDetailsTable.PricePerMeter, InvoiceDetailsTable.LengthInMeter, InvoiceDetailsTable.ItemDescription," +
+                            "InvoiceDetailsTable.MinusInventory, UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
+                            "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
                         DataTable dtInvoiceDetails = DatabaseAccess.Retrive(subquery);
                         if (dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
                         {
                             this.Close();
                             PurchaseInvoice purchaseInvoice = new PurchaseInvoice(dataInvoice, dtInvoiceDetails);
+                            purchaseInvoice.MdiParent = Application.OpenForms["Dashboard"];
                             CommonFunction.DisposeOnClose(purchaseInvoice);
                             purchaseInvoice.Show();
                         }
@@ -122,27 +151,36 @@ namespace SmartFlow.Purchase
                 }
                 else if (purchasereturnradio.Checked)
                 {
-                    string query = string.Format("SELECT Invoiceid,InvoiceNo,invoicedate,ClientID,Narration,CreatedAt,CreatedDay," +
-                        "UpdatedAt,UpdatedDay,AddedBy,Companyid,Userid,InvoiceCode,NetTotal,ClientName,TotalVat,TotalDiscount," +
-                        "FreightShippingCharges,TotalQty,PurchaseInvoiceRefrence,IsPlanetInvoice,Currencyid,CurrencyName,CurrencySymbol," +
-                        "ConversionRate,InvoiceTypeid,IsSaleInvoice,InvoiceTypeName,IsTaxAble,QuotationValidUntill,InvoiceSpecialNote " +
-                        "FROM InvoiceTable WHERE InvoiceNo = '" + invoicenotxtbox.Text + "'");
+                    string query = string.Format("SELECT InvoiceTable.Invoiceid,InvoiceTable.InvoiceNo,InvoiceTable.invoicedate,InvoiceTable.ClientID," +
+                        "InvoiceTable.CreatedAt,InvoiceTable.CreatedDay,InvoiceTable.UpdatedAt,InvoiceTable.UpdatedDay,InvoiceTable.AddedBy,InvoiceTable.Companyid," +
+                        "InvoiceTable.Userid,InvoiceTable.InvoiceCode,InvoiceTable.NetTotal,InvoiceTable.ClientName,InvoiceTable.TotalVat,InvoiceTable.TotalDiscount," +
+                        "InvoiceTable.FreightShippingCharges,InvoiceTable.InvoiceRefrence,InvoiceTable.IsPlanetInvoice,InvoiceTable.Currencyid," +
+                        "InvoiceTable.CurrencyName,InvoiceTable.ConversionRate,InvoiceTable.QuotationValidUntill," +
+                        "InvoiceTable.SalePerson,AccountSubControlTable.MobileNo,AccountSubControlTable.Email,AccountSubControlTable.RefrencePersonName," +
+                        "AccountSubControlTable.AccountSubControlName,AccountSubControlTable.CodeAccount,AccountSubControlTable.CompanyName " +
+                        "FROM InvoiceTable INNER JOIN AccountSubControlTable " +
+                        "ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
                     DataTable dataInvoice = DatabaseAccess.Retrive(query);
 
                     if (dataInvoice.Rows.Count > 0)
                     {
-                        string subquery = string.Format("SELECT InvoiceDetailsId,InvoiceNo,Invoicecode,Productid,Quantity," +
-                            "UnitSalePrice,ItemSerialNo,ProductName,MFR,ItemWiseDiscount,ItemWiseVAT,ItemDescription,Warehouseid," +
-                            "PurchaseCostPrice,PurchaseLowestSalePrice,PurchaseStandardPrice,PurchaseItemSalePrice,SystemSerialNo," +
-                            "ItemTotal,Unitid,IncludeInventory,ProductCondition FROM InvoiceDetailsTable WHERE " +
-                            "InvoiceNo = '" + invoicenotxtbox.Text + "'");
+                        string subquery = string.Format("SELECT InvoiceDetailsTable.InvoiceDetailsId,InvoiceDetailsTable.InvoiceNo,InvoiceDetailsTable.Invoicecode," +
+                            "InvoiceDetailsTable.Productid, InvoiceDetailsTable.Quantity, InvoiceDetailsTable.UnitSalePrice, InvoiceDetailsTable.ItemSerialNoid," +
+                            "InvoiceDetailsTable.ProductName, InvoiceDetailsTable.MFR, InvoiceDetailsTable.ItemWiseDiscount, InvoiceDetailsTable.ItemWiseVAT," +
+                            "InvoiceDetailsTable.Warehouseid, InvoiceDetailsTable.PurchaseCostPrice, InvoiceDetailsTable.PurchaseLowestSalePrice," +
+                            "InvoiceDetailsTable.PurchaseStandardPrice, InvoiceDetailsTable.PurchaseItemSalePrice, InvoiceDetailsTable.SystemSerialNoid," +
+                            "InvoiceDetailsTable.ItemTotal, InvoiceDetailsTable.Unitid, InvoiceDetailsTable.AddInventory, InvoiceDetailsTable.ItemAvailability," +
+                            "InvoiceDetailsTable.Warehouseid, InvoiceDetailsTable.PricePerMeter, InvoiceDetailsTable.LengthInMeter, InvoiceDetailsTable.ItemDescription," +
+                            "InvoiceDetailsTable.MinusInventory, UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
+                            "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
                         DataTable dtInvoiceDetails = DatabaseAccess.Retrive(subquery);
                         if (dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
                         {
                             this.Close();
                             PurchaseReturnInvoice purchaseReturnInvoice = new PurchaseReturnInvoice(dataInvoice, dtInvoiceDetails);
+                            purchaseReturnInvoice.MdiParent = Application.OpenForms["Dashboard"];
                             CommonFunction.DisposeOnClose(purchaseReturnInvoice);
                             purchaseReturnInvoice.Show();
                         }

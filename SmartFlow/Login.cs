@@ -39,12 +39,16 @@ namespace SmartFlow
                     return;
                 }
 
+                this.Hide();
+                Dashboard dashboard = new Dashboard();
+                dashboard.Show();
+
 /*                foreach(DataRow row in companyData.Rows)
                 {
                     companycode = row["CompnayCode"].ToString();
                 }*/
 
-                string query = string.Empty;
+                /*string query = string.Empty;
 
                 query = "SELECT UserID,UserType_ID,FullName,Email,ContactNo,UserName,Password,UserCode,CompanyID,CreatedAt,UpdatedAt,AddedBy,CreatedDay," +
                     "UpdatedDay FROM UserTable WHERE CompanyID = '" + companycode + "' AND UserName = '"+usernametxtbox.Text+"'";
@@ -72,7 +76,7 @@ namespace SmartFlow
                             }
                         }
                     }
-                }
+                }*/
 
             }catch(Exception ex) { throw ex; }
         }

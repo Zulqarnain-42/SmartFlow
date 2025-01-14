@@ -2,9 +2,8 @@
 using SmartFlow.Common.CommonForms;
 using SmartFlow.General;
 using SmartFlow.Masters;
-using SmartFlow.Payroll;
 using SmartFlow.Purchase;
-using SmartFlow.Reports;
+using SmartFlow.Report;
 using SmartFlow.Sales;
 using SmartFlow.Setting;
 using SmartFlow.Stock;
@@ -22,7 +21,6 @@ namespace SmartFlow
             InitializeComponent();
             this.IsMdiContainer = true;
         }
-        
         private void warehouseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(ListWarehouse));
@@ -436,36 +434,12 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form openForm = CommonFunction.IsFormOpen(typeof(ChangePassword));
-            if(openForm == null)
-            {
-                ChangePassword changePassword = new ChangePassword();
-                changePassword.MdiParent = this;
-                CommonFunction.DisposeOnClose(changePassword);
-                changePassword.Show();
-            }
-            else { openForm.BringToFront(); }
-        }
         private void tsbLogin_Click(object sender, EventArgs e)
         {
             Login login = new Login(this);
             login.MdiParent = this;
             CommonFunction.DisposeOnClose(login);
             login.ShowDialog();
-        }
-        private void stockLocationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form openForm = CommonFunction.IsFormOpen(typeof(StockLocation));
-            if(openForm == null)
-            {
-                StockLocation stockLocation = new StockLocation();
-                stockLocation.MdiParent = this;
-                CommonFunction.DisposeOnClose(stockLocation);
-                stockLocation.Show();
-            }
-            else { openForm.BringToFront(); }
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -495,33 +469,16 @@ namespace SmartFlow
             }
             else { openForm.BringToFront(); }
         }
-        private void groupingAccountToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            GroupingAccount groupingAccount = new GroupingAccount();
-            groupingAccount.MdiParent = this;
-            CommonFunction.DisposeOnClose(groupingAccount);
-            groupingAccount.Show();
-        }
-        private void purchaseTypeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PurchaseType purchaseType = new PurchaseType();
-            purchaseType.MdiParent = this;
-            CommonFunction.DisposeOnClose(purchaseType);
-            purchaseType.Show();
-        }
-        private void saleTypeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaleType saleType = new SaleType();
-            saleType.MdiParent = this;
-            CommonFunction.DisposeOnClose(saleType);
-            saleType.Show();
-        }
         private void findAnInvoiceToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = CommonFunction.IsFormOpen(typeof(FindPurchaseInvoiceForm));
             if(openForm == null)
             {
-                FindPurchaseInvoiceForm findInvoiceForm = new FindPurchaseInvoiceForm();
+                FindPurchaseInvoiceForm findInvoiceForm = new FindPurchaseInvoiceForm() 
+                {
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterScreen,
+                };
                 findInvoiceForm.MdiParent = this;
                 CommonFunction.DisposeOnClose(findInvoiceForm);
                 findInvoiceForm.Show();
@@ -563,26 +520,14 @@ namespace SmartFlow
         }
         private void taxPlanetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TaxPlanet taxPlanet = new TaxPlanet();
+            TaxPlanet taxPlanet = new TaxPlanet()
+            {
+                WindowState = FormWindowState.Normal,
+                StartPosition = FormStartPosition.CenterScreen,
+            };
             taxPlanet.MdiParent = this;
             CommonFunction.DisposeOnClose(taxPlanet);
             taxPlanet.Show();
-        }
-        private void allToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string hiddendata = "Sale";
-            FromToDateSearchForm fromtodateform = new FromToDateSearchForm(hiddendata);
-            fromtodateform.MdiParent = this;
-            CommonFunction.DisposeOnClose(fromtodateform);
-            fromtodateform.Show();
-        }
-        private void allPurchaseQuotationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string hiddendata = "Purchase";
-            FromToDateSearchForm fromtodateform = new FromToDateSearchForm(hiddendata);
-            fromtodateform.MdiParent = this;
-            CommonFunction.DisposeOnClose(fromtodateform);
-            fromtodateform.Show();
         }
         private void databaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -626,27 +571,6 @@ namespace SmartFlow
             CommonFunction.DisposeOnClose(findTransactionForm);
             findTransactionForm.Show();
         }
-        private void listCurrenciesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CurrencyList currencyList = new CurrencyList();
-            currencyList.MdiParent = this;
-            CommonFunction.DisposeOnClose(currencyList);
-            currencyList.Show();
-        }
-        private void listPurchaseTypeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ListPurchaseType listPurchaseType = new ListPurchaseType();
-            listPurchaseType.MdiParent = this;
-            CommonFunction.DisposeOnClose(listPurchaseType);
-            listPurchaseType.Show();
-        }
-        private void listSaleTypeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ListSaleType listSaleType = new ListSaleType();
-            listSaleType.MdiParent = this;
-            CommonFunction.DisposeOnClose(listSaleType);
-            listSaleType.Show();
-        }
         private void listOfGroupingAccountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ListGroupingAccount listGroupingAccount = new ListGroupingAccount();
@@ -654,15 +578,6 @@ namespace SmartFlow
             CommonFunction.DisposeOnClose(listGroupingAccount);
             listGroupingAccount.Show();
         }
-        private void listTransactionInvoicesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string hiddendata = "Transaction";
-            FromToDateSearchForm fromtodateform = new FromToDateSearchForm(hiddendata);
-            fromtodateform.MdiParent = this;
-            CommonFunction.DisposeOnClose(fromtodateform);
-            fromtodateform.Show();
-        }
-
         private void manageInventoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StockManageForm stockManageForm = new StockManageForm();
@@ -670,15 +585,6 @@ namespace SmartFlow
             CommonFunction.DisposeOnClose(stockManageForm);
             stockManageForm.Show();
         }
-
-        private void itemWiseReportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ItemWiseInventoyReport itemWiseInventoyReport = new ItemWiseInventoyReport();
-            itemWiseInventoyReport.MdiParent = this;
-            CommonFunction.DisposeOnClose(itemWiseInventoyReport);
-            itemWiseInventoyReport.Show();
-        }
-
         private void unitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UnitList unitList = new UnitList();
@@ -687,28 +593,20 @@ namespace SmartFlow
             unitList.Show();
         }
 
-        private void userRolesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void perfromaInvoiceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UserRoles userRoles = new UserRoles();
-            userRoles.MdiParent = this;
-            CommonFunction.DisposeOnClose(userRoles);
-            userRoles.Show();
+            PerformaInvoice performaInvoice = new PerformaInvoice();
+            performaInvoice.MdiParent = this;
+            CommonFunction.DisposeOnClose (performaInvoice);
+            performaInvoice.Show();
         }
 
-        private void userRightsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void balanceSheetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UserRights userRights = new UserRights();
-            userRights.MdiParent = this;
-            CommonFunction.DisposeOnClose(userRights);
-            userRights.Show();
-        }
-
-        private void listUserToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SystemUsers userUsers = new SystemUsers();
-            userUsers.MdiParent = this;
-            CommonFunction.DisposeOnClose(userUsers);
-            userUsers.Show();
+            BalanceSheet balanceSheet = new BalanceSheet();
+            balanceSheet.MdiParent = this;
+            CommonFunction.DisposeOnClose(balanceSheet);
+            balanceSheet.Show();
         }
     }
 }

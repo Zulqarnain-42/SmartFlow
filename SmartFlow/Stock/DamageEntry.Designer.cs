@@ -40,7 +40,6 @@
             this.productmfrlbl = new System.Windows.Forms.Label();
             this.warehousefromlbl = new System.Windows.Forms.Label();
             this.warehouseidlbl = new System.Windows.Forms.Label();
-            this.productpricelbl = new System.Windows.Forms.Label();
             this.barcodelbl = new System.Windows.Forms.Label();
             this.upclbl = new System.Windows.Forms.Label();
             this.productnamelbl = new System.Windows.Forms.Label();
@@ -56,7 +55,6 @@
             this.productmfr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productupc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productbarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.damagedqty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
@@ -91,7 +89,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panel2.BackColor = System.Drawing.SystemColors.Control;
             this.panel2.Controls.Add(this.selectwarehousefromtxtbox);
             this.panel2.Controls.Add(this.addbtn);
             this.panel2.Controls.Add(this.productmfrtxtbox);
@@ -192,17 +190,6 @@
             this.warehouseidlbl.Text = "warehouseid";
             this.warehouseidlbl.Visible = false;
             // 
-            // productpricelbl
-            // 
-            this.productpricelbl.AutoSize = true;
-            this.productpricelbl.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productpricelbl.Location = new System.Drawing.Point(1146, 355);
-            this.productpricelbl.Name = "productpricelbl";
-            this.productpricelbl.Size = new System.Drawing.Size(78, 15);
-            this.productpricelbl.TabIndex = 28;
-            this.productpricelbl.Text = "Product Price";
-            this.productpricelbl.Visible = false;
-            // 
             // barcodelbl
             // 
             this.barcodelbl.AutoSize = true;
@@ -260,14 +247,13 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panel3.BackColor = System.Drawing.SystemColors.Control;
             this.panel3.Controls.Add(this.warehouseidlbl);
             this.panel3.Controls.Add(this.damageidlbl);
             this.panel3.Controls.Add(this.closebtn);
             this.panel3.Controls.Add(this.savebtn);
             this.panel3.Controls.Add(this.upclbl);
             this.panel3.Controls.Add(this.barcodelbl);
-            this.panel3.Controls.Add(this.productpricelbl);
             this.panel3.Controls.Add(this.descriptiontxtbox);
             this.panel3.Controls.Add(this.descriptionlbl);
             this.panel3.Controls.Add(this.dgvproducts);
@@ -345,7 +331,6 @@
             this.productmfr,
             this.productname,
             this.productupc,
-            this.productprice,
             this.productbarcode,
             this.damagedqty});
             this.dgvproducts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -388,13 +373,6 @@
             this.productupc.MinimumWidth = 6;
             this.productupc.Name = "productupc";
             this.productupc.Width = 125;
-            // 
-            // productprice
-            // 
-            this.productprice.HeaderText = "PRICE";
-            this.productprice.MinimumWidth = 6;
-            this.productprice.Name = "productprice";
-            this.productprice.Width = 125;
             // 
             // productbarcode
             // 
@@ -464,7 +442,6 @@
         private System.Windows.Forms.Label upclbl;
         private System.Windows.Forms.Label productnamelbl;
         private System.Windows.Forms.Label productidlbl;
-        private System.Windows.Forms.Label productpricelbl;
         private System.Windows.Forms.Button closebtn;
         private System.Windows.Forms.TextBox selectwarehousefromtxtbox;
         private System.Windows.Forms.Label warehouseidlbl;
@@ -473,7 +450,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn productmfr;
         private System.Windows.Forms.DataGridViewTextBoxColumn productname;
         private System.Windows.Forms.DataGridViewTextBoxColumn productupc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productprice;
         private System.Windows.Forms.DataGridViewTextBoxColumn productbarcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn damagedqty;
     }

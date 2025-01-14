@@ -37,7 +37,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.longdescriptiontxtbox = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvCreditNote = new System.Windows.Forms.DataGridView();
             this.srnocolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.debitcreditcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,6 +65,8 @@
             this.currencynamelbl = new System.Windows.Forms.Label();
             this.currencysymbollbl = new System.Windows.Forms.Label();
             this.currencyconversionratelbl = new System.Windows.Forms.Label();
+            this.voucherInfotxtbox = new System.Windows.Forms.RichTextBox();
+            this.voucherInfolbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCreditNote)).BeginInit();
@@ -109,7 +110,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1227, 538);
+            this.label3.Location = new System.Drawing.Point(1536, 56);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 16);
             this.label3.TabIndex = 122;
@@ -127,7 +128,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(936, 538);
+            this.label1.Location = new System.Drawing.Point(932, 538);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(24, 16);
             this.label1.TabIndex = 120;
@@ -152,16 +153,6 @@
             this.longdescriptiontxtbox.Name = "longdescriptiontxtbox";
             this.longdescriptiontxtbox.Size = new System.Drawing.Size(1336, 93);
             this.longdescriptiontxtbox.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(1371, 102);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(299, 586);
-            this.groupBox1.TabIndex = 118;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "VOUCHER INFO";
             // 
             // dgvCreditNote
             // 
@@ -361,7 +352,6 @@
             this.accountnametxtbox.TabIndex = 128;
             this.accountnametxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.accountnametxtbox_MouseClick);
             this.accountnametxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.accountnametxtbox_KeyDown);
-            this.accountnametxtbox.Leave += new System.EventHandler(this.accountnametxtbox_Leave);
             // 
             // amountlbl
             // 
@@ -434,12 +424,32 @@
             this.currencyconversionratelbl.Text = "currencyconversionratelbl";
             this.currencyconversionratelbl.Visible = false;
             // 
+            // voucherInfotxtbox
+            // 
+            this.voucherInfotxtbox.Location = new System.Drawing.Point(1367, 194);
+            this.voucherInfotxtbox.Name = "voucherInfotxtbox";
+            this.voucherInfotxtbox.Size = new System.Drawing.Size(303, 488);
+            this.voucherInfotxtbox.TabIndex = 136;
+            this.voucherInfotxtbox.Text = "";
+            // 
+            // voucherInfolbl
+            // 
+            this.voucherInfolbl.AutoSize = true;
+            this.voucherInfolbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.voucherInfolbl.Location = new System.Drawing.Point(1367, 168);
+            this.voucherInfolbl.Name = "voucherInfolbl";
+            this.voucherInfolbl.Size = new System.Drawing.Size(110, 23);
+            this.voucherInfolbl.TabIndex = 137;
+            this.voucherInfolbl.Text = "Voucher Info";
+            // 
             // CreditNote
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1682, 770);
+            this.Controls.Add(this.voucherInfolbl);
+            this.Controls.Add(this.voucherInfotxtbox);
             this.Controls.Add(this.currencyconversionratelbl);
             this.Controls.Add(this.currencysymbollbl);
             this.Controls.Add(this.currencynamelbl);
@@ -456,7 +466,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvCreditNote);
             this.Controls.Add(this.invoicenotxtbox);
             this.Controls.Add(this.invoicenolbl);
@@ -491,7 +500,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox longdescriptiontxtbox;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgvCreditNote;
         private System.Windows.Forms.TextBox invoicenotxtbox;
         private System.Windows.Forms.Label invoicenolbl;
@@ -520,5 +528,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn debitcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn creditcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn shortnarationcolumn;
+        private System.Windows.Forms.Label voucherInfolbl;
+        private System.Windows.Forms.RichTextBox voucherInfotxtbox;
     }
 }

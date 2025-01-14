@@ -23,7 +23,7 @@ namespace SmartFlow.Transactions.ReportViewer
             try
             {
                 ReportDocument reportDocument = new ReportDocument();
-                reportDocument.Load(@"C:\Users\FABT\source\repos\SmartFlow\SmartFlow\Purchase\ReportViewer\Reports\PurchaseQuotationReport.rpt");
+                reportDocument.Load(@"C:\Users\FABT\source\repos\SmartFlow\SmartFlow\Transactions\ReportViewer\Reports\CreditNoteReport.rpt");
 
                 // If using a DataSet
                 // DataSet ds = GetYourDataSet();

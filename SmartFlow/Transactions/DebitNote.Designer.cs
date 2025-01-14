@@ -38,7 +38,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.longdescriptiontxtbox = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.invoicenotxtbox = new System.Windows.Forms.TextBox();
             this.invoicenolbl = new System.Windows.Forms.Label();
             this.datelbl = new System.Windows.Forms.Label();
@@ -66,6 +65,8 @@
             this.currencynamelbl = new System.Windows.Forms.Label();
             this.currencyidlbl = new System.Windows.Forms.Label();
             this.accountidlbl = new System.Windows.Forms.Label();
+            this.voucherinfotxtbox = new System.Windows.Forms.RichTextBox();
+            this.voucherinfolbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -115,7 +116,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(967, 527);
+            this.label3.Location = new System.Drawing.Point(1536, 48);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 16);
             this.label3.TabIndex = 76;
@@ -124,7 +125,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(798, 527);
+            this.label2.Location = new System.Drawing.Point(1076, 527);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(24, 16);
             this.label2.TabIndex = 75;
@@ -133,7 +134,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(661, 527);
+            this.label1.Location = new System.Drawing.Point(940, 527);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(24, 16);
             this.label1.TabIndex = 74;
@@ -158,16 +159,6 @@
             this.longdescriptiontxtbox.Name = "longdescriptiontxtbox";
             this.longdescriptiontxtbox.Size = new System.Drawing.Size(1340, 93);
             this.longdescriptiontxtbox.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(1371, 102);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(299, 586);
-            this.groupBox1.TabIndex = 72;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "VOUCHER INFO";
             // 
             // invoicenotxtbox
             // 
@@ -362,7 +353,6 @@
             this.accountnametxtbox.TabIndex = 133;
             this.accountnametxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.accountnametxtbox_MouseClick);
             this.accountnametxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.accountnametxtbox_KeyDown);
-            this.accountnametxtbox.Leave += new System.EventHandler(this.accountnametxtbox_Leave);
             // 
             // accountcodetxtbox
             // 
@@ -434,12 +424,32 @@
             this.accountidlbl.Text = "accountidlbl";
             this.accountidlbl.Visible = false;
             // 
+            // voucherinfotxtbox
+            // 
+            this.voucherinfotxtbox.Location = new System.Drawing.Point(1372, 189);
+            this.voucherinfotxtbox.Name = "voucherinfotxtbox";
+            this.voucherinfotxtbox.Size = new System.Drawing.Size(298, 493);
+            this.voucherinfotxtbox.TabIndex = 143;
+            this.voucherinfotxtbox.Text = "";
+            // 
+            // voucherinfolbl
+            // 
+            this.voucherinfolbl.AutoSize = true;
+            this.voucherinfolbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.voucherinfolbl.Location = new System.Drawing.Point(1371, 162);
+            this.voucherinfolbl.Name = "voucherinfolbl";
+            this.voucherinfolbl.Size = new System.Drawing.Size(110, 23);
+            this.voucherinfolbl.TabIndex = 144;
+            this.voucherinfolbl.Text = "Voucher Info";
+            // 
             // DebitNote
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1682, 770);
+            this.Controls.Add(this.voucherinfolbl);
+            this.Controls.Add(this.voucherinfotxtbox);
             this.Controls.Add(this.currencyconversionratelbl);
             this.Controls.Add(this.currencysymbollbl);
             this.Controls.Add(this.currencynamelbl);
@@ -457,7 +467,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.invoicenotxtbox);
             this.Controls.Add(this.invoicenolbl);
             this.Controls.Add(this.datelbl);
@@ -494,7 +503,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox longdescriptiontxtbox;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox invoicenotxtbox;
         private System.Windows.Forms.Label invoicenolbl;
         private System.Windows.Forms.Label datelbl;
@@ -522,5 +530,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn debitcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn creditcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn shortnarationcolumn;
+        private System.Windows.Forms.Label voucherinfolbl;
+        private System.Windows.Forms.RichTextBox voucherinfotxtbox;
     }
 }

@@ -53,6 +53,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ReturnReportView";
             this.Text = "PURCHASE RETURN REPORT VIEWER";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ReturnReportView_Load);
             this.ResumeLayout(false);
 

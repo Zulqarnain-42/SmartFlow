@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SmartFlow.Common;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using ZXing;
 
@@ -621,11 +623,23 @@ namespace SmartFlow.Masters
         {
             try
             {
-                if(!string.IsNullOrEmpty(productid.Text) && !string.IsNullOrWhiteSpace(productid.Text))
+                if (!string.IsNullOrEmpty(productid.Text) && !string.IsNullOrWhiteSpace(productid.Text))
                 {
-                    string checkstock = string.Format("SELECT ProductID, SUM(Quantity) AS TotalQuantity FROM StockTable " +
-                    "WHERE ProductID = '" + productid.Text + "' GROUP BY ProductID;");
-                    DataTable stockqty = DatabaseAccess.Retrive(checkstock);
+                    // Prepare the parameter for the stored procedure
+                    int productID = int.Parse(productid.Text); // assuming ProductID is an integer
+
+                    // Create the command to call the stored procedure
+                    string storedProcedure = "GetTotalQuantity";
+
+                    // Create parameters for the stored procedure
+                    var parameters = new List<SqlParameter>
+    {
+        new SqlParameter("@ProductID", SqlDbType.Int) { Value = productID }
+    };
+
+                    // Retrieve the result from the stored procedure
+                    DataTable stockqty = DatabaseAccess.Retrive(storedProcedure, parameters);
+
                     if (stockqty.Rows.Count > 0 && stockqty != null)
                     {
                         string totalQty = stockqty.Rows[0]["TotalQuantity"].ToString();
@@ -639,6 +653,7 @@ namespace SmartFlow.Masters
                         qtylbl.Text = "Out Of Stock: 0";
                     }
                 }
+
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -691,6 +706,11 @@ namespace SmartFlow.Masters
             return generatedCode;
         }
 
-        
+        private void serialnobtn_Click(object sender, EventArgs e)
+        {
+            ProductSerialNo productSerialNo = new ProductSerialNo();
+            CommonFunction.DisposeOnClose(productSerialNo);
+            productSerialNo.ShowDialog();
+        }
     }
 }

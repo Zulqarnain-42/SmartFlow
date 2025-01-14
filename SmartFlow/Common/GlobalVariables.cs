@@ -10,33 +10,24 @@ namespace SmartFlow.Common
         public static string currencysymbolglobal = null;
         public static float currencyconversionrateglobal = 0;
 
-        public static int saletypeidglobal = 0;
-        public static string saletypenameglobal = null;
-        public static bool saletypeistaxable = false;
-
-        public static int purchasetypeidglobal = 0;
-        public static string purchasetypenameglobal = null;
-        public static bool purchasetypeistaxable = false;
-
-        public static int salespersonidglobal = 0;
-        public static string salespersonnameglobal = null;
-
         public static int warehouseidglobal = 0;
         public static string warehousenameglobal = null;
 
         public static int supplieridglobal = 0;
         public static string suppliernameglobal = null;
         public static string suppliercodeglobal = null;
+        public static string suppliercompanyName = null;
 
         public static int accountidglobal = 0;
         public static int accountheadidglobal = 0;
         public static string accountnameglobal = null;
+        public static string accountcodeglobal = null;
 
         public static int customeridglobal = 0;
         public static string customernameglobal = null;
         public static string customercodeglobal = null;
         public static string customermobileglobal = null;
-        public static string customerrefrencegloba = null;
+        public static string customercompanyname = null;
 
         public static int productidglobal = 0;
         public static string productnameglobal = null;
@@ -54,7 +45,13 @@ namespace SmartFlow.Common
         public static bool isproductdiscounted = false;
         public static decimal productdiscountamountitemwise = 0;
         public static decimal productfinalamountwithvatanddiscountitemwise = 0;
-        public static bool productconditionglobal = false;
+        public static decimal productinmeterprice = 0;
+        public static decimal productinmeterlength = 0;
+        public static decimal productUnitPrice = 0;
+        public static decimal productcostprice = 0;
+        public static decimal productstandardprice = 0;
+        public static decimal productlowestlength = 0;
+        public static decimal productsaleprice = 0;
 
         public static int unitidglobal = 0;
         public static string unitnameglobal = null;

@@ -3,6 +3,7 @@ using SmartFlow.Common.CommonForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace SmartFlow.Masters
@@ -142,7 +143,11 @@ namespace SmartFlow.Masters
                 { "EmiratesId", emiratesidtxtbox.Text },
                 { "ServiceTaxNo", servicetaxnotxtbox.Text },
                 { "BankName", banknametxtbox.Text },
-                { "BankAccountNo", accountnotxtbox.Text }
+                { "BankAccountNo", accountnotxtbox.Text },
+                { "CompanyName", companynametxtbox.Text },
+                { "IsCustomer", customerradio.Checked },
+                { "IsSupplier", supplierradio.Checked },
+                { "IsEmployee", employeeradio.Checked }
             };
 
             bool isUpdated = DatabaseAccess.ExecuteQuery(tableName, "UPDATE", columnData, whereClause);
@@ -192,6 +197,7 @@ namespace SmartFlow.Masters
                 { "IsCustomer", customerradio.Checked },
                 { "IsSupplier", supplierradio.Checked },
                 { "IsEmployee", employeeradio.Checked },
+                { "CompanyName", companynametxtbox.Text }
             };
 
             bool isInserted = DatabaseAccess.ExecuteQuery(tableName, "INSERT", columnData);
@@ -200,7 +206,7 @@ namespace SmartFlow.Masters
 
         private string CheckDuplicate()
         {
-            string query = string.Format(@"SELECT AccountSubControlID,AccountHead_ID,AccountControl_ID,User_ID,AccountSubControlName,
+            string query = string.Format(@"SELECT AccountSubControlID,AccountHead_ID,CompanyName,AccountControl_ID,User_ID,AccountSubControlName,
             CompanyID,PrintName,Address,Country,Email,MobileNo,TRN,GSTNO,VATNO,Location,State,PostalCode,Fax,Website,
             EmiratesId,ServiceTaxNo,BankName,BankAccountNo FROM AccountSubControlTable WHERE AccountSubControlName = @AccountSubControlName");
 
@@ -222,56 +228,14 @@ namespace SmartFlow.Masters
                 string gstno = dt.Rows[0]["GSTNO"].ToString();
                 string vatno = dt.Rows[0]["VATNO"].ToString();
                 string emiratesid = dt.Rows[0]["EmiratesId"].ToString();
-
-                if(nametxtbox.Text == accountName && addresstxtbox.Text == address)
-                {
-                    return $"Duplicate found: Account Name = {accountName}, Address = {address}.";
-                }
-
-                if(nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country)
-                {
-                    return $"Duplicate found: Account Name = {accountName}, Address = {address}, Country = {country}.";
-                }
-
-                if(nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country && emailtxtbox.Text == email)
-                {
-                    return $"Duplicate found: Account Name = {accountName}, Address = {address}, Country = {country}, Email = {email}.";
-                }
-
-                if(nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country && emailtxtbox.Text == email && 
-                    mobilenotxtbox.Text == mobileno)
-                {
-                    return $"Duplicate found: Account Name = {accountName}, Address = {address}, Country = {country}, Email = {email}, " +
-                        $"Mobile No = {mobileno}.";
-                }
-
-                if(nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country && emailtxtbox.Text == email && 
-                    mobilenotxtbox.Text == mobileno && trntxtbox.Text == trn)
-                {
-                    return $"Duplicate found: Account Name = {accountName}, Address = {address}, Country = {country}, Email = {email}, " +
-                        $"Mobile No = {mobileno}, TRN = {trn}.";
-                }
-
-                if (nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country && emailtxtbox.Text == email &&
-                    mobilenotxtbox.Text == mobileno && trntxtbox.Text == trn && gstnotxtbox.Text == gstno)
-                {
-                    return $"Duplicate found: Account Name = {accountName}, Address = {address}, Country = {country}, Email = {email}, " +
-                        $"Mobile No = {mobileno}, TRN = {trn}, GST NO = {gstno}.";
-                }
-
-                if (nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country && emailtxtbox.Text == email &&
-                    mobilenotxtbox.Text == mobileno && trntxtbox.Text == trn && gstnotxtbox.Text == gstno && vatnotxtbox.Text == vatno)
-                {
-                    return $"Duplicate found: Account Name = {accountName}, Address = {address}, Country = {country}, Email = {email}, " +
-                        $"Mobile No = {mobileno}, TRN = {trn}, GST NO = {gstno}, VAT NO = {vatno}.";
-                }
+                string companyName = dt.Rows[0]["CompanyName"].ToString();
 
                 if (nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country && emailtxtbox.Text == email &&
                    mobilenotxtbox.Text == mobileno && trntxtbox.Text == trn && gstnotxtbox.Text == gstno && vatnotxtbox.Text == vatno 
-                   && emiratesidtxtbox.Text == emiratesid)
+                   && emiratesidtxtbox.Text == emiratesid && companynametxtbox.Text == companyName)
                 {
                     return $"Duplicate found: Account Name = {accountName}, Address = {address}, Country = {country}, Email = {email}, " +
-                        $"Mobile No = {mobileno}, TRN = {trn}, GST NO = {gstno}, VAT NO = {vatno}, Emirates Id = {emiratesid}.";
+                        $"Mobile No = {mobileno}, TRN = {trn}, GST NO = {gstno}, VAT NO = {vatno}, Emirates Id = {emiratesid}, Company Name = {companyName}.";
                 }
             }
             return null;
@@ -314,95 +278,147 @@ namespace SmartFlow.Masters
         {
             try
             {
-                string query = string.Format("SELECT AccountSubControlID,AccountHead_ID,AccountControl_ID,User_ID,AccountSubControlName,AccountSubControlCode,CompanyID," +
-                    "CreatedAt,UpdatedAt,AddedBy,CreatedDay,UpdatedDay,PrintName,Address,Country,Email,MobileNo,OpeningBalanceCredit,OpeningBalanceDebit,CodeAccount,Area," +
-                    "Description,TRN,GSTNO,VATNO,Location,State,PostalCode,Fax,Website,CreditLimit,PaymentTerm,DiscountPercentage,RefrencePersonName,RefrencePersonMobile," +
-                    "RefrencePersonEmail,IsAllowedSMS,IsAllowedEmail,EmiratesId,ServiceTaxNo,BankName,BankAccountNo,IsCustomer,IsSupplier,IsEmployee " +
-                    "FROM AccountSubControlTable WHERE AccountSubControlID = @AccountSubControlID");
+                // Validate the input ID
+                if (id <= 0)
+                {
+                    MessageBox.Show("The AccountSubControlID cannot be null or empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // SQL query for fetching data
+                string query = "SELECT AccountSubControlID, AccountHead_ID, AccountControl_ID, User_ID, AccountSubControlName, AccountSubControlCode, CompanyID, " +
+                               "CreatedAt, UpdatedAt, AddedBy, CreatedDay, UpdatedDay, PrintName, Address, Country, Email, MobileNo, OpeningBalanceCredit, OpeningBalanceDebit, " +
+                               "CodeAccount, Area, Description, TRN, GSTNO, VATNO, Location, State, PostalCode, Fax, Website, CreditLimit, PaymentTerm, DiscountPercentage, " +
+                               "RefrencePersonName, RefrencePersonMobile, RefrencePersonEmail, IsAllowedSMS, IsAllowedEmail, EmiratesId, ServiceTaxNo, BankName, BankAccountNo, " +
+                               "IsCustomer, IsSupplier, IsEmployee, CompanyName FROM AccountSubControlTable WHERE AccountSubControlID = @AccountSubControlID";
 
                 var parameters = new Dictionary<string, object>
                 {
-                    { "AccountSubControlID", id }
+                    { "@AccountSubControlID", id }
                 };
 
                 DataTable dataTable = DatabaseAccess.RetrieveData(query, parameters);
 
-                if (dataTable != null)
+                if (dataTable == null || dataTable.Rows.Count == 0)
                 {
-                    if (dataTable.Rows.Count > 0)
-                    {
-                        nametxtbox.Text = dataTable.Rows[0]["AccountSubControlName"].ToString();
-                        printnametxtbox.Text = dataTable.Rows[0]["PrintName"].ToString();
-                        int accountcontrolid = Convert.ToInt32(dataTable.Rows[0]["AccountControl_ID"].ToString());
-                        accountheadidlbl.Text = dataTable.Rows[0]["AccountHead_ID"].ToString();
-                        if (accountcontrolid > 0)
-                        {
-                            DataTable dtaccountgroup = DatabaseAccess.Retrive("SELECT AccountControlName FROM AccountControlTable " +
-                                "WHERE AccountControlID = '"+ accountcontrolid + "'");
-                            if (dtaccountgroup != null && dtaccountgroup.Rows.Count > 0)
-                            {
-                                selectaccountgrouptxtbox.Text = dtaccountgroup.Rows[0]["AccountControlName"].ToString();
-                                selectaccountgrouptxtbox.Enabled = false;
-                                accountgroupidlbl.Text = accountcontrolid.ToString();
-                                
-                            } 
-                        }
-                        addresstxtbox.Text = dataTable.Rows[0]["Address"].ToString(); 
-                        countrytxtbox.Text = dataTable.Rows[0]["Country"].ToString(); 
-                        emailtxtbox.Text = dataTable.Rows[0]["Email"].ToString(); 
-                        mobilenotxtbox.Text = dataTable.Rows[0]["MobileNo"].ToString();
-                        postalcodetxtbox.Text = dataTable.Rows[0]["PostalCode"].ToString();
-                        areatxtbox.Text = dataTable.Rows[0]["Area"].ToString();
-                        locationtxtbox.Text = dataTable.Rows[0]["Location"].ToString();
-                        trntxtbox.Text = dataTable.Rows[0]["TRN"].ToString();
-                        faxtxtbox.Text = dataTable.Rows[0]["Fax"].ToString();
-                        websitetxtbox.Text = dataTable.Rows[0]["Website"].ToString();
-                        creditlimittxtbox.Text = dataTable.Rows[0]["CreditLimit"].ToString();
-                        paymenttermstxtbox.Text = dataTable.Rows[0]["PaymentTerm"].ToString();
-                        gstnotxtbox.Text = dataTable.Rows[0]["GSTNO"].ToString();
-                        vatnotxtbox.Text = dataTable.Rows[0]["VATNO"].ToString();
-                        servicetaxnotxtbox.Text = dataTable.Rows[0]["ServiceTaxNo"].ToString();
-                        emiratesidtxtbox.Text = dataTable.Rows[0]["EmiratesId"].ToString();
-                        banknametxtbox.Text = dataTable.Rows[0]["BankName"].ToString();
-                        accountnotxtbox.Text = dataTable.Rows[0]["BankAccountNo"].ToString();
-                        discounttxtbox.Text = dataTable.Rows[0]["DiscountPercentage"].ToString();
-                        refrencepersonnametxtbox.Text = dataTable.Rows[0]["RefrencePersonName"].ToString();
-                        refrencepersonemailtxtbox.Text = dataTable.Rows[0]["RefrencePersonEmail"].ToString();
-                        refrencepersonmobiletxtbox.Text = dataTable.Rows[0]["RefrencePersonMobile"].ToString();
-                        issmsallowedcheckbox.Checked = Convert.ToBoolean(dataTable.Rows[0]["IsAllowedSMS"]);
-                        isemailallowedcheckbox.Checked = Convert.ToBoolean(dataTable.Rows[0]["IsAllowedEmail"]);
-                        descriptiontxtbox.Text = dataTable.Rows[0]["Description"].ToString();
-                        accountcodelbl.Visible = true;
-                        accountcodelbl.Text = dataTable.Rows[0]["CodeAccount"].ToString();
-                        
-                    }
-                    savebtn.Text = "Update";
+                    MessageBox.Show("No data found for the given AccountSubControlID.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
+
+                // Map data to controls
+                var row = dataTable.Rows[0];
+                nametxtbox.Text = row["AccountSubControlName"].ToString();
+                printnametxtbox.Text = row["PrintName"].ToString();
+                accountheadidlbl.Text = row["AccountHead_ID"].ToString();
+
+                int accountControlId;
+                if (int.TryParse(row["AccountControl_ID"].ToString(), out accountControlId) && accountControlId > 0)
+                {
+                    // Fetch account group details
+                    string accountGroupQuery = "SELECT AccountControlName FROM AccountControlTable WHERE AccountControlID = @AccountControlID";
+                    var accountGroupParams = new Dictionary<string, object>
+                    {
+                        { "@AccountControlID", accountControlId }
+                    };
+                    DataTable dtAccountGroup = DatabaseAccess.RetrieveData(accountGroupQuery, accountGroupParams);
+
+                    if (dtAccountGroup != null && dtAccountGroup.Rows.Count > 0)
+                    {
+                        selectaccountgrouptxtbox.Text = dtAccountGroup.Rows[0]["AccountControlName"].ToString();
+                        selectaccountgrouptxtbox.Enabled = false;
+                        accountgroupidlbl.Text = accountControlId.ToString();
+
+                        switch (selectaccountgrouptxtbox.Text)
+                        {
+                            case "Customers":
+                            case "Reseller":
+                                customerradio.Checked = true;
+                                break;
+                            case "Suppliers":
+                                supplierradio.Checked = true;
+                                break;
+                            case "Employee":
+                                employeeradio.Checked = true;
+                                break;
+                            default:
+                                accountcodelbl.Visible = true;
+                                break;
+                        }
+                    }
+                }
+
+                // Populate other controls
+                addresstxtbox.Text = row["Address"].ToString();
+                countrytxtbox.Text = row["Country"].ToString();
+                emailtxtbox.Text = row["Email"].ToString();
+                mobilenotxtbox.Text = row["MobileNo"].ToString();
+                postalcodetxtbox.Text = row["PostalCode"].ToString();
+                areatxtbox.Text = row["Area"].ToString();
+                locationtxtbox.Text = row["Location"].ToString();
+                trntxtbox.Text = row["TRN"].ToString();
+                faxtxtbox.Text = row["Fax"].ToString();
+                websitetxtbox.Text = row["Website"].ToString();
+                creditlimittxtbox.Text = row["CreditLimit"].ToString();
+                paymenttermstxtbox.Text = row["PaymentTerm"].ToString();
+                gstnotxtbox.Text = row["GSTNO"].ToString();
+                vatnotxtbox.Text = row["VATNO"].ToString();
+                servicetaxnotxtbox.Text = row["ServiceTaxNo"].ToString();
+                emiratesidtxtbox.Text = row["EmiratesId"].ToString();
+                banknametxtbox.Text = row["BankName"].ToString();
+                accountnotxtbox.Text = row["BankAccountNo"].ToString();
+                discounttxtbox.Text = row["DiscountPercentage"].ToString();
+                refrencepersonnametxtbox.Text = row["RefrencePersonName"].ToString();
+                refrencepersonemailtxtbox.Text = row["RefrencePersonEmail"].ToString();
+                refrencepersonmobiletxtbox.Text = row["RefrencePersonMobile"].ToString();
+                issmsallowedcheckbox.Checked = Convert.ToBoolean(row["IsAllowedSMS"]);
+                isemailallowedcheckbox.Checked = Convert.ToBoolean(row["IsAllowedEmail"]);
+                descriptiontxtbox.Text = row["Description"].ToString();
+                accountcodelbl.Visible = true;
+                accountcodelbl.Text = row["CodeAccount"].ToString();
+                companynametxtbox.Text = row["CompanyName"].ToString();
+
+                // Update button text
+                savebtn.Text = "Update";
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"Database error: {sqlEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (FormatException formatEx)
+            {
+                MessageBox.Show($"Data format error: {formatEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
         private void selectaccountgrouptxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             try
             {
-                Form openForm = CommonFunction.IsFormOpen(typeof(AccountGroupSelectionForm));
-                if(openForm == null)
+                if (string.IsNullOrEmpty(selectaccountgrouptxtbox.Text))
                 {
-                    AccountGroupSelectionForm accountSelection = new AccountGroupSelectionForm
+                    Form openForm = CommonFunction.IsFormOpen(typeof(AccountGroupSelectionForm));
+                    if (openForm == null)
                     {
-                        WindowState = FormWindowState.Normal,
-                        StartPosition = FormStartPosition.CenterParent,
-                    };
-                    accountSelection.FormClosed += delegate
+                        AccountGroupSelectionForm accountSelection = new AccountGroupSelectionForm
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        };
+                        accountSelection.FormClosed += delegate
+                        {
+                            UpdateAccountInfo();
+                        };
+                        CommonFunction.DisposeOnClose(accountSelection);
+                        accountSelection.ShowDialog();
+                    }
+                    else
                     {
-                        UpdateAccountInfo();
-                    };
-                    CommonFunction.DisposeOnClose(accountSelection);
-                    accountSelection.ShowDialog();
-                }
-                else
-                {
-                    openForm.BringToFront();
+                        openForm.BringToFront();
+                    }
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -446,24 +462,27 @@ namespace SmartFlow.Masters
         {
             if(e.KeyCode == Keys.Enter)
             {
-                Form openForm = CommonFunction.IsFormOpen(typeof(AccountGroupSelectionForm));
-                if (openForm == null)
+                if (string.IsNullOrEmpty(selectaccountgrouptxtbox.Text))
                 {
-                    AccountGroupSelectionForm accountSelection = new AccountGroupSelectionForm
+                    Form openForm = CommonFunction.IsFormOpen(typeof(AccountGroupSelectionForm));
+                    if (openForm == null)
                     {
-                        WindowState = FormWindowState.Normal,
-                        StartPosition = FormStartPosition.CenterParent,
-                    };
-                    accountSelection.FormClosed += delegate
+                        AccountGroupSelectionForm accountSelection = new AccountGroupSelectionForm
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        };
+                        accountSelection.FormClosed += delegate
+                        {
+                            UpdateAccountInfo();
+                        };
+                        CommonFunction.DisposeOnClose(accountSelection);
+                        accountSelection.ShowDialog();
+                    }
+                    else
                     {
-                        UpdateAccountInfo();
-                    };
-                    CommonFunction.DisposeOnClose(accountSelection);
-                    accountSelection.ShowDialog();
-                }
-                else
-                {
-                    openForm.BringToFront();
+                        openForm.BringToFront();
+                    }
                 }
             }
         }

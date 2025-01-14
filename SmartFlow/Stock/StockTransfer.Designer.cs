@@ -43,7 +43,6 @@
             this.warehousefromlbl = new System.Windows.Forms.Label();
             this.warehousetoidlbl = new System.Windows.Forms.Label();
             this.warehousefromidlbl = new System.Windows.Forms.Label();
-            this.productpricelbl = new System.Windows.Forms.Label();
             this.stocktransferidlbl = new System.Windows.Forms.Label();
             this.productbarcodelbl = new System.Windows.Forms.Label();
             this.productupclbl = new System.Windows.Forms.Label();
@@ -54,7 +53,6 @@
             this.productmfr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productupc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productbarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productquantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -94,7 +92,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panel2.BackColor = System.Drawing.SystemColors.Control;
             this.panel2.Controls.Add(this.selectwarehousetotxtbox);
             this.panel2.Controls.Add(this.selectwarehousefromtxtbox);
             this.panel2.Controls.Add(this.addbtn);
@@ -229,16 +227,6 @@
             this.warehousefromidlbl.Text = "warehousefromid";
             this.warehousefromidlbl.Visible = false;
             // 
-            // productpricelbl
-            // 
-            this.productpricelbl.AutoSize = true;
-            this.productpricelbl.Location = new System.Drawing.Point(1142, 373);
-            this.productpricelbl.Name = "productpricelbl";
-            this.productpricelbl.Size = new System.Drawing.Size(82, 16);
-            this.productpricelbl.TabIndex = 16;
-            this.productpricelbl.Text = "productprice";
-            this.productpricelbl.Visible = false;
-            // 
             // stocktransferidlbl
             // 
             this.stocktransferidlbl.AutoSize = true;
@@ -305,7 +293,6 @@
             this.productmfr,
             this.productname,
             this.productupc,
-            this.productprice,
             this.productbarcode,
             this.productquantity});
             this.dgvproducts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -347,13 +334,6 @@
             this.productupc.Name = "productupc";
             this.productupc.Width = 125;
             // 
-            // productprice
-            // 
-            this.productprice.HeaderText = "PRICE";
-            this.productprice.MinimumWidth = 6;
-            this.productprice.Name = "productprice";
-            this.productprice.Width = 125;
-            // 
             // productbarcode
             // 
             this.productbarcode.HeaderText = "BARCODE";
@@ -370,7 +350,7 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panel3.BackColor = System.Drawing.SystemColors.Control;
             this.panel3.Controls.Add(this.closebtn);
             this.panel3.Controls.Add(this.warehousefromidlbl);
             this.panel3.Controls.Add(this.warehousetoidlbl);
@@ -378,7 +358,6 @@
             this.panel3.Controls.Add(this.descriptiontxtbox);
             this.panel3.Controls.Add(this.descriptionlbl);
             this.panel3.Controls.Add(this.dgvproducts);
-            this.panel3.Controls.Add(this.productpricelbl);
             this.panel3.Controls.Add(this.productidlbl);
             this.panel3.Controls.Add(this.stocktransferidlbl);
             this.panel3.Controls.Add(this.productnamelbl);
@@ -448,7 +427,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1448, 773);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -497,18 +476,16 @@
         private System.Windows.Forms.Button addbtn;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Label stocktransferidlbl;
-        private System.Windows.Forms.Label productpricelbl;
         private System.Windows.Forms.TextBox selectwarehousetotxtbox;
         private System.Windows.Forms.TextBox selectwarehousefromtxtbox;
         private System.Windows.Forms.Label warehousetoidlbl;
         private System.Windows.Forms.Label warehousefromidlbl;
+        private System.Windows.Forms.Button closebtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productid;
         private System.Windows.Forms.DataGridViewTextBoxColumn productmfr;
         private System.Windows.Forms.DataGridViewTextBoxColumn productname;
         private System.Windows.Forms.DataGridViewTextBoxColumn productupc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productprice;
         private System.Windows.Forms.DataGridViewTextBoxColumn productbarcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn productquantity;
-        private System.Windows.Forms.Button closebtn;
     }
 }

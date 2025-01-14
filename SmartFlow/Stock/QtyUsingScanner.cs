@@ -23,6 +23,7 @@ namespace SmartFlow.Stock
         {
             try
             {
+
                 errorProvider.Clear();
                 if(selectwarehousetxtbox.Text.Trim().Length == 0)
                 {
@@ -39,7 +40,7 @@ namespace SmartFlow.Stock
                 }
 
                 string query = string.Empty;
-                string invoiceno = qtyusingscanneridlbl.Text;
+                string invoiceno = CheckInvoiceBeforeInsert();
                 string importantNotes = importantnotestxtbox.Text;
 
                 string tableName = "StockCustomizedTable";
@@ -65,11 +66,10 @@ namespace SmartFlow.Stock
                         {
                             string productid = Convert.ToString(row.Cells[0].Value);
                             string productname = Convert.ToString(row.Cells[1].Value);
-                            string price = Convert.ToString(row.Cells[2].Value);
-                            string upc = Convert.ToString(row.Cells[3].Value);
-                            string mfr = Convert.ToString(row.Cells[4].Value);
-                            string barcode = Convert.ToString(row.Cells[5].Value);
-                            int quantity = Convert.ToInt32(row.Cells[6].Value);
+                            string upc = Convert.ToString(row.Cells[2].Value);
+                            string mfr = Convert.ToString(row.Cells[3].Value);
+                            string barcode = Convert.ToString(row.Cells[4].Value);
+                            int quantity = Convert.ToInt32(row.Cells[5].Value);
 
                             if (quantity > 0)
                             {
@@ -156,16 +156,6 @@ namespace SmartFlow.Stock
             DataTable dataTable = DatabaseAccess.Retrive(query);
             string productid = null, mfr = null, title = null, upc = null, price = null, systembarcode = null;
             int quantity = 0;
-            string radiostatus = null;
-            
-            if (useditemradio.Checked)
-            {
-                radiostatus = "USED";
-            }
-            else
-            {
-                radiostatus = "NEW";
-            }
 
             if (dataTable.Rows.Count>0)
             {
@@ -195,14 +185,13 @@ namespace SmartFlow.Stock
                     {
                         productid = row["ProductID"].ToString();
                         title = row["ProductName"].ToString();
-                        price = row["StandardPrice"].ToString();
                         upc = row["UPC"].ToString();
                         mfr = row["MFR"].ToString();
                         systembarcode = row["Barcode"].ToString();
                         quantity = 1;
                     }
 
-                    int newRowIndex = dgvinventory.Rows.Add(productid, title, price, upc, mfr, systembarcode, quantity);
+                    int newRowIndex = dgvinventory.Rows.Add(productid, title, upc, mfr, systembarcode, quantity);
                     dgvinventory.ClearSelection();
                     // Highlight and scroll to the new row
                     DataGridViewRow newRow = dgvinventory.Rows[newRowIndex];
@@ -274,6 +263,28 @@ namespace SmartFlow.Stock
                 }
             }
         }
+        private string CheckInvoiceBeforeInsert()
+        {
+            try
+            {
+                string lastInvoiceNumber = GetLastInvoiceNumber();
+                string newInvoiceNumber = qtyusingscanneridlbl.Text;
+
+                if (String.Compare(newInvoiceNumber, lastInvoiceNumber) <= 0)
+                {
+                    return GenerateNextInvoiceNumber();
+                }
+                else
+                {
+                    return qtyusingscanneridlbl.Text;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
         private string GenerateNextInvoiceNumber()
         {
             try
@@ -325,7 +336,8 @@ namespace SmartFlow.Stock
             string lastInvoiceNumber = null;
             try
             {
-                string query = "SELECT TOP 1 InvoiceNo FROM StockCustomizedTable WHERE InvoiceNo LIKE 'QUS-%' ORDER BY InvoiceNo DESC";
+                string datePart = DateTime.Today.ToString("yyMMdd");
+                string query = $"SELECT TOP 1 InvoiceNo FROM StockCustomizedTable WHERE InvoiceNo LIKE 'QUS-{datePart}-%' ORDER BY InvoiceNo DESC";
                 DataTable invoiceData = DatabaseAccess.Retrive(query);
                 if (invoiceData.Rows.Count > 0)
                 {
@@ -347,35 +359,39 @@ namespace SmartFlow.Stock
         }
         private void selectwarehousetxtbox_MouseClick(object sender, MouseEventArgs e)
         {
-            Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
-            if (openForm == null)
+            if (string.IsNullOrEmpty(selectwarehousetxtbox.Text))
             {
-                string getwarehousedata = "SELECT WarehouseID,Name,Address,City,Code FROM WarehouseTable";
-                DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
-
-                if (warehousedata != null)
+                Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
+                if (openForm == null)
                 {
-                    if (warehousedata.Rows.Count > 0)
-                    {
-                        WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata)
-                        {
-                            WindowState = FormWindowState.Normal,
-                            StartPosition = FormStartPosition.CenterParent,
-                        };
+                    string getwarehousedata = "SELECT WarehouseID,Name,Address,City,Code FROM WarehouseTable";
+                    DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
 
-                        warehouseSelection.FormClosed += delegate
+                    if (warehousedata != null)
+                    {
+                        if (warehousedata.Rows.Count > 0)
                         {
-                            UpdateWarehouseTxtBox();
-                        };
-                        CommonFunction.DisposeOnClose(warehouseSelection);
-                        warehouseSelection.Show();
+                            WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata)
+                            {
+                                WindowState = FormWindowState.Normal,
+                                StartPosition = FormStartPosition.CenterParent,
+                            };
+
+                            warehouseSelection.FormClosed += delegate
+                            {
+                                UpdateWarehouseTxtBox();
+                            };
+                            CommonFunction.DisposeOnClose(warehouseSelection);
+                            warehouseSelection.Show();
+                        }
                     }
                 }
+                else
+                {
+                    openForm.BringToFront();
+                }
             }
-            else
-            {
-                openForm.BringToFront();
-            }
+            
         }
         private void UpdateWarehouseTxtBox()
         {
@@ -424,20 +440,6 @@ namespace SmartFlow.Stock
                     MessageBox.Show("Please enter a valid quantity.");
                     dgvinventory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 1; // Reset to default
                 }
-            }
-        }
-
-        private void useditemradio_CheckedChanged(object sender, EventArgs e)
-        {
-            if(useditemradio.Checked == true)
-            {
-                refrencetxtbox.Visible = true;
-                usedproductrefrencelbl.Visible = true;
-            }
-            else
-            {
-                refrencetxtbox.Visible = false;
-                usedproductrefrencelbl.Visible = false;
             }
         }
     }

@@ -210,7 +210,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1594, 740);
             this.Controls.Add(this.sampleexcelfilebtn);
             this.Controls.Add(this.accountgroupidlabel);
@@ -224,7 +224,6 @@
             this.Controls.Add(this.txtfilename);
             this.Controls.Add(this.selectfilebtn);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "ExcelAccounts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

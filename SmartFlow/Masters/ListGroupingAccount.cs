@@ -70,16 +70,23 @@ namespace SmartFlow.Masters
                 {
                     if(dgvlistgroupingaccount.SelectedRows.Count == 1)
                     {
-                        GroupingAccount groupingAccount = new GroupingAccount(Convert.ToInt32(dgvlistgroupingaccount.CurrentRow.Cells[0].Value));
-                        groupingAccount.MdiParent = this.MdiParent;
+                        GroupingAccount groupingAccount = new GroupingAccount(Convert.ToInt32(dgvlistgroupingaccount.CurrentRow.Cells[0].Value)) 
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        };
+
                         groupingAccount.FormClosed += delegate
                         {
-                            GlobalVariables.currentRowIndex = dgvlistgroupingaccount.CurrentCell.RowIndex;
-                            GlobalVariables.currentCellIndex = dgvlistgroupingaccount.CurrentCell.ColumnIndex;
+                            if(dgvlistgroupingaccount.CurrentCell.RowIndex > 0 && dgvlistgroupingaccount.CurrentCell.ColumnIndex > 0)
+                            {
+                                GlobalVariables.currentRowIndex = dgvlistgroupingaccount.CurrentCell.RowIndex;
+                                GlobalVariables.currentCellIndex = dgvlistgroupingaccount.CurrentCell.ColumnIndex;
+                            }
                             FillGrid();
                         };
                         CommonFunction.DisposeOnClose(groupingAccount);
-                        groupingAccount.Show();
+                        groupingAccount.ShowDialog();
                     }
                 }
             }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -93,16 +100,23 @@ namespace SmartFlow.Masters
                 {
                     if(dgvlistgroupingaccount.SelectedRows.Count == 1)
                     {
-                        GroupingAccount groupingAccount = new GroupingAccount(Convert.ToInt32(dgvlistgroupingaccount.CurrentRow.Cells[0].Value));
-                        groupingAccount.MdiParent = this.MdiParent;
+                        GroupingAccount groupingAccount = new GroupingAccount(Convert.ToInt32(dgvlistgroupingaccount.CurrentRow.Cells[0].Value)) 
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        };
+
                         groupingAccount.FormClosed += delegate
                         {
-                            GlobalVariables.currentRowIndex = dgvlistgroupingaccount.CurrentCell.RowIndex;
-                            GlobalVariables.currentCellIndex = dgvlistgroupingaccount.CurrentCell.ColumnIndex;
+                            if(dgvlistgroupingaccount.CurrentCell.RowIndex > 0 && dgvlistgroupingaccount.CurrentCell.ColumnIndex > 0)
+                            {
+                                GlobalVariables.currentRowIndex = dgvlistgroupingaccount.CurrentCell.RowIndex;
+                                GlobalVariables.currentCellIndex = dgvlistgroupingaccount.CurrentCell.ColumnIndex;
+                            }
                             FillGrid();
                         };
                         CommonFunction.DisposeOnClose(groupingAccount);
-                        groupingAccount.Show();
+                        groupingAccount.ShowDialog();
                     }
                 }
             }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }

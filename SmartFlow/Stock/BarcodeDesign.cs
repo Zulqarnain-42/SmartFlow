@@ -39,22 +39,25 @@ namespace SmartFlow.Stock
         }
         private void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
-            Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
-            if (openForm == null) 
-            { 
-                ProductSelectionForm productSelection = new ProductSelectionForm();
-                productSelection.MdiParent = this.MdiParent;
-                
-                productSelection.FormClosed += delegate
-                {
-                    UpdateProductTextBox();
-                };
-                CommonFunction.DisposeOnClose(productSelection);
-                productSelection.Show();
-            }
-            else
+            if (string.IsNullOrEmpty(selectproducttxtbox.Text))
             {
-                openForm.BringToFront();
+                Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+                if (openForm == null)
+                {
+                    ProductSelectionForm productSelection = new ProductSelectionForm();
+                    productSelection.MdiParent = this.MdiParent;
+
+                    productSelection.FormClosed += delegate
+                    {
+                        UpdateProductTextBox();
+                    };
+                    CommonFunction.DisposeOnClose(productSelection);
+                    productSelection.Show();
+                }
+                else
+                {
+                    openForm.BringToFront();
+                }
             }
         }
         private void UpdateProductTextBox()
@@ -189,26 +192,30 @@ namespace SmartFlow.Stock
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
-                if (openForm == null) 
+                if (string.IsNullOrEmpty(selectproducttxtbox.Text))
                 {
-                    ProductSelectionForm productSelection = new ProductSelectionForm
+                    Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+                    if (openForm == null)
                     {
-                        WindowState = FormWindowState.Normal,
-                        StartPosition = FormStartPosition.CenterScreen,
-                    };
-                    
-                    productSelection.FormClosed += delegate
+                        ProductSelectionForm productSelection = new ProductSelectionForm
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterScreen,
+                        };
+
+                        productSelection.FormClosed += delegate
+                        {
+                            UpdateProductTextBox();
+                        };
+                        CommonFunction.DisposeOnClose(productSelection);
+                        productSelection.ShowDialog();
+                    }
+                    else
                     {
-                        UpdateProductTextBox();
-                    };
-                    CommonFunction.DisposeOnClose(productSelection);
-                    productSelection.ShowDialog();
+                        openForm.BringToFront();
+                    }
                 }
-                else
-                {
-                    openForm.BringToFront();
-                }
+                
             }
         }
     }

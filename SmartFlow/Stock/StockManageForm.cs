@@ -257,10 +257,17 @@ namespace SmartFlow.Stock
                 // Deserialize JSON to Invoice object
                 Invoice invoice = JsonConvert.DeserializeObject<Invoice>(invoiceData);
 
-                string query = string.Format("INSERT INTO StockCustomizedTable (Code,InvoiceNo,CreatedAt,CreatedDay) VALUES ('" + Guid.NewGuid() + "'," +
-                        "'" + invoice.InvoiceNo + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "'); " +
-                        "SELECT SCOPE_IDENTITY();");
-                int stockcustomid = 0;
+                string tableName = "StockCustomizedTable";
+                var columnData = new Dictionary<string, object>
+                {
+                    { "Code", Guid.NewGuid().ToString() },
+                    { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                    { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                    { "InvoiceNo", invoice.InvoiceNo },
+                };
+
+                int stockcustomid = DatabaseAccess.InsertDataId(tableName, columnData);
+
                 // Extract the 'code' values from each item
                 foreach (var item in invoice.items)
                 {
@@ -317,7 +324,6 @@ namespace SmartFlow.Stock
 
         private bool minusinventoryData(InvoiceItem item,int stockcustomid)
         {
-            int negativeQuantity = -Math.Abs(item.quantity);
             bool allSuccess = true;
             DataTable productData = DatabaseAccess.Retrive("SELECT ProductID,ProductName,SaleUnitPrice,LowestPrice,WholeSalePrice,StandardPrice,Description," +
                         "StockTrasholdQty,StockCode,CompanyID,CreatedAt,UpdatedAt,AddedBy,CreatedDay,UPC,EAN,Length,Width,Height,Weight,MFR,Barcode,ProductCode," +
@@ -328,11 +334,23 @@ namespace SmartFlow.Stock
                 {
                     foreach (DataRow row in productData.Rows)
                     {
-                        string addinvoicequery = string.Format("INSERT INTO StockTable (ProductID,ProductMfr,Quantity,StockCustom_ID,CreatedAt,CreatedDay) VALUES " +
-                            "('" + row["ProductID"].ToString() + "','" + row["MFR"].ToString() + "','" + negativeQuantity + "','" + stockcustomid + "'," +
-                            "'" + System.DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + System.DateTime.Now.DayOfWeek + "')");
+                        string tableName = "StockTable";
+                        int productid = Convert.ToInt32(row["ProductID"].ToString());
+                        string productMfr = row["MFR"].ToString();
 
-                        bool result = false;
+                        var tableData = new Dictionary<string, object>
+                        {
+                            { "ProductID", productid },
+                            { "ProductMfr", productMfr },
+                            { "Quantity", item.quantity },
+                            { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                            { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                            { "StockCustom_ID", stockcustomid },
+                            { "MinusInventory", true },
+                            { "AddInventory",false }
+                        };
+
+                        bool result = DatabaseAccess.ExecuteQuery(tableName, "INSERT", tableData);
                         if (!result) // If any insert fails, set the flag to false
                         {
                             allSuccess = false; 

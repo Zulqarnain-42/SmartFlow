@@ -99,6 +99,8 @@
             this.customerradio = new System.Windows.Forms.RadioButton();
             this.supplierradio = new System.Windows.Forms.RadioButton();
             this.employeeradio = new System.Windows.Forms.RadioButton();
+            this.companynamelbl = new System.Windows.Forms.Label();
+            this.companynametxtbox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.panel1.SuspendLayout();
             this.refrencepersongroupbox.SuspendLayout();
@@ -721,7 +723,8 @@
             // 
             // accountcodelbl
             // 
-            this.accountcodelbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.accountcodelbl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.accountcodelbl.AutoSize = true;
             this.accountcodelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accountcodelbl.ForeColor = System.Drawing.Color.Red;
@@ -807,12 +810,33 @@
             this.employeeradio.UseVisualStyleBackColor = true;
             this.employeeradio.Visible = false;
             // 
+            // companynamelbl
+            // 
+            this.companynamelbl.AutoSize = true;
+            this.companynamelbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.companynamelbl.Location = new System.Drawing.Point(499, 268);
+            this.companynamelbl.Name = "companynamelbl";
+            this.companynamelbl.Size = new System.Drawing.Size(112, 18);
+            this.companynamelbl.TabIndex = 67;
+            this.companynamelbl.Text = "COMPANY NAME";
+            // 
+            // companynametxtbox
+            // 
+            this.companynametxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.companynametxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.companynametxtbox.Location = new System.Drawing.Point(763, 263);
+            this.companynametxtbox.Name = "companynametxtbox";
+            this.companynametxtbox.Size = new System.Drawing.Size(300, 28);
+            this.companynametxtbox.TabIndex = 68;
+            // 
             // Account
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1477, 581);
+            this.Controls.Add(this.companynametxtbox);
+            this.Controls.Add(this.companynamelbl);
             this.Controls.Add(this.employeeradio);
             this.Controls.Add(this.supplierradio);
             this.Controls.Add(this.customerradio);
@@ -875,10 +899,7 @@
             this.Controls.Add(this.addresslbl);
             this.Controls.Add(this.printnametxtbox);
             this.Controls.Add(this.accountgrouplbl);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Account";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ACCOUNT";
@@ -965,5 +986,7 @@
         private System.Windows.Forms.RadioButton employeeradio;
         private System.Windows.Forms.RadioButton supplierradio;
         private System.Windows.Forms.RadioButton customerradio;
+        private System.Windows.Forms.TextBox companynametxtbox;
+        private System.Windows.Forms.Label companynamelbl;
     }
 }

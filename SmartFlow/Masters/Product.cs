@@ -12,6 +12,7 @@ namespace SmartFlow.Masters
         {
             InitializeComponent();
         }
+
         private void newbtn_Click(object sender, EventArgs e)
         {
             CreateProduct createProduct = new CreateProduct();
@@ -23,10 +24,12 @@ namespace SmartFlow.Masters
             CommonFunction.DisposeOnClose(createProduct);
             createProduct.Show();
         }
+
         private void closebtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
         private void FillGrid(string searchvalue) 
         {
             try
@@ -74,14 +77,17 @@ namespace SmartFlow.Masters
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
+
         private void Product_Load(object sender, EventArgs e)
         {
             FillGrid("");
         }
+
         private void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
             FillGrid(searchtxtbox.Text.Trim());
         }
+
         private void Product_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -90,6 +96,7 @@ namespace SmartFlow.Masters
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
+
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -130,6 +137,7 @@ namespace SmartFlow.Masters
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void productsGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -180,6 +188,7 @@ namespace SmartFlow.Masters
 
             return firstDisplayedRowIndex + displayedRowCount - 1;
         }
+
         private void productsGridView_Scroll(object sender, ScrollEventArgs e)
         {
             int firstVisibleRowIndex = GetFirstVisibleRowIndex(productsGridView);
@@ -190,6 +199,7 @@ namespace SmartFlow.Masters
                 GlobalVariables.currentCellIndex = firstVisibleCellIndex;
             }
         }
+
         private int GetFirstVisibleCellIndex(DataGridView dataGridView)
         {
             int horizontalOffset = dataGridView.HorizontalScrollingOffset;
@@ -212,6 +222,7 @@ namespace SmartFlow.Masters
 
             return dataGridView.Columns.Count - 1;
         }
+
         private string BuildSearchQuery(string searchTerm)
         {
             string[] terms = searchTerm.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
