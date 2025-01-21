@@ -353,6 +353,12 @@
     <Compile Include="Masters\CreateProduct.Designer.cs">
       <DependentUpon>CreateProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Masters\CurrencyList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\CurrencyList.Designer.cs">
+      <DependentUpon>CurrencyList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Masters\ExcelAccounts.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -467,11 +473,11 @@
     <Compile Include="Masters\UploadExcel.Designer.cs">
       <DependentUpon>UploadExcel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchase\FindPurchaseInvoiceForm.cs">
+    <Compile Include="Purchase\ListInvoiceDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Purchase\FindPurchaseInvoiceForm.Designer.cs">
-      <DependentUpon>FindPurchaseInvoiceForm.cs</DependentUpon>
+    <Compile Include="Purchase\ListInvoiceDetail.Designer.cs">
+      <DependentUpon>ListInvoiceDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Purchase\ListPurchaseInvoice.cs">
       <SubType>Form</SubType>
@@ -1257,6 +1263,9 @@
     <EmbeddedResource Include="Masters\CreateProduct.resx">
       <DependentUpon>CreateProduct.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Masters\CurrencyList.resx">
+      <DependentUpon>CurrencyList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Masters\ExcelAccounts.resx">
       <DependentUpon>ExcelAccounts.cs</DependentUpon>
     </EmbeddedResource>
@@ -1319,8 +1328,8 @@
     <EmbeddedResource Include="Masters\UploadExcel.resx">
       <DependentUpon>UploadExcel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Purchase\FindPurchaseInvoiceForm.resx">
-      <DependentUpon>FindPurchaseInvoiceForm.cs</DependentUpon>
+    <EmbeddedResource Include="Purchase\ListInvoiceDetail.resx">
+      <DependentUpon>ListInvoiceDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\ListPurchaseInvoice.resx">
       <DependentUpon>ListPurchaseInvoice.cs</DependentUpon>

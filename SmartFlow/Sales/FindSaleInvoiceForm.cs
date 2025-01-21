@@ -29,85 +29,11 @@ namespace SmartFlow.Sales
 
                 if (salequotationradio.Checked)
                 {
-                    string query = string.Format("SELECT InvoiceTable.Invoiceid,InvoiceTable.InvoiceNo,InvoiceTable.invoicedate,InvoiceTable.ClientID," +
-                        "InvoiceTable.CreatedAt,InvoiceTable.CreatedDay,InvoiceTable.UpdatedAt,InvoiceTable.UpdatedDay,InvoiceTable.AddedBy,InvoiceTable.Companyid," +
-                        "InvoiceTable.Userid,InvoiceTable.InvoiceCode,InvoiceTable.NetTotal,InvoiceTable.ClientName,InvoiceTable.TotalVat,InvoiceTable.TotalDiscount," +
-                        "InvoiceTable.FreightShippingCharges,InvoiceTable.InvoiceRefrence,InvoiceTable.IsPlanetInvoice,InvoiceTable.Currencyid," +
-                        "InvoiceTable.CurrencyName,InvoiceTable.ConversionRate,InvoiceTable.QuotationValidUntill," +
-                        "InvoiceTable.SalePerson,AccountSubControlTable.MobileNo,AccountSubControlTable.Email,AccountSubControlTable.RefrencePersonName," +
-                        "AccountSubControlTable.AccountSubControlName,AccountSubControlTable.CodeAccount,AccountSubControlTable.CompanyName " +
-                        "FROM InvoiceTable INNER JOIN AccountSubControlTable " +
-                        "ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
-
-                    DataTable dataInvoice = await DatabaseAccess.RetriveAsync(query);
-
-                    if (dataInvoice.Rows.Count > 0)
-                    {
-                        string subquery = string.Format("SELECT InvoiceDetailsTable.InvoiceDetailsId,InvoiceDetailsTable.InvoiceNo,InvoiceDetailsTable.Invoicecode," +
-                            "InvoiceDetailsTable.Productid, InvoiceDetailsTable.Quantity, InvoiceDetailsTable.UnitSalePrice, InvoiceDetailsTable.ItemSerialNoid," +
-                            "InvoiceDetailsTable.ProductName, InvoiceDetailsTable.MFR, InvoiceDetailsTable.ItemWiseDiscount, InvoiceDetailsTable.ItemWiseVAT," +
-                            "InvoiceDetailsTable.Warehouseid, InvoiceDetailsTable.PurchaseCostPrice, InvoiceDetailsTable.PurchaseLowestSalePrice," +
-                            "InvoiceDetailsTable.PurchaseStandardPrice, InvoiceDetailsTable.PurchaseItemSalePrice, InvoiceDetailsTable.SystemSerialNoid," +
-                            "InvoiceDetailsTable.ItemTotal, InvoiceDetailsTable.Unitid, InvoiceDetailsTable.AddInventory, InvoiceDetailsTable.ItemAvailability," +
-                            "InvoiceDetailsTable.Warehouseid, InvoiceDetailsTable.PricePerMeter, InvoiceDetailsTable.LengthInMeter, InvoiceDetailsTable.ItemDescription," +
-                            "InvoiceDetailsTable.MinusInventory, UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
-                            "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
-
-                        DataTable dtInvoiceDetails = await DatabaseAccess.RetriveAsync(subquery);
-                        if (dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
-                        {
-                            this.Close();
-                            SaleQuotationInvoice saleQuotationInvoice = new SaleQuotationInvoice(dataInvoice, dtInvoiceDetails);
-                            saleQuotationInvoice.MdiParent = Application.OpenForms["Dashboard"];
-                            await CommonFunction.DisposeOnCloseAsync(saleQuotationInvoice);
-                            saleQuotationInvoice.Show();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("No Record Found.");
-                    }
+                    
                 }
                 else if (proformainvoicebtn.Checked)
                 {
-                    string query = string.Format("SELECT InvoiceTable.Invoiceid,InvoiceTable.InvoiceNo,InvoiceTable.invoicedate,InvoiceTable.ClientID," +
-                        "InvoiceTable.CreatedAt,InvoiceTable.CreatedDay,InvoiceTable.UpdatedAt,InvoiceTable.UpdatedDay,InvoiceTable.AddedBy,InvoiceTable.Companyid," +
-                        "InvoiceTable.Userid,InvoiceTable.InvoiceCode,InvoiceTable.NetTotal,InvoiceTable.ClientName,InvoiceTable.TotalVat,InvoiceTable.TotalDiscount," +
-                        "InvoiceTable.FreightShippingCharges,InvoiceTable.InvoiceRefrence,InvoiceTable.IsPlanetInvoice,InvoiceTable.Currencyid," +
-                        "InvoiceTable.CurrencyName,InvoiceTable.ConversionRate,InvoiceTable.QuotationValidUntill," +
-                        "InvoiceTable.SalePerson,AccountSubControlTable.MobileNo,AccountSubControlTable.Email,AccountSubControlTable.RefrencePersonName," +
-                        "AccountSubControlTable.AccountSubControlName,AccountSubControlTable.CodeAccount,AccountSubControlTable.CompanyName " +
-                        "FROM InvoiceTable INNER JOIN AccountSubControlTable " +
-                        "ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
-
-                    DataTable dataInvoice = await DatabaseAccess.RetriveAsync(query);
-
-                    if (dataInvoice.Rows.Count > 0)
-                    {
-                        string subquery = string.Format("SELECT InvoiceDetailsTable.InvoiceDetailsId,InvoiceDetailsTable.InvoiceNo,InvoiceDetailsTable.Invoicecode," +
-                            "InvoiceDetailsTable.Productid, InvoiceDetailsTable.Quantity, InvoiceDetailsTable.UnitSalePrice, InvoiceDetailsTable.ItemSerialNoid," +
-                            "InvoiceDetailsTable.ProductName, InvoiceDetailsTable.MFR, InvoiceDetailsTable.ItemWiseDiscount, InvoiceDetailsTable.ItemWiseVAT," +
-                            "InvoiceDetailsTable.Warehouseid, InvoiceDetailsTable.PurchaseCostPrice, InvoiceDetailsTable.PurchaseLowestSalePrice," +
-                            "InvoiceDetailsTable.PurchaseStandardPrice, InvoiceDetailsTable.PurchaseItemSalePrice, InvoiceDetailsTable.SystemSerialNoid," +
-                            "InvoiceDetailsTable.ItemTotal, InvoiceDetailsTable.Unitid, InvoiceDetailsTable.AddInventory, InvoiceDetailsTable.ItemAvailability," +
-                            "InvoiceDetailsTable.Warehouseid, InvoiceDetailsTable.PricePerMeter, InvoiceDetailsTable.LengthInMeter, InvoiceDetailsTable.ItemDescription," +
-                            "InvoiceDetailsTable.MinusInventory, UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
-                            "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
-
-                        DataTable dtInvoiceDetails = await DatabaseAccess.RetriveAsync(subquery);
-                        if (dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
-                        {
-                            this.Close();
-                            SaleInvoice saleInvoice = new SaleInvoice(dataInvoice, dtInvoiceDetails);
-                            saleInvoice.MdiParent = Application.OpenForms["Dashboard"];
-                            await CommonFunction.DisposeOnCloseAsync(saleInvoice);
-                            saleInvoice.Show();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("No Record Found.");
-                    }
+                    
                 }
                 else if(salereturnradio.Checked)
                 {
@@ -256,9 +182,9 @@ namespace SmartFlow.Sales
                     // Using parameterized query to avoid SQL injection
                     string query = "SELECT invoicedate FROM InvoiceTable WHERE InvoiceNo = @InvoiceNo";
                     var parameters = new Dictionary<string, object>
-        {
-            { "@InvoiceNo", userinput }
-        };
+                    {
+                        { "@InvoiceNo", userinput }
+                    };
 
                     DataTable invoiceData = await DatabaseAccess.RetriveAsync(query, parameters);
 

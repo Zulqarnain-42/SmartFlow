@@ -59,9 +59,10 @@
             // closebtn
             // 
             this.closebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.closebtn.Location = new System.Drawing.Point(837, 425);
+            this.closebtn.Location = new System.Drawing.Point(628, 345);
+            this.closebtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.closebtn.Name = "closebtn";
-            this.closebtn.Size = new System.Drawing.Size(331, 36);
+            this.closebtn.Size = new System.Drawing.Size(248, 29);
             this.closebtn.TabIndex = 67;
             this.closebtn.Text = "EXIT";
             this.closebtn.UseVisualStyleBackColor = true;
@@ -70,9 +71,10 @@
             // unitcodelbl
             // 
             this.unitcodelbl.AutoSize = true;
-            this.unitcodelbl.Location = new System.Drawing.Point(838, 406);
+            this.unitcodelbl.Location = new System.Drawing.Point(628, 330);
+            this.unitcodelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.unitcodelbl.Name = "unitcodelbl";
-            this.unitcodelbl.Size = new System.Drawing.Size(72, 16);
+            this.unitcodelbl.Size = new System.Drawing.Size(58, 13);
             this.unitcodelbl.TabIndex = 66;
             this.unitcodelbl.Text = "unitcodelbl";
             this.unitcodelbl.Visible = false;
@@ -90,18 +92,20 @@
             this.panel3.Controls.Add(this.unitnamelbl);
             this.panel3.Controls.Add(this.dgvListunit);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 45);
+            this.panel3.Location = new System.Drawing.Point(0, 37);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1180, 473);
+            this.panel3.Size = new System.Drawing.Size(885, 384);
             this.panel3.TabIndex = 6;
             // 
             // isdefaultchkbox
             // 
             this.isdefaultchkbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.isdefaultchkbox.AutoSize = true;
-            this.isdefaultchkbox.Location = new System.Drawing.Point(841, 327);
+            this.isdefaultchkbox.Location = new System.Drawing.Point(627, 266);
+            this.isdefaultchkbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.isdefaultchkbox.Name = "isdefaultchkbox";
-            this.isdefaultchkbox.Size = new System.Drawing.Size(106, 20);
+            this.isdefaultchkbox.Size = new System.Drawing.Size(88, 17);
             this.isdefaultchkbox.TabIndex = 69;
             this.isdefaultchkbox.Text = "IS DEFAULT";
             this.isdefaultchkbox.UseVisualStyleBackColor = true;
@@ -109,18 +113,20 @@
             // descriptiontxtbox
             // 
             this.descriptiontxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.descriptiontxtbox.Location = new System.Drawing.Point(837, 90);
+            this.descriptiontxtbox.Location = new System.Drawing.Point(628, 73);
+            this.descriptiontxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.descriptiontxtbox.Name = "descriptiontxtbox";
-            this.descriptiontxtbox.Size = new System.Drawing.Size(331, 231);
+            this.descriptiontxtbox.Size = new System.Drawing.Size(249, 188);
             this.descriptiontxtbox.TabIndex = 68;
             this.descriptiontxtbox.Text = "";
             // 
             // unitidlbl
             // 
             this.unitidlbl.AutoSize = true;
-            this.unitidlbl.Location = new System.Drawing.Point(916, 406);
+            this.unitidlbl.Location = new System.Drawing.Point(687, 330);
+            this.unitidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.unitidlbl.Name = "unitidlbl";
-            this.unitidlbl.Size = new System.Drawing.Size(52, 16);
+            this.unitidlbl.Size = new System.Drawing.Size(42, 13);
             this.unitidlbl.TabIndex = 65;
             this.unitidlbl.Text = "unitidlbl";
             this.unitidlbl.Visible = false;
@@ -128,9 +134,10 @@
             // savebtn
             // 
             this.savebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.savebtn.Location = new System.Drawing.Point(837, 353);
+            this.savebtn.Location = new System.Drawing.Point(628, 299);
+            this.savebtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.savebtn.Name = "savebtn";
-            this.savebtn.Size = new System.Drawing.Size(331, 36);
+            this.savebtn.Size = new System.Drawing.Size(248, 29);
             this.savebtn.TabIndex = 60;
             this.savebtn.Text = "SAVE";
             this.savebtn.UseVisualStyleBackColor = true;
@@ -141,9 +148,10 @@
             this.unitnametxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.unitnametxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.unitnametxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.unitnametxtbox.Location = new System.Drawing.Point(837, 29);
+            this.unitnametxtbox.Location = new System.Drawing.Point(628, 24);
+            this.unitnametxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.unitnametxtbox.Name = "unitnametxtbox";
-            this.unitnametxtbox.Size = new System.Drawing.Size(331, 32);
+            this.unitnametxtbox.Size = new System.Drawing.Size(249, 27);
             this.unitnametxtbox.TabIndex = 55;
             // 
             // descriptionlbl
@@ -151,9 +159,10 @@
             this.descriptionlbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.descriptionlbl.AutoSize = true;
             this.descriptionlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.descriptionlbl.Location = new System.Drawing.Point(837, 64);
+            this.descriptionlbl.Location = new System.Drawing.Point(628, 52);
+            this.descriptionlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.descriptionlbl.Name = "descriptionlbl";
-            this.descriptionlbl.Size = new System.Drawing.Size(116, 23);
+            this.descriptionlbl.Size = new System.Drawing.Size(90, 18);
             this.descriptionlbl.TabIndex = 59;
             this.descriptionlbl.Text = "DESCRIPTION";
             // 
@@ -162,9 +171,10 @@
             this.unitnamelbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.unitnamelbl.AutoSize = true;
             this.unitnamelbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.unitnamelbl.Location = new System.Drawing.Point(837, 3);
+            this.unitnamelbl.Location = new System.Drawing.Point(628, 2);
+            this.unitnamelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.unitnamelbl.Name = "unitnamelbl";
-            this.unitnamelbl.Size = new System.Drawing.Size(101, 23);
+            this.unitnamelbl.Size = new System.Drawing.Size(79, 18);
             this.unitnamelbl.TabIndex = 57;
             this.unitnamelbl.Text = "UNIT NAME";
             // 
@@ -183,12 +193,13 @@
             this.dgvListunit.ColumnHeadersVisible = false;
             this.dgvListunit.ContextMenuStrip = this.contextMenuStrip;
             this.dgvListunit.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvListunit.Location = new System.Drawing.Point(0, 3);
+            this.dgvListunit.Location = new System.Drawing.Point(0, 2);
+            this.dgvListunit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvListunit.Name = "dgvListunit";
             this.dgvListunit.RowHeadersWidth = 51;
             this.dgvListunit.RowTemplate.Height = 24;
             this.dgvListunit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvListunit.Size = new System.Drawing.Size(831, 467);
+            this.dgvListunit.Size = new System.Drawing.Size(623, 379);
             this.dgvListunit.TabIndex = 2;
             this.dgvListunit.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListunit_CellDoubleClick);
             this.dgvListunit.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgvListunit_Scroll);
@@ -199,12 +210,12 @@
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.eDITToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(110, 28);
+            this.contextMenuStrip.Size = new System.Drawing.Size(99, 26);
             // 
             // eDITToolStripMenuItem
             // 
             this.eDITToolStripMenuItem.Name = "eDITToolStripMenuItem";
-            this.eDITToolStripMenuItem.Size = new System.Drawing.Size(109, 24);
+            this.eDITToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.eDITToolStripMenuItem.Text = "EDIT";
             this.eDITToolStripMenuItem.Click += new System.EventHandler(this.eDITToolStripMenuItem_Click);
             // 
@@ -215,8 +226,9 @@
             this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(1180, 45);
+            this.headinglbl.Size = new System.Drawing.Size(885, 37);
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "LIST UNIT";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -226,21 +238,22 @@
             this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1180, 45);
+            this.panel1.Size = new System.Drawing.Size(885, 37);
             this.panel1.TabIndex = 4;
             // 
             // UnitList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1180, 518);
+            this.ClientSize = new System.Drawing.Size(885, 421);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "UnitList";
             this.Text = "UnitList";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.UnitList_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UnitList_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();

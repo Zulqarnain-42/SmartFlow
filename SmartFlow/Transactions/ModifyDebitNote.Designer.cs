@@ -105,6 +105,7 @@
             this.invoicenotxtbox.Size = new System.Drawing.Size(281, 27);
             this.invoicenotxtbox.TabIndex = 133;
             this.invoicenotxtbox.TextChanged += new System.EventHandler(this.invoicenotxtbox_TextChanged);
+            this.invoicenotxtbox.Leave += new System.EventHandler(this.invoicenotxtbox_Leave);
             // 
             // invoicenolbl
             // 

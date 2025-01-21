@@ -36,5 +36,35 @@ namespace SmartFlow.Transactions
         {
             invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
+
+        private async void invoicenotxtbox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                string userinput = invoicenotxtbox.Text;
+                if (userinput.Length > 0)
+                {
+                    // Using parameterized query to avoid SQL injection
+                    string query = "SELECT invoicedate FROM InvoiceTable WHERE InvoiceNo = @InvoiceNo";
+                    var parameters = new Dictionary<string, object>
+                    {
+                        { "@InvoiceNo", userinput }
+                    };
+
+                    DataTable invoiceData = await DatabaseAccess.RetriveAsync(query, parameters);
+
+                    if (invoiceData.Rows.Count > 0)
+                    {
+                        DataRow row = invoiceData.Rows[0];
+                        invoicedatetxtbox.Text = Convert.ToDateTime(row["invoicedate"]).ToString("dd/MM/yyyy");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle unexpected errors
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

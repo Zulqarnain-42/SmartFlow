@@ -505,7 +505,6 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.Repor
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.UnitList.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.UpdateOpeningBalance.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.UploadExcel.resources
-C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.FindPurchaseInvoiceForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.PurchaseInvoice.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.PurchaseOrder.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.PurchaseQuotationInvoice.resources
@@ -611,3 +610,5 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ModifyJournalVoucher.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ModifyMaterialIssue.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ModifyMaterialReceived.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.ListInvoiceDetail.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Masters.CurrencyList.resources

@@ -718,5 +718,12 @@ namespace SmartFlow
             await CommonFunction.DisposeOnCloseAsync(listMaterialReceived);
             listMaterialReceived.Show();
         }
+        private async void currencyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CurrencyList listCurrencyList = new CurrencyList();
+            listCurrencyList.MdiParent = this;
+            await CommonFunction.DisposeOnCloseAsync(listCurrencyList);
+            listCurrencyList.Show();
+        }
     }
 }
