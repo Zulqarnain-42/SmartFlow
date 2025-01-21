@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.dgvItemSerialNo = new System.Windows.Forms.DataGridView();
+            this.productidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productmfr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serialnocolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.selectproductlbl = new System.Windows.Forms.Label();
             this.selectproducttxtbox = new System.Windows.Forms.TextBox();
             this.serialnolbl = new System.Windows.Forms.Label();
@@ -41,9 +44,8 @@
             this.savebtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.headinglbl = new System.Windows.Forms.Label();
-            this.productidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productmfr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.serialnocolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productupclbl = new System.Windows.Forms.Label();
+            this.productbarcodelbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemSerialNo)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -61,134 +63,13 @@
             this.productmfr,
             this.serialnocolumn});
             this.dgvItemSerialNo.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvItemSerialNo.Location = new System.Drawing.Point(12, 149);
+            this.dgvItemSerialNo.Location = new System.Drawing.Point(9, 121);
+            this.dgvItemSerialNo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvItemSerialNo.Name = "dgvItemSerialNo";
             this.dgvItemSerialNo.RowHeadersWidth = 51;
             this.dgvItemSerialNo.RowTemplate.Height = 24;
-            this.dgvItemSerialNo.Size = new System.Drawing.Size(1107, 501);
+            this.dgvItemSerialNo.Size = new System.Drawing.Size(830, 407);
             this.dgvItemSerialNo.TabIndex = 0;
-            // 
-            // selectproductlbl
-            // 
-            this.selectproductlbl.AutoSize = true;
-            this.selectproductlbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectproductlbl.Location = new System.Drawing.Point(12, 75);
-            this.selectproductlbl.Name = "selectproductlbl";
-            this.selectproductlbl.Size = new System.Drawing.Size(112, 18);
-            this.selectproductlbl.TabIndex = 3;
-            this.selectproductlbl.Text = "SELECT PRODUCT";
-            // 
-            // selectproducttxtbox
-            // 
-            this.selectproducttxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.selectproducttxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectproducttxtbox.Location = new System.Drawing.Point(148, 71);
-            this.selectproducttxtbox.Name = "selectproducttxtbox";
-            this.selectproducttxtbox.Size = new System.Drawing.Size(890, 28);
-            this.selectproducttxtbox.TabIndex = 4;
-            this.selectproducttxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectproducttxtbox_MouseClick);
-            this.selectproducttxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.selectproducttxtbox_KeyDown);
-            // 
-            // serialnolbl
-            // 
-            this.serialnolbl.AutoSize = true;
-            this.serialnolbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.serialnolbl.Location = new System.Drawing.Point(12, 109);
-            this.serialnolbl.Name = "serialnolbl";
-            this.serialnolbl.Size = new System.Drawing.Size(72, 18);
-            this.serialnolbl.TabIndex = 5;
-            this.serialnolbl.Text = "SERIAL NO";
-            // 
-            // serialnotxtbox
-            // 
-            this.serialnotxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.serialnotxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.serialnotxtbox.Location = new System.Drawing.Point(148, 105);
-            this.serialnotxtbox.Name = "serialnotxtbox";
-            this.serialnotxtbox.Size = new System.Drawing.Size(971, 28);
-            this.serialnotxtbox.TabIndex = 6;
-            // 
-            // productidlbl
-            // 
-            this.productidlbl.AutoSize = true;
-            this.productidlbl.Location = new System.Drawing.Point(927, 49);
-            this.productidlbl.Name = "productidlbl";
-            this.productidlbl.Size = new System.Drawing.Size(77, 16);
-            this.productidlbl.TabIndex = 7;
-            this.productidlbl.Text = "productidlbl";
-            this.productidlbl.Visible = false;
-            // 
-            // mfrlbl
-            // 
-            this.mfrlbl.AutoSize = true;
-            this.mfrlbl.Location = new System.Drawing.Point(738, 50);
-            this.mfrlbl.Name = "mfrlbl";
-            this.mfrlbl.Size = new System.Drawing.Size(39, 16);
-            this.mfrlbl.TabIndex = 8;
-            this.mfrlbl.Text = "mfrlbl";
-            this.mfrlbl.Visible = false;
-            // 
-            // addbtn
-            // 
-            this.addbtn.Location = new System.Drawing.Point(1044, 71);
-            this.addbtn.Name = "addbtn";
-            this.addbtn.Size = new System.Drawing.Size(75, 23);
-            this.addbtn.TabIndex = 9;
-            this.addbtn.Text = "ADD";
-            this.addbtn.UseVisualStyleBackColor = true;
-            this.addbtn.Click += new System.EventHandler(this.addbtn_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.exitbtn);
-            this.panel2.Controls.Add(this.savebtn);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 656);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1131, 60);
-            this.panel2.TabIndex = 10;
-            // 
-            // exitbtn
-            // 
-            this.exitbtn.Location = new System.Drawing.Point(803, 3);
-            this.exitbtn.Name = "exitbtn";
-            this.exitbtn.Size = new System.Drawing.Size(155, 45);
-            this.exitbtn.TabIndex = 1;
-            this.exitbtn.Text = "EXIT";
-            this.exitbtn.UseVisualStyleBackColor = true;
-            this.exitbtn.Click += new System.EventHandler(this.exitbtn_Click);
-            // 
-            // savebtn
-            // 
-            this.savebtn.Location = new System.Drawing.Point(964, 3);
-            this.savebtn.Name = "savebtn";
-            this.savebtn.Size = new System.Drawing.Size(155, 45);
-            this.savebtn.TabIndex = 0;
-            this.savebtn.Text = "SAVE";
-            this.savebtn.UseVisualStyleBackColor = true;
-            this.savebtn.Click += new System.EventHandler(this.savebtn_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.headinglbl);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1131, 45);
-            this.panel1.TabIndex = 11;
-            // 
-            // headinglbl
-            // 
-            this.headinglbl.BackColor = System.Drawing.Color.Black;
-            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold);
-            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.headinglbl.Location = new System.Drawing.Point(0, 0);
-            this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(1131, 45);
-            this.headinglbl.TabIndex = 0;
-            this.headinglbl.Text = "ADD SERIAL NO";
-            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // productidcolumn
             // 
@@ -212,11 +93,169 @@
             this.serialnocolumn.MinimumWidth = 6;
             this.serialnocolumn.Name = "serialnocolumn";
             // 
+            // selectproductlbl
+            // 
+            this.selectproductlbl.AutoSize = true;
+            this.selectproductlbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectproductlbl.Location = new System.Drawing.Point(9, 61);
+            this.selectproductlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.selectproductlbl.Name = "selectproductlbl";
+            this.selectproductlbl.Size = new System.Drawing.Size(94, 14);
+            this.selectproductlbl.TabIndex = 3;
+            this.selectproductlbl.Text = "SELECT PRODUCT";
+            // 
+            // selectproducttxtbox
+            // 
+            this.selectproducttxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.selectproducttxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectproducttxtbox.Location = new System.Drawing.Point(111, 58);
+            this.selectproducttxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.selectproducttxtbox.Name = "selectproducttxtbox";
+            this.selectproducttxtbox.Size = new System.Drawing.Size(668, 24);
+            this.selectproducttxtbox.TabIndex = 4;
+            this.selectproducttxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectproducttxtbox_MouseClick);
+            this.selectproducttxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.selectproducttxtbox_KeyDown);
+            // 
+            // serialnolbl
+            // 
+            this.serialnolbl.AutoSize = true;
+            this.serialnolbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.serialnolbl.Location = new System.Drawing.Point(9, 89);
+            this.serialnolbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.serialnolbl.Name = "serialnolbl";
+            this.serialnolbl.Size = new System.Drawing.Size(61, 14);
+            this.serialnolbl.TabIndex = 5;
+            this.serialnolbl.Text = "SERIAL NO";
+            // 
+            // serialnotxtbox
+            // 
+            this.serialnotxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.serialnotxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.serialnotxtbox.Location = new System.Drawing.Point(111, 85);
+            this.serialnotxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.serialnotxtbox.Name = "serialnotxtbox";
+            this.serialnotxtbox.Size = new System.Drawing.Size(729, 24);
+            this.serialnotxtbox.TabIndex = 6;
+            // 
+            // productidlbl
+            // 
+            this.productidlbl.AutoSize = true;
+            this.productidlbl.Location = new System.Drawing.Point(695, 40);
+            this.productidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.productidlbl.Name = "productidlbl";
+            this.productidlbl.Size = new System.Drawing.Size(61, 13);
+            this.productidlbl.TabIndex = 7;
+            this.productidlbl.Text = "productidlbl";
+            this.productidlbl.Visible = false;
+            // 
+            // mfrlbl
+            // 
+            this.mfrlbl.AutoSize = true;
+            this.mfrlbl.Location = new System.Drawing.Point(554, 41);
+            this.mfrlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.mfrlbl.Name = "mfrlbl";
+            this.mfrlbl.Size = new System.Drawing.Size(31, 13);
+            this.mfrlbl.TabIndex = 8;
+            this.mfrlbl.Text = "mfrlbl";
+            this.mfrlbl.Visible = false;
+            // 
+            // addbtn
+            // 
+            this.addbtn.Location = new System.Drawing.Point(783, 58);
+            this.addbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addbtn.Name = "addbtn";
+            this.addbtn.Size = new System.Drawing.Size(56, 19);
+            this.addbtn.TabIndex = 9;
+            this.addbtn.Text = "ADD";
+            this.addbtn.UseVisualStyleBackColor = true;
+            this.addbtn.Click += new System.EventHandler(this.addbtn_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.exitbtn);
+            this.panel2.Controls.Add(this.savebtn);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 533);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(848, 49);
+            this.panel2.TabIndex = 10;
+            // 
+            // exitbtn
+            // 
+            this.exitbtn.Location = new System.Drawing.Point(602, 2);
+            this.exitbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.exitbtn.Name = "exitbtn";
+            this.exitbtn.Size = new System.Drawing.Size(116, 37);
+            this.exitbtn.TabIndex = 1;
+            this.exitbtn.Text = "EXIT";
+            this.exitbtn.UseVisualStyleBackColor = true;
+            this.exitbtn.Click += new System.EventHandler(this.exitbtn_Click);
+            // 
+            // savebtn
+            // 
+            this.savebtn.Location = new System.Drawing.Point(723, 2);
+            this.savebtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.savebtn.Name = "savebtn";
+            this.savebtn.Size = new System.Drawing.Size(116, 37);
+            this.savebtn.TabIndex = 0;
+            this.savebtn.Text = "SAVE";
+            this.savebtn.UseVisualStyleBackColor = true;
+            this.savebtn.Click += new System.EventHandler(this.savebtn_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.headinglbl);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(848, 37);
+            this.panel1.TabIndex = 11;
+            // 
+            // headinglbl
+            // 
+            this.headinglbl.BackColor = System.Drawing.Color.Black;
+            this.headinglbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold);
+            this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.headinglbl.Name = "headinglbl";
+            this.headinglbl.Size = new System.Drawing.Size(848, 37);
+            this.headinglbl.TabIndex = 0;
+            this.headinglbl.Text = "ADD SERIAL NO";
+            this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // productupclbl
+            // 
+            this.productupclbl.AutoSize = true;
+            this.productupclbl.Location = new System.Drawing.Point(291, 41);
+            this.productupclbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.productupclbl.Name = "productupclbl";
+            this.productupclbl.Size = new System.Drawing.Size(71, 13);
+            this.productupclbl.TabIndex = 12;
+            this.productupclbl.Text = "productupclbl";
+            this.productupclbl.Visible = false;
+            // 
+            // productbarcodelbl
+            // 
+            this.productbarcodelbl.AutoSize = true;
+            this.productbarcodelbl.Location = new System.Drawing.Point(385, 41);
+            this.productbarcodelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.productbarcodelbl.Name = "productbarcodelbl";
+            this.productbarcodelbl.Size = new System.Drawing.Size(92, 13);
+            this.productbarcodelbl.TabIndex = 13;
+            this.productbarcodelbl.Text = "productbarcodelbl";
+            this.productbarcodelbl.Visible = false;
+            // 
             // ProductSerialNo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1131, 716);
+            this.ClientSize = new System.Drawing.Size(848, 582);
+            this.Controls.Add(this.productbarcodelbl);
+            this.Controls.Add(this.productupclbl);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.addbtn);
@@ -228,6 +267,7 @@
             this.Controls.Add(this.selectproductlbl);
             this.Controls.Add(this.dgvItemSerialNo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ProductSerialNo";
             this.Text = "ADD PRODUCT SERIAL NO";
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemSerialNo)).EndInit();
@@ -256,5 +296,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn productidcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productmfr;
         private System.Windows.Forms.DataGridViewTextBoxColumn serialnocolumn;
+        private System.Windows.Forms.Label productupclbl;
+        private System.Windows.Forms.Label productbarcodelbl;
     }
 }

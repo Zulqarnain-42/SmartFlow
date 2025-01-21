@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using SmartFlow.Common.Forms;
 using System.Data;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SmartFlow.Masters
 {
@@ -18,11 +19,11 @@ namespace SmartFlow.Masters
             InitializeComponent();
             this.groupingaccountidlbl.Text = groupingaccountid.ToString();
         }
-        private void selectaccounttxtbox_MouseClick(object sender, MouseEventArgs e)
+        private async void selectaccounttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             if (string.IsNullOrEmpty(selectaccounttxtbox.Text))
             {
-                Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
+                Form openForm = await CommonFunction.IsFormOpenAsync(typeof(AccountSelectionForm));
                 if (openForm == null)
                 {
                     AccountSelectionForm allaccountselection = new AccountSelectionForm
@@ -32,11 +33,9 @@ namespace SmartFlow.Masters
                     };
 
 
-                    allaccountselection.FormClosed += delegate
-                    {
-                        UpdateAccountInfo();
-                    };
-                    CommonFunction.DisposeOnClose(allaccountselection);
+                    allaccountselection.AccountDataSelected += UpdateAccountInfo;
+
+                    await CommonFunction.DisposeOnCloseAsync(allaccountselection);
                     allaccountselection.ShowDialog();
                 }
                 else
@@ -45,22 +44,46 @@ namespace SmartFlow.Masters
                 }
             }
         }
-        private void UpdateAccountInfo()
+
+        private async void UpdateAccountInfo(object sender, AccountData e)
         {
-            if(!string.IsNullOrEmpty(GlobalVariables.accountnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.accountnameglobal) &&
-                GlobalVariables.accountidglobal > 0)
+            try
             {
-                accountidlbl.Text = GlobalVariables.accountidglobal.ToString();
-                selectaccounttxtbox.Text = GlobalVariables.accountnameglobal.ToString();
+                // Simulate some async work (e.g., fetching additional data or processing)
+                await Task.Run(() =>
+                {
+                    // Perform any long-running or async operations here (if needed)
+                    // For example, querying a database, calling an API, etc.
+
+                    int accountid = e.AccountId;
+                    string accountname = e.AccountName;
+                    int accountheadid = e.AccountHeadId;
+
+                    // If you need to update UI controls, ensure that it's done on the UI thread
+                    // If you update textboxes, labels, etc., do it like this:
+                    this.Invoke(new Action(() =>
+                    {
+                        // Assuming these are TextBox controls
+                        accountidlbl.Text = accountid.ToString();
+                        selectaccounttxtbox.Text = accountname.ToString();
+                        accountheadidlbl.Text = accountheadid.ToString();
+                    }));
+                });
+            }
+            catch (Exception ex)
+            {
+                // Catch any unexpected errors and show them to the user
+                MessageBox.Show($"An error occurred while updating supplier information: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void selectaccounttxtbox_KeyDown(object sender, KeyEventArgs e)
+        private async void selectaccounttxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) 
             {
                 if (string.IsNullOrEmpty(selectaccounttxtbox.Text))
                 {
-                    Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
+                    Form openForm = await CommonFunction.IsFormOpenAsync(typeof(AccountSelectionForm));
                     if (openForm == null)
                     {
                         AccountSelectionForm allAccountsSelection = new AccountSelectionForm
@@ -69,11 +92,9 @@ namespace SmartFlow.Masters
                             StartPosition = FormStartPosition.CenterParent,
                         };
 
-                        allAccountsSelection.FormClosed += delegate
-                        {
-                            UpdateAccountInfo();
-                        };
-                        CommonFunction.DisposeOnClose(allAccountsSelection);
+                        allAccountsSelection.AccountDataSelected += UpdateAccountInfo;
+
+                        await CommonFunction.DisposeOnCloseAsync(allAccountsSelection);
                         allAccountsSelection.ShowDialog();
                     }
                     else
@@ -148,7 +169,7 @@ namespace SmartFlow.Masters
 
             }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
-        private void savebtn_Click(object sender, EventArgs e)
+        private async void savebtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -163,7 +184,7 @@ namespace SmartFlow.Masters
                 
                 if(savebtn.Text == "UPDATE")
                 {
-                    bool isupdated = UpdateGrouping();
+                    bool isupdated = await UpdateGrouping();
                     if (isupdated) 
                     { 
                         MessageBox.Show("Updated Successfully!"); 
@@ -172,7 +193,7 @@ namespace SmartFlow.Masters
                 }
                 else
                 {
-                    bool isInserted = InsertGrouping();
+                    bool isInserted = await InsertGrouping();
                     if (isInserted) 
                     { 
                         MessageBox.Show("Saved Successfully!"); 
@@ -190,7 +211,7 @@ namespace SmartFlow.Masters
             dgvgroupingaccount.Rows.Clear();
         }
 
-        private bool UpdateGrouping()
+        private async Task<bool> UpdateGrouping()
         {
             // Update AccountGroupingTable
             string tableName = "AccountGroupingTable";
@@ -205,7 +226,7 @@ namespace SmartFlow.Masters
             };
 
             // Call the common function for the update
-            bool result = DatabaseAccess.ExecuteQuery(tableName, "UPDATE", columnData, whereClause);
+            bool result = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
 
             if (result)
             {
@@ -217,7 +238,7 @@ namespace SmartFlow.Masters
                     { "AccountGroupId", groupingaccountidlbl.Text }
                 };
 
-                bool isDeleted = DatabaseAccess.ExecuteQuery(subTableName, "DELETE", parameter, whereClause);
+                bool isDeleted = await DatabaseAccess.ExecuteQueryAsync(subTableName, "DELETE", parameter, delWhereClause);
                 if (isDeleted)
                 {
                     string subaccounttable = "AccountGroupingDetailsTable";
@@ -237,7 +258,7 @@ namespace SmartFlow.Masters
                             { "AccountGroupId", groupingaccountidlbl.Text },
                         };
 
-                        result = DatabaseAccess.ExecuteQuery(subaccounttable, "INSERT", detailData);
+                        result = await DatabaseAccess.ExecuteQueryAsync(subaccounttable, "INSERT", detailData);
                     }
                 }
                 
@@ -249,7 +270,7 @@ namespace SmartFlow.Masters
             }
         }
 
-        private bool InsertGrouping()
+        private async Task<bool> InsertGrouping()
         {
             // Update AccountGroupingTable
             string tableName = "AccountGroupingTable";
@@ -264,7 +285,7 @@ namespace SmartFlow.Masters
             };
 
             // Call the common function for the update
-            int result = DatabaseAccess.InsertDataId(tableName, columnData);
+            int result = await DatabaseAccess.InsertDataIdAsync(tableName, columnData);
 
             if (result > 0)
             {
@@ -284,7 +305,7 @@ namespace SmartFlow.Masters
                         { "AccountGroupId", result }
                     };
 
-                    bool subresult = DatabaseAccess.ExecuteQuery(subtableName, "INSERT", detailData);
+                    bool subresult = await DatabaseAccess.ExecuteQueryAsync(subtableName, "INSERT", detailData);
                 }
                 return true;
             }
@@ -333,7 +354,7 @@ namespace SmartFlow.Masters
                 FindRecord(result);
             }
         }
-        private void FindRecord(int groupingid)
+        private async void FindRecord(int groupingid)
         {
             try
             {
@@ -345,7 +366,7 @@ namespace SmartFlow.Masters
                     { "AccountGroupid",groupingid }
                 };
 
-                DataTable dtlistgrouping = DatabaseAccess.RetrieveData(query, parameters);
+                DataTable dtlistgrouping = await DatabaseAccess.RetrieveDataAsync(query, parameters);
 
                 if (dtlistgrouping != null && dtlistgrouping.Rows.Count > 0)
                 {
@@ -357,7 +378,7 @@ namespace SmartFlow.Masters
                     string querydetails = string.Format("SELECT AccountId [accountidcolumn],AccountName [accountnamecolumn] FROM AccountGroupingDetailsTable " +
                         "WHERE AccountGroupId = '" + groupingid + "'");
 
-                    DataTable dtlistdetails = DatabaseAccess.Retrive(querydetails);
+                    DataTable dtlistdetails = await DatabaseAccess.RetriveAsync(querydetails);
 
                     if(dtlistdetails != null && dtlistdetails.Rows.Count > 0)
                     {

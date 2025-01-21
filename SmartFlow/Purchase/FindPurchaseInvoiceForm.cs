@@ -3,6 +3,7 @@ using SmartFlow.Purchase.ReportViewer;
 using System;
 using System.Data;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Purchase
@@ -13,7 +14,7 @@ namespace SmartFlow.Purchase
         {
             InitializeComponent();
         }
-        private void searchbtn_Click(object sender, EventArgs e)
+        private async void searchbtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -37,7 +38,7 @@ namespace SmartFlow.Purchase
                         "FROM InvoiceTable INNER JOIN AccountSubControlTable " +
                         "ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                    DataTable dataInvoice = DatabaseAccess.Retrive(query);
+                    DataTable dataInvoice = await DatabaseAccess.RetriveAsync(query);
 
 
                     if (dataInvoice.Rows.Count > 0)
@@ -52,13 +53,13 @@ namespace SmartFlow.Purchase
                             "InvoiceDetailsTable.MinusInventory, UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
                             "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                        DataTable dtInvoiceDetails = DatabaseAccess.Retrive(subquery);
+                        DataTable dtInvoiceDetails = await DatabaseAccess.RetriveAsync(subquery);
                         if(dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
                         {
                             this.Close();
                             PurchaseQuotationInvoice purchaseQuotationInvoice = new PurchaseQuotationInvoice(dataInvoice,dtInvoiceDetails);
                             purchaseQuotationInvoice.MdiParent = Application.OpenForms["Dashboard"];
-                            CommonFunction.DisposeOnClose(purchaseQuotationInvoice);
+                            await CommonFunction.DisposeOnCloseAsync(purchaseQuotationInvoice);
                             purchaseQuotationInvoice.Show();
                         }
                     }
@@ -79,7 +80,7 @@ namespace SmartFlow.Purchase
                         "FROM InvoiceTable INNER JOIN AccountSubControlTable " +
                         "ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                    DataTable dataInvoice = DatabaseAccess.Retrive(query);
+                    DataTable dataInvoice = await DatabaseAccess.RetriveAsync(query);
 
                     if (dataInvoice.Rows.Count > 0)
                     {
@@ -93,13 +94,13 @@ namespace SmartFlow.Purchase
                             "InvoiceDetailsTable.MinusInventory, UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
                             "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                        DataTable dtInvoiceDetails = DatabaseAccess.Retrive(subquery);
+                        DataTable dtInvoiceDetails = await DatabaseAccess.RetriveAsync(subquery);
                         if (dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
                         {
                             this.Close();
                             PurchaseOrder purchaseOrder = new PurchaseOrder(dataInvoice, dtInvoiceDetails);
                             purchaseOrder.MdiParent = Application.OpenForms["Dashboard"];
-                            CommonFunction.DisposeOnClose(purchaseOrder);
+                            await CommonFunction.DisposeOnCloseAsync(purchaseOrder);
                             purchaseOrder.Show();
                         }
                     }
@@ -120,7 +121,7 @@ namespace SmartFlow.Purchase
                         "FROM InvoiceTable INNER JOIN AccountSubControlTable " +
                         "ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                    DataTable dataInvoice = DatabaseAccess.Retrive(query);
+                    DataTable dataInvoice = await DatabaseAccess.RetriveAsync(query);
 
                     if (dataInvoice.Rows.Count > 0)
                     {
@@ -134,13 +135,13 @@ namespace SmartFlow.Purchase
                             "InvoiceDetailsTable.MinusInventory, UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
                             "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                        DataTable dtInvoiceDetails = DatabaseAccess.Retrive(subquery);
+                        DataTable dtInvoiceDetails = await DatabaseAccess.RetriveAsync(subquery);
                         if (dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
                         {
                             this.Close();
                             PurchaseInvoice purchaseInvoice = new PurchaseInvoice(dataInvoice, dtInvoiceDetails);
                             purchaseInvoice.MdiParent = Application.OpenForms["Dashboard"];
-                            CommonFunction.DisposeOnClose(purchaseInvoice);
+                            await CommonFunction.DisposeOnCloseAsync(purchaseInvoice);
                             purchaseInvoice.Show();
                         }
                     }
@@ -161,7 +162,7 @@ namespace SmartFlow.Purchase
                         "FROM InvoiceTable INNER JOIN AccountSubControlTable " +
                         "ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                    DataTable dataInvoice = DatabaseAccess.Retrive(query);
+                    DataTable dataInvoice = await DatabaseAccess.RetriveAsync(query);
 
                     if (dataInvoice.Rows.Count > 0)
                     {
@@ -175,13 +176,13 @@ namespace SmartFlow.Purchase
                             "InvoiceDetailsTable.MinusInventory, UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
                             "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                        DataTable dtInvoiceDetails = DatabaseAccess.Retrive(subquery);
+                        DataTable dtInvoiceDetails = await DatabaseAccess.RetriveAsync(subquery);
                         if (dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
                         {
                             this.Close();
                             PurchaseReturnInvoice purchaseReturnInvoice = new PurchaseReturnInvoice(dataInvoice, dtInvoiceDetails);
                             purchaseReturnInvoice.MdiParent = Application.OpenForms["Dashboard"];
-                            CommonFunction.DisposeOnClose(purchaseReturnInvoice);
+                            await CommonFunction.DisposeOnCloseAsync(purchaseReturnInvoice);
                             purchaseReturnInvoice.Show();
                         }
                     }
@@ -196,11 +197,24 @@ namespace SmartFlow.Purchase
                 }
             }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
-        private void FindPurchaseInvoiceForm_Load(object sender, EventArgs e)
+        private async void FindPurchaseInvoiceForm_Load(object sender, EventArgs e)
         {
             invoicenotxtbox.Focus();
             invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
+
+            // Example of an asynchronous operation (e.g., loading data from a database)
+            await LoadInvoiceDataAsync();
         }
+
+        /// <summary>
+        /// Simulates an asynchronous operation, such as fetching data from a database or an API.
+        /// </summary>
+        private async Task LoadInvoiceDataAsync()
+        {
+            // Simulate a delay to mimic an asynchronous operation (e.g., database call)
+            await Task.Delay(1000); // Replace this with your actual async logic
+        }
+
         private bool AreAnyTextBoxesFilled()
         {
             if (invoicenotxtbox.Text.Trim().Length > 0) { return true; }
@@ -210,16 +224,24 @@ namespace SmartFlow.Purchase
             if (purchasereturnradio.Checked) { return true; }
             return false; // No TextBox is filled
         }
-        private void FindPurchaseInvoiceForm_KeyDown(object sender, KeyEventArgs e)
+        private async void FindPurchaseInvoiceForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
                 if (AreAnyTextBoxesFilled())
                 {
-                    DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
-                                                          "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    // Example: Asynchronous confirmation or operation
+                    DialogResult result = await Task.Run(() =>
+                    {
+                        return MessageBox.Show("There are unsaved changes. Do you really want to close?",
+                                               "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    });
+
                     if (result == DialogResult.Yes)
                     {
+                        // Example: Async operation before closing
+                        await PerformUnsavedChangesCleanupAsync();
+
                         this.Close();
                         e.Handled = true;
                     }
@@ -231,16 +253,39 @@ namespace SmartFlow.Purchase
                 }
             }
         }
-        private void invoicenotxtbox_Leave(object sender, EventArgs e)
+
+        /// <summary>
+        /// Simulates an asynchronous operation for cleaning up unsaved changes.
+        /// Replace this with actual async operations as needed.
+        /// </summary>
+        private async Task PerformUnsavedChangesCleanupAsync()
+        {
+            // Simulate a delay to mimic an async operation
+            await Task.Delay(500);
+            Console.WriteLine("Unsaved changes cleanup completed.");
+        }
+
+        private async void invoicenotxtbox_Leave(object sender, EventArgs e)
         {
             string userInput = invoicenotxtbox.Text;
             if (userInput.Length > 0)
             {
-                DataTable invoiceDate = DatabaseAccess.Retrive("SELECT invoicedate FROM InvoiceTable WHERE InvoiceNo LIKE '" + userInput + "'");
-                if(invoiceDate != null && invoiceDate.Rows.Count > 0)
+                try
                 {
-                    DataRow row = invoiceDate.Rows[0];
-                    invoicedatetxtbox.Text = Convert.ToDateTime(row["invoicedate"]).ToString("dd/MM/yyyy");
+                    // Asynchronously retrieve data from the database
+                    DataTable invoiceDate = await Task.Run(() =>
+                        DatabaseAccess.RetriveAsync($"SELECT invoicedate FROM InvoiceTable WHERE InvoiceNo LIKE '{userInput}'"));
+
+                    if (invoiceDate != null && invoiceDate.Rows.Count > 0)
+                    {
+                        DataRow row = invoiceDate.Rows[0];
+                        invoicedatetxtbox.Text = Convert.ToDateTime(row["invoicedate"]).ToString("dd/MM/yyyy");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred while retrieving the invoice date: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
 
@@ -270,5 +315,6 @@ namespace SmartFlow.Purchase
                 MessageBox.Show("INVOICE NOT EXIST");
             }
         }
+
     }
 }

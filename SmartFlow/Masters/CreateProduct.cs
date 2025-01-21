@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZXing;
 
@@ -30,7 +31,7 @@ namespace SmartFlow.Masters
         {
             this.Close();
         }
-        private void savebtn_Click(object sender, EventArgs e)
+        private async void savebtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -51,7 +52,7 @@ namespace SmartFlow.Masters
                         mfrtextBox.Focus(); 
                         return;
                     }
-                    string duplicateinfo = checkduplicate();
+                    string duplicateinfo = await checkduplicate();
 
                     if (duplicateinfo != null)
                     {
@@ -61,7 +62,7 @@ namespace SmartFlow.Masters
                     {
                         if (randomNumber > 0)
                         {
-                            string updateresult = UpdateProduct();
+                            string updateresult = await UpdateProduct();
                             if (updateresult == "Product updated successfully!")
                             {
                                 DeleteBundleData(Convert.ToInt32(productid.Text));
@@ -71,7 +72,7 @@ namespace SmartFlow.Masters
                         }
                         else
                         {
-                            string updateresult = UpdateProduct();
+                            string updateresult = await UpdateProduct();
                             if(updateresult == "Product updated successfully!")
                             {
                                 DeleteBundleData(Convert.ToInt32(productid.Text));
@@ -98,7 +99,7 @@ namespace SmartFlow.Masters
                         mfrtextBox.Focus();
                         return;
                     }
-                    string duplicateinfo = checkduplicate();
+                    string duplicateinfo = await checkduplicate();
 
                     if (duplicateinfo != null)
                     {
@@ -150,7 +151,7 @@ namespace SmartFlow.Masters
                         
                         // Insert data and get the result
 
-                        int result = DatabaseAccess.InsertDataId("ProductTable", data);
+                        int result = await DatabaseAccess.InsertDataIdAsync("ProductTable", data);
                         if (result > 0)
                         {
                             AddDataToDatabase(result, data["ProductCode"].ToString());
@@ -168,7 +169,7 @@ namespace SmartFlow.Masters
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private string checkduplicate()
+        private async Task<string> checkduplicate()
         {
             string query = string.Format(@"SELECT ProductID,ProductName,MFR,UPC,EAN,SecondMFr,SecondUpc,ProductCode," +
                         "SaleUnitPrice,LowestPrice,ThirdMfr,ThirdUPC,IsCustomProduct FROM ProductTable WHERE MFR = @MFR " +
@@ -187,7 +188,7 @@ namespace SmartFlow.Masters
                 { "IsCustomProduct", isCustomcheck.Checked }
             };
 
-            DataTable dt = DatabaseAccess.RetrieveData(query, parameters);
+            DataTable dt = await DatabaseAccess.RetrieveDataAsync(query, parameters);
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -256,7 +257,7 @@ namespace SmartFlow.Masters
             return null;
         }
 
-        private string UpdateProduct()
+        private async Task<string> UpdateProduct()
         {
             string tableName = "ProductTable";
             string whereClause = "ProductID = '" + productid.Text + "'";
@@ -301,7 +302,7 @@ namespace SmartFlow.Masters
                 { "IsCustomProduct", isCustomcheck.Checked }
             };
 
-            bool isUpdated = DatabaseAccess.ExecuteQuery(tableName, "UPDATE", columnData, whereClause);
+            bool isUpdated = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
 
             return isUpdated ? "Product updated successfully!" : "Failed to update the product.";
         }
@@ -322,7 +323,7 @@ namespace SmartFlow.Masters
             return 0; // Default value if parsing fails
         }
 
-        private void FindRecord(int productid)
+        private async void FindRecord(int productid)
         {
             try
             {
@@ -336,7 +337,7 @@ namespace SmartFlow.Masters
                     { "ProductID", productid }
                 };
 
-                DataTable dataTable = DatabaseAccess.RetrieveData(query, parameters);
+                DataTable dataTable = await DatabaseAccess.RetrieveDataAsync(query, parameters);
 
                 if (dataTable != null && dataTable.Rows.Count > 0)
                 {
@@ -442,12 +443,12 @@ namespace SmartFlow.Masters
             }
         }
 
-        private void FillBundleDataGridView(int productid)
+        private async void FillBundleDataGridView(int productid)
         {
             try
             {
                 string querybundle = "SELECT IncludeItem FROM ProductBundleTable WHERE ProductId = '" + productid + "'";
-                DataTable bundledata = DatabaseAccess.Retrive(querybundle);
+                DataTable bundledata = await DatabaseAccess.RetriveAsync(querybundle);
                 if (bundledata != null)
                 {
                     if (bundledata.Rows.Count > 0)
@@ -495,7 +496,7 @@ namespace SmartFlow.Masters
             }
         }
 
-        private void GenerateBarcode()
+        private async void GenerateBarcode()
         {
             var writer = new BarcodeWriter
             {
@@ -513,7 +514,7 @@ namespace SmartFlow.Masters
             while (!isUnique)
             {
                 string query = $"SELECT Barcode FROM ProductTable WHERE Barcode = {randomNumber}";
-                DataTable dt = DatabaseAccess.Retrive(query);
+                DataTable dt = await DatabaseAccess.RetriveAsync(query);
                 if (dt != null)
                 {
                     if (dt.Rows.Count > 0)
@@ -546,7 +547,7 @@ namespace SmartFlow.Masters
             includelbl.Visible = checkBox1.Checked;
         }
 
-        private void AddDataToDatabase(int productid,string productcode)
+        private async void AddDataToDatabase(int productid,string productcode)
         {
             try
             {
@@ -563,12 +564,12 @@ namespace SmartFlow.Masters
                         { "CreatedDay", DateTime.Now.DayOfWeek }
                     };
 
-                    DatabaseAccess.ExecuteQuery(tableName, "INSERT", columnData);
+                    await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData);
                 }
             }catch (Exception ex) { throw ex; }
         }
 
-        private void DeleteBundleData(int productid)
+        private async void DeleteBundleData(int productid)
         {
             try
             {
@@ -580,7 +581,7 @@ namespace SmartFlow.Masters
                     { "ProductID", productid }
                 };
 
-                DatabaseAccess.ExecuteQuery(tableName, "DELETE", columnData, whereClause);
+                await DatabaseAccess.ExecuteQueryAsync(tableName, "DELETE", columnData, whereClause);
 
             }catch (Exception ex) { throw ex; }
         }
@@ -619,7 +620,7 @@ namespace SmartFlow.Masters
             if (secondmfrtxtbox.Text.Trim().Length > 0) { return true; }
             return false; // No TextBox is filled
         }
-        private void qtycheckbtn_Click(object sender, EventArgs e)
+        private async void qtycheckbtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -633,12 +634,12 @@ namespace SmartFlow.Masters
 
                     // Create parameters for the stored procedure
                     var parameters = new List<SqlParameter>
-    {
-        new SqlParameter("@ProductID", SqlDbType.Int) { Value = productID }
-    };
+                    {
+                        new SqlParameter("@ProductID", SqlDbType.Int) { Value = productID }
+                    };
 
                     // Retrieve the result from the stored procedure
-                    DataTable stockqty = DatabaseAccess.Retrive(storedProcedure, parameters);
+                    DataTable stockqty = await DatabaseAccess.RetriveAsync(storedProcedure, parameters);
 
                     if (stockqty.Rows.Count > 0 && stockqty != null)
                     {
@@ -658,7 +659,7 @@ namespace SmartFlow.Masters
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private void isCustomcheck_CheckedChanged(object sender, EventArgs e)
+        private async void isCustomcheck_CheckedChanged(object sender, EventArgs e)
         {
             if (isCustomcheck.Checked)
             {
@@ -671,7 +672,7 @@ namespace SmartFlow.Masters
 
                 if(string.IsNullOrEmpty(mfrtextBox.Text))
                 {
-                    mfrtextBox.Text = GenerateUniqueCode();
+                    mfrtextBox.Text = await GenerateUniqueCode();
                 }
             }
             else
@@ -686,7 +687,7 @@ namespace SmartFlow.Masters
             }
         }
 
-        private string GenerateUniqueCode()
+        private async Task<string> GenerateUniqueCode()
         {
             string generatedCode;
             bool isCodeUnique;
@@ -698,18 +699,19 @@ namespace SmartFlow.Masters
                 int randomNumber = random.Next(10000, 100000); // 8-digit range
                 generatedCode = "FAB" + randomNumber;
 
-                // Check if the code exists in the database
-                isCodeUnique = DatabaseAccess.CheckIfCodeExistsInDatabase(generatedCode);
+                // Check if the code exists in the database asynchronously
+                isCodeUnique = await DatabaseAccess.CheckIfCodeExistsInDatabaseAsync(generatedCode);
 
             } while (!isCodeUnique); // Repeat if the code is not unique
 
-            return generatedCode;
+            return generatedCode; // Return the unique code
         }
 
-        private void serialnobtn_Click(object sender, EventArgs e)
+
+        private async void serialnobtn_Click(object sender, EventArgs e)
         {
             ProductSerialNo productSerialNo = new ProductSerialNo();
-            CommonFunction.DisposeOnClose(productSerialNo);
+            await CommonFunction.DisposeOnCloseAsync(productSerialNo);
             productSerialNo.ShowDialog();
         }
     }

@@ -356,7 +356,7 @@
             // 
             this.itemdescriptiontxtbox.Location = new System.Drawing.Point(596, 98);
             this.itemdescriptiontxtbox.Name = "itemdescriptiontxtbox";
-            this.itemdescriptiontxtbox.Size = new System.Drawing.Size(243, 77);
+            this.itemdescriptiontxtbox.Size = new System.Drawing.Size(243, 110);
             this.itemdescriptiontxtbox.TabIndex = 4;
             this.itemdescriptiontxtbox.Text = "";
             this.itemdescriptiontxtbox.TextChanged += new System.EventHandler(this.serialnotxtbox_TextChanged);

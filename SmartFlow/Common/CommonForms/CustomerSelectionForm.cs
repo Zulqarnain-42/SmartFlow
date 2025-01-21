@@ -7,20 +7,22 @@ namespace SmartFlow.Common.Forms
     {
         private DateTime lastEnterPressTime;
         private const int doubleEnterThreshold = 500; // Time in milliseconds
+        public event EventHandler<CustomerData> CustomerDataSelected;
+
         public CustomerSelectionForm()
         {
             InitializeComponent();
         }
-        private void searchtxtbox_TextChanged(object sender, EventArgs e)
+        private async void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
-            CommonFunction.GetCustomer(searchtxtbox.Text,dgvcustomer);
+            await CommonFunction.GetCustomerAsync(searchtxtbox.Text,dgvcustomer);
         }
         private void CustomerSelectionForm_Load(object sender, EventArgs e)
         {
             FocusSearchAndLoadCustomerInfo();
         }
 
-        private void FocusSearchAndLoadCustomerInfo()
+        private async void FocusSearchAndLoadCustomerInfo()
         {
             try
             {
@@ -47,7 +49,7 @@ namespace SmartFlow.Common.Forms
                 }
 
                 // Load customer information using the common function
-                CommonFunction.GetCustomer("", dgvcustomer);
+                await CommonFunction.GetCustomerAsync("", dgvcustomer);
             }
             catch (Exception ex)
             {
@@ -69,67 +71,36 @@ namespace SmartFlow.Common.Forms
                         // Ensure exactly one row is selected
                         if (dgvcustomer.SelectedRows.Count == 1 && dgvcustomer.CurrentRow != null)
                         {
-                            // Validate and assign customer ID
-                            if (int.TryParse(dgvcustomer.CurrentRow.Cells["ID"]?.Value?.ToString(), out int customerId))
+                            DataGridViewRow selectedRow = dgvcustomer.CurrentRow;
+
+                            // Safe checks for each value and parsing
+                            if (selectedRow != null)
                             {
-                                GlobalVariables.customeridglobal = customerId;
+                                // Parse supplier ID
+                                if (int.TryParse(selectedRow.Cells["ID"]?.Value?.ToString(), out int customerId))
+                                {
+                                    // Raise the event with the data to pass to the parent form
+                                    CustomerDataSelected?.Invoke(this, new CustomerData(
+                                        customerId,
+                                        selectedRow.Cells["Account Name"]?.Value?.ToString() ?? "Unknown",
+                                        selectedRow.Cells["CODE"]?.Value?.ToString() ?? "Unknown",
+                                        selectedRow.Cells["Company Name"]?.Value?.ToString() ?? "Unknown",
+                                        selectedRow.Cells["Mobile"]?.Value?.ToString() ?? "Unknown"
+                                    ));
+
+                                    // Close the child form after passing the data
+                                    this.Close();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Invalid Customer ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return;
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Invalid customer ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
+                                MessageBox.Show("Selected row is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
-
-                            // Validate and assign customer name
-                            string customerName = dgvcustomer.CurrentRow.Cells["Account Name"]?.Value?.ToString();
-                            if (!string.IsNullOrWhiteSpace(customerName))
-                            {
-                                GlobalVariables.customernameglobal = customerName;
-                            }
-                            else
-                            {
-                                MessageBox.Show("Customer name cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-
-                            // Validate and assign customer code
-                            string customerCode = dgvcustomer.CurrentRow.Cells["CODE"]?.Value?.ToString();
-                            if (!string.IsNullOrWhiteSpace(customerCode))
-                            {
-                                GlobalVariables.customercodeglobal = customerCode;
-                            }
-                            else
-                            {
-                                MessageBox.Show("Customer code cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-
-                            // Validate and assign customer mobile
-                            string customerMobile = dgvcustomer.CurrentRow.Cells["MOBILE"]?.Value?.ToString();
-                            if (!string.IsNullOrWhiteSpace(customerMobile))
-                            {
-                                GlobalVariables.customermobileglobal = customerMobile;
-                            }
-                            else
-                            {
-                                MessageBox.Show("Customer mobile cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-
-                            // Validate and assign customer company name
-                            string customerCompanyName = dgvcustomer.CurrentRow.Cells["Company Name"]?.Value?.ToString();
-                            if (!string.IsNullOrWhiteSpace(customerCompanyName))
-                            {
-                                GlobalVariables.customercompanyname = customerCompanyName;
-                            }
-                            else
-                            {
-                                MessageBox.Show("Customer company name cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-
-                            // Close the form after successful assignment
-                            this.Close();
                         }
                         else
                         {
@@ -159,76 +130,51 @@ namespace SmartFlow.Common.Forms
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    // Ensure there is a selected row in the DataGridView
-                    DataGridViewRow selectedRow = dgvcustomer.CurrentRow;
-
-                    if (selectedRow != null)
+                    // Ensure the DataGridView is not null
+                    if (dgvcustomer != null)
                     {
-                        // Validate and assign customer ID
-                        if (int.TryParse(selectedRow.Cells["ID"]?.Value?.ToString(), out int customerId))
+                        // Check if there are rows in the DataGridView
+                        if (dgvcustomer.Rows.Count > 0)
                         {
-                            GlobalVariables.customeridglobal = customerId;
+                            // Ensure exactly one row is selected
+                            if (dgvcustomer.SelectedRows.Count == 1 && dgvcustomer.CurrentRow != null)
+                            {
+                                DataGridViewRow selectedRow = dgvcustomer.CurrentRow;
+
+                                // Safe checks for each value and parsing
+                                if (int.TryParse(selectedRow.Cells["ID"]?.Value?.ToString(), out int customerId))
+                                {
+                                    // Raise the event with the data to pass to the parent form
+                                    CustomerDataSelected?.Invoke(this, new CustomerData(
+                                        customerId,
+                                        selectedRow.Cells["Account Name"]?.Value?.ToString() ?? "Unknown",
+                                        selectedRow.Cells["CODE"]?.Value?.ToString() ?? "Unknown",
+                                        selectedRow.Cells["Mobile"]?.Value?.ToString() ?? "Unknown",
+                                        selectedRow.Cells["Company Name"]?.Value?.ToString() ?? "Unknown"
+                                    ));
+
+                                    // Close the child form after passing the data
+                                    this.Close();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Invalid Customer ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Please select exactly one row.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Invalid customer ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
+                            MessageBox.Show("The customer list is empty.", "Data Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
-
-                        // Validate and assign customer name
-                        string customerName = selectedRow.Cells["Account Name"]?.Value?.ToString();
-                        if (!string.IsNullOrWhiteSpace(customerName))
-                        {
-                            GlobalVariables.customernameglobal = customerName;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Account name cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        // Validate and assign customer code
-                        string customerCode = selectedRow.Cells["CODE"]?.Value?.ToString();
-                        if (!string.IsNullOrWhiteSpace(customerCode))
-                        {
-                            GlobalVariables.customercodeglobal = customerCode;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Customer code cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        // Validate and assign customer mobile
-                        string customerMobile = selectedRow.Cells["MOBILE"]?.Value?.ToString();
-                        if (!string.IsNullOrWhiteSpace(customerMobile))
-                        {
-                            GlobalVariables.customermobileglobal = customerMobile;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Customer mobile cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        // Validate and assign customer company name
-                        string customerCompanyName = selectedRow.Cells["Company Name"]?.Value?.ToString();
-                        if (!string.IsNullOrWhiteSpace(customerCompanyName))
-                        {
-                            GlobalVariables.customercompanyname = customerCompanyName;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Customer company name cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        // Close the form after successful assignment
-                        this.Close();
                     }
                     else
                     {
-                        MessageBox.Show("No row is selected.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("The customer DataGridView is not initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

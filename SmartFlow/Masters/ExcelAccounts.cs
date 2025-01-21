@@ -1,11 +1,10 @@
 ﻿using ExcelDataReader;
-using SmartFlow.Common.CommonForms;
-using SmartFlow.Common;
 using System;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace SmartFlow.Masters
 {
@@ -70,11 +69,11 @@ namespace SmartFlow.Masters
             this.Close();
         }
 
-        private void selectAccounttxtbox_MouseClick(object sender, MouseEventArgs e)
+        private async void selectAccounttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             try
             {
-                Form openForm = CommonFunction.IsFormOpen(typeof(AccountGroupSelectionForm));
+                /*Form openForm = await CommonFunction.IsFormOpenAsync(typeof(AccountGroupSelectionForm));
                 if (openForm == null)
                 {
                     AccountGroupSelectionForm selectionForm = new AccountGroupSelectionForm
@@ -87,18 +86,18 @@ namespace SmartFlow.Masters
                     {
                         UpdateAccountGroupInfo();
                     };
-                    CommonFunction.DisposeOnClose(selectionForm);
+                    await CommonFunction.DisposeOnCloseAsync(selectionForm);
                     selectionForm.ShowDialog();
                 }
                 else
                 {
                     openForm.BringToFront();
-                }
+                }*/
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private void UpdateAccountGroupInfo()
+        /*private void UpdateAccountGroupInfo()
         {
             if(!string.IsNullOrEmpty(GlobalVariables.accountnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.accountnameglobal) && 
                 GlobalVariables.accountidglobal > 0)
@@ -106,7 +105,7 @@ namespace SmartFlow.Masters
                 selectAccounttxtbox.Text = GlobalVariables.accountnameglobal;
                 accountgroupidlabel.Text = GlobalVariables.accountidglobal.ToString();
             }
-        }
+        }*/
 
         private void sheetCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -114,7 +113,7 @@ namespace SmartFlow.Masters
             dataGridViewExcel.DataSource = dt;
         }
 
-        private void savebtn_Click(object sender, EventArgs e)
+        private async void savebtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -132,7 +131,7 @@ namespace SmartFlow.Masters
                 int subacountid = 0;
                 bool result = false;
 
-                foreach (DataGridViewRow row in dataGridViewExcel.Rows)
+                /*foreach (DataGridViewRow row in dataGridViewExcel.Rows)
                 {
                     if (accountgroupName == "Customers" || accountgroupName == "Reseller")
                     {
@@ -151,7 +150,7 @@ namespace SmartFlow.Masters
                         string getaccounthead = "SELECT AccountControlID,AccountControlName,AccountHead_ID,AccountControlCode,Alias FROM AccountControlTable " +
                         "WHERE AccountControlID = '" + accountgroupid + "'";
 
-                        DataTable accountcontrol = DatabaseAccess.Retrive(getaccounthead);
+                        DataTable accountcontrol = await DatabaseAccess.RetriveAsync(getaccounthead);
                         if (accountcontrol != null)
                         {
                             if (accountcontrol.Rows.Count > 0)
@@ -198,7 +197,7 @@ namespace SmartFlow.Masters
                             }
                         }
                     }
-                }
+                }*/
                 if (result)
                 {
                     MessageBox.Show("Saved Successfully.");
@@ -207,7 +206,7 @@ namespace SmartFlow.Masters
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        static string GenerateRandomAccountCode(string intializer)
+        static async Task<string> GenerateRandomAccountCode(string intializer)
         {
             Random random = new Random();
             const string chars = "0123456789";
@@ -220,12 +219,12 @@ namespace SmartFlow.Masters
 
             string serialNumber = new string(serialChars);
             string query = "SELECT CodeAccount FROM AccountSubControlTable WHERE CodeAccount = '" + serialNumber + "'";
-            DataTable dt = DatabaseAccess.Retrive(query);
+            DataTable dt = await DatabaseAccess.RetriveAsync(query);
             if (dt != null)
             {
                 if (dt.Rows.Count > 0)
                 {
-                    serialNumber = GenerateRandomAccountCode(intializer);
+                    serialNumber = await GenerateRandomAccountCode(intializer);
                 }
             }
             return serialNumber = String.Concat(intializer, serialNumber); ;

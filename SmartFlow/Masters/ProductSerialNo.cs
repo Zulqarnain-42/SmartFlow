@@ -3,6 +3,7 @@ using SmartFlow.Common;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace SmartFlow.Masters
 {
@@ -13,11 +14,11 @@ namespace SmartFlow.Masters
             InitializeComponent();
         }
 
-        private void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
+        private async void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             if (string.IsNullOrEmpty(selectproducttxtbox.Text))
             {
-                Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+                Form openForm = await CommonFunction.IsFormOpenAsync(typeof(ProductSelectionForm));
                 if (openForm == null)
                 {
                     ProductSelectionForm productSelection = new ProductSelectionForm
@@ -26,12 +27,9 @@ namespace SmartFlow.Masters
                         StartPosition = FormStartPosition.CenterParent,
                     };
 
-                    productSelection.FormClosed += delegate
-                    {
-                        UpdateProductTextBox();
-                    };
+                    productSelection.ProductDataSelected += UpdateProductTextBox;
 
-                    CommonFunction.DisposeOnClose(productSelection);
+                    await CommonFunction.DisposeOnCloseAsync(productSelection);
                     productSelection.Show();
                 }
                 else
@@ -42,13 +40,13 @@ namespace SmartFlow.Masters
             
         }
 
-        private void selectproducttxtbox_KeyDown(object sender, KeyEventArgs e)
+        private async void selectproducttxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 if (string.IsNullOrEmpty(selectproducttxtbox.Text))
                 {
-                    Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+                    Form openForm = await CommonFunction.IsFormOpenAsync(typeof(ProductSelectionForm));
                     if (openForm == null)
                     {
                         ProductSelectionForm productSelection = new ProductSelectionForm
@@ -57,12 +55,10 @@ namespace SmartFlow.Masters
                             StartPosition = FormStartPosition.CenterParent,
                         };
 
-                        productSelection.FormClosed += delegate
-                        {
-                            UpdateProductTextBox();
-                        };
+                        productSelection.ProductDataSelected += UpdateProductTextBox;
 
-                        CommonFunction.DisposeOnClose(productSelection);
+
+                        await CommonFunction.DisposeOnCloseAsync(productSelection);
                         productSelection.Show();
                     }
                     else
@@ -73,15 +69,41 @@ namespace SmartFlow.Masters
             }
         }
 
-        private void UpdateProductTextBox()
+        private async void UpdateProductTextBox(object sender, ProductData e)
         {
-            if (!string.IsNullOrEmpty(GlobalVariables.productnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.productnameglobal) &&
-                !string.IsNullOrEmpty(GlobalVariables.productmfrglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.productmfrglobal) &&
-                GlobalVariables.productidglobal > 0)
+            try
             {
-                selectproducttxtbox.Text = GlobalVariables.productnameglobal.ToString();
-                productidlbl.Text = GlobalVariables.productidglobal.ToString();
-                mfrlbl.Text = GlobalVariables.productmfrglobal.ToString();
+                // Simulate some async work (e.g., fetching additional data or processing)
+                await Task.Run(() =>
+                {
+                    // Perform any long-running or async operations here (if needed)
+                    // For example, querying a database, calling an API, etc.
+
+                    int productid = e.ProductId;
+                    string productname = e.ProductName;
+                    string productmfr = e.ProductMfr;
+                    string productupc = e.ProductUPC;
+                    float productprice = e.ProductPrice;
+                    string productbarcode = e.ProductBarcode;
+
+                    // If you need to update UI controls, ensure that it's done on the UI thread
+                    // If you update textboxes, labels, etc., do it like this:
+                    this.Invoke(new Action(() =>
+                    {
+                        // Assuming these are TextBox controls
+                        productidlbl.Text = productid.ToString();
+                        selectproducttxtbox.Text = productname.ToString();
+                        mfrlbl.Text = productmfr.ToString();
+                        productupclbl.Text = productupc.ToString();
+                        productbarcodelbl.Text = productbarcode.ToString();
+                    }));
+                });
+            }
+            catch (Exception ex)
+            {
+                // Catch any unexpected errors and show them to the user
+                MessageBox.Show($"An error occurred while updating supplier information: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -101,7 +123,7 @@ namespace SmartFlow.Masters
             }
         }
 
-        private void savebtn_Click(object sender, EventArgs e)
+        private async void savebtn_Click(object sender, EventArgs e)
         {
             foreach(DataGridViewRow row in dgvItemSerialNo.Rows)
             {
@@ -122,7 +144,7 @@ namespace SmartFlow.Masters
                     {"ProductMfr", mfr }
                 };
 
-                bool result = DatabaseAccess.ExecuteQuery(tableName, "INSERT", columnData);
+                bool result = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData);
                 dgvItemSerialNo.Rows.Clear();
             }
         }

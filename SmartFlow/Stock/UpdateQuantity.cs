@@ -2,6 +2,7 @@
 using SmartFlow.Purchase;
 using System;
 using System.Data;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Stock
@@ -19,7 +20,7 @@ namespace SmartFlow.Stock
             productname.Text = title;
             productmfr.Text = mfr;
         }
-        private void savebtn_Click(object sender, EventArgs e)
+        private async void savebtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -52,7 +53,7 @@ namespace SmartFlow.Stock
                             int start = 0;
                             while (start < diff)
                             {
-                                string serialnumber = GenerateRandomSerialNumber();
+                                string serialnumber = await GenerateRandomSerialNumber();
                                 string query1 = string.Format("INSERT INTO SerialNoTable (ProductId,SerialNo,CreatedAt,CreatedDay) " +
                             "VALUES ('" + productid + "','" + serialnumber + "','" + System.DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
                             "'" + System.DateTime.Now.DayOfWeek + "')");
@@ -68,7 +69,7 @@ namespace SmartFlow.Stock
 
             }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
-        static string GenerateRandomSerialNumber()
+        static async Task<string> GenerateRandomSerialNumber()
         {
             Random random = new Random();
             const string chars = "0123456789";
@@ -81,12 +82,12 @@ namespace SmartFlow.Stock
 
             string serialNumber = new string(serialChars);
             string query = "SELECT SerialNo FROM SerialNoTable WHERE SerialNo = '" + serialNumber + "'";
-            DataTable dt = DatabaseAccess.Retrive(query);
+            DataTable dt = await DatabaseAccess.RetriveAsync(query);
             if (dt != null)
             {
                 if (dt.Rows.Count > 0)
                 {
-                    serialNumber = GenerateRandomSerialNumber();
+                    serialNumber = await GenerateRandomSerialNumber();
                 }
             }
             return serialNumber;
@@ -123,13 +124,13 @@ namespace SmartFlow.Stock
                 }
             }
         }
-        private void selectwarehousetxtbox_MouseClick(object sender, MouseEventArgs e)
+        private async void selectwarehousetxtbox_MouseClick(object sender, MouseEventArgs e)
         {
-            Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
+            Form openForm = await CommonFunction.IsFormOpenAsync(typeof(WarehouseSelection));
             if (openForm == null)
             {
                 string getwarehousedata = "SELECT WarehouseID,Name,Address,City,Code FROM WarehouseTable";
-                DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
+                DataTable warehousedata = await DatabaseAccess.RetriveAsync(getwarehousedata);
 
                 if (warehousedata != null)
                 {
@@ -137,13 +138,10 @@ namespace SmartFlow.Stock
                     {
                         WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
                         warehouseSelection.MdiParent = this.MdiParent;
-                        
-                        warehouseSelection.FormClosed += delegate
-                        {
-                            UpdateWarehouseFromTextBox();
-                        };
 
-                        CommonFunction.DisposeOnClose(warehouseSelection);
+                        warehouseSelection.WarehouseDataSelected += UpdateWarehouseInfo;
+
+                        await CommonFunction.DisposeOnCloseAsync(warehouseSelection);
                         warehouseSelection.Show();
                     }
                 }
@@ -154,12 +152,36 @@ namespace SmartFlow.Stock
                 openForm.BringToFront();
             }
         }
-        private void UpdateWarehouseFromTextBox()
+        private async void UpdateWarehouseInfo(object sender, WarehouseData e)
         {
-            if(GlobalVariables.warehousenameglobal != null && GlobalVariables.warehouseidglobal > 0)
+            try
             {
-                selectwarehousetxtbox.Text = GlobalVariables.warehousenameglobal.ToString();
-                warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
+                // Simulate some async work (e.g., fetching additional data or processing)
+                await Task.Run(() =>
+                {
+                    // Perform any long-running or async operations here (if needed)
+                    // For example, querying a database, calling an API, etc.
+
+                    int warehouseid = e.WarehouseId;
+                    string warehousename = e.WarehouseName;
+
+                    // If you need to update UI controls, ensure that it's done on the UI thread
+                    // If you update textboxes, labels, etc., do it like this:
+                    this.Invoke(new Action(() =>
+                    {
+                        // Assuming these are TextBox controls
+                        /*supplieridlbl.Text = supplierId.ToString();
+                        selectsuppliertxtbox.Text = supplierName;
+                        codetxtbox.Text = supplierCode;
+                        companytxtbox.Text = companyName;*/
+                    }));
+                });
+            }
+            catch (Exception ex)
+            {
+                // Catch any unexpected errors and show them to the user
+                MessageBox.Show($"An error occurred while updating supplier information: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private bool AreAnyTextBoxesFilled()

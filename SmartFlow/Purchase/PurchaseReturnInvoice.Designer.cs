@@ -39,6 +39,7 @@
             this.mfrtxtbox = new System.Windows.Forms.TextBox();
             this.mfrlbl = new System.Windows.Forms.Label();
             this.dgvpurchaseproducts = new System.Windows.Forms.DataGridView();
+            this.srnocolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mfrcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,8 +56,12 @@
             this.pricepermetercolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.savebtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.currencyconversionratelbl = new System.Windows.Forms.Label();
+            this.currencynamelbl = new System.Windows.Forms.Label();
             this.invoicereflbl = new System.Windows.Forms.Label();
+            this.currencystringlbl = new System.Windows.Forms.Label();
             this.invoicereftxtbox = new System.Windows.Forms.TextBox();
+            this.currencysymbollbl = new System.Windows.Forms.Label();
             this.productvatlbl = new System.Windows.Forms.Label();
             this.productdiscountlbl = new System.Windows.Forms.Label();
             this.unitidlbl = new System.Windows.Forms.Label();
@@ -92,18 +97,17 @@
             this.removevatchkbox = new System.Windows.Forms.CheckBox();
             this.shippingchargestxtbox = new System.Windows.Forms.TextBox();
             this.freightcharges = new System.Windows.Forms.Label();
-            this.currencynamelbl = new System.Windows.Forms.Label();
-            this.currencystringlbl = new System.Windows.Forms.Label();
-            this.currencysymbollbl = new System.Windows.Forms.Label();
             this.currencyidlbl = new System.Windows.Forms.Label();
             this.currencylbl = new System.Windows.Forms.Label();
-            this.currencyconversionratelbl = new System.Windows.Forms.Label();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.eDITToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpurchaseproducts)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.panel1.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -170,6 +174,7 @@
             this.selectproducttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectproducttxtbox.Location = new System.Drawing.Point(202, 38);
             this.selectproducttxtbox.Name = "selectproducttxtbox";
+            this.selectproducttxtbox.ReadOnly = true;
             this.selectproducttxtbox.Size = new System.Drawing.Size(405, 32);
             this.selectproducttxtbox.TabIndex = 27;
             this.selectproducttxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectproducttxtbox_MouseClick);
@@ -202,6 +207,7 @@
             this.mfrtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mfrtxtbox.Location = new System.Drawing.Point(15, 38);
             this.mfrtxtbox.Name = "mfrtxtbox";
+            this.mfrtxtbox.ReadOnly = true;
             this.mfrtxtbox.Size = new System.Drawing.Size(181, 32);
             this.mfrtxtbox.TabIndex = 18;
             // 
@@ -226,6 +232,7 @@
             this.dgvpurchaseproducts.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvpurchaseproducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvpurchaseproducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.srnocolumn,
             this.mfrcolumn,
             this.productid,
             this.productnamecolumn,
@@ -240,26 +247,38 @@
             this.itemdescriptioncolumn,
             this.lengthinmetercolumn,
             this.pricepermetercolumn});
+            this.dgvpurchaseproducts.ContextMenuStrip = this.contextMenuStrip;
             this.dgvpurchaseproducts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvpurchaseproducts.Enabled = false;
             this.dgvpurchaseproducts.Location = new System.Drawing.Point(3, 76);
             this.dgvpurchaseproducts.Name = "dgvpurchaseproducts";
+            this.dgvpurchaseproducts.ReadOnly = true;
             this.dgvpurchaseproducts.RowHeadersVisible = false;
             this.dgvpurchaseproducts.RowHeadersWidth = 51;
             this.dgvpurchaseproducts.RowTemplate.Height = 24;
             this.dgvpurchaseproducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvpurchaseproducts.Size = new System.Drawing.Size(1738, 367);
             this.dgvpurchaseproducts.TabIndex = 1;
+            this.dgvpurchaseproducts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvpurchaseproducts_CellFormatting);
             this.dgvpurchaseproducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvpurchaseproducts_CellValueChanged);
             this.dgvpurchaseproducts.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvpurchaseproducts_RowsAdded);
             this.dgvpurchaseproducts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvpurchaseproducts_RowsRemoved);
             this.dgvpurchaseproducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvpurchasequotationproduct_KeyDown);
+            // 
+            // srnocolumn
+            // 
+            this.srnocolumn.HeaderText = "#";
+            this.srnocolumn.MinimumWidth = 6;
+            this.srnocolumn.Name = "srnocolumn";
+            this.srnocolumn.ReadOnly = true;
+            this.srnocolumn.Width = 40;
             // 
             // mfrcolumn
             // 
             this.mfrcolumn.HeaderText = "MFR";
             this.mfrcolumn.MinimumWidth = 6;
             this.mfrcolumn.Name = "mfrcolumn";
+            this.mfrcolumn.ReadOnly = true;
             this.mfrcolumn.Width = 125;
             // 
             // productid
@@ -267,6 +286,7 @@
             this.productid.HeaderText = "ID";
             this.productid.MinimumWidth = 6;
             this.productid.Name = "productid";
+            this.productid.ReadOnly = true;
             this.productid.Visible = false;
             this.productid.Width = 125;
             // 
@@ -276,12 +296,14 @@
             this.productnamecolumn.HeaderText = "Product Name";
             this.productnamecolumn.MinimumWidth = 6;
             this.productnamecolumn.Name = "productnamecolumn";
+            this.productnamecolumn.ReadOnly = true;
             // 
             // qtycolumn
             // 
             this.qtycolumn.HeaderText = "Qty";
             this.qtycolumn.MinimumWidth = 6;
             this.qtycolumn.Name = "qtycolumn";
+            this.qtycolumn.ReadOnly = true;
             this.qtycolumn.Width = 125;
             // 
             // unitidcolumn
@@ -289,6 +311,7 @@
             this.unitidcolumn.HeaderText = "unitid";
             this.unitidcolumn.MinimumWidth = 6;
             this.unitidcolumn.Name = "unitidcolumn";
+            this.unitidcolumn.ReadOnly = true;
             this.unitidcolumn.Visible = false;
             this.unitidcolumn.Width = 125;
             // 
@@ -297,6 +320,7 @@
             this.unitnamecolumn.HeaderText = "Unit";
             this.unitnamecolumn.MinimumWidth = 6;
             this.unitnamecolumn.Name = "unitnamecolumn";
+            this.unitnamecolumn.ReadOnly = true;
             this.unitnamecolumn.Width = 125;
             // 
             // pricecolumn
@@ -304,6 +328,7 @@
             this.pricecolumn.HeaderText = "Price";
             this.pricecolumn.MinimumWidth = 6;
             this.pricecolumn.Name = "pricecolumn";
+            this.pricecolumn.ReadOnly = true;
             this.pricecolumn.Width = 125;
             // 
             // vatcolumn
@@ -311,6 +336,7 @@
             this.vatcolumn.HeaderText = "VAT";
             this.vatcolumn.MinimumWidth = 6;
             this.vatcolumn.Name = "vatcolumn";
+            this.vatcolumn.ReadOnly = true;
             this.vatcolumn.Width = 125;
             // 
             // discountcolumn
@@ -318,6 +344,7 @@
             this.discountcolumn.HeaderText = "Discount";
             this.discountcolumn.MinimumWidth = 6;
             this.discountcolumn.Name = "discountcolumn";
+            this.discountcolumn.ReadOnly = true;
             this.discountcolumn.Width = 125;
             // 
             // totalcolumn
@@ -325,6 +352,7 @@
             this.totalcolumn.HeaderText = "Total";
             this.totalcolumn.MinimumWidth = 6;
             this.totalcolumn.Name = "totalcolumn";
+            this.totalcolumn.ReadOnly = true;
             this.totalcolumn.Width = 125;
             // 
             // warehouseidcolumn
@@ -332,6 +360,7 @@
             this.warehouseidcolumn.HeaderText = "warehouseid";
             this.warehouseidcolumn.MinimumWidth = 6;
             this.warehouseidcolumn.Name = "warehouseidcolumn";
+            this.warehouseidcolumn.ReadOnly = true;
             this.warehouseidcolumn.Visible = false;
             this.warehouseidcolumn.Width = 125;
             // 
@@ -340,6 +369,7 @@
             this.itemdescriptioncolumn.HeaderText = "itemdescriptioncolumn";
             this.itemdescriptioncolumn.MinimumWidth = 6;
             this.itemdescriptioncolumn.Name = "itemdescriptioncolumn";
+            this.itemdescriptioncolumn.ReadOnly = true;
             this.itemdescriptioncolumn.Visible = false;
             this.itemdescriptioncolumn.Width = 125;
             // 
@@ -348,6 +378,7 @@
             this.lengthinmetercolumn.HeaderText = "lengthinmetercolumn";
             this.lengthinmetercolumn.MinimumWidth = 6;
             this.lengthinmetercolumn.Name = "lengthinmetercolumn";
+            this.lengthinmetercolumn.ReadOnly = true;
             this.lengthinmetercolumn.Visible = false;
             this.lengthinmetercolumn.Width = 125;
             // 
@@ -356,6 +387,7 @@
             this.pricepermetercolumn.HeaderText = "pricepermetercolumn";
             this.pricepermetercolumn.MinimumWidth = 6;
             this.pricepermetercolumn.Name = "pricepermetercolumn";
+            this.pricepermetercolumn.ReadOnly = true;
             this.pricepermetercolumn.Visible = false;
             this.pricepermetercolumn.Width = 125;
             // 
@@ -408,6 +440,26 @@
             this.panel2.Size = new System.Drawing.Size(1200, 165);
             this.panel2.TabIndex = 51;
             // 
+            // currencyconversionratelbl
+            // 
+            this.currencyconversionratelbl.AutoSize = true;
+            this.currencyconversionratelbl.Location = new System.Drawing.Point(730, 149);
+            this.currencyconversionratelbl.Name = "currencyconversionratelbl";
+            this.currencyconversionratelbl.Size = new System.Drawing.Size(161, 16);
+            this.currencyconversionratelbl.TabIndex = 163;
+            this.currencyconversionratelbl.Text = "currencyconversionratelbl";
+            this.currencyconversionratelbl.Visible = false;
+            // 
+            // currencynamelbl
+            // 
+            this.currencynamelbl.AutoSize = true;
+            this.currencynamelbl.Location = new System.Drawing.Point(1099, 133);
+            this.currencynamelbl.Name = "currencynamelbl";
+            this.currencynamelbl.Size = new System.Drawing.Size(106, 16);
+            this.currencynamelbl.TabIndex = 165;
+            this.currencynamelbl.Text = "currencynamelbl";
+            this.currencynamelbl.Visible = false;
+            // 
             // invoicereflbl
             // 
             this.invoicereflbl.AutoSize = true;
@@ -418,6 +470,16 @@
             this.invoicereflbl.TabIndex = 166;
             this.invoicereflbl.Text = "Invoice Ref";
             // 
+            // currencystringlbl
+            // 
+            this.currencystringlbl.AutoSize = true;
+            this.currencystringlbl.Location = new System.Drawing.Point(1099, 115);
+            this.currencystringlbl.Name = "currencystringlbl";
+            this.currencystringlbl.Size = new System.Drawing.Size(104, 16);
+            this.currencystringlbl.TabIndex = 164;
+            this.currencystringlbl.Text = "currencystringlbl";
+            this.currencystringlbl.Visible = false;
+            // 
             // invoicereftxtbox
             // 
             this.invoicereftxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -426,6 +488,16 @@
             this.invoicereftxtbox.Name = "invoicereftxtbox";
             this.invoicereftxtbox.Size = new System.Drawing.Size(167, 32);
             this.invoicereftxtbox.TabIndex = 165;
+            // 
+            // currencysymbollbl
+            // 
+            this.currencysymbollbl.AutoSize = true;
+            this.currencysymbollbl.Location = new System.Drawing.Point(1096, 98);
+            this.currencysymbollbl.Name = "currencysymbollbl";
+            this.currencysymbollbl.Size = new System.Drawing.Size(116, 16);
+            this.currencysymbollbl.TabIndex = 163;
+            this.currencysymbollbl.Text = "currencysymbollbl";
+            this.currencysymbollbl.Visible = false;
             // 
             // productvatlbl
             // 
@@ -598,6 +670,7 @@
             this.selectsuppliertxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectsuppliertxtbox.Location = new System.Drawing.Point(291, 55);
             this.selectsuppliertxtbox.Name = "selectsuppliertxtbox";
+            this.selectsuppliertxtbox.ReadOnly = true;
             this.selectsuppliertxtbox.Size = new System.Drawing.Size(698, 32);
             this.selectsuppliertxtbox.TabIndex = 66;
             this.selectsuppliertxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectsuppliertxtbox_MouseClick);
@@ -610,6 +683,7 @@
             this.suppliercodetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.suppliercodetxtbox.Location = new System.Drawing.Point(118, 55);
             this.suppliercodetxtbox.Name = "suppliercodetxtbox";
+            this.suppliercodetxtbox.ReadOnly = true;
             this.suppliercodetxtbox.Size = new System.Drawing.Size(167, 32);
             this.suppliercodetxtbox.TabIndex = 61;
             // 
@@ -640,6 +714,7 @@
             this.invoicenotxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoicenotxtbox.Location = new System.Drawing.Point(118, 17);
             this.invoicenotxtbox.Name = "invoicenotxtbox";
+            this.invoicenotxtbox.ReadOnly = true;
             this.invoicenotxtbox.Size = new System.Drawing.Size(167, 32);
             this.invoicenotxtbox.TabIndex = 2;
             // 
@@ -733,6 +808,7 @@
             this.totaldiscounttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totaldiscounttxtbox.Location = new System.Drawing.Point(1378, 155);
             this.totaldiscounttxtbox.Name = "totaldiscounttxtbox";
+            this.totaldiscounttxtbox.ReadOnly = true;
             this.totaldiscounttxtbox.Size = new System.Drawing.Size(378, 32);
             this.totaldiscounttxtbox.TabIndex = 152;
             this.totaldiscounttxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -746,6 +822,7 @@
             this.totalvattxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalvattxtbox.Location = new System.Drawing.Point(1378, 122);
             this.totalvattxtbox.Name = "totalvattxtbox";
+            this.totalvattxtbox.ReadOnly = true;
             this.totalvattxtbox.Size = new System.Drawing.Size(378, 32);
             this.totalvattxtbox.TabIndex = 153;
             this.totalvattxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -759,6 +836,7 @@
             this.nettotaltxtbox.Font = new System.Drawing.Font("Calibri", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nettotaltxtbox.Location = new System.Drawing.Point(1378, 51);
             this.nettotaltxtbox.Name = "nettotaltxtbox";
+            this.nettotaltxtbox.ReadOnly = true;
             this.nettotaltxtbox.Size = new System.Drawing.Size(378, 69);
             this.nettotaltxtbox.TabIndex = 154;
             this.nettotaltxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -798,36 +876,6 @@
             this.freightcharges.TabIndex = 156;
             this.freightcharges.Text = "Freight && Shipping Charges";
             // 
-            // currencynamelbl
-            // 
-            this.currencynamelbl.AutoSize = true;
-            this.currencynamelbl.Location = new System.Drawing.Point(1099, 133);
-            this.currencynamelbl.Name = "currencynamelbl";
-            this.currencynamelbl.Size = new System.Drawing.Size(106, 16);
-            this.currencynamelbl.TabIndex = 165;
-            this.currencynamelbl.Text = "currencynamelbl";
-            this.currencynamelbl.Visible = false;
-            // 
-            // currencystringlbl
-            // 
-            this.currencystringlbl.AutoSize = true;
-            this.currencystringlbl.Location = new System.Drawing.Point(1099, 115);
-            this.currencystringlbl.Name = "currencystringlbl";
-            this.currencystringlbl.Size = new System.Drawing.Size(104, 16);
-            this.currencystringlbl.TabIndex = 164;
-            this.currencystringlbl.Text = "currencystringlbl";
-            this.currencystringlbl.Visible = false;
-            // 
-            // currencysymbollbl
-            // 
-            this.currencysymbollbl.AutoSize = true;
-            this.currencysymbollbl.Location = new System.Drawing.Point(1096, 98);
-            this.currencysymbollbl.Name = "currencysymbollbl";
-            this.currencysymbollbl.Size = new System.Drawing.Size(116, 16);
-            this.currencysymbollbl.TabIndex = 163;
-            this.currencysymbollbl.Text = "currencysymbollbl";
-            this.currencysymbollbl.Visible = false;
-            // 
             // currencyidlbl
             // 
             this.currencyidlbl.AutoSize = true;
@@ -848,15 +896,20 @@
             this.currencylbl.TabIndex = 161;
             this.currencylbl.Text = "CURRENCY : AED";
             // 
-            // currencyconversionratelbl
+            // contextMenuStrip
             // 
-            this.currencyconversionratelbl.AutoSize = true;
-            this.currencyconversionratelbl.Location = new System.Drawing.Point(730, 149);
-            this.currencyconversionratelbl.Name = "currencyconversionratelbl";
-            this.currencyconversionratelbl.Size = new System.Drawing.Size(161, 16);
-            this.currencyconversionratelbl.TabIndex = 163;
-            this.currencyconversionratelbl.Text = "currencyconversionratelbl";
-            this.currencyconversionratelbl.Visible = false;
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.eDITToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(211, 56);
+            // 
+            // eDITToolStripMenuItem
+            // 
+            this.eDITToolStripMenuItem.Name = "eDITToolStripMenuItem";
+            this.eDITToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.eDITToolStripMenuItem.Text = "EDIT";
+            this.eDITToolStripMenuItem.Click += new System.EventHandler(this.eDITToolStripMenuItem_Click);
             // 
             // PurchaseReturnInvoice
             // 
@@ -897,6 +950,7 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -949,6 +1003,17 @@
         private System.Windows.Forms.Label productvatlbl;
         private System.Windows.Forms.Label productdiscountlbl;
         private System.Windows.Forms.Label unitidlbl;
+        private System.Windows.Forms.Label invoicereflbl;
+        private System.Windows.Forms.TextBox invoicereftxtbox;
+        private System.Windows.Forms.TextBox shippingchargestxtbox;
+        private System.Windows.Forms.Label freightcharges;
+        private System.Windows.Forms.Label currencynamelbl;
+        private System.Windows.Forms.Label currencystringlbl;
+        private System.Windows.Forms.Label currencysymbollbl;
+        private System.Windows.Forms.Label currencyidlbl;
+        private System.Windows.Forms.Label currencylbl;
+        private System.Windows.Forms.Label currencyconversionratelbl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn srnocolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn mfrcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productid;
         private System.Windows.Forms.DataGridViewTextBoxColumn productnamecolumn;
@@ -963,15 +1028,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn itemdescriptioncolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lengthinmetercolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pricepermetercolumn;
-        private System.Windows.Forms.Label invoicereflbl;
-        private System.Windows.Forms.TextBox invoicereftxtbox;
-        private System.Windows.Forms.TextBox shippingchargestxtbox;
-        private System.Windows.Forms.Label freightcharges;
-        private System.Windows.Forms.Label currencynamelbl;
-        private System.Windows.Forms.Label currencystringlbl;
-        private System.Windows.Forms.Label currencysymbollbl;
-        private System.Windows.Forms.Label currencyidlbl;
-        private System.Windows.Forms.Label currencylbl;
-        private System.Windows.Forms.Label currencyconversionratelbl;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem eDITToolStripMenuItem;
     }
 }

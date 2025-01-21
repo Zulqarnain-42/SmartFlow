@@ -1,26 +1,28 @@
-﻿using SmartFlow.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Masters
 {
     public partial class UnitList : Form
     {
+        private int currentCellIndex = 0;
+        private int currentRowIndex = 0;
         public UnitList()
         {
             InitializeComponent();
         }
 
-        private void FillGrid()
+        private async void FillGrid()
         {
             try
             {
                 string query = string.Empty;
                 DataTable dtlistunit = new DataTable();
                 query = "SELECT UnitID [ID],UnitName [UNIT NAME],Description [DESCRIPTION],UnitCode [CODE],IsDefault [DEFAULT] FROM UnitTable";
-                dtlistunit = DatabaseAccess.Retrive(query);
+                dtlistunit = await DatabaseAccess.RetriveAsync(query);
 
                 if (dtlistunit != null && dtlistunit.Rows.Count > 0) 
                 {
@@ -33,10 +35,10 @@ namespace SmartFlow.Masters
 
                 }
 
-                if(GlobalVariables.currentRowIndex >= 0 && GlobalVariables.currentCellIndex >= 0 && GlobalVariables.currentRowIndex < dgvListunit.Rows.Count && 
-                    GlobalVariables.currentCellIndex < dgvListunit.Rows[GlobalVariables.currentRowIndex].Cells.Count)
+                if(currentRowIndex >= 0 && currentCellIndex >= 0 && currentRowIndex < dgvListunit.Rows.Count && 
+                    currentCellIndex < dgvListunit.Rows[currentRowIndex].Cells.Count)
                 {
-                    dgvListunit.CurrentCell = dgvListunit.Rows[GlobalVariables.currentRowIndex].Cells[GlobalVariables.currentCellIndex];
+                    dgvListunit.CurrentCell = dgvListunit.Rows[currentRowIndex].Cells[currentCellIndex];
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
@@ -145,12 +147,12 @@ namespace SmartFlow.Masters
             int firstVisibleCellIndex = GetFirstVisibleCellIndex(dgvListunit);
             if (firstVisibleRowIndex >= 0)
             {
-                GlobalVariables.currentRowIndex = firstVisibleRowIndex;
-                GlobalVariables.currentCellIndex = firstVisibleCellIndex;
+                currentRowIndex = firstVisibleRowIndex;
+                currentCellIndex = firstVisibleCellIndex;
             }
         }
 
-        private void savebtn_Click(object sender, EventArgs e)
+        private async void savebtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -162,7 +164,7 @@ namespace SmartFlow.Masters
                     return;
                 }
 
-                string duplicateinfo = CheckDuplicate();
+                string duplicateinfo = await CheckDuplicate();
                 if (duplicateinfo != null) 
                 {
                     MessageBox.Show(duplicateinfo, "Duplicate Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -171,7 +173,7 @@ namespace SmartFlow.Masters
                 {
                     if (savebtn.Text == "Update")
                     {
-                        bool result = UpdateUnit();
+                        bool result = await UpdateUnit();
                         if (result)
                         {
                             MessageBox.Show("Updated Successfully!");
@@ -181,7 +183,7 @@ namespace SmartFlow.Masters
                     }
                     else
                     {
-                        bool isinserted = InsertUnit();
+                        bool isinserted = await InsertUnit();
                         if (isinserted)
                         {
                             MessageBox.Show("Saved Successfully!");
@@ -200,7 +202,7 @@ namespace SmartFlow.Masters
             this.Close();
         }
 
-        private string CheckDuplicate()
+        private async Task<string> CheckDuplicate()
         {
             string query = string.Format("SELECT UnitID,UnitName,Description,UnitCode,CompanyID,CreatedAt,UpdatedAt,AddedBy,CreatedDay,UpdatedDay," +
                 "IsDefault FROM UnitTable WHERE UnitName = @UnitName");
@@ -210,7 +212,7 @@ namespace SmartFlow.Masters
                 { "UnitName", unitnametxtbox.Text }
             };
 
-            DataTable dt = DatabaseAccess.RetrieveData(query, parameters);
+            DataTable dt = await DatabaseAccess.RetrieveDataAsync(query, parameters);
             if(dt!=null && dt.Rows.Count > 0)
             {
                 return $"Duplicate found: Unit Name = {dt.Rows[0]["UnitName"].ToString()}.";
@@ -218,7 +220,7 @@ namespace SmartFlow.Masters
             return null;
         }
 
-        private bool InsertUnit()
+        private async Task<bool> InsertUnit()
         {
             string tableName = "UnitTable";
             var columnData = new Dictionary<string, object>()
@@ -231,11 +233,11 @@ namespace SmartFlow.Masters
                 { "IsDefault", isdefaultchkbox.Checked }
             };
 
-            bool isInserted = DatabaseAccess.ExecuteQuery(tableName, "INSERT", columnData);
+            bool isInserted = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData);
             return isInserted;
         }
 
-        private bool UpdateUnit()
+        private async Task<bool> UpdateUnit()
         {
             string tableName = "UnitTable";
             string whereClause = "UnitID = '" + unitidlbl.Text + "'";
@@ -250,7 +252,7 @@ namespace SmartFlow.Masters
                 { "IsDefault", isdefaultchkbox.Checked }            
             };
 
-            bool isInserted = DatabaseAccess.ExecuteQuery(tableName, "UPDATE", columnData, whereClause);
+            bool isInserted = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
             return isInserted;
         }
     }

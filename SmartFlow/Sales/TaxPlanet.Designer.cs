@@ -135,6 +135,7 @@
             this.cancelbtn.TabIndex = 7;
             this.cancelbtn.Text = "Cancel Transaction";
             this.cancelbtn.UseVisualStyleBackColor = true;
+            this.cancelbtn.Click += new System.EventHandler(this.cancelbtn_Click);
             // 
             // findtransactionbtn
             // 

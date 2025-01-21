@@ -16,7 +16,7 @@ namespace SmartFlow.Sales.CommonForm
         {
             InitializeComponent();
         }
-        private void searchbtn_Click(object sender, EventArgs e)
+        private async void searchbtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -34,28 +34,38 @@ namespace SmartFlow.Sales.CommonForm
                 string quotationNo = quotationnotxtbox.Text;
 
                 // Using parameterized query to avoid SQL injection
-                string queryQuotation = @"SELECT InvoiceTable.Invoiceid, InvoiceTable.InvoiceNo, InvoiceTable.Invoicedate, InvoiceTable.ClientID,
-                                    InvoiceTable.Narration, InvoiceTable.CreatedAt, InvoiceTable.CreatedDay, InvoiceTable.UpdatedAt,
-                                    InvoiceTable.UpdatedDay, InvoiceTable.AddedBy, InvoiceTable.Companyid, InvoiceTable.Userid,
-                                    InvoiceTable.InvoiceCode, InvoiceTable.NetTotal, InvoiceTable.ClientName, InvoiceTable.TotalVat,
-                                    InvoiceTable.TotalDiscount, InvoiceTable.FreightShippingCharges, InvoiceTable.TotalQty,
-                                    InvoiceTable.InvoiceRefrence, InvoiceTable.IsPlanetInvoice, InvoiceTable.Currencyid,
-                                    InvoiceTable.CurrencyName, InvoiceTable.CurrencySymbol, InvoiceTable.ConversionRate,
-                                    CustomerTable.CustomerCode, CustomerTable.ContactNo
-                              FROM InvoiceTable
-                              INNER JOIN CustomerTable ON CustomerTable.CustomerID = InvoiceTable.ClientID
-                              WHERE InvoiceTable.InvoiceNo = @InvoiceNo";
+                string queryQuotation = @"SELECT InvoiceTable.Invoiceid,InvoiceTable.InvoiceNo,InvoiceTable.invoicedate,InvoiceTable.ClientID,InvoiceTable.CreatedAt,
+                    InvoiceTable.CreatedDay,InvoiceTable.UpdatedAt,InvoiceTable.UpdatedDay,InvoiceTable.AddedBy,InvoiceTable.Companyid,InvoiceTable.Userid,InvoiceTable.InvoiceCode,
+                    InvoiceTable.NetTotal,InvoiceTable.ClientName,InvoiceTable.TotalVat,InvoiceTable.TotalDiscount,InvoiceTable.FreightShippingCharges,InvoiceTable.TotalQty,
+                    InvoiceTable.InvoiceRefrence,InvoiceTable.IsPlanetInvoice,InvoiceTable.Currencyid,InvoiceTable.CurrencyName,InvoiceTable.CurrencySymbol,InvoiceTable.ConversionRate,
+                    InvoiceTable.IsSaleInvoice,InvoiceTable.IsTaxAble,InvoiceTable.QuotationValidUntill,InvoiceTable.SalePerson,InvoiceTable.ShipmentReceiveingPerson,
+                    AccountSubControlTable.CompanyName,AccountSubControlTable.CodeAccount,AccountSubControlTable.MobileNo FROM InvoiceTable 
+                    INNER JOIN AccountSubControlTable ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = @InvoiceNo";
 
                 var parameters = new Dictionary<string, object>
                 {
                     { "@InvoiceNo", quotationNo }
                 };
 
-                DataTable quotationData = DatabaseAccess.Retrive(queryQuotation, parameters);
+                DataTable quotationData = await DatabaseAccess.RetriveAsync(queryQuotation, parameters);
 
                 if (quotationData != null && quotationData.Rows.Count > 0)
                 {
-                    this.Close();
+                    string subQueryQuotation = @"SELECT InvoiceDetailsId,InvoiceNo,Invoicecode,Productid,Quantity,UnitSalePrice,ItemSerialNoid,ProductName,MFR,ItemWiseDiscount,ItemWiseVAT,
+                        Warehouseid,PurchaseCostPrice,PurchaseLowestSalePrice,PurchaseStandardPrice,PurchaseItemSalePrice,SystemSerialNoid,ItemTotal,Unitid,ItemAvailability,PricePerMeter,
+                        LengthInMeter,ItemDescription,MinusInventory,IsSaleInvoice,AddInventory,VatCode,DiscountPercentage,DiscountType FROM InvoiceDetailsTable WHERE InvoiceNo = @InvoiceNo";
+
+                    var subparameters = new Dictionary<string, object>
+                    {
+                        { "InvoiceNo", quotationNo }
+                    };
+
+                    DataTable quotationdetails = await DatabaseAccess.RetriveAsync(subQueryQuotation,subparameters);
+
+                    if(quotationData.Rows.Count > 0 && quotationdetails.Rows.Count > 0)
+                    {
+
+                    }
                 }
                 else
                 {

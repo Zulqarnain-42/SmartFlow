@@ -1,14 +1,5 @@
-﻿using DocumentFormat.OpenXml.VariantTypes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
-using static SmartFlow.Common.CommonFunction;
 
 namespace SmartFlow.Common.CommonForms
 {
@@ -21,9 +12,9 @@ namespace SmartFlow.Common.CommonForms
             InitializeComponent();
         }
 
-        private void CurrencySelection_Load(object sender, EventArgs e)
+        private async void CurrencySelection_Load(object sender, EventArgs e)
         {
-            CommonFunction.PopulateCurrencyComboBox(cmbcurrency);
+            await CommonFunction.PopulateCurrencyComboBoxAsync(cmbcurrency);
         }
 
         private void savebtn_Click(object sender, EventArgs e)

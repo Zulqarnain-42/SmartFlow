@@ -16,7 +16,7 @@ namespace SmartFlow.Masters
         {
             this.Close();
         }
-        private void savebtn_Click(object sender, EventArgs e)
+        private async void savebtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace SmartFlow.Masters
                         { "OpeningBalanceDebit", amounttxtbox.Text }
                     };
 
-                    bool isUpdated = DatabaseAccess.ExecuteQuery(tableName, "UPDATE", columnData, whereClause);
+                    bool isUpdated = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
                     if (isUpdated)
                     {
                         this.Close();
@@ -68,7 +68,7 @@ namespace SmartFlow.Masters
                         { "OpeningBalanceCredit", amounttxtbox.Text }
                     };
 
-                    bool isUpdated = DatabaseAccess.ExecuteQuery(tableName, "UPDATE", columnData, whereClause);
+                    bool isUpdated = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
                     if (isUpdated)
                     {
                         this.Close();

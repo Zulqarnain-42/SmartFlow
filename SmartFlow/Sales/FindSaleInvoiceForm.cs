@@ -14,7 +14,7 @@ namespace SmartFlow.Sales
         {
             InitializeComponent();
         }
-        private void searchbtn_Click(object sender, EventArgs e)
+        private async void searchbtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace SmartFlow.Sales
                         "FROM InvoiceTable INNER JOIN AccountSubControlTable " +
                         "ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                    DataTable dataInvoice = DatabaseAccess.Retrive(query);
+                    DataTable dataInvoice = await DatabaseAccess.RetriveAsync(query);
 
                     if (dataInvoice.Rows.Count > 0)
                     {
@@ -53,13 +53,13 @@ namespace SmartFlow.Sales
                             "InvoiceDetailsTable.MinusInventory, UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
                             "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                        DataTable dtInvoiceDetails = DatabaseAccess.Retrive(subquery);
+                        DataTable dtInvoiceDetails = await DatabaseAccess.RetriveAsync(subquery);
                         if (dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
                         {
                             this.Close();
                             SaleQuotationInvoice saleQuotationInvoice = new SaleQuotationInvoice(dataInvoice, dtInvoiceDetails);
                             saleQuotationInvoice.MdiParent = Application.OpenForms["Dashboard"];
-                            CommonFunction.DisposeOnClose(saleQuotationInvoice);
+                            await CommonFunction.DisposeOnCloseAsync(saleQuotationInvoice);
                             saleQuotationInvoice.Show();
                         }
                     }
@@ -80,7 +80,7 @@ namespace SmartFlow.Sales
                         "FROM InvoiceTable INNER JOIN AccountSubControlTable " +
                         "ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                    DataTable dataInvoice = DatabaseAccess.Retrive(query);
+                    DataTable dataInvoice = await DatabaseAccess.RetriveAsync(query);
 
                     if (dataInvoice.Rows.Count > 0)
                     {
@@ -94,13 +94,13 @@ namespace SmartFlow.Sales
                             "InvoiceDetailsTable.MinusInventory, UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
                             "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                        DataTable dtInvoiceDetails = DatabaseAccess.Retrive(subquery);
+                        DataTable dtInvoiceDetails = await DatabaseAccess.RetriveAsync(subquery);
                         if (dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
                         {
                             this.Close();
                             SaleInvoice saleInvoice = new SaleInvoice(dataInvoice, dtInvoiceDetails);
                             saleInvoice.MdiParent = Application.OpenForms["Dashboard"];
-                            CommonFunction.DisposeOnClose(saleInvoice);
+                            await CommonFunction.DisposeOnCloseAsync(saleInvoice);
                             saleInvoice.Show();
                         }
                     }
@@ -121,7 +121,7 @@ namespace SmartFlow.Sales
                         "FROM InvoiceTable INNER JOIN AccountSubControlTable " +
                         "ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                    DataTable dataInvoice = DatabaseAccess.Retrive(query);
+                    DataTable dataInvoice = await DatabaseAccess.RetriveAsync(query);
 
                     if (dataInvoice.Rows.Count > 0)
                     {
@@ -135,13 +135,13 @@ namespace SmartFlow.Sales
                             "InvoiceDetailsTable.MinusInventory, UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
                             "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                        DataTable dtInvoiceDetails = DatabaseAccess.Retrive(subquery);
+                        DataTable dtInvoiceDetails = await DatabaseAccess.RetriveAsync(subquery);
                         if (dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
                         {
                             this.Close();
                             SaleReturnInvoice saleReturnInvoice = new SaleReturnInvoice(dataInvoice,dtInvoiceDetails);
                             saleReturnInvoice.MdiParent = Application.OpenForms["Dashboard"];
-                            CommonFunction.DisposeOnClose(saleReturnInvoice);
+                            await CommonFunction.DisposeOnCloseAsync(saleReturnInvoice);
                             saleReturnInvoice.Show();
                         }
                     }
@@ -162,7 +162,7 @@ namespace SmartFlow.Sales
                         "FROM InvoiceTable INNER JOIN AccountSubControlTable " +
                         "ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                    DataTable dataInvoice = DatabaseAccess.Retrive(query);
+                    DataTable dataInvoice = await DatabaseAccess.RetriveAsync(query);
 
                     if (dataInvoice.Rows.Count > 0)
                     {
@@ -176,13 +176,13 @@ namespace SmartFlow.Sales
                             "InvoiceDetailsTable.MinusInventory, UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
                             "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
-                        DataTable dtInvoiceDetails = DatabaseAccess.Retrive(subquery);
+                        DataTable dtInvoiceDetails = await DatabaseAccess.RetriveAsync(subquery);
                         if (dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
                         {
                             this.Close();
                             SaleReturnInvoice saleReturnInvoice = new SaleReturnInvoice(dataInvoice, dtInvoiceDetails);
                             saleReturnInvoice.MdiParent = Application.OpenForms["Dashboard"];
-                            CommonFunction.DisposeOnClose(saleReturnInvoice);
+                            await CommonFunction.DisposeOnCloseAsync(saleReturnInvoice);
                             saleReturnInvoice.Show();
                         }
                     }
@@ -244,7 +244,7 @@ namespace SmartFlow.Sales
             }
         }
 
-        private void invoicenotxtbox_Leave(object sender, EventArgs e)
+        private async void invoicenotxtbox_Leave(object sender, EventArgs e)
         {
             try
             {
@@ -260,7 +260,7 @@ namespace SmartFlow.Sales
             { "@InvoiceNo", userinput }
         };
 
-                    DataTable invoiceData = DatabaseAccess.Retrive(query, parameters);
+                    DataTable invoiceData = await DatabaseAccess.RetriveAsync(query, parameters);
 
                     if (invoiceData.Rows.Count > 0)
                     {

@@ -41,6 +41,24 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.addbtn = new System.Windows.Forms.Button();
             this.dgvpurchaseproducts = new System.Windows.Forms.DataGridView();
+            this.srnocolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mfrcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salepricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discountcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vatcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.warehouseidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemdescriptioncolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lengthinmetercolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pricepermetercolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.costpricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.eDITToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.qtytxtbox = new System.Windows.Forms.TextBox();
             this.selectproducttxtbox = new System.Windows.Forms.TextBox();
             this.codelbl = new System.Windows.Forms.Label();
@@ -95,25 +113,11 @@
             this.currencystringlbl = new System.Windows.Forms.Label();
             this.currencynamelbl = new System.Windows.Forms.Label();
             this.currencyconversionratelbl = new System.Windows.Forms.Label();
-            this.mfrcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qtycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.salepricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discountcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vatcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.warehouseidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemdescriptioncolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lengthinmetercolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pricepermetercolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.costpricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.shippinginfotab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpurchaseproducts)).BeginInit();
+            this.contextMenuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.suppliersearchresult)).BeginInit();
@@ -128,20 +132,21 @@
             this.invoicenotxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.invoicenotxtbox.Enabled = false;
             this.invoicenotxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoicenotxtbox.Location = new System.Drawing.Point(215, 6);
-            this.invoicenotxtbox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.invoicenotxtbox.Location = new System.Drawing.Point(161, 5);
+            this.invoicenotxtbox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.invoicenotxtbox.Name = "invoicenotxtbox";
-            this.invoicenotxtbox.Size = new System.Drawing.Size(204, 32);
+            this.invoicenotxtbox.ReadOnly = true;
+            this.invoicenotxtbox.Size = new System.Drawing.Size(154, 27);
             this.invoicenotxtbox.TabIndex = 44;
             // 
             // invoicedatelbl
             // 
             this.invoicedatelbl.AutoSize = true;
             this.invoicedatelbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoicedatelbl.Location = new System.Drawing.Point(437, 11);
-            this.invoicedatelbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.invoicedatelbl.Location = new System.Drawing.Point(328, 9);
+            this.invoicedatelbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.invoicedatelbl.Name = "invoicedatelbl";
-            this.invoicedatelbl.Size = new System.Drawing.Size(106, 23);
+            this.invoicedatelbl.Size = new System.Drawing.Size(85, 18);
             this.invoicedatelbl.TabIndex = 46;
             this.invoicedatelbl.Text = "Invoice Date";
             // 
@@ -149,10 +154,10 @@
             // 
             this.suppliercodenamelbl.AutoSize = true;
             this.suppliercodenamelbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.suppliercodenamelbl.Location = new System.Drawing.Point(11, 49);
-            this.suppliercodenamelbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.suppliercodenamelbl.Location = new System.Drawing.Point(8, 40);
+            this.suppliercodenamelbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.suppliercodenamelbl.Name = "suppliercodenamelbl";
-            this.suppliercodenamelbl.Size = new System.Drawing.Size(168, 23);
+            this.suppliercodenamelbl.Size = new System.Drawing.Size(138, 18);
             this.suppliercodenamelbl.TabIndex = 47;
             this.suppliercodenamelbl.Text = "Supplier Code/Name";
             // 
@@ -160,10 +165,10 @@
             // 
             this.invoicenoreflbl.AutoSize = true;
             this.invoicenoreflbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoicenoreflbl.Location = new System.Drawing.Point(11, 87);
-            this.invoicenoreflbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.invoicenoreflbl.Location = new System.Drawing.Point(8, 71);
+            this.invoicenoreflbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.invoicenoreflbl.Name = "invoicenoreflbl";
-            this.invoicenoreflbl.Size = new System.Drawing.Size(133, 23);
+            this.invoicenoreflbl.Size = new System.Drawing.Size(108, 18);
             this.invoicenoreflbl.TabIndex = 48;
             this.invoicenoreflbl.Text = "Invoice No (Ref)";
             // 
@@ -172,20 +177,21 @@
             this.codetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.codetxtbox.Enabled = false;
             this.codetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.codetxtbox.Location = new System.Drawing.Point(215, 44);
-            this.codetxtbox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.codetxtbox.Location = new System.Drawing.Point(161, 36);
+            this.codetxtbox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.codetxtbox.Name = "codetxtbox";
-            this.codetxtbox.Size = new System.Drawing.Size(204, 32);
+            this.codetxtbox.ReadOnly = true;
+            this.codetxtbox.Size = new System.Drawing.Size(154, 27);
             this.codetxtbox.TabIndex = 50;
             // 
             // invoicerefrencetxtbox
             // 
             this.invoicerefrencetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.invoicerefrencetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoicerefrencetxtbox.Location = new System.Drawing.Point(215, 82);
-            this.invoicerefrencetxtbox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.invoicerefrencetxtbox.Location = new System.Drawing.Point(161, 67);
+            this.invoicerefrencetxtbox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.invoicerefrencetxtbox.Name = "invoicerefrencetxtbox";
-            this.invoicerefrencetxtbox.Size = new System.Drawing.Size(204, 32);
+            this.invoicerefrencetxtbox.Size = new System.Drawing.Size(154, 27);
             this.invoicerefrencetxtbox.TabIndex = 51;
             // 
             // shippinginfotab
@@ -196,11 +202,11 @@
             this.shippinginfotab.Controls.Add(this.tabPage1);
             this.shippinginfotab.Controls.Add(this.tabPage2);
             this.shippinginfotab.Font = new System.Drawing.Font("Calibri", 11F);
-            this.shippinginfotab.Location = new System.Drawing.Point(0, 236);
-            this.shippinginfotab.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.shippinginfotab.Location = new System.Drawing.Point(0, 180);
+            this.shippinginfotab.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.shippinginfotab.Name = "shippinginfotab";
             this.shippinginfotab.SelectedIndex = 0;
-            this.shippinginfotab.Size = new System.Drawing.Size(1768, 461);
+            this.shippinginfotab.Size = new System.Drawing.Size(1326, 387);
             this.shippinginfotab.TabIndex = 60;
             // 
             // tabPage1
@@ -214,11 +220,11 @@
             this.tabPage1.Controls.Add(this.productnamelbl);
             this.tabPage1.Controls.Add(this.qtylbl);
             this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 31);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.tabPage1.Location = new System.Drawing.Point(4, 27);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.tabPage1.Size = new System.Drawing.Size(1760, 426);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.tabPage1.Size = new System.Drawing.Size(1318, 356);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Product Detail";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -226,9 +232,10 @@
             // addbtn
             // 
             this.addbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addbtn.Location = new System.Drawing.Point(1637, 31);
+            this.addbtn.Location = new System.Drawing.Point(1228, 25);
+            this.addbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.addbtn.Name = "addbtn";
-            this.addbtn.Size = new System.Drawing.Size(112, 32);
+            this.addbtn.Size = new System.Drawing.Size(84, 26);
             this.addbtn.TabIndex = 38;
             this.addbtn.Text = "ADD";
             this.addbtn.UseVisualStyleBackColor = true;
@@ -250,6 +257,7 @@
             this.dgvpurchaseproducts.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvpurchaseproducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvpurchaseproducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.srnocolumn,
             this.mfrcolumn,
             this.productidcolumn,
             this.productnamecolumn,
@@ -265,20 +273,173 @@
             this.lengthinmetercolumn,
             this.pricepermetercolumn,
             this.costpricecolumn});
+            this.dgvpurchaseproducts.ContextMenuStrip = this.contextMenuStrip;
             this.dgvpurchaseproducts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvpurchaseproducts.Location = new System.Drawing.Point(3, 69);
-            this.dgvpurchaseproducts.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.dgvpurchaseproducts.Location = new System.Drawing.Point(2, 56);
+            this.dgvpurchaseproducts.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.dgvpurchaseproducts.Name = "dgvpurchaseproducts";
+            this.dgvpurchaseproducts.ReadOnly = true;
             this.dgvpurchaseproducts.RowHeadersVisible = false;
             this.dgvpurchaseproducts.RowHeadersWidth = 51;
             this.dgvpurchaseproducts.RowTemplate.Height = 24;
             this.dgvpurchaseproducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvpurchaseproducts.Size = new System.Drawing.Size(1755, 355);
+            this.dgvpurchaseproducts.Size = new System.Drawing.Size(1316, 300);
             this.dgvpurchaseproducts.TabIndex = 2;
-            this.dgvpurchaseproducts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvpurchaseproducts_CellDoubleClick);
+            this.dgvpurchaseproducts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvpurchaseproducts_CellFormatting);
             this.dgvpurchaseproducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvpurchaseproducts_CellValueChanged);
             this.dgvpurchaseproducts.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvpurchaseproducts_RowsAdded);
             this.dgvpurchaseproducts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvpurchaseproducts_RowsRemoved);
+            this.dgvpurchaseproducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvpurchaseproducts_KeyDown);
+            // 
+            // srnocolumn
+            // 
+            this.srnocolumn.HeaderText = "#";
+            this.srnocolumn.MinimumWidth = 6;
+            this.srnocolumn.Name = "srnocolumn";
+            this.srnocolumn.ReadOnly = true;
+            this.srnocolumn.Width = 40;
+            // 
+            // mfrcolumn
+            // 
+            this.mfrcolumn.HeaderText = "MFR";
+            this.mfrcolumn.MinimumWidth = 6;
+            this.mfrcolumn.Name = "mfrcolumn";
+            this.mfrcolumn.ReadOnly = true;
+            this.mfrcolumn.Width = 125;
+            // 
+            // productidcolumn
+            // 
+            this.productidcolumn.HeaderText = "ID";
+            this.productidcolumn.MinimumWidth = 6;
+            this.productidcolumn.Name = "productidcolumn";
+            this.productidcolumn.ReadOnly = true;
+            this.productidcolumn.Visible = false;
+            this.productidcolumn.Width = 125;
+            // 
+            // productnamecolumn
+            // 
+            this.productnamecolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.productnamecolumn.HeaderText = "Product Name";
+            this.productnamecolumn.MinimumWidth = 6;
+            this.productnamecolumn.Name = "productnamecolumn";
+            this.productnamecolumn.ReadOnly = true;
+            // 
+            // qtycolumn
+            // 
+            this.qtycolumn.HeaderText = "Qty";
+            this.qtycolumn.MinimumWidth = 6;
+            this.qtycolumn.Name = "qtycolumn";
+            this.qtycolumn.ReadOnly = true;
+            this.qtycolumn.Width = 125;
+            // 
+            // unitidcolumn
+            // 
+            this.unitidcolumn.HeaderText = "unitid";
+            this.unitidcolumn.MinimumWidth = 6;
+            this.unitidcolumn.Name = "unitidcolumn";
+            this.unitidcolumn.ReadOnly = true;
+            this.unitidcolumn.Visible = false;
+            this.unitidcolumn.Width = 125;
+            // 
+            // unitnamecolumn
+            // 
+            this.unitnamecolumn.HeaderText = "Unit";
+            this.unitnamecolumn.MinimumWidth = 6;
+            this.unitnamecolumn.Name = "unitnamecolumn";
+            this.unitnamecolumn.ReadOnly = true;
+            this.unitnamecolumn.Width = 125;
+            // 
+            // salepricecolumn
+            // 
+            this.salepricecolumn.HeaderText = "Price";
+            this.salepricecolumn.MinimumWidth = 6;
+            this.salepricecolumn.Name = "salepricecolumn";
+            this.salepricecolumn.ReadOnly = true;
+            this.salepricecolumn.Width = 125;
+            // 
+            // discountcolumn
+            // 
+            this.discountcolumn.HeaderText = "Diss";
+            this.discountcolumn.MinimumWidth = 6;
+            this.discountcolumn.Name = "discountcolumn";
+            this.discountcolumn.ReadOnly = true;
+            this.discountcolumn.Width = 125;
+            // 
+            // vatcolumn
+            // 
+            this.vatcolumn.HeaderText = "VAT";
+            this.vatcolumn.MinimumWidth = 6;
+            this.vatcolumn.Name = "vatcolumn";
+            this.vatcolumn.ReadOnly = true;
+            this.vatcolumn.Width = 125;
+            // 
+            // totalcolumn
+            // 
+            this.totalcolumn.HeaderText = "Total";
+            this.totalcolumn.MinimumWidth = 6;
+            this.totalcolumn.Name = "totalcolumn";
+            this.totalcolumn.ReadOnly = true;
+            this.totalcolumn.Width = 125;
+            // 
+            // warehouseidcolumn
+            // 
+            this.warehouseidcolumn.HeaderText = "warehouseid";
+            this.warehouseidcolumn.MinimumWidth = 6;
+            this.warehouseidcolumn.Name = "warehouseidcolumn";
+            this.warehouseidcolumn.ReadOnly = true;
+            this.warehouseidcolumn.Visible = false;
+            this.warehouseidcolumn.Width = 125;
+            // 
+            // itemdescriptioncolumn
+            // 
+            this.itemdescriptioncolumn.HeaderText = "itemdescription";
+            this.itemdescriptioncolumn.MinimumWidth = 6;
+            this.itemdescriptioncolumn.Name = "itemdescriptioncolumn";
+            this.itemdescriptioncolumn.ReadOnly = true;
+            this.itemdescriptioncolumn.Visible = false;
+            this.itemdescriptioncolumn.Width = 125;
+            // 
+            // lengthinmetercolumn
+            // 
+            this.lengthinmetercolumn.HeaderText = "lengthinmeter";
+            this.lengthinmetercolumn.MinimumWidth = 6;
+            this.lengthinmetercolumn.Name = "lengthinmetercolumn";
+            this.lengthinmetercolumn.ReadOnly = true;
+            this.lengthinmetercolumn.Visible = false;
+            this.lengthinmetercolumn.Width = 125;
+            // 
+            // pricepermetercolumn
+            // 
+            this.pricepermetercolumn.HeaderText = "pricepermeter";
+            this.pricepermetercolumn.MinimumWidth = 6;
+            this.pricepermetercolumn.Name = "pricepermetercolumn";
+            this.pricepermetercolumn.ReadOnly = true;
+            this.pricepermetercolumn.Visible = false;
+            this.pricepermetercolumn.Width = 125;
+            // 
+            // costpricecolumn
+            // 
+            this.costpricecolumn.HeaderText = "costprice";
+            this.costpricecolumn.MinimumWidth = 6;
+            this.costpricecolumn.Name = "costpricecolumn";
+            this.costpricecolumn.ReadOnly = true;
+            this.costpricecolumn.Visible = false;
+            this.costpricecolumn.Width = 125;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.eDITToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(99, 26);
+            // 
+            // eDITToolStripMenuItem
+            // 
+            this.eDITToolStripMenuItem.Name = "eDITToolStripMenuItem";
+            this.eDITToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.eDITToolStripMenuItem.Text = "EDIT";
+            this.eDITToolStripMenuItem.Click += new System.EventHandler(this.eDITToolStripMenuItem_Click);
             // 
             // qtytxtbox
             // 
@@ -286,9 +447,10 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.qtytxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.qtytxtbox.Font = new System.Drawing.Font("Calibri", 12F);
-            this.qtytxtbox.Location = new System.Drawing.Point(604, 31);
+            this.qtytxtbox.Location = new System.Drawing.Point(453, 25);
+            this.qtytxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.qtytxtbox.Name = "qtytxtbox";
-            this.qtytxtbox.Size = new System.Drawing.Size(154, 32);
+            this.qtytxtbox.Size = new System.Drawing.Size(116, 27);
             this.qtytxtbox.TabIndex = 33;
             this.qtytxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.qtytxtbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.qtytxtbox_KeyPress);
@@ -300,10 +462,11 @@
             this.selectproducttxtbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.selectproducttxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.selectproducttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectproducttxtbox.Location = new System.Drawing.Point(194, 31);
-            this.selectproducttxtbox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.selectproducttxtbox.Location = new System.Drawing.Point(146, 25);
+            this.selectproducttxtbox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.selectproducttxtbox.Name = "selectproducttxtbox";
-            this.selectproducttxtbox.Size = new System.Drawing.Size(402, 32);
+            this.selectproducttxtbox.ReadOnly = true;
+            this.selectproducttxtbox.Size = new System.Drawing.Size(302, 27);
             this.selectproducttxtbox.TabIndex = 19;
             this.selectproducttxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectproducttxtbox_MouseClick);
             this.selectproducttxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.selectproducttxtbox_KeyDown);
@@ -312,10 +475,10 @@
             // 
             this.codelbl.AutoSize = true;
             this.codelbl.Font = new System.Drawing.Font("Calibri", 11F);
-            this.codelbl.Location = new System.Drawing.Point(10, 7);
-            this.codelbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.codelbl.Location = new System.Drawing.Point(8, 6);
+            this.codelbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.codelbl.Name = "codelbl";
-            this.codelbl.Size = new System.Drawing.Size(95, 23);
+            this.codelbl.Size = new System.Drawing.Size(76, 18);
             this.codelbl.TabIndex = 0;
             this.codelbl.Text = "Code / SKU";
             // 
@@ -324,20 +487,21 @@
             this.mfrtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mfrtxtbox.Enabled = false;
             this.mfrtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mfrtxtbox.Location = new System.Drawing.Point(10, 31);
-            this.mfrtxtbox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.mfrtxtbox.Location = new System.Drawing.Point(8, 25);
+            this.mfrtxtbox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.mfrtxtbox.Name = "mfrtxtbox";
-            this.mfrtxtbox.Size = new System.Drawing.Size(178, 32);
+            this.mfrtxtbox.ReadOnly = true;
+            this.mfrtxtbox.Size = new System.Drawing.Size(134, 27);
             this.mfrtxtbox.TabIndex = 9;
             // 
             // productnamelbl
             // 
             this.productnamelbl.AutoSize = true;
             this.productnamelbl.Font = new System.Drawing.Font("Calibri", 11F);
-            this.productnamelbl.Location = new System.Drawing.Point(194, 7);
-            this.productnamelbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.productnamelbl.Location = new System.Drawing.Point(146, 6);
+            this.productnamelbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.productnamelbl.Name = "productnamelbl";
-            this.productnamelbl.Size = new System.Drawing.Size(120, 23);
+            this.productnamelbl.Size = new System.Drawing.Size(96, 18);
             this.productnamelbl.TabIndex = 1;
             this.productnamelbl.Text = "Product Name";
             // 
@@ -347,19 +511,20 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.qtylbl.AutoSize = true;
             this.qtylbl.Font = new System.Drawing.Font("Calibri", 11F);
-            this.qtylbl.Location = new System.Drawing.Point(600, 7);
-            this.qtylbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.qtylbl.Location = new System.Drawing.Point(450, 6);
+            this.qtylbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.qtylbl.Name = "qtylbl";
-            this.qtylbl.Size = new System.Drawing.Size(41, 23);
+            this.qtylbl.Size = new System.Drawing.Size(32, 18);
             this.qtylbl.TabIndex = 3;
             this.qtylbl.Text = "QTY";
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 31);
+            this.tabPage2.Location = new System.Drawing.Point(4, 27);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1760, 426);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Size = new System.Drawing.Size(1318, 344);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Shipping Info";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -367,10 +532,10 @@
             // warehouseidlbl
             // 
             this.warehouseidlbl.AutoSize = true;
-            this.warehouseidlbl.Location = new System.Drawing.Point(285, 123);
-            this.warehouseidlbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.warehouseidlbl.Location = new System.Drawing.Point(214, 100);
+            this.warehouseidlbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.warehouseidlbl.Name = "warehouseidlbl";
-            this.warehouseidlbl.Size = new System.Drawing.Size(84, 16);
+            this.warehouseidlbl.Size = new System.Drawing.Size(67, 13);
             this.warehouseidlbl.TabIndex = 19;
             this.warehouseidlbl.Text = "warehouseid";
             this.warehouseidlbl.Visible = false;
@@ -380,10 +545,10 @@
             this.newbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.newbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.newbtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newbtn.Location = new System.Drawing.Point(1441, 702);
-            this.newbtn.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.newbtn.Location = new System.Drawing.Point(1081, 570);
+            this.newbtn.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.newbtn.Name = "newbtn";
-            this.newbtn.Size = new System.Drawing.Size(160, 55);
+            this.newbtn.Size = new System.Drawing.Size(120, 45);
             this.newbtn.TabIndex = 63;
             this.newbtn.Text = "NEW";
             this.newbtn.UseVisualStyleBackColor = true;
@@ -394,10 +559,10 @@
             this.savebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.savebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.savebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.savebtn.Location = new System.Drawing.Point(1608, 702);
-            this.savebtn.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.savebtn.Location = new System.Drawing.Point(1206, 570);
+            this.savebtn.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.savebtn.Name = "savebtn";
-            this.savebtn.Size = new System.Drawing.Size(160, 55);
+            this.savebtn.Size = new System.Drawing.Size(120, 45);
             this.savebtn.TabIndex = 70;
             this.savebtn.Text = "SAVE && PRINT";
             this.savebtn.UseVisualStyleBackColor = true;
@@ -408,9 +573,9 @@
             this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1768, 45);
+            this.panel1.Size = new System.Drawing.Size(1326, 37);
             this.panel1.TabIndex = 71;
             // 
             // headinglbl
@@ -420,9 +585,9 @@
             this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
-            this.headinglbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.headinglbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(1768, 45);
+            this.headinglbl.Size = new System.Drawing.Size(1326, 37);
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "PURCHASE INVOICE";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -458,18 +623,19 @@
             this.panel3.Controls.Add(this.invoicenoreflbl);
             this.panel3.Controls.Add(this.codetxtbox);
             this.panel3.Controls.Add(this.invoicerefrencetxtbox);
-            this.panel3.Location = new System.Drawing.Point(0, 46);
-            this.panel3.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.panel3.Location = new System.Drawing.Point(0, 37);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1263, 146);
+            this.panel3.Size = new System.Drawing.Size(947, 119);
             this.panel3.TabIndex = 73;
             // 
             // itemsalepricelbl
             // 
             this.itemsalepricelbl.AutoSize = true;
-            this.itemsalepricelbl.Location = new System.Drawing.Point(12, 117);
+            this.itemsalepricelbl.Location = new System.Drawing.Point(9, 95);
+            this.itemsalepricelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.itemsalepricelbl.Name = "itemsalepricelbl";
-            this.itemsalepricelbl.Size = new System.Drawing.Size(102, 16);
+            this.itemsalepricelbl.Size = new System.Drawing.Size(78, 13);
             this.itemsalepricelbl.TabIndex = 141;
             this.itemsalepricelbl.Text = "itemsalepricelbl";
             this.itemsalepricelbl.Visible = false;
@@ -477,9 +643,10 @@
             // lowestpricelbl
             // 
             this.lowestpricelbl.AutoSize = true;
-            this.lowestpricelbl.Location = new System.Drawing.Point(1129, 110);
+            this.lowestpricelbl.Location = new System.Drawing.Point(847, 89);
+            this.lowestpricelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lowestpricelbl.Name = "lowestpricelbl";
-            this.lowestpricelbl.Size = new System.Drawing.Size(89, 16);
+            this.lowestpricelbl.Size = new System.Drawing.Size(70, 13);
             this.lowestpricelbl.TabIndex = 140;
             this.lowestpricelbl.Text = "lowestpricelbl";
             this.lowestpricelbl.Visible = false;
@@ -487,9 +654,10 @@
             // standardpricelbl
             // 
             this.standardpricelbl.AutoSize = true;
-            this.standardpricelbl.Location = new System.Drawing.Point(1129, 94);
+            this.standardpricelbl.Location = new System.Drawing.Point(847, 76);
+            this.standardpricelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.standardpricelbl.Name = "standardpricelbl";
-            this.standardpricelbl.Size = new System.Drawing.Size(104, 16);
+            this.standardpricelbl.Size = new System.Drawing.Size(81, 13);
             this.standardpricelbl.TabIndex = 139;
             this.standardpricelbl.Text = "standardpricelbl";
             this.standardpricelbl.Visible = false;
@@ -497,9 +665,10 @@
             // costpricelbl
             // 
             this.costpricelbl.AutoSize = true;
-            this.costpricelbl.Location = new System.Drawing.Point(1129, 76);
+            this.costpricelbl.Location = new System.Drawing.Point(847, 62);
+            this.costpricelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.costpricelbl.Name = "costpricelbl";
-            this.costpricelbl.Size = new System.Drawing.Size(76, 16);
+            this.costpricelbl.Size = new System.Drawing.Size(60, 13);
             this.costpricelbl.TabIndex = 138;
             this.costpricelbl.Text = "costpricelbl";
             this.costpricelbl.Visible = false;
@@ -507,9 +676,10 @@
             // productvatlbl
             // 
             this.productvatlbl.AutoSize = true;
-            this.productvatlbl.Location = new System.Drawing.Point(1131, 57);
+            this.productvatlbl.Location = new System.Drawing.Point(848, 46);
+            this.productvatlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.productvatlbl.Name = "productvatlbl";
-            this.productvatlbl.Size = new System.Drawing.Size(84, 16);
+            this.productvatlbl.Size = new System.Drawing.Size(68, 13);
             this.productvatlbl.TabIndex = 137;
             this.productvatlbl.Text = "productvatlbl";
             this.productvatlbl.Visible = false;
@@ -517,9 +687,10 @@
             // productdiscountlbl
             // 
             this.productdiscountlbl.AutoSize = true;
-            this.productdiscountlbl.Location = new System.Drawing.Point(1129, 39);
+            this.productdiscountlbl.Location = new System.Drawing.Point(847, 32);
+            this.productdiscountlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.productdiscountlbl.Name = "productdiscountlbl";
-            this.productdiscountlbl.Size = new System.Drawing.Size(116, 16);
+            this.productdiscountlbl.Size = new System.Drawing.Size(93, 13);
             this.productdiscountlbl.TabIndex = 136;
             this.productdiscountlbl.Text = "productdiscountlbl";
             this.productdiscountlbl.Visible = false;
@@ -527,9 +698,10 @@
             // unitidlbl
             // 
             this.unitidlbl.AutoSize = true;
-            this.unitidlbl.Location = new System.Drawing.Point(1129, 22);
+            this.unitidlbl.Location = new System.Drawing.Point(847, 18);
+            this.unitidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.unitidlbl.Name = "unitidlbl";
-            this.unitidlbl.Size = new System.Drawing.Size(52, 16);
+            this.unitidlbl.Size = new System.Drawing.Size(42, 13);
             this.unitidlbl.TabIndex = 135;
             this.unitidlbl.Text = "unitidlbl";
             this.unitidlbl.Visible = false;
@@ -537,9 +709,10 @@
             // unitnamelbl
             // 
             this.unitnamelbl.AutoSize = true;
-            this.unitnamelbl.Location = new System.Drawing.Point(1129, 6);
+            this.unitnamelbl.Location = new System.Drawing.Point(847, 5);
+            this.unitnamelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.unitnamelbl.Name = "unitnamelbl";
-            this.unitnamelbl.Size = new System.Drawing.Size(75, 16);
+            this.unitnamelbl.Size = new System.Drawing.Size(60, 13);
             this.unitnamelbl.TabIndex = 134;
             this.unitnamelbl.Text = "unitnamelbl";
             this.unitnamelbl.Visible = false;
@@ -547,9 +720,10 @@
             // totalcolumnlbl
             // 
             this.totalcolumnlbl.AutoSize = true;
-            this.totalcolumnlbl.Location = new System.Drawing.Point(1004, 121);
+            this.totalcolumnlbl.Location = new System.Drawing.Point(753, 98);
+            this.totalcolumnlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.totalcolumnlbl.Name = "totalcolumnlbl";
-            this.totalcolumnlbl.Size = new System.Drawing.Size(89, 16);
+            this.totalcolumnlbl.Size = new System.Drawing.Size(71, 13);
             this.totalcolumnlbl.TabIndex = 133;
             this.totalcolumnlbl.Text = "totalcolumnlbl";
             this.totalcolumnlbl.Visible = false;
@@ -557,9 +731,10 @@
             // lengthinmeterlbl
             // 
             this.lengthinmeterlbl.AutoSize = true;
-            this.lengthinmeterlbl.Location = new System.Drawing.Point(897, 121);
+            this.lengthinmeterlbl.Location = new System.Drawing.Point(673, 98);
+            this.lengthinmeterlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lengthinmeterlbl.Name = "lengthinmeterlbl";
-            this.lengthinmeterlbl.Size = new System.Drawing.Size(101, 16);
+            this.lengthinmeterlbl.Size = new System.Drawing.Size(80, 13);
             this.lengthinmeterlbl.TabIndex = 132;
             this.lengthinmeterlbl.Text = "lengthinmeterlbl";
             this.lengthinmeterlbl.Visible = false;
@@ -567,9 +742,10 @@
             // pricepermeterlbl
             // 
             this.pricepermeterlbl.AutoSize = true;
-            this.pricepermeterlbl.Location = new System.Drawing.Point(786, 121);
+            this.pricepermeterlbl.Location = new System.Drawing.Point(590, 98);
+            this.pricepermeterlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.pricepermeterlbl.Name = "pricepermeterlbl";
-            this.pricepermeterlbl.Size = new System.Drawing.Size(105, 16);
+            this.pricepermeterlbl.Size = new System.Drawing.Size(81, 13);
             this.pricepermeterlbl.TabIndex = 131;
             this.pricepermeterlbl.Text = "pricepermeterlbl";
             this.pricepermeterlbl.Visible = false;
@@ -577,9 +753,10 @@
             // unitsalepricelbl
             // 
             this.unitsalepricelbl.AutoSize = true;
-            this.unitsalepricelbl.Location = new System.Drawing.Point(683, 121);
+            this.unitsalepricelbl.Location = new System.Drawing.Point(512, 98);
+            this.unitsalepricelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.unitsalepricelbl.Name = "unitsalepricelbl";
-            this.unitsalepricelbl.Size = new System.Drawing.Size(97, 16);
+            this.unitsalepricelbl.Size = new System.Drawing.Size(76, 13);
             this.unitsalepricelbl.TabIndex = 130;
             this.unitsalepricelbl.Text = "unitsalepricelbl";
             this.unitsalepricelbl.Visible = false;
@@ -587,9 +764,10 @@
             // itemdescriptionlbl
             // 
             this.itemdescriptionlbl.AutoSize = true;
-            this.itemdescriptionlbl.Location = new System.Drawing.Point(565, 121);
+            this.itemdescriptionlbl.Location = new System.Drawing.Point(424, 98);
+            this.itemdescriptionlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.itemdescriptionlbl.Name = "itemdescriptionlbl";
-            this.itemdescriptionlbl.Size = new System.Drawing.Size(112, 16);
+            this.itemdescriptionlbl.Size = new System.Drawing.Size(87, 13);
             this.itemdescriptionlbl.TabIndex = 129;
             this.itemdescriptionlbl.Text = "itemdescriptionlbl";
             this.itemdescriptionlbl.Visible = false;
@@ -601,27 +779,31 @@
             this.companytxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.companytxtbox.Enabled = false;
             this.companytxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.companytxtbox.Location = new System.Drawing.Point(553, 82);
+            this.companytxtbox.Location = new System.Drawing.Point(415, 67);
+            this.companytxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.companytxtbox.Name = "companytxtbox";
-            this.companytxtbox.Size = new System.Drawing.Size(570, 32);
+            this.companytxtbox.ReadOnly = true;
+            this.companytxtbox.Size = new System.Drawing.Size(428, 27);
             this.companytxtbox.TabIndex = 128;
             // 
             // companylbl
             // 
             this.companylbl.AutoSize = true;
             this.companylbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.companylbl.Location = new System.Drawing.Point(429, 87);
+            this.companylbl.Location = new System.Drawing.Point(322, 71);
+            this.companylbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.companylbl.Name = "companylbl";
-            this.companylbl.Size = new System.Drawing.Size(83, 23);
+            this.companylbl.Size = new System.Drawing.Size(66, 18);
             this.companylbl.TabIndex = 127;
             this.companylbl.Text = "Company";
             // 
             // invoicecodelbl
             // 
             this.invoicecodelbl.AutoSize = true;
-            this.invoicecodelbl.Location = new System.Drawing.Point(464, 121);
+            this.invoicecodelbl.Location = new System.Drawing.Point(348, 98);
+            this.invoicecodelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.invoicecodelbl.Name = "invoicecodelbl";
-            this.invoicecodelbl.Size = new System.Drawing.Size(95, 16);
+            this.invoicecodelbl.Size = new System.Drawing.Size(75, 13);
             this.invoicecodelbl.TabIndex = 126;
             this.invoicecodelbl.Text = "invoicecodelbl";
             this.invoicecodelbl.Visible = false;
@@ -629,9 +811,10 @@
             // supplieridlbl
             // 
             this.supplieridlbl.AutoSize = true;
-            this.supplieridlbl.Location = new System.Drawing.Point(377, 123);
+            this.supplieridlbl.Location = new System.Drawing.Point(283, 100);
+            this.supplieridlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.supplieridlbl.Name = "supplieridlbl";
-            this.supplieridlbl.Size = new System.Drawing.Size(80, 16);
+            this.supplieridlbl.Size = new System.Drawing.Size(61, 13);
             this.supplieridlbl.TabIndex = 115;
             this.supplieridlbl.Text = "supplieridlbl";
             this.supplieridlbl.Visible = false;
@@ -640,21 +823,21 @@
             // 
             this.invoicedatetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.invoicedatetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoicedatetxtbox.Location = new System.Drawing.Point(553, 6);
-            this.invoicedatetxtbox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.invoicedatetxtbox.Location = new System.Drawing.Point(415, 5);
+            this.invoicedatetxtbox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.invoicedatetxtbox.Mask = "00/00/0000";
             this.invoicedatetxtbox.Name = "invoicedatetxtbox";
-            this.invoicedatetxtbox.Size = new System.Drawing.Size(570, 32);
+            this.invoicedatetxtbox.Size = new System.Drawing.Size(428, 27);
             this.invoicedatetxtbox.TabIndex = 114;
             this.invoicedatetxtbox.ValidatingType = typeof(System.DateTime);
             // 
             // productidlbl
             // 
             this.productidlbl.AutoSize = true;
-            this.productidlbl.Location = new System.Drawing.Point(212, 123);
-            this.productidlbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.productidlbl.Location = new System.Drawing.Point(159, 100);
+            this.productidlbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.productidlbl.Name = "productidlbl";
-            this.productidlbl.Size = new System.Drawing.Size(63, 16);
+            this.productidlbl.Size = new System.Drawing.Size(51, 13);
             this.productidlbl.TabIndex = 75;
             this.productidlbl.Text = "productid";
             this.productidlbl.Visible = false;
@@ -671,13 +854,13 @@
             this.suppliersearchresult.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.suppliername});
-            this.suppliersearchresult.Location = new System.Drawing.Point(426, 73);
-            this.suppliersearchresult.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.suppliersearchresult.Location = new System.Drawing.Point(320, 59);
+            this.suppliersearchresult.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.suppliersearchresult.Name = "suppliersearchresult";
             this.suppliersearchresult.RowHeadersVisible = false;
             this.suppliersearchresult.RowHeadersWidth = 51;
             this.suppliersearchresult.RowTemplate.Height = 24;
-            this.suppliersearchresult.Size = new System.Drawing.Size(712, 0);
+            this.suppliersearchresult.Size = new System.Drawing.Size(534, 0);
             this.suppliersearchresult.TabIndex = 74;
             // 
             // id
@@ -702,10 +885,11 @@
             this.selectsuppliertxtbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.selectsuppliertxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.selectsuppliertxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectsuppliertxtbox.Location = new System.Drawing.Point(429, 44);
-            this.selectsuppliertxtbox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.selectsuppliertxtbox.Location = new System.Drawing.Point(322, 36);
+            this.selectsuppliertxtbox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.selectsuppliertxtbox.Name = "selectsuppliertxtbox";
-            this.selectsuppliertxtbox.Size = new System.Drawing.Size(694, 32);
+            this.selectsuppliertxtbox.ReadOnly = true;
+            this.selectsuppliertxtbox.Size = new System.Drawing.Size(521, 27);
             this.selectsuppliertxtbox.TabIndex = 73;
             this.selectsuppliertxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectsuppliertxtbox_MouseClick);
             this.selectsuppliertxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.selectsuppliertxtbox_KeyDown);
@@ -714,10 +898,10 @@
             // 
             this.invoicenolbl.AutoSize = true;
             this.invoicenolbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoicenolbl.Location = new System.Drawing.Point(11, 11);
-            this.invoicenolbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.invoicenolbl.Location = new System.Drawing.Point(8, 9);
+            this.invoicenolbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.invoicenolbl.Name = "invoicenolbl";
-            this.invoicenolbl.Size = new System.Drawing.Size(92, 23);
+            this.invoicenolbl.Size = new System.Drawing.Size(74, 18);
             this.invoicenolbl.TabIndex = 45;
             this.invoicenolbl.Text = "Invoice No";
             // 
@@ -727,10 +911,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.totaldiscountlbl.AutoSize = true;
             this.totaldiscountlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totaldiscountlbl.Location = new System.Drawing.Point(1269, 163);
-            this.totaldiscountlbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.totaldiscountlbl.Location = new System.Drawing.Point(952, 132);
+            this.totaldiscountlbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.totaldiscountlbl.Name = "totaldiscountlbl";
-            this.totaldiscountlbl.Size = new System.Drawing.Size(95, 16);
+            this.totaldiscountlbl.Size = new System.Drawing.Size(80, 13);
             this.totaldiscountlbl.TabIndex = 139;
             this.totaldiscountlbl.Text = "TOTAL DISS";
             // 
@@ -740,10 +924,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.totalvatlbl.AutoSize = true;
             this.totalvatlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalvatlbl.Location = new System.Drawing.Point(1269, 129);
-            this.totalvatlbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.totalvatlbl.Location = new System.Drawing.Point(952, 105);
+            this.totalvatlbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.totalvatlbl.Name = "totalvatlbl";
-            this.totalvatlbl.Size = new System.Drawing.Size(90, 16);
+            this.totalvatlbl.Size = new System.Drawing.Size(75, 13);
             this.totalvatlbl.TabIndex = 135;
             this.totalvatlbl.Text = "TOTAL VAT";
             // 
@@ -752,10 +936,10 @@
             this.nettotallbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nettotallbl.AutoSize = true;
             this.nettotallbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nettotallbl.Location = new System.Drawing.Point(1269, 73);
-            this.nettotallbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.nettotallbl.Location = new System.Drawing.Point(952, 59);
+            this.nettotallbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.nettotallbl.Name = "nettotallbl";
-            this.nettotallbl.Size = new System.Drawing.Size(94, 23);
+            this.nettotallbl.Size = new System.Drawing.Size(73, 18);
             this.nettotallbl.TabIndex = 134;
             this.nettotallbl.Text = "NET TOTAL";
             // 
@@ -764,10 +948,10 @@
             this.freightcharges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.freightcharges.AutoSize = true;
             this.freightcharges.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.freightcharges.Location = new System.Drawing.Point(9, 718);
-            this.freightcharges.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.freightcharges.Location = new System.Drawing.Point(7, 583);
+            this.freightcharges.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.freightcharges.Name = "freightcharges";
-            this.freightcharges.Size = new System.Drawing.Size(217, 23);
+            this.freightcharges.Size = new System.Drawing.Size(174, 18);
             this.freightcharges.TabIndex = 140;
             this.freightcharges.Text = "Freight && Shipping Charges";
             // 
@@ -778,9 +962,11 @@
             this.totaldiscounttxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.totaldiscounttxtbox.Enabled = false;
             this.totaldiscounttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totaldiscounttxtbox.Location = new System.Drawing.Point(1378, 153);
+            this.totaldiscounttxtbox.Location = new System.Drawing.Point(1034, 124);
+            this.totaldiscounttxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.totaldiscounttxtbox.Name = "totaldiscounttxtbox";
-            this.totaldiscounttxtbox.Size = new System.Drawing.Size(378, 32);
+            this.totaldiscounttxtbox.ReadOnly = true;
+            this.totaldiscounttxtbox.Size = new System.Drawing.Size(284, 27);
             this.totaldiscounttxtbox.TabIndex = 148;
             this.totaldiscounttxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -791,9 +977,11 @@
             this.totalvattxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.totalvattxtbox.Enabled = false;
             this.totalvattxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalvattxtbox.Location = new System.Drawing.Point(1378, 119);
+            this.totalvattxtbox.Location = new System.Drawing.Point(1034, 97);
+            this.totalvattxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.totalvattxtbox.Name = "totalvattxtbox";
-            this.totalvattxtbox.Size = new System.Drawing.Size(378, 32);
+            this.totalvattxtbox.ReadOnly = true;
+            this.totalvattxtbox.Size = new System.Drawing.Size(284, 27);
             this.totalvattxtbox.TabIndex = 149;
             this.totalvattxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -804,9 +992,11 @@
             this.nettotaltxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.nettotaltxtbox.Enabled = false;
             this.nettotaltxtbox.Font = new System.Drawing.Font("Calibri", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nettotaltxtbox.Location = new System.Drawing.Point(1378, 48);
+            this.nettotaltxtbox.Location = new System.Drawing.Point(1034, 39);
+            this.nettotaltxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nettotaltxtbox.Name = "nettotaltxtbox";
-            this.nettotaltxtbox.Size = new System.Drawing.Size(378, 69);
+            this.nettotaltxtbox.ReadOnly = true;
+            this.nettotaltxtbox.Size = new System.Drawing.Size(284, 56);
             this.nettotaltxtbox.TabIndex = 150;
             this.nettotaltxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -815,10 +1005,10 @@
             this.shipmentreceivedlbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.shipmentreceivedlbl.AutoSize = true;
             this.shipmentreceivedlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.shipmentreceivedlbl.Location = new System.Drawing.Point(643, 718);
-            this.shipmentreceivedlbl.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.shipmentreceivedlbl.Location = new System.Drawing.Point(482, 583);
+            this.shipmentreceivedlbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.shipmentreceivedlbl.Name = "shipmentreceivedlbl";
-            this.shipmentreceivedlbl.Size = new System.Drawing.Size(178, 23);
+            this.shipmentreceivedlbl.Size = new System.Drawing.Size(146, 18);
             this.shipmentreceivedlbl.TabIndex = 151;
             this.shipmentreceivedlbl.Text = "Shipment Received By";
             // 
@@ -829,10 +1019,10 @@
             this.shipmentreceivedbytxtbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.shipmentreceivedbytxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.shipmentreceivedbytxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.shipmentreceivedbytxtbox.Location = new System.Drawing.Point(840, 713);
-            this.shipmentreceivedbytxtbox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.shipmentreceivedbytxtbox.Location = new System.Drawing.Point(630, 579);
+            this.shipmentreceivedbytxtbox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.shipmentreceivedbytxtbox.Name = "shipmentreceivedbytxtbox";
-            this.shipmentreceivedbytxtbox.Size = new System.Drawing.Size(402, 32);
+            this.shipmentreceivedbytxtbox.Size = new System.Drawing.Size(302, 27);
             this.shipmentreceivedbytxtbox.TabIndex = 152;
             // 
             // shippingchargestxtbox
@@ -840,9 +1030,10 @@
             this.shippingchargestxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.shippingchargestxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.shippingchargestxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.shippingchargestxtbox.Location = new System.Drawing.Point(242, 713);
+            this.shippingchargestxtbox.Location = new System.Drawing.Point(182, 579);
+            this.shippingchargestxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.shippingchargestxtbox.Name = "shippingchargestxtbox";
-            this.shippingchargestxtbox.Size = new System.Drawing.Size(378, 32);
+            this.shippingchargestxtbox.Size = new System.Drawing.Size(284, 27);
             this.shippingchargestxtbox.TabIndex = 153;
             this.shippingchargestxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -851,9 +1042,10 @@
             this.removevatchkbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.removevatchkbox.AutoSize = true;
             this.removevatchkbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.removevatchkbox.Location = new System.Drawing.Point(1378, 191);
+            this.removevatchkbox.Location = new System.Drawing.Point(1019, 155);
+            this.removevatchkbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.removevatchkbox.Name = "removevatchkbox";
-            this.removevatchkbox.Size = new System.Drawing.Size(150, 24);
+            this.removevatchkbox.Size = new System.Drawing.Size(127, 21);
             this.removevatchkbox.TabIndex = 155;
             this.removevatchkbox.Text = "REMOVE VAT";
             this.removevatchkbox.UseVisualStyleBackColor = true;
@@ -863,18 +1055,20 @@
             // 
             this.currencylbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.currencylbl.AutoSize = true;
-            this.currencylbl.Location = new System.Drawing.Point(1633, 195);
+            this.currencylbl.Location = new System.Drawing.Point(1225, 158);
+            this.currencylbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.currencylbl.Name = "currencylbl";
-            this.currencylbl.Size = new System.Drawing.Size(120, 16);
+            this.currencylbl.Size = new System.Drawing.Size(98, 13);
             this.currencylbl.TabIndex = 156;
             this.currencylbl.Text = "CURRENCY : AED";
             // 
             // currencyidlbl
             // 
             this.currencyidlbl.AutoSize = true;
-            this.currencyidlbl.Location = new System.Drawing.Point(1636, 215);
+            this.currencyidlbl.Location = new System.Drawing.Point(1227, 175);
+            this.currencyidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.currencyidlbl.Name = "currencyidlbl";
-            this.currencyidlbl.Size = new System.Drawing.Size(83, 16);
+            this.currencyidlbl.Size = new System.Drawing.Size(66, 13);
             this.currencyidlbl.TabIndex = 157;
             this.currencyidlbl.Text = "currencyidlbl";
             this.currencyidlbl.Visible = false;
@@ -882,9 +1076,10 @@
             // currencysymbollbl
             // 
             this.currencysymbollbl.AutoSize = true;
-            this.currencysymbollbl.Location = new System.Drawing.Point(1081, 195);
+            this.currencysymbollbl.Location = new System.Drawing.Point(811, 158);
+            this.currencysymbollbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.currencysymbollbl.Name = "currencysymbollbl";
-            this.currencysymbollbl.Size = new System.Drawing.Size(116, 16);
+            this.currencysymbollbl.Size = new System.Drawing.Size(90, 13);
             this.currencysymbollbl.TabIndex = 158;
             this.currencysymbollbl.Text = "currencysymbollbl";
             this.currencysymbollbl.Visible = false;
@@ -892,9 +1087,10 @@
             // currencystringlbl
             // 
             this.currencystringlbl.AutoSize = true;
-            this.currencystringlbl.Location = new System.Drawing.Point(971, 195);
+            this.currencystringlbl.Location = new System.Drawing.Point(728, 158);
+            this.currencystringlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.currencystringlbl.Name = "currencystringlbl";
-            this.currencystringlbl.Size = new System.Drawing.Size(104, 16);
+            this.currencystringlbl.Size = new System.Drawing.Size(83, 13);
             this.currencystringlbl.TabIndex = 159;
             this.currencystringlbl.Text = "currencystringlbl";
             this.currencystringlbl.Visible = false;
@@ -902,9 +1098,10 @@
             // currencynamelbl
             // 
             this.currencynamelbl.AutoSize = true;
-            this.currencynamelbl.Location = new System.Drawing.Point(859, 195);
+            this.currencynamelbl.Location = new System.Drawing.Point(644, 158);
+            this.currencynamelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.currencynamelbl.Name = "currencynamelbl";
-            this.currencynamelbl.Size = new System.Drawing.Size(106, 16);
+            this.currencynamelbl.Size = new System.Drawing.Size(84, 13);
             this.currencynamelbl.TabIndex = 160;
             this.currencynamelbl.Text = "currencynamelbl";
             this.currencynamelbl.Visible = false;
@@ -912,131 +1109,20 @@
             // currencyconversionratelbl
             // 
             this.currencyconversionratelbl.AutoSize = true;
-            this.currencyconversionratelbl.Location = new System.Drawing.Point(683, 195);
+            this.currencyconversionratelbl.Location = new System.Drawing.Point(512, 158);
+            this.currencyconversionratelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.currencyconversionratelbl.Name = "currencyconversionratelbl";
-            this.currencyconversionratelbl.Size = new System.Drawing.Size(161, 16);
+            this.currencyconversionratelbl.Size = new System.Drawing.Size(128, 13);
             this.currencyconversionratelbl.TabIndex = 161;
             this.currencyconversionratelbl.Text = "currencyconversionratelbl";
             this.currencyconversionratelbl.Visible = false;
             // 
-            // mfrcolumn
-            // 
-            this.mfrcolumn.HeaderText = "MFR";
-            this.mfrcolumn.MinimumWidth = 6;
-            this.mfrcolumn.Name = "mfrcolumn";
-            this.mfrcolumn.Width = 125;
-            // 
-            // productidcolumn
-            // 
-            this.productidcolumn.HeaderText = "ID";
-            this.productidcolumn.MinimumWidth = 6;
-            this.productidcolumn.Name = "productidcolumn";
-            this.productidcolumn.Visible = false;
-            this.productidcolumn.Width = 125;
-            // 
-            // productnamecolumn
-            // 
-            this.productnamecolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.productnamecolumn.HeaderText = "Product Name";
-            this.productnamecolumn.MinimumWidth = 6;
-            this.productnamecolumn.Name = "productnamecolumn";
-            // 
-            // qtycolumn
-            // 
-            this.qtycolumn.HeaderText = "Qty";
-            this.qtycolumn.MinimumWidth = 6;
-            this.qtycolumn.Name = "qtycolumn";
-            this.qtycolumn.Width = 125;
-            // 
-            // unitidcolumn
-            // 
-            this.unitidcolumn.HeaderText = "unitid";
-            this.unitidcolumn.MinimumWidth = 6;
-            this.unitidcolumn.Name = "unitidcolumn";
-            this.unitidcolumn.Visible = false;
-            this.unitidcolumn.Width = 125;
-            // 
-            // unitnamecolumn
-            // 
-            this.unitnamecolumn.HeaderText = "Unit";
-            this.unitnamecolumn.MinimumWidth = 6;
-            this.unitnamecolumn.Name = "unitnamecolumn";
-            this.unitnamecolumn.Width = 125;
-            // 
-            // salepricecolumn
-            // 
-            this.salepricecolumn.HeaderText = "Price";
-            this.salepricecolumn.MinimumWidth = 6;
-            this.salepricecolumn.Name = "salepricecolumn";
-            this.salepricecolumn.Width = 125;
-            // 
-            // discountcolumn
-            // 
-            this.discountcolumn.HeaderText = "Diss";
-            this.discountcolumn.MinimumWidth = 6;
-            this.discountcolumn.Name = "discountcolumn";
-            this.discountcolumn.Width = 125;
-            // 
-            // vatcolumn
-            // 
-            this.vatcolumn.HeaderText = "VAT";
-            this.vatcolumn.MinimumWidth = 6;
-            this.vatcolumn.Name = "vatcolumn";
-            this.vatcolumn.Width = 125;
-            // 
-            // totalcolumn
-            // 
-            this.totalcolumn.HeaderText = "Total";
-            this.totalcolumn.MinimumWidth = 6;
-            this.totalcolumn.Name = "totalcolumn";
-            this.totalcolumn.Width = 125;
-            // 
-            // warehouseidcolumn
-            // 
-            this.warehouseidcolumn.HeaderText = "warehouseid";
-            this.warehouseidcolumn.MinimumWidth = 6;
-            this.warehouseidcolumn.Name = "warehouseidcolumn";
-            this.warehouseidcolumn.Visible = false;
-            this.warehouseidcolumn.Width = 125;
-            // 
-            // itemdescriptioncolumn
-            // 
-            this.itemdescriptioncolumn.HeaderText = "itemdescription";
-            this.itemdescriptioncolumn.MinimumWidth = 6;
-            this.itemdescriptioncolumn.Name = "itemdescriptioncolumn";
-            this.itemdescriptioncolumn.Visible = false;
-            this.itemdescriptioncolumn.Width = 125;
-            // 
-            // lengthinmetercolumn
-            // 
-            this.lengthinmetercolumn.HeaderText = "lengthinmeter";
-            this.lengthinmetercolumn.MinimumWidth = 6;
-            this.lengthinmetercolumn.Name = "lengthinmetercolumn";
-            this.lengthinmetercolumn.Visible = false;
-            this.lengthinmetercolumn.Width = 125;
-            // 
-            // pricepermetercolumn
-            // 
-            this.pricepermetercolumn.HeaderText = "pricepermeter";
-            this.pricepermetercolumn.MinimumWidth = 6;
-            this.pricepermetercolumn.Name = "pricepermetercolumn";
-            this.pricepermetercolumn.Visible = false;
-            this.pricepermetercolumn.Width = 125;
-            // 
-            // costpricecolumn
-            // 
-            this.costpricecolumn.HeaderText = "costprice";
-            this.costpricecolumn.MinimumWidth = 6;
-            this.costpricecolumn.Name = "costpricecolumn";
-            this.costpricecolumn.Visible = false;
-            this.costpricecolumn.Width = 125;
-            // 
             // PurchaseInvoice
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1768, 757);
+            this.ClientSize = new System.Drawing.Size(1326, 615);
             this.Controls.Add(this.currencyconversionratelbl);
             this.Controls.Add(this.currencynamelbl);
             this.Controls.Add(this.currencystringlbl);
@@ -1060,7 +1146,7 @@
             this.Controls.Add(this.newbtn);
             this.Controls.Add(this.shippinginfotab);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.Name = "PurchaseInvoice";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PURCHASE INVOICE";
@@ -1072,6 +1158,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpurchaseproducts)).EndInit();
+            this.contextMenuStrip.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -1147,6 +1234,7 @@
         private System.Windows.Forms.Label currencystringlbl;
         private System.Windows.Forms.Label currencysymbollbl;
         private System.Windows.Forms.Label currencyconversionratelbl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn srnocolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn mfrcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productidcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productnamecolumn;
@@ -1162,5 +1250,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn lengthinmetercolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pricepermetercolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn costpricecolumn;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem eDITToolStripMenuItem;
     }
 }

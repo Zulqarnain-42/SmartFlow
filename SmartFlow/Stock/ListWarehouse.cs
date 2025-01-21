@@ -2,12 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Stock
 {
     public partial class ListWarehouse : Form
     {
+        private int currentRowIndex = 0;
+        private int currentCellIndex = 0;
         public ListWarehouse()
         {
             InitializeComponent();
@@ -18,14 +21,14 @@ namespace SmartFlow.Stock
             FillGrid();
         }
 
-        private void FillGrid()
+        private async void FillGrid()
         {
             try
             {
                 string query = string.Empty;
                 DataTable dtlistwarehouse = new DataTable();
                 query = "SELECT WarehouseID,Name,Address,City FROM WarehouseTable";
-                dtlistwarehouse = DatabaseAccess.Retrive(query);
+                dtlistwarehouse = await DatabaseAccess.RetriveAsync(query);
 
                 if (dtlistwarehouse != null && dtlistwarehouse.Rows.Count > 0) 
                 {
@@ -38,11 +41,11 @@ namespace SmartFlow.Stock
                 }
 
                 // Restore the cursor position
-                if (GlobalVariables.currentRowIndex >= 0 && GlobalVariables.currentCellIndex >= 0 &&
-                    GlobalVariables.currentRowIndex < dgvlistwarehouse.Rows.Count &&
-                    GlobalVariables.currentCellIndex < dgvlistwarehouse.Rows[GlobalVariables.currentRowIndex].Cells.Count)
+                if (currentRowIndex >= 0 && currentCellIndex >= 0 &&
+                    currentRowIndex < dgvlistwarehouse.Rows.Count &&
+                    currentCellIndex < dgvlistwarehouse.Rows[currentRowIndex].Cells.Count)
                 {
-                    dgvlistwarehouse.CurrentCell = dgvlistwarehouse.Rows[GlobalVariables.currentRowIndex].Cells[GlobalVariables.currentCellIndex];
+                    dgvlistwarehouse.CurrentCell = dgvlistwarehouse.Rows[currentRowIndex].Cells[currentCellIndex];
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -84,7 +87,7 @@ namespace SmartFlow.Stock
             }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private void createwarehousesavebtn_Click(object sender, EventArgs e)
+        private async void createwarehousesavebtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -110,7 +113,7 @@ namespace SmartFlow.Stock
                     return;
                 }
 
-                string duplicateinfo = CheckDuplicate();
+                string duplicateinfo = await CheckDuplicate();
                 if (duplicateinfo != null)
                 {
                     MessageBox.Show(duplicateinfo, "Duplicate Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -119,7 +122,7 @@ namespace SmartFlow.Stock
                 {
                     if (createwarehousesavebtn.Text == "Update")
                     {
-                        bool isUpdated = UpdateWarehouse();
+                        bool isUpdated = await UpdateWarehouse();
                         if (isUpdated)
                         {
                             MessageBox.Show("Updated Successfully.");
@@ -128,7 +131,7 @@ namespace SmartFlow.Stock
                     }
                     else
                     {
-                        bool isInserted = InsertWarehouse();
+                        bool isInserted = await InsertWarehouse();
                         if (isInserted) 
                         {
                             MessageBox.Show("Saved Successfully.");
@@ -145,7 +148,7 @@ namespace SmartFlow.Stock
             this.Close();
         }
 
-        private string CheckDuplicate()
+        private async Task<string> CheckDuplicate()
         {
             string query = string.Format("SELECT WarehouseID,Name,Address,City,Code,CompanyID,CreatedAt,UpdatedAt,AddedBy,CreatedDay," +
                 "UpdatedDay FROM WarehouseTable WHERE Name LIKE @Name AND Address LIKE @Address AND City LIKE @City");
@@ -156,7 +159,7 @@ namespace SmartFlow.Stock
                 { "City",citytxtbox.Text }
             };
 
-            DataTable dt = DatabaseAccess.RetrieveData(query, parameters);
+            DataTable dt = await DatabaseAccess.RetrieveDataAsync(query, parameters);
             if(dt!=null&& dt.Rows.Count > 0)
             {
                 return $"Duplicate found: Unit Name = {dt.Rows[0]["UnitName"].ToString()}.";
@@ -164,7 +167,7 @@ namespace SmartFlow.Stock
             return null;
         }
 
-        private bool InsertWarehouse()
+        private async Task<bool> InsertWarehouse()
         {
             string tableName = "WarehouseTable";
             var columnData = new Dictionary<string, object>
@@ -177,11 +180,11 @@ namespace SmartFlow.Stock
                 { "Code", Guid.NewGuid().ToString() }
             };
 
-            bool IsInserted = DatabaseAccess.ExecuteQuery(tableName,"INSERT",columnData);
+            bool IsInserted = await DatabaseAccess.ExecuteQueryAsync(tableName,"INSERT",columnData);
             return IsInserted;
         }
 
-        private bool UpdateWarehouse()
+        private async Task<bool> UpdateWarehouse()
         {
             string tableName = "WarehouseTable";
             string whereClause = "WarehouseID = '" + warehouseidlbl.Text + "'";
@@ -195,7 +198,7 @@ namespace SmartFlow.Stock
                 { "UpdatedDay",DateTime.Now.DayOfWeek.ToString() },
             };
 
-            bool isUpdated = DatabaseAccess.ExecuteQuery(tableName, "UPDATE", columnData, whereClause);
+            bool isUpdated = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
             return isUpdated;
         }
     }

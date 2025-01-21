@@ -43,6 +43,9 @@
     <Reference Include="Azure.Identity, Version=1.11.4.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>..\packages\Azure.Identity.1.11.4\lib\netstandard2.0\Azure.Identity.dll</HintPath>
     </Reference>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
     <Reference Include="ClosedXML, Version=0.102.2.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
       <HintPath>..\packages\ClosedXML.0.102.2\lib\netstandard2.0\ClosedXML.dll</HintPath>
     </Reference>
@@ -73,6 +76,9 @@
     </Reference>
     <Reference Include="Irony, Version=1.0.11.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
       <HintPath>..\packages\Irony.NetCore.1.0.11\lib\net461\Irony.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -271,12 +277,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\CommonForms\AccountGroupSelectionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Common\CommonForms\AccountGroupSelectionForm.Designer.cs">
-      <DependentUpon>AccountGroupSelectionForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Common\AccountData.cs" />
     <Compile Include="Common\CommonForms\AccountSelectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -309,13 +310,19 @@
     </Compile>
     <Compile Include="Common\CommonFunction.cs" />
     <Compile Include="Common\CurrencyData.cs" />
+    <Compile Include="Common\CurrencyService.cs" />
+    <Compile Include="Common\CustomerData.cs" />
     <Compile Include="Common\GlobalVariables.cs" />
+    <Compile Include="Common\ProductData.cs" />
+    <Compile Include="Common\SupplierData.cs" />
+    <Compile Include="Common\WarehouseData.cs" />
     <Compile Include="General\NewCompany.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="General\NewCompany.Designer.cs">
       <DependentUpon>NewCompany.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interface\ICurrencyService.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -466,6 +473,54 @@
     <Compile Include="Purchase\FindPurchaseInvoiceForm.Designer.cs">
       <DependentUpon>FindPurchaseInvoiceForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase\ListPurchaseInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ListPurchaseInvoice.Designer.cs">
+      <DependentUpon>ListPurchaseInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ListPurchaseOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ListPurchaseOrder.Designer.cs">
+      <DependentUpon>ListPurchaseOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ListPurchaseQuotation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ListPurchaseQuotation.Designer.cs">
+      <DependentUpon>ListPurchaseQuotation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ListPurchaseReturn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ListPurchaseReturn.Designer.cs">
+      <DependentUpon>ListPurchaseReturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ModifyPurchaseInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ModifyPurchaseInvoice.Designer.cs">
+      <DependentUpon>ModifyPurchaseInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ModifyPurchaseOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ModifyPurchaseOrder.Designer.cs">
+      <DependentUpon>ModifyPurchaseOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ModifyPurchaseQuotation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ModifyPurchaseQuotation.Designer.cs">
+      <DependentUpon>ModifyPurchaseQuotation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ModifyPurchaseReturn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ModifyPurchaseReturn.Designer.cs">
+      <DependentUpon>ModifyPurchaseReturn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchase\PurchaseInvoice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -548,6 +603,12 @@
     <Compile Include="Report\BalanceSheet.Designer.cs">
       <DependentUpon>BalanceSheet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sales\CommonForm\EditItemInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\CommonForm\EditItemInvoice.Designer.cs">
+      <DependentUpon>EditItemInvoice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\CommonForm\ItemAvailability.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -589,6 +650,54 @@
     </Compile>
     <Compile Include="Sales\FindSaleInvoiceForm.Designer.cs">
       <DependentUpon>FindSaleInvoiceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ListProformaInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ListProformaInvoice.Designer.cs">
+      <DependentUpon>ListProformaInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ListSaleInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ListSaleInvoice.Designer.cs">
+      <DependentUpon>ListSaleInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ListSalesQuotation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ListSalesQuotation.Designer.cs">
+      <DependentUpon>ListSalesQuotation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ListSalesReturn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ListSalesReturn.Designer.cs">
+      <DependentUpon>ListSalesReturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ModifyProformaInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ModifyProformaInvoice.Designer.cs">
+      <DependentUpon>ModifyProformaInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ModifySaleInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ModifySaleInvoice.Designer.cs">
+      <DependentUpon>ModifySaleInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ModifySaleQuotation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ModifySaleQuotation.Designer.cs">
+      <DependentUpon>ModifySaleQuotation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ModifySaleReturnInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ModifySaleReturnInvoice.Designer.cs">
+      <DependentUpon>ModifySaleReturnInvoice.cs</DependentUpon>
     </Compile>
     <Compile Include="Sales\PackingList.cs">
       <SubType>Form</SubType>
@@ -648,13 +757,6 @@
       <DesignTime>True</DesignTime>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Sales\ReportViewer\Reports\SaleQuotationReportold.cs">
-      <DependentUpon>SaleQuotationReportold.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="Sales\ReportViewer\SaleInvoiceView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -672,12 +774,6 @@
     </Compile>
     <Compile Include="Sales\ReportViewer\SaleReturnView.Designer.cs">
       <DependentUpon>SaleReturnView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sales\ReportViewer\TaxPlanetView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sales\ReportViewer\TaxPlanetView.Designer.cs">
-      <DependentUpon>TaxPlanetView.cs</DependentUpon>
     </Compile>
     <Compile Include="Sales\TaxPlanet.cs">
       <SubType>Form</SubType>
@@ -880,12 +976,6 @@
     <Compile Include="Stock\OpenBoxProduct.Designer.cs">
       <DependentUpon>OpenBoxProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="Stock\StockManageForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Stock\StockManageForm.Designer.cs">
-      <DependentUpon>StockManageForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Stock\StockTransfer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -940,6 +1030,48 @@
     <Compile Include="Transactions\Journal.Designer.cs">
       <DependentUpon>Journal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Transactions\ListCreditNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ListCreditNote.Designer.cs">
+      <DependentUpon>ListCreditNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ListDebitNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ListDebitNote.Designer.cs">
+      <DependentUpon>ListDebitNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ListJournal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ListJournal.Designer.cs">
+      <DependentUpon>ListJournal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ListMaterialIssue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ListMaterialIssue.Designer.cs">
+      <DependentUpon>ListMaterialIssue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ListMaterialReceived.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ListMaterialReceived.Designer.cs">
+      <DependentUpon>ListMaterialReceived.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ListPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ListPayment.Designer.cs">
+      <DependentUpon>ListPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ListReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ListReceipt.Designer.cs">
+      <DependentUpon>ListReceipt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Transactions\MaterialIssueToParty.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -951,6 +1083,48 @@
     </Compile>
     <Compile Include="Transactions\MaterialReceivedFromParty.Designer.cs">
       <DependentUpon>MaterialReceivedFromParty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ModifyCreditNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ModifyCreditNote.Designer.cs">
+      <DependentUpon>ModifyCreditNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ModifyDebitNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ModifyDebitNote.Designer.cs">
+      <DependentUpon>ModifyDebitNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ModifyJournalVoucher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ModifyJournalVoucher.Designer.cs">
+      <DependentUpon>ModifyJournalVoucher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ModifyMaterialIssue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ModifyMaterialIssue.Designer.cs">
+      <DependentUpon>ModifyMaterialIssue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ModifyMaterialReceived.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ModifyMaterialReceived.Designer.cs">
+      <DependentUpon>ModifyMaterialReceived.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ModifyPaymentVoucher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ModifyPaymentVoucher.Designer.cs">
+      <DependentUpon>ModifyPaymentVoucher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\ModifyReceiptVoucher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transactions\ModifyReceiptVoucher.Designer.cs">
+      <DependentUpon>ModifyReceiptVoucher.cs</DependentUpon>
     </Compile>
     <Compile Include="Transactions\Payment.cs">
       <SubType>Form</SubType>
@@ -1050,9 +1224,6 @@
       <SubType>Component</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <EmbeddedResource Include="Common\CommonForms\AccountGroupSelectionForm.resx">
-      <DependentUpon>AccountGroupSelectionForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Common\CommonForms\AccountSelectionForm.resx">
       <DependentUpon>AccountSelectionForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1151,6 +1322,30 @@
     <EmbeddedResource Include="Purchase\FindPurchaseInvoiceForm.resx">
       <DependentUpon>FindPurchaseInvoiceForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ListPurchaseInvoice.resx">
+      <DependentUpon>ListPurchaseInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ListPurchaseOrder.resx">
+      <DependentUpon>ListPurchaseOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ListPurchaseQuotation.resx">
+      <DependentUpon>ListPurchaseQuotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ListPurchaseReturn.resx">
+      <DependentUpon>ListPurchaseReturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ModifyPurchaseInvoice.resx">
+      <DependentUpon>ModifyPurchaseInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ModifyPurchaseOrder.resx">
+      <DependentUpon>ModifyPurchaseOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ModifyPurchaseQuotation.resx">
+      <DependentUpon>ModifyPurchaseQuotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ModifyPurchaseReturn.resx">
+      <DependentUpon>ModifyPurchaseReturn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchase\PurchaseInvoice.resx">
       <DependentUpon>PurchaseInvoice.cs</DependentUpon>
     </EmbeddedResource>
@@ -1201,6 +1396,9 @@
     <EmbeddedResource Include="Report\BalanceSheet.resx">
       <DependentUpon>BalanceSheet.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sales\CommonForm\EditItemInvoice.resx">
+      <DependentUpon>EditItemInvoice.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sales\CommonForm\ItemAvailability.resx">
       <DependentUpon>ItemAvailability.cs</DependentUpon>
     </EmbeddedResource>
@@ -1221,6 +1419,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\FindSaleInvoiceForm.resx">
       <DependentUpon>FindSaleInvoiceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ListProformaInvoice.resx">
+      <DependentUpon>ListProformaInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ListSaleInvoice.resx">
+      <DependentUpon>ListSaleInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ListSalesQuotation.resx">
+      <DependentUpon>ListSalesQuotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ListSalesReturn.resx">
+      <DependentUpon>ListSalesReturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ModifyProformaInvoice.resx">
+      <DependentUpon>ModifyProformaInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ModifySaleInvoice.resx">
+      <DependentUpon>ModifySaleInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ModifySaleQuotation.resx">
+      <DependentUpon>ModifySaleQuotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ModifySaleReturnInvoice.resx">
+      <DependentUpon>ModifySaleReturnInvoice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\PackingList.resx">
       <DependentUpon>PackingList.cs</DependentUpon>
@@ -1257,11 +1479,6 @@
       <LastGenOutput>SaleReturnReport.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ReportViewer\Reports\SaleQuotationReportold.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SaleQuotationReportold.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="Sales\ReportViewer\SaleInvoiceView.resx">
       <DependentUpon>SaleInvoiceView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1270,9 +1487,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\ReportViewer\SaleReturnView.resx">
       <DependentUpon>SaleReturnView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ReportViewer\TaxPlanetView.resx">
-      <DependentUpon>TaxPlanetView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\SaleInvoice.resx">
       <DependentUpon>SaleInvoice.cs</DependentUpon>
@@ -1389,9 +1603,6 @@
     <EmbeddedResource Include="Stock\OpenBoxProduct.resx">
       <DependentUpon>OpenBoxProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Stock\StockManageForm.resx">
-      <DependentUpon>StockManageForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Stock\StockTransfer.resx">
       <DependentUpon>StockTransfer.cs</DependentUpon>
     </EmbeddedResource>
@@ -1419,11 +1630,53 @@
     <EmbeddedResource Include="Transactions\Journal.resx">
       <DependentUpon>Journal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ListCreditNote.resx">
+      <DependentUpon>ListCreditNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ListDebitNote.resx">
+      <DependentUpon>ListDebitNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ListJournal.resx">
+      <DependentUpon>ListJournal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ListMaterialIssue.resx">
+      <DependentUpon>ListMaterialIssue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ListMaterialReceived.resx">
+      <DependentUpon>ListMaterialReceived.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ListPayment.resx">
+      <DependentUpon>ListPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ListReceipt.resx">
+      <DependentUpon>ListReceipt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Transactions\MaterialIssueToParty.resx">
       <DependentUpon>MaterialIssueToParty.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Transactions\MaterialReceivedFromParty.resx">
       <DependentUpon>MaterialReceivedFromParty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ModifyCreditNote.resx">
+      <DependentUpon>ModifyCreditNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ModifyDebitNote.resx">
+      <DependentUpon>ModifyDebitNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ModifyJournalVoucher.resx">
+      <DependentUpon>ModifyJournalVoucher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ModifyMaterialIssue.resx">
+      <DependentUpon>ModifyMaterialIssue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ModifyMaterialReceived.resx">
+      <DependentUpon>ModifyMaterialReceived.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ModifyPaymentVoucher.resx">
+      <DependentUpon>ModifyPaymentVoucher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transactions\ModifyReceiptVoucher.resx">
+      <DependentUpon>ModifyReceiptVoucher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Transactions\Payment.resx">
       <DependentUpon>Payment.cs</DependentUpon>

@@ -51,9 +51,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.customeridlbl = new System.Windows.Forms.Label();
             this.totaldiscountlbl = new System.Windows.Forms.Label();
-            this.validuntiltxtbox = new System.Windows.Forms.MaskedTextBox();
             this.invoicedatetxtbox = new System.Windows.Forms.MaskedTextBox();
-            this.validuntillbl = new System.Windows.Forms.Label();
             this.newbtn = new System.Windows.Forms.Button();
             this.savebtn = new System.Windows.Forms.Button();
             this.totalvatlbl = new System.Windows.Forms.Label();
@@ -70,6 +68,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.addbtn = new System.Windows.Forms.Button();
             this.dgvsaleproducts = new System.Windows.Forms.DataGridView();
+            this.srnocolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -103,11 +102,14 @@
             this.currencyidlbl = new System.Windows.Forms.Label();
             this.currencylbl = new System.Windows.Forms.Label();
             this.currencyconversionratelbl = new System.Windows.Forms.Label();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.eDITToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvsaleproducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -285,6 +287,7 @@
             this.totaldiscounttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totaldiscounttxtbox.Location = new System.Drawing.Point(1378, 159);
             this.totaldiscounttxtbox.Name = "totaldiscounttxtbox";
+            this.totaldiscounttxtbox.ReadOnly = true;
             this.totaldiscounttxtbox.Size = new System.Drawing.Size(378, 32);
             this.totaldiscounttxtbox.TabIndex = 192;
             this.totaldiscounttxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -298,6 +301,7 @@
             this.totalvattxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalvattxtbox.Location = new System.Drawing.Point(1378, 125);
             this.totalvattxtbox.Name = "totalvattxtbox";
+            this.totalvattxtbox.ReadOnly = true;
             this.totalvattxtbox.Size = new System.Drawing.Size(378, 32);
             this.totalvattxtbox.TabIndex = 191;
             this.totalvattxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -311,6 +315,7 @@
             this.nettotaltxtbox.Font = new System.Drawing.Font("Calibri", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nettotaltxtbox.Location = new System.Drawing.Point(1378, 54);
             this.nettotaltxtbox.Name = "nettotaltxtbox";
+            this.nettotaltxtbox.ReadOnly = true;
             this.nettotaltxtbox.Size = new System.Drawing.Size(378, 69);
             this.nettotaltxtbox.TabIndex = 190;
             this.nettotaltxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -348,17 +353,6 @@
             this.totaldiscountlbl.TabIndex = 187;
             this.totaldiscountlbl.Text = "TOTAL DISS";
             // 
-            // validuntiltxtbox
-            // 
-            this.validuntiltxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.validuntiltxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.validuntiltxtbox.Location = new System.Drawing.Point(798, 168);
-            this.validuntiltxtbox.Mask = "00/00/0000";
-            this.validuntiltxtbox.Name = "validuntiltxtbox";
-            this.validuntiltxtbox.Size = new System.Drawing.Size(250, 32);
-            this.validuntiltxtbox.TabIndex = 181;
-            this.validuntiltxtbox.ValidatingType = typeof(System.DateTime);
-            // 
             // invoicedatetxtbox
             // 
             this.invoicedatetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -369,16 +363,6 @@
             this.invoicedatetxtbox.Size = new System.Drawing.Size(554, 32);
             this.invoicedatetxtbox.TabIndex = 168;
             this.invoicedatetxtbox.ValidatingType = typeof(System.DateTime);
-            // 
-            // validuntillbl
-            // 
-            this.validuntillbl.AutoSize = true;
-            this.validuntillbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.validuntillbl.Location = new System.Drawing.Point(687, 173);
-            this.validuntillbl.Name = "validuntillbl";
-            this.validuntillbl.Size = new System.Drawing.Size(88, 23);
-            this.validuntillbl.TabIndex = 180;
-            this.validuntillbl.Text = "Valid Until";
             // 
             // newbtn
             // 
@@ -436,6 +420,7 @@
             this.selectcustomertxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectcustomertxtbox.Location = new System.Drawing.Point(375, 92);
             this.selectcustomertxtbox.Name = "selectcustomertxtbox";
+            this.selectcustomertxtbox.ReadOnly = true;
             this.selectcustomertxtbox.Size = new System.Drawing.Size(673, 32);
             this.selectcustomertxtbox.TabIndex = 172;
             this.selectcustomertxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectcustomertxtbox_MouseClick);
@@ -448,6 +433,7 @@
             this.mobiletxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mobiletxtbox.Location = new System.Drawing.Point(188, 130);
             this.mobiletxtbox.Name = "mobiletxtbox";
+            this.mobiletxtbox.ReadOnly = true;
             this.mobiletxtbox.Size = new System.Drawing.Size(187, 32);
             this.mobiletxtbox.TabIndex = 177;
             // 
@@ -469,7 +455,7 @@
             this.salesmantxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.salesmantxtbox.Location = new System.Drawing.Point(188, 168);
             this.salesmantxtbox.Name = "salesmantxtbox";
-            this.salesmantxtbox.Size = new System.Drawing.Size(493, 32);
+            this.salesmantxtbox.Size = new System.Drawing.Size(860, 32);
             this.salesmantxtbox.TabIndex = 179;
             // 
             // companytxtbox
@@ -479,6 +465,7 @@
             this.companytxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.companytxtbox.Location = new System.Drawing.Point(494, 130);
             this.companytxtbox.Name = "companytxtbox";
+            this.companytxtbox.ReadOnly = true;
             this.companytxtbox.Size = new System.Drawing.Size(554, 32);
             this.companytxtbox.TabIndex = 175;
             // 
@@ -489,6 +476,7 @@
             this.invoicenotxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoicenotxtbox.Location = new System.Drawing.Point(188, 54);
             this.invoicenotxtbox.Name = "invoicenotxtbox";
+            this.invoicenotxtbox.ReadOnly = true;
             this.invoicenotxtbox.Size = new System.Drawing.Size(187, 32);
             this.invoicenotxtbox.TabIndex = 166;
             // 
@@ -499,6 +487,7 @@
             this.codetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.codetxtbox.Location = new System.Drawing.Point(188, 92);
             this.codetxtbox.Name = "codetxtbox";
+            this.codetxtbox.ReadOnly = true;
             this.codetxtbox.Size = new System.Drawing.Size(187, 32);
             this.codetxtbox.TabIndex = 170;
             // 
@@ -568,6 +557,7 @@
             this.dgvsaleproducts.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvsaleproducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvsaleproducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.srnocolumn,
             this.codecolumn,
             this.productid,
             this.productnamecolumn,
@@ -583,6 +573,7 @@
             this.itemdescriptioncolumn,
             this.lengthinmetercolumn,
             this.pricepermetercolumn});
+            this.dgvsaleproducts.ContextMenuStrip = this.contextMenuStrip;
             this.dgvsaleproducts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvsaleproducts.Location = new System.Drawing.Point(3, 74);
             this.dgvsaleproducts.Name = "dgvsaleproducts";
@@ -593,11 +584,19 @@
             this.dgvsaleproducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvsaleproducts.Size = new System.Drawing.Size(1726, 396);
             this.dgvsaleproducts.TabIndex = 0;
-            this.dgvsaleproducts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvsaleproducts_CellDoubleClick);
+            this.dgvsaleproducts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvsaleproducts_CellFormatting);
             this.dgvsaleproducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvsaleproducts_CellValueChanged);
             this.dgvsaleproducts.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvsaleproducts_RowsAdded);
             this.dgvsaleproducts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvsaleproducts_RowsRemoved);
             this.dgvsaleproducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvsaleproducts_KeyDown);
+            // 
+            // srnocolumn
+            // 
+            this.srnocolumn.HeaderText = "#";
+            this.srnocolumn.MinimumWidth = 6;
+            this.srnocolumn.Name = "srnocolumn";
+            this.srnocolumn.ReadOnly = true;
+            this.srnocolumn.Width = 40;
             // 
             // codecolumn
             // 
@@ -747,6 +746,7 @@
             this.selectproducttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectproducttxtbox.Location = new System.Drawing.Point(171, 36);
             this.selectproducttxtbox.Name = "selectproducttxtbox";
+            this.selectproducttxtbox.ReadOnly = true;
             this.selectproducttxtbox.Size = new System.Drawing.Size(427, 32);
             this.selectproducttxtbox.TabIndex = 2;
             this.selectproducttxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectproducttxtbox_MouseClick);
@@ -759,6 +759,7 @@
             this.mfrtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mfrtxtbox.Location = new System.Drawing.Point(7, 36);
             this.mfrtxtbox.Name = "mfrtxtbox";
+            this.mfrtxtbox.ReadOnly = true;
             this.mfrtxtbox.Size = new System.Drawing.Size(158, 32);
             this.mfrtxtbox.TabIndex = 0;
             // 
@@ -905,6 +906,21 @@
             this.currencyconversionratelbl.Text = "currencyconversionratelbl";
             this.currencyconversionratelbl.Visible = false;
             // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.eDITToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(211, 56);
+            // 
+            // eDITToolStripMenuItem
+            // 
+            this.eDITToolStripMenuItem.Name = "eDITToolStripMenuItem";
+            this.eDITToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.eDITToolStripMenuItem.Text = "EDIT";
+            this.eDITToolStripMenuItem.Click += new System.EventHandler(this.eDITToolStripMenuItem_Click);
+            // 
             // PerformaInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -936,9 +952,7 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.customeridlbl);
             this.Controls.Add(this.totaldiscountlbl);
-            this.Controls.Add(this.validuntiltxtbox);
             this.Controls.Add(this.invoicedatetxtbox);
-            this.Controls.Add(this.validuntillbl);
             this.Controls.Add(this.newbtn);
             this.Controls.Add(this.savebtn);
             this.Controls.Add(this.totalvatlbl);
@@ -970,6 +984,7 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvsaleproducts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -999,9 +1014,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label customeridlbl;
         private System.Windows.Forms.Label totaldiscountlbl;
-        private System.Windows.Forms.MaskedTextBox validuntiltxtbox;
         private System.Windows.Forms.MaskedTextBox invoicedatetxtbox;
-        private System.Windows.Forms.Label validuntillbl;
         private System.Windows.Forms.Button newbtn;
         private System.Windows.Forms.Button savebtn;
         private System.Windows.Forms.Label totalvatlbl;
@@ -1018,21 +1031,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button addbtn;
         private System.Windows.Forms.DataGridView dgvsaleproducts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codecolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productnamecolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qtycolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn availabilitycolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unitidcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unitname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pricecolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn vatcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn discountcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totalcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn warehouseidcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn itemdescriptioncolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lengthinmetercolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pricepermetercolumn;
         private System.Windows.Forms.TextBox qtytxtbox;
         private System.Windows.Forms.TextBox selectproducttxtbox;
         private System.Windows.Forms.TextBox mfrtxtbox;
@@ -1051,5 +1049,23 @@
         private System.Windows.Forms.Label currencyidlbl;
         private System.Windows.Forms.Label currencylbl;
         private System.Windows.Forms.Label currencyconversionratelbl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn srnocolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codecolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productnamecolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn qtycolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn availabilitycolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitidcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pricecolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vatcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discountcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn warehouseidcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemdescriptioncolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lengthinmetercolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pricepermetercolumn;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem eDITToolStripMenuItem;
     }
 }

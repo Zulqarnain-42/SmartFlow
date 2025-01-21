@@ -87,7 +87,7 @@ namespace SmartFlow.Sales.CommonForm
                     {
                         // Close the form after the selection and quantity check
                         GlobalVariables.warehouseidglobal = Convert.ToInt32(selectedRow.Cells["WarehouseID"].Value);
-                        GlobalVariables.availabilitystatus = "In Stock";
+                        GlobalVariables.availabilitystatus = "IN STOCK";
                         this.Close();
                     }
                     else
@@ -125,7 +125,7 @@ namespace SmartFlow.Sales.CommonForm
                         {
                             // Close the form
                             GlobalVariables.warehouseidglobal = Convert.ToInt32(selectedRow.Cells["WarehouseID"].Value);
-                            GlobalVariables.availabilitystatus = "In Stock";
+                            GlobalVariables.availabilitystatus = "IN STOCK";
                             this.Close();
                         }
                         else

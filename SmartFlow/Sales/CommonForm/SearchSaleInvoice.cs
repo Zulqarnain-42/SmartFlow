@@ -16,7 +16,7 @@ namespace SmartFlow.Sales.CommonForm
         {
             InitializeComponent();
         }
-        private void searchbtn_Click(object sender, EventArgs e)
+        private async void searchbtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace SmartFlow.Sales.CommonForm
     };
 
                 // Retrieve data using parameterized query
-                DataTable salesData = DatabaseAccess.Retrive(querysales, parameters);
+                DataTable salesData = await DatabaseAccess.RetriveAsync(querysales, parameters);
 
                 // Check if data was found
                 if (salesData != null && salesData.Rows.Count > 0)

@@ -39,6 +39,7 @@ namespace SmartFlow.Purchase
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.addbtn = new System.Windows.Forms.Button();
             this.dgvpurchaseproducts = new System.Windows.Forms.DataGridView();
+            this.srnocolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mfrcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,7 +59,11 @@ namespace SmartFlow.Purchase
             this.qtylbl = new System.Windows.Forms.Label();
             this.productnamelbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.currencyconversionratelbl = new System.Windows.Forms.Label();
+            this.currencynamelbl = new System.Windows.Forms.Label();
+            this.currencystringlbl = new System.Windows.Forms.Label();
             this.productvatlbl = new System.Windows.Forms.Label();
+            this.currencysymbollbl = new System.Windows.Forms.Label();
             this.unitidlbl = new System.Windows.Forms.Label();
             this.unitnamelbl = new System.Windows.Forms.Label();
             this.totalcolumnlbl = new System.Windows.Forms.Label();
@@ -85,18 +90,17 @@ namespace SmartFlow.Purchase
             this.removevatchkbox = new System.Windows.Forms.CheckBox();
             this.totalvattxtbox = new System.Windows.Forms.TextBox();
             this.totalvatlbl = new System.Windows.Forms.Label();
-            this.currencynamelbl = new System.Windows.Forms.Label();
-            this.currencystringlbl = new System.Windows.Forms.Label();
-            this.currencysymbollbl = new System.Windows.Forms.Label();
             this.currencyidlbl = new System.Windows.Forms.Label();
             this.currencylbl = new System.Windows.Forms.Label();
-            this.currencyconversionratelbl = new System.Windows.Forms.Label();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.eDITToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpurchaseproducts)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.panel1.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // newbtn
@@ -119,6 +123,7 @@ namespace SmartFlow.Purchase
             this.invoicenotxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoicenotxtbox.Location = new System.Drawing.Point(121, 4);
             this.invoicenotxtbox.Name = "invoicenotxtbox";
+            this.invoicenotxtbox.ReadOnly = true;
             this.invoicenotxtbox.Size = new System.Drawing.Size(167, 32);
             this.invoicenotxtbox.TabIndex = 0;
             // 
@@ -198,6 +203,7 @@ namespace SmartFlow.Purchase
             this.dgvpurchaseproducts.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvpurchaseproducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvpurchaseproducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.srnocolumn,
             this.mfrcolumn,
             this.productidcolumn,
             this.productnamecolumn,
@@ -210,26 +216,37 @@ namespace SmartFlow.Purchase
             this.itemdescriptioncolummn,
             this.pricepermetercolumn,
             this.lengthinmetercolumn});
+            this.dgvpurchaseproducts.ContextMenuStrip = this.contextMenuStrip;
             this.dgvpurchaseproducts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvpurchaseproducts.Location = new System.Drawing.Point(6, 73);
             this.dgvpurchaseproducts.Name = "dgvpurchaseproducts";
+            this.dgvpurchaseproducts.ReadOnly = true;
             this.dgvpurchaseproducts.RowHeadersVisible = false;
             this.dgvpurchaseproducts.RowHeadersWidth = 51;
             this.dgvpurchaseproducts.RowTemplate.Height = 24;
             this.dgvpurchaseproducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvpurchaseproducts.Size = new System.Drawing.Size(1724, 368);
             this.dgvpurchaseproducts.TabIndex = 1;
-            this.dgvpurchaseproducts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvpurchasequotationproduct_CellDoubleClick);
+            this.dgvpurchaseproducts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvpurchaseproducts_CellFormatting);
             this.dgvpurchaseproducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvpurchaseproducts_CellValueChanged);
             this.dgvpurchaseproducts.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvpurchaseproducts_RowsAdded);
             this.dgvpurchaseproducts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvpurchaseproducts_RowsRemoved);
             this.dgvpurchaseproducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvpurchasequotationproduct_KeyDown);
+            // 
+            // srnocolumn
+            // 
+            this.srnocolumn.HeaderText = "#";
+            this.srnocolumn.MinimumWidth = 6;
+            this.srnocolumn.Name = "srnocolumn";
+            this.srnocolumn.ReadOnly = true;
+            this.srnocolumn.Width = 40;
             // 
             // mfrcolumn
             // 
             this.mfrcolumn.HeaderText = "MFR";
             this.mfrcolumn.MinimumWidth = 6;
             this.mfrcolumn.Name = "mfrcolumn";
+            this.mfrcolumn.ReadOnly = true;
             this.mfrcolumn.Width = 125;
             // 
             // productidcolumn
@@ -237,6 +254,7 @@ namespace SmartFlow.Purchase
             this.productidcolumn.HeaderText = "ID";
             this.productidcolumn.MinimumWidth = 6;
             this.productidcolumn.Name = "productidcolumn";
+            this.productidcolumn.ReadOnly = true;
             this.productidcolumn.Visible = false;
             this.productidcolumn.Width = 125;
             // 
@@ -246,12 +264,14 @@ namespace SmartFlow.Purchase
             this.productnamecolumn.HeaderText = "Product Name";
             this.productnamecolumn.MinimumWidth = 6;
             this.productnamecolumn.Name = "productnamecolumn";
+            this.productnamecolumn.ReadOnly = true;
             // 
             // qtycolumn
             // 
             this.qtycolumn.HeaderText = "Qty";
             this.qtycolumn.MinimumWidth = 6;
             this.qtycolumn.Name = "qtycolumn";
+            this.qtycolumn.ReadOnly = true;
             this.qtycolumn.Width = 125;
             // 
             // unitidcolumn
@@ -259,6 +279,7 @@ namespace SmartFlow.Purchase
             this.unitidcolumn.HeaderText = "unitid";
             this.unitidcolumn.MinimumWidth = 6;
             this.unitidcolumn.Name = "unitidcolumn";
+            this.unitidcolumn.ReadOnly = true;
             this.unitidcolumn.Visible = false;
             this.unitidcolumn.Width = 125;
             // 
@@ -267,6 +288,7 @@ namespace SmartFlow.Purchase
             this.unitnamecolumn.HeaderText = "UNIT";
             this.unitnamecolumn.MinimumWidth = 6;
             this.unitnamecolumn.Name = "unitnamecolumn";
+            this.unitnamecolumn.ReadOnly = true;
             this.unitnamecolumn.Width = 125;
             // 
             // pricecolumn
@@ -274,6 +296,7 @@ namespace SmartFlow.Purchase
             this.pricecolumn.HeaderText = "Price";
             this.pricecolumn.MinimumWidth = 6;
             this.pricecolumn.Name = "pricecolumn";
+            this.pricecolumn.ReadOnly = true;
             this.pricecolumn.Width = 125;
             // 
             // vatcolumn
@@ -281,6 +304,7 @@ namespace SmartFlow.Purchase
             this.vatcolumn.HeaderText = "VAT";
             this.vatcolumn.MinimumWidth = 6;
             this.vatcolumn.Name = "vatcolumn";
+            this.vatcolumn.ReadOnly = true;
             this.vatcolumn.Width = 125;
             // 
             // totalcolumn
@@ -288,6 +312,7 @@ namespace SmartFlow.Purchase
             this.totalcolumn.HeaderText = "Total";
             this.totalcolumn.MinimumWidth = 6;
             this.totalcolumn.Name = "totalcolumn";
+            this.totalcolumn.ReadOnly = true;
             this.totalcolumn.Width = 125;
             // 
             // itemdescriptioncolummn
@@ -295,6 +320,7 @@ namespace SmartFlow.Purchase
             this.itemdescriptioncolummn.HeaderText = "itemdescription";
             this.itemdescriptioncolummn.MinimumWidth = 6;
             this.itemdescriptioncolummn.Name = "itemdescriptioncolummn";
+            this.itemdescriptioncolummn.ReadOnly = true;
             this.itemdescriptioncolummn.Visible = false;
             this.itemdescriptioncolummn.Width = 125;
             // 
@@ -303,6 +329,7 @@ namespace SmartFlow.Purchase
             this.pricepermetercolumn.HeaderText = "pricepermeter";
             this.pricepermetercolumn.MinimumWidth = 6;
             this.pricepermetercolumn.Name = "pricepermetercolumn";
+            this.pricepermetercolumn.ReadOnly = true;
             this.pricepermetercolumn.Visible = false;
             this.pricepermetercolumn.Width = 125;
             // 
@@ -311,6 +338,7 @@ namespace SmartFlow.Purchase
             this.lengthinmetercolumn.HeaderText = "lengthinmeter";
             this.lengthinmetercolumn.MinimumWidth = 6;
             this.lengthinmetercolumn.Name = "lengthinmetercolumn";
+            this.lengthinmetercolumn.ReadOnly = true;
             this.lengthinmetercolumn.Visible = false;
             this.lengthinmetercolumn.Width = 125;
             // 
@@ -336,6 +364,7 @@ namespace SmartFlow.Purchase
             this.selectproducttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectproducttxtbox.Location = new System.Drawing.Point(201, 36);
             this.selectproducttxtbox.Name = "selectproducttxtbox";
+            this.selectproducttxtbox.ReadOnly = true;
             this.selectproducttxtbox.Size = new System.Drawing.Size(405, 32);
             this.selectproducttxtbox.TabIndex = 0;
             this.selectproducttxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectproducttxtbox_MouseClick);
@@ -357,6 +386,7 @@ namespace SmartFlow.Purchase
             this.mfrtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mfrtxtbox.Location = new System.Drawing.Point(14, 36);
             this.mfrtxtbox.Name = "mfrtxtbox";
+            this.mfrtxtbox.ReadOnly = true;
             this.mfrtxtbox.Size = new System.Drawing.Size(181, 32);
             this.mfrtxtbox.TabIndex = 4;
             // 
@@ -412,6 +442,36 @@ namespace SmartFlow.Purchase
             this.panel2.Size = new System.Drawing.Size(1251, 157);
             this.panel2.TabIndex = 45;
             // 
+            // currencyconversionratelbl
+            // 
+            this.currencyconversionratelbl.AutoSize = true;
+            this.currencyconversionratelbl.Location = new System.Drawing.Point(803, 134);
+            this.currencyconversionratelbl.Name = "currencyconversionratelbl";
+            this.currencyconversionratelbl.Size = new System.Drawing.Size(161, 16);
+            this.currencyconversionratelbl.TabIndex = 163;
+            this.currencyconversionratelbl.Text = "currencyconversionratelbl";
+            this.currencyconversionratelbl.Visible = false;
+            // 
+            // currencynamelbl
+            // 
+            this.currencynamelbl.AutoSize = true;
+            this.currencynamelbl.Location = new System.Drawing.Point(999, 132);
+            this.currencynamelbl.Name = "currencynamelbl";
+            this.currencynamelbl.Size = new System.Drawing.Size(106, 16);
+            this.currencynamelbl.TabIndex = 165;
+            this.currencynamelbl.Text = "currencynamelbl";
+            this.currencynamelbl.Visible = false;
+            // 
+            // currencystringlbl
+            // 
+            this.currencystringlbl.AutoSize = true;
+            this.currencystringlbl.Location = new System.Drawing.Point(1129, 120);
+            this.currencystringlbl.Name = "currencystringlbl";
+            this.currencystringlbl.Size = new System.Drawing.Size(104, 16);
+            this.currencystringlbl.TabIndex = 164;
+            this.currencystringlbl.Text = "currencystringlbl";
+            this.currencystringlbl.Visible = false;
+            // 
             // productvatlbl
             // 
             this.productvatlbl.AutoSize = true;
@@ -421,6 +481,16 @@ namespace SmartFlow.Purchase
             this.productvatlbl.TabIndex = 159;
             this.productvatlbl.Text = "productvatlbl";
             this.productvatlbl.Visible = false;
+            // 
+            // currencysymbollbl
+            // 
+            this.currencysymbollbl.AutoSize = true;
+            this.currencysymbollbl.Location = new System.Drawing.Point(1129, 99);
+            this.currencysymbollbl.Name = "currencysymbollbl";
+            this.currencysymbollbl.Size = new System.Drawing.Size(116, 16);
+            this.currencysymbollbl.TabIndex = 163;
+            this.currencysymbollbl.Text = "currencysymbollbl";
+            this.currencysymbollbl.Visible = false;
             // 
             // unitidlbl
             // 
@@ -563,6 +633,7 @@ namespace SmartFlow.Purchase
             this.selectsuppliertxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectsuppliertxtbox.Location = new System.Drawing.Point(295, 42);
             this.selectsuppliertxtbox.Name = "selectsuppliertxtbox";
+            this.selectsuppliertxtbox.ReadOnly = true;
             this.selectsuppliertxtbox.Size = new System.Drawing.Size(693, 32);
             this.selectsuppliertxtbox.TabIndex = 2;
             this.selectsuppliertxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectsuppliertxtbox_MouseClick);
@@ -575,6 +646,7 @@ namespace SmartFlow.Purchase
             this.codetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.codetxtbox.Location = new System.Drawing.Point(122, 42);
             this.codetxtbox.Name = "codetxtbox";
+            this.codetxtbox.ReadOnly = true;
             this.codetxtbox.Size = new System.Drawing.Size(167, 32);
             this.codetxtbox.TabIndex = 61;
             // 
@@ -657,6 +729,7 @@ namespace SmartFlow.Purchase
             this.nettotaltxtbox.Font = new System.Drawing.Font("Calibri", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nettotaltxtbox.Location = new System.Drawing.Point(1378, 48);
             this.nettotaltxtbox.Name = "nettotaltxtbox";
+            this.nettotaltxtbox.ReadOnly = true;
             this.nettotaltxtbox.Size = new System.Drawing.Size(378, 69);
             this.nettotaltxtbox.TabIndex = 149;
             this.nettotaltxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -683,6 +756,7 @@ namespace SmartFlow.Purchase
             this.totalvattxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalvattxtbox.Location = new System.Drawing.Point(1378, 122);
             this.totalvattxtbox.Name = "totalvattxtbox";
+            this.totalvattxtbox.ReadOnly = true;
             this.totalvattxtbox.Size = new System.Drawing.Size(378, 32);
             this.totalvattxtbox.TabIndex = 157;
             this.totalvattxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -699,36 +773,6 @@ namespace SmartFlow.Purchase
             this.totalvatlbl.Size = new System.Drawing.Size(90, 16);
             this.totalvatlbl.TabIndex = 156;
             this.totalvatlbl.Text = "TOTAL VAT";
-            // 
-            // currencynamelbl
-            // 
-            this.currencynamelbl.AutoSize = true;
-            this.currencynamelbl.Location = new System.Drawing.Point(999, 132);
-            this.currencynamelbl.Name = "currencynamelbl";
-            this.currencynamelbl.Size = new System.Drawing.Size(106, 16);
-            this.currencynamelbl.TabIndex = 165;
-            this.currencynamelbl.Text = "currencynamelbl";
-            this.currencynamelbl.Visible = false;
-            // 
-            // currencystringlbl
-            // 
-            this.currencystringlbl.AutoSize = true;
-            this.currencystringlbl.Location = new System.Drawing.Point(1129, 120);
-            this.currencystringlbl.Name = "currencystringlbl";
-            this.currencystringlbl.Size = new System.Drawing.Size(104, 16);
-            this.currencystringlbl.TabIndex = 164;
-            this.currencystringlbl.Text = "currencystringlbl";
-            this.currencystringlbl.Visible = false;
-            // 
-            // currencysymbollbl
-            // 
-            this.currencysymbollbl.AutoSize = true;
-            this.currencysymbollbl.Location = new System.Drawing.Point(1129, 99);
-            this.currencysymbollbl.Name = "currencysymbollbl";
-            this.currencysymbollbl.Size = new System.Drawing.Size(116, 16);
-            this.currencysymbollbl.TabIndex = 163;
-            this.currencysymbollbl.Text = "currencysymbollbl";
-            this.currencysymbollbl.Visible = false;
             // 
             // currencyidlbl
             // 
@@ -750,15 +794,20 @@ namespace SmartFlow.Purchase
             this.currencylbl.TabIndex = 161;
             this.currencylbl.Text = "CURRENCY : AED";
             // 
-            // currencyconversionratelbl
+            // contextMenuStrip
             // 
-            this.currencyconversionratelbl.AutoSize = true;
-            this.currencyconversionratelbl.Location = new System.Drawing.Point(803, 134);
-            this.currencyconversionratelbl.Name = "currencyconversionratelbl";
-            this.currencyconversionratelbl.Size = new System.Drawing.Size(161, 16);
-            this.currencyconversionratelbl.TabIndex = 163;
-            this.currencyconversionratelbl.Text = "currencyconversionratelbl";
-            this.currencyconversionratelbl.Visible = false;
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.eDITToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(211, 56);
+            // 
+            // eDITToolStripMenuItem
+            // 
+            this.eDITToolStripMenuItem.Name = "eDITToolStripMenuItem";
+            this.eDITToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.eDITToolStripMenuItem.Text = "EDIT";
+            this.eDITToolStripMenuItem.Click += new System.EventHandler(this.eDITToolStripMenuItem_Click);
             // 
             // PurchaseOrder
             // 
@@ -793,6 +842,7 @@ namespace SmartFlow.Purchase
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -839,6 +889,15 @@ namespace SmartFlow.Purchase
         private Label totalcolumnlbl;
         private Label lengthinmeterlbl;
         private Label productvatlbl;
+        private TextBox totalvattxtbox;
+        private Label totalvatlbl;
+        private Label currencynamelbl;
+        private Label currencystringlbl;
+        private Label currencysymbollbl;
+        private Label currencyidlbl;
+        private Label currencylbl;
+        private Label currencyconversionratelbl;
+        private DataGridViewTextBoxColumn srnocolumn;
         private DataGridViewTextBoxColumn mfrcolumn;
         private DataGridViewTextBoxColumn productidcolumn;
         private DataGridViewTextBoxColumn productnamecolumn;
@@ -851,13 +910,7 @@ namespace SmartFlow.Purchase
         private DataGridViewTextBoxColumn itemdescriptioncolummn;
         private DataGridViewTextBoxColumn pricepermetercolumn;
         private DataGridViewTextBoxColumn lengthinmetercolumn;
-        private TextBox totalvattxtbox;
-        private Label totalvatlbl;
-        private Label currencynamelbl;
-        private Label currencystringlbl;
-        private Label currencysymbollbl;
-        private Label currencyidlbl;
-        private Label currencylbl;
-        private Label currencyconversionratelbl;
+        private ContextMenuStrip contextMenuStrip;
+        private ToolStripMenuItem eDITToolStripMenuItem;
     }
 }

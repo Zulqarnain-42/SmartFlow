@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Security.Cryptography;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SmartFlow.General
@@ -20,7 +18,7 @@ namespace SmartFlow.General
             InitializeComponent();
             this.companyid = companyID;
         }
-        private void savebtn_Click(object sender, EventArgs e)
+        private async void savebtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -75,11 +73,11 @@ namespace SmartFlow.General
                     { "State", statetxtbox.Text }
                 };
 
-                bool isInserted = DatabaseAccess.ExecuteQuery(tableName, "INSERT", columnData);
+                bool isInserted = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData);
 
                 if (isInserted)
                 {
-                    string hashedPassword = CommonFunction.HashPassword(passwordtxtbox.Text);
+                    string hashedPassword = await CommonFunction.HashPasswordAsync(passwordtxtbox.Text);
 
                     tableName = "UserTable";
                     columnData = new Dictionary<string, object>
@@ -93,7 +91,7 @@ namespace SmartFlow.General
                         { "CreatedDay" , DateTime.Now.DayOfWeek.ToString() }
                     };
 
-                    bool useradded = DatabaseAccess.ExecuteQuery(tableName, "INSERT", columnData);
+                    bool useradded = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData);
 
                     if (useradded)
                     {

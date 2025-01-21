@@ -7,20 +7,21 @@ namespace SmartFlow.Common.Forms
     {
         private DateTime lastEnterPressTime;
         private const int doubleEnterThreshold = 500; // Time in milliseconds
+        public event EventHandler<AccountData> AccountDataSelected;
         public AccountSelectionForm()
         {
             InitializeComponent();
         }
-        private void searchtxtbox_TextChanged(object sender, EventArgs e)
+        private async void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
-            CommonFunction.GetAccountInfo(searchtxtbox.Text, dgvaccount);
+            await CommonFunction.GetAccountInfoAsync(searchtxtbox.Text, dgvaccount);
         }
         private void AccountSelectionForm_Load(object sender, EventArgs e)
         {
             FocusSearchAndLoadAccountInfo();
         }
 
-        private void FocusSearchAndLoadAccountInfo()
+        private async void FocusSearchAndLoadAccountInfo()
         {
             try
             {
@@ -47,7 +48,7 @@ namespace SmartFlow.Common.Forms
                 }
 
                 // Load account information using the common function
-                CommonFunction.GetAccountInfo("", dgvaccount);
+                await CommonFunction.GetAccountInfoAsync("", dgvaccount);
             }
             catch (Exception ex)
             {
@@ -69,43 +70,36 @@ namespace SmartFlow.Common.Forms
                         // Ensure exactly one row is selected
                         if (dgvaccount.SelectedRows.Count == 1 && dgvaccount.CurrentRow != null)
                         {
-                            // Validate and assign account ID
-                            if (int.TryParse(dgvaccount.CurrentRow.Cells[0]?.Value?.ToString(), out int accountId))
+                            DataGridViewRow selectedRow = dgvaccount.CurrentRow;
+
+                            // Safe checks for each value and parsing
+                            if (selectedRow != null)
                             {
-                                GlobalVariables.accountidglobal = accountId;
+                                // Parse supplier ID
+                                if (int.TryParse(selectedRow.Cells["ID"]?.Value?.ToString(), out int accountid))
+                                {
+                                    int accountheadid = Convert.ToInt32(selectedRow.Cells["HEADID"]?.Value ?? 0);
+                                    // Raise the event with the data to pass to the parent form
+                                    AccountDataSelected?.Invoke(this, new AccountData(
+                                        accountid,
+                                        selectedRow.Cells["Account Name"]?.Value?.ToString() ?? "Unknown",
+                                        accountheadid,
+                                        selectedRow.Cells["CodeAccount"]?.Value?.ToString() ?? "Unknown"
+                                    ));
+
+                                    // Close the child form after passing the data
+                                    this.Close();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Invalid Supplier ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return;
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Invalid account ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
+                                MessageBox.Show("Selected row is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
-
-                            // Validate and assign account name
-                            string accountName = dgvaccount.CurrentRow.Cells[1]?.Value?.ToString();
-                            if (!string.IsNullOrWhiteSpace(accountName))
-                            {
-                                GlobalVariables.accountnameglobal = accountName;
-                            }
-                            else
-                            {
-                                MessageBox.Show("Account name cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-
-                            // Validate and assign account code
-                            string accountCode = dgvaccount.CurrentRow.Cells[4]?.Value?.ToString();
-                            if (!string.IsNullOrWhiteSpace(accountCode))
-                            {
-                                GlobalVariables.accountcodeglobal = accountCode;
-                            }
-                            else
-                            {
-                                MessageBox.Show("Account code cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-
-                            // Close the form after successful assignment
-                            this.Close();
                         }
                         else
                         {
@@ -140,31 +134,34 @@ namespace SmartFlow.Common.Forms
                     {
                         DataGridViewRow selectedRow = dgvaccount.CurrentRow;
 
-                        // Validate and assign account ID
-                        if (int.TryParse(selectedRow.Cells[0]?.Value?.ToString(), out int accountId))
+                        // Safe checks for each value and parsing
+                        if (selectedRow != null)
                         {
-                            GlobalVariables.accountidglobal = accountId;
+                            // Parse supplier ID
+                            if (int.TryParse(selectedRow.Cells["ID"]?.Value?.ToString(), out int accountid))
+                            {
+                                int accountheadid = Convert.ToInt32(selectedRow.Cells["HEADID"]?.Value ?? 0);
+                                // Raise the event with the data to pass to the parent form
+                                AccountDataSelected?.Invoke(this, new AccountData(
+                                    accountid,
+                                    selectedRow.Cells["Account Name"]?.Value?.ToString() ?? "Unknown",
+                                    accountheadid,
+                                    selectedRow.Cells["CodeAccount"]?.Value?.ToString() ?? "Unknown"
+                                ));
+
+                                // Close the child form after passing the data
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Invalid Supplier ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Invalid account ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
+                            MessageBox.Show("Selected row is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-
-                        // Validate and assign account name
-                        string accountName = selectedRow.Cells[1]?.Value?.ToString();
-                        if (!string.IsNullOrWhiteSpace(accountName))
-                        {
-                            GlobalVariables.accountnameglobal = accountName;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Account name cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        // Close the form after successful assignment
-                        this.Close();
                     }
                     else
                     {

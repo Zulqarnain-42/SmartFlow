@@ -30,7 +30,7 @@ namespace SmartFlow.Transactions.CommonForm
                     return;
                 }
 
-                if (iscreditentrylbl.Checked) 
+                /*if (iscreditentrylbl.Checked) 
                 {
                     GlobalVariables.iscreditglobal = true;
                 }
@@ -43,7 +43,7 @@ namespace SmartFlow.Transactions.CommonForm
                 if(!string.IsNullOrEmpty(shortnarationtxtbox.Text) && !string.IsNullOrWhiteSpace(shortnarationtxtbox.Text))
                 {
                     GlobalVariables.shortdescriptionglobal = shortnarationtxtbox.Text;
-                }
+                }*/
 
                 this.Close();
 

@@ -7,6 +7,7 @@ namespace SmartFlow.Purchase
 {
     public partial class WarehouseSelection : Form
     {
+        public event EventHandler<WarehouseData> WarehouseDataSelected;
         public WarehouseSelection()
         {
             InitializeComponent();
@@ -25,8 +26,8 @@ namespace SmartFlow.Purchase
                 DataGridViewRow selectedrow = dgvwarehouseselection.CurrentRow;
                 if (selectedrow != null)
                 {
-                    GlobalVariables.warehouseidglobal = Convert.ToInt32(selectedrow.Cells["WarehouseID"].Value.ToString());
-                    GlobalVariables.warehousenameglobal = selectedrow.Cells["Name"].Value.ToString();
+                    /*GlobalVariables.warehouseidglobal = Convert.ToInt32(selectedrow.Cells["WarehouseID"].Value.ToString());
+                    GlobalVariables.warehousenameglobal = selectedrow.Cells["Name"].Value.ToString();*/
                     this.Close();
                 }
             }
@@ -39,8 +40,8 @@ namespace SmartFlow.Purchase
                 {
                     if (dgvwarehouseselection.SelectedRows.Count == 1)
                     {
-                        GlobalVariables.warehouseidglobal = Convert.ToInt32(dgvwarehouseselection.CurrentRow.Cells["WarehouseID"].Value);
-                        GlobalVariables.warehousenameglobal = dgvwarehouseselection.CurrentRow.Cells["Name"].Value.ToString();
+                        /*GlobalVariables.warehouseidglobal = Convert.ToInt32(dgvwarehouseselection.CurrentRow.Cells["WarehouseID"].Value);
+                        GlobalVariables.warehousenameglobal = dgvwarehouseselection.CurrentRow.Cells["Name"].Value.ToString();*/
                         this.Close();
                     }
                 }

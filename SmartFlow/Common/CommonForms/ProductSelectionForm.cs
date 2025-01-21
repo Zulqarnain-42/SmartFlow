@@ -1,5 +1,4 @@
-﻿using SmartFlow.Masters;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace SmartFlow.Common.Forms
@@ -8,18 +7,19 @@ namespace SmartFlow.Common.Forms
     {
         private DateTime lastEnterPressTime;
         private const int doubleEnterThreshold = 500; // Time in milliseconds
+        public event EventHandler<ProductData> ProductDataSelected;
         public ProductSelectionForm()
         {
             InitializeComponent();
         }
-        private void searchtxtbox_TextChanged(object sender, EventArgs e)
+        private async void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
-            CommonFunction.GetProduct(searchtxtbox.Text,dgvproducts);
+            await CommonFunction.GetProductAsync(searchtxtbox.Text,dgvproducts);
         }
-        private void ProductSelectionForm_Load(object sender, EventArgs e)
+        private async void ProductSelectionForm_Load(object sender, EventArgs e)
         {
             searchtxtbox.Focus();
-            CommonFunction.GetProduct("",dgvproducts);
+            await CommonFunction.GetProductAsync("",dgvproducts);
         }
         private void dgvproducts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -34,43 +34,35 @@ namespace SmartFlow.Common.Forms
                         // Get the selected row
                         DataGridViewRow selectedRow = dgvproducts.CurrentRow;
 
-                        // Validate and assign product details
+                        // Safe checks for each value and parsing
                         if (selectedRow != null)
                         {
-                            // Validate and safely parse product ID
-                            if (int.TryParse(selectedRow.Cells["ID"]?.Value?.ToString(), out int productId))
+                            // Parse supplier ID
+                            if (int.TryParse(selectedRow.Cells["ID"]?.Value?.ToString(), out int productid))
                             {
-                                GlobalVariables.productidglobal = productId;
+                                float productPrice = float.TryParse(selectedRow.Cells["PRICE"].Value?.ToString(), out float price) ? price : 0.0f;
+                                // Raise the event with the data to pass to the parent form
+                                ProductDataSelected?.Invoke(this, new ProductData(
+                                    productid,
+                                    selectedRow.Cells["MFR"]?.Value?.ToString() ?? "Unknown",
+                                    selectedRow.Cells["TITLE"]?.Value?.ToString() ?? "Unknown",
+                                    productPrice,
+                                    selectedRow.Cells["UPC"]?.Value?.ToString() ?? "Unknown",
+                                    selectedRow.Cells["Barcode"]?.Value?.ToString() ?? "Unknown"
+                                ));
+
+                                // Close the child form after passing the data
+                                this.Close();
                             }
                             else
                             {
-                                MessageBox.Show("Invalid product ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                MessageBox.Show("Invalid Supplier ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return;
                             }
-
-                            // Assign product name
-                            GlobalVariables.productnameglobal = selectedRow.Cells["TITLE"]?.Value?.ToString();
-
-                            // Validate and assign manufacturer
-                            GlobalVariables.productmfrglobal = selectedRow.Cells["MFR"]?.Value?.ToString() ?? "Unknown";
-
-                            // Validate and parse product price
-                            if (float.TryParse(selectedRow.Cells["PRICE"]?.Value?.ToString(), out float productPrice))
-                            {
-                                GlobalVariables.productpriceglobal = productPrice;
-                            }
-                            else
-                            {
-                                MessageBox.Show("Invalid product price.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-
-                            // Assign product UPC and barcode
-                            GlobalVariables.productupcglobal = selectedRow.Cells["UPC"]?.Value?.ToString();
-                            GlobalVariables.productbarcodeglobal = selectedRow.Cells["BARCODE"]?.Value?.ToString();
-
-                            // Close the form
-                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Selected row is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
@@ -101,42 +93,32 @@ namespace SmartFlow.Common.Forms
 
                     if (selectedRow != null)
                     {
-                        // Validate and safely parse product ID
-                        if (int.TryParse(selectedRow.Cells["ID"]?.Value?.ToString(), out int productId))
+                        // Parse supplier ID
+                        if (int.TryParse(selectedRow.Cells["ID"]?.Value?.ToString(), out int productid))
                         {
-                            GlobalVariables.productidglobal = productId;
+                            float productPrice = float.TryParse(selectedRow.Cells["PRICE"].Value?.ToString(), out float price) ? price : 0.0f;
+                            // Raise the event with the data to pass to the parent form
+                            ProductDataSelected?.Invoke(this, new ProductData(
+                                productid,
+                                selectedRow.Cells["MFR"]?.Value?.ToString() ?? "Unknown",
+                                selectedRow.Cells["TITLE"]?.Value?.ToString() ?? "Unknown",
+                                productPrice,
+                                selectedRow.Cells["UPC"]?.Value?.ToString() ?? "Unknown",
+                                selectedRow.Cells["Barcode"]?.Value?.ToString() ?? "Unknown"
+                            ));
+
+                            // Close the child form after passing the data
+                            this.Close();
                         }
                         else
                         {
-                            MessageBox.Show("Invalid product ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("Invalid Supplier ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
-
-                        // Assign product name and manufacturer, with null checks
-                        GlobalVariables.productnameglobal = selectedRow.Cells["TITLE"]?.Value?.ToString() ?? "Unknown";
-                        GlobalVariables.productmfrglobal = selectedRow.Cells["MFR"]?.Value?.ToString() ?? "Unknown";
-
-                        // Validate and parse product price
-                        if (float.TryParse(selectedRow.Cells["PRICE"]?.Value?.ToString(), out float productPrice))
-                        {
-                            GlobalVariables.productpriceglobal = productPrice;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Invalid product price.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        // Assign product UPC and barcode with null checks
-                        GlobalVariables.productupcglobal = selectedRow.Cells["UPC"]?.Value?.ToString();
-                        GlobalVariables.productbarcodeglobal = selectedRow.Cells["BARCODE"]?.Value?.ToString();
-
-                        // Close the form
-                        this.Close();
                     }
                     else
                     {
-                        MessageBox.Show("No row selected.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Selected row is null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -158,12 +140,6 @@ namespace SmartFlow.Common.Forms
                     {
                         // Clear selection and reset global variables
                         dgvproducts.ClearSelection();
-                        GlobalVariables.productidglobal = 0;
-                        GlobalVariables.productnameglobal = null;
-                        GlobalVariables.productmfrglobal = null;
-                        GlobalVariables.productpriceglobal = 0;
-                        GlobalVariables.productupcglobal = null;
-                        GlobalVariables.productbarcodeglobal = null;
                     }
                     else
                     {

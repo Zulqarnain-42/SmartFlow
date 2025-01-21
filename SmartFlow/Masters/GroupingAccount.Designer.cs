@@ -50,6 +50,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.rEMOVEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.accountheadidlbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvgroupingaccount)).BeginInit();
@@ -62,8 +63,9 @@
             this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1013, 45);
+            this.panel1.Size = new System.Drawing.Size(760, 37);
             this.panel1.TabIndex = 0;
             // 
             // headinglbl
@@ -73,14 +75,16 @@
             this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(1013, 45);
+            this.headinglbl.Size = new System.Drawing.Size(760, 37);
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "ACCOUNT GROUPING";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.accountheadidlbl);
             this.panel2.Controls.Add(this.groupingcodelbl);
             this.panel2.Controls.Add(this.groupingaccountidlbl);
             this.panel2.Controls.Add(this.addbtn);
@@ -94,17 +98,19 @@
             this.panel2.Controls.Add(this.groupingnametxtbox);
             this.panel2.Controls.Add(this.groupingnamelbl);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 45);
+            this.panel2.Location = new System.Drawing.Point(0, 37);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1013, 234);
+            this.panel2.Size = new System.Drawing.Size(760, 190);
             this.panel2.TabIndex = 1;
             // 
             // groupingcodelbl
             // 
             this.groupingcodelbl.AutoSize = true;
-            this.groupingcodelbl.Location = new System.Drawing.Point(623, 40);
+            this.groupingcodelbl.Location = new System.Drawing.Point(467, 32);
+            this.groupingcodelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.groupingcodelbl.Name = "groupingcodelbl";
-            this.groupingcodelbl.Size = new System.Drawing.Size(105, 16);
+            this.groupingcodelbl.Size = new System.Drawing.Size(82, 13);
             this.groupingcodelbl.TabIndex = 29;
             this.groupingcodelbl.Text = "groupingcodelbl";
             this.groupingcodelbl.Visible = false;
@@ -112,9 +118,10 @@
             // groupingaccountidlbl
             // 
             this.groupingaccountidlbl.AutoSize = true;
-            this.groupingaccountidlbl.Location = new System.Drawing.Point(620, 20);
+            this.groupingaccountidlbl.Location = new System.Drawing.Point(465, 16);
+            this.groupingaccountidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.groupingaccountidlbl.Name = "groupingaccountidlbl";
-            this.groupingaccountidlbl.Size = new System.Drawing.Size(132, 16);
+            this.groupingaccountidlbl.Size = new System.Drawing.Size(105, 13);
             this.groupingaccountidlbl.TabIndex = 28;
             this.groupingaccountidlbl.Text = "groupingaccountidlbl";
             this.groupingaccountidlbl.Visible = false;
@@ -122,9 +129,10 @@
             // addbtn
             // 
             this.addbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addbtn.Location = new System.Drawing.Point(619, 178);
+            this.addbtn.Location = new System.Drawing.Point(464, 145);
+            this.addbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.addbtn.Name = "addbtn";
-            this.addbtn.Size = new System.Drawing.Size(117, 32);
+            this.addbtn.Size = new System.Drawing.Size(88, 26);
             this.addbtn.TabIndex = 27;
             this.addbtn.Text = "ADD";
             this.addbtn.UseVisualStyleBackColor = true;
@@ -133,9 +141,10 @@
             // exitbtn
             // 
             this.exitbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.exitbtn.Location = new System.Drawing.Point(816, 168);
+            this.exitbtn.Location = new System.Drawing.Point(612, 136);
+            this.exitbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.exitbtn.Name = "exitbtn";
-            this.exitbtn.Size = new System.Drawing.Size(185, 42);
+            this.exitbtn.Size = new System.Drawing.Size(139, 34);
             this.exitbtn.TabIndex = 25;
             this.exitbtn.Text = "EXIT";
             this.exitbtn.UseVisualStyleBackColor = true;
@@ -144,9 +153,10 @@
             // savebtn
             // 
             this.savebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.savebtn.Location = new System.Drawing.Point(816, 120);
+            this.savebtn.Location = new System.Drawing.Point(612, 98);
+            this.savebtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.savebtn.Name = "savebtn";
-            this.savebtn.Size = new System.Drawing.Size(185, 42);
+            this.savebtn.Size = new System.Drawing.Size(139, 34);
             this.savebtn.TabIndex = 24;
             this.savebtn.Text = "SAVE";
             this.savebtn.UseVisualStyleBackColor = true;
@@ -155,9 +165,10 @@
             // accountidlbl
             // 
             this.accountidlbl.AutoSize = true;
-            this.accountidlbl.Location = new System.Drawing.Point(813, 76);
+            this.accountidlbl.Location = new System.Drawing.Point(610, 62);
+            this.accountidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.accountidlbl.Name = "accountidlbl";
-            this.accountidlbl.Size = new System.Drawing.Size(79, 16);
+            this.accountidlbl.Size = new System.Drawing.Size(64, 13);
             this.accountidlbl.TabIndex = 23;
             this.accountidlbl.Text = "accountidlbl";
             this.accountidlbl.Visible = false;
@@ -169,9 +180,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.selectaccounttxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.selectaccounttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectaccounttxtbox.Location = new System.Drawing.Point(167, 178);
+            this.selectaccounttxtbox.Location = new System.Drawing.Point(125, 145);
+            this.selectaccounttxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.selectaccounttxtbox.Name = "selectaccounttxtbox";
-            this.selectaccounttxtbox.Size = new System.Drawing.Size(446, 32);
+            this.selectaccounttxtbox.Size = new System.Drawing.Size(335, 27);
             this.selectaccounttxtbox.TabIndex = 2;
             this.selectaccounttxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectaccounttxtbox_MouseClick);
             this.selectaccounttxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.selectaccounttxtbox_KeyDown);
@@ -180,9 +192,10 @@
             // 
             this.selectaccountlbl.AutoSize = true;
             this.selectaccountlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectaccountlbl.Location = new System.Drawing.Point(12, 182);
+            this.selectaccountlbl.Location = new System.Drawing.Point(9, 148);
+            this.selectaccountlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.selectaccountlbl.Name = "selectaccountlbl";
-            this.selectaccountlbl.Size = new System.Drawing.Size(145, 23);
+            this.selectaccountlbl.Size = new System.Drawing.Size(114, 18);
             this.selectaccountlbl.TabIndex = 19;
             this.selectaccountlbl.Text = "SELECT ACCOUNT";
             // 
@@ -193,19 +206,21 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.descriptiontxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.descriptiontxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.descriptiontxtbox.Location = new System.Drawing.Point(167, 48);
+            this.descriptiontxtbox.Location = new System.Drawing.Point(125, 39);
+            this.descriptiontxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.descriptiontxtbox.Multiline = true;
             this.descriptiontxtbox.Name = "descriptiontxtbox";
-            this.descriptiontxtbox.Size = new System.Drawing.Size(446, 124);
+            this.descriptiontxtbox.Size = new System.Drawing.Size(335, 101);
             this.descriptiontxtbox.TabIndex = 1;
             // 
             // descriptionlbl
             // 
             this.descriptionlbl.AutoSize = true;
             this.descriptionlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.descriptionlbl.Location = new System.Drawing.Point(12, 65);
+            this.descriptionlbl.Location = new System.Drawing.Point(9, 53);
+            this.descriptionlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.descriptionlbl.Name = "descriptionlbl";
-            this.descriptionlbl.Size = new System.Drawing.Size(116, 23);
+            this.descriptionlbl.Size = new System.Drawing.Size(90, 18);
             this.descriptionlbl.TabIndex = 17;
             this.descriptionlbl.Text = "DESCRIPTION";
             // 
@@ -216,18 +231,20 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupingnametxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.groupingnametxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupingnametxtbox.Location = new System.Drawing.Point(167, 10);
+            this.groupingnametxtbox.Location = new System.Drawing.Point(125, 8);
+            this.groupingnametxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupingnametxtbox.Name = "groupingnametxtbox";
-            this.groupingnametxtbox.Size = new System.Drawing.Size(446, 32);
+            this.groupingnametxtbox.Size = new System.Drawing.Size(335, 27);
             this.groupingnametxtbox.TabIndex = 0;
             // 
             // groupingnamelbl
             // 
             this.groupingnamelbl.AutoSize = true;
             this.groupingnamelbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupingnamelbl.Location = new System.Drawing.Point(12, 14);
+            this.groupingnamelbl.Location = new System.Drawing.Point(9, 11);
+            this.groupingnamelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.groupingnamelbl.Name = "groupingnamelbl";
-            this.groupingnamelbl.Size = new System.Drawing.Size(149, 23);
+            this.groupingnamelbl.Size = new System.Drawing.Size(116, 18);
             this.groupingnamelbl.TabIndex = 0;
             this.groupingnamelbl.Text = "GROUPING NAME";
             // 
@@ -245,13 +262,14 @@
             this.dgvgroupingaccount.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvgroupingaccount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvgroupingaccount.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvgroupingaccount.Location = new System.Drawing.Point(0, 279);
+            this.dgvgroupingaccount.Location = new System.Drawing.Point(0, 227);
+            this.dgvgroupingaccount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvgroupingaccount.Name = "dgvgroupingaccount";
             this.dgvgroupingaccount.RowHeadersVisible = false;
             this.dgvgroupingaccount.RowHeadersWidth = 51;
             this.dgvgroupingaccount.RowTemplate.Height = 24;
             this.dgvgroupingaccount.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvgroupingaccount.Size = new System.Drawing.Size(1013, 312);
+            this.dgvgroupingaccount.Size = new System.Drawing.Size(760, 253);
             this.dgvgroupingaccount.TabIndex = 2;
             this.dgvgroupingaccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvgroupingaccount_KeyDown);
             // 
@@ -275,12 +293,12 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rEMOVEToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 28);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(121, 26);
             // 
             // rEMOVEToolStripMenuItem
             // 
             this.rEMOVEToolStripMenuItem.Name = "rEMOVEToolStripMenuItem";
-            this.rEMOVEToolStripMenuItem.Size = new System.Drawing.Size(136, 24);
+            this.rEMOVEToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.rEMOVEToolStripMenuItem.Text = "REMOVE";
             this.rEMOVEToolStripMenuItem.Click += new System.EventHandler(this.rEMOVEToolStripMenuItem_Click);
             // 
@@ -288,17 +306,29 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // accountheadidlbl
+            // 
+            this.accountheadidlbl.AutoSize = true;
+            this.accountheadidlbl.Location = new System.Drawing.Point(467, 82);
+            this.accountheadidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.accountheadidlbl.Name = "accountheadidlbl";
+            this.accountheadidlbl.Size = new System.Drawing.Size(88, 13);
+            this.accountheadidlbl.TabIndex = 30;
+            this.accountheadidlbl.Text = "accountheadidlbl";
+            this.accountheadidlbl.Visible = false;
+            // 
             // GroupingAccount
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1013, 591);
+            this.ClientSize = new System.Drawing.Size(760, 480);
             this.Controls.Add(this.dgvgroupingaccount);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "GroupingAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ACCOUNT GROUPING";
@@ -337,5 +367,6 @@
         private System.Windows.Forms.Label groupingcodelbl;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem rEMOVEToolStripMenuItem;
+        private System.Windows.Forms.Label accountheadidlbl;
     }
 }

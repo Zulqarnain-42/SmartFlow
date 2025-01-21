@@ -8,11 +8,13 @@ namespace SmartFlow.Stock
 {
     public partial class OpeningStock : Form
     {
+        private int currentRowIndex = 0;
+        private int currentCellIndex = 0;
         public OpeningStock()
         {
             InitializeComponent();
         }
-        private void FillGrid(string searchvalue)
+        private async void FillGrid(string searchvalue)
         {
             try
             {
@@ -28,7 +30,7 @@ namespace SmartFlow.Stock
                     query = BuildSearchQuery(searchvalue);
                 }
 
-                DataTable datatableProduct = DatabaseAccess.Retrive(query);
+                DataTable datatableProduct = await DatabaseAccess.RetriveAsync(query);
                 if (datatableProduct.Rows.Count > 0)
                 {
                     dgvProducts.DataSource = datatableProduct;
@@ -45,11 +47,11 @@ namespace SmartFlow.Stock
                 }
 
                 // Restore the cursor position
-                if (GlobalVariables.currentRowIndex >= 0 && GlobalVariables.currentCellIndex >= 0 &&
-                    GlobalVariables.currentRowIndex < dgvProducts.Rows.Count &&
-                    GlobalVariables.currentCellIndex < dgvProducts.Rows[GlobalVariables.currentRowIndex].Cells.Count)
+                if (currentRowIndex >= 0 && currentCellIndex >= 0 &&
+                    currentRowIndex < dgvProducts.Rows.Count &&
+                    currentCellIndex < dgvProducts.Rows[currentRowIndex].Cells.Count)
                 {
-                    dgvProducts.CurrentCell = dgvProducts.Rows[GlobalVariables.currentRowIndex].Cells[GlobalVariables.currentCellIndex];
+                    dgvProducts.CurrentCell = dgvProducts.Rows[currentRowIndex].Cells[currentCellIndex];
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -58,7 +60,7 @@ namespace SmartFlow.Stock
         {
             FillGrid("");
         }
-        private void dgvProducts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private async void dgvProducts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -78,11 +80,11 @@ namespace SmartFlow.Stock
 
                         updateQuantity.FormClosed += delegate
                         {
-                            GlobalVariables.currentRowIndex = dgvProducts.CurrentCell.RowIndex;
-                            GlobalVariables.currentCellIndex = dgvProducts.CurrentCell.ColumnIndex;
+                            currentRowIndex = dgvProducts.CurrentCell.RowIndex;
+                            currentCellIndex = dgvProducts.CurrentCell.ColumnIndex;
                             FillGrid("");
                         };
-                        CommonFunction.DisposeOnClose(updateQuantity);
+                        await CommonFunction.DisposeOnCloseAsync(updateQuantity);
                         updateQuantity.Show();
                     }
                     else
@@ -102,8 +104,8 @@ namespace SmartFlow.Stock
             int firstVisibleCellIndex = GetFirstVisibleCellIndex(dgvProducts);
             if (firstVisibleRowIndex >= 0)
             {
-                GlobalVariables.currentRowIndex = firstVisibleRowIndex;
-                GlobalVariables.currentCellIndex = firstVisibleCellIndex;
+                currentRowIndex = firstVisibleRowIndex;
+                currentCellIndex = firstVisibleCellIndex;
             }
         }
         private int GetFirstVisibleCellIndex(DataGridView dataGridView)

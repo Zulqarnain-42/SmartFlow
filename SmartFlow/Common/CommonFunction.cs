@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.VariantTypes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -8,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Common
@@ -15,30 +15,17 @@ namespace SmartFlow.Common
     public class CommonFunction
     {
         private static string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        public static void GetSupplier(string searchValue, DataGridView dgv)
+        public static async Task GetSupplierAsync(string searchValue, DataGridView dgv)
         {
             try
             {
-                string query = @"
-            SELECT 
-                AccountSubControlTable.AccountSubControlID [ID],
-                AccountSubControlTable.CodeAccount [Code],
-                AccountSubControlTable.AccountSubControlName [Account Name],
-                AccountSubControlTable.CompanyName [Company Name],
-                AccountSubControlTable.MobileNo [Mobile],
-                AccountSubControlTable.Email [Email],
-                AccountSubControlTable.CreatedAt [Created],
-                AccountSubControlTable.CreatedDay [Day]
-            FROM AccountSubControlTable
-            WHERE IsSupplier = @IsSupplier
-        ";
+                string query = @"SELECT AccountSubControlTable.AccountSubControlID [ID],AccountSubControlTable.CodeAccount [Code],AccountSubControlTable.AccountSubControlName [Account Name],
+                    AccountSubControlTable.CompanyName [Company Name],AccountSubControlTable.MobileNo [Mobile],AccountSubControlTable.Email [Email],AccountSubControlTable.CreatedAt [Created],
+                    AccountSubControlTable.CreatedDay [Day] FROM AccountSubControlTable WHERE IsSupplier = @IsSupplier";
 
                 if (!string.IsNullOrWhiteSpace(searchValue))
                 {
-                    query += @"
-                AND (AccountSubControlTable.AccountSubControlName LIKE @SearchValue OR 
-                     AccountSubControlTable.CompanyName LIKE @SearchValue)
-            ";
+                    query += @"AND (AccountSubControlTable.AccountSubControlName LIKE @SearchValue OR AccountSubControlTable.CompanyName LIKE @SearchValue)";
                 }
 
                 using (var connection = new SqlConnection(connectionString))
@@ -49,8 +36,8 @@ namespace SmartFlow.Common
                         command.Parameters.AddWithValue("@IsSupplier", true);
                         command.Parameters.AddWithValue("@SearchValue", "%" + searchValue + "%");
 
-                        connection.Open();
-                        using (var reader = command.ExecuteReader())
+                        await connection.OpenAsync();
+                        using (var reader = await command.ExecuteReaderAsync())
                         {
                             DataTable dt = new DataTable();
                             dt.Load(reader);
@@ -77,20 +64,18 @@ namespace SmartFlow.Common
                 // Catch other errors
                 MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            // Ensuring that the method returns a completed task
+            await Task.CompletedTask;
         }
 
-
-        public static void GetItemSerialNo(string searchValue, int searchId, DataGridView dgv)
+        public static async Task GetItemSerialNoAsync(string searchValue, int searchId, DataGridView dgv)
         {
             try
             {
                 if (!string.IsNullOrWhiteSpace(searchValue) && searchId > 0)
                 {
-                    string query = @"
-                SELECT SerialNOID, ProductId, SerialNo 
-                FROM SerialNoTable 
-                WHERE ProductId = @SearchId AND IsSold = @IsSold
-            ";
+                    string query = @"SELECT SerialNOID, ProductId, SerialNo FROM SerialNoTable WHERE ProductId = @SearchId AND IsSold = @IsSold";
 
                     using (var connection = new SqlConnection(connectionString))
                     {
@@ -100,8 +85,8 @@ namespace SmartFlow.Common
                             command.Parameters.AddWithValue("@SearchId", searchId);
                             command.Parameters.AddWithValue("@IsSold", false);
 
-                            connection.Open();
-                            using (var reader = command.ExecuteReader())
+                            await connection.OpenAsync(); // Use asynchronous method to open the connection
+                            using (var reader = await command.ExecuteReaderAsync()) // Asynchronous reader execution
                             {
                                 DataTable dt = new DataTable();
                                 dt.Load(reader);
@@ -132,92 +117,49 @@ namespace SmartFlow.Common
             {
                 MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            // Return a completed task to ensure the method returns a Task as expected
+            await Task.CompletedTask;
         }
 
-
-        public static void GetCustomer(string searchValue, DataGridView dgv)
+        public static async Task GetCustomerAsync(string searchValue, DataGridView dgv)
         {
             try
             {
+                string query = @"SELECT AccountSubControlTable.AccountSubControlID [ID],AccountSubControlTable.CodeAccount [Code],AccountSubControlTable.AccountSubControlName [Account Name],
+                    AccountSubControlTable.CompanyName [Company Name],AccountSubControlTable.MobileNo [Mobile],AccountSubControlTable.Email [Email],AccountSubControlTable.CreatedAt [Created],
+                    AccountSubControlTable.CreatedDay [Day] FROM AccountSubControlTable WHERE IsCustomer = 1";
+
+                // Add search filter if a search value is provided
                 if (!string.IsNullOrWhiteSpace(searchValue))
                 {
-                    // Search with the provided value
-                    string query = @"
-                SELECT 
-                    AccountSubControlTable.AccountSubControlID [ID],
-                    AccountSubControlTable.CodeAccount [Code],
-                    AccountSubControlTable.AccountSubControlName [Account Name],
-                    AccountSubControlTable.CompanyName [Company Name],
-                    AccountSubControlTable.MobileNo [Mobile],
-                    AccountSubControlTable.Email [Email],
-                    AccountSubControlTable.CreatedAt [Created],
-                    AccountSubControlTable.CreatedDay [Day]
-                FROM AccountSubControlTable 
-                WHERE (AccountSubControlTable.AccountSubControlName LIKE @SearchValue 
-                    OR AccountSubControlTable.CompanyName LIKE @SearchValue) 
-                    AND IsCustomer = 1";
-
-                    using (var connection = new SqlConnection(connectionString))
-                    {
-                        using (var command = new SqlCommand(query, connection))
-                        {
-                            // Add parameters to prevent SQL injection
-                            command.Parameters.AddWithValue("@SearchValue", "%" + searchValue + "%");
-
-                            connection.Open();
-                            using (var reader = command.ExecuteReader())
-                            {
-                                DataTable dt = new DataTable();
-                                dt.Load(reader);
-
-                                if (dt.Rows.Count > 0)
-                                {
-                                    dgv.DataSource = dt;
-                                    dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("No customers found.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                }
-                            }
-                        }
-                    }
+                    query += @"AND (AccountSubControlTable.AccountSubControlName LIKE @SearchValue OR AccountSubControlTable.CompanyName LIKE @SearchValue)";
                 }
-                else
+
+                using (var connection = new SqlConnection(connectionString))
                 {
-                    // Search without filter if no search value is provided
-                    string query = @"
-                SELECT 
-                    AccountSubControlTable.AccountSubControlID [ID],
-                    AccountSubControlTable.CodeAccount [Code],
-                    AccountSubControlTable.AccountSubControlName [Account Name],
-                    AccountSubControlTable.CompanyName [Company Name],
-                    AccountSubControlTable.MobileNo [Mobile],
-                    AccountSubControlTable.Email [Email],
-                    AccountSubControlTable.CreatedAt [Created],
-                    AccountSubControlTable.CreatedDay [Day]
-                FROM AccountSubControlTable 
-                WHERE IsCustomer = 1";
-
-                    using (var connection = new SqlConnection(connectionString))
+                    using (var command = new SqlCommand(query, connection))
                     {
-                        using (var command = new SqlCommand(query, connection))
+                        // Add parameters to prevent SQL injection
+                        if (!string.IsNullOrWhiteSpace(searchValue))
                         {
-                            connection.Open();
-                            using (var reader = command.ExecuteReader())
-                            {
-                                DataTable dt = new DataTable();
-                                dt.Load(reader);
+                            command.Parameters.AddWithValue("@SearchValue", "%" + searchValue + "%");
+                        }
 
-                                if (dt.Rows.Count > 0)
-                                {
-                                    dgv.DataSource = dt;
-                                    dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("No customers found.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                }
+                        await connection.OpenAsync(); // Asynchronous method to open the connection
+                        using (var reader = await command.ExecuteReaderAsync()) // Asynchronous reader execution
+                        {
+                            DataTable dt = new DataTable();
+                            dt.Load(reader);
+
+                            if (dt.Rows.Count > 0)
+                            {
+                                dgv.DataSource = dt;
+                                dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                            }
+                            else
+                            {
+                                MessageBox.Show("No customers found.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                     }
@@ -233,8 +175,7 @@ namespace SmartFlow.Common
             }
         }
 
-
-        public static void GetProduct(string searchValue, DataGridView dgv)
+        public static async Task GetProductAsync(string searchValue, DataGridView dgv)
         {
             try
             {
@@ -243,8 +184,8 @@ namespace SmartFlow.Common
                     ? GetDefaultProductQuery()
                     : BuildSearchQueryProduct(searchValue);
 
-                // Retrieve product data from the database
-                DataTable dt = RetrieveData(query, searchValue);
+                // Retrieve product data from the database asynchronously
+                DataTable dt = await RetrieveDataAsync(query, searchValue);
 
                 // Populate DataGridView with data if available
                 if (dt != null && dt.Rows.Count > 0)
@@ -264,38 +205,43 @@ namespace SmartFlow.Common
             }
         }
 
+
         private static string GetDefaultProductQuery()
         {
             // Default query when no search value is provided
-            return @"
-        SELECT ProductID [ID], ProductName [TITLE], StandardPrice [PRICE], UPC, EAN, MFR, Barcode [BARCODE] 
-        FROM ProductTable";
+            return @"SELECT ProductID [ID], ProductName [TITLE], StandardPrice [PRICE], UPC, EAN, MFR, Barcode [BARCODE] FROM ProductTable";
         }
 
-        private static DataTable RetrieveData(string query, string searchValue)
+        public static async Task<DataTable> RetrieveDataAsync(string query, string searchValue)
         {
-            // This method retrieves data from the database using a parameterized query
+            DataTable dt = new DataTable();
             try
             {
                 using (var connection = new SqlConnection(connectionString))
-                using (var command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@SearchValue", "%" + searchValue + "%");
-
-                    using (var adapter = new SqlDataAdapter(command))
+                    using (var command = new SqlCommand(query, connection))
                     {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-                        return dt;
+                        if (!string.IsNullOrWhiteSpace(searchValue))
+                        {
+                            command.Parameters.AddWithValue("@SearchValue", "%" + searchValue + "%");
+                        }
+
+                        await connection.OpenAsync();
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            dt.Load(reader);
+                        }
                     }
                 }
             }
-            catch (Exception ex)
+            catch (SqlException sqlEx)
             {
-                LogError(ex);
-                throw new ApplicationException("Error retrieving data from the database.");
+                LogError(sqlEx);
+                throw;  // Rethrow exception to be caught by the calling method
             }
+            return dt;
         }
+
 
         private static void ShowNoResultsMessage()
         {
@@ -319,8 +265,7 @@ namespace SmartFlow.Common
             }
         }
 
-
-        public static void GetAccountInfo(string searchValue, DataGridView dgv)
+        public static async Task GetAccountInfoAsync(string searchValue, DataGridView dgv)
         {
             try
             {
@@ -329,14 +274,15 @@ namespace SmartFlow.Common
                     ? GetDefaultAccountQuery()
                     : BuildSearchQueryAccount(searchValue);
 
-                // Retrieve account data from the database
-                DataTable dt = RetrieveData(query, searchValue);
+                // Retrieve account data from the database asynchronously
+                DataTable dt = await RetrieveDataAsync(query, searchValue);
 
                 // Populate DataGridView with data if available
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     dgv.DataSource = dt;
-                    dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dgv.Columns[1].Visible = false;
+                    dgv.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
                 else
                 {
@@ -350,94 +296,128 @@ namespace SmartFlow.Common
             }
         }
 
+
         private static string GetDefaultAccountQuery()
         {
             // Default query when no search value is provided
-            return @"
-        SELECT AccountSubControlID [ID], AccountSubControlName [ACCOUNT NAME], Email [EMAIL], MobileNo [MOBILE], CodeAccount 
-        FROM AccountSubControlTable";
+            return @"SELECT AccountSubControlID [ID], AccountHead_ID [HEADID], AccountSubControlName [ACCOUNT NAME], Email [EMAIL], MobileNo [MOBILE], CodeAccount FROM AccountSubControlTable";
         }
 
         private static string BuildSearchQueryAccount(string searchValue)
         {
             // Build the search query using parameterization to avoid SQL injection
-            return @"
-        SELECT AccountSubControlID [ID], AccountSubControlName [ACCOUNT NAME], Email [EMAIL], MobileNo [MOBILE], CodeAccount 
-        FROM AccountSubControlTable 
-        WHERE AccountSubControlName LIKE @SearchValue";
+            return @"SELECT AccountSubControlID [ID], AccountHead_ID [HEADID], AccountSubControlName [ACCOUNT NAME], Email [EMAIL], MobileNo [MOBILE], CodeAccount FROM AccountSubControlTable 
+                WHERE AccountSubControlName LIKE @SearchValue";
         }
 
-
-        public static void GetAccountGroupInfo(string searchvalue, DataGridView dgv)
+        /*public static async Task GetAccountGroupInfoAsync(string searchvalue, DataGridView dgv)
         {
             try
             {
                 string query = string.Empty;
                 DataTable dt = new DataTable();
-                if (string.IsNullOrEmpty(searchvalue) && String.IsNullOrWhiteSpace(searchvalue))
+
+                // Check if the search value is null or empty
+                if (string.IsNullOrEmpty(searchvalue) || string.IsNullOrWhiteSpace(searchvalue))
                 {
-                    query = "SELECT AccountControlID [ID],AccountControlName [Account Name],AccountHead_ID,Alias FROM AccountControlTable";
+                    query = "SELECT AccountControlID [ID], AccountControlName [Account Name], AccountHead_ID, Alias FROM AccountControlTable";
                 }
                 else
                 {
-                    query = "SELECT AccountControlID [ID],AccountControlName [Account Name],AccountHead_ID,Alias FROM AccountControlTable" +
-                        "WHERE AccountControlName LIKE '%" + searchvalue + "%'";
+                    query = "SELECT AccountControlID [ID], AccountControlName [Account Name], AccountHead_ID, Alias FROM AccountControlTable" +
+                            " WHERE AccountControlName LIKE @SearchValue";
                 }
 
-                dt = DatabaseAccess.Retrive(query);
+                // Retrieve data asynchronously
+                *//*dt = await DatabaseAccess.RetriveAsync(query, searchvalue);*//*
+                dt = null;
+                // Populate DataGridView if data is available
                 if (dt.Rows.Count > 0)
                 {
                     dgv.DataSource = dt;
                     dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
+                else
+                {
+                    MessageBox.Show("No results found.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-        }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }*/
 
-        public static void GetProductQtyWarehouse(DataGridView dgv,string productmfr,int productid)
+
+        /*public static async Task GetProductQtyWarehouseAsync(DataGridView dgv, string productmfr, int productid)
         {
             try
             {
-                string getproductinventoryquery = string.Format("SELECT StockTable.WarehouseID [ID],WarehouseTable.Name [Warehouse Name]," +
-                    "SUM(COALESCE(StockTable.[Quantity],0)) + COALESCE(InvoiceDetailsTable.Quantity, 0) AS Quantity " +
+                string getproductinventoryquery = string.Format("SELECT StockTable.WarehouseID [ID], WarehouseTable.Name [Warehouse Name], " +
+                    "SUM(COALESCE(StockTable.[Quantity], 0)) + COALESCE(InvoiceDetailsTable.Quantity, 0) AS Quantity " +
                     "FROM StockTable INNER JOIN WarehouseTable ON WarehouseTable.WarehouseID = StockTable.Warehouseid " +
                     "LEFT JOIN ProductTable ON ProductTable.ProductID = StockTable.ProductID " +
                     "AND ProductTable.WarehouseID = WarehouseTable.WarehouseID " +
                     "LEFT JOIN InvoiceDetailsTable ON InvoiceDetailsTable.Productid = StockTable.ProductID " +
                     "AND InvoiceDetailsTable.Productid = ProductTable.ProductID " +
-                    "AND InvoiceDetailsTable.Warehouseid = WarehouseTable.WarehouseID WHERE StockTable.ProductID = '" + productid + "' " +
+                    "AND InvoiceDetailsTable.Warehouseid = WarehouseTable.WarehouseID WHERE StockTable.ProductID = @ProductID " +
                     "AND StockTable.Warehouseid IN (SELECT WarehouseID FROM WarehouseTable) " +
-                    "GROUP BY StockTable.ProductID,StockTable.Warehouseid,WarehouseTable.Name,InvoiceDetailsTable.Quantity " +
+                    "GROUP BY StockTable.ProductID, StockTable.Warehouseid, WarehouseTable.Name, InvoiceDetailsTable.Quantity " +
                     "ORDER BY StockTable.ProductID");
-                
-                DataTable datainventory = DatabaseAccess.Retrive(getproductinventoryquery);
-                if (datainventory != null && datainventory.Rows.Count > 0) 
+
+                // Retrieve data asynchronously
+                *//*DataTable datainventory = await DatabaseAccess.RetriveAsync(getproductinventoryquery, productid);*//*
+                DataTable datainventory = null;
+                // Populate DataGridView if data is available
+                if (datainventory != null && datainventory.Rows.Count > 0)
                 {
                     dgv.DataSource = datainventory;
                     dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
+                else
+                {
+                    MessageBox.Show("No inventory data found.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-        }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }*/
 
-        public static void GetTransactionInfoProduct(DataGridView dgv,string productmfr,int productid)
+
+        /*public static async Task GetTransactionInfoProductAsync(DataGridView dgv, string productmfr, int productid)
         {
             try
             {
-                string query = string.Format("SELECT InvoiceTable.Invoiceid [ID],InvoiceTable.InvoiceNo [Invoice No],InvoiceTable.invoicedate [Date]," +
-                    "InvoiceTable.ClientID [Client ID],InvoiceTable.ClientName [Client Name],InvoiceDetailsTable.ProductName [Title],InvoiceDetailsTable.ItemSerialNoid [Serial No]," +
-                    "InvoiceDetailsTable.ItemWiseDiscount [Discount],InvoiceDetailsTable.ItemWiseVAT [VAT],InvoiceDetailsTable.UnitSalePrice [Price]," +
-                    "InvoiceDetailsTable.MFR [MFR],InvoiceDetailsTable.Quantity [Quantity],InvoiceDetailsTable.SystemSerialNoid [System Serial No] FROM InvoiceTable " +
+                // Create the query string using parameterized SQL to prevent SQL injection
+                string query = "SELECT InvoiceTable.Invoiceid [ID], InvoiceTable.InvoiceNo [Invoice No], InvoiceTable.invoicedate [Date], " +
+                    "InvoiceTable.ClientID [Client ID], InvoiceTable.ClientName [Client Name], InvoiceDetailsTable.ProductName [Title], " +
+                    "InvoiceDetailsTable.ItemSerialNoid [Serial No], InvoiceDetailsTable.ItemWiseDiscount [Discount], " +
+                    "InvoiceDetailsTable.ItemWiseVAT [VAT], InvoiceDetailsTable.UnitSalePrice [Price], InvoiceDetailsTable.MFR [MFR], " +
+                    "InvoiceDetailsTable.Quantity [Quantity], InvoiceDetailsTable.SystemSerialNoid [System Serial No] FROM InvoiceTable " +
                     "INNER JOIN InvoiceDetailsTable ON InvoiceDetailsTable.Invoicecode = InvoiceTable.InvoiceCode " +
-                    "WHERE InvoiceDetailsTable.Productid = '" + productid + "' AND ClientID = '" + GlobalVariables.customeridglobal + "'");
-                DataTable datatransaction = DatabaseAccess.Retrive(query);
+                    "WHERE InvoiceDetailsTable.Productid = @ProductID AND InvoiceTable.ClientID = @ClientID";
 
-                if(datatransaction!=null && datatransaction.Rows.Count > 0)
+                // Retrieve data asynchronously
+                DataTable datatransaction = await DatabaseAccess.RetriveAsync(query, productid, GlobalVariables.customeridglobal);
+
+                // Populate DataGridView if data is available
+                if (datatransaction != null && datatransaction.Rows.Count > 0)
                 {
-                    dgv.DataSource= datatransaction;
+                    dgv.DataSource = datatransaction;
                 }
-            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-        }
+                else
+                {
+                    MessageBox.Show("No transactions found.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }*/
+
 
         public static string BuildSearchQueryProduct(string searchTerm)
         {
@@ -473,40 +453,48 @@ namespace SmartFlow.Common
             return queryBuilder.ToString();
         }
 
-        public static Form IsFormOpen(Type formType)
+        public static async Task<Form> IsFormOpenAsync(Type formType)
         {
-            foreach (Form form in Application.OpenForms)
+            return await Task.Run(() =>
             {
-                if (form.GetType() == formType)
+                foreach (Form form in Application.OpenForms)
                 {
-                    return form;
+                    if (form.GetType() == formType)
+                    {
+                        return form;
+                    }
                 }
-            }
-            return null;
+                return null;
+            });
         }
 
-        public static string HashPassword(string password)
-        {
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                // ComputeHash - returns byte array
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
 
-                // Convert byte array to a string
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
+        public static async Task<string> HashPasswordAsync(string password)
+        {
+            return await Task.Run(() =>
+            {
+                using (SHA256 sha256Hash = SHA256.Create())
                 {
-                    builder.Append(bytes[i].ToString("x2"));
+                    // ComputeHash - returns byte array
+                    byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                    // Convert byte array to a string
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = 0; i < bytes.Length; i++)
+                    {
+                        builder.Append(bytes[i].ToString("x2"));
+                    }
+                    return builder.ToString();
                 }
-                return builder.ToString();
-            }
+            });
         }
 
-        public static void PopulateCurrencyComboBox(ComboBox combo)
+
+        public static async Task PopulateCurrencyComboBoxAsync(ComboBox combo)
         {
-            // Retrieve data from the database (example query)
+            // Retrieve data from the database asynchronously
             string query = "SELECT CurrencyId, Symbol, Name, CurrencyString FROM CurrencyTable";
-            DataTable dt = DatabaseAccess.Retrive(query);
+            DataTable dt = await Task.Run(() => DatabaseAccess.RetriveAsync(query));
 
             List<CurrencyData> currencies = new List<CurrencyData>();
 
@@ -523,6 +511,7 @@ namespace SmartFlow.Common
                 currencies.Add(currency);
             }
 
+            // Setting ComboBox data source on the UI thread
             combo.DataSource = currencies;
             combo.DisplayMember = "Name";  // Or whatever you want to display
             combo.ValueMember = "CurrencyId"; // The actual value will be the CurrencyId
@@ -530,15 +519,15 @@ namespace SmartFlow.Common
 
 
 
-        public static void FillUnitData(ComboBox combo)
+        public static async Task FillUnitDataAsync(ComboBox combo)
         {
             try
             {
                 // Initialize a DataTable to hold the unit data
-                DataTable dtUnit = InitializeUnitDataTable();
+                DataTable dtUnit = await InitializeUnitDataTableAsync();
 
-                // Retrieve the unit data from the database
-                DataTable dt = GetUnitDataFromDatabase();
+                // Retrieve the unit data from the database asynchronously
+                DataTable dt = await Task.Run(() => GetUnitDataFromDatabaseAsync());
 
                 // If data is retrieved successfully, populate the DataTable
                 if (dt != null && dt.Rows.Count > 0)
@@ -546,7 +535,7 @@ namespace SmartFlow.Common
                     PopulateUnitDataTable(dtUnit, dt);
                 }
 
-                // Set ComboBox data source
+                // Set ComboBox data source on the UI thread
                 SetComboBoxDataSource(combo, dtUnit);
             }
             catch (Exception ex)
@@ -556,7 +545,81 @@ namespace SmartFlow.Common
             }
         }
 
-        private static DataTable InitializeUnitDataTable()
+        public static async Task FillWarehouseDataAsync(ComboBox combo)
+        {
+            try
+            {
+                // Initialize a DataTable to hold the unit data
+                DataTable dtWarehouse = await InitializeWarehouseDataTableAsync();
+
+                // Retrieve the unit data from the database asynchronously
+                DataTable dt = await Task.Run(() => GetWarehouseDataFromDatabaseAsync());
+
+                // If data is retrieved successfully, populate the DataTable
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    PopulateWarehouseDataTable(dtWarehouse, dt);
+                }
+
+                // Set ComboBox data source on the UI thread
+                SetWarehouseComboBoxDataSource(combo, dtWarehouse);
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                MessageBox.Show("An error occurred while filling the unit data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private static async Task<DataTable> InitializeWarehouseDataTableAsync()
+        {
+            // Initialize a DataTable with columns for UnitID and UnitName
+            DataTable dtWarehouse = new DataTable();
+            dtWarehouse.Columns.Add("WarehouseID");
+            dtWarehouse.Columns.Add("Name");
+
+            // Add an empty first row to the DataTable
+            DataRow emptyRow = dtWarehouse.NewRow();
+            emptyRow["WarehouseID"] = DBNull.Value; // Placeholder for no selection
+            emptyRow["Name"] = string.Empty; // Empty display text for no selection
+            dtWarehouse.Rows.Add(emptyRow);
+
+            // Simulate an asynchronous operation (e.g., external data retrieval)
+            await Task.Delay(50); // Placeholder for async task
+
+            return dtWarehouse;
+        }
+
+        private static async Task<DataTable> GetWarehouseDataFromDatabaseAsync()
+        {
+            // Query to retrieve unit data from the database, ordered by default unit
+            string query = "SELECT WarehouseID, Name FROM WarehouseTable";
+
+            // Execute the query asynchronously and return the result
+            return await DatabaseAccess.RetriveAsync(query);
+        }
+
+        private static void PopulateWarehouseDataTable(DataTable dtWarehouse, DataTable dt)
+        {
+            // Iterate through the result rows and add them to the DataTable
+            foreach (DataRow unit in dt.Rows)
+            {
+                dtWarehouse.Rows.Add(unit["WarehouseID"], unit["Name"]);
+            }
+        }
+
+        private static void SetWarehouseComboBoxDataSource(ComboBox combo, DataTable dtWarehouse)
+        {
+            // Set ComboBox properties to bind the data source
+            combo.DataSource = dtWarehouse;
+            combo.ValueMember = "WarehouseID";
+            combo.DisplayMember = "Name";
+
+            // Select the first item by default
+            combo.SelectedIndex = 0;
+        }
+
+        private static async Task<DataTable> InitializeUnitDataTableAsync()
         {
             // Initialize a DataTable with columns for UnitID and UnitName
             DataTable dtUnit = new DataTable();
@@ -569,17 +632,22 @@ namespace SmartFlow.Common
             emptyRow["UnitName"] = string.Empty; // Empty display text for no selection
             dtUnit.Rows.Add(emptyRow);
 
+            // Simulate an asynchronous operation (e.g., external data retrieval)
+            await Task.Delay(50); // Placeholder for async task
+
             return dtUnit;
         }
 
-        private static DataTable GetUnitDataFromDatabase()
+
+        private static async Task<DataTable> GetUnitDataFromDatabaseAsync()
         {
             // Query to retrieve unit data from the database, ordered by default unit
             string query = "SELECT UnitID, UnitName FROM UnitTable ORDER BY IsDefault DESC";
 
-            // Execute the query and return the result
-            return DatabaseAccess.Retrive(query);
+            // Execute the query asynchronously and return the result
+            return await DatabaseAccess.RetriveAsync(query);
         }
+
 
         private static void PopulateUnitDataTable(DataTable dtUnit, DataTable dt)
         {
@@ -602,11 +670,12 @@ namespace SmartFlow.Common
         }
 
 
-        public static void ShiftFocusOnEnter(KeyEventArgs e, Control currentControl)
+        public static async Task ShiftFocusOnEnterAsync(KeyEventArgs e, Control currentControl)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true; // Prevent the "ding" sound
+
                 var parent = currentControl.Parent;
                 if (parent != null)
                 {
@@ -617,128 +686,174 @@ namespace SmartFlow.Common
 
                     // Focus the next control
                     var nextControl = controls.FirstOrDefault();
-                    nextControl?.Focus();
+
+                    if (nextControl != null)
+                    {
+                        // Use async delay to simulate asynchronous behavior if needed
+                        await Task.Delay(50);  // Simulate async work, not strictly necessary
+                        nextControl.Focus();
+                    }
                 }
             }
         }
 
-        public static void DisposeOnClose(Form form)
+
+        public static async Task DisposeOnCloseAsync(Form form)
         {
-            form.FormClosed += (sender, e) =>
+            form.FormClosed += async (sender, e) =>
             {
+                // You could perform some async work here if needed
+                await Task.Delay(50);  // Simulated async delay, if necessary
+
                 form.Dispose();
             };
         }
 
-        public static void CalculateTotalDiscountColumn(int columnIndex,DataGridView dataGridView,TextBox textBox)
+        public static async Task CalculateTotalDiscountColumnAsync(int columnIndex, DataGridView dataGridView, TextBox textBox)
         {
-            decimal totaldiscount = 0;
+            decimal totalDiscount = 0;
 
-            // Check if the DataGridView has rows
-            if (dataGridView.Rows.Count > 0)
+            // Run the calculation in the background thread
+            await Task.Run(() =>
             {
-                foreach (DataGridViewRow row in dataGridView.Rows)
+                // Check if the DataGridView has rows
+                if (dataGridView.Rows.Count > 0)
                 {
-                    // Ensure the cell has a value
-                    if (row.Cells[columnIndex].Value != null)
+                    foreach (DataGridViewRow row in dataGridView.Rows)
                     {
-                        // Try parsing the value in the cell to decimal
-                        if (decimal.TryParse(row.Cells[columnIndex].Value.ToString(), out decimal value))
+                        // Skip the row if it's empty
+                        if (row.IsNewRow) continue;
+
+                        // Ensure the cell has a value
+                        var cellValue = row.Cells[columnIndex].Value;
+                        if (cellValue != null && decimal.TryParse(cellValue.ToString(), out decimal value))
                         {
-                            totaldiscount += value;
+                            totalDiscount += value;
                         }
                         else
                         {
-                            // Optionally handle cases where the value can't be parsed to decimal
-                            MessageBox.Show($"Invalid value found in row {row.Index + 1}, column {columnIndex}. Skipping this row.",
-                                            "Invalid Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            // Handle cases where the value can't be parsed to decimal
+                            if (cellValue != null)
+                            {
+                                // Optional: Log the invalid row if necessary
+                                // Example: LogInvalidRow(row.Index);
+                            }
                         }
                     }
                 }
+            });
 
-                // Update the total discount in the text box with formatting
-                textBox.Text = totaldiscount.ToString("N2");
+            // Update the TextBox on the UI thread
+            if (textBox.InvokeRequired)
+            {
+                textBox.Invoke((Action)(() =>
+                {
+                    textBox.Text = totalDiscount.ToString("N2");
+                }));
             }
             else
             {
-                // If no rows are present, set the discount total to zero
-                textBox.Text = "0.00";
+                textBox.Text = totalDiscount.ToString("N2");
             }
         }
 
-        public static void CalculateTotalColumn(int columnIndex,DataGridView dataGridView,TextBox textBox)
+
+        public static async Task CalculateTotalColumnAsync(int columnIndex, DataGridView dataGridView, TextBox textBox)
         {
             decimal total = 0;
 
-            // Check if the DataGridView has rows
-            if (dataGridView.Rows.Count > 0)
+            // Run the calculation in a background thread
+            await Task.Run(() =>
             {
-                foreach (DataGridViewRow row in dataGridView.Rows)
+                // Check if the DataGridView has rows
+                if (dataGridView.Rows.Count > 0)
                 {
-                    // Ensure the cell has a value
-                    if (row.Cells[columnIndex].Value != null)
+                    foreach (DataGridViewRow row in dataGridView.Rows)
                     {
-                        // Try parsing the value in the cell to decimal
-                        if (decimal.TryParse(row.Cells[columnIndex].Value.ToString(), out decimal value))
+                        // Skip the row if it's empty
+                        if (row.IsNewRow) continue;
+
+                        // Ensure the cell has a value
+                        var cellValue = row.Cells[columnIndex].Value;
+                        if (cellValue != null && decimal.TryParse(cellValue.ToString(), out decimal value))
                         {
                             total += value;
                         }
                         else
                         {
                             // Optionally handle cases where the value can't be parsed to decimal
-                            MessageBox.Show($"Invalid value found in row {row.Index + 1}, column {columnIndex}. Skipping this row.",
-                                            "Invalid Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            if (cellValue != null)
+                            {
+                                // Log or handle invalid rows if necessary
+                                // Example: LogInvalidRow(row.Index);
+                            }
                         }
                     }
                 }
+            });
 
-                // Update the total in the text box with formatting
-                textBox.Text = total.ToString("N2");
+            // Update the TextBox on the UI thread
+            if (textBox.InvokeRequired)
+            {
+                textBox.Invoke((Action)(() =>
+                {
+                    textBox.Text = total.ToString("N2");
+                }));
             }
             else
             {
-                // If no rows are present, set the total to zero
-                textBox.Text = "0.00";
+                textBox.Text = total.ToString("N2");
             }
         }
 
-        public static void CalculateTotalVatColumn(int columnIndex,DataGridView dataGridView,TextBox textBox)
+
+        public static async Task CalculateTotalVatColumnAsync(int columnIndex, DataGridView dataGridView, TextBox textBox)
         {
             decimal totalvat = 0;
 
-            // Check if the DataGridView has rows
-            if (dataGridView.Rows.Count > 0)
+            // Run the calculation in a background thread
+            await Task.Run(() =>
             {
-                foreach (DataGridViewRow row in dataGridView.Rows)
+                // Check if the DataGridView has rows
+                if (dataGridView.Rows.Count > 0)
                 {
-                    // Ensure the cell has a value
-                    if (row.Cells[columnIndex].Value != null)
+                    foreach (DataGridViewRow row in dataGridView.Rows)
                     {
-                        // Try parsing the value in the cell to decimal
-                        if (decimal.TryParse(row.Cells[columnIndex].Value.ToString(), out decimal value))
+                        // Skip the row if it's empty
+                        if (row.IsNewRow) continue;
+
+                        // Ensure the cell has a value
+                        var cellValue = row.Cells[columnIndex].Value;
+                        if (cellValue != null && decimal.TryParse(cellValue.ToString(), out decimal value))
                         {
                             totalvat += value;
                         }
                         else
                         {
                             // Optionally handle cases where the value can't be parsed to decimal
-                            MessageBox.Show($"Invalid value found in row {row.Index + 1}, column {columnIndex}. Skipping this row.",
-                                            "Invalid Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            if (cellValue != null)
+                            {
+                                // Log or handle invalid rows if necessary
+                                // Example: LogInvalidRow(row.Index);
+                            }
                         }
                     }
                 }
+            });
 
-                // Update the total VAT in the text box with formatting
-                textBox.Text = totalvat.ToString("N2");
+            // Update the TextBox on the UI thread
+            if (textBox.InvokeRequired)
+            {
+                textBox.Invoke((Action)(() =>
+                {
+                    textBox.Text = totalvat.ToString("N2");
+                }));
             }
             else
             {
-                // If no rows are present, set the VAT total to zero
-                textBox.Text = "0.00";
+                textBox.Text = totalvat.ToString("N2");
             }
+
         }
-
-
-
     }
 }

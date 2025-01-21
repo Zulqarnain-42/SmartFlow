@@ -6,6 +6,7 @@ using System.IO;
 using System.Diagnostics;
 using SmartFlow.Common;
 using SmartFlow.Purchase;
+using System.Threading.Tasks;
 
 namespace SmartFlow.Masters
 {
@@ -58,7 +59,7 @@ namespace SmartFlow.Masters
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
-        private void savebtn_Click(object sender, EventArgs e)
+        private async void savebtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -93,7 +94,7 @@ namespace SmartFlow.Masters
                             {
                                 query = string.Format("SELECT ProductID,ProductCode,ProductName FROM ProductTable WHERE MFR LIKE '" + mfr + "'");
                                 DataTable dataTable = new DataTable();
-                                dataTable = DatabaseAccess.Retrive(query);
+                                dataTable = await DatabaseAccess.RetriveAsync(query);
                                 var productcode = Guid.NewGuid();
                                 if (dataTable != null)
                                 {
@@ -115,7 +116,7 @@ namespace SmartFlow.Masters
                                                 int start = 0;
                                                 while (start < anynumber)
                                                 {
-                                                    serialnumber = GenerateRandomSerialNumber();
+                                                    serialnumber = await GenerateRandomSerialNumber();
                                                     query1 = string.Format("INSERT INTO SerialNoTable (ProductCode,SerialNo,CreatedAt,CreatedDay) " +
                                                 "VALUES ('" + dataTable.Rows[0]["ProductCode"].ToString() + "','" + serialnumber + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')");
 
@@ -149,7 +150,7 @@ namespace SmartFlow.Masters
                                                     int start = 0;
                                                     while (start < diff)
                                                     {
-                                                        serialnumber = GenerateRandomSerialNumber();
+                                                        serialnumber = await GenerateRandomSerialNumber();
                                                         query1 = string.Format("INSERT INTO SerialNoTable (ProductCode,SerialNo,CreatedAt,CreatedDay) " +
                                                     "VALUES ('" + dataTable.Rows[0]["ProductCode"].ToString() + "','" + serialnumber + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')");
 
@@ -177,7 +178,7 @@ namespace SmartFlow.Masters
                                                 int start = 0;
                                                 while (start < anynumber)
                                                 {
-                                                    serialnumber = GenerateRandomSerialNumber();
+                                                    serialnumber = await GenerateRandomSerialNumber();
                                                     query1 = string.Format("INSERT INTO SerialNoTable (ProductCode,SerialNo,CreatedAt,CreatedDay) " +
                                                 "VALUES ('" + productcode + "','" + serialnumber + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
                                                 "'" + DateTime.Now.DayOfWeek + "')");
@@ -212,7 +213,7 @@ namespace SmartFlow.Masters
                                                     int start = 0;
                                                     while (start < diff)
                                                     {
-                                                        serialnumber = GenerateRandomSerialNumber();
+                                                        serialnumber = await GenerateRandomSerialNumber();
                                                         query1 = string.Format("INSERT INTO SerialNoTable (ProductCode,SerialNo,CreatedAt,CreatedDay) " +
                                                     "VALUES ('" + productcode + "','" + serialnumber + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
                                                     "'" + DateTime.Now.DayOfWeek + "')");
@@ -239,7 +240,7 @@ namespace SmartFlow.Masters
                                             int start = 0;
                                             while (start < anynumber)
                                             {
-                                                serialnumber = GenerateRandomSerialNumber();
+                                                serialnumber = await GenerateRandomSerialNumber();
                                                 query1 = string.Format("INSERT INTO SerialNoTable (ProductCode,SerialNo,CreatedAt,CreatedDay) " +
                                             "VALUES ('" + productcode + "','" + serialnumber + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')");
 
@@ -273,7 +274,7 @@ namespace SmartFlow.Masters
                                                 int start = 0;
                                                 while (start < diff)
                                                 {
-                                                    serialnumber = GenerateRandomSerialNumber();
+                                                    serialnumber = await GenerateRandomSerialNumber();
                                                     query1 = string.Format("INSERT INTO SerialNoTable (ProductCode,SerialNo,CreatedAt,CreatedDay) " +
                                                 "VALUES ('" + productcode + "','" + serialnumber + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "')");
 
@@ -318,7 +319,7 @@ namespace SmartFlow.Masters
             Process[] processes = Process.GetProcessesByName(processName);
             return processes.Length > 0;
         }
-        static string GenerateRandomSerialNumber()
+        static async Task<string> GenerateRandomSerialNumber()
         {
             Random random = new Random();
             const string chars = "0123456789";
@@ -331,12 +332,12 @@ namespace SmartFlow.Masters
 
             string serialNumber = new string(serialChars);
             string query = "SELECT SerialNo FROM SerialNoTable WHERE SerialNo = '" + serialNumber+"'";
-            DataTable dt = DatabaseAccess.Retrive(query);
+            DataTable dt = await DatabaseAccess.RetriveAsync(query);
             if (dt != null)
             {
                 if (dt.Rows.Count > 0)
                 {
-                    serialNumber = GenerateRandomSerialNumber();
+                    serialNumber = await GenerateRandomSerialNumber();
                 }
             }
             return serialNumber;
@@ -364,14 +365,14 @@ namespace SmartFlow.Masters
             }
             return false; // No TextBox is filled
         }
-        private void selectwarehouse_MouseClick(object sender, MouseEventArgs e)
+        private async void selectwarehouse_MouseClick(object sender, MouseEventArgs e)
         {
-            Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
+            Form openForm = await CommonFunction.IsFormOpenAsync(typeof(WarehouseSelection));
             if (openForm == null) 
             {
                 WarehouseSelection warehouseSelection = new WarehouseSelection();
                 warehouseSelection.MdiParent = this.MdiParent;
-                CommonFunction.DisposeOnClose(warehouseSelection);
+                await CommonFunction.DisposeOnCloseAsync(warehouseSelection);
                 warehouseSelection.Show();
             }
             else

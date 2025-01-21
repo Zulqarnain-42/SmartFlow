@@ -16,7 +16,7 @@ namespace SmartFlow.Transactions
             invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
-        private void searchbtn_Click(object sender, EventArgs e)
+        private async void searchbtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -32,20 +32,20 @@ namespace SmartFlow.Transactions
                     string query = string.Format("SELECT TransactionId,InvoiceNo,Date,TransactionCode,LongDescription,CurrencyId,CurrencyName,CurrencySymbol,ConversionRate," +
                         "CreatedAt,UpdatedAt,CreatedDay,UpdatedDay,UserId,AddedBy,CompanyId,VoucherInfo FROM TransactionTable WHERE InvoiceNo LIKE '" + invoiceNo + "'");
 
-                    DataTable dataInvoice = DatabaseAccess.Retrive(query);
+                    DataTable dataInvoice = await DatabaseAccess.RetriveAsync(query);
 
                     if (dataInvoice.Rows.Count > 0)
                     {
                         string subquery = string.Format("SELECT TransactionDetailId,TransactionId,AccountId,AccountName,AccountCode,IsDebit,IsCredit,ShortDescription," +
                             "DebitAmount,CreditAmount,InvoiceNo,DebitOrCredit FROM TransactionDetailTable WHERE InvoiceNo LIKE '" + invoiceNo + "'");
 
-                        DataTable dataTransactionTable = DatabaseAccess.Retrive(subquery);
+                        DataTable dataTransactionTable = await DatabaseAccess.RetriveAsync(subquery);
                         if(dataTransactionTable != null && dataTransactionTable.Rows.Count > 0)
                         {
                             this.Close();
                             Payment payment = new Payment(dataInvoice, dataTransactionTable);
                             payment.MdiParent = Application.OpenForms["Dashboard"];
-                            CommonFunction.DisposeOnClose(payment);
+                            await CommonFunction.DisposeOnCloseAsync(payment);
                             payment.Show();
                         }
                     }
@@ -55,20 +55,20 @@ namespace SmartFlow.Transactions
                     string query = string.Format("SELECT TransactionId,InvoiceNo,Date,TransactionCode,LongDescription,CurrencyId,CurrencyName,CurrencySymbol,ConversionRate," +
                         "CreatedAt,UpdatedAt,CreatedDay,UpdatedDay,UserId,AddedBy,CompanyId,VoucherInfo FROM TransactionTable WHERE InvoiceNo LIKE '" + invoiceNo + "'");
 
-                    DataTable dataInvoice = DatabaseAccess.Retrive(query);
+                    DataTable dataInvoice = await DatabaseAccess.RetriveAsync(query);
 
                     if (dataInvoice.Rows.Count > 0)
                     {
                         string subquery = string.Format("SELECT TransactionDetailId,TransactionId,AccountId,AccountName,AccountCode,IsDebit,IsCredit,ShortDescription," +
                             "DebitAmount,CreditAmount,InvoiceNo,DebitOrCredit FROM TransactionDetailTable WHERE InvoiceNo LIKE '" + invoiceNo + "'");
 
-                        DataTable dataTransactionTable = DatabaseAccess.Retrive(subquery);
+                        DataTable dataTransactionTable = await DatabaseAccess.RetriveAsync(subquery);
                         if (dataTransactionTable != null && dataTransactionTable.Rows.Count > 0)
                         {
                             this.Close();
                             Receipts receipts = new Receipts(dataInvoice, dataTransactionTable);
                             receipts.MdiParent = Application.OpenForms["Dashboard"];
-                            CommonFunction.DisposeOnClose(receipts);
+                            await CommonFunction.DisposeOnCloseAsync(receipts);
                             receipts.Show();
                         }
                     }

@@ -7,15 +7,16 @@ namespace SmartFlow.Common.Forms
     {
         private DateTime lastEnterPressTime;
         private const int doubleEnterThreshold = 500; // Time in milliseconds
+        public event EventHandler<SupplierData> SupplierDataSelected;
         public SupplierSelectionForm()
         {
             InitializeComponent();
         }
-        private void searchtxtbox_TextChanged(object sender, EventArgs e)
+        private async void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
-            CommonFunction.GetSupplier(searchtxtbox.Text,dgvsupplier);
+            await CommonFunction.GetSupplierAsync(searchtxtbox.Text,dgvsupplier);
         }
-        private void SupplierSelectionForm_Load(object sender, EventArgs e)
+        private async void SupplierSelectionForm_Load(object sender, EventArgs e)
         {
             try
             {
@@ -26,7 +27,7 @@ namespace SmartFlow.Common.Forms
                 dgvsupplier.ClearSelection();
 
                 // Call the function to load or refresh supplier data
-                CommonFunction.GetSupplier("", dgvsupplier);
+                await CommonFunction.GetSupplierAsync("", dgvsupplier);
             }
             catch (Exception ex)
             {
@@ -53,25 +54,22 @@ namespace SmartFlow.Common.Forms
                             // Parse supplier ID
                             if (int.TryParse(selectedRow.Cells["ID"]?.Value?.ToString(), out int supplierId))
                             {
-                                GlobalVariables.supplieridglobal = supplierId;
+                                // Raise the event with the data to pass to the parent form
+                                SupplierDataSelected?.Invoke(this, new SupplierData(
+                                    supplierId,
+                                    selectedRow.Cells["Account Name"]?.Value?.ToString() ?? "Unknown",
+                                    selectedRow.Cells["CODE"]?.Value?.ToString() ?? "Unknown",
+                                    selectedRow.Cells["Company Name"]?.Value?.ToString() ?? "Unknown"
+                                ));
+
+                                // Close the child form after passing the data
+                                this.Close();
                             }
                             else
                             {
                                 MessageBox.Show("Invalid Supplier ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return;
                             }
-
-                            // Get supplier name
-                            GlobalVariables.suppliernameglobal = selectedRow.Cells["Account Name"]?.Value?.ToString() ?? "Unknown";
-
-                            // Get supplier code
-                            GlobalVariables.suppliercodeglobal = selectedRow.Cells["CODE"]?.Value?.ToString() ?? "Unknown";
-
-                            // Get supplier company name
-                            GlobalVariables.suppliercompanyName = selectedRow.Cells["Company Name"]?.Value?.ToString() ?? "Unknown";
-
-                            // Close the form
-                            this.Close();
                         }
                         else
                         {
@@ -105,30 +103,28 @@ namespace SmartFlow.Common.Forms
                     // Ensure there's a valid current row
                     DataGridViewRow selectedRow = dgvsupplier.CurrentRow;
 
+                    // Safe checks for each value and parsing
                     if (selectedRow != null)
                     {
-                        // Safe checks and conversion with proper exception handling
-                        if (selectedRow.Cells["ID"].Value != null && int.TryParse(selectedRow.Cells["ID"].Value.ToString(), out int supplierId))
+                        // Parse supplier ID
+                        if (int.TryParse(selectedRow.Cells["ID"]?.Value?.ToString(), out int supplierId))
                         {
-                            GlobalVariables.supplieridglobal = supplierId;
+                            // Raise the event with the data to pass to the parent form
+                            SupplierDataSelected?.Invoke(this, new SupplierData(
+                                supplierId,
+                                selectedRow.Cells["Account Name"]?.Value?.ToString() ?? "Unknown",
+                                selectedRow.Cells["CODE"]?.Value?.ToString() ?? "Unknown",
+                                selectedRow.Cells["Company Name"]?.Value?.ToString() ?? "Unknown"
+                            ));
+
+                            // Close the child form after passing the data
+                            this.Close();
                         }
                         else
                         {
-                            MessageBox.Show("Invalid Supplier ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("Invalid Supplier ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
-
-                        // Safely retrieve other values from the selected row
-                        GlobalVariables.suppliernameglobal = selectedRow.Cells["Account Name"]?.Value?.ToString() ?? "Unknown";
-                        GlobalVariables.suppliercodeglobal = selectedRow.Cells["CODE"]?.Value?.ToString() ?? "Unknown";
-                        GlobalVariables.suppliercompanyName = selectedRow.Cells["Company Name"]?.Value?.ToString() ?? "Unknown";
-
-                        // Close the form after selection
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No row selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }

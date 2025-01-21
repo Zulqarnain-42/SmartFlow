@@ -296,7 +296,6 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Sales\ReportViewer\Repo
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Sales\ReportViewer\Reports\SaleInvoiceReport.rpt
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Sales\ReportViewer\Reports\ProfermaInvoice.rpt
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Sales\ReportViewer\Reports\SaleReturnReport.rpt
-C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Sales\ReportViewer\Reports\SaleQuotationReportold.rpt
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Transactions\ReportViewer\Reports\ReceiptReport.rpt
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Transactions\ReportViewer\Reports\PaymentReport.rpt
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Purchase\ReportViewer\Reports\PurchaseReturnReport.cs
@@ -307,7 +306,6 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Sales\ReportViewer\Repo
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Sales\ReportViewer\Reports\SaleInvoiceReport.cs
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Sales\ReportViewer\Reports\ProfermaInvoice.cs
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Sales\ReportViewer\Reports\SaleReturnReport.cs
-C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Sales\ReportViewer\Reports\SaleQuotationReportold.cs
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Transactions\ReportViewer\Reports\ReceiptReport.cs
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Transactions\ReportViewer\Reports\PaymentReport.cs
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\SmartFlow.exe.config
@@ -315,6 +313,7 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\SmartFlow.exe
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\SmartFlow.pdb
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Azure.Core.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Azure.Identity.dll
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\BouncyCastle.Cryptography.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ClosedXML.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\CrystalDecisions.ReportSource.dll
@@ -327,6 +326,7 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ExcelDataReader.DataSet
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ExcelDataReader.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ExcelNumberFormat.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Irony.dll
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\itextsharp.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Microsoft.Data.SqlClient.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Microsoft.Identity.Client.dll
@@ -383,6 +383,7 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\CrystalDecisions.Report
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\stdole.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Azure.Core.xml
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Azure.Identity.xml
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\BouncyCastle.Cryptography.xml
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ClosedXML.xml
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\DocumentFormat.OpenXml.xml
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\EntityFramework.xml
@@ -392,6 +393,7 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ExcelDataReader.xml
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ExcelDataReader.DataSet.pdb
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ExcelDataReader.DataSet.xml
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ExcelNumberFormat.xml
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\itextsharp.xml
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Microsoft.Data.SqlClient.xml
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\Microsoft.Identity.Client.xml
@@ -478,7 +480,6 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\ru\Microsoft.ReportView
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.csproj.AssemblyReference.cache
-C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Common.CommonForms.AccountGroupSelectionForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Common.Forms.AccountSelectionForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Common.CommonForms.CurrencySelection.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Common.Forms.CustomerSelectionForm.resources
@@ -515,6 +516,7 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.Repo
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.ReportViewer.ReturnReportView.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.WarehouseSelection.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Report.BalanceSheet.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonForm.EditItemInvoice.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonForm.ItemAvailability.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonForm.SearchQuotationForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonForm.SearchSaleInvoice.resources
@@ -522,6 +524,7 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonF
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.CommonForm.WarehouseQty.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.DeliveryNote.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.FindSaleInvoiceForm.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.ModifySaleQuotation.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.PackingList.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.PerformaInvoice.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.ReportViewer.DeliveryNoteView.resources
@@ -530,7 +533,6 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.ReportV
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.ReportViewer.SaleInvoiceView.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.ReportViewer.SaleQuotationView.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.ReportViewer.SaleReturnView.resources
-C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.ReportViewer.TaxPlanetView.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.SaleInvoice.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.SaleQuotationInvoice.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.SaleReturnInvoice.resources
@@ -555,7 +557,6 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.ReportV
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.ReportViewer.StockTransferViewer.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.DamageEntry.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.OpenBoxProduct.resources
-C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.StockManageForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.StockTransfer.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.QtyUsingMfr.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.QtyUsingScanner.resources
@@ -581,3 +582,32 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.csproj.CoreCo
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.csproj.Up2Date
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.exe
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.pdb
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.ModifyPurchaseInvoice.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.ModifyPurchaseOrder.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.ModifyPurchaseQuotation.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.ModifyPurchaseReturn.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.ModifyProformaInvoice.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.ModifySaleInvoice.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.ModifySaleReturnInvoice.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ModifyPaymentVoucher.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ModifyReceiptVoucher.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.ListPurchaseInvoice.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.ListPurchaseOrder.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.ListPurchaseQuotation.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Purchase.ListPurchaseReturn.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.ListProformaInvoice.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.ListSaleInvoice.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.ListSalesQuotation.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Sales.ListSalesReturn.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ListCreditNote.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ListDebitNote.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ListJournal.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ListMaterialIssue.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ListMaterialReceived.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ListPayment.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ListReceipt.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ModifyCreditNote.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ModifyDebitNote.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ModifyJournalVoucher.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ModifyMaterialIssue.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Transactions.ModifyMaterialReceived.resources

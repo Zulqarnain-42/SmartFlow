@@ -8,6 +8,8 @@ namespace SmartFlow.Masters
 {
     public partial class OpeningBalance : Form
     {
+        private int currentRowIndex = 0;
+        private int currentCellIndex = 0;
         public OpeningBalance()
         {
             InitializeComponent();
@@ -20,7 +22,7 @@ namespace SmartFlow.Masters
                 e.Handled = true; // Prevent further processing of the key event
             }
         }
-        private void FillGrid(string searchvalue)
+        private async void FillGrid(string searchvalue)
         {
             try
             {
@@ -36,7 +38,7 @@ namespace SmartFlow.Masters
                     query = BuildSearchQueryAccounts(searchvalue);
                 }
 
-                dataTable = DatabaseAccess.Retrive(query);
+                dataTable = await DatabaseAccess.RetriveAsync(query);
 
                 if (dataTable != null)
                 {
@@ -59,11 +61,11 @@ namespace SmartFlow.Masters
                 }
 
                 // Restore the cursor position
-                if (GlobalVariables.currentRowIndex >= 0 && GlobalVariables.currentCellIndex >= 0 &&
-                    GlobalVariables.currentRowIndex < dataGridViewopeningbalance.Rows.Count &&
-                    GlobalVariables.currentCellIndex < dataGridViewopeningbalance.Rows[GlobalVariables.currentRowIndex].Cells.Count)
+                if (currentRowIndex >= 0 && currentCellIndex >= 0 &&
+                    currentRowIndex < dataGridViewopeningbalance.Rows.Count &&
+                    currentCellIndex < dataGridViewopeningbalance.Rows[currentRowIndex].Cells.Count)
                 {
-                    dataGridViewopeningbalance.CurrentCell = dataGridViewopeningbalance.Rows[GlobalVariables.currentRowIndex].Cells[GlobalVariables.currentCellIndex];
+                    dataGridViewopeningbalance.CurrentCell = dataGridViewopeningbalance.Rows[currentRowIndex].Cells[currentCellIndex];
                 }
             }
             catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -78,8 +80,8 @@ namespace SmartFlow.Masters
             int firstVisibleCellIndex = GetFirstVisibleCellIndex(dataGridViewopeningbalance);
             if (firstVisibleRowIndex >= 0)
             {
-                GlobalVariables.currentRowIndex = firstVisibleRowIndex;
-                GlobalVariables.currentCellIndex = firstVisibleCellIndex;
+                currentRowIndex = firstVisibleRowIndex;
+                currentCellIndex = firstVisibleCellIndex;
             }
         }
         private int GetFirstVisibleRowIndex(DataGridView dataGridView)
@@ -161,7 +163,7 @@ namespace SmartFlow.Masters
             }
             return false; // No TextBox is filled
         }
-        private void dataGridViewopeningbalance_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private async void dataGridViewopeningbalance_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -185,11 +187,11 @@ namespace SmartFlow.Masters
 
                             updateOpening.FormClosed += delegate
                             {
-                                GlobalVariables.currentRowIndex = dataGridViewopeningbalance.CurrentCell.RowIndex;
-                                GlobalVariables.currentCellIndex = dataGridViewopeningbalance.CurrentCell.ColumnIndex;
+                                currentRowIndex = dataGridViewopeningbalance.CurrentCell.RowIndex;
+                                currentCellIndex = dataGridViewopeningbalance.CurrentCell.ColumnIndex;
                                 FillGrid("");
                             };
-                            CommonFunction.DisposeOnClose(updateOpening);
+                            await CommonFunction.DisposeOnCloseAsync(updateOpening);
                             updateOpening.ShowDialog();
                         }
                     }

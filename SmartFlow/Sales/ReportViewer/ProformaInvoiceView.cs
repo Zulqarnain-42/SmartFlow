@@ -29,7 +29,7 @@ namespace SmartFlow.Sales.ReportViewer
                 // Create a new instance of the report
                 ReportDocument reportDocument = new ReportDocument();
 
-                string reportPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Sales\ReportViewer\Reports\SaleInvoiceReport.rpt");
+                string reportPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Sales\ReportViewer\Reports\ProfermaInvoice.rpt");
                 reportDocument.Load(reportPath);
 
                 // Fetch data for a specific invoice

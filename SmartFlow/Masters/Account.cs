@@ -1,9 +1,10 @@
 ﻿using SmartFlow.Common;
-using SmartFlow.Common.CommonForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Masters
@@ -23,7 +24,7 @@ namespace SmartFlow.Masters
         {
             this.Close();
         }
-        private void savebtn_Click(object sender, EventArgs e)
+        private async void savebtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -57,7 +58,7 @@ namespace SmartFlow.Masters
                     return;
                 }
 
-                string duplicateinfo = CheckDuplicate();
+                string duplicateinfo = await CheckDuplicateAsync();
                 if (duplicateinfo != null) 
                 {
                     MessageBox.Show(duplicateinfo, "Duplicate Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -66,12 +67,12 @@ namespace SmartFlow.Masters
                 {
                     if (savebtn.Text == "Update")
                     {
-                        bool isupdated = UpdateAccountSubControl();
+                        bool isupdated = await UpdateAccountSubControlAsync();
                         if (isupdated) { MessageBox.Show("Updated Successfully"); }
                     }
                     else
                     {
-                        bool isInserted = InsertAccountSubControl();
+                        bool isInserted = await InsertAccountSubControlAsync();
                         if (isInserted) { MessageBox.Show("Saved Successfully."); }
                     }
                 }   
@@ -81,7 +82,7 @@ namespace SmartFlow.Masters
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        static string GenerateRandomAccountCode(string intializer)
+        static async Task<string> GenerateRandomAccountCodeAsync(string initializer)
         {
             Random random = new Random();
             const string chars = "0123456789";
@@ -94,21 +95,25 @@ namespace SmartFlow.Masters
 
             string serialNumber = new string(serialChars);
             string query = "SELECT CodeAccount FROM AccountSubControlTable WHERE CodeAccount = '" + serialNumber + "'";
-            DataTable dt = DatabaseAccess.Retrive(query);
+
+            // Assuming 'DatabaseAccess.RetriveAsync' is an asynchronous method
+            DataTable dt = await DatabaseAccess.RetriveAsync(query);
+
             if (dt != null)
             {
                 if (dt.Rows.Count > 0)
                 {
-                    serialNumber = GenerateRandomAccountCode(intializer);
+                    serialNumber = await GenerateRandomAccountCodeAsync(initializer); // Recursive async call
                 }
             }
-            return serialNumber = String.Concat(intializer, serialNumber); ;
+
+            return string.Concat(initializer, serialNumber);
         }
 
-        private bool UpdateAccountSubControl()
+        private async Task<bool> UpdateAccountSubControlAsync()
         {
             string tableName = "AccountSubControlTable";
-            string whereClause = "AccountSubControlID = '"+ accountidlbl.Text + "'";
+            string whereClause = "AccountSubControlID = '" + accountidlbl.Text + "'";
 
             var columnData = new Dictionary<string, object>
             {
@@ -150,11 +155,13 @@ namespace SmartFlow.Masters
                 { "IsEmployee", employeeradio.Checked }
             };
 
-            bool isUpdated = DatabaseAccess.ExecuteQuery(tableName, "UPDATE", columnData, whereClause);
+            // Assuming ExecuteQueryAsync is an asynchronous method for executing the query
+            bool isUpdated = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
             return isUpdated;
         }
 
-        private bool InsertAccountSubControl()
+
+        private async Task<bool> InsertAccountSubControlAsync()
         {
             string tableName = "AccountSubControlTable";
 
@@ -200,24 +207,29 @@ namespace SmartFlow.Masters
                 { "CompanyName", companynametxtbox.Text }
             };
 
-            bool isInserted = DatabaseAccess.ExecuteQuery(tableName, "INSERT", columnData);
+            // Assuming ExecuteQueryAsync is an asynchronous method for executing the query
+            bool isInserted = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData);
             return isInserted;
         }
 
-        private string CheckDuplicate()
+
+        private async Task<string> CheckDuplicateAsync()
         {
-            string query = string.Format(@"SELECT AccountSubControlID,AccountHead_ID,CompanyName,AccountControl_ID,User_ID,AccountSubControlName,
-            CompanyID,PrintName,Address,Country,Email,MobileNo,TRN,GSTNO,VATNO,Location,State,PostalCode,Fax,Website,
-            EmiratesId,ServiceTaxNo,BankName,BankAccountNo FROM AccountSubControlTable WHERE AccountSubControlName = @AccountSubControlName");
+            string query = @"SELECT AccountSubControlID, AccountHead_ID, CompanyName, AccountControl_ID, User_ID, AccountSubControlName,
+                     CompanyID, PrintName, Address, Country, Email, MobileNo, TRN, GSTNO, VATNO, Location, State, PostalCode, 
+                     Fax, Website, EmiratesId, ServiceTaxNo, BankName, BankAccountNo 
+                     FROM AccountSubControlTable 
+                     WHERE AccountSubControlName = @AccountSubControlName";
 
             var parameters = new Dictionary<string, object>
             {
                 { "AccountSubControlName", nametxtbox.Text }
             };
 
-            DataTable dt = DatabaseAccess.RetrieveData(query, parameters);
+            // Assuming RetrieveDataAsync is an async method for fetching data from the database
+            DataTable dt = await DatabaseAccess.RetrieveDataAsync(query, parameters);
 
-            if(dt!=null && dt.Rows.Count > 0)
+            if (dt != null && dt.Rows.Count > 0)
             {
                 string accountName = dt.Rows[0]["AccountSubControlName"].ToString();
                 string address = dt.Rows[0]["Address"].ToString();
@@ -231,8 +243,8 @@ namespace SmartFlow.Masters
                 string companyName = dt.Rows[0]["CompanyName"].ToString();
 
                 if (nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country && emailtxtbox.Text == email &&
-                   mobilenotxtbox.Text == mobileno && trntxtbox.Text == trn && gstnotxtbox.Text == gstno && vatnotxtbox.Text == vatno 
-                   && emiratesidtxtbox.Text == emiratesid && companynametxtbox.Text == companyName)
+                    mobilenotxtbox.Text == mobileno && trntxtbox.Text == trn && gstnotxtbox.Text == gstno && vatnotxtbox.Text == vatno &&
+                    emiratesidtxtbox.Text == emiratesid && companynametxtbox.Text == companyName)
                 {
                     return $"Duplicate found: Account Name = {accountName}, Address = {address}, Country = {country}, Email = {email}, " +
                         $"Mobile No = {mobileno}, TRN = {trn}, GST NO = {gstno}, VAT NO = {vatno}, Emirates Id = {emiratesid}, Company Name = {companyName}.";
@@ -241,11 +253,12 @@ namespace SmartFlow.Masters
             return null;
         }
 
-        private void Account_KeyDown(object sender, KeyEventArgs e)
+
+        private async void Account_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
-                if (AreAnyTextBoxesFilled())
+                if (await AreAnyTextBoxesFilledAsync())  // Assuming AreAnyTextBoxesFilled is now async
                 {
                     DialogResult result = MessageBox.Show("There are unsaved changes. Do you really want to close?",
                                                           "Confirm Close", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -262,19 +275,31 @@ namespace SmartFlow.Masters
                 }
             }
         }
+
         private void nametxtbox_TextChanged(object sender, EventArgs e)
         {
             printnametxtbox.Text = nametxtbox.Text.ToLower();
         }
-        private void Account_Load(object sender, EventArgs e)
+
+        private async void Account_Load(object sender, EventArgs e)
         {
             string labeldata = accountidlbl.Text;
-            if(labeldata!= "accountidlbl")
+            if (labeldata != "accountidlbl")
             {
-                FindRecord(Convert.ToInt32(accountidlbl.Text));
+                // Try parsing the account ID to ensure it's a valid integer
+                if (int.TryParse(accountidlbl.Text, out int accountId))
+                {
+                    // Call FindRecord asynchronously
+                    await FindRecordAsync(accountId);
+                }
+                else
+                {
+                    MessageBox.Show("Invalid account ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
-        private void FindRecord(int id)
+
+        private async Task FindRecordAsync(int id)
         {
             try
             {
@@ -297,7 +322,8 @@ namespace SmartFlow.Masters
                     { "@AccountSubControlID", id }
                 };
 
-                DataTable dataTable = DatabaseAccess.RetrieveData(query, parameters);
+                // Use asynchronous method to retrieve data
+                DataTable dataTable = await DatabaseAccess.RetrieveDataAsync(query, parameters);
 
                 if (dataTable == null || dataTable.Rows.Count == 0)
                 {
@@ -314,13 +340,13 @@ namespace SmartFlow.Masters
                 int accountControlId;
                 if (int.TryParse(row["AccountControl_ID"].ToString(), out accountControlId) && accountControlId > 0)
                 {
-                    // Fetch account group details
+                    // Fetch account group details asynchronously
                     string accountGroupQuery = "SELECT AccountControlName FROM AccountControlTable WHERE AccountControlID = @AccountControlID";
                     var accountGroupParams = new Dictionary<string, object>
                     {
                         { "@AccountControlID", accountControlId }
                     };
-                    DataTable dtAccountGroup = DatabaseAccess.RetrieveData(accountGroupQuery, accountGroupParams);
+                    DataTable dtAccountGroup = await DatabaseAccess.RetrieveDataAsync(accountGroupQuery, accountGroupParams);
 
                     if (dtAccountGroup != null && dtAccountGroup.Rows.Count > 0)
                     {
@@ -392,15 +418,15 @@ namespace SmartFlow.Masters
             {
                 MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
-        private void selectaccountgrouptxtbox_MouseClick(object sender, MouseEventArgs e)
+
+        private async void selectaccountgrouptxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             try
             {
-                if (string.IsNullOrEmpty(selectaccountgrouptxtbox.Text))
+                /*if (string.IsNullOrEmpty(selectaccountgrouptxtbox.Text))
                 {
-                    Form openForm = CommonFunction.IsFormOpen(typeof(AccountGroupSelectionForm));
+                    Form openForm = await CommonFunction.IsFormOpenAsync(typeof(AccountGroupSelectionForm));
                     if (openForm == null)
                     {
                         AccountGroupSelectionForm accountSelection = new AccountGroupSelectionForm
@@ -408,63 +434,96 @@ namespace SmartFlow.Masters
                             WindowState = FormWindowState.Normal,
                             StartPosition = FormStartPosition.CenterParent,
                         };
-                        accountSelection.FormClosed += delegate
-                        {
-                            UpdateAccountInfo();
-                        };
-                        CommonFunction.DisposeOnClose(accountSelection);
-                        accountSelection.ShowDialog();
-                    }
-                    else
-                    {
-                        openForm.BringToFront();
-                    }
-                }
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-        }
-        private void UpdateAccountInfo()
-        {
-            if(!string.IsNullOrEmpty(GlobalVariables.accountnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.accountnameglobal) 
-                && GlobalVariables.accountidglobal > 0 && GlobalVariables.accountheadidglobal > 0)
-            {
-                selectaccountgrouptxtbox.Text = GlobalVariables.accountnameglobal;
-                accountgroupidlbl.Text = GlobalVariables.accountidglobal.ToString();
-                accountheadidlbl.Text = GlobalVariables.accountheadidglobal.ToString();
-            }
-        }
-        private bool AreAnyTextBoxesFilled()
-        {
-            if (nametxtbox.Text.Trim().Length > 0) { return true; }
-            if (printnametxtbox.Text.Trim().Length > 0) { return true; }
-            if (selectaccountgrouptxtbox.Text.Trim().Length > 0) { return true; }
-            if (addresstxtbox.Text.Trim().Length > 0) { return true; }
-            if (countrytxtbox.Text.Trim().Length > 0) { return true; }
-            if (emiratesidtxtbox.Text.Trim().Length > 0) { return true; }
-            if (areatxtbox.Text.Trim().Length > 0) { return true; }
-            if (locationtxtbox.Text.Trim().Length > 0) { return true; }
-            if (statetxtbox.Text.Trim().Length > 0) { return true; }
-            if (mobilenotxtbox.Text.Trim().Length > 0) { return true; }
-            if (trntxtbox.Text.Trim().Length > 0) { return true; }
-            if (faxtxtbox.Text.Trim().Length > 0) { return true; }
-            if (gstnotxtbox.Text.Trim().Length > 0) { return true; }
-            if (vatnotxtbox.Text.Trim().Length > 0) { return true; }
-            if (servicetaxnotxtbox.Text.Trim().Length > 0) { return true; }
-            if (postalcodetxtbox.Text.Trim().Length > 0) { return true; }
-            if (trntxtbox.Text.Trim().Length > 0) { return true; }
-            if (accountnotxtbox.Text.Trim().Length > 0) { return true; }
 
-            if (issmsallowedcheckbox.Checked) {  return true; }
-            if (isemailallowedcheckbox.Checked) { return true; }
-            return false; // No TextBox is filled
-        }
-        private void selectaccountgrouptxtbox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Enter)
+                        accountSelection.FormClosed += async delegate
+                        {
+                            // Use async call if the UpdateAccountInfo method is async
+                            await UpdateAccountInfo();
+                        };
+
+                        await CommonFunction.DisposeOnCloseAsync(accountSelection);
+                        await Task.Run(() => accountSelection.ShowDialog());  // Use async operation to show form asynchronously
+                    }
+                    else
+                    {
+                        openForm.BringToFront();
+                    }
+                }*/
+            }
+            catch (Exception ex)
             {
-                if (string.IsNullOrEmpty(selectaccountgrouptxtbox.Text))
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void UpdateAccountInfo(object sender, AccountData e)
+        {
+            try
+            {
+                // Simulate some async work (e.g., fetching additional data or processing)
+                await Task.Run(() =>
                 {
-                    Form openForm = CommonFunction.IsFormOpen(typeof(AccountGroupSelectionForm));
+                    // Perform any long-running or async operations here (if needed)
+                    // For example, querying a database, calling an API, etc.
+
+                    int accountid = e.AccountId;
+                    string accountname = e.AccountName;
+                    int accountheadid = e.AccountHeadId;
+
+                    // If you need to update UI controls, ensure that it's done on the UI thread
+                    // If you update textboxes, labels, etc., do it like this:
+                    this.Invoke(new Action(() =>
+                    {
+                        // Assuming these are TextBox controls
+                        accountgroupidlbl.Text = accountid.ToString();
+                        selectaccountgrouptxtbox.Text = accountname.ToString();
+                        accountheadidlbl.Text = accountheadid.ToString();
+                    }));
+                });
+            }
+            catch (Exception ex)
+            {
+                // Catch any unexpected errors and show them to the user
+                MessageBox.Show($"An error occurred while updating supplier information: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async Task<bool> AreAnyTextBoxesFilledAsync()
+        {
+            return await Task.Run(() =>
+            {
+                var textBoxes = new List<TextBox>
+                {
+                    nametxtbox, printnametxtbox, selectaccountgrouptxtbox,
+                    countrytxtbox, emiratesidtxtbox, areatxtbox, locationtxtbox, statetxtbox,
+                    mobilenotxtbox, trntxtbox, faxtxtbox, gstnotxtbox, vatnotxtbox,
+                    servicetaxnotxtbox, postalcodetxtbox, accountnotxtbox
+                };
+
+                // Check if any of the TextBoxes have text
+                if (textBoxes.Any(txtBox => !string.IsNullOrWhiteSpace(txtBox.Text)))
+                {
+                    return true;
+                }
+
+                // Check if any of the checkboxes are checked
+                if (issmsallowedcheckbox.Checked || isemailallowedcheckbox.Checked)
+                {
+                    return true;
+                }
+
+                return false; // No TextBox is filled or checkbox is checked
+            });
+        }
+
+        private async void selectaccountgrouptxtbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                /*if (string.IsNullOrEmpty(selectaccountgrouptxtbox.Text))
+                {
+                    Form openForm = await CommonFunction.IsFormOpenAsync(typeof(AccountGroupSelectionForm));
                     if (openForm == null)
                     {
                         AccountGroupSelectionForm accountSelection = new AccountGroupSelectionForm
@@ -472,53 +531,58 @@ namespace SmartFlow.Masters
                             WindowState = FormWindowState.Normal,
                             StartPosition = FormStartPosition.CenterParent,
                         };
-                        accountSelection.FormClosed += delegate
+
+                        accountSelection.FormClosed += async delegate
                         {
-                            UpdateAccountInfo();
+                            await UpdateAccountInfo();
                         };
-                        CommonFunction.DisposeOnClose(accountSelection);
-                        accountSelection.ShowDialog();
+
+                        await CommonFunction.DisposeOnCloseAsync(accountSelection);
+                        // Use ShowDialog asynchronously if you have any async work to be done inside the form
+                        await Task.Run(() => accountSelection.ShowDialog());
                     }
                     else
                     {
                         openForm.BringToFront();
                     }
-                }
+                }*/
             }
         }
-        private void selectaccountgrouptxtbox_Leave(object sender, EventArgs e)
+
+        private async void selectaccountgrouptxtbox_Leave(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(selectaccountgrouptxtbox.Text) && !string.IsNullOrWhiteSpace(selectaccountgrouptxtbox.Text) && 
+            if (!string.IsNullOrEmpty(selectaccountgrouptxtbox.Text) && !string.IsNullOrWhiteSpace(selectaccountgrouptxtbox.Text) &&
                 accountgroupidlbl.Text != "accountgroupid")
             {
                 if (selectaccountgrouptxtbox.Text == "Customers" || selectaccountgrouptxtbox.Text == "Reseller")
                 {
                     string initialize = "CU";
-                    accountcodelbl.Text = GenerateRandomAccountCode(initialize);
+                    accountcodelbl.Text = await GenerateRandomAccountCodeAsync(initialize);
                     customerradio.Checked = true;
                     accountcodelbl.Visible = true;
                 }
                 else if (selectaccountgrouptxtbox.Text == "Suppliers")
                 {
                     string initialize = "SU";
-                    accountcodelbl.Text = GenerateRandomAccountCode(initialize);
+                    accountcodelbl.Text = await GenerateRandomAccountCodeAsync(initialize);
                     supplierradio.Checked = true;
                     accountcodelbl.Visible = true;
                 }
-                else if(selectaccountgrouptxtbox.Text == "Employee")
+                else if (selectaccountgrouptxtbox.Text == "Employee")
                 {
                     string initialize = "EM";
-                    accountcodelbl.Text = GenerateRandomAccountCode(initialize);
+                    accountcodelbl.Text = await GenerateRandomAccountCodeAsync(initialize);
                     employeeradio.Checked = true;
                     accountcodelbl.Visible = true;
                 }
                 else
                 {
                     string initialize = "AC";
-                    accountcodelbl.Text = GenerateRandomAccountCode(initialize);
+                    accountcodelbl.Text = await GenerateRandomAccountCodeAsync(initialize);
                     accountcodelbl.Visible = true;
                 }
             }
         }
+
     }
 }

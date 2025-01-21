@@ -3,6 +3,7 @@ using SmartFlow.Common.Forms;
 using SmartFlow.Purchase;
 using System;
 using System.Data;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Stock
@@ -23,7 +24,7 @@ namespace SmartFlow.Stock
             startdatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
             enddatetxtbox.Text = DateTime.Now.AddDays(20).ToString("dd/MM/yyyy");
         }
-        private void searchbtn_Click(object sender, EventArgs e)
+        private async void searchbtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -38,7 +39,7 @@ namespace SmartFlow.Stock
                 else
                 {
                     string query = string.Format("");
-                    DataTable invoicedata = DatabaseAccess.Retrive(query);
+                    DataTable invoicedata = await DatabaseAccess.RetriveAsync(query);
                     if (invoicedata.Rows.Count > 0)
                     {
 
@@ -80,15 +81,15 @@ namespace SmartFlow.Stock
 
             }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
-        private void selectwarehousetxtbox_MouseClick(object sender, MouseEventArgs e)
+        private async void selectwarehousetxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             if (string.IsNullOrEmpty(selectwarehousetxtbox.Text))
             {
-                Form openForm = CommonFunction.IsFormOpen(typeof(WarehouseSelection));
+                Form openForm = await CommonFunction.IsFormOpenAsync(typeof(WarehouseSelection));
                 if (openForm == null)
                 {
                     string getwarehousedata = "SELECT WarehouseID,Name,Address,City,Code FROM WarehouseTable";
-                    DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
+                    DataTable warehousedata = await DatabaseAccess.RetriveAsync(getwarehousedata);
 
                     if (warehousedata != null)
                     {
@@ -101,7 +102,7 @@ namespace SmartFlow.Stock
                             {
                                 UpdateWarehouseTxtBox();
                             };
-                            CommonFunction.DisposeOnClose(warehouseSelection);
+                            await CommonFunction.DisposeOnCloseAsync(warehouseSelection);
                             warehouseSelection.Show();
                         }
                     }
@@ -112,11 +113,13 @@ namespace SmartFlow.Stock
                 }
             }
         }
+
         private void UpdateWarehouseTxtBox()
         {
-            selectwarehousetxtbox.Text = GlobalVariables.warehousenameglobal;
-            warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
+            /*selectwarehousetxtbox.Text = GlobalVariables.warehousenameglobal;
+            warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();*/
         }
+
         private void BookItem_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -147,21 +150,19 @@ namespace SmartFlow.Stock
             return false; // No TextBox is filled
         }
 
-        private void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
+        private async void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             if (string.IsNullOrEmpty(selectproducttxtbox.Text))
             {
-                Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+                Form openForm = await CommonFunction.IsFormOpenAsync(typeof(ProductSelectionForm));
                 if (openForm == null)
                 {
                     ProductSelectionForm productSelection = new ProductSelectionForm();
                     productSelection.MdiParent = this.MdiParent;
 
-                    productSelection.FormClosed += delegate
-                    {
-                        UpdateProductTextBox();
-                    };
-                    CommonFunction.DisposeOnClose(productSelection);
+                    productSelection.ProductDataSelected += UpdateProductTextBox;
+
+                    await CommonFunction.DisposeOnCloseAsync(productSelection);
                     productSelection.Show();
                 }
                 else
@@ -170,15 +171,40 @@ namespace SmartFlow.Stock
                 }
             }
         }
-        private void UpdateProductTextBox()
+        private async void UpdateProductTextBox(object sender, ProductData e)
         {
-            if (!string.IsNullOrEmpty(GlobalVariables.productnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.productnameglobal) &&
-                !string.IsNullOrEmpty(GlobalVariables.productmfrglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.productmfrglobal) &&
-                GlobalVariables.productidglobal > 0)
+            try
             {
-                selectproducttxtbox.Text = GlobalVariables.productnameglobal.ToString();
-                productidlbl.Text = GlobalVariables.productidglobal.ToString();
-                mfrtxtbox.Text = GlobalVariables.productmfrglobal.ToString();
+                // Simulate some async work (e.g., fetching additional data or processing)
+                await Task.Run(() =>
+                {
+                    // Perform any long-running or async operations here (if needed)
+                    // For example, querying a database, calling an API, etc.
+
+                    int productid = e.ProductId;
+                    string productname = e.ProductName;
+                    string productmfr = e.ProductMfr;
+                    string productupc = e.ProductUPC;
+                    float productprice = e.ProductPrice;
+                    string productbarcode = e.ProductBarcode;
+
+                    // If you need to update UI controls, ensure that it's done on the UI thread
+                    // If you update textboxes, labels, etc., do it like this:
+                    this.Invoke(new Action(() =>
+                    {
+                        // Assuming these are TextBox controls
+                        /* supplieridlbl.Text = supplierId.ToString();
+                         selectsuppliertxtbox.Text = supplierName;
+                         suppliercodetxtbox.Text = supplierCode;
+                         companytxtbox.Text = companyName;*/
+                    }));
+                });
+            }
+            catch (Exception ex)
+            {
+                // Catch any unexpected errors and show them to the user
+                MessageBox.Show($"An error occurred while updating supplier information: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

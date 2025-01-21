@@ -5,6 +5,7 @@ using System;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZXing;
 
@@ -37,21 +38,19 @@ namespace SmartFlow.Stock
                 }
             }
         }
-        private void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
+        private async void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             if (string.IsNullOrEmpty(selectproducttxtbox.Text))
             {
-                Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+                Form openForm = await CommonFunction.IsFormOpenAsync(typeof(ProductSelectionForm));
                 if (openForm == null)
                 {
                     ProductSelectionForm productSelection = new ProductSelectionForm();
                     productSelection.MdiParent = this.MdiParent;
 
-                    productSelection.FormClosed += delegate
-                    {
-                        UpdateProductTextBox();
-                    };
-                    CommonFunction.DisposeOnClose(productSelection);
+                    productSelection.ProductDataSelected += UpdateProductTextBox;
+
+                    await CommonFunction.DisposeOnCloseAsync(productSelection);
                     productSelection.Show();
                 }
                 else
@@ -60,11 +59,41 @@ namespace SmartFlow.Stock
                 }
             }
         }
-        private void UpdateProductTextBox()
+        private async void UpdateProductTextBox(object sender, ProductData e)
         {
-            selectproducttxtbox.Text = GlobalVariables.productnameglobal;
-            productidlbl.Text = GlobalVariables.productidglobal.ToString();
-            productmfrlbl.Text = GlobalVariables.productmfrglobal.ToString();
+            try
+            {
+                // Simulate some async work (e.g., fetching additional data or processing)
+                await Task.Run(() =>
+                {
+                    // Perform any long-running or async operations here (if needed)
+                    // For example, querying a database, calling an API, etc.
+
+                    int productid = e.ProductId;
+                    string productname = e.ProductName;
+                    string productmfr = e.ProductMfr;
+                    string productupc = e.ProductUPC;
+                    float productprice = e.ProductPrice;
+                    string productbarcode = e.ProductBarcode;
+
+                    // If you need to update UI controls, ensure that it's done on the UI thread
+                    // If you update textboxes, labels, etc., do it like this:
+                    this.Invoke(new Action(() =>
+                    {
+                        // Assuming these are TextBox controls
+                        /* supplieridlbl.Text = supplierId.ToString();
+                         selectsuppliertxtbox.Text = supplierName;
+                         suppliercodetxtbox.Text = supplierCode;
+                         companytxtbox.Text = companyName;*/
+                    }));
+                });
+            }
+            catch (Exception ex)
+            {
+                // Catch any unexpected errors and show them to the user
+                MessageBox.Show($"An error occurred while updating supplier information: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void addbtn_Click(object sender, EventArgs e)
         {
@@ -117,7 +146,7 @@ namespace SmartFlow.Stock
                 
             }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
-        private void generatebtn_Click(object sender, EventArgs e)
+        private async void generatebtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -140,7 +169,7 @@ namespace SmartFlow.Stock
                         string getbarcodeProduct = string.Format("SELECT Barcode FROM ProductTable WHERE ProductName LIKE '%" + producttitle + "%' " +
                             "AND MFR LIKE '" + productmfr + "' " +
                             "AND ProductID = '" + productid + "'");
-                        DataTable dtproductdata = DatabaseAccess.Retrive(getbarcodeProduct);
+                        DataTable dtproductdata = await DatabaseAccess.RetriveAsync(getbarcodeProduct);
 
                         if(dtproductdata!=null && dtproductdata.Rows.Count > 0)
                         {
@@ -152,7 +181,7 @@ namespace SmartFlow.Stock
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
-        public void GenerateBarcodes(DataTable dataTable)
+        public async void GenerateBarcodes(DataTable dataTable)
         {
             BarcodeWriter writer = new BarcodeWriter
             {
@@ -179,7 +208,7 @@ namespace SmartFlow.Stock
 
             this.Close();
             PrintedBarcodeViewer printedBarcode = new PrintedBarcodeViewer(dataTable);
-            CommonFunction.DisposeOnClose(printedBarcode);
+            await CommonFunction.DisposeOnCloseAsync(printedBarcode);
             printedBarcode.Show();
         }
         private bool AreAnyTextBoxesFilled()
@@ -188,13 +217,13 @@ namespace SmartFlow.Stock
             if(qtybarcode.Text.Trim().Length > 0) { return true; }
             return false; // No TextBox is filled
         }
-        private void selectproducttxtbox_KeyDown(object sender, KeyEventArgs e)
+        private async void selectproducttxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 if (string.IsNullOrEmpty(selectproducttxtbox.Text))
                 {
-                    Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+                    Form openForm = await CommonFunction.IsFormOpenAsync(typeof(ProductSelectionForm));
                     if (openForm == null)
                     {
                         ProductSelectionForm productSelection = new ProductSelectionForm
@@ -203,11 +232,9 @@ namespace SmartFlow.Stock
                             StartPosition = FormStartPosition.CenterScreen,
                         };
 
-                        productSelection.FormClosed += delegate
-                        {
-                            UpdateProductTextBox();
-                        };
-                        CommonFunction.DisposeOnClose(productSelection);
+                        productSelection.ProductDataSelected += UpdateProductTextBox;
+
+                        await CommonFunction.DisposeOnCloseAsync(productSelection);
                         productSelection.ShowDialog();
                     }
                     else

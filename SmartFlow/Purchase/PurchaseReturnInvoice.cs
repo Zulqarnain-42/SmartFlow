@@ -10,6 +10,8 @@ using SmartFlow.Sales.CommonForm;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SmartFlow.DatabaseAccess;
 
@@ -30,7 +32,7 @@ namespace SmartFlow
             this._dtinvoice = dtinvoice;
             this._dtinvoicedetails = dtinvoicedetails;
         }
-        private void PurchaseReturnInvoice_Load(object sender, EventArgs e)
+        private async void PurchaseReturnInvoice_Load(object sender, EventArgs e)
         {
             if(_dtinvoice!=null && _dtinvoice.Rows.Count>0 && _dtinvoicedetails!=null && _dtinvoicedetails.Rows.Count > 0)
             {
@@ -69,14 +71,14 @@ namespace SmartFlow
             else
             {
                 invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
-                invoicenotxtbox.Text = GenerateNextInvoiceNumber();
+                invoicenotxtbox.Text = await GenerateNextInvoiceNumber();
             }
         }
-        private string GenerateNextInvoiceNumber()
+        private async Task<string> GenerateNextInvoiceNumber()
         {
             try
             {
-                string lastInvoiceNumber = GetLastInvoiceNumber();
+                string lastInvoiceNumber = await GetLastInvoiceNumber();
                 string newInvoiceNumber;
 
                 if (lastInvoiceNumber == null)
@@ -118,13 +120,13 @@ namespace SmartFlow
                 return null;
             }
         }
-        private string GetLastInvoiceNumber()
+        private async Task<string> GetLastInvoiceNumber()
         {
             string lastInvoiceNumber = null;
             try
             {
                 string query = "SELECT TOP 1 InvoiceNo FROM InvoiceTable WHERE InvoiceNo LIKE 'PR-%' ORDER BY InvoiceNo DESC";
-                DataTable invoiceData = DatabaseAccess.Retrive(query);
+                DataTable invoiceData = await DatabaseAccess.RetriveAsync(query);
                 if (invoiceData.Rows.Count > 0)
                 {
                     lastInvoiceNumber = invoiceData.Rows[0]["InvoiceNo"].ToString();
@@ -137,16 +139,16 @@ namespace SmartFlow
 
             return lastInvoiceNumber;
         }
-        private string CheckInvoiceBeforeInsert()
+        private async Task<string> CheckInvoiceBeforeInsert()
         {
             try
             {
-                string lastInvoiceNumber = GetLastInvoiceNumber();
+                string lastInvoiceNumber = await GetLastInvoiceNumber();
                 string newInvoiceNumber = invoicenotxtbox.Text;
 
                 if (String.Compare(newInvoiceNumber, lastInvoiceNumber) <= 0)
                 {
-                    return GenerateNextInvoiceNumber();
+                    return await GenerateNextInvoiceNumber();
                 }
                 else
                 {
@@ -223,12 +225,17 @@ namespace SmartFlow
                     MessageBox.Show("Select One Row");
                 }
             }
+
+            if (e.KeyCode == Keys.E)
+            {
+                HandleRowSelectionAsync();
+            }
         }
-        private void selectsuppliertxtbox_MouseClick(object sender, MouseEventArgs e)
+        private async void selectsuppliertxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             if (string.IsNullOrEmpty(selectsuppliertxtbox.Text))
             {
-                Form openForm = CommonFunction.IsFormOpen(typeof(SupplierSelectionForm));
+                Form openForm = await CommonFunction.IsFormOpenAsync(typeof(SupplierSelectionForm));
                 if (openForm == null)
                 {
                     SupplierSelectionForm supplierSelection = new SupplierSelectionForm
@@ -236,11 +243,9 @@ namespace SmartFlow
                         WindowState = FormWindowState.Normal,
                         StartPosition = FormStartPosition.CenterParent,
                     };
-                    supplierSelection.FormClosed += delegate
-                    {
-                        UpdateSupplierTextBox();
-                    };
-                    CommonFunction.DisposeOnClose(supplierSelection);
+                    supplierSelection.SupplierDataSelected += UpdateSupplierTextBox;
+
+                    await CommonFunction.DisposeOnCloseAsync(supplierSelection);
                     supplierSelection.ShowDialog();
                 }
                 else
@@ -249,18 +254,39 @@ namespace SmartFlow
                 }
             }
         }
-        private void UpdateSupplierTextBox()
+        private async void UpdateSupplierTextBox(object sender, SupplierData e)
         {
-            if(!string.IsNullOrEmpty(GlobalVariables.suppliernameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.suppliernameglobal) && 
-                !string.IsNullOrEmpty(GlobalVariables.suppliercodeglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.suppliercodeglobal) && 
-                GlobalVariables.supplieridglobal > 0)
+            try
             {
-                supplieridlbl.Text = GlobalVariables.supplieridglobal.ToString();
-                selectsuppliertxtbox.Text = GlobalVariables.suppliernameglobal;
-                suppliercodetxtbox.Text = GlobalVariables.suppliercodeglobal;
-                companytxtbox.Text = GlobalVariables.suppliercompanyName;
-            }
+                // Simulate some async work (e.g., fetching additional data or processing)
+                await Task.Run(() =>
+                {
+                    // Perform any long-running or async operations here (if needed)
+                    // For example, querying a database, calling an API, etc.
 
+                    int supplierId = e.SupplierId;
+                    string supplierName = e.SupplierName;
+                    string supplierCode = e.SupplierCode;
+                    string companyName = e.SupplierCompanyName;
+
+                    // If you need to update UI controls, ensure that it's done on the UI thread
+                    // If you update textboxes, labels, etc., do it like this:
+                    this.Invoke(new Action(() =>
+                    {
+                        // Assuming these are TextBox controls
+                        supplieridlbl.Text = supplierId.ToString();
+                        selectsuppliertxtbox.Text = supplierName;
+                        suppliercodetxtbox.Text = supplierCode;
+                        companytxtbox.Text = companyName;
+                    }));
+                });
+            }
+            catch (Exception ex)
+            {
+                // Catch any unexpected errors and show them to the user
+                MessageBox.Show($"An error occurred while updating supplier information: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private bool AreAnyTextBoxesFilled()
         {
@@ -269,13 +295,13 @@ namespace SmartFlow
             if (dgvpurchaseproducts.Rows.Count > 0) { return true; }
             return false; // No TextBox is filled
         }
-        private void selectsuppliertxtbox_KeyDown(object sender, KeyEventArgs e)
+        private async void selectsuppliertxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Enter)
             {
                 if (string.IsNullOrEmpty(selectsuppliertxtbox.Text))
                 {
-                    Form openForm = CommonFunction.IsFormOpen(typeof(SupplierSelectionForm));
+                    Form openForm = await CommonFunction.IsFormOpenAsync(typeof(SupplierSelectionForm));
                     if (openForm == null)
                     {
                         SupplierSelectionForm supplierSelection = new SupplierSelectionForm
@@ -284,11 +310,9 @@ namespace SmartFlow
                             StartPosition = FormStartPosition.CenterParent,
                         };
 
-                        supplierSelection.FormClosed += delegate
-                        {
-                            UpdateSupplierTextBox();
-                        };
-                        CommonFunction.DisposeOnClose(supplierSelection);
+                        supplierSelection.SupplierDataSelected += UpdateSupplierTextBox;
+
+                        await CommonFunction.DisposeOnCloseAsync(supplierSelection);
                         supplierSelection.ShowDialog();
                     }
                     else
@@ -298,11 +322,11 @@ namespace SmartFlow
                 }
             }
         }
-        private void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
+        private async void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             if (string.IsNullOrEmpty(selectproducttxtbox.Text))
             {
-                Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+                Form openForm = await CommonFunction.IsFormOpenAsync(typeof(ProductSelectionForm));
                 if (openForm == null)
                 {
                     ProductSelectionForm productSelection = new ProductSelectionForm
@@ -311,11 +335,9 @@ namespace SmartFlow
                         StartPosition = FormStartPosition.CenterParent,
                     };
 
-                    productSelection.FormClosed += delegate
-                    {
-                        UpdateProductTextBox();
-                    };
-                    CommonFunction.DisposeOnClose(productSelection);
+                    productSelection.ProductDataSelected += UpdateProductTextBox;
+
+                    await CommonFunction.DisposeOnCloseAsync(productSelection);
                     productSelection.ShowDialog();
                 }
                 else
@@ -324,25 +346,48 @@ namespace SmartFlow
                 }
             }
         }
-        private void UpdateProductTextBox()
+        private async void UpdateProductTextBox(object sender, ProductData e)
         {
-            if(!string.IsNullOrEmpty(GlobalVariables.productnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.productnameglobal) && 
-                !string.IsNullOrEmpty(GlobalVariables.productmfrglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.productmfrglobal) && 
-                GlobalVariables.productidglobal > 0)
+            try
             {
-                selectproducttxtbox.Text = GlobalVariables.productnameglobal;
-                mfrtxtbox.Text = GlobalVariables.productmfrglobal;
-                productidlbl.Text = GlobalVariables.productidglobal.ToString();
-            }
+                // Simulate some async work (e.g., fetching additional data or processing)
+                await Task.Run(() =>
+                {
+                    // Perform any long-running or async operations here (if needed)
+                    // For example, querying a database, calling an API, etc.
 
+                    int productid = e.ProductId;
+                    string productname = e.ProductName;
+                    string productmfr = e.ProductMfr;
+                    string productupc = e.ProductUPC;
+                    float productprice = e.ProductPrice;
+                    string productbarcode = e.ProductBarcode;
+
+                    // If you need to update UI controls, ensure that it's done on the UI thread
+                    // If you update textboxes, labels, etc., do it like this:
+                    this.Invoke(new Action(() =>
+                    {
+                        // Assuming these are TextBox controls
+                        productidlbl.Text = productid.ToString();
+                        mfrtxtbox.Text = productmfr.ToString();
+                        selectproducttxtbox.Text = productname.ToString();
+                    }));
+                });
+            }
+            catch (Exception ex)
+            {
+                // Catch any unexpected errors and show them to the user
+                MessageBox.Show($"An error occurred while updating supplier information: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-        private void selectproducttxtbox_KeyDown(object sender, KeyEventArgs e)
+        private async void selectproducttxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) 
             {
                 if (string.IsNullOrEmpty(selectproducttxtbox.Text))
                 {
-                    Form openForm = CommonFunction.IsFormOpen(typeof(ProductSelectionForm));
+                    Form openForm = await CommonFunction.IsFormOpenAsync(typeof(ProductSelectionForm));
                     if (openForm == null)
                     {
                         ProductSelectionForm productSelectionForm = new ProductSelectionForm
@@ -351,11 +396,9 @@ namespace SmartFlow
                             StartPosition = FormStartPosition.CenterParent,
                         };
 
-                        productSelectionForm.FormClosed += delegate
-                        {
-                            UpdateProductTextBox();
-                        };
-                        CommonFunction.DisposeOnClose(productSelectionForm);
+                        productSelectionForm.ProductDataSelected += UpdateProductTextBox;
+
+                        await CommonFunction.DisposeOnCloseAsync(productSelectionForm);
                         productSelectionForm.ShowDialog();
                     }
                     else
@@ -365,19 +408,19 @@ namespace SmartFlow
                 }
             }
         }
-        private void dgvpurchaseproducts_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private async void dgvpurchaseproducts_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            CommonFunction.CalculateTotalColumn(9,dgvpurchaseproducts,nettotaltxtbox);
-            CommonFunction.CalculateTotalVatColumn(8, dgvpurchaseproducts, totalvattxtbox);
-            CommonFunction.CalculateTotalDiscountColumn(7,dgvpurchaseproducts,totaldiscounttxtbox);
+            await CommonFunction.CalculateTotalColumnAsync(10,dgvpurchaseproducts,nettotaltxtbox);
+            await CommonFunction.CalculateTotalVatColumnAsync(9, dgvpurchaseproducts, totalvattxtbox);
+            await CommonFunction.CalculateTotalDiscountColumnAsync(8,dgvpurchaseproducts,totaldiscounttxtbox);
         }
-        private void dgvpurchaseproducts_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        private async void dgvpurchaseproducts_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            CommonFunction.CalculateTotalColumn(9, dgvpurchaseproducts, nettotaltxtbox);
-            CommonFunction.CalculateTotalVatColumn(8, dgvpurchaseproducts, totalvattxtbox);
-            CommonFunction.CalculateTotalDiscountColumn(7, dgvpurchaseproducts, totaldiscounttxtbox);
+            await CommonFunction.CalculateTotalColumnAsync(10, dgvpurchaseproducts, nettotaltxtbox);
+            await CommonFunction.CalculateTotalVatColumnAsync(9, dgvpurchaseproducts, totalvattxtbox);
+            await CommonFunction.CalculateTotalDiscountColumnAsync(8, dgvpurchaseproducts, totaldiscounttxtbox);
         }
-        private void savebtn_Click(object sender, EventArgs e)
+        private async void savebtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -401,7 +444,7 @@ namespace SmartFlow
                 if(savebtn.Text == "UPDATE")
                 {
                     string invoicecode = Guid.NewGuid().ToString();
-                    invoiceno = CheckInvoiceBeforeInsert();
+                    invoiceno = await CheckInvoiceBeforeInsert();
                     DateTime invoiceDate = DateTime.Parse(invoicedatetxtbox.Text);
                     int supplierid = Convert.ToInt32(supplieridlbl.Text.ToString());
                     string suppliercode = suppliercodetxtbox.Text;
@@ -411,10 +454,6 @@ namespace SmartFlow
                     float netVat = float.Parse(totalvattxtbox.Text.ToString());
                     float netDiscount = float.Parse(totaldiscounttxtbox.Text.ToString());
                     float shippingCharges = string.IsNullOrWhiteSpace(shippingchargestxtbox.Text) ? 0 : float.Parse(shippingchargestxtbox.Text);
-                    int currencyid = Convert.ToInt32(currencyidlbl.Text);
-                    string currencyname = currencynamelbl.Text.ToString();
-                    string currencysymbol = currencysymbollbl.Text.ToString();
-                    float conversionRate = float.Parse(currencyconversionratelbl.Text);
                     string tableName = "InvoiceTable";
                     string whereClause = "InvoiceNo = '" + invoiceno + "'";
 
@@ -432,22 +471,18 @@ namespace SmartFlow
                         { "TotalDiscount", netDiscount },
                         { "FreightShippingCharges", shippingCharges },
                         { "InvoiceRefrence", invoiceRef },
-                        { "Currencyid", currencyid },
-                        { "CurrencyName", currencyname },
-                        { "CurrencySymbol", currencysymbol },
-                        { "ConversionRate", conversionRate }
                     };
 
-                    bool insertinvoice = DatabaseAccess.ExecuteQuery(tableName, "INSERT", columnData);
+                    bool insertinvoice = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData);
 
                     if (insertinvoice)
                     {
-                        bool isAdded = UpdateInvoiceDetailsData(invoiceno, invoicecode);
+                        bool isAdded = await UpdateInvoiceDetailsData(invoiceno, invoicecode);
                         if (isAdded)
                         {
                             ReturnReportView returnReport = new ReturnReportView(invoiceno);
                             returnReport.MdiParent = Application.OpenForms["Dashboard"];
-                            CommonFunction.DisposeOnClose(returnReport);
+                            await CommonFunction.DisposeOnCloseAsync(returnReport);
                             returnReport.Show();
                             this.Close();
                         }
@@ -457,7 +492,7 @@ namespace SmartFlow
                 else
                 {
                     string invoicecode = Guid.NewGuid().ToString();
-                    invoiceno = CheckInvoiceBeforeInsert();
+                    invoiceno = await CheckInvoiceBeforeInsert();
                     DateTime invoiceDate = DateTime.Parse(invoicedatetxtbox.Text);
                     int supplierid = Convert.ToInt32(supplieridlbl.Text.ToString());
                     string suppliercode = suppliercodetxtbox.Text;
@@ -467,10 +502,6 @@ namespace SmartFlow
                     float netVat = float.Parse(totalvattxtbox.Text.ToString());
                     float netDiscount = float.Parse(totaldiscounttxtbox.Text.ToString());
                     float shippingCharges = string.IsNullOrWhiteSpace(shippingchargestxtbox.Text) ? 0 : float.Parse(shippingchargestxtbox.Text);
-                    int currencyid = Convert.ToInt32(currencyidlbl.Text);
-                    string currencyname = currencynamelbl.Text.ToString();
-                    string currencysymbol = currencysymbollbl.Text.ToString();
-                    float conversionrate = float.Parse(currencyconversionratelbl.Text);
                     string tableName = "InvoiceTable";
 
                     var columnData = new Dictionary<string, object>
@@ -486,14 +517,10 @@ namespace SmartFlow
                         { "TotalVat", netVat },
                         { "TotalDiscount", netDiscount },
                         { "FreightShippingCharges", shippingCharges },
-                        { "InvoiceRefrence", invoiceRef },
-                        { "Currencyid", currencyid },
-                        { "CurrencyName", currencyname },
-                        { "CurrencySymbol", currencysymbol },
-                        { "ConversionRate", conversionrate }
+                        { "InvoiceRefrence", invoiceRef }
                     };
 
-                    bool insertinvoice = DatabaseAccess.ExecuteQuery(tableName, "INSERT", columnData);
+                    bool insertinvoice = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData);
 
                     if (insertinvoice)
                     {
@@ -536,7 +563,7 @@ namespace SmartFlow
                                 { "MinusInventory", true },
                                 { "UnitSalePrice", saleprice }
                             };
-                            bool insertprod = DatabaseAccess.ExecuteQuery(subtable, "INSERT", subColumnData);
+                            bool insertprod = await DatabaseAccess.ExecuteQueryAsync(subtable, "INSERT", subColumnData);
                         }
                         isInserted = true;
                     }
@@ -546,7 +573,7 @@ namespace SmartFlow
                     {
                         ReturnReportView returnReport = new ReturnReportView(invoiceno);
                         returnReport.MdiParent = Application.OpenForms["Dashboard"];
-                        CommonFunction.DisposeOnClose(returnReport);
+                        await CommonFunction.DisposeOnCloseAsync(returnReport);
                         returnReport.Show();
                         this.Close();
                     }
@@ -556,7 +583,7 @@ namespace SmartFlow
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private bool UpdateInvoiceDetailsData(string invoiceNo, string invoiceCode)
+        private async Task<bool> UpdateInvoiceDetailsData(string invoiceNo, string invoiceCode)
         {
             bool isInserted = false;
             InsertBackUpData(invoiceNo, invoiceCode);
@@ -601,13 +628,13 @@ namespace SmartFlow
                     { "MinusInventory", true },
                     { "UnitSalePrice", saleprice }
                 };
-                bool insertprod = DatabaseAccess.ExecuteQuery(subtable, "INSERT", subColumnData);
+                bool insertprod = await DatabaseAccess.ExecuteQueryAsync(subtable, "INSERT", subColumnData);
             }
 
             return true;
         }
 
-        private void DeleteInvoiceDetail(string invoiceNo, string tablename)
+        private async void DeleteInvoiceDetail(string invoiceNo, string tablename)
         {
             try
             {
@@ -619,13 +646,13 @@ namespace SmartFlow
                     { "InvoiceNo", invoiceNo }
                 };
 
-                DatabaseAccess.ExecuteQuery(tableName, "DELETE", columnData, whereClause);
+                await DatabaseAccess.ExecuteQueryAsync(tableName, "DELETE", columnData, whereClause);
 
             }
             catch (Exception ex) { throw ex; }
         }
 
-        private void InsertBackUpData(string invoiceNo, string invoicecode)
+        private async void InsertBackUpData(string invoiceNo, string invoicecode)
         {
             foreach (DataGridViewRow row in dgvpurchaseproducts.Rows)
             {
@@ -647,26 +674,27 @@ namespace SmartFlow
 
                 string subtable = "InvoiceDetailsTableBackUp";
                 var subColumnData = new Dictionary<string, object>
-                        {
-                            { "InvoiceNo", invoiceNo },
-                            { "Invoicecode", invoicecode },
-                            { "Productid", productid },
-                            { "Quantity", quantity },
-                            { "ProductName", productname },
-                            { "MFR", mfr },
-                            { "ItemWiseDiscount", discount },
-                            { "ItemWiseVAT", vat },
-                            { "Warehouseid", warehouseid },
-                            { "ItemTotal", total },
-                            { "Unitid", unitid },
-                            { "AddInventory", true },
-                            { "PricePerMeter", pricepermeter },
-                            { "LengthInMeter", lengthinmeter },
-                            { "ItemDescription", itemdescription },
-                            { "MinusInventory", true },
-                            { "UnitSalePrice", saleprice }
-                        };
-                DatabaseAccess.ExecuteQuery(subtable, "INSERT", subColumnData);
+                {
+                    { "InvoiceNo", invoiceNo },
+                    { "Invoicecode", invoicecode },
+                    { "Productid", productid },
+                    { "Quantity", quantity },
+                    { "ProductName", productname },
+                    { "MFR", mfr },
+                    { "ItemWiseDiscount", discount },
+                    { "ItemWiseVAT", vat },
+                    { "Warehouseid", warehouseid },
+                    { "ItemTotal", total },
+                    { "Unitid", unitid },
+                    { "AddInventory", true },
+                    { "PricePerMeter", pricepermeter },
+                    { "LengthInMeter", lengthinmeter },
+                    { "ItemDescription", itemdescription },
+                    { "MinusInventory", true },
+                    { "UnitSalePrice", saleprice }
+                };
+
+                await DatabaseAccess.ExecuteQueryAsync(subtable, "INSERT", subColumnData);
             }
 
         }
@@ -709,7 +737,7 @@ namespace SmartFlow
 
                 if (!productExists)
                 {
-                    dgvpurchaseproducts.Rows.Add(mfr, productid, productname, qty, unitid, unitname, unitprice
+                    dgvpurchaseproducts.Rows.Add("", mfr, productid, productname, qty, unitid, unitname, unitprice
                         , discount, vatamount, finalitemwise, warehouseid, itemwisedescription, lengthinmeterproduct, priceinmeter);
                 }
 
@@ -717,19 +745,6 @@ namespace SmartFlow
                 selectproducttxtbox.Text = string.Empty;
                 productidlbl.Text = string.Empty;
                 qtytxtbox.Text = string.Empty;
-                GlobalVariables.unitidglobal = 0;
-                GlobalVariables.productpriceglobal = 0;
-                GlobalVariables.productitemwisevatamount = 0;
-                GlobalVariables.productdiscountamountitemwise = 0;
-                GlobalVariables.productfinalamountwithvatanddiscountitemwise = 0;
-                GlobalVariables.warehouseidglobal = 0;
-                GlobalVariables.productitemwisedescriptiongloabl = string.Empty;
-                GlobalVariables.productinmeterlength = 0;
-                GlobalVariables.productinmeterprice = 0;
-                GlobalVariables.productcostprice = 0;
-                GlobalVariables.productstandardprice = 0;
-                GlobalVariables.productlowestlength = 0;
-                GlobalVariables.productsaleprice = 0;
                 selectproducttxtbox.Focus();
             }
         }
@@ -742,13 +757,13 @@ namespace SmartFlow
             }
         }
 
-        private void qtytxtbox_Leave(object sender, EventArgs e)
+        private async void qtytxtbox_Leave(object sender, EventArgs e)
         {
             int itemqty = Convert.ToInt32(qtytxtbox.Text);
             if (itemqty > 0)
             {
                 string getwarehousedata = "SELECT WarehouseID,Name FROM WarehouseTable";
-                DataTable warehousedata = DatabaseAccess.Retrive(getwarehousedata);
+                DataTable warehousedata = await DatabaseAccess.RetriveAsync(getwarehousedata);
 
                 if (warehousedata != null)
                 {
@@ -762,19 +777,19 @@ namespace SmartFlow
 
                         warehouseSelection.FormClosed += WarehouseSelection_FormClosed;
 
-                        CommonFunction.DisposeOnClose(warehouseSelection);
+                        await CommonFunction.DisposeOnCloseAsync(warehouseSelection);
                         warehouseSelection.ShowDialog();
                     }
                 }
             }
         }
 
-        private void WarehouseSelection_FormClosed(object sender, FormClosedEventArgs e)
+        private async void WarehouseSelection_FormClosed(object sender, FormClosedEventArgs e)
         {
             try
             {
                 // Dispose of the current form (warehouseQty)
-                CommonFunction.DisposeOnClose((WarehouseSelection)sender);
+                await CommonFunction.DisposeOnCloseAsync((WarehouseSelection)sender);
 
                 // Create and show VATForm after WarehouseQty is closed
                 VATForm vATForm = new VATForm(Convert.ToInt32(qtytxtbox.Text), false)
@@ -782,12 +797,12 @@ namespace SmartFlow
                     WindowState = FormWindowState.Normal,
                     StartPosition = FormStartPosition.CenterParent,
                 };
-                vATForm.FormClosed += delegate
+                vATForm.FormClosed += async delegate
                 {
-                    UpdateProductData();
+                    await UpdateProductDataAsync();
                 };
                 // Apply DisposeOnClose to VATForm
-                CommonFunction.DisposeOnClose(vATForm);
+                await CommonFunction.DisposeOnCloseAsync(vATForm);
                 vATForm.ShowDialog();
             }
             catch (Exception ex)
@@ -796,25 +811,132 @@ namespace SmartFlow
             }
         }
 
-        private void UpdateProductData()
+        private async Task UpdateProductDataAsync()
         {
-            warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();
-            itemdescriptionlbl.Text = GlobalVariables.productitemwisedescriptiongloabl.ToString();
-            unitsalepricelbl.Text = GlobalVariables.productpriceglobal.ToString();
-            pricepermeterlbl.Text = GlobalVariables.productinmeterprice.ToString();
-            lengthinmeterlbl.Text = GlobalVariables.productinmeterlength.ToString();
-            totalcolumnlbl.Text = GlobalVariables.productfinalamountwithvatanddiscountitemwise.ToString();
-            unitnamelbl.Text = GlobalVariables.unitnameglobal.ToString();
-            unitidlbl.Text = GlobalVariables.unitidglobal.ToString();
-            productdiscountlbl.Text = GlobalVariables.productdiscountamountitemwise.ToString();
-            productvatlbl.Text = GlobalVariables.productitemwisevatamount.ToString();
+            await Task.Run(() =>
+            {
+                // Assuming these updates are thread-safe
+                warehouseidlbl.Invoke((Action)(() => warehouseidlbl.Text = GlobalVariables.warehouseidglobal != 0 ? GlobalVariables.warehouseidglobal.ToString() : "0"));
+                itemdescriptionlbl.Invoke((Action)(() => itemdescriptionlbl.Text = GlobalVariables.productitemwisedescriptiongloabl ?? "N/A"));
+                unitsalepricelbl.Invoke((Action)(() => unitsalepricelbl.Text = GlobalVariables.productpriceglobal != 0 ? GlobalVariables.productpriceglobal.ToString("0.00") : "0.00"));
+                pricepermeterlbl.Invoke((Action)(() => pricepermeterlbl.Text = GlobalVariables.productinmeterprice != 0 ? GlobalVariables.productinmeterprice.ToString("0.00") : "0.00"));
+                lengthinmeterlbl.Invoke((Action)(() => lengthinmeterlbl.Text = GlobalVariables.productinmeterlength != 0 ? GlobalVariables.productinmeterlength.ToString("0.00") : "0.00"));
+                totalcolumnlbl.Invoke((Action)(() => totalcolumnlbl.Text = GlobalVariables.productfinalamountwithvatanddiscountitemwise != 0 ? GlobalVariables.productfinalamountwithvatanddiscountitemwise.ToString("0.00") : "0.00"));
+                unitnamelbl.Invoke((Action)(() => unitnamelbl.Text = GlobalVariables.unitnameglobal ?? "N/A"));
+                unitidlbl.Invoke((Action)(() => unitidlbl.Text = GlobalVariables.unitidglobal != 0 ? GlobalVariables.unitidglobal.ToString() : "0"));
+                productdiscountlbl.Invoke((Action)(() => productdiscountlbl.Text = GlobalVariables.productdiscountamountitemwise != 0 ? GlobalVariables.productdiscountamountitemwise.ToString("0.00") : "0.00"));
+                productvatlbl.Invoke((Action)(() => productvatlbl.Text = GlobalVariables.productitemwisevatamount != 0 ? GlobalVariables.productitemwisevatamount.ToString("0.00") : "0.00"));
+                ResetGlobalVariables();
+            });
         }
 
-        private void dgvpurchaseproducts_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        private async void ResetGlobalVariables()
         {
-            CommonFunction.CalculateTotalColumn(9, dgvpurchaseproducts, nettotaltxtbox);
-            CommonFunction.CalculateTotalVatColumn(8, dgvpurchaseproducts, totalvattxtbox);
-            CommonFunction.CalculateTotalDiscountColumn(7, dgvpurchaseproducts, totaldiscounttxtbox);
+            await Task.Run(() =>
+            {
+                GlobalVariables.warehouseidglobal = 0;
+                GlobalVariables.productitemwisedescriptiongloabl = null;
+                GlobalVariables.productpriceglobal = 0;
+                GlobalVariables.productinmeterprice = 0;
+                GlobalVariables.productinmeterlength = 0;
+                GlobalVariables.productfinalamountwithvatanddiscountitemwise = 0;   
+                GlobalVariables.unitnameglobal = null;
+                GlobalVariables.unitidglobal = 0;
+                GlobalVariables.productdiscountamountitemwise = 0;
+                GlobalVariables.productitemwisevatamount = 0;
+            });
+        }
+
+        private async void dgvpurchaseproducts_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            await CommonFunction.CalculateTotalColumnAsync(10, dgvpurchaseproducts, nettotaltxtbox);
+            await CommonFunction.CalculateTotalVatColumnAsync(9, dgvpurchaseproducts, totalvattxtbox);
+            await CommonFunction.CalculateTotalDiscountColumnAsync(8, dgvpurchaseproducts, totaldiscounttxtbox);
+        }
+
+        private void dgvpurchaseproducts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Check if the cell is in the first column (index 0)
+            if (e.RowIndex >= 0 && e.ColumnIndex == 0)
+            {
+                // Set the cell value to the row number (1-based index)
+                e.Value = e.RowIndex + 1;
+            }
+        }
+
+        private void eDITToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HandleRowSelectionAsync();
+        }
+
+        private void HandleRowSelectionAsync()
+        {
+            if (dgvpurchaseproducts.SelectedRows.Count > 0) // Check if any row is selected
+            {
+                DataGridViewRow selectedRow = dgvpurchaseproducts.SelectedRows[0]; // Get the first selected row
+                int rowIndex = selectedRow.Index;
+                string productmfr = selectedRow.Cells["codecolumn"].Value?.ToString() ?? null;
+                string productname = selectedRow.Cells["productnamecolumn"].Value?.ToString() ?? null;
+
+                int productid = selectedRow.Cells["productid"].Value != null && !string.IsNullOrEmpty(selectedRow.Cells["productid"].Value.ToString())
+                    ? Convert.ToInt32(selectedRow.Cells["productid"].Value.ToString())
+                    : 0; // Default to 0 if empty or null
+
+                int quantity = selectedRow.Cells["qtycolumn"].Value != null && !string.IsNullOrEmpty(selectedRow.Cells["qtycolumn"].Value.ToString())
+                    ? Convert.ToInt32(selectedRow.Cells["qtycolumn"].Value.ToString())
+                    : 0;
+
+                int unitid = selectedRow.Cells["unitidcolumn"].Value != null && !string.IsNullOrEmpty(selectedRow.Cells["unitidcolumn"].Value.ToString())
+                    ? Convert.ToInt32(selectedRow.Cells["unitidcolumn"].Value.ToString())
+                    : 0;
+
+                string unitname = selectedRow.Cells["unitnamecolumn"].Value?.ToString() ?? null;
+
+                float price = selectedRow.Cells["pricecolumn"].Value != null && !string.IsNullOrEmpty(selectedRow.Cells["pricecolumn"].Value.ToString())
+                    ? float.Parse(selectedRow.Cells["pricecolumn"].Value.ToString())
+                    : 0.0f;
+
+                float vat = selectedRow.Cells["vatcolumn"].Value != null && !string.IsNullOrEmpty(selectedRow.Cells["vatcolumn"].Value.ToString())
+                    ? float.Parse(selectedRow.Cells["vatcolumn"].Value.ToString())
+                    : 0.0f;
+
+                float discount = selectedRow.Cells["discountcolumn"].Value != null && !string.IsNullOrEmpty(selectedRow.Cells["discountcolumn"].Value.ToString())
+                    ? float.Parse(selectedRow.Cells["discountcolumn"].Value.ToString())
+                    : 0.0f;
+
+                float itemtotal = selectedRow.Cells["totalcolumn"].Value != null && !string.IsNullOrEmpty(selectedRow.Cells["totalcolumn"].Value.ToString())
+                    ? float.Parse(selectedRow.Cells["totalcolumn"].Value.ToString())
+                    : 0.0f;
+
+                int warehouseid = selectedRow.Cells["warehouseidcolumn"].Value != null && !string.IsNullOrEmpty(selectedRow.Cells["warehouseidcolumn"].Value.ToString())
+                    ? Convert.ToInt32(selectedRow.Cells["warehouseidcolumn"].Value.ToString())
+                    : 0;
+
+                string itemdescription = selectedRow.Cells["itemdescriptioncolumn"].Value?.ToString() ?? null;
+
+                float lengthinmeter = selectedRow.Cells["lengthinmetercolumn"].Value != null && !string.IsNullOrEmpty(selectedRow.Cells["lengthinmetercolumn"].Value.ToString())
+                    ? float.Parse(selectedRow.Cells["lengthinmetercolumn"].Value.ToString())
+                    : 0.0f;
+
+                float priceinmeter = selectedRow.Cells["pricepermetercolumn"].Value != null && !string.IsNullOrEmpty(selectedRow.Cells["pricepermetercolumn"].Value.ToString())
+                    ? float.Parse(selectedRow.Cells["pricepermetercolumn"].Value.ToString())
+                    : 0.0f;
+
+                float vatpercentage = selectedRow.Cells["vatpercentagecolumn"].Value != null && !string.IsNullOrEmpty(selectedRow.Cells["vatpercentagecolumn"].Value.ToString())
+                    ? float.Parse(selectedRow.Cells["vatpercentagecolumn"].Value.ToString())
+                    : 0.0f;
+
+                // Open the edit dialog asynchronously
+
+                EditItemInvoice editItemInvoice = new EditItemInvoice(rowIndex, productmfr, productname, productid, quantity, unitid, unitname, price,
+                    vat, discount, itemtotal, warehouseid, itemdescription, lengthinmeter, priceinmeter, vatpercentage);
+                editItemInvoice.ShowDialog(); // This will still block but in a separate thread.
+
+            }
+            else
+            {
+                MessageBox.Show("No row selected.");
+            }
         }
     }
 }

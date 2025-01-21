@@ -8,12 +8,15 @@ namespace SmartFlow.Masters
 {
     public partial class Product : Form
     {
+        private int currentRowIndex = 0;
+        private int currentCellIndex = 0;
+
         public Product()
         {
             InitializeComponent();
         }
 
-        private void newbtn_Click(object sender, EventArgs e)
+        private async void newbtn_Click(object sender, EventArgs e)
         {
             CreateProduct createProduct = new CreateProduct();
             createProduct.MdiParent = this.MdiParent;
@@ -21,7 +24,7 @@ namespace SmartFlow.Masters
             {
                 FillGrid("");
             };
-            CommonFunction.DisposeOnClose(createProduct);
+            await CommonFunction.DisposeOnCloseAsync(createProduct);
             createProduct.Show();
         }
 
@@ -30,7 +33,7 @@ namespace SmartFlow.Masters
             this.Close();
         }
 
-        private void FillGrid(string searchvalue) 
+        private async void FillGrid(string searchvalue) 
         {
             try
             {
@@ -46,7 +49,7 @@ namespace SmartFlow.Masters
                     query = BuildSearchQuery(searchvalue);
                 }
 
-                dt = DatabaseAccess.Retrive(query);
+                dt = await DatabaseAccess.RetriveAsync(query);
                 if (dt != null)
                 {
                     if (dt.Rows.Count > 0)
@@ -68,11 +71,11 @@ namespace SmartFlow.Masters
                 }
 
                 // Restore the cursor position
-                if (GlobalVariables.currentRowIndex >= 0 &&GlobalVariables.currentRowIndex >= 0 &&
-                    GlobalVariables.currentRowIndex < productsGridView.Rows.Count &&
-                    GlobalVariables.currentCellIndex < productsGridView.Rows[GlobalVariables.currentRowIndex].Cells.Count)
+                if (currentRowIndex >= 0 && currentRowIndex >= 0 &&
+                    currentRowIndex < productsGridView.Rows.Count &&
+                    currentCellIndex < productsGridView.Rows[currentRowIndex].Cells.Count)
                 {
-                    productsGridView.CurrentCell = productsGridView.Rows[GlobalVariables.currentRowIndex].Cells[GlobalVariables.currentCellIndex];
+                    productsGridView.CurrentCell = productsGridView.Rows[currentRowIndex].Cells[currentCellIndex];
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -97,7 +100,7 @@ namespace SmartFlow.Masters
             }
         }
 
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -113,12 +116,12 @@ namespace SmartFlow.Masters
                             {
                                 if (productsGridView.CurrentCell.RowIndex > 0 && productsGridView.CurrentCell.ColumnIndex > 0)
                                 {
-                                    GlobalVariables.currentRowIndex = productsGridView.CurrentCell.RowIndex;
-                                    GlobalVariables.currentCellIndex = productsGridView.CurrentCell.ColumnIndex;
+                                    currentRowIndex = productsGridView.CurrentCell.RowIndex;
+                                    currentCellIndex = productsGridView.CurrentCell.ColumnIndex;
                                 }
                                 FillGrid("");
                             };
-                            CommonFunction.DisposeOnClose(createProduct);
+                            await CommonFunction.DisposeOnCloseAsync(createProduct);
                             createProduct.ShowDialog();
                         }
                         else
@@ -138,7 +141,7 @@ namespace SmartFlow.Masters
             }
         }
 
-        private void productsGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private async void productsGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -154,12 +157,12 @@ namespace SmartFlow.Masters
                             {
                                 if(productsGridView.CurrentCell.RowIndex > 0 && productsGridView.CurrentCell.ColumnIndex > 0)
                                 {
-                                    GlobalVariables.currentRowIndex = productsGridView.CurrentCell.RowIndex;
-                                    GlobalVariables.currentCellIndex = productsGridView.CurrentCell.ColumnIndex;
+                                    currentRowIndex = productsGridView.CurrentCell.RowIndex;
+                                    currentCellIndex = productsGridView.CurrentCell.ColumnIndex;
                                 }
                                 FillGrid("");
                             };
-                            CommonFunction.DisposeOnClose(createProduct);
+                            await CommonFunction.DisposeOnCloseAsync(createProduct);
                             createProduct.Show();
                         }
                         else
@@ -195,8 +198,8 @@ namespace SmartFlow.Masters
             int firstVisibleCellIndex = GetFirstVisibleCellIndex(productsGridView);
             if (firstVisibleRowIndex >= 0)
             {
-                GlobalVariables.currentRowIndex = firstVisibleRowIndex;
-                GlobalVariables.currentCellIndex = firstVisibleCellIndex;
+                currentRowIndex = firstVisibleRowIndex;
+                currentCellIndex = firstVisibleCellIndex;
             }
         }
 
@@ -244,7 +247,7 @@ namespace SmartFlow.Masters
             return queryBuilder.ToString();
         }
 
-        private void productDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void productDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -259,11 +262,11 @@ namespace SmartFlow.Masters
                             createProduct.MdiParent = this.MdiParent;
                             createProduct.FormClosed += delegate
                             {
-                                GlobalVariables.currentRowIndex = productsGridView.CurrentCell.RowIndex;
-                                GlobalVariables.currentCellIndex = productsGridView.CurrentCell.ColumnIndex;
+                                currentRowIndex = productsGridView.CurrentCell.RowIndex;
+                                currentCellIndex = productsGridView.CurrentCell.ColumnIndex;
                                 FillGrid("");
                             };
-                            CommonFunction.DisposeOnClose(createProduct);
+                            await CommonFunction.DisposeOnCloseAsync(createProduct);
                             createProduct.ShowDialog();
                         }
                         else

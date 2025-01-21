@@ -515,6 +515,7 @@
             this.selectaccountgrouptxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectaccountgrouptxtbox.Location = new System.Drawing.Point(180, 109);
             this.selectaccountgrouptxtbox.Name = "selectaccountgrouptxtbox";
+            this.selectaccountgrouptxtbox.ReadOnly = true;
             this.selectaccountgrouptxtbox.Size = new System.Drawing.Size(300, 28);
             this.selectaccountgrouptxtbox.TabIndex = 2;
             this.selectaccountgrouptxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectaccountgrouptxtbox_MouseClick);

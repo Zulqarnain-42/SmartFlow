@@ -14,12 +14,12 @@ namespace SmartFlow.Setting
         {
             CheckTerms();
         }
-        private void CheckTerms()
+        private async void CheckTerms()
         {
             try
             {
                 string getterms = "SELECT TermsConditions FROM TermsConditionTable";
-                DataTable terms = DatabaseAccess.Retrive(getterms);
+                DataTable terms = await DatabaseAccess.RetriveAsync(getterms);
 
                 if (terms != null)
                 {

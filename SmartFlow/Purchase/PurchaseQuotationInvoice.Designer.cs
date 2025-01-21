@@ -50,6 +50,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.addbtn = new System.Windows.Forms.Button();
             this.dgvpurchaseproducts = new System.Windows.Forms.DataGridView();
+            this.srnocolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mfrcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,12 +63,15 @@
             this.mfrtxtbox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.headinglbl = new System.Windows.Forms.Label();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.eDITToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpurchaseproducts)).BeginInit();
             this.panel1.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // label8
@@ -110,6 +114,7 @@
             this.invoicenotxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoicenotxtbox.Location = new System.Drawing.Point(118, 10);
             this.invoicenotxtbox.Name = "invoicenotxtbox";
+            this.invoicenotxtbox.ReadOnly = true;
             this.invoicenotxtbox.Size = new System.Drawing.Size(167, 32);
             this.invoicenotxtbox.TabIndex = 0;
             // 
@@ -241,6 +246,7 @@
             this.selectsuppliertxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectsuppliertxtbox.Location = new System.Drawing.Point(284, 48);
             this.selectsuppliertxtbox.Name = "selectsuppliertxtbox";
+            this.selectsuppliertxtbox.ReadOnly = true;
             this.selectsuppliertxtbox.Size = new System.Drawing.Size(700, 32);
             this.selectsuppliertxtbox.TabIndex = 2;
             this.selectsuppliertxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectsuppliertxtbox_MouseClick);
@@ -253,6 +259,7 @@
             this.codetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.codetxtbox.Location = new System.Drawing.Point(118, 48);
             this.codetxtbox.Name = "codetxtbox";
+            this.codetxtbox.ReadOnly = true;
             this.codetxtbox.Size = new System.Drawing.Size(167, 32);
             this.codetxtbox.TabIndex = 2;
             // 
@@ -311,27 +318,39 @@
             this.dgvpurchaseproducts.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvpurchaseproducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvpurchaseproducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.srnocolumn,
             this.mfrcolumn,
             this.productid,
             this.productnamecolumn,
             this.qtycolumn});
+            this.dgvpurchaseproducts.ContextMenuStrip = this.contextMenuStrip;
             this.dgvpurchaseproducts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvpurchaseproducts.Location = new System.Drawing.Point(6, 75);
             this.dgvpurchaseproducts.Name = "dgvpurchaseproducts";
+            this.dgvpurchaseproducts.ReadOnly = true;
             this.dgvpurchaseproducts.RowHeadersVisible = false;
             this.dgvpurchaseproducts.RowHeadersWidth = 51;
             this.dgvpurchaseproducts.RowTemplate.Height = 24;
             this.dgvpurchaseproducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvpurchaseproducts.Size = new System.Drawing.Size(1724, 353);
             this.dgvpurchaseproducts.TabIndex = 1;
-            this.dgvpurchaseproducts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvpurchasequotationproduct_CellDoubleClick);
+            this.dgvpurchaseproducts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvpurchaseproducts_CellFormatting);
             this.dgvpurchaseproducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvpurchasequotationproduct_KeyDown);
+            // 
+            // srnocolumn
+            // 
+            this.srnocolumn.HeaderText = "#";
+            this.srnocolumn.MinimumWidth = 6;
+            this.srnocolumn.Name = "srnocolumn";
+            this.srnocolumn.ReadOnly = true;
+            this.srnocolumn.Width = 40;
             // 
             // mfrcolumn
             // 
             this.mfrcolumn.HeaderText = "MFR";
             this.mfrcolumn.MinimumWidth = 6;
             this.mfrcolumn.Name = "mfrcolumn";
+            this.mfrcolumn.ReadOnly = true;
             this.mfrcolumn.Width = 125;
             // 
             // productid
@@ -339,6 +358,7 @@
             this.productid.HeaderText = "ID";
             this.productid.MinimumWidth = 6;
             this.productid.Name = "productid";
+            this.productid.ReadOnly = true;
             this.productid.Visible = false;
             this.productid.Width = 125;
             // 
@@ -348,12 +368,14 @@
             this.productnamecolumn.HeaderText = "Product Name";
             this.productnamecolumn.MinimumWidth = 6;
             this.productnamecolumn.Name = "productnamecolumn";
+            this.productnamecolumn.ReadOnly = true;
             // 
             // qtycolumn
             // 
             this.qtycolumn.HeaderText = "Qty";
             this.qtycolumn.MinimumWidth = 6;
             this.qtycolumn.Name = "qtycolumn";
+            this.qtycolumn.ReadOnly = true;
             this.qtycolumn.Width = 125;
             // 
             // qtytxtbox
@@ -377,6 +399,7 @@
             this.selectproducttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectproducttxtbox.Location = new System.Drawing.Point(201, 37);
             this.selectproducttxtbox.Name = "selectproducttxtbox";
+            this.selectproducttxtbox.ReadOnly = true;
             this.selectproducttxtbox.Size = new System.Drawing.Size(405, 32);
             this.selectproducttxtbox.TabIndex = 1;
             this.selectproducttxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectproducttxtbox_MouseClick);
@@ -418,6 +441,7 @@
             this.mfrtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mfrtxtbox.Location = new System.Drawing.Point(14, 37);
             this.mfrtxtbox.Name = "mfrtxtbox";
+            this.mfrtxtbox.ReadOnly = true;
             this.mfrtxtbox.Size = new System.Drawing.Size(181, 32);
             this.mfrtxtbox.TabIndex = 0;
             // 
@@ -442,6 +466,21 @@
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "PURCHASE QUOTATION INVOICE";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.eDITToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(211, 56);
+            // 
+            // eDITToolStripMenuItem
+            // 
+            this.eDITToolStripMenuItem.Name = "eDITToolStripMenuItem";
+            this.eDITToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.eDITToolStripMenuItem.Text = "EDIT";
+            this.eDITToolStripMenuItem.Click += new System.EventHandler(this.eDITToolStripMenuItem_Click);
             // 
             // PurchaseQuotationInvoice
             // 
@@ -469,6 +508,7 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpurchaseproducts)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -500,12 +540,15 @@
         private System.Windows.Forms.TextBox qtytxtbox;
         private System.Windows.Forms.TextBox selectproducttxtbox;
         private System.Windows.Forms.Button addbtn;
+        private System.Windows.Forms.Label invoicecodelbl;
+        private System.Windows.Forms.TextBox companytxtbox;
+        private System.Windows.Forms.Label companylbl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn srnocolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn mfrcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productid;
         private System.Windows.Forms.DataGridViewTextBoxColumn productnamecolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn qtycolumn;
-        private System.Windows.Forms.Label invoicecodelbl;
-        private System.Windows.Forms.TextBox companytxtbox;
-        private System.Windows.Forms.Label companylbl;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem eDITToolStripMenuItem;
     }
 }

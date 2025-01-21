@@ -23,7 +23,7 @@ namespace SmartFlow.Sales.CommonForm
             _itemqty = itemQty;
             _ispurchase = ispurchaseform;
         }
-        private void VATForm_Load(object sender, EventArgs e)
+        private async void VATForm_Load(object sender, EventArgs e)
         {
             // Format and display VAT and Discount
             vattxtbox.Text = _vatPercentage.ToString("N2");
@@ -34,13 +34,12 @@ namespace SmartFlow.Sales.CommonForm
             costpricetxtbox.Visible = _ispurchase;
 
             // Fill unit data for the combo box
-            CommonFunction.FillUnitData(unitcombobox);
+            await CommonFunction.FillUnitDataAsync(unitcombobox);
 
         }
         private void savebtn_Click(object sender, EventArgs e)
         {
             try
-            
             {
                 ProcessProductDetails();
             }
@@ -81,7 +80,7 @@ namespace SmartFlow.Sales.CommonForm
             }
 
             // Assign Unit-related global variables
-            GlobalVariables.unitidglobal = Convert.ToInt32(unitcombobox.SelectedValue);
+            /*GlobalVariables.unitidglobal = Convert.ToInt32(unitcombobox.SelectedValue);*/
             AssignPurchasePriceGlobalVariables();
 
             // Assign Length and Description global variables
@@ -185,10 +184,10 @@ namespace SmartFlow.Sales.CommonForm
             GlobalVariables.productitemwisedescriptiongloabl = itemdescriptiontxtbox.Text.Trim().ToUpper();
         }
 
-        private void AssignUnitNameGlobalVariable()
+        private async void AssignUnitNameGlobalVariable()
         {
             string query = $"SELECT UnitName FROM UnitTable WHERE UnitID = '{GlobalVariables.unitidglobal}'";
-            DataTable unitData = DatabaseAccess.Retrive(query);
+            DataTable unitData = await DatabaseAccess.RetriveAsync(query);
 
             if (unitData != null && unitData.Rows.Count > 0)
             {
@@ -202,6 +201,7 @@ namespace SmartFlow.Sales.CommonForm
             {
                 GlobalVariables.isproductdiscounted = true;
                 GlobalVariables.productdiscounttype = percentageradio.Checked;
+                GlobalVariables.discountpercentage = float.Parse(discounttxtbox.Text);
                 GlobalVariables.productdiscountamountitemwise = decimal.TryParse(discountamountlbl.Text, out var discountAmount) ? discountAmount : 0;
             }
         }
@@ -453,6 +453,9 @@ namespace SmartFlow.Sales.CommonForm
         {
             try
             {
+                GlobalVariables.unitidglobal = unitcombobox.SelectedValue != null
+                    && int.TryParse(unitcombobox.SelectedValue.ToString(), out int value) ? value : 0;
+
                 if (unitcombobox.SelectedItem is DataRowView selectedRow)
                 {
                     string unitName = selectedRow["UnitName"]?.ToString() ?? string.Empty;

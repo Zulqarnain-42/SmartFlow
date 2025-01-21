@@ -18,7 +18,7 @@ namespace SmartFlow.Sales.CommonForm
             InitializeComponent();
         }
 
-        private void savebtn_Click(object sender, EventArgs e)
+        private async void savebtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -28,12 +28,16 @@ namespace SmartFlow.Sales.CommonForm
                 if (string.IsNullOrWhiteSpace(availabilitytxtbox.Text))
                 {
                     errorProvider.SetError(availabilitytxtbox, "Please Enter Availability.");
-                    availabilitytxtbox.Focus();  // Set focus to the invalid field
+                    availabilitytxtbox.Focus(); // Set focus to the invalid field
                     return; // Exit the method if validation fails
                 }
 
-                // Assign the value to the global variable if validation passes
-                GlobalVariables.availabilitystatus = availabilitytxtbox.Text;
+                // Simulate an asynchronous operation, like saving to a database
+                await Task.Run(() =>
+                {
+                    // Assign the value to the global variable (this is synchronous in this case)
+                    GlobalVariables.availabilitystatus = availabilitytxtbox.Text;
+                });
 
                 // Close the current form (only if validation succeeds)
                 this.Close();
@@ -43,7 +47,6 @@ namespace SmartFlow.Sales.CommonForm
                 // Log or display the exception message to help with debugging
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
     }
 }

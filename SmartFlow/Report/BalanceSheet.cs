@@ -19,13 +19,13 @@ namespace SmartFlow.Report
             InitializeComponent();
         }
 
-        private void selectaccounttxtbox_MouseClick(object sender, MouseEventArgs e)
+        private async void selectaccounttxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             try
             {
                 if (string.IsNullOrEmpty(selectaccounttxtbox.Text))
                 {
-                    Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
+                    Form openForm = await CommonFunction.IsFormOpenAsync(typeof(AccountSelectionForm));
                     if (openForm == null)
                     {
                         AccountSelectionForm accountsSelection = new AccountSelectionForm
@@ -34,11 +34,9 @@ namespace SmartFlow.Report
                             StartPosition = FormStartPosition.CenterParent,
                         };
 
-                        accountsSelection.FormClosed += delegate
-                        {
-                            UpdateAccountInfo();
-                        };
-                        CommonFunction.DisposeOnClose(accountsSelection);
+                        accountsSelection.AccountDataSelected += UpdateAccountInfo;
+
+                        await CommonFunction.DisposeOnCloseAsync(accountsSelection);
                         accountsSelection.ShowDialog();
                     }
                     else
@@ -50,17 +48,41 @@ namespace SmartFlow.Report
             catch (Exception ex) { throw ex; }
         }
 
-        private void UpdateAccountInfo()
+        private async void UpdateAccountInfo(object sender, AccountData e)
         {
-            if (!string.IsNullOrEmpty(GlobalVariables.accountnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.accountnameglobal) &&
-                GlobalVariables.accountidglobal > 0)
+            try
             {
-                accountidlbl.Text = GlobalVariables.accountidglobal.ToString();
-                selectaccounttxtbox.Text = GlobalVariables.accountnameglobal.ToString();
+                // Simulate some async work (e.g., fetching additional data or processing)
+                await Task.Run(() =>
+                {
+                    // Perform any long-running or async operations here (if needed)
+                    // For example, querying a database, calling an API, etc.
+
+                    int accountid = e.AccountId;
+                    string accountname = e.AccountName;
+                    int accountheadid = e.AccountHeadId;
+
+                    // If you need to update UI controls, ensure that it's done on the UI thread
+                    // If you update textboxes, labels, etc., do it like this:
+                    this.Invoke(new Action(() =>
+                    {
+                        // Assuming these are TextBox controls
+                        /* supplieridlbl.Text = supplierId.ToString();
+                         selectsuppliertxtbox.Text = supplierName;
+                         suppliercodetxtbox.Text = supplierCode;
+                         companytxtbox.Text = companyName;*/
+                    }));
+                });
+            }
+            catch (Exception ex)
+            {
+                // Catch any unexpected errors and show them to the user
+                MessageBox.Show($"An error occurred while updating supplier information: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void selectaccounttxtbox_KeyDown(object sender, KeyEventArgs e)
+        private async void selectaccounttxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
@@ -68,7 +90,7 @@ namespace SmartFlow.Report
                 {
                     if (string.IsNullOrEmpty(selectaccounttxtbox.Text))
                     {
-                        Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
+                        Form openForm = await CommonFunction.IsFormOpenAsync(typeof(AccountSelectionForm));
                         if (openForm == null)
                         {
                             AccountSelectionForm accountsSelection = new AccountSelectionForm
@@ -76,11 +98,9 @@ namespace SmartFlow.Report
                                 WindowState = FormWindowState.Normal,
                                 StartPosition = FormStartPosition.CenterParent,
                             };
-                            accountsSelection.FormClosed += delegate
-                            {
-                                UpdateAccountInfo();
-                            };
-                            CommonFunction.DisposeOnClose(accountsSelection);
+                            accountsSelection.AccountDataSelected += UpdateAccountInfo;
+
+                            await CommonFunction.DisposeOnCloseAsync(accountsSelection);
                             accountsSelection.ShowDialog();
                         }
                         else

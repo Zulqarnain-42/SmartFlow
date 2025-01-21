@@ -6,6 +6,7 @@ using SmartFlow.Transactions.ReportViewer;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Transactions
@@ -21,13 +22,13 @@ namespace SmartFlow.Transactions
         {
             this.Close();
         }
-        private void savebtn_Click(object sender, EventArgs e)
+        private async void savebtn_Click(object sender, EventArgs e)
         {
             try
             {
                 errorProvider.Clear();
 
-                string invoiceNo = CheckInvoiceBeforeInsert();
+                string invoiceNo = await CheckInvoiceBeforeInsert();
                 DateTime invoiceDate = DateTime.Parse(invoicedatetxtbox.Text);
                 string transactionCode = Guid.NewGuid().ToString();
                 string longdescription = longdescriptiontxtbox.Text;
@@ -48,7 +49,7 @@ namespace SmartFlow.Transactions
                     { "VoucherInfo", voucherinfotxtbox.Text }
                 };
 
-                int transactionid = DatabaseAccess.InsertDataId(tableName, columnData);
+                int transactionid = await DatabaseAccess.InsertDataIdAsync(tableName, columnData);
                 if (transactionid > 0)
                 {
                     foreach (DataGridViewRow row in dgvDebitNote.Rows)
@@ -80,11 +81,11 @@ namespace SmartFlow.Transactions
                             { "CreditAmount", creditamount }
                         };
 
-                        bool isInserted = DatabaseAccess.ExecuteQuery(subTable, "INSERT", subColumnData);
+                        bool isInserted = await DatabaseAccess.ExecuteQueryAsync(subTable, "INSERT", subColumnData);
                     }
 
                     DebitNoteReportView debitNoteReportView = new DebitNoteReportView();
-                    CommonFunction.DisposeOnClose(debitNoteReportView);
+                    await CommonFunction.DisposeOnCloseAsync(debitNoteReportView);
                     debitNoteReportView.Show();
                 }
                 else
@@ -95,10 +96,10 @@ namespace SmartFlow.Transactions
             catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             
         }
-        private void DebitNote_Load(object sender, EventArgs e)
+        private async void DebitNote_Load(object sender, EventArgs e)
         {
             invoicedatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            invoicenotxtbox.Text = GenerateNextInvoiceNumber();
+            invoicenotxtbox.Text = await GenerateNextInvoiceNumber();
         }
         private void DebitNote_KeyDown(object sender, KeyEventArgs e)
         {
@@ -129,16 +130,16 @@ namespace SmartFlow.Transactions
             if (dgvDebitNote.Rows.Count > 0) { return true; }
             return false; // No TextBox is filled
         }
-        private string CheckInvoiceBeforeInsert()
+        private async Task<string> CheckInvoiceBeforeInsert()
         {
             try
             {
-                string lastInvoiceNumber = GetLastInvoiceNumber();
+                string lastInvoiceNumber = await GetLastInvoiceNumber();
                 string newInvoiceNumber = invoicenotxtbox.Text;
 
                 if (String.Compare(newInvoiceNumber, lastInvoiceNumber) <= 0)
                 {
-                    return GenerateNextInvoiceNumber();
+                    return await GenerateNextInvoiceNumber();
                 }
                 else
                 {
@@ -151,13 +152,13 @@ namespace SmartFlow.Transactions
                 return null;
             }
         }
-        private string GetLastInvoiceNumber()
+        private async Task<string> GetLastInvoiceNumber()
         {
             string lastInvoiceNumber = null;
             try
             {
                 string query = "SELECT TOP 1 InvoiceNo FROM InvoiceTable WHERE InvoiceNo LIKE 'PI-%' ORDER BY InvoiceNo DESC";
-                DataTable invoiceData = DatabaseAccess.Retrive(query);
+                DataTable invoiceData = await DatabaseAccess.RetriveAsync(query);
                 if (invoiceData.Rows.Count > 0)
                 {
                     lastInvoiceNumber = invoiceData.Rows[0]["InvoiceNo"].ToString();
@@ -170,11 +171,11 @@ namespace SmartFlow.Transactions
 
             return lastInvoiceNumber;
         }
-        private string GenerateNextInvoiceNumber()
+        private async Task<string> GenerateNextInvoiceNumber()
         {
             try
             {
-                string lastInvoiceNumber = GetLastInvoiceNumber();
+                string lastInvoiceNumber = await GetLastInvoiceNumber();
                 string newInvoiceNumber;
 
                 if (lastInvoiceNumber == null)
@@ -216,11 +217,11 @@ namespace SmartFlow.Transactions
                 return null;
             }
         }
-        private void amounttxtbox_Leave(object sender, EventArgs e)
+        private async void amounttxtbox_Leave(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(amounttxtbox.Text) && !string.IsNullOrWhiteSpace(amounttxtbox.Text))
             {
-                Form openForm = CommonFunction.IsFormOpen(typeof(DebitAndCreditForm));
+                Form openForm = await CommonFunction.IsFormOpenAsync(typeof(DebitAndCreditForm));
                 if (openForm == null)
                 {
                     DebitAndCreditForm debitAndCreditForm = new DebitAndCreditForm
@@ -228,10 +229,9 @@ namespace SmartFlow.Transactions
                         WindowState = FormWindowState.Normal,
                         StartPosition = FormStartPosition.CenterParent,
                     };
-                    CommonFunction.DisposeOnClose(debitAndCreditForm);
+                    await CommonFunction.DisposeOnCloseAsync(debitAndCreditForm);
                     debitAndCreditForm.FormClosed += delegate
                     {
-                        string transactionsymbol = null;
                         int accountid = Convert.ToInt32(accountidlbl.Text);
                         string accountname = accountnametxtbox.Text;
                         string accountCode = accountcodetxtbox.Text;
@@ -252,7 +252,7 @@ namespace SmartFlow.Transactions
 
                         if (!productExists)
                         {
-                            if (GlobalVariables.iscreditglobal == true)
+                            /*if (GlobalVariables.iscreditglobal == true)
                             {
                                 decimal paymentamountcredit = decimal.Parse(amounttxtbox.Text);
                                 transactionsymbol = "C";
@@ -267,16 +267,12 @@ namespace SmartFlow.Transactions
                                 transactionsymbol = "D";
                                 dgvDebitNote.Rows.Add(null, transactionsymbol, accountname, accountCode, accountid, GlobalVariables.isdebitglobal, GlobalVariables.iscreditglobal,
                                     paymentamountdebit, null, GlobalVariables.shortdescriptionglobal);
-                            }
+                            }*/
 
                             accountcodetxtbox.Text = string.Empty;
                             accountnametxtbox.Text = string.Empty;
                             amounttxtbox.Text = string.Empty;
                             accountidlbl.Text = string.Empty;
-                            GlobalVariables.iscreditglobal = false;
-                            GlobalVariables.isdebitglobal = false;
-                            GlobalVariables.shortdescriptionglobal = null;
-
                             accountnametxtbox.Focus();
                         }
                     };
@@ -288,11 +284,11 @@ namespace SmartFlow.Transactions
                 }
             }
         }
-        private void accountnametxtbox_MouseClick(object sender, MouseEventArgs e)
+        private async void accountnametxtbox_MouseClick(object sender, MouseEventArgs e)
         {
             if (string.IsNullOrEmpty(accountnametxtbox.Text))
             {
-                Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
+                Form openForm = await CommonFunction.IsFormOpenAsync(typeof(AccountSelectionForm));
                 if (openForm == null)
                 {
                     AccountSelectionForm accountSelection = new AccountSelectionForm
@@ -301,11 +297,9 @@ namespace SmartFlow.Transactions
                         StartPosition = FormStartPosition.CenterParent,
                     };
 
-                    accountSelection.FormClosed += delegate
-                    {
-                        UpdateAccountInfo();
-                    };
-                    CommonFunction.DisposeOnClose(accountSelection);
+                    accountSelection.AccountDataSelected += UpdateAccountInfo;
+
+                    await CommonFunction.DisposeOnCloseAsync(accountSelection);
                     accountSelection.ShowDialog();
                 }
                 else
@@ -314,13 +308,13 @@ namespace SmartFlow.Transactions
                 }
             }
         }
-        private void accountnametxtbox_KeyDown(object sender, KeyEventArgs e)
+        private async void accountnametxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) 
             {
                 if (string.IsNullOrEmpty(accountnametxtbox.Text))
                 {
-                    Form openForm = CommonFunction.IsFormOpen(typeof(AccountSelectionForm));
+                    Form openForm = await CommonFunction.IsFormOpenAsync(typeof(AccountSelectionForm));
                     if (openForm == null)
                     {
                         AccountSelectionForm accountSelectionForm = new AccountSelectionForm
@@ -329,11 +323,9 @@ namespace SmartFlow.Transactions
                             StartPosition = FormStartPosition.CenterParent,
                         };
 
-                        accountSelectionForm.FormClosed += delegate
-                        {
-                            UpdateAccountInfo();
-                        };
-                        CommonFunction.DisposeOnClose(accountSelectionForm);
+                        accountSelectionForm.AccountDataSelected += UpdateAccountInfo;
+
+                        await CommonFunction.DisposeOnCloseAsync(accountSelectionForm);
                         accountSelectionForm.ShowDialog();
                     }
                     else
@@ -343,13 +335,37 @@ namespace SmartFlow.Transactions
                 }
             }
         }
-        private void UpdateAccountInfo()
+        private async void UpdateAccountInfo(object sender, AccountData e)
         {
-            if(!string.IsNullOrEmpty(GlobalVariables.accountnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.accountnameglobal) && 
-                GlobalVariables.accountidglobal > 0)
+            try
             {
-                accountnametxtbox.Text = GlobalVariables.accountnameglobal;
-                accountidlbl.Text = GlobalVariables.accountidglobal.ToString();
+                // Simulate some async work (e.g., fetching additional data or processing)
+                await Task.Run(() =>
+                {
+                    // Perform any long-running or async operations here (if needed)
+                    // For example, querying a database, calling an API, etc.
+
+                    int accountid = e.AccountId;
+                    string accountname = e.AccountName;
+                    int accountheadid = e.AccountHeadId;
+
+                    // If you need to update UI controls, ensure that it's done on the UI thread
+                    // If you update textboxes, labels, etc., do it like this:
+                    this.Invoke(new Action(() =>
+                    {
+                        // Assuming these are TextBox controls
+                        /* supplieridlbl.Text = supplierId.ToString();
+                         selectsuppliertxtbox.Text = supplierName;
+                         suppliercodetxtbox.Text = supplierCode;
+                         companytxtbox.Text = companyName;*/
+                    }));
+                });
+            }
+            catch (Exception ex)
+            {
+                // Catch any unexpected errors and show them to the user
+                MessageBox.Show($"An error occurred while updating supplier information: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
