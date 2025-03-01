@@ -53,9 +53,10 @@
             // 
             this.searchtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchtxtbox.Location = new System.Drawing.Point(94, 57);
+            this.searchtxtbox.Location = new System.Drawing.Point(70, 46);
+            this.searchtxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchtxtbox.Name = "searchtxtbox";
-            this.searchtxtbox.Size = new System.Drawing.Size(822, 32);
+            this.searchtxtbox.Size = new System.Drawing.Size(617, 27);
             this.searchtxtbox.TabIndex = 0;
             this.searchtxtbox.TextChanged += new System.EventHandler(this.searchtxtbox_TextChanged);
             // 
@@ -63,9 +64,10 @@
             // 
             this.searchlbl.AutoSize = true;
             this.searchlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchlbl.Location = new System.Drawing.Point(6, 62);
+            this.searchlbl.Location = new System.Drawing.Point(4, 50);
+            this.searchlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.searchlbl.Name = "searchlbl";
-            this.searchlbl.Size = new System.Drawing.Size(66, 23);
+            this.searchlbl.Size = new System.Drawing.Size(52, 18);
             this.searchlbl.TabIndex = 3;
             this.searchlbl.Text = "Search ";
             // 
@@ -82,7 +84,8 @@
             this.productsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.productsGridView.ContextMenuStrip = this.gridViewMenuStrip;
             this.productsGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.productsGridView.Location = new System.Drawing.Point(0, 101);
+            this.productsGridView.Location = new System.Drawing.Point(0, 82);
+            this.productsGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.productsGridView.Name = "productsGridView";
             this.productsGridView.ReadOnly = true;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -97,7 +100,7 @@
             this.productsGridView.RowHeadersWidth = 51;
             this.productsGridView.RowTemplate.Height = 24;
             this.productsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.productsGridView.Size = new System.Drawing.Size(1532, 612);
+            this.productsGridView.Size = new System.Drawing.Size(1149, 497);
             this.productsGridView.TabIndex = 1;
             this.productsGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productsGridView_CellDoubleClick);
             this.productsGridView.Scroll += new System.Windows.Forms.ScrollEventHandler(this.productsGridView_Scroll);
@@ -111,30 +114,30 @@
             this.toolStripMenuItem1,
             this.productDetailsToolStripMenuItem});
             this.gridViewMenuStrip.Name = "gridViewMenuStrip";
-            this.gridViewMenuStrip.Size = new System.Drawing.Size(181, 82);
+            this.gridViewMenuStrip.Size = new System.Drawing.Size(158, 76);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // productHistoryToolStripMenuItem
             // 
             this.productHistoryToolStripMenuItem.Name = "productHistoryToolStripMenuItem";
-            this.productHistoryToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.productHistoryToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.productHistoryToolStripMenuItem.Text = "Product History";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(154, 6);
             // 
             // productDetailsToolStripMenuItem
             // 
             this.productDetailsToolStripMenuItem.Name = "productDetailsToolStripMenuItem";
-            this.productDetailsToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.productDetailsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.productDetailsToolStripMenuItem.Text = "Product Details";
             this.productDetailsToolStripMenuItem.Click += new System.EventHandler(this.productDetailsToolStripMenuItem_Click);
             // 
@@ -145,9 +148,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.Controls.Add(this.closebtn);
             this.panel3.Controls.Add(this.newbtn);
-            this.panel3.Location = new System.Drawing.Point(0, 714);
+            this.panel3.Location = new System.Drawing.Point(0, 580);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1532, 56);
+            this.panel3.Size = new System.Drawing.Size(1149, 46);
             this.panel3.TabIndex = 10;
             // 
             // closebtn
@@ -157,9 +161,10 @@
             this.closebtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.closebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closebtn.Font = new System.Drawing.Font("Impact", 12F);
-            this.closebtn.Location = new System.Drawing.Point(1135, 5);
+            this.closebtn.Location = new System.Drawing.Point(851, 4);
+            this.closebtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.closebtn.Name = "closebtn";
-            this.closebtn.Size = new System.Drawing.Size(192, 48);
+            this.closebtn.Size = new System.Drawing.Size(144, 39);
             this.closebtn.TabIndex = 1;
             this.closebtn.Text = "CLOSE";
             this.closebtn.UseVisualStyleBackColor = false;
@@ -171,9 +176,10 @@
             this.newbtn.BackColor = System.Drawing.Color.SpringGreen;
             this.newbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.newbtn.Font = new System.Drawing.Font("Impact", 12F);
-            this.newbtn.Location = new System.Drawing.Point(1333, 5);
+            this.newbtn.Location = new System.Drawing.Point(1000, 4);
+            this.newbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.newbtn.Name = "newbtn";
-            this.newbtn.Size = new System.Drawing.Size(192, 48);
+            this.newbtn.Size = new System.Drawing.Size(144, 39);
             this.newbtn.TabIndex = 0;
             this.newbtn.Text = "NEW";
             this.newbtn.UseVisualStyleBackColor = false;
@@ -184,8 +190,9 @@
             this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1532, 45);
+            this.panel1.Size = new System.Drawing.Size(1149, 37);
             this.panel1.TabIndex = 11;
             // 
             // headinglbl
@@ -195,26 +202,26 @@
             this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(1532, 45);
+            this.headinglbl.Size = new System.Drawing.Size(1149, 37);
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "PRODUCT";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Product
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1532, 770);
+            this.ClientSize = new System.Drawing.Size(1149, 626);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.searchtxtbox);
             this.Controls.Add(this.searchlbl);
             this.Controls.Add(this.productsGridView);
             this.Controls.Add(this.panel3);
             this.KeyPreview = true;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Product";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PRODUCT LIST";

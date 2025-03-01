@@ -4,6 +4,7 @@ using SmartFlow.Purchase;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,13 +13,91 @@ namespace SmartFlow.Stock
     public partial class DamageEntry : Form
     {
         private int invoiceCounter = 1;
+        private DataTable _datainvoice;
+        private DataTable _detailinvoicedata;
+
         public DamageEntry()
         {
             InitializeComponent();
         }
+
+        public DamageEntry(DataTable datainvoice,DataTable detailinvoicedata)
+        {
+            InitializeComponent();
+            this._datainvoice = datainvoice;
+            this._detailinvoicedata = detailinvoicedata;
+        }
+
         private async void DamageEntry_Load(object sender, EventArgs e)
         {
-            damageidlbl.Text = await GenerateNextInvoiceNumber();
+            if(_datainvoice != null && _datainvoice.Rows.Count > 0 || _detailinvoicedata != null && _detailinvoicedata.Rows.Count > 0)
+            {
+                DataRow row = _datainvoice.Rows[0];
+                
+                descriptiontxtbox.Text = row["Description"].ToString();
+                damageidlbl.Text = row["CustomStockID"].ToString();
+                damagecodelbl.Text = row["Code"].ToString();
+                warehouseidlbl.Text = _detailinvoicedata.Rows.Count > 0
+                    ? _detailinvoicedata.Rows[0]["Warehouseid"]?.ToString() ?? ""
+                    : "";
+
+                selectwarehousefromtxtbox.Text = _detailinvoicedata.Rows.Count > 0
+                    ? _detailinvoicedata.Rows[0]["Name"]?.ToString() ?? ""
+                    : "";
+
+                try
+                {
+                    dgvproducts.SuspendLayout();
+                    dgvproducts.VirtualMode = false; // Ensure real-time updates
+                    dgvproducts.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+                    dgvproducts.AllowUserToAddRows = false; // Prevent ghost rows
+
+                    List<DataGridViewRow> newRows = new List<DataGridViewRow>();
+
+                    foreach (DataRow invoiceRow in _detailinvoicedata.Rows)
+                    {
+                        var newRow = new DataGridViewRow();
+                        newRow.CreateCells(dgvproducts);
+
+                        try
+                        {
+                            // Safely converting each value and setting the cells
+                            newRow.Cells[dgvproducts.Columns["productid"].Index].Value = invoiceRow["ProductID"];
+                            newRow.Cells[dgvproducts.Columns["productmfr"].Index].Value = invoiceRow["MFR"];
+                            newRow.Cells[dgvproducts.Columns["productname"].Index].Value = invoiceRow["ProductName"];
+                            newRow.Cells[dgvproducts.Columns["productupc"].Index].Value = invoiceRow["UPC"];
+                            newRow.Cells[dgvproducts.Columns["productbarcode"].Index].Value = invoiceRow["Barcode"];
+                            newRow.Cells[dgvproducts.Columns["damagedqty"].Index].Value = invoiceRow["Quantity"];
+
+                            newRow.Height = 25;
+                            newRows.Add(newRow);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Log the error with context to help identify which row failed
+                            Debug.WriteLine($"[Error] Processing row (Invoice No: {invoiceRow["InvoiceNo"]}): {ex.Message}");
+                        }
+                    }
+
+                    // Add rows to the DataGridView
+                    dgvproducts.Rows.AddRange(newRows.ToArray());
+                }
+                catch (Exception ex)
+                {
+                    // Log any errors encountered in the outer try block
+                    Debug.WriteLine($"[Error] AddGridData: {ex.Message}");
+                }
+                finally
+                {
+                    // Ensure layout is resumed and the DataGridView is refreshed
+                    dgvproducts.ResumeLayout();
+                    this.Invoke((MethodInvoker)delegate { dgvproducts.Refresh(); });
+                }
+            }
+            else
+            {
+                damageidlbl.Text = await GenerateNextInvoiceNumber();
+            }
         }
         private async void savebtn_Click(object sender, EventArgs e)
         {
@@ -50,6 +129,7 @@ namespace SmartFlow.Stock
                 if (IsInserted) 
                 {
                     MessageBox.Show("Saved Successfully!");
+                    dgvproducts.Rows.Clear();
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -257,7 +337,7 @@ namespace SmartFlow.Stock
 
                             warehouseSelection.WarehouseDataSelected += UpdateWarehouseInfo;
 
-                            await CommonFunction.DisposeOnCloseAsync(warehouseSelection);
+                            CommonFunction.DisposeOnClose(warehouseSelection);
                             warehouseSelection.Show();
                         }
                     }
@@ -283,7 +363,7 @@ namespace SmartFlow.Stock
 
                     productSelectionForm.ProductDataSelected += UpdateProductTextBox;
 
-                    await CommonFunction.DisposeOnCloseAsync(productSelectionForm);
+                    CommonFunction.DisposeOnClose(productSelectionForm);
                     productSelectionForm.ShowDialog();
                 }
                 else
@@ -314,10 +394,11 @@ namespace SmartFlow.Stock
                     this.Invoke(new Action(() =>
                     {
                         // Assuming these are TextBox controls
-                        /* supplieridlbl.Text = supplierId.ToString();
-                         selectsuppliertxtbox.Text = supplierName;
-                         suppliercodetxtbox.Text = supplierCode;
-                         companytxtbox.Text = companyName;*/
+                        productidlbl.Text = productid.ToString();
+                        productnamelbl.Text = productname;
+                        productmfrtxtbox.Text = productmfr;
+                        upclbl.Text = productupc;
+                        barcodelbl.Text = productbarcode;
                     }));
                 });
             }
@@ -346,10 +427,8 @@ namespace SmartFlow.Stock
                     this.Invoke(new Action(() =>
                     {
                         // Assuming these are TextBox controls
-                        /*supplieridlbl.Text = supplierId.ToString();
-                        selectsuppliertxtbox.Text = supplierName;
-                        codetxtbox.Text = supplierCode;
-                        companytxtbox.Text = companyName;*/
+                        warehouseidlbl.Text = warehouseid.ToString();
+                        selectwarehousefromtxtbox.Text = warehousename;
                     }));
                 });
             }
@@ -391,10 +470,10 @@ namespace SmartFlow.Stock
                 {
                     if (row.IsNewRow) continue;
 
-                    int productId = Convert.ToInt32(row.Cells[""].Value);
-                    int warehouseId = Convert.ToInt32(row.Cells[""].Value);
-                    int quantity = Convert.ToInt32(row.Cells[""].Value);
-                    string productMfr = row.Cells[""].Value.ToString();
+                    int productId = Convert.ToInt32(row.Cells["productid"].Value);
+                    int warehouseId = Convert.ToInt32(warehouseidlbl.Text);
+                    int quantity = Convert.ToInt32(row.Cells["damagedqty"].Value);
+                    string productMfr = row.Cells["productmfr"].Value.ToString();
 
                     var detailData = new Dictionary<string, object>
                     {

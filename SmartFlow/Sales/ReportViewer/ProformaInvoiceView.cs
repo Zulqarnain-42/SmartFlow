@@ -1,4 +1,5 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Windows.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace SmartFlow.Sales.ReportViewer
     public partial class ProformaInvoiceView : Form
     {
         private string _invoiceNo;
+        private ReportDocument reportDocument;
         public ProformaInvoiceView(string invoiceNo)
         {
             InitializeComponent();
@@ -27,7 +29,7 @@ namespace SmartFlow.Sales.ReportViewer
             try
             {
                 // Create a new instance of the report
-                ReportDocument reportDocument = new ReportDocument();
+                reportDocument = new ReportDocument();
 
                 string reportPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Sales\ReportViewer\Reports\ProfermaInvoice.rpt");
                 reportDocument.Load(reportPath);
@@ -40,6 +42,7 @@ namespace SmartFlow.Sales.ReportViewer
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.AddWithValue("@InvoiceNo", invoiceNo);
+                    command.Parameters.AddWithValue("@IsNewRecord", true);
 
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     DataSet dataSet = new DataSet();
@@ -62,6 +65,22 @@ namespace SmartFlow.Sales.ReportViewer
         private void ProformaInvoiceView_Load(object sender, EventArgs e)
         {
             LoadCrystalReport(_invoiceNo);
+        }
+
+        private void ProformaInvoiceView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DisposeReport();
+        }
+
+        private void DisposeReport()
+        {
+            if (reportDocument != null)
+            {
+                reportDocument.Close();
+                reportDocument.Dispose();
+                reportDocument = null;
+                GC.Collect(); // Force garbage collection
+            }
         }
     }
 }

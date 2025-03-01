@@ -13,10 +13,12 @@ namespace SmartFlow.Common.Forms
         {
             InitializeComponent();
         }
+
         private async void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
             await CommonFunction.GetCustomerAsync(searchtxtbox.Text,dgvcustomer);
         }
+
         private void CustomerSelectionForm_Load(object sender, EventArgs e)
         {
             FocusSearchAndLoadCustomerInfo();
@@ -124,6 +126,7 @@ namespace SmartFlow.Common.Forms
             }
 
         }
+
         private void dgvcustomer_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -183,8 +186,8 @@ namespace SmartFlow.Common.Forms
                 // Catch unexpected errors and display the exception message
                 MessageBox.Show($"An error occurred:\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
         private void CustomerSelectionForm_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -210,8 +213,8 @@ namespace SmartFlow.Common.Forms
                 // Handle unexpected errors gracefully
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
         private void searchtxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

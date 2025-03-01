@@ -8,14 +8,17 @@ namespace SmartFlow.Common.Forms
         private DateTime lastEnterPressTime;
         private const int doubleEnterThreshold = 500; // Time in milliseconds
         public event EventHandler<SupplierData> SupplierDataSelected;
+
         public SupplierSelectionForm()
         {
             InitializeComponent();
         }
+
         private async void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
             await CommonFunction.GetSupplierAsync(searchtxtbox.Text,dgvsupplier);
         }
+
         private async void SupplierSelectionForm_Load(object sender, EventArgs e)
         {
             try
@@ -34,8 +37,8 @@ namespace SmartFlow.Common.Forms
                 // Handle unexpected errors and display an error message
                 MessageBox.Show($"An error occurred while refreshing supplier data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
         private void dgvsupplier_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -92,8 +95,8 @@ namespace SmartFlow.Common.Forms
                 // Catch unexpected errors and display a message
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
         private void dgvsupplier_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -133,8 +136,8 @@ namespace SmartFlow.Common.Forms
                 // Catch any unexpected errors
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
         private void SupplierSelectionForm_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -157,8 +160,8 @@ namespace SmartFlow.Common.Forms
                 // Log the exception and show a user-friendly message
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
         private void searchtxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

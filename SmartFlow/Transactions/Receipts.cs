@@ -1,4 +1,5 @@
-﻿using SmartFlow.Common;
+﻿using SixLabors.Fonts;
+using SmartFlow.Common;
 using SmartFlow.Common.CommonForms;
 using SmartFlow.Common.Forms;
 using SmartFlow.Sales;
@@ -7,7 +8,10 @@ using SmartFlow.Transactions.ReportViewer;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 
 
@@ -38,153 +42,257 @@ namespace SmartFlow.Transactions
         {
             try
             {
-                errorProvider.Clear();
-
-                if(savebtn.Text == "UPDATE")
+                if (!string.IsNullOrEmpty(currencyidlbl.Text) && currencyidlbl.Text != currencyidlbl.Name
+                    && !string.IsNullOrEmpty(currencynamelbl.Text) && currencynamelbl.Text != currencynamelbl.Name
+                    && !string.IsNullOrEmpty(currencysymbollbl.Text) && currencysymbollbl.Text != currencysymbollbl.Name
+                    && !string.IsNullOrEmpty(currencyconversionratelbl.Text) && currencyconversionratelbl.Text != currencyconversionratelbl.Name)
                 {
-                    string invoiceNo = invoicenotxtbox.Text;
-                    int transactionId = Convert.ToInt32(transactionidlbl.Text);
-                    DateTime inoviceDate = DateTime.Parse(invoicedatetxtbox.Text);
-                    string transactionCode = transactioncodelbl.Text;
-                    string longdescription = longdescriptiontxtbox.Text;
+                    errorProvider.Clear();
 
-
-                    string tableName = "TransactionTable";
-                    string whereClause = "TransactionId = '" + transactionId + "'";
-                    var columnData = new Dictionary<string, object>
+                    if (!ValidateDebitCreditBalance())
                     {
-                        { "InvoiceNo", invoiceNo },
-                        { "Date", inoviceDate },
-                        { "TransactionCode", transactionCode },
-                        { "LongDescription", longdescription },
-                        { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
-                        { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
-                        { "VoucherInfo", voucherinfotxtbox.Text }
-                    };
+                        MessageBox.Show("Debit And Credit Amount are not balanced!");
+                        return;
+                    }
 
-                    bool isUpdated = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
+                    // Define the custom date format and UK culture
+                    string format = "dd/MM/yyyy";
+                    var cultureInfo = new System.Globalization.CultureInfo("en-GB"); // UK culture
 
-                    if (isUpdated)
+                    // Parse startDate and endDate from the textboxes using the custom format
+                    DateTime invoiceDate;
+
+                    // Try parsing the dates from the textboxes with the exact format
+                    if (DateTime.TryParseExact(invoicedatetxtbox.Text, format, cultureInfo, System.Globalization.DateTimeStyles.None, out invoiceDate))
                     {
-                        UpdateTransactionDetailData(invoiceNo, transactionId);
-                        PaymentReportView paymentReportView = new PaymentReportView(invoiceNo);
-                        paymentReportView.MdiParent = Application.OpenForms["Dashboard"];
-                        await CommonFunction.DisposeOnCloseAsync(paymentReportView);
-                        paymentReportView.Show();
+                        // Date parsing was successful
+                        Console.WriteLine($"Start Date: {invoiceDate}");
+                    }
+                    else
+                    {
+                        invoiceDate = DateTime.Parse(invoicedatetxtbox.Text);
+                    }
+
+                    if (savebtn.Text == "UPDATE")
+                    {
+                        string invoiceNo = invoicenotxtbox.Text;
+                        int transactionId = Convert.ToInt32(transactionidlbl.Text);
+                        string transactionCode = transactioncodelbl.Text;
+                        string longdescription = longdescriptiontxtbox.Text;
+                        int currencyid = Convert.ToInt32(currencyidlbl.Text);
+                        string currencyname = currencynamelbl.Text;
+                        string currencysymbol = currencysymbollbl.Text;
+                        string currencyconversionrate = currencyconversionratelbl.Text;
+                        string voucherinfo = voucherinfotxtbox.Text;
+
+                        string tableName = "TransactionTable";
+                        string whereClause = "TransactionId = '" + transactionId + "'";
+                        var columnData = new Dictionary<string, object>
+                        {
+                            { "InvoiceNo", invoiceNo },
+                            { "InvoiceDate", invoiceDate },
+                            { "TransactionCode", transactionCode },
+                            { "LongDescription", longdescription },
+                            { "CurrencyId", currencyid },
+                            { "CurrencyName", currencyname},
+                            { "CurrencySymbol", currencysymbol },
+                            { "ConversionRate", currencyconversionrate },
+                            { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                            { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                            { "VoucherInfo", voucherinfo },
+                            { "TransactionType", "Receipts" }
+                        };
+
+                        bool isUpdated = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
+
+                        if (isUpdated)
+                        {
+                            UpdateTransactionDetailData(invoiceNo, transactionId, transactionCode,longdescription);
+                        }
+                    }
+                    else
+                    {
+                        string invoiceNo = await CheckInvoiceBeforeInsert();
+                        string transactionCode = Guid.NewGuid().ToString();
+                        string longdescription = longdescriptiontxtbox.Text;
+                        int currencyid = Convert.ToInt32(currencyidlbl.Text);
+                        string currencyname = currencynamelbl.Text;
+                        string currencysymbol = currencysymbollbl.Text;
+                        string currencyconversionrate = currencyconversionratelbl.Text;
+                        string voucherinfo = voucherinfotxtbox.Text;
+
+                        string tableName = "TransactionTable";
+                        var columnData = new Dictionary<string, object>
+                        {
+                            { "InvoiceNo", invoiceNo },
+                            { "InvoiceDate", invoiceDate },
+                            { "TransactionCode", transactionCode },
+                            { "LongDescription", longdescription },
+                            { "CurrencyId", currencyid },
+                            { "CurrencyName", currencyname},
+                            { "CurrencySymbol", currencysymbol },
+                            { "ConversionRate", currencyconversionrate },
+                            { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                            { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                            { "VoucherInfo", voucherinfo },
+                            { "TransactionType", "Receipts" }
+                        };
+
+                        int transactionid = await DatabaseAccess.InsertDataIdAsync(tableName, columnData);
+
+                        if (transactionid > 0)
+                        {
+                            foreach (DataGridViewRow row in dgvReceipts.Rows)
+                            {
+                                if (row.IsNewRow) { continue; }
+
+                                int accountid = Convert.ToInt32(row.Cells["accountidcolumn"].Value?.ToString() ?? "0");
+                                string accountCode = row.Cells["accountcodecolumn"].Value?.ToString() ?? "";
+                                string accountName = row.Cells["accountcolumn"].Value?.ToString() ?? "";
+                                bool isdebitentry = Convert.ToBoolean(row.Cells["isdebitcolumn"].Value?.ToString() ?? "false");
+                                bool iscreditentry = Convert.ToBoolean(row.Cells["iscreditcolumn"].Value?.ToString() ?? "false");
+                                decimal debitamount = decimal.TryParse(row.Cells["debitcolumn"].Value?.ToString(), out decimal result) ? result : 0;
+                                decimal creditamount = decimal.TryParse(row.Cells["creditcolumn"].Value?.ToString(), out decimal resultcredit) ? resultcredit : 0;
+                                string debitorcredit = row.Cells["debitcreditcolumn"].Value?.ToString() ?? "";
+                                string shortnaration = row.Cells["shortnarationcolumn"].Value?.ToString() ?? "";
+
+                                string subTable = "TransactionDetailTable";
+                                var subColumnData = new Dictionary<string, object>
+                                {
+                                    { "TransactionId", transactionid },
+                                    { "TransactionCode", transactionCode },
+                                    { "AccountId", accountid },
+                                    { "AccountCode", accountCode },
+                                    { "AccountName", accountName },
+                                    { "IsDebit", isdebitentry },
+                                    { "IsCredit", iscreditentry },
+                                    { "DebitAmount", debitamount },
+                                    { "CreditAmount", creditamount },
+                                    { "InvoiceNo", invoiceNo },
+                                    { "DebitOrCredit", debitorcredit },
+                                    { "ShortDescription", shortnaration },
+                                    { "IsNewRecord", true },
+                                };
+
+                                bool isInserted = await DatabaseAccess.ExecuteQueryAsync(subTable, "INSERT", subColumnData);
+                                await CommonFunction.InsertOrUpdateAccountStatementAsync(accountName, accountid, "Receipts", invoiceNo, "", longdescription, 0, debitamount, creditamount, "", isdebitentry, iscreditentry, "", "");
+                            }
+
+                            this.Close();
+                            ReceiptReportView receiptReportView = new ReceiptReportView(invoiceNo, true, false);
+                            receiptReportView.MdiParent = Application.OpenForms["Dashboard"];
+                            CommonFunction.DisposeOnClose(receiptReportView);
+                            receiptReportView.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Something is wrong!");
+                        }
                     }
                 }
                 else
                 {
-                    string invoiceNo = await CheckInvoiceBeforeInsert();
-                    DateTime invoiceDate = DateTime.Parse(invoicedatetxtbox.Text);
-                    string transactionCode = Guid.NewGuid().ToString();
-                    string longdescription = longdescriptiontxtbox.Text;
-
-                    string tableName = "TransactionTable";
-                    var columnData = new Dictionary<string, object>
-                    {
-                        { "InvoiceNo", invoiceNo },
-                        { "Date", invoiceDate },
-                        { "TransactionCode", transactionCode },
-                        { "LongDescription", longdescription },
-                        { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
-                        { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
-                        { "VoucherInfo", voucherinfotxtbox.Text }
-                    };
-
-                    int transactionid = await DatabaseAccess.InsertDataIdAsync(tableName, columnData);
-                    if (transactionid > 0)
-                    {
-                        foreach (DataGridViewRow row in dgvReceipts.Rows)
-                        {
-                            if (row.IsNewRow) { continue; }
-
-                            int accountid = Convert.ToInt32(row.Cells["accountidcolumn"].Value.ToString());
-                            string accountCode = row.Cells["accountcodecolumn"].Value.ToString();
-                            string accountName = row.Cells["accountcolumn"].Value.ToString();
-                            bool isdebitentry = Convert.ToBoolean(row.Cells["isdebitcolumn"].Value.ToString());
-                            bool iscreditentry = Convert.ToBoolean(row.Cells["iscreditcolumn"].Value.ToString());
-                            float debitamount = float.TryParse(row.Cells["debitcolumn"].Value?.ToString(), out float result) ? result : 0;
-                            float creditamount = float.TryParse(row.Cells["creditcolumn"].Value?.ToString(), out float resultcredit) ? resultcredit : 0;
-                            string debitorcredit = row.Cells["debitcreditcolumn"].Value.ToString();
-
-                            string subTable = "TransactionDetailTable";
-                            var subColumnData = new Dictionary<string, object>
-                            {
-                                { "TransactionId", transactionid },
-                                { "AccountId", accountid },
-                                { "AccountCode", accountCode },
-                                { "AccountName", accountName },
-                                { "IsDebit", isdebitentry },
-                                { "IsCredit", iscreditentry },
-                                { "DebitAmount", debitamount },
-                                { "CreditAmount", creditamount },
-                                { "InvoiceNo", invoiceNo }
-                            };
-
-                            bool isInserted = await DatabaseAccess.ExecuteQueryAsync(subTable, "INSERT", subColumnData);
-
-                        }
-
-                        ReceiptReportView receiptReportView = new ReceiptReportView(invoiceNo);
-                        receiptReportView.MdiParent = Application.OpenForms["Dashboard"];
-                        await CommonFunction.DisposeOnCloseAsync(receiptReportView);
-                        receiptReportView.Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Something is wrong!");
-                    }
+                    MessageBox.Show("Kindly Select Currency!");
                 }
-
                 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             
         }
-        private async void UpdateTransactionDetailData(string invoiceNo, int transactionid)
+
+        private bool ValidateDebitCreditBalance()
         {
-            try
+            decimal totalDebit = 0;
+            decimal totalCredit = 0;
+
+            foreach (DataGridViewRow row in dgvReceipts.Rows)
             {
-                InsertTransactionDetail(invoiceNo, transactionid);
-                DeleteTransactionData(invoiceNo);
-                foreach (DataGridViewRow row in dgvReceipts.Rows)
+                if (row.Cells["debitcolumn"].Value != null)
                 {
-                    if (row.IsNewRow) { continue; }
+                    decimal debit;
+                    if (decimal.TryParse(row.Cells["debitcolumn"].Value.ToString(), out debit))
+                    {
+                        totalDebit += debit;
+                    }
+                }
 
-                    int accountid = Convert.ToInt32(row.Cells["accountidcolumn"].Value.ToString());
-                    string accountCode = row.Cells["accountcodecolumn"].Value.ToString();
-                    string accountName = row.Cells["accountcolumn"].Value.ToString();
-                    bool isdebitentry = Convert.ToBoolean(row.Cells["isdebitcolumn"].Value.ToString());
-                    bool iscreditentry = Convert.ToBoolean(row.Cells["iscreditcolumn"].Value.ToString());
-                    float debitamount = float.TryParse(row.Cells["debitcolumn"].Value?.ToString(), out float result) ? result : 0;
-                    float creditamount = float.TryParse(row.Cells["creditcolumn"].Value?.ToString(), out float resultcredit) ? resultcredit : 0;
-                    string debitorcredit = row.Cells["debitcreditcolumn"].Value.ToString();
-
-                    string subTable = "TransactionDetailTable";
-                    var subColumnData = new Dictionary<string, object>
-                            {
-                                { "TransactionId", transactionid },
-                                { "AccountId", accountid },
-                                { "AccountCode", accountCode },
-                                { "AccountName", accountName },
-                                { "IsDebit", isdebitentry },
-                                { "IsCredit", iscreditentry },
-                                { "DebitAmount", debitamount },
-                                { "CreditAmount", creditamount },
-                                { "InvoiceNo", invoiceNo }
-                            };
-
-                    bool isInserted = await DatabaseAccess.ExecuteQueryAsync(subTable, "INSERT", subColumnData);
+                if (row.Cells["creditcolumn"].Value != null)
+                {
+                    decimal credit;
+                    if (decimal.TryParse(row.Cells["creditcolumn"].Value.ToString(), out credit))
+                    {
+                        totalCredit += credit;
+                    }
                 }
             }
-            catch (Exception ex) { throw ex; }
+
+            return totalDebit == totalCredit;
         }
-        private async void DeleteTransactionData(string invoiceNo)
+
+        private async void UpdateTransactionDetailData(string invoiceNo, int transactionid, string transactionCode,string longdescription)
         {
             try
             {
-                string tableName = "TransactionDetailTable";
+                bool isoldrecord = await UpdateTransactionData(invoiceNo);
+                if (isoldrecord)
+                {
+                    bool isdeleted = await DeleteStatementData(invoiceNo);
+                        foreach (DataGridViewRow row in dgvReceipts.Rows)
+                        {
+                            if (row.IsNewRow) { continue; }
+
+                            int accountid = row.Cells["accountidcolumn"].Value != null ? Convert.ToInt32(row.Cells["accountidcolumn"].Value) : 0;
+                            string accountCode = row.Cells["accountcodecolumn"].Value?.ToString() ?? "";
+                            string accountName = row.Cells["accountcolumn"].Value?.ToString() ?? "";
+                            bool isdebitentry = bool.TryParse(row.Cells["isdebitcolumn"].Value?.ToString(), out bool debitResult) && debitResult;
+                            bool iscreditentry = bool.TryParse(row.Cells["iscreditcolumn"].Value?.ToString(), out bool creditResult) && creditResult;
+                            decimal debitamount = decimal.TryParse(row.Cells["debitcolumn"].Value?.ToString(), out decimal debit) ? debit : 0;
+                            decimal creditamount = decimal.TryParse(row.Cells["creditcolumn"].Value?.ToString(), out decimal credit) ? credit : 0;
+                            string debitorcredit = row.Cells["debitcreditcolumn"].Value?.ToString() ?? "";
+                            string shortnaration = row.Cells["shortnarationcolumn"].Value?.ToString() ?? "";
+
+                            string subTable = "TransactionDetailTable";
+                            var subColumnData = new Dictionary<string, object>
+                        {
+                            { "TransactionId", transactionid },
+                            { "TransactionCode", transactionCode },
+                            { "AccountId", accountid },
+                            { "AccountCode", accountCode },
+                            { "AccountName", accountName },
+                            { "IsDebit", isdebitentry },
+                            { "IsCredit", iscreditentry },
+                            { "DebitAmount", debitamount },
+                            { "CreditAmount", creditamount },
+                            { "InvoiceNo", invoiceNo },
+                            { "DebitOrCredit", debitorcredit },
+                            { "ShortDescription", shortnaration },
+                            { "IsNewRecord", true }
+                        };
+                            await CommonFunction.InsertOrUpdateAccountStatementAsync(accountName, accountid, "Receipts", invoiceNo, "", longdescription, 0, debitamount, creditamount, "", isdebitentry, iscreditentry, "", "");
+                            await DatabaseAccess.ExecuteQueryAsync(subTable, "INSERT", subColumnData);
+                        }
+                    
+
+                    ReceiptReportView receiptReportView = new ReceiptReportView(invoiceNo, true, false);
+                    receiptReportView.MdiParent = Application.OpenForms["Dashboard"];
+                    CommonFunction.DisposeOnClose(receiptReportView);
+                    receiptReportView.Show();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                throw; // Preserve original stack trace
+            }
+        }
+
+        private async Task<bool> DeleteStatementData(string invoiceNo)
+        {
+            try
+            {
+                bool isoldrecord = false;
+                string tableName = "AccountStatementTable";
                 string whereClause = "InvoiceNo = @InvoiceNo";
 
                 var columnData = new Dictionary<string, object>
@@ -192,8 +300,27 @@ namespace SmartFlow.Transactions
                     { "InvoiceNo", invoiceNo }
                 };
 
-                await DatabaseAccess.ExecuteQueryAsync(tableName, "DELETE", columnData, whereClause);
+                isoldrecord = await DatabaseAccess.ExecuteQueryAsync(tableName, "DELETE", columnData, whereClause);
+                return isoldrecord;
+            }
+            catch (Exception ex) { throw ex; }
+        }
 
+        private async Task<bool> UpdateTransactionData(string invoiceNo)
+        {
+            try
+            {
+                bool isoldrecord = false;
+                string tableName = "TransactionDetailTable";
+                string whereClause = "InvoiceNo = '" + invoiceNo + "'";
+
+                var columnData = new Dictionary<string, object>
+                {
+                    { "IsNewRecord", false }
+                };
+
+                isoldrecord = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
+                return isoldrecord;
             }
             catch (Exception ex) { throw ex; }
         }
@@ -235,15 +362,20 @@ namespace SmartFlow.Transactions
         }
         private async void Receipts_Load(object sender, EventArgs e)
         {
-            if (_dataInvoice != null && _dataInvoice.Rows.Count > 0 && _dataInvoiceDetails != null && _dataInvoiceDetails.Rows.Count > 0) 
+            if (_dataInvoice != null && _dataInvoice.Rows.Count > 0 || _dataInvoiceDetails != null && _dataInvoiceDetails.Rows.Count > 0) 
             {
                 DataRow row = _dataInvoice.Rows[0];
-                invoicedatetxtbox.Text = Convert.ToDateTime(row["Date"]).ToString("dd-MM-yyyy");
+                invoicedatetxtbox.Text = Convert.ToDateTime(row["InvoiceDate"]).ToString("dd-MM-yyyy");
                 invoicenotxtbox.Text = row["InvoiceNo"].ToString();
                 longdescriptiontxtbox.Text = row["LongDescription"].ToString();
                 voucherinfotxtbox.Text = row["VoucherInfo"].ToString();
                 transactioncodelbl.Text = row["TransactionCode"].ToString();
                 transactionidlbl.Text = row["TransactionId"].ToString();
+                currencyidlbl.Text = row["CurrencyId"].ToString();
+                currencynamelbl.Text = row["CurrencyName"].ToString();
+                currencysymbollbl.Text = row["CurrencySymbol"].ToString();
+                currencyconversionratelbl.Text = row["ConversionRate"].ToString();
+                currencylbl.Text = $"{currencynamelbl.Text} : {currencysymbollbl.Text}";
 
                 foreach (DataRow transactiondetail in _dataInvoiceDetails.Rows)
                 {
@@ -256,6 +388,7 @@ namespace SmartFlow.Transactions
                     dgvReceipts.Rows[detailsRowIndex].Cells["iscreditcolumn"].Value = transactiondetail["IsCredit"];
                     dgvReceipts.Rows[detailsRowIndex].Cells["debitcolumn"].Value = transactiondetail["DebitAmount"];
                     dgvReceipts.Rows[detailsRowIndex].Cells["creditcolumn"].Value = transactiondetail["CreditAmount"];
+                    dgvReceipts.Rows[detailsRowIndex].Cells["shortnarationcolumn"].Value = transactiondetail["ShortDescription"];
                 }
 
                 savebtn.Text = "UPDATE";
@@ -304,6 +437,7 @@ namespace SmartFlow.Transactions
             currencynamelbl.Text = receivedCurrency.Name.ToString();
             currencysymbollbl.Text = receivedCurrency.Symbol.ToString();
             currencystringlbl.Text = receivedCurrency.CurrencyString.ToString();
+            currencyconversionratelbl.Text = receivedCurrency.ConversionRate.ToString();
         }
 
         private bool AreAnyTextBoxesFilled()
@@ -401,77 +535,6 @@ namespace SmartFlow.Transactions
                 return null;
             }
         }
-        
-        private async void amounttxtbox_Leave(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(amounttxtbox.Text) && !string.IsNullOrWhiteSpace(amounttxtbox.Text)) { 
-                Form openForm = await CommonFunction.IsFormOpenAsync(typeof(DebitAndCreditForm));
-                
-                if (openForm == null)
-                {
-                    DebitAndCreditForm debitAndCreditForm = new DebitAndCreditForm
-                    {
-                        WindowState = FormWindowState.Normal,
-                        StartPosition = FormStartPosition.CenterParent,
-                    };
-                    await CommonFunction.DisposeOnCloseAsync(debitAndCreditForm);
-                    debitAndCreditForm.FormClosed += delegate
-                    {
-                        int accountid = Convert.ToInt32(accountidlbl.Text);
-                        string accountname = accountnametxtbox.Text;
-                        string accountCode = accountcodetxtbox.Text;
-
-                        bool productExists = false;
-                        foreach (DataGridViewRow row in dgvReceipts.Rows)
-                        {
-                            if (!row.IsNewRow)
-                            {
-                                if (row.Cells["accountidcolumn"].Value != null && row.Cells["accountidcolumn"].Value.ToString() == accountid.ToString())
-                                {
-                                    MessageBox.Show("Account Already Selected");
-                                    productExists = true;
-                                    break;
-                                }
-                            }
-                        }
-
-                        if (!productExists)
-                        {
-                            if (GlobalVariables.iscreditglobal == true)
-                            {
-                                decimal paymentamountcredit = decimal.Parse(amounttxtbox.Text);
-                                GlobalVariables.transactionsymbol = "C";
-                                dgvReceipts.Rows.Add(null, GlobalVariables.transactionsymbol, accountname, accountCode, accountid, GlobalVariables.isdebitglobal, GlobalVariables.iscreditglobal,
-                                    null, paymentamountcredit, GlobalVariables.shortdescriptionglobal);
-                            }
-
-                            else if (GlobalVariables.isdebitglobal == true)
-
-                            {
-                                decimal paymentamountdebit = decimal.Parse(amounttxtbox.Text);
-                                GlobalVariables.transactionsymbol = "D";
-                                dgvReceipts.Rows.Add(null, GlobalVariables.transactionsymbol, accountname, accountCode, accountid, GlobalVariables.isdebitglobal, GlobalVariables.iscreditglobal,
-                                    paymentamountdebit, null, GlobalVariables.shortdescriptionglobal);
-                            }
-
-                            accountcodetxtbox.Text = string.Empty;
-                            accountnametxtbox.Text = string.Empty;
-                            amounttxtbox.Text = string.Empty;
-                            accountidlbl.Text = string.Empty;
-
-                            accountnametxtbox.Focus();
-                        }
-                        
-                    };
-
-                    debitAndCreditForm.ShowDialog();
-                }
-                else
-                {
-                    openForm.BringToFront();
-                }
-            }
-        }
 
         private async void accountnametxtbox_MouseClick(object sender, MouseEventArgs e)
         {
@@ -488,7 +551,7 @@ namespace SmartFlow.Transactions
 
                     accountsSelection.AccountDataSelected += UpdateAccountInfo;
 
-                    await CommonFunction.DisposeOnCloseAsync(accountsSelection);
+                    CommonFunction.DisposeOnClose(accountsSelection);
                     accountsSelection.ShowDialog();
                 }
                 else
@@ -547,7 +610,7 @@ namespace SmartFlow.Transactions
                             StartPosition = FormStartPosition.CenterParent,
                         };
                         accountsSelection.AccountDataSelected += UpdateAccountInfo;
-                        await CommonFunction.DisposeOnCloseAsync(accountsSelection);
+                        CommonFunction.DisposeOnClose(accountsSelection);
                         accountsSelection.ShowDialog();
                     }
                     else
@@ -563,8 +626,8 @@ namespace SmartFlow.Transactions
             if (e.Control && e.KeyCode == Keys.D)
             {
                 // Ensure the current row has a valid product ID.
-                var productidCellValue = dgvReceipts.CurrentRow?.Cells[1].Value;
-                if (productidCellValue != null && int.TryParse(productidCellValue.ToString(), out int productid) && productid > 0)
+                var accountidCellValue = dgvReceipts.CurrentRow?.Cells["accountidcolumn"].Value;
+                if (accountidCellValue != null && int.TryParse(accountidCellValue.ToString(), out int accountid) && accountid > 0)
                 {
                     // Check if there are any selected rows.
                     if (dgvReceipts.SelectedRows.Count > 0)
@@ -605,6 +668,173 @@ namespace SmartFlow.Transactions
                 // Set the cell value to the row number (1-based index)
                 e.Value = e.RowIndex + 1;
             }
+        }
+
+        private void dgvReceipts_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            CalculateTotal();
+        }
+
+        private void CalculateTotal()
+        {
+            decimal debitTotal = 0;
+            decimal creditTotal = 0;
+
+            // Check if DataGridView has rows (excluding the new row)
+            bool hasRows = dgvReceipts.Rows.Cast<DataGridViewRow>().Any(row => !row.IsNewRow);
+
+            foreach (DataGridViewRow row in dgvReceipts.Rows)
+            {
+                if (row.IsNewRow) continue; // Skip the new row
+
+                if (decimal.TryParse(row.Cells["debitcolumn"].Value?.ToString(), out decimal debit))
+                {
+                    debitTotal += debit;
+                }
+
+                if (decimal.TryParse(row.Cells["creditcolumn"].Value?.ToString(), out decimal credit))
+                {
+                    creditTotal += credit;
+                }
+            }
+
+            totaldebitvaluelbl.Text = $"{debitTotal:N2}";
+            totalcreditvaluelbl.Text = $"{creditTotal:N2}";
+
+            // Enable textboxes and radio buttons if DataGridView is empty OR if totals do not match
+            bool enableControls = !hasRows || (debitTotal != creditTotal);
+            accountnametxtbox.Enabled = enableControls;
+            amounttxtbox.Enabled = enableControls;
+            shortnarationtxtbox.Enabled = enableControls;
+            debitamountradio.Enabled = enableControls;
+            creditamountradio.Enabled = enableControls;
+
+        }
+
+        private void dgvReceipts_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            CalculateTotal();
+
+            // Check if there are any remaining credit or debit entries
+            bool hasCredit = false;
+            bool hasDebit = false;
+
+            foreach (DataGridViewRow row in dgvReceipts.Rows)
+            {
+                if (row.IsNewRow) continue; // Skip the new row
+
+                decimal debit = row.Cells["debitcolumn"].Value != null ? Convert.ToDecimal(row.Cells["debitcolumn"].Value) : 0;
+                decimal credit = row.Cells["creditcolumn"].Value != null ? Convert.ToDecimal(row.Cells["creditcolumn"].Value) : 0;
+
+                if (debit > 0)
+                    hasDebit = true;
+                if (credit > 0)
+                    hasCredit = true;
+
+                if (hasCredit && hasDebit) // If both exist, no need to continue checking
+                    break;
+            }
+
+            // If no more Credit entries exist, check the Debit checkbox
+            if (hasCredit)
+            {
+                debitamountradio.Checked = true;
+                creditamountradio.Checked = false;
+            }
+            // If no more Debit entries exist, check the Credit checkbox
+            else if (hasDebit)
+            {
+                creditamountradio.Checked = true;
+                debitamountradio.Checked = false;
+            }
+        }
+
+        private void addbtn_Click(object sender, EventArgs e)
+        {
+            if (creditamountradio.Checked)
+            {
+                // Set flags for the first entry (Credit)
+                GlobalVariables.iscreditglobal = true;
+                GlobalVariables.isdebitglobal = false;
+            }
+            else
+            {
+                // For subsequent entries, set Debit flag
+                GlobalVariables.isdebitglobal = true;
+                GlobalVariables.iscreditglobal = false;
+            }
+
+            int accountid = Convert.ToInt32(accountidlbl.Text);
+            string accountname = accountnametxtbox.Text;
+            string accountCode = accountcodetxtbox.Text;
+            string shortnarationfrominvoice = shortnarationtxtbox.Text;
+
+            bool productExists = false;
+
+            if (!productExists)
+            {
+                if (creditamountradio.Checked)
+                {
+                    if (GlobalVariables.iscreditglobal)
+                    {
+                        decimal paymentamountcredit = decimal.Parse(amounttxtbox.Text);
+                        GlobalVariables.transactionsymbol = "C"; // First transaction should be Credit
+                        dgvReceipts.Rows.Add(null, GlobalVariables.transactionsymbol, accountname, accountCode, accountid,
+                            GlobalVariables.isdebitglobal, GlobalVariables.iscreditglobal,  null, paymentamountcredit,
+                            shortnarationfrominvoice);
+
+                        debitamountradio.Checked = true;
+                    }
+                    else
+                    {
+                        decimal paymentamountdebit = decimal.Parse(amounttxtbox.Text);
+                        GlobalVariables.transactionsymbol = "D"; // Subsequent transactions should be Debit
+                        dgvReceipts.Rows.Add(null, GlobalVariables.transactionsymbol, accountname, accountCode, accountid,
+                            GlobalVariables.isdebitglobal, GlobalVariables.iscreditglobal, paymentamountdebit, null,
+                            shortnarationfrominvoice);
+
+                        creditamountradio.Checked = true;
+                    }
+                }
+                else
+                {
+                    // For subsequent entries, allow Debit or Credit based on flag
+                    if (GlobalVariables.isdebitglobal)
+                    {
+                        decimal paymentamountdebit = decimal.Parse(amounttxtbox.Text);
+                        GlobalVariables.transactionsymbol = "D"; // Subsequent transactions should be Debit
+                        dgvReceipts.Rows.Add(null, GlobalVariables.transactionsymbol, accountname, accountCode, accountid,
+                            GlobalVariables.isdebitglobal, GlobalVariables.iscreditglobal, paymentamountdebit, null,
+                            shortnarationfrominvoice);
+
+                        creditamountradio.Checked = true;
+                    }
+                    else if (GlobalVariables.iscreditglobal)
+                    {
+                        decimal paymentamountcredit = decimal.Parse(amounttxtbox.Text);
+                        GlobalVariables.transactionsymbol = "C";
+                        dgvReceipts.Rows.Add(null, GlobalVariables.transactionsymbol, accountname, accountCode, accountid,
+                            GlobalVariables.isdebitglobal, GlobalVariables.iscreditglobal,  null, paymentamountcredit,
+                            shortnarationfrominvoice);
+
+                        debitamountradio.Checked = true;
+                    }
+                }
+
+                // Reset controls after adding the row
+                ResetControl();
+            }
+
+        }
+
+        private void ResetControl()
+        {
+            accountnametxtbox.Text = string.Empty;
+            accountcodetxtbox.Text = string.Empty;
+            amounttxtbox.Text = string.Empty;
+            accountidlbl.Text = string.Empty;
+            shortnarationtxtbox.Text = string.Empty;
+            accountnametxtbox.Focus();
         }
     }
 }

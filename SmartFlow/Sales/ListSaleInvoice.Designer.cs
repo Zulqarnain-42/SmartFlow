@@ -35,6 +35,7 @@
             this.datetolbl = new System.Windows.Forms.Label();
             this.invoicedatetxtbox = new System.Windows.Forms.MaskedTextBox();
             this.datelbl = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,6 +71,7 @@
             this.searchbtn.TabIndex = 141;
             this.searchbtn.Text = "SEARCH";
             this.searchbtn.UseVisualStyleBackColor = true;
+            this.searchbtn.Click += new System.EventHandler(this.searchbtn_Click);
             // 
             // invoicedatetotxtbox
             // 
@@ -117,11 +119,19 @@
             this.datelbl.TabIndex = 137;
             this.datelbl.Text = "DATE FROM";
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(0, 187);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(434, 23);
+            this.progressBar1.TabIndex = 142;
+            // 
             // ListSaleInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 211);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.searchbtn);
             this.Controls.Add(this.invoicedatetotxtbox);
             this.Controls.Add(this.datetolbl);
@@ -130,6 +140,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ListSaleInvoice";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LIST SALE INVOICE";
             this.Load += new System.EventHandler(this.ListSaleInvoice_Load);
             this.panel1.ResumeLayout(false);
@@ -147,5 +158,6 @@
         private System.Windows.Forms.Label datetolbl;
         private System.Windows.Forms.MaskedTextBox invoicedatetxtbox;
         private System.Windows.Forms.Label datelbl;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

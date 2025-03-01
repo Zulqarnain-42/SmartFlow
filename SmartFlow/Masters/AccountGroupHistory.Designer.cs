@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.searchtxtbox = new System.Windows.Forms.TextBox();
             this.searchlbl = new System.Windows.Forms.Label();
             this.accountgroupdatagridview = new System.Windows.Forms.DataGridView();
@@ -66,10 +67,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.searchtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchtxtbox.Location = new System.Drawing.Point(107, 5);
-            this.searchtxtbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.searchtxtbox.Location = new System.Drawing.Point(80, 4);
+            this.searchtxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchtxtbox.Name = "searchtxtbox";
-            this.searchtxtbox.Size = new System.Drawing.Size(446, 32);
+            this.searchtxtbox.Size = new System.Drawing.Size(335, 27);
             this.searchtxtbox.TabIndex = 0;
             this.searchtxtbox.TextChanged += new System.EventHandler(this.searchtxtbox_TextChanged);
             // 
@@ -80,9 +81,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.searchlbl.AutoSize = true;
             this.searchlbl.Font = new System.Drawing.Font("Calibri", 11F);
-            this.searchlbl.Location = new System.Drawing.Point(21, 10);
+            this.searchlbl.Location = new System.Drawing.Point(16, 8);
+            this.searchlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.searchlbl.Name = "searchlbl";
-            this.searchlbl.Size = new System.Drawing.Size(66, 23);
+            this.searchlbl.Size = new System.Drawing.Size(52, 18);
             this.searchlbl.TabIndex = 3;
             this.searchlbl.Text = "Search ";
             // 
@@ -99,16 +101,24 @@
             this.accountgroupdatagridview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.accountgroupdatagridview.ContextMenuStrip = this.gridViewMenuStrip;
             this.accountgroupdatagridview.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.accountgroupdatagridview.Location = new System.Drawing.Point(5, 0);
-            this.accountgroupdatagridview.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.accountgroupdatagridview.Location = new System.Drawing.Point(4, 0);
+            this.accountgroupdatagridview.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.accountgroupdatagridview.MultiSelect = false;
             this.accountgroupdatagridview.Name = "accountgroupdatagridview";
             this.accountgroupdatagridview.ReadOnly = true;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.accountgroupdatagridview.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.accountgroupdatagridview.RowHeadersVisible = false;
             this.accountgroupdatagridview.RowHeadersWidth = 51;
             this.accountgroupdatagridview.RowTemplate.Height = 24;
             this.accountgroupdatagridview.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.accountgroupdatagridview.Size = new System.Drawing.Size(1241, 681);
+            this.accountgroupdatagridview.Size = new System.Drawing.Size(931, 553);
             this.accountgroupdatagridview.TabIndex = 0;
             this.accountgroupdatagridview.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.accountgroupdatagridview_CellDoubleClick_1);
             this.accountgroupdatagridview.Scroll += new System.Windows.Forms.ScrollEventHandler(this.accountgroupdatagridview_Scroll);
@@ -119,12 +129,12 @@
             this.gridViewMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem});
             this.gridViewMenuStrip.Name = "gridViewMenuStrip";
-            this.gridViewMenuStrip.Size = new System.Drawing.Size(105, 28);
+            this.gridViewMenuStrip.Size = new System.Drawing.Size(95, 26);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(104, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
@@ -134,9 +144,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.accountgroupid.AutoSize = true;
-            this.accountgroupid.Location = new System.Drawing.Point(1432, 9);
+            this.accountgroupid.Location = new System.Drawing.Point(1074, 7);
+            this.accountgroupid.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.accountgroupid.Name = "accountgroupid";
-            this.accountgroupid.Size = new System.Drawing.Size(100, 16);
+            this.accountgroupid.Size = new System.Drawing.Size(81, 13);
             this.accountgroupid.TabIndex = 41;
             this.accountgroupid.Text = "accountgroupid";
             this.accountgroupid.Visible = false;
@@ -147,10 +158,10 @@
             this.savebtn.BackColor = System.Drawing.Color.SpringGreen;
             this.savebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.savebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.savebtn.Location = new System.Drawing.Point(1255, 578);
-            this.savebtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.savebtn.Location = new System.Drawing.Point(941, 470);
+            this.savebtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.savebtn.Name = "savebtn";
-            this.savebtn.Size = new System.Drawing.Size(276, 46);
+            this.savebtn.Size = new System.Drawing.Size(207, 37);
             this.savebtn.TabIndex = 4;
             this.savebtn.Text = "SAVE";
             this.savebtn.UseVisualStyleBackColor = false;
@@ -162,10 +173,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.aliastxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.aliastxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.aliastxtbox.Location = new System.Drawing.Point(1255, 95);
-            this.aliastxtbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.aliastxtbox.Location = new System.Drawing.Point(941, 77);
+            this.aliastxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.aliastxtbox.Name = "aliastxtbox";
-            this.aliastxtbox.Size = new System.Drawing.Size(271, 32);
+            this.aliastxtbox.Size = new System.Drawing.Size(204, 27);
             this.aliastxtbox.TabIndex = 2;
             // 
             // groupnametxtbox
@@ -174,10 +185,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupnametxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.groupnametxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupnametxtbox.Location = new System.Drawing.Point(1255, 30);
-            this.groupnametxtbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupnametxtbox.Location = new System.Drawing.Point(941, 24);
+            this.groupnametxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupnametxtbox.Name = "groupnametxtbox";
-            this.groupnametxtbox.Size = new System.Drawing.Size(273, 32);
+            this.groupnametxtbox.Size = new System.Drawing.Size(205, 27);
             this.groupnametxtbox.TabIndex = 1;
             this.groupnametxtbox.TextChanged += new System.EventHandler(this.groupnametxtbox_TextChanged);
             // 
@@ -187,9 +198,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.aliaslbl.AutoSize = true;
             this.aliaslbl.Font = new System.Drawing.Font("Calibri", 11F);
-            this.aliaslbl.Location = new System.Drawing.Point(1253, 68);
+            this.aliaslbl.Location = new System.Drawing.Point(940, 55);
+            this.aliaslbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.aliaslbl.Name = "aliaslbl";
-            this.aliaslbl.Size = new System.Drawing.Size(46, 23);
+            this.aliaslbl.Size = new System.Drawing.Size(38, 18);
             this.aliaslbl.TabIndex = 34;
             this.aliaslbl.Text = "Alias";
             // 
@@ -199,9 +211,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupnamelbl.AutoSize = true;
             this.groupnamelbl.Font = new System.Drawing.Font("Calibri", 11F);
-            this.groupnamelbl.Location = new System.Drawing.Point(1251, 2);
+            this.groupnamelbl.Location = new System.Drawing.Point(938, 2);
+            this.groupnamelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.groupnamelbl.Name = "groupnamelbl";
-            this.groupnamelbl.Size = new System.Drawing.Size(112, 23);
+            this.groupnamelbl.Size = new System.Drawing.Size(89, 18);
             this.groupnamelbl.TabIndex = 33;
             this.groupnamelbl.Text = "Group Name ";
             // 
@@ -210,9 +223,9 @@
             this.panel2.Controls.Add(this.headinglbl);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1540, 46);
+            this.panel2.Size = new System.Drawing.Size(1155, 37);
             this.panel2.TabIndex = 16;
             // 
             // headinglbl
@@ -222,8 +235,9 @@
             this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(1540, 46);
+            this.headinglbl.Size = new System.Drawing.Size(1155, 37);
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "ACCOUNT GROUPS";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -237,10 +251,10 @@
             this.panel4.Controls.Add(this.searchtxtbox);
             this.panel4.Controls.Add(this.searchlbl);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 46);
-            this.panel4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel4.Location = new System.Drawing.Point(0, 37);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1540, 39);
+            this.panel4.Size = new System.Drawing.Size(1155, 32);
             this.panel4.TabIndex = 17;
             // 
             // panel5
@@ -259,19 +273,20 @@
             this.panel5.Controls.Add(this.aliastxtbox);
             this.panel5.Controls.Add(this.groupnametxtbox);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(0, 85);
-            this.panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel5.Location = new System.Drawing.Point(0, 69);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1540, 685);
+            this.panel5.Size = new System.Drawing.Size(1155, 557);
             this.panel5.TabIndex = 18;
             // 
             // rbrevenue
             // 
             this.rbrevenue.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.rbrevenue.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbrevenue.Location = new System.Drawing.Point(1257, 269);
+            this.rbrevenue.Location = new System.Drawing.Point(943, 219);
+            this.rbrevenue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbrevenue.Name = "rbrevenue";
-            this.rbrevenue.Size = new System.Drawing.Size(199, 26);
+            this.rbrevenue.Size = new System.Drawing.Size(149, 21);
             this.rbrevenue.TabIndex = 47;
             this.rbrevenue.TabStop = true;
             this.rbrevenue.Text = "REVENUE";
@@ -281,9 +296,10 @@
             // 
             this.rbexpense.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.rbexpense.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbexpense.Location = new System.Drawing.Point(1257, 237);
+            this.rbexpense.Location = new System.Drawing.Point(943, 193);
+            this.rbexpense.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbexpense.Name = "rbexpense";
-            this.rbexpense.Size = new System.Drawing.Size(201, 26);
+            this.rbexpense.Size = new System.Drawing.Size(151, 21);
             this.rbexpense.TabIndex = 46;
             this.rbexpense.TabStop = true;
             this.rbexpense.Text = "EXPENSES";
@@ -293,9 +309,10 @@
             // 
             this.rbequity.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.rbequity.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbequity.Location = new System.Drawing.Point(1257, 205);
+            this.rbequity.Location = new System.Drawing.Point(943, 167);
+            this.rbequity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbequity.Name = "rbequity";
-            this.rbequity.Size = new System.Drawing.Size(184, 26);
+            this.rbequity.Size = new System.Drawing.Size(138, 21);
             this.rbequity.TabIndex = 45;
             this.rbequity.TabStop = true;
             this.rbequity.Text = "EQUITY";
@@ -305,9 +322,10 @@
             // 
             this.rbliabilities.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.rbliabilities.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbliabilities.Location = new System.Drawing.Point(1257, 173);
+            this.rbliabilities.Location = new System.Drawing.Point(943, 141);
+            this.rbliabilities.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbliabilities.Name = "rbliabilities";
-            this.rbliabilities.Size = new System.Drawing.Size(210, 26);
+            this.rbliabilities.Size = new System.Drawing.Size(158, 21);
             this.rbliabilities.TabIndex = 44;
             this.rbliabilities.TabStop = true;
             this.rbliabilities.Text = "LIABILITIES";
@@ -317,9 +335,10 @@
             // 
             this.rbassets.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.rbassets.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbassets.Location = new System.Drawing.Point(1257, 141);
+            this.rbassets.Location = new System.Drawing.Point(943, 115);
+            this.rbassets.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbassets.Name = "rbassets";
-            this.rbassets.Size = new System.Drawing.Size(180, 26);
+            this.rbassets.Size = new System.Drawing.Size(135, 21);
             this.rbassets.TabIndex = 43;
             this.rbassets.TabStop = true;
             this.rbassets.Text = "ASSETS";
@@ -331,10 +350,10 @@
             this.closebtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.closebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.closebtn.Location = new System.Drawing.Point(1255, 628);
-            this.closebtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.closebtn.Location = new System.Drawing.Point(941, 510);
+            this.closebtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.closebtn.Name = "closebtn";
-            this.closebtn.Size = new System.Drawing.Size(276, 46);
+            this.closebtn.Size = new System.Drawing.Size(207, 37);
             this.closebtn.TabIndex = 5;
             this.closebtn.Text = "CLOSE";
             this.closebtn.UseVisualStyleBackColor = false;
@@ -342,15 +361,15 @@
             // 
             // AccountGroupHistory
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1540, 770);
+            this.ClientSize = new System.Drawing.Size(1155, 626);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AccountGroupHistory";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ACCOUNT GROUPS";

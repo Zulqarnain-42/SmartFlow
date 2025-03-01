@@ -88,7 +88,7 @@ namespace SmartFlow.Sales.CommonForm
                     MessageBox.Show("No Data Found For this Invoice No");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Log the exception and display a user-friendly message
                 // LogError(ex); // Optional: You can implement a logging mechanism here

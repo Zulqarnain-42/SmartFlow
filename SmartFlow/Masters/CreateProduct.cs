@@ -19,12 +19,12 @@ namespace SmartFlow.Masters
         public CreateProduct(int ProductID)
         {
             InitializeComponent();
-            productid.Text = ProductID.ToString();
+            productidlbl.Text = ProductID.ToString();
         }
         public CreateProduct(int ProductID,string formtitle)
         {
             InitializeComponent();
-            productid.Text = ProductID.ToString();
+            productidlbl.Text = ProductID.ToString();
             headinglbl.Text = formtitle;
         }
         private void closebtn_Click(object sender, EventArgs e)
@@ -52,6 +52,14 @@ namespace SmartFlow.Masters
                         mfrtextBox.Focus(); 
                         return;
                     }
+
+                    if(cmbbrand.SelectedIndex == 0)
+                    {
+                        errorProvider.SetError(cmbbrand,"Please Select Brand.");
+                        cmbbrand.Focus();
+                        return;
+                    }
+
                     string duplicateinfo = await checkduplicate();
 
                     if (duplicateinfo != null)
@@ -65,8 +73,8 @@ namespace SmartFlow.Masters
                             string updateresult = await UpdateProduct();
                             if (updateresult == "Product updated successfully!")
                             {
-                                DeleteBundleData(Convert.ToInt32(productid.Text));
-                                AddDataToDatabase(Convert.ToInt32(productid.Text), productcodelbl.Text);
+                                DeleteBundleData(Convert.ToInt32(productidlbl.Text));
+                                AddDataToDatabase(Convert.ToInt32(productidlbl.Text), productcodelbl.Text);
                                 MessageBox.Show("Item Updated Successfully!");
                             }
                         }
@@ -75,8 +83,8 @@ namespace SmartFlow.Masters
                             string updateresult = await UpdateProduct();
                             if(updateresult == "Product updated successfully!")
                             {
-                                DeleteBundleData(Convert.ToInt32(productid.Text));
-                                AddDataToDatabase(Convert.ToInt32(productid.Text), productcodelbl.Text);
+                                DeleteBundleData(Convert.ToInt32(productidlbl.Text));
+                                AddDataToDatabase(Convert.ToInt32(productidlbl.Text), productcodelbl.Text);
                                 MessageBox.Show("Item Updated Successfully!");
                             }
                         }
@@ -146,7 +154,8 @@ namespace SmartFlow.Masters
                             { "SecondUpc", secondupctxtbox.Text.Trim() },
                             { "ThirdMfr", thirdmfrtxtbox.Text.Trim() },
                             { "ThirdUPC", thirdupctxtbox.Text.Trim() },
-                            { "IsCustomProduct", isCustomcheck.Checked }
+                            { "IsCustomProduct", isCustomcheck.Checked },
+                            { "BrandId", cmbbrand.SelectedValue }
                         };
                         
                         // Insert data and get the result
@@ -171,10 +180,11 @@ namespace SmartFlow.Masters
         }
         private async Task<string> checkduplicate()
         {
+            int brandid = Convert.ToInt32(cmbbrand.SelectedValue);
             string query = string.Format(@"SELECT ProductID,ProductName,MFR,UPC,EAN,SecondMFr,SecondUpc,ProductCode," +
-                        "SaleUnitPrice,LowestPrice,ThirdMfr,ThirdUPC,IsCustomProduct FROM ProductTable WHERE MFR = @MFR " +
+                        "SaleUnitPrice,LowestPrice,ThirdMfr,ThirdUPC,IsCustomProduct,BrandId FROM ProductTable WHERE MFR = @MFR " +
                         "AND UPC = @UPC AND EAN = @EAN " +
-                        "AND SecondMFr = @SecondMFr AND SecondUpc = @SecondUpc");
+                        "AND SecondMFr = @SecondMFr AND SecondUpc = @SecondUpc AND BrandId = @BrandId");
 
             var parameters = new Dictionary<string, object>
             {
@@ -185,7 +195,8 @@ namespace SmartFlow.Masters
                 { "SecondUpc" , secondupctxtbox.Text },
                 { "ThirdMfr" , thirdmfrtxtbox.Text },
                 { "ThirdUPC" , thirdupctxtbox.Text },
-                { "IsCustomProduct", isCustomcheck.Checked }
+                { "IsCustomProduct", isCustomcheck.Checked },
+                { "BrandId", brandid }
             };
 
             DataTable dt = await DatabaseAccess.RetrieveDataAsync(query, parameters);
@@ -202,49 +213,6 @@ namespace SmartFlow.Masters
                 string productthirdupc = dt.Rows[0]["ThirdUPC"].ToString();
                 bool isCustom = Convert.ToBoolean(dt.Rows[0]["IsCustomProduct"]);
 
-                if (nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr)
-                {
-                    return $"Duplicate found: Product Name = {productTitle}, MFR = {productmfr}.";
-                }
-
-                if (nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr && isCustomcheck.Checked == isCustom)
-                {
-                    return $"Duplicate found: Product Name = {productTitle}, MFR = {productmfr}, Custom Product = {isCustom}.";
-                }
-
-                if (nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr && upctextBox.Text == productUpc && isCustomcheck.Checked == isCustom)
-                {
-                    return $"Duplicate found: Product Name = {productTitle}, MFR = {productmfr}, UPC = {productUpc}, Custom Product = {isCustom}.";
-                }
-
-                if(nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr && upctextBox.Text == productUpc && eantextBox.Text == productean 
-                    && isCustomcheck.Checked == isCustom)
-                {
-                    return $"Duplicate found: Product Name = {productTitle}, MFR = {productmfr}, UPC = {productUpc}, EAN = {productean}, Custom Product = {isCustom}.";
-                }
-
-                if(nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr && upctextBox.Text == productUpc && eantextBox.Text == productean 
-                    && secondmfrtxtbox.Text == productsecondmfr && secondupctxtbox.Text == productsecondupc && isCustomcheck.Checked == isCustom)
-                {
-                    return $"Duplicate found: Product Name = {productTitle}, MFR = {productmfr}, UPC = {productUpc}, EAN = {productean}," +
-                        $"SecondMFR = {productsecondmfr}, SecondUPC = {productsecondupc}, Custom Product = {isCustom}.";
-                }
-
-                if (nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr && upctextBox.Text == productUpc && eantextBox.Text == productean
-                    && secondmfrtxtbox.Text == productsecondmfr && isCustomcheck.Checked == isCustom)
-                {
-                    return $"Duplicate found: Product Name = {productTitle}, MFR = {productmfr}, UPC = {productUpc}, EAN = {productean}," +
-                        $"SecondMFR = {productsecondmfr}, Custom Product = {isCustom}.";
-                }
-
-                if(nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr && upctextBox.Text == productUpc && eantextBox.Text == productean && 
-                    secondmfrtxtbox.Text == productsecondmfr && secondupctxtbox.Text == productsecondupc && thirdmfrtxtbox.Text == productthirdmfr && 
-                    thirdupctxtbox.Text == productthirdupc && isCustomcheck.Checked == isCustom)
-                {
-                    return $"Duplicate found: Product Name = {productTitle}, MFR = {productmfr}, UPC = {productUpc}, EAN = {productean}," +
-                        $"SecondMFR = {productsecondmfr}, SecondUPC = {productsecondupc}, ThirdMfr = {productthirdmfr}, ThirdUpc = {productthirdupc}, Custom Product = {isCustom}.";
-                }
-
                 if (nametxtbox.Text == productTitle && mfrtextBox.Text == productmfr && upctextBox.Text == productUpc && eantextBox.Text == productean &&
                     secondmfrtxtbox.Text == productsecondmfr && secondupctxtbox.Text == productsecondupc && thirdmfrtxtbox.Text == productthirdmfr 
                     && isCustomcheck.Checked == isCustom)
@@ -260,7 +228,7 @@ namespace SmartFlow.Masters
         private async Task<string> UpdateProduct()
         {
             string tableName = "ProductTable";
-            string whereClause = "ProductID = '" + productid.Text + "'";
+            string whereClause = "ProductID = '" + productidlbl.Text + "'";
 
             decimal saleUnitPrice = TryParseDecimal(salepricetxtbox.Text.Trim());
             decimal lowestPrice = TryParseDecimal(lowestpricetxtbox.Text.Trim());
@@ -299,7 +267,8 @@ namespace SmartFlow.Masters
                 { "SecondUpc", secondupctxtbox.Text.Trim() },
                 { "ThirdMfr", thirdmfrtxtbox.Text.Trim() },
                 { "ThirdUPC", thirdupctxtbox.Text.Trim() },
-                { "IsCustomProduct", isCustomcheck.Checked }
+                { "IsCustomProduct", isCustomcheck.Checked },
+                { "BrandId", cmbbrand.SelectedValue }
             };
 
             bool isUpdated = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
@@ -330,7 +299,7 @@ namespace SmartFlow.Masters
                 bool isChecked = false;
                 string query = string.Format("SELECT ProductID,ProductName,ProductCode,SaleUnitPrice,LowestPrice,WholeSalePrice,StandardPrice," +
                     "StockTrasholdQty,StockCode,CompanyID,UPC,EAN,Length,Width,Height,Weight,MFR,Barcode,ProductCode,DiscountPercentage,IsBundle," +
-                    "HSCode,SecondMFr,COO,SecondUpc,ThirdMfr,ThirdUPC,IsCustomProduct FROM ProductTable WHERE ProductID = @ProductID");
+                    "HSCode,SecondMFr,COO,SecondUpc,ThirdMfr,ThirdUPC,IsCustomProduct,BrandId FROM ProductTable WHERE ProductID = @ProductID");
 
                 var parameters = new Dictionary<string, object>
                 {
@@ -365,7 +334,7 @@ namespace SmartFlow.Masters
                     thirdmfrtxtbox.Text = dataTable.Rows[0]["ThirdMfr"].ToString();
                     thirdupctxtbox.Text = dataTable.Rows[0]["ThirdUPC"].ToString();
                     isCustomcheck.Checked = Convert.ToBoolean(dataTable.Rows[0]["IsCustomProduct"]);
-
+                    cmbbrand.SelectedValue = dataTable.Rows[0]["BrandId"];
                     
                     if(isChecked != false)
                     {
@@ -483,12 +452,17 @@ namespace SmartFlow.Masters
             }
         }    
 
-        private void CreateProduct_Load(object sender, EventArgs e)
+        private async void CreateProduct_Load(object sender, EventArgs e)
         {
-            string labeldata = productid.Text;
+            await CommonFunction.PopulateBrandComboBoxAsync(cmbbrand);
+            this.lowestpricetxtbox.BringToFront();
+            this.salepricetxtbox.BringToFront();
+            this.discountpercentagetxtbox.BringToFront();
+            this.wholesalepricetxtbox.BringToFront();
+            string labeldata = productidlbl.Text;
             if (labeldata != "productid")
             {
-                FindRecord(Convert.ToInt32(productid.Text));
+                FindRecord(Convert.ToInt32(productidlbl.Text));
             }
             else
             {
@@ -624,10 +598,10 @@ namespace SmartFlow.Masters
         {
             try
             {
-                if (!string.IsNullOrEmpty(productid.Text) && !string.IsNullOrWhiteSpace(productid.Text))
+                if (!string.IsNullOrEmpty(productidlbl.Text) && !string.IsNullOrWhiteSpace(productidlbl.Text))
                 {
                     // Prepare the parameter for the stored procedure
-                    int productID = int.Parse(productid.Text); // assuming ProductID is an integer
+                    int productID = int.Parse(productidlbl.Text); // assuming ProductID is an integer
 
                     // Create the command to call the stored procedure
                     string storedProcedure = "GetTotalQuantity";
@@ -710,9 +684,56 @@ namespace SmartFlow.Masters
 
         private async void serialnobtn_Click(object sender, EventArgs e)
         {
-            ProductSerialNo productSerialNo = new ProductSerialNo();
-            await CommonFunction.DisposeOnCloseAsync(productSerialNo);
-            productSerialNo.ShowDialog();
+            int productid = Convert.ToInt32(productidlbl.Text);
+
+            if (productid > 0) 
+            {
+                DataTable serialData = await GetBoxSerialData(productid);
+
+                if (serialData != null && serialData.Rows.Count > 0)
+                {
+                    serialnotxtbox.Clear(); // Clear previous data
+
+                    foreach (DataRow row in serialData.Rows)
+                    {
+                        string serialNo = row["SerialNo"].ToString();
+
+                        // Append formatted text to RichTextBox
+                        serialnotxtbox.AppendText($"Serial No: {serialNo}\n");
+                    }
+                }
+                else
+                {
+                    serialnotxtbox.Text = "No serial numbers found for this Product ID.";
+                }
+            }
+
+        }
+
+        private async Task<DataTable> GetBoxSerialData(int productId)
+        {
+            string query = @"SELECT BoxSerialNoId, ProductId, SerialNo, CreatedAt, UpdatedAt, AddedBy, 
+                            CreatedDay, UpdatedDay, IsSold, ProductMfr 
+                     FROM BoxSerialNoTable 
+                     WHERE ProductId = @ProductId";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@ProductId", productId }
+            };
+
+            return await DatabaseAccess.RetriveAsync(query, parameters);
+        }
+
+        private void addserialbtn_Click(object sender, EventArgs e)
+        {
+            int productid = Convert.ToInt32(productidlbl.Text);
+            if(productid > 0)
+            {
+                ProductSerialNo productSerialNo = new ProductSerialNo(productid);
+                CommonFunction.DisposeOnClose(productSerialNo);
+                productSerialNo.ShowDialog();
+            }
         }
     }
 }

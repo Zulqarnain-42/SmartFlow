@@ -131,6 +131,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ModifyJournalVoucher";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MODIFY JOURNAL VOUCHER";
             this.Load += new System.EventHandler(this.ModifyJournalVoucher_Load);
             this.panel1.ResumeLayout(false);

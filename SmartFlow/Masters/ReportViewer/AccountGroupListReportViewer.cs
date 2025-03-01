@@ -1,4 +1,5 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Windows.Forms;
 using System;
 using System.Configuration;
 using System.Data;
@@ -9,6 +10,7 @@ namespace SmartFlow.Masters.ReportViewer
 {
     public partial class AccountGroupListReportViewer : Form
     {
+        private ReportDocument reportDocument;
         public AccountGroupListReportViewer()
         {
             InitializeComponent();
@@ -40,7 +42,7 @@ namespace SmartFlow.Masters.ReportViewer
             try
             {
                 // Create a new instance of the report
-                ReportDocument reportDocument = new ReportDocument();
+                reportDocument = new ReportDocument();
 
                 string reportPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"\Sales\ReportViewer\Reports\SaleInvoiceReport.rpt");
                 reportDocument.Load(reportPath);
@@ -69,6 +71,22 @@ namespace SmartFlow.Masters.ReportViewer
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}", "Report Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void AccountGroupListReportViewer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DisposeReport();
+        }
+
+        private void DisposeReport()
+        {
+            if (reportDocument != null)
+            {
+                reportDocument.Close();
+                reportDocument.Dispose();
+                reportDocument = null;
+                GC.Collect(); // Force garbage collection
             }
         }
     }

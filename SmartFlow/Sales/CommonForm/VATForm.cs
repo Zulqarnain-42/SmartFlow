@@ -32,6 +32,8 @@ namespace SmartFlow.Sales.CommonForm
             // Show or hide cost price fields based on the purchase condition
             costpricelbl.Visible = _ispurchase;
             costpricetxtbox.Visible = _ispurchase;
+            qtyorderedlbl.Visible = _ispurchase;
+            totalqtytxtbox.Visible = _ispurchase;
 
             // Fill unit data for the combo box
             await CommonFunction.FillUnitDataAsync(unitcombobox);
@@ -43,7 +45,7 @@ namespace SmartFlow.Sales.CommonForm
             {
                 ProcessProductDetails();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Log the exception (optional, depending on your logging framework)
                 // For example: Logger.LogError(ex);
@@ -139,6 +141,11 @@ namespace SmartFlow.Sales.CommonForm
             {
                 return false;
             }
+
+            if(!ValidateTextBox(totalqtytxtbox,"Please Enter Qty Ordered."))
+            {
+                return false;
+            }
             return true;
         }
 
@@ -155,32 +162,35 @@ namespace SmartFlow.Sales.CommonForm
 
         private void AssignVatGlobalVariables(float vat)
         {
-            GlobalVariables.productitemwisevatpercentage = decimal.Parse(vattxtbox.Text);
-            GlobalVariables.productitemwisevatamount = decimal.Parse(vatamountlbl.Text);
-            GlobalVariables.producttotalwithvatitemwise = decimal.Parse(totalwithvatlbl.Text);
+            GlobalVariables.productitemwisevatpercentage = Math.Round(decimal.Parse(vattxtbox.Text), 2, MidpointRounding.AwayFromZero);
+            GlobalVariables.productitemwisevatamount = Math.Round(decimal.Parse(vatamountlbl.Text), 2, MidpointRounding.AwayFromZero);
+            GlobalVariables.producttotalwithvatitemwise = Math.Round(decimal.Parse(totalwithvatlbl.Text), 2, MidpointRounding.AwayFromZero);
         }
 
         private void AssignPurchasePriceGlobalVariables()
         {
             if (_ispurchase)
             {
-                GlobalVariables.productcostprice = decimal.Parse(costpricetxtbox.Text);
+                GlobalVariables.productcostprice = Math.Round(decimal.Parse(costpricetxtbox.Text), 2, MidpointRounding.AwayFromZero);
+                GlobalVariables.actualqtyordered = Convert.ToInt32(totalqtytxtbox.Text);
             }
 
             if (!lengthinmetertxtbox.Visible)
             {
-                GlobalVariables.productpriceglobal = float.Parse(pricetxtbox.Text);
+                GlobalVariables.productpriceglobal = Math.Round(decimal.Parse(pricetxtbox.Text), 2, MidpointRounding.AwayFromZero);            
             }
             else
             {
-                GlobalVariables.productinmeterprice = decimal.Parse(pricetxtbox.Text);
-                GlobalVariables.productpriceglobal = float.Parse(label6.Text) / _itemqty;
+                GlobalVariables.productinmeterprice = Math.Round(decimal.Parse(pricetxtbox.Text), 2, MidpointRounding.AwayFromZero);
+                GlobalVariables.productpriceglobal = Math.Round((decimal.Parse(label6.Text) / _itemqty),2,MidpointRounding.AwayFromZero);
             }
         }
 
         private void AssignLengthAndDescriptionGlobalVariables()
         {
-            GlobalVariables.productinmeterlength = decimal.TryParse(lengthinmetertxtbox.Text, out var length) ? length : 0;
+            GlobalVariables.productinmeterlength = decimal.TryParse(lengthinmetertxtbox.Text, out var length)
+            ? Math.Round(length, 2, MidpointRounding.AwayFromZero)
+    :       0;
             GlobalVariables.productitemwisedescriptiongloabl = itemdescriptiontxtbox.Text.Trim().ToUpper();
         }
 
@@ -201,15 +211,21 @@ namespace SmartFlow.Sales.CommonForm
             {
                 GlobalVariables.isproductdiscounted = true;
                 GlobalVariables.productdiscounttype = percentageradio.Checked;
-                GlobalVariables.discountpercentage = float.Parse(discounttxtbox.Text);
-                GlobalVariables.productdiscountamountitemwise = decimal.TryParse(discountamountlbl.Text, out var discountAmount) ? discountAmount : 0;
+                GlobalVariables.discountpercentage = Math.Round(decimal.Parse(discounttxtbox.Text), 2, MidpointRounding.AwayFromZero);
+                GlobalVariables.productdiscountamountitemwise = decimal.TryParse(discountamountlbl.Text, out var discountAmount)
+                ? Math.Round(discountAmount, 2, MidpointRounding.AwayFromZero)
+    :           0;
             }
         }
 
         private void AssignFinalTotal()
         {
-            decimal total = decimal.TryParse(totalwithvatanddiscountlbl.Text, out var finalTotal) ? finalTotal : 0;
-            GlobalVariables.productfinalamountwithvatanddiscountitemwise = total > 0 ? total : decimal.Parse(label6.Text);
+            decimal total = decimal.TryParse(totalwithvatanddiscountlbl.Text, out var finalTotal)
+                ? Math.Round(finalTotal, 2, MidpointRounding.AwayFromZero) : 0;
+
+            GlobalVariables.productfinalamountwithvatanddiscountitemwise = total > 0 
+                ? Math.Round(total, 2, MidpointRounding.AwayFromZero)
+                : Math.Round(decimal.Parse(label6.Text), 2, MidpointRounding.AwayFromZero);
         }
 
         private void vattxtbox_KeyPress(object sender, KeyPressEventArgs e)
@@ -303,12 +319,12 @@ namespace SmartFlow.Sales.CommonForm
                     return;  // Exit if discount percentage is invalid
                 }
 
-                decimal discountAmount = amountWithoutVat * (discountTotal / 100);
+                decimal discountAmount = Math.Round(amountWithoutVat * (discountTotal / 100), 2, MidpointRounding.AwayFromZero);
                 discountamountlbl.Text = discountAmount.ToString("N2");
                 discountamountlbl.Visible = true;
 
                 // Calculate final amount after discount
-                finalAmount = amountWithoutVat - discountAmount;
+                finalAmount = Math.Round(amountWithoutVat - discountAmount, 2, MidpointRounding.AwayFromZero);
                 totalwithvatanddiscountlbl.Text = finalAmount.ToString("N2");
                 totalamountafterdiscount.Text = finalAmount.ToString("N2");
             }
@@ -361,8 +377,8 @@ namespace SmartFlow.Sales.CommonForm
             errorProvider.Clear();
 
             // Calculate VAT amount and total with VAT
-            decimal vatAmount = price * (vatRate / 100);
-            decimal totalAmountWithVat = price + vatAmount;
+            decimal vatAmount = Math.Round(price * (vatRate / 100), 2, MidpointRounding.AwayFromZero);
+            decimal totalAmountWithVat = Math.Round(price + vatAmount, 2, MidpointRounding.AwayFromZero);
 
             // Update labels
             vatamountlbl.Text = vatAmount.ToString("N2");
@@ -513,22 +529,29 @@ namespace SmartFlow.Sales.CommonForm
                             }
 
                             // Calculate and update the total price
-                            float totalPrice = _itemqty * price;
+                            float totalPrice = (float)Math.Round(_itemqty * price, 2, MidpointRounding.AwayFromZero);
                             label6.Text = totalPrice.ToString("0.00");
                             label6.Visible = true;
                             label1.Visible = true;
+                            CalculateTotalWithVAT();
+                            CalculateDiscountedTotal();
 
                             // Update total with VAT and discount
                             if (float.TryParse(vattxtbox.Text, out float vatRate) && vatRate >= 0)
                             {
-                                float vatAmount = totalPrice * (vatRate / 100);
-                                float totalWithVat = totalPrice + vatAmount;
+                                float vatAmount = (float)Math.Round(totalPrice * (vatRate / 100), 2, MidpointRounding.AwayFromZero);
+                                float totalWithVat = (float)Math.Round(totalPrice + vatAmount, 2, MidpointRounding.AwayFromZero);
+
 
                                 // Check for discount and calculate the final total
                                 if (float.TryParse(discounttxtbox.Text, out float discount) && discount >= 0)
                                 {
-                                    float discountAmount = discount <= 100 ? totalWithVat * (discount / 100) : discount;
-                                    float totalWithVatAndDiscount = totalWithVat - discountAmount;
+                                    float discountAmount = (float)(discount <= 100
+                                        ? Math.Round(totalWithVat * (discount / 100), 2, MidpointRounding.AwayFromZero)
+                                        : Math.Round(discount, 2, MidpointRounding.AwayFromZero));
+
+                                    float totalWithVatAndDiscount = (float)Math.Round(totalWithVat - discountAmount, 2, MidpointRounding.AwayFromZero);
+
 
                                     // Update the respective labels
                                     totalwithvatanddiscountlbl.Text = totalWithVatAndDiscount.ToString("0.00");
@@ -593,7 +616,7 @@ namespace SmartFlow.Sales.CommonForm
                     throw new ArgumentException("Quantity must be greater than 0.");
 
                 // Calculate the total price
-                float totalPrice = _itemqty * price * lengthInMeters;
+                float totalPrice = (float)Math.Round(_itemqty * price * lengthInMeters, 2, MidpointRounding.AwayFromZero);
                 label6.Text = totalPrice.ToString("N2");
                 label6.Visible = true;
                 label1.Visible = true;
@@ -601,14 +624,18 @@ namespace SmartFlow.Sales.CommonForm
                 // Update total with VAT and discount
                 if (float.TryParse(vattxtbox.Text, out float vatRate) && vatRate >= 0)
                 {
-                    float vatAmount = totalPrice * (vatRate / 100);
-                    float totalWithVat = totalPrice + vatAmount;
+                    float vatAmount = (float)Math.Round(totalPrice * (vatRate / 100), 2, MidpointRounding.AwayFromZero);
+                    float totalWithVat = (float)Math.Round(totalPrice + vatAmount, 2, MidpointRounding.AwayFromZero);
 
                     // Handle discount
                     if (float.TryParse(discounttxtbox.Text, out float discount) && discount >= 0)
                     {
-                        float discountAmount = discount <= 100 ? totalWithVat * (discount / 100) : discount;
-                        float totalWithVatAndDiscount = totalWithVat - discountAmount;
+                        float discountAmount = (float)(discount <= 100
+                            ? Math.Round(totalWithVat * (discount / 100), 2, MidpointRounding.AwayFromZero)
+                            : Math.Round(discount, 2, MidpointRounding.AwayFromZero));
+
+                        float totalWithVatAndDiscount = (float)Math.Round(totalWithVat - discountAmount, 2, MidpointRounding.AwayFromZero);
+
 
                         // Update labels
                         totalwithvatanddiscountlbl.Text = totalWithVatAndDiscount.ToString("N2");

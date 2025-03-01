@@ -1,12 +1,7 @@
 ﻿using SmartFlow.Common;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Purchase
@@ -33,7 +28,7 @@ namespace SmartFlow.Purchase
             string query = string.Format("SELECT InvoiceTable.Invoiceid,InvoiceTable.InvoiceNo,InvoiceTable.invoicedate,InvoiceTable.ClientID," +
                         "InvoiceTable.CreatedAt,InvoiceTable.CreatedDay,InvoiceTable.UpdatedAt,InvoiceTable.UpdatedDay,InvoiceTable.AddedBy,InvoiceTable.Companyid," +
                         "InvoiceTable.Userid,InvoiceTable.InvoiceCode,InvoiceTable.NetTotal,InvoiceTable.ClientName,InvoiceTable.TotalVat,InvoiceTable.TotalDiscount," +
-                        "InvoiceTable.FreightShippingCharges,InvoiceTable.InvoiceRefrence,InvoiceTable.IsPlanetInvoice,InvoiceTable.Currencyid," +
+                        "InvoiceTable.FreightShippingCharges,InvoiceTable.InvoiceRefrence,InvoiceTable.IsPlanetInvoice,InvoiceTable.Currencyid,InvoiceTable.CurrencySymbol," +
                         "InvoiceTable.CurrencyName,InvoiceTable.ConversionRate,InvoiceTable.QuotationValidUntill," +
                         "InvoiceTable.SalePerson,AccountSubControlTable.MobileNo,AccountSubControlTable.Email,AccountSubControlTable.RefrencePersonName," +
                         "AccountSubControlTable.AccountSubControlName,AccountSubControlTable.CodeAccount,AccountSubControlTable.CompanyName " +
@@ -45,23 +40,21 @@ namespace SmartFlow.Purchase
 
             if (dataInvoice.Rows.Count > 0)
             {
-                string subquery = string.Format("SELECT InvoiceDetailsTable.InvoiceDetailsId,InvoiceDetailsTable.InvoiceNo,InvoiceDetailsTable.Invoicecode," +
-                    "InvoiceDetailsTable.Productid, InvoiceDetailsTable.Quantity, InvoiceDetailsTable.UnitSalePrice, InvoiceDetailsTable.ItemSerialNoid," +
-                    "InvoiceDetailsTable.ProductName, InvoiceDetailsTable.MFR, InvoiceDetailsTable.ItemWiseDiscount, InvoiceDetailsTable.ItemWiseVAT," +
-                    "InvoiceDetailsTable.Warehouseid, InvoiceDetailsTable.PurchaseCostPrice, InvoiceDetailsTable.PurchaseLowestSalePrice," +
-                    "InvoiceDetailsTable.PurchaseStandardPrice, InvoiceDetailsTable.PurchaseItemSalePrice, InvoiceDetailsTable.SystemSerialNoid," +
-                    "InvoiceDetailsTable.ItemTotal, InvoiceDetailsTable.Unitid, InvoiceDetailsTable.AddInventory, InvoiceDetailsTable.ItemAvailability," +
-                    "InvoiceDetailsTable.Warehouseid, InvoiceDetailsTable.PricePerMeter, InvoiceDetailsTable.LengthInMeter, InvoiceDetailsTable.ItemDescription," +
-                    "InvoiceDetailsTable.MinusInventory, UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
-                    "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
+                string subquery = string.Format("SELECT InvoiceDetailsTable.InvoiceDetailsId,InvoiceDetailsTable.InvoiceNo,InvoiceDetailsTable.AddInventory,InvoiceDetailsTable.MinusInventory,InvoiceDetailsTable.Invoicecode," +
+                    "InvoiceDetailsTable.Productid,InvoiceDetailsTable.Quantity,InvoiceDetailsTable.UnitSalePrice,InvoiceDetailsTable.ItemSerialNoid,InvoiceDetailsTable.ProductName,InvoiceDetailsTable.MFR,InvoiceDetailsTable.ItemWiseDiscount," +
+                    "InvoiceDetailsTable.ItemWiseVAT,InvoiceDetailsTable.Warehouseid,InvoiceDetailsTable.PurchaseCostPrice,InvoiceDetailsTable.PurchaseLowestSalePrice,InvoiceDetailsTable.PurchaseStandardPrice," +
+                    "InvoiceDetailsTable.PurchaseItemSalePrice,InvoiceDetailsTable.SystemSerialNoid,InvoiceDetailsTable.ItemTotal,InvoiceDetailsTable.Unitid,InvoiceDetailsTable.ItemAvailability,InvoiceDetailsTable.PricePerMeter," +
+                    "InvoiceDetailsTable.LengthInMeter,InvoiceDetailsTable.ItemDescription,InvoiceDetailsTable.IsSaleInvoice,InvoiceDetailsTable.VatCode,InvoiceDetailsTable.IsNewRecord,InvoiceDetailsTable.DiscountType," +
+                    "InvoiceDetailsTable.DiscountPercentage,UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
+                    "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'  AND InvoiceDetailsTable.IsNewRecord = '" + true + "'");
 
                 DataTable dtInvoiceDetails = await DatabaseAccess.RetriveAsync(subquery);
-                if (dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
+                if (dataInvoice != null && dataInvoice.Rows.Count > 0 || dtInvoiceDetails != null && dtInvoiceDetails.Rows.Count > 0)
                 {
                     this.Close();
                     PurchaseQuotationInvoice purchaseQuotationInvoice = new PurchaseQuotationInvoice(dataInvoice, dtInvoiceDetails);
                     purchaseQuotationInvoice.MdiParent = Application.OpenForms["Dashboard"];
-                    await CommonFunction.DisposeOnCloseAsync(purchaseQuotationInvoice);
+                    CommonFunction.DisposeOnClose(purchaseQuotationInvoice);
                     purchaseQuotationInvoice.Show();
                 }
             }

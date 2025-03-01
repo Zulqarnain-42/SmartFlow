@@ -45,7 +45,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(434, 45);
-            this.panel1.TabIndex = 0;
+            this.panel1.TabIndex = 137;
             // 
             // headinglbl
             // 
@@ -57,29 +57,29 @@
             this.headinglbl.Name = "headinglbl";
             this.headinglbl.Size = new System.Drawing.Size(434, 45);
             this.headinglbl.TabIndex = 0;
-            this.headinglbl.Text = "MODIFY CREDIT NOTE";
+            this.headinglbl.Text = "MODIFY CREDIT VOUCHER";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // invoicedatetxtbox
             // 
             this.invoicedatetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.invoicedatetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoicedatetxtbox.Location = new System.Drawing.Point(120, 90);
+            this.invoicedatetxtbox.Location = new System.Drawing.Point(120, 120);
             this.invoicedatetxtbox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.invoicedatetxtbox.Mask = "00/00/0000";
             this.invoicedatetxtbox.Name = "invoicedatetxtbox";
             this.invoicedatetxtbox.Size = new System.Drawing.Size(281, 27);
-            this.invoicedatetxtbox.TabIndex = 136;
+            this.invoicedatetxtbox.TabIndex = 142;
             this.invoicedatetxtbox.ValidatingType = typeof(System.DateTime);
             // 
             // searchbtn
             // 
             this.searchbtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchbtn.Location = new System.Drawing.Point(120, 122);
+            this.searchbtn.Location = new System.Drawing.Point(120, 152);
             this.searchbtn.Margin = new System.Windows.Forms.Padding(2);
             this.searchbtn.Name = "searchbtn";
             this.searchbtn.Size = new System.Drawing.Size(280, 28);
-            this.searchbtn.TabIndex = 135;
+            this.searchbtn.TabIndex = 141;
             this.searchbtn.Text = "SEARCH";
             this.searchbtn.UseVisualStyleBackColor = true;
             this.searchbtn.Click += new System.EventHandler(this.searchbtn_Click);
@@ -88,22 +88,22 @@
             // 
             this.datelbl.AutoSize = true;
             this.datelbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.datelbl.Location = new System.Drawing.Point(33, 95);
+            this.datelbl.Location = new System.Drawing.Point(33, 125);
             this.datelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.datelbl.Name = "datelbl";
             this.datelbl.Size = new System.Drawing.Size(39, 18);
-            this.datelbl.TabIndex = 134;
+            this.datelbl.TabIndex = 140;
             this.datelbl.Text = "DATE";
             // 
             // invoicenotxtbox
             // 
             this.invoicenotxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.invoicenotxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoicenotxtbox.Location = new System.Drawing.Point(120, 60);
+            this.invoicenotxtbox.Location = new System.Drawing.Point(120, 90);
             this.invoicenotxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.invoicenotxtbox.Name = "invoicenotxtbox";
             this.invoicenotxtbox.Size = new System.Drawing.Size(281, 27);
-            this.invoicenotxtbox.TabIndex = 133;
+            this.invoicenotxtbox.TabIndex = 139;
             this.invoicenotxtbox.TextChanged += new System.EventHandler(this.invoicenotxtbox_TextChanged);
             this.invoicenotxtbox.Leave += new System.EventHandler(this.invoicenotxtbox_Leave);
             // 
@@ -111,11 +111,11 @@
             // 
             this.invoicenolbl.AutoSize = true;
             this.invoicenolbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoicenolbl.Location = new System.Drawing.Point(33, 64);
+            this.invoicenolbl.Location = new System.Drawing.Point(33, 94);
             this.invoicenolbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.invoicenolbl.Name = "invoicenolbl";
             this.invoicenolbl.Size = new System.Drawing.Size(83, 18);
-            this.invoicenolbl.TabIndex = 132;
+            this.invoicenolbl.TabIndex = 138;
             this.invoicenolbl.Text = "INVOICE NO";
             // 
             // ModifyCreditNote
@@ -123,13 +123,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 211);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.invoicedatetxtbox);
             this.Controls.Add(this.searchbtn);
             this.Controls.Add(this.datelbl);
             this.Controls.Add(this.invoicenotxtbox);
             this.Controls.Add(this.invoicenolbl);
-            this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ModifyCreditNote";
             this.Text = "MODIFY CREDIT NOTE";
             this.Load += new System.EventHandler(this.ModifyCreditNote_Load);

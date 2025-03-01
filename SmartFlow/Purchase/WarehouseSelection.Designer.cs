@@ -53,7 +53,7 @@
             this.dgvwarehouseselection.RowHeadersWidth = 51;
             this.dgvwarehouseselection.RowTemplate.Height = 24;
             this.dgvwarehouseselection.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvwarehouseselection.Size = new System.Drawing.Size(578, 231);
+            this.dgvwarehouseselection.Size = new System.Drawing.Size(852, 231);
             this.dgvwarehouseselection.TabIndex = 1;
             this.dgvwarehouseselection.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvwarehouseselection_CellDoubleClick);
             this.dgvwarehouseselection.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvwarehouseselection_KeyDown);
@@ -64,7 +64,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(578, 45);
+            this.panel1.Size = new System.Drawing.Size(852, 45);
             this.panel1.TabIndex = 2;
             // 
             // headinglbl
@@ -75,7 +75,7 @@
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
             this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(578, 45);
+            this.headinglbl.Size = new System.Drawing.Size(852, 45);
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "WAREHOUSE SELECTION";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -85,7 +85,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(578, 279);
+            this.ClientSize = new System.Drawing.Size(852, 279);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgvwarehouseselection);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

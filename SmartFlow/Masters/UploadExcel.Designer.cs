@@ -54,9 +54,10 @@
             // 
             this.selectfilebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.selectfilebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectfilebtn.Location = new System.Drawing.Point(13, 71);
+            this.selectfilebtn.Location = new System.Drawing.Point(10, 58);
+            this.selectfilebtn.Margin = new System.Windows.Forms.Padding(2);
             this.selectfilebtn.Name = "selectfilebtn";
-            this.selectfilebtn.Size = new System.Drawing.Size(271, 35);
+            this.selectfilebtn.Size = new System.Drawing.Size(203, 28);
             this.selectfilebtn.TabIndex = 46;
             this.selectfilebtn.Text = "SELECT THE EXCEL FILE";
             this.selectfilebtn.UseVisualStyleBackColor = true;
@@ -75,14 +76,15 @@
             this.dataGridViewExcel.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.dataGridViewExcel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewExcel.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridViewExcel.Location = new System.Drawing.Point(293, 71);
+            this.dataGridViewExcel.Location = new System.Drawing.Point(220, 58);
+            this.dataGridViewExcel.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewExcel.Name = "dataGridViewExcel";
             this.dataGridViewExcel.ReadOnly = true;
             this.dataGridViewExcel.RowHeadersVisible = false;
             this.dataGridViewExcel.RowHeadersWidth = 51;
             this.dataGridViewExcel.RowTemplate.Height = 24;
             this.dataGridViewExcel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewExcel.Size = new System.Drawing.Size(1289, 657);
+            this.dataGridViewExcel.Size = new System.Drawing.Size(967, 534);
             this.dataGridViewExcel.TabIndex = 47;
             // 
             // savebtn
@@ -90,9 +92,10 @@
             this.savebtn.BackColor = System.Drawing.Color.SpringGreen;
             this.savebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.savebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.savebtn.Location = new System.Drawing.Point(12, 426);
+            this.savebtn.Location = new System.Drawing.Point(11, 354);
+            this.savebtn.Margin = new System.Windows.Forms.Padding(2);
             this.savebtn.Name = "savebtn";
-            this.savebtn.Size = new System.Drawing.Size(271, 30);
+            this.savebtn.Size = new System.Drawing.Size(203, 29);
             this.savebtn.TabIndex = 49;
             this.savebtn.Text = "SAVE";
             this.savebtn.UseVisualStyleBackColor = false;
@@ -104,9 +107,10 @@
             this.exitbtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.exitbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exitbtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitbtn.Location = new System.Drawing.Point(13, 462);
+            this.exitbtn.Location = new System.Drawing.Point(10, 387);
+            this.exitbtn.Margin = new System.Windows.Forms.Padding(2);
             this.exitbtn.Name = "exitbtn";
-            this.exitbtn.Size = new System.Drawing.Size(271, 30);
+            this.exitbtn.Size = new System.Drawing.Size(203, 29);
             this.exitbtn.TabIndex = 50;
             this.exitbtn.Text = "EXIT";
             this.exitbtn.UseVisualStyleBackColor = false;
@@ -120,9 +124,10 @@
             // 
             this.warehouseselectionlbl.AutoSize = true;
             this.warehouseselectionlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.warehouseselectionlbl.Location = new System.Drawing.Point(12, 305);
+            this.warehouseselectionlbl.Location = new System.Drawing.Point(9, 248);
+            this.warehouseselectionlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.warehouseselectionlbl.Name = "warehouseselectionlbl";
-            this.warehouseselectionlbl.Size = new System.Drawing.Size(158, 23);
+            this.warehouseselectionlbl.Size = new System.Drawing.Size(128, 18);
             this.warehouseselectionlbl.TabIndex = 52;
             this.warehouseselectionlbl.Text = "Select a warehouse";
             // 
@@ -130,9 +135,10 @@
             // 
             this.locationselection.AutoSize = true;
             this.locationselection.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.locationselection.Location = new System.Drawing.Point(9, 364);
+            this.locationselection.Location = new System.Drawing.Point(7, 296);
+            this.locationselection.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.locationselection.Name = "locationselection";
-            this.locationselection.Size = new System.Drawing.Size(138, 23);
+            this.locationselection.Size = new System.Drawing.Size(110, 18);
             this.locationselection.TabIndex = 53;
             this.locationselection.Text = "Select a Location";
             this.locationselection.Visible = false;
@@ -141,9 +147,10 @@
             // 
             this.comboBox1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(13, 390);
+            this.comboBox1.Location = new System.Drawing.Point(10, 317);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(271, 32);
+            this.comboBox1.Size = new System.Drawing.Size(204, 27);
             this.comboBox1.TabIndex = 54;
             this.comboBox1.Visible = false;
             // 
@@ -151,9 +158,10 @@
             // 
             this.sheetselectionlbl.AutoSize = true;
             this.sheetselectionlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sheetselectionlbl.Location = new System.Drawing.Point(12, 246);
+            this.sheetselectionlbl.Location = new System.Drawing.Point(9, 200);
+            this.sheetselectionlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.sheetselectionlbl.Name = "sheetselectionlbl";
-            this.sheetselectionlbl.Size = new System.Drawing.Size(119, 23);
+            this.sheetselectionlbl.Size = new System.Drawing.Size(98, 18);
             this.sheetselectionlbl.TabIndex = 55;
             this.sheetselectionlbl.Text = "Select a Sheet ";
             // 
@@ -161,9 +169,10 @@
             // 
             this.comboBox2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(13, 272);
+            this.comboBox2.Location = new System.Drawing.Point(10, 221);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(271, 32);
+            this.comboBox2.Size = new System.Drawing.Size(204, 27);
             this.comboBox2.TabIndex = 56;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
@@ -172,9 +181,10 @@
             this.txtfilename.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtfilename.Enabled = false;
             this.txtfilename.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtfilename.Location = new System.Drawing.Point(12, 112);
+            this.txtfilename.Location = new System.Drawing.Point(9, 91);
+            this.txtfilename.Margin = new System.Windows.Forms.Padding(2);
             this.txtfilename.Name = "txtfilename";
-            this.txtfilename.Size = new System.Drawing.Size(271, 32);
+            this.txtfilename.Size = new System.Drawing.Size(204, 27);
             this.txtfilename.TabIndex = 57;
             // 
             // panel1
@@ -182,8 +192,9 @@
             this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1594, 45);
+            this.panel1.Size = new System.Drawing.Size(1196, 37);
             this.panel1.TabIndex = 58;
             // 
             // headinglbl
@@ -193,8 +204,9 @@
             this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(1594, 45);
+            this.headinglbl.Size = new System.Drawing.Size(1196, 37);
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "UPLOAD USING EXCEL";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -203,18 +215,20 @@
             // 
             this.selectwarehousetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.selectwarehousetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectwarehousetxtbox.Location = new System.Drawing.Point(12, 331);
+            this.selectwarehousetxtbox.Location = new System.Drawing.Point(9, 269);
+            this.selectwarehousetxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.selectwarehousetxtbox.Name = "selectwarehousetxtbox";
-            this.selectwarehousetxtbox.Size = new System.Drawing.Size(271, 32);
+            this.selectwarehousetxtbox.Size = new System.Drawing.Size(204, 27);
             this.selectwarehousetxtbox.TabIndex = 59;
             this.selectwarehousetxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectwarehouse_MouseClick);
             // 
             // warehouseidlbl
             // 
             this.warehouseidlbl.AutoSize = true;
-            this.warehouseidlbl.Location = new System.Drawing.Point(16, 151);
+            this.warehouseidlbl.Location = new System.Drawing.Point(12, 123);
+            this.warehouseidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.warehouseidlbl.Name = "warehouseidlbl";
-            this.warehouseidlbl.Size = new System.Drawing.Size(88, 16);
+            this.warehouseidlbl.Size = new System.Drawing.Size(70, 13);
             this.warehouseidlbl.TabIndex = 60;
             this.warehouseidlbl.Text = "Warehouseid";
             this.warehouseidlbl.Visible = false;
@@ -222,19 +236,20 @@
             // sampleexcelfilebtn
             // 
             this.sampleexcelfilebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.sampleexcelfilebtn.Location = new System.Drawing.Point(12, 698);
+            this.sampleexcelfilebtn.Location = new System.Drawing.Point(9, 567);
+            this.sampleexcelfilebtn.Margin = new System.Windows.Forms.Padding(2);
             this.sampleexcelfilebtn.Name = "sampleexcelfilebtn";
-            this.sampleexcelfilebtn.Size = new System.Drawing.Size(271, 30);
+            this.sampleexcelfilebtn.Size = new System.Drawing.Size(203, 24);
             this.sampleexcelfilebtn.TabIndex = 61;
             this.sampleexcelfilebtn.Text = "DOWNLOAD SAMPLE FILE";
             this.sampleexcelfilebtn.UseVisualStyleBackColor = true;
             // 
             // UploadExcel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1594, 740);
+            this.ClientSize = new System.Drawing.Size(1196, 601);
             this.Controls.Add(this.sampleexcelfilebtn);
             this.Controls.Add(this.warehouseidlbl);
             this.Controls.Add(this.selectwarehousetxtbox);
@@ -249,10 +264,8 @@
             this.Controls.Add(this.savebtn);
             this.Controls.Add(this.dataGridViewExcel);
             this.Controls.Add(this.selectfilebtn);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "UploadExcel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UPLOAD PRODUCTS USING EXCEL";

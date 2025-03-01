@@ -61,6 +61,8 @@
             this.costpricelbl = new System.Windows.Forms.Label();
             this.costpricetxtbox = new System.Windows.Forms.TextBox();
             this.totalamountafterdiscount = new System.Windows.Forms.Label();
+            this.qtyorderedlbl = new System.Windows.Forms.Label();
+            this.totalqtytxtbox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -93,7 +95,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 275);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 16);
+            this.label2.Size = new System.Drawing.Size(80, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "VAT/TAX (%) : ";
             // 
@@ -102,7 +104,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(435, 275);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(135, 16);
+            this.label3.Size = new System.Drawing.Size(113, 13);
             this.label3.TabIndex = 3;
             this.label3.Text = "TAX/VAT AMOUNT : ";
             // 
@@ -111,7 +113,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(12, 247);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(148, 16);
+            this.label4.Size = new System.Drawing.Size(122, 13);
             this.label4.TabIndex = 4;
             this.label4.Text = "DISCOUNT AMOUNT : ";
             // 
@@ -139,7 +141,7 @@
             this.vattxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.vattxtbox.Location = new System.Drawing.Point(172, 272);
             this.vattxtbox.Name = "vattxtbox";
-            this.vattxtbox.Size = new System.Drawing.Size(243, 22);
+            this.vattxtbox.Size = new System.Drawing.Size(243, 20);
             this.vattxtbox.TabIndex = 3;
             this.vattxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.vattxtbox.TextChanged += new System.EventHandler(this.vattxtbox_TextChanged);
@@ -151,7 +153,7 @@
             this.discounttxtbox.Enabled = false;
             this.discounttxtbox.Location = new System.Drawing.Point(172, 244);
             this.discounttxtbox.Name = "discounttxtbox";
-            this.discounttxtbox.Size = new System.Drawing.Size(243, 22);
+            this.discounttxtbox.Size = new System.Drawing.Size(243, 20);
             this.discounttxtbox.TabIndex = 6;
             this.discounttxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.discounttxtbox.TextChanged += new System.EventHandler(this.discounttxtbox_TextChanged);
@@ -164,7 +166,7 @@
             this.label6.ForeColor = System.Drawing.Color.Blue;
             this.label6.Location = new System.Drawing.Point(499, 59);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 25);
+            this.label6.Size = new System.Drawing.Size(57, 20);
             this.label6.TabIndex = 9;
             this.label6.Text = "label6";
             this.label6.Visible = false;
@@ -174,7 +176,7 @@
             this.vatamountlbl.AutoSize = true;
             this.vatamountlbl.Location = new System.Drawing.Point(756, 276);
             this.vatamountlbl.Name = "vatamountlbl";
-            this.vatamountlbl.Size = new System.Drawing.Size(83, 16);
+            this.vatamountlbl.Size = new System.Drawing.Size(67, 13);
             this.vatamountlbl.TabIndex = 10;
             this.vatamountlbl.Text = "vatamountlbl";
             this.vatamountlbl.Visible = false;
@@ -184,7 +186,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(435, 247);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(148, 16);
+            this.label8.Size = new System.Drawing.Size(122, 13);
             this.label8.TabIndex = 11;
             this.label8.Text = "DISCOUNT AMOUNT : ";
             // 
@@ -193,7 +195,7 @@
             this.discountamountlbl.AutoSize = true;
             this.discountamountlbl.Location = new System.Drawing.Point(724, 247);
             this.discountamountlbl.Name = "discountamountlbl";
-            this.discountamountlbl.Size = new System.Drawing.Size(115, 16);
+            this.discountamountlbl.Size = new System.Drawing.Size(92, 13);
             this.discountamountlbl.TabIndex = 12;
             this.discountamountlbl.Text = "discountamountlbl";
             this.discountamountlbl.Visible = false;
@@ -203,7 +205,7 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(5, 419);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(288, 16);
+            this.label11.Size = new System.Drawing.Size(237, 13);
             this.label11.TabIndex = 14;
             this.label11.Text = "FINAL WITH VAT AND DISCOUNT AMOUNT : ";
             // 
@@ -214,7 +216,7 @@
             this.totalwithvatanddiscountlbl.ForeColor = System.Drawing.Color.Blue;
             this.totalwithvatanddiscountlbl.Location = new System.Drawing.Point(299, 415);
             this.totalwithvatanddiscountlbl.Name = "totalwithvatanddiscountlbl";
-            this.totalwithvatanddiscountlbl.Size = new System.Drawing.Size(247, 24);
+            this.totalwithvatanddiscountlbl.Size = new System.Drawing.Size(201, 18);
             this.totalwithvatanddiscountlbl.TabIndex = 15;
             this.totalwithvatanddiscountlbl.Text = "totalwithvatanddiscountlbl";
             this.totalwithvatanddiscountlbl.Visible = false;
@@ -224,7 +226,7 @@
             this.percentageradio.AutoSize = true;
             this.percentageradio.Location = new System.Drawing.Point(12, 214);
             this.percentageradio.Name = "percentageradio";
-            this.percentageradio.Size = new System.Drawing.Size(121, 20);
+            this.percentageradio.Size = new System.Drawing.Size(98, 17);
             this.percentageradio.TabIndex = 23;
             this.percentageradio.TabStop = true;
             this.percentageradio.Text = "PERCENTAGE";
@@ -236,7 +238,7 @@
             this.fixedamountradio.AutoSize = true;
             this.fixedamountradio.Location = new System.Drawing.Point(12, 188);
             this.fixedamountradio.Name = "fixedamountradio";
-            this.fixedamountradio.Size = new System.Drawing.Size(128, 20);
+            this.fixedamountradio.Size = new System.Drawing.Size(106, 17);
             this.fixedamountradio.TabIndex = 22;
             this.fixedamountradio.TabStop = true;
             this.fixedamountradio.Text = "FIXED AMOUNT";
@@ -250,7 +252,7 @@
             this.unitcombobox.FormattingEnabled = true;
             this.unitcombobox.Location = new System.Drawing.Point(172, 95);
             this.unitcombobox.Name = "unitcombobox";
-            this.unitcombobox.Size = new System.Drawing.Size(243, 24);
+            this.unitcombobox.Size = new System.Drawing.Size(243, 21);
             this.unitcombobox.TabIndex = 0;
             this.unitcombobox.SelectedIndexChanged += new System.EventHandler(this.unitcombobox_SelectedIndexChanged);
             // 
@@ -259,7 +261,7 @@
             this.unitlbl.AutoSize = true;
             this.unitlbl.Location = new System.Drawing.Point(12, 98);
             this.unitlbl.Name = "unitlbl";
-            this.unitlbl.Size = new System.Drawing.Size(39, 16);
+            this.unitlbl.Size = new System.Drawing.Size(33, 13);
             this.unitlbl.TabIndex = 24;
             this.unitlbl.Text = "UNIT";
             // 
@@ -272,7 +274,7 @@
             this.totalwithvatlbl.AutoSize = true;
             this.totalwithvatlbl.Location = new System.Drawing.Point(753, 292);
             this.totalwithvatlbl.Name = "totalwithvatlbl";
-            this.totalwithvatlbl.Size = new System.Drawing.Size(86, 16);
+            this.totalwithvatlbl.Size = new System.Drawing.Size(71, 13);
             this.totalwithvatlbl.TabIndex = 26;
             this.totalwithvatlbl.Text = "totalwithvatlbl";
             this.totalwithvatlbl.Visible = false;
@@ -283,7 +285,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(231, 59);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(262, 25);
+            this.label1.Size = new System.Drawing.Size(202, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "AMOUNT WITHOUT VAT : ";
             this.label1.Visible = false;
@@ -293,7 +295,7 @@
             this.novatchkbox.AutoSize = true;
             this.novatchkbox.Location = new System.Drawing.Point(435, 309);
             this.novatchkbox.Name = "novatchkbox";
-            this.novatchkbox.Size = new System.Drawing.Size(123, 20);
+            this.novatchkbox.Size = new System.Drawing.Size(102, 17);
             this.novatchkbox.TabIndex = 5;
             this.novatchkbox.Text = "WITHOUT VAT";
             this.novatchkbox.UseVisualStyleBackColor = true;
@@ -304,7 +306,7 @@
             this.pricetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pricetxtbox.Location = new System.Drawing.Point(172, 125);
             this.pricetxtbox.Name = "pricetxtbox";
-            this.pricetxtbox.Size = new System.Drawing.Size(243, 22);
+            this.pricetxtbox.Size = new System.Drawing.Size(243, 20);
             this.pricetxtbox.TabIndex = 1;
             this.pricetxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.pricetxtbox.Visible = false;
@@ -316,7 +318,7 @@
             this.lengthinmetertxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lengthinmetertxtbox.Location = new System.Drawing.Point(172, 153);
             this.lengthinmetertxtbox.Name = "lengthinmetertxtbox";
-            this.lengthinmetertxtbox.Size = new System.Drawing.Size(243, 22);
+            this.lengthinmetertxtbox.Size = new System.Drawing.Size(243, 20);
             this.lengthinmetertxtbox.TabIndex = 2;
             this.lengthinmetertxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.lengthinmetertxtbox.Visible = false;
@@ -328,7 +330,7 @@
             this.pricelbl.AutoSize = true;
             this.pricelbl.Location = new System.Drawing.Point(12, 127);
             this.pricelbl.Name = "pricelbl";
-            this.pricelbl.Size = new System.Drawing.Size(129, 16);
+            this.pricelbl.Size = new System.Drawing.Size(105, 13);
             this.pricelbl.TabIndex = 30;
             this.pricelbl.Text = "PRICE PER METER";
             this.pricelbl.Visible = false;
@@ -338,7 +340,7 @@
             this.lengthinmeterlbl.AutoSize = true;
             this.lengthinmeterlbl.Location = new System.Drawing.Point(12, 155);
             this.lengthinmeterlbl.Name = "lengthinmeterlbl";
-            this.lengthinmeterlbl.Size = new System.Drawing.Size(129, 16);
+            this.lengthinmeterlbl.Size = new System.Drawing.Size(106, 13);
             this.lengthinmeterlbl.TabIndex = 31;
             this.lengthinmeterlbl.Text = "LENGTH IN METER";
             this.lengthinmeterlbl.Visible = false;
@@ -348,7 +350,7 @@
             this.itemdescriptionlbl.AutoSize = true;
             this.itemdescriptionlbl.Location = new System.Drawing.Point(435, 98);
             this.itemdescriptionlbl.Name = "itemdescriptionlbl";
-            this.itemdescriptionlbl.Size = new System.Drawing.Size(142, 16);
+            this.itemdescriptionlbl.Size = new System.Drawing.Size(118, 13);
             this.itemdescriptionlbl.TabIndex = 32;
             this.itemdescriptionlbl.Text = "ITEM DESCRIPTION : ";
             // 
@@ -364,9 +366,9 @@
             // costpricelbl
             // 
             this.costpricelbl.AutoSize = true;
-            this.costpricelbl.Location = new System.Drawing.Point(12, 349);
+            this.costpricelbl.Location = new System.Drawing.Point(12, 351);
             this.costpricelbl.Name = "costpricelbl";
-            this.costpricelbl.Size = new System.Drawing.Size(87, 16);
+            this.costpricelbl.Size = new System.Drawing.Size(71, 13);
             this.costpricelbl.TabIndex = 35;
             this.costpricelbl.Text = "COST PRICE";
             this.costpricelbl.Visible = false;
@@ -374,9 +376,9 @@
             // costpricetxtbox
             // 
             this.costpricetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.costpricetxtbox.Location = new System.Drawing.Point(172, 346);
+            this.costpricetxtbox.Location = new System.Drawing.Point(172, 347);
             this.costpricetxtbox.Name = "costpricetxtbox";
-            this.costpricetxtbox.Size = new System.Drawing.Size(243, 22);
+            this.costpricetxtbox.Size = new System.Drawing.Size(243, 20);
             this.costpricetxtbox.TabIndex = 33;
             this.costpricetxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.costpricetxtbox.Visible = false;
@@ -386,15 +388,37 @@
             this.totalamountafterdiscount.AutoSize = true;
             this.totalamountafterdiscount.Location = new System.Drawing.Point(687, 263);
             this.totalamountafterdiscount.Name = "totalamountafterdiscount";
-            this.totalamountafterdiscount.Size = new System.Drawing.Size(152, 16);
+            this.totalamountafterdiscount.Size = new System.Drawing.Size(123, 13);
             this.totalamountafterdiscount.TabIndex = 41;
             this.totalamountafterdiscount.Text = "totalamountafterdiscount";
             this.totalamountafterdiscount.Visible = false;
+            // 
+            // qtyorderedlbl
+            // 
+            this.qtyorderedlbl.AutoSize = true;
+            this.qtyorderedlbl.Location = new System.Drawing.Point(436, 351);
+            this.qtyorderedlbl.Name = "qtyorderedlbl";
+            this.qtyorderedlbl.Size = new System.Drawing.Size(86, 13);
+            this.qtyorderedlbl.TabIndex = 43;
+            this.qtyorderedlbl.Text = "QTY ORDERED";
+            this.qtyorderedlbl.Visible = false;
+            // 
+            // totalqtytxtbox
+            // 
+            this.totalqtytxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.totalqtytxtbox.Location = new System.Drawing.Point(596, 347);
+            this.totalqtytxtbox.Name = "totalqtytxtbox";
+            this.totalqtytxtbox.Size = new System.Drawing.Size(243, 20);
+            this.totalqtytxtbox.TabIndex = 42;
+            this.totalqtytxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.totalqtytxtbox.Visible = false;
             // 
             // VATForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(864, 508);
+            this.Controls.Add(this.qtyorderedlbl);
+            this.Controls.Add(this.totalqtytxtbox);
             this.Controls.Add(this.totalamountafterdiscount);
             this.Controls.Add(this.costpricelbl);
             this.Controls.Add(this.costpricetxtbox);
@@ -472,5 +496,7 @@
         private System.Windows.Forms.Label costpricelbl;
         private System.Windows.Forms.TextBox costpricetxtbox;
         private System.Windows.Forms.Label totalamountafterdiscount;
+        private System.Windows.Forms.Label qtyorderedlbl;
+        private System.Windows.Forms.TextBox totalqtytxtbox;
     }
 }

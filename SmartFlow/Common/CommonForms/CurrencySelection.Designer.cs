@@ -46,8 +46,9 @@
             this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(507, 45);
+            this.panel1.Size = new System.Drawing.Size(380, 37);
             this.panel1.TabIndex = 0;
             // 
             // headinglbl
@@ -57,8 +58,9 @@
             this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(507, 45);
+            this.headinglbl.Size = new System.Drawing.Size(380, 37);
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "CURRENCY SELECTION";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -66,25 +68,29 @@
             // cmbcurrency
             // 
             this.cmbcurrency.FormattingEnabled = true;
-            this.cmbcurrency.Location = new System.Drawing.Point(141, 80);
+            this.cmbcurrency.Location = new System.Drawing.Point(106, 65);
+            this.cmbcurrency.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbcurrency.Name = "cmbcurrency";
-            this.cmbcurrency.Size = new System.Drawing.Size(327, 24);
+            this.cmbcurrency.Size = new System.Drawing.Size(246, 21);
             this.cmbcurrency.TabIndex = 1;
+            this.cmbcurrency.SelectedIndexChanged += new System.EventHandler(this.cmbcurrency_SelectedIndexChanged);
             // 
             // selectcurrencylbl
             // 
             this.selectcurrencylbl.AutoSize = true;
-            this.selectcurrencylbl.Location = new System.Drawing.Point(12, 83);
+            this.selectcurrencylbl.Location = new System.Drawing.Point(9, 67);
+            this.selectcurrencylbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.selectcurrencylbl.Name = "selectcurrencylbl";
-            this.selectcurrencylbl.Size = new System.Drawing.Size(101, 16);
+            this.selectcurrencylbl.Size = new System.Drawing.Size(82, 13);
             this.selectcurrencylbl.TabIndex = 2;
             this.selectcurrencylbl.Text = "SELECT CURR";
             // 
             // savebtn
             // 
-            this.savebtn.Location = new System.Drawing.Point(141, 139);
+            this.savebtn.Location = new System.Drawing.Point(106, 113);
+            this.savebtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.savebtn.Name = "savebtn";
-            this.savebtn.Size = new System.Drawing.Size(327, 24);
+            this.savebtn.Size = new System.Drawing.Size(245, 20);
             this.savebtn.TabIndex = 3;
             this.savebtn.Text = "SAVE";
             this.savebtn.UseVisualStyleBackColor = true;
@@ -93,18 +99,22 @@
             // conversionratelbl
             // 
             this.conversionratelbl.AutoSize = true;
-            this.conversionratelbl.Location = new System.Drawing.Point(12, 113);
+            this.conversionratelbl.Location = new System.Drawing.Point(9, 92);
+            this.conversionratelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.conversionratelbl.Name = "conversionratelbl";
-            this.conversionratelbl.Size = new System.Drawing.Size(76, 16);
+            this.conversionratelbl.Size = new System.Drawing.Size(62, 13);
             this.conversionratelbl.TabIndex = 5;
             this.conversionratelbl.Text = "CON RATE";
+            this.conversionratelbl.Visible = false;
             // 
             // conversionratetxtbox
             // 
-            this.conversionratetxtbox.Location = new System.Drawing.Point(141, 111);
+            this.conversionratetxtbox.Location = new System.Drawing.Point(106, 90);
+            this.conversionratetxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.conversionratetxtbox.Name = "conversionratetxtbox";
-            this.conversionratetxtbox.Size = new System.Drawing.Size(327, 22);
+            this.conversionratetxtbox.Size = new System.Drawing.Size(246, 20);
             this.conversionratetxtbox.TabIndex = 6;
+            this.conversionratetxtbox.Visible = false;
             // 
             // errorProvider
             // 
@@ -112,9 +122,9 @@
             // 
             // CurrencySelection
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(507, 204);
+            this.ClientSize = new System.Drawing.Size(380, 166);
             this.Controls.Add(this.conversionratetxtbox);
             this.Controls.Add(this.conversionratelbl);
             this.Controls.Add(this.savebtn);
@@ -122,6 +132,7 @@
             this.Controls.Add(this.cmbcurrency);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "CurrencySelection";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CURRENCY SELECTION";

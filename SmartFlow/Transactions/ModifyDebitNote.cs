@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartFlow.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,17 +20,12 @@ namespace SmartFlow.Transactions
 
         private void invoicenotxtbox_TextChanged(object sender, EventArgs e)
         {
-            string prefix = "PIS-";
+            string prefix = "DE-";
             if (!invoicenotxtbox.Text.StartsWith(prefix))
             {
                 invoicenotxtbox.Text = prefix;
                 invoicenotxtbox.SelectionStart = invoicenotxtbox.Text.Length; // Place the cursor at the end
             }
-        }
-
-        private void searchbtn_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void ModifyDebitNote_Load(object sender, EventArgs e)
@@ -63,6 +59,41 @@ namespace SmartFlow.Transactions
             catch (Exception ex)
             {
                 // Handle unexpected errors
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void searchbtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string query = string.Format("SELECT TransactionId,InvoiceNo,InvoiceDate,TransactionCode,LongDescription,CurrencyId,CurrencyName,CurrencySymbol," +
+                    "ConversionRate,CreatedAt,UpdatedAt,CreatedDay,UpdatedDay,UserId,AddedBy,CompanyId,VoucherInfo FROM TransactionTable WHERE InvoiceNo LIKE '" + invoicenotxtbox.Text + "'");
+
+                DataTable dataInvoice = await DatabaseAccess.RetriveAsync(query);
+
+                if (dataInvoice.Rows.Count > 0)
+                {
+                    string subquery = string.Format("SELECT TransactionDetailId,TransactionId,AccountId,AccountName,AccountCode,IsDebit,IsCredit,ShortDescription,DebitAmount,CreditAmount," +
+                        "InvoiceNo,DebitOrCredit,TransactionCode FROM TransactionDetailTable WHERE InvoiceNo LIKE '" + invoicenotxtbox.Text + "' AND IsNewRecord = '" + true + "'");
+
+                    DataTable dtInvoiceDetails = await DatabaseAccess.RetriveAsync(subquery);
+                    if (dtInvoiceDetails != null || dtInvoiceDetails.Rows.Count > 0)
+                    {
+                        this.Close();
+                        Journal journal = new Journal(dataInvoice, dtInvoiceDetails);
+                        journal.MdiParent = Application.OpenForms["Dashboard"];
+                        CommonFunction.DisposeOnClose(journal);
+                        journal.Show();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No Record Found.");
+                }
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

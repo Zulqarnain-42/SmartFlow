@@ -41,24 +41,12 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.addbtn = new System.Windows.Forms.Button();
             this.dgvpurchaseproducts = new System.Windows.Forms.DataGridView();
-            this.srnocolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mfrcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qtycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.salepricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discountcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vatcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.warehouseidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemdescriptioncolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lengthinmetercolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pricepermetercolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.costpricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.eDITToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currencysymbollbl = new System.Windows.Forms.Label();
+            this.currencystringlbl = new System.Windows.Forms.Label();
+            this.currencynamelbl = new System.Windows.Forms.Label();
+            this.currencyconversionratelbl = new System.Windows.Forms.Label();
             this.qtytxtbox = new System.Windows.Forms.TextBox();
             this.selectproducttxtbox = new System.Windows.Forms.TextBox();
             this.codelbl = new System.Windows.Forms.Label();
@@ -66,6 +54,16 @@
             this.productnamelbl = new System.Windows.Forms.Label();
             this.qtylbl = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.vatchargestxtbox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.customchargestxtbox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.importdutytxtbox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.inlandtransportationtxtbox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.freighttxtbox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.warehouseidlbl = new System.Windows.Forms.Label();
             this.newbtn = new System.Windows.Forms.Button();
             this.savebtn = new System.Windows.Forms.Button();
@@ -99,25 +97,74 @@
             this.totaldiscountlbl = new System.Windows.Forms.Label();
             this.totalvatlbl = new System.Windows.Forms.Label();
             this.nettotallbl = new System.Windows.Forms.Label();
-            this.freightcharges = new System.Windows.Forms.Label();
             this.totaldiscounttxtbox = new System.Windows.Forms.TextBox();
             this.totalvattxtbox = new System.Windows.Forms.TextBox();
             this.nettotaltxtbox = new System.Windows.Forms.TextBox();
             this.shipmentreceivedlbl = new System.Windows.Forms.Label();
             this.shipmentreceivedbytxtbox = new System.Windows.Forms.TextBox();
-            this.shippingchargestxtbox = new System.Windows.Forms.TextBox();
             this.removevatchkbox = new System.Windows.Forms.CheckBox();
             this.currencylbl = new System.Windows.Forms.Label();
             this.currencyidlbl = new System.Windows.Forms.Label();
-            this.currencysymbollbl = new System.Windows.Forms.Label();
-            this.currencystringlbl = new System.Windows.Forms.Label();
-            this.currencynamelbl = new System.Windows.Forms.Label();
-            this.currencyconversionratelbl = new System.Windows.Forms.Label();
+            this.vatcodelbl = new System.Windows.Forms.Label();
+            this.discountpercentagelbl = new System.Windows.Forms.Label();
+            this.discounttypelbl = new System.Windows.Forms.Label();
+            this.availabilitystatuslbl = new System.Windows.Forms.Label();
+            this.actualqtyorderedlbl = new System.Windows.Forms.Label();
+            this.srnocolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productnamecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.availabilitycolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vatcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discountcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.warehouseidcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemdescriptioncolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lengthinmetercolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pricepermetercolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.costpricecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vatpercentagecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discountpercentagecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discounttypecolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.actualqtyorderedcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.excisedutytxtbox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.antidumpingdutiestxtbox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.terminalhandlingcharges = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.demurragechargestxtbox = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.warehousingchargestxtbox = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.insurancechargestxtbox = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.custombondtxtbox = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.importlisencepermittxtbox = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.inspectionfeestxtbox = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.legalizationcertificatetxtbox = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.letterofcreditfeetxtbox = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.foreignexchangechargestxtbox = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.custombrokerfeecharges = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.freightforwardertxtbox = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.shippinginfotab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpurchaseproducts)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.suppliersearchresult)).BeginInit();
@@ -213,6 +260,10 @@
             // 
             this.tabPage1.Controls.Add(this.addbtn);
             this.tabPage1.Controls.Add(this.dgvpurchaseproducts);
+            this.tabPage1.Controls.Add(this.currencysymbollbl);
+            this.tabPage1.Controls.Add(this.currencystringlbl);
+            this.tabPage1.Controls.Add(this.currencynamelbl);
+            this.tabPage1.Controls.Add(this.currencyconversionratelbl);
             this.tabPage1.Controls.Add(this.qtytxtbox);
             this.tabPage1.Controls.Add(this.selectproducttxtbox);
             this.tabPage1.Controls.Add(this.codelbl);
@@ -233,7 +284,7 @@
             // 
             this.addbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.addbtn.Location = new System.Drawing.Point(1228, 25);
-            this.addbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addbtn.Margin = new System.Windows.Forms.Padding(2);
             this.addbtn.Name = "addbtn";
             this.addbtn.Size = new System.Drawing.Size(84, 26);
             this.addbtn.TabIndex = 38;
@@ -258,25 +309,31 @@
             this.dgvpurchaseproducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvpurchaseproducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.srnocolumn,
-            this.mfrcolumn,
-            this.productidcolumn,
+            this.codecolumn,
+            this.productid,
             this.productnamecolumn,
             this.qtycolumn,
+            this.availabilitycolumn,
             this.unitidcolumn,
-            this.unitnamecolumn,
-            this.salepricecolumn,
-            this.discountcolumn,
+            this.unitname,
+            this.pricecolumn,
             this.vatcolumn,
+            this.discountcolumn,
             this.totalcolumn,
             this.warehouseidcolumn,
             this.itemdescriptioncolumn,
             this.lengthinmetercolumn,
             this.pricepermetercolumn,
-            this.costpricecolumn});
+            this.costpricecolumn,
+            this.vatpercentagecolumn,
+            this.discountpercentagecolumn,
+            this.discounttypecolumn,
+            this.actualqtyorderedcolumn});
             this.dgvpurchaseproducts.ContextMenuStrip = this.contextMenuStrip;
             this.dgvpurchaseproducts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvpurchaseproducts.Location = new System.Drawing.Point(2, 56);
             this.dgvpurchaseproducts.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.dgvpurchaseproducts.MultiSelect = false;
             this.dgvpurchaseproducts.Name = "dgvpurchaseproducts";
             this.dgvpurchaseproducts.ReadOnly = true;
             this.dgvpurchaseproducts.RowHeadersVisible = false;
@@ -290,141 +347,6 @@
             this.dgvpurchaseproducts.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvpurchaseproducts_RowsAdded);
             this.dgvpurchaseproducts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvpurchaseproducts_RowsRemoved);
             this.dgvpurchaseproducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvpurchaseproducts_KeyDown);
-            // 
-            // srnocolumn
-            // 
-            this.srnocolumn.HeaderText = "#";
-            this.srnocolumn.MinimumWidth = 6;
-            this.srnocolumn.Name = "srnocolumn";
-            this.srnocolumn.ReadOnly = true;
-            this.srnocolumn.Width = 40;
-            // 
-            // mfrcolumn
-            // 
-            this.mfrcolumn.HeaderText = "MFR";
-            this.mfrcolumn.MinimumWidth = 6;
-            this.mfrcolumn.Name = "mfrcolumn";
-            this.mfrcolumn.ReadOnly = true;
-            this.mfrcolumn.Width = 125;
-            // 
-            // productidcolumn
-            // 
-            this.productidcolumn.HeaderText = "ID";
-            this.productidcolumn.MinimumWidth = 6;
-            this.productidcolumn.Name = "productidcolumn";
-            this.productidcolumn.ReadOnly = true;
-            this.productidcolumn.Visible = false;
-            this.productidcolumn.Width = 125;
-            // 
-            // productnamecolumn
-            // 
-            this.productnamecolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.productnamecolumn.HeaderText = "Product Name";
-            this.productnamecolumn.MinimumWidth = 6;
-            this.productnamecolumn.Name = "productnamecolumn";
-            this.productnamecolumn.ReadOnly = true;
-            // 
-            // qtycolumn
-            // 
-            this.qtycolumn.HeaderText = "Qty";
-            this.qtycolumn.MinimumWidth = 6;
-            this.qtycolumn.Name = "qtycolumn";
-            this.qtycolumn.ReadOnly = true;
-            this.qtycolumn.Width = 125;
-            // 
-            // unitidcolumn
-            // 
-            this.unitidcolumn.HeaderText = "unitid";
-            this.unitidcolumn.MinimumWidth = 6;
-            this.unitidcolumn.Name = "unitidcolumn";
-            this.unitidcolumn.ReadOnly = true;
-            this.unitidcolumn.Visible = false;
-            this.unitidcolumn.Width = 125;
-            // 
-            // unitnamecolumn
-            // 
-            this.unitnamecolumn.HeaderText = "Unit";
-            this.unitnamecolumn.MinimumWidth = 6;
-            this.unitnamecolumn.Name = "unitnamecolumn";
-            this.unitnamecolumn.ReadOnly = true;
-            this.unitnamecolumn.Width = 125;
-            // 
-            // salepricecolumn
-            // 
-            this.salepricecolumn.HeaderText = "Price";
-            this.salepricecolumn.MinimumWidth = 6;
-            this.salepricecolumn.Name = "salepricecolumn";
-            this.salepricecolumn.ReadOnly = true;
-            this.salepricecolumn.Width = 125;
-            // 
-            // discountcolumn
-            // 
-            this.discountcolumn.HeaderText = "Diss";
-            this.discountcolumn.MinimumWidth = 6;
-            this.discountcolumn.Name = "discountcolumn";
-            this.discountcolumn.ReadOnly = true;
-            this.discountcolumn.Width = 125;
-            // 
-            // vatcolumn
-            // 
-            this.vatcolumn.HeaderText = "VAT";
-            this.vatcolumn.MinimumWidth = 6;
-            this.vatcolumn.Name = "vatcolumn";
-            this.vatcolumn.ReadOnly = true;
-            this.vatcolumn.Width = 125;
-            // 
-            // totalcolumn
-            // 
-            this.totalcolumn.HeaderText = "Total";
-            this.totalcolumn.MinimumWidth = 6;
-            this.totalcolumn.Name = "totalcolumn";
-            this.totalcolumn.ReadOnly = true;
-            this.totalcolumn.Width = 125;
-            // 
-            // warehouseidcolumn
-            // 
-            this.warehouseidcolumn.HeaderText = "warehouseid";
-            this.warehouseidcolumn.MinimumWidth = 6;
-            this.warehouseidcolumn.Name = "warehouseidcolumn";
-            this.warehouseidcolumn.ReadOnly = true;
-            this.warehouseidcolumn.Visible = false;
-            this.warehouseidcolumn.Width = 125;
-            // 
-            // itemdescriptioncolumn
-            // 
-            this.itemdescriptioncolumn.HeaderText = "itemdescription";
-            this.itemdescriptioncolumn.MinimumWidth = 6;
-            this.itemdescriptioncolumn.Name = "itemdescriptioncolumn";
-            this.itemdescriptioncolumn.ReadOnly = true;
-            this.itemdescriptioncolumn.Visible = false;
-            this.itemdescriptioncolumn.Width = 125;
-            // 
-            // lengthinmetercolumn
-            // 
-            this.lengthinmetercolumn.HeaderText = "lengthinmeter";
-            this.lengthinmetercolumn.MinimumWidth = 6;
-            this.lengthinmetercolumn.Name = "lengthinmetercolumn";
-            this.lengthinmetercolumn.ReadOnly = true;
-            this.lengthinmetercolumn.Visible = false;
-            this.lengthinmetercolumn.Width = 125;
-            // 
-            // pricepermetercolumn
-            // 
-            this.pricepermetercolumn.HeaderText = "pricepermeter";
-            this.pricepermetercolumn.MinimumWidth = 6;
-            this.pricepermetercolumn.Name = "pricepermetercolumn";
-            this.pricepermetercolumn.ReadOnly = true;
-            this.pricepermetercolumn.Visible = false;
-            this.pricepermetercolumn.Width = 125;
-            // 
-            // costpricecolumn
-            // 
-            this.costpricecolumn.HeaderText = "costprice";
-            this.costpricecolumn.MinimumWidth = 6;
-            this.costpricecolumn.Name = "costpricecolumn";
-            this.costpricecolumn.ReadOnly = true;
-            this.costpricecolumn.Visible = false;
-            this.costpricecolumn.Width = 125;
             // 
             // contextMenuStrip
             // 
@@ -441,6 +363,50 @@
             this.eDITToolStripMenuItem.Text = "EDIT";
             this.eDITToolStripMenuItem.Click += new System.EventHandler(this.eDITToolStripMenuItem_Click);
             // 
+            // currencysymbollbl
+            // 
+            this.currencysymbollbl.AutoSize = true;
+            this.currencysymbollbl.Location = new System.Drawing.Point(993, 25);
+            this.currencysymbollbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.currencysymbollbl.Name = "currencysymbollbl";
+            this.currencysymbollbl.Size = new System.Drawing.Size(127, 18);
+            this.currencysymbollbl.TabIndex = 158;
+            this.currencysymbollbl.Text = "currencysymbollbl";
+            this.currencysymbollbl.Visible = false;
+            // 
+            // currencystringlbl
+            // 
+            this.currencystringlbl.AutoSize = true;
+            this.currencystringlbl.Location = new System.Drawing.Point(874, 25);
+            this.currencystringlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.currencystringlbl.Name = "currencystringlbl";
+            this.currencystringlbl.Size = new System.Drawing.Size(115, 18);
+            this.currencystringlbl.TabIndex = 159;
+            this.currencystringlbl.Text = "currencystringlbl";
+            this.currencystringlbl.Visible = false;
+            // 
+            // currencynamelbl
+            // 
+            this.currencynamelbl.AutoSize = true;
+            this.currencynamelbl.Location = new System.Drawing.Point(754, 25);
+            this.currencynamelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.currencynamelbl.Name = "currencynamelbl";
+            this.currencynamelbl.Size = new System.Drawing.Size(116, 18);
+            this.currencynamelbl.TabIndex = 160;
+            this.currencynamelbl.Text = "currencynamelbl";
+            this.currencynamelbl.Visible = false;
+            // 
+            // currencyconversionratelbl
+            // 
+            this.currencyconversionratelbl.AutoSize = true;
+            this.currencyconversionratelbl.Location = new System.Drawing.Point(573, 25);
+            this.currencyconversionratelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.currencyconversionratelbl.Name = "currencyconversionratelbl";
+            this.currencyconversionratelbl.Size = new System.Drawing.Size(177, 18);
+            this.currencyconversionratelbl.TabIndex = 161;
+            this.currencyconversionratelbl.Text = "currencyconversionratelbl";
+            this.currencyconversionratelbl.Visible = false;
+            // 
             // qtytxtbox
             // 
             this.qtytxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -448,7 +414,7 @@
             this.qtytxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.qtytxtbox.Font = new System.Drawing.Font("Calibri", 12F);
             this.qtytxtbox.Location = new System.Drawing.Point(453, 25);
-            this.qtytxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.qtytxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.qtytxtbox.Name = "qtytxtbox";
             this.qtytxtbox.Size = new System.Drawing.Size(116, 27);
             this.qtytxtbox.TabIndex = 33;
@@ -465,7 +431,6 @@
             this.selectproducttxtbox.Location = new System.Drawing.Point(146, 25);
             this.selectproducttxtbox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.selectproducttxtbox.Name = "selectproducttxtbox";
-            this.selectproducttxtbox.ReadOnly = true;
             this.selectproducttxtbox.Size = new System.Drawing.Size(302, 27);
             this.selectproducttxtbox.TabIndex = 19;
             this.selectproducttxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectproducttxtbox_MouseClick);
@@ -514,20 +479,168 @@
             this.qtylbl.Location = new System.Drawing.Point(450, 6);
             this.qtylbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.qtylbl.Name = "qtylbl";
-            this.qtylbl.Size = new System.Drawing.Size(32, 18);
+            this.qtylbl.Size = new System.Drawing.Size(94, 18);
             this.qtylbl.TabIndex = 3;
-            this.qtylbl.Text = "QTY";
+            this.qtylbl.Text = "QTY RECEIVED";
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.freightforwardertxtbox);
+            this.tabPage2.Controls.Add(this.label19);
+            this.tabPage2.Controls.Add(this.custombrokerfeecharges);
+            this.tabPage2.Controls.Add(this.label18);
+            this.tabPage2.Controls.Add(this.foreignexchangechargestxtbox);
+            this.tabPage2.Controls.Add(this.label17);
+            this.tabPage2.Controls.Add(this.letterofcreditfeetxtbox);
+            this.tabPage2.Controls.Add(this.label16);
+            this.tabPage2.Controls.Add(this.legalizationcertificatetxtbox);
+            this.tabPage2.Controls.Add(this.label15);
+            this.tabPage2.Controls.Add(this.inspectionfeestxtbox);
+            this.tabPage2.Controls.Add(this.label14);
+            this.tabPage2.Controls.Add(this.importlisencepermittxtbox);
+            this.tabPage2.Controls.Add(this.label13);
+            this.tabPage2.Controls.Add(this.custombondtxtbox);
+            this.tabPage2.Controls.Add(this.label12);
+            this.tabPage2.Controls.Add(this.insurancechargestxtbox);
+            this.tabPage2.Controls.Add(this.label11);
+            this.tabPage2.Controls.Add(this.warehousingchargestxtbox);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.demurragechargestxtbox);
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.terminalhandlingcharges);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.antidumpingdutiestxtbox);
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.excisedutytxtbox);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.vatchargestxtbox);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.customchargestxtbox);
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.importdutytxtbox);
+            this.tabPage2.Controls.Add(this.label3);
+            this.tabPage2.Controls.Add(this.inlandtransportationtxtbox);
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.freighttxtbox);
+            this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tabPage2.Size = new System.Drawing.Size(1318, 344);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage2.Size = new System.Drawing.Size(1318, 356);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Shipping Info";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // vatchargestxtbox
+            // 
+            this.vatchargestxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.vatchargestxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.vatchargestxtbox.Location = new System.Drawing.Point(288, 147);
+            this.vatchargestxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.vatchargestxtbox.Name = "vatchargestxtbox";
+            this.vatchargestxtbox.Size = new System.Drawing.Size(284, 27);
+            this.vatchargestxtbox.TabIndex = 163;
+            this.vatchargestxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(9, 151);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 18);
+            this.label5.TabIndex = 162;
+            this.label5.Text = "GST / VAT";
+            // 
+            // customchargestxtbox
+            // 
+            this.customchargestxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.customchargestxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customchargestxtbox.Location = new System.Drawing.Point(288, 116);
+            this.customchargestxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.customchargestxtbox.Name = "customchargestxtbox";
+            this.customchargestxtbox.Size = new System.Drawing.Size(284, 27);
+            this.customchargestxtbox.TabIndex = 161;
+            this.customchargestxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(9, 120);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(177, 18);
+            this.label4.TabIndex = 160;
+            this.label4.Text = "Customs Clearance Charges";
+            // 
+            // importdutytxtbox
+            // 
+            this.importdutytxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.importdutytxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.importdutytxtbox.Location = new System.Drawing.Point(288, 85);
+            this.importdutytxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.importdutytxtbox.Name = "importdutytxtbox";
+            this.importdutytxtbox.Size = new System.Drawing.Size(284, 27);
+            this.importdutytxtbox.TabIndex = 159;
+            this.importdutytxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(9, 89);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(82, 18);
+            this.label3.TabIndex = 158;
+            this.label3.Text = "Import Duty";
+            // 
+            // inlandtransportationtxtbox
+            // 
+            this.inlandtransportationtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.inlandtransportationtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inlandtransportationtxtbox.Location = new System.Drawing.Point(288, 54);
+            this.inlandtransportationtxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.inlandtransportationtxtbox.Name = "inlandtransportationtxtbox";
+            this.inlandtransportationtxtbox.Size = new System.Drawing.Size(284, 27);
+            this.inlandtransportationtxtbox.TabIndex = 157;
+            this.inlandtransportationtxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(9, 58);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(139, 18);
+            this.label2.TabIndex = 156;
+            this.label2.Text = "Inland Transportation";
+            // 
+            // freighttxtbox
+            // 
+            this.freighttxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.freighttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.freighttxtbox.Location = new System.Drawing.Point(288, 23);
+            this.freighttxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.freighttxtbox.Name = "freighttxtbox";
+            this.freighttxtbox.Size = new System.Drawing.Size(284, 27);
+            this.freighttxtbox.TabIndex = 155;
+            this.freighttxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(9, 27);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(273, 18);
+            this.label1.TabIndex = 154;
+            this.label1.Text = "Ocean Freight / Air Freight / Land Transport";
             // 
             // warehouseidlbl
             // 
@@ -780,7 +893,7 @@
             this.companytxtbox.Enabled = false;
             this.companytxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.companytxtbox.Location = new System.Drawing.Point(415, 67);
-            this.companytxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.companytxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.companytxtbox.Name = "companytxtbox";
             this.companytxtbox.ReadOnly = true;
             this.companytxtbox.Size = new System.Drawing.Size(428, 27);
@@ -888,7 +1001,6 @@
             this.selectsuppliertxtbox.Location = new System.Drawing.Point(322, 36);
             this.selectsuppliertxtbox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.selectsuppliertxtbox.Name = "selectsuppliertxtbox";
-            this.selectsuppliertxtbox.ReadOnly = true;
             this.selectsuppliertxtbox.Size = new System.Drawing.Size(521, 27);
             this.selectsuppliertxtbox.TabIndex = 73;
             this.selectsuppliertxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectsuppliertxtbox_MouseClick);
@@ -943,18 +1055,6 @@
             this.nettotallbl.TabIndex = 134;
             this.nettotallbl.Text = "NET TOTAL";
             // 
-            // freightcharges
-            // 
-            this.freightcharges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.freightcharges.AutoSize = true;
-            this.freightcharges.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.freightcharges.Location = new System.Drawing.Point(7, 583);
-            this.freightcharges.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.freightcharges.Name = "freightcharges";
-            this.freightcharges.Size = new System.Drawing.Size(174, 18);
-            this.freightcharges.TabIndex = 140;
-            this.freightcharges.Text = "Freight && Shipping Charges";
-            // 
             // totaldiscounttxtbox
             // 
             this.totaldiscounttxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -963,7 +1063,7 @@
             this.totaldiscounttxtbox.Enabled = false;
             this.totaldiscounttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totaldiscounttxtbox.Location = new System.Drawing.Point(1034, 124);
-            this.totaldiscounttxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.totaldiscounttxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.totaldiscounttxtbox.Name = "totaldiscounttxtbox";
             this.totaldiscounttxtbox.ReadOnly = true;
             this.totaldiscounttxtbox.Size = new System.Drawing.Size(284, 27);
@@ -978,7 +1078,7 @@
             this.totalvattxtbox.Enabled = false;
             this.totalvattxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalvattxtbox.Location = new System.Drawing.Point(1034, 97);
-            this.totalvattxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.totalvattxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.totalvattxtbox.Name = "totalvattxtbox";
             this.totalvattxtbox.ReadOnly = true;
             this.totalvattxtbox.Size = new System.Drawing.Size(284, 27);
@@ -993,7 +1093,7 @@
             this.nettotaltxtbox.Enabled = false;
             this.nettotaltxtbox.Font = new System.Drawing.Font("Calibri", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nettotaltxtbox.Location = new System.Drawing.Point(1034, 39);
-            this.nettotaltxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nettotaltxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.nettotaltxtbox.Name = "nettotaltxtbox";
             this.nettotaltxtbox.ReadOnly = true;
             this.nettotaltxtbox.Size = new System.Drawing.Size(284, 56);
@@ -1005,7 +1105,7 @@
             this.shipmentreceivedlbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.shipmentreceivedlbl.AutoSize = true;
             this.shipmentreceivedlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.shipmentreceivedlbl.Location = new System.Drawing.Point(482, 583);
+            this.shipmentreceivedlbl.Location = new System.Drawing.Point(14, 581);
             this.shipmentreceivedlbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.shipmentreceivedlbl.Name = "shipmentreceivedlbl";
             this.shipmentreceivedlbl.Size = new System.Drawing.Size(146, 18);
@@ -1019,23 +1119,11 @@
             this.shipmentreceivedbytxtbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.shipmentreceivedbytxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.shipmentreceivedbytxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.shipmentreceivedbytxtbox.Location = new System.Drawing.Point(630, 579);
+            this.shipmentreceivedbytxtbox.Location = new System.Drawing.Point(162, 577);
             this.shipmentreceivedbytxtbox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.shipmentreceivedbytxtbox.Name = "shipmentreceivedbytxtbox";
             this.shipmentreceivedbytxtbox.Size = new System.Drawing.Size(302, 27);
             this.shipmentreceivedbytxtbox.TabIndex = 152;
-            // 
-            // shippingchargestxtbox
-            // 
-            this.shippingchargestxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.shippingchargestxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.shippingchargestxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.shippingchargestxtbox.Location = new System.Drawing.Point(182, 579);
-            this.shippingchargestxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.shippingchargestxtbox.Name = "shippingchargestxtbox";
-            this.shippingchargestxtbox.Size = new System.Drawing.Size(284, 27);
-            this.shippingchargestxtbox.TabIndex = 153;
-            this.shippingchargestxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // removevatchkbox
             // 
@@ -1043,7 +1131,7 @@
             this.removevatchkbox.AutoSize = true;
             this.removevatchkbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removevatchkbox.Location = new System.Drawing.Point(1019, 155);
-            this.removevatchkbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.removevatchkbox.Margin = new System.Windows.Forms.Padding(2);
             this.removevatchkbox.Name = "removevatchkbox";
             this.removevatchkbox.Size = new System.Drawing.Size(127, 21);
             this.removevatchkbox.TabIndex = 155;
@@ -1073,49 +1161,538 @@
             this.currencyidlbl.Text = "currencyidlbl";
             this.currencyidlbl.Visible = false;
             // 
-            // currencysymbollbl
+            // vatcodelbl
             // 
-            this.currencysymbollbl.AutoSize = true;
-            this.currencysymbollbl.Location = new System.Drawing.Point(811, 158);
-            this.currencysymbollbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.currencysymbollbl.Name = "currencysymbollbl";
-            this.currencysymbollbl.Size = new System.Drawing.Size(90, 13);
-            this.currencysymbollbl.TabIndex = 158;
-            this.currencysymbollbl.Text = "currencysymbollbl";
-            this.currencysymbollbl.Visible = false;
+            this.vatcodelbl.AutoSize = true;
+            this.vatcodelbl.Location = new System.Drawing.Point(401, 159);
+            this.vatcodelbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.vatcodelbl.Name = "vatcodelbl";
+            this.vatcodelbl.Size = new System.Drawing.Size(56, 13);
+            this.vatcodelbl.TabIndex = 142;
+            this.vatcodelbl.Text = "vatcodelbl";
+            this.vatcodelbl.Visible = false;
             // 
-            // currencystringlbl
+            // discountpercentagelbl
             // 
-            this.currencystringlbl.AutoSize = true;
-            this.currencystringlbl.Location = new System.Drawing.Point(728, 158);
-            this.currencystringlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.currencystringlbl.Name = "currencystringlbl";
-            this.currencystringlbl.Size = new System.Drawing.Size(83, 13);
-            this.currencystringlbl.TabIndex = 159;
-            this.currencystringlbl.Text = "currencystringlbl";
-            this.currencystringlbl.Visible = false;
+            this.discountpercentagelbl.AutoSize = true;
+            this.discountpercentagelbl.Location = new System.Drawing.Point(522, 163);
+            this.discountpercentagelbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.discountpercentagelbl.Name = "discountpercentagelbl";
+            this.discountpercentagelbl.Size = new System.Drawing.Size(111, 13);
+            this.discountpercentagelbl.TabIndex = 163;
+            this.discountpercentagelbl.Text = "discountpercentagelbl";
+            this.discountpercentagelbl.Visible = false;
             // 
-            // currencynamelbl
+            // discounttypelbl
             // 
-            this.currencynamelbl.AutoSize = true;
-            this.currencynamelbl.Location = new System.Drawing.Point(644, 158);
-            this.currencynamelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.currencynamelbl.Name = "currencynamelbl";
-            this.currencynamelbl.Size = new System.Drawing.Size(84, 13);
-            this.currencynamelbl.TabIndex = 160;
-            this.currencynamelbl.Text = "currencynamelbl";
-            this.currencynamelbl.Visible = false;
+            this.discounttypelbl.AutoSize = true;
+            this.discounttypelbl.Location = new System.Drawing.Point(673, 159);
+            this.discounttypelbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.discounttypelbl.Name = "discounttypelbl";
+            this.discounttypelbl.Size = new System.Drawing.Size(77, 13);
+            this.discounttypelbl.TabIndex = 164;
+            this.discounttypelbl.Text = "discounttypelbl";
+            this.discounttypelbl.Visible = false;
             // 
-            // currencyconversionratelbl
+            // availabilitystatuslbl
             // 
-            this.currencyconversionratelbl.AutoSize = true;
-            this.currencyconversionratelbl.Location = new System.Drawing.Point(512, 158);
-            this.currencyconversionratelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.currencyconversionratelbl.Name = "currencyconversionratelbl";
-            this.currencyconversionratelbl.Size = new System.Drawing.Size(128, 13);
-            this.currencyconversionratelbl.TabIndex = 161;
-            this.currencyconversionratelbl.Text = "currencyconversionratelbl";
-            this.currencyconversionratelbl.Visible = false;
+            this.availabilitystatuslbl.AutoSize = true;
+            this.availabilitystatuslbl.Location = new System.Drawing.Point(214, 163);
+            this.availabilitystatuslbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.availabilitystatuslbl.Name = "availabilitystatuslbl";
+            this.availabilitystatuslbl.Size = new System.Drawing.Size(93, 13);
+            this.availabilitystatuslbl.TabIndex = 165;
+            this.availabilitystatuslbl.Text = "availabilitystatuslbl";
+            this.availabilitystatuslbl.Visible = false;
+            // 
+            // actualqtyorderedlbl
+            // 
+            this.actualqtyorderedlbl.AutoSize = true;
+            this.actualqtyorderedlbl.Location = new System.Drawing.Point(758, 159);
+            this.actualqtyorderedlbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.actualqtyorderedlbl.Name = "actualqtyorderedlbl";
+            this.actualqtyorderedlbl.Size = new System.Drawing.Size(96, 13);
+            this.actualqtyorderedlbl.TabIndex = 166;
+            this.actualqtyorderedlbl.Text = "actualqtyorderedlbl";
+            this.actualqtyorderedlbl.Visible = false;
+            // 
+            // srnocolumn
+            // 
+            this.srnocolumn.HeaderText = "#";
+            this.srnocolumn.MinimumWidth = 6;
+            this.srnocolumn.Name = "srnocolumn";
+            this.srnocolumn.ReadOnly = true;
+            this.srnocolumn.Width = 40;
+            // 
+            // codecolumn
+            // 
+            this.codecolumn.HeaderText = "MFR";
+            this.codecolumn.MinimumWidth = 6;
+            this.codecolumn.Name = "codecolumn";
+            this.codecolumn.ReadOnly = true;
+            this.codecolumn.Width = 125;
+            // 
+            // productid
+            // 
+            this.productid.HeaderText = "ID";
+            this.productid.MinimumWidth = 6;
+            this.productid.Name = "productid";
+            this.productid.ReadOnly = true;
+            this.productid.Visible = false;
+            this.productid.Width = 125;
+            // 
+            // productnamecolumn
+            // 
+            this.productnamecolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.productnamecolumn.HeaderText = "Product Name";
+            this.productnamecolumn.MinimumWidth = 6;
+            this.productnamecolumn.Name = "productnamecolumn";
+            this.productnamecolumn.ReadOnly = true;
+            // 
+            // qtycolumn
+            // 
+            this.qtycolumn.HeaderText = "Qty";
+            this.qtycolumn.MinimumWidth = 6;
+            this.qtycolumn.Name = "qtycolumn";
+            this.qtycolumn.ReadOnly = true;
+            this.qtycolumn.Width = 125;
+            // 
+            // availabilitycolumn
+            // 
+            this.availabilitycolumn.HeaderText = "AVAIL";
+            this.availabilitycolumn.Name = "availabilitycolumn";
+            this.availabilitycolumn.ReadOnly = true;
+            this.availabilitycolumn.Visible = false;
+            // 
+            // unitidcolumn
+            // 
+            this.unitidcolumn.HeaderText = "unitid";
+            this.unitidcolumn.MinimumWidth = 6;
+            this.unitidcolumn.Name = "unitidcolumn";
+            this.unitidcolumn.ReadOnly = true;
+            this.unitidcolumn.Visible = false;
+            this.unitidcolumn.Width = 125;
+            // 
+            // unitname
+            // 
+            this.unitname.HeaderText = "Unit";
+            this.unitname.MinimumWidth = 6;
+            this.unitname.Name = "unitname";
+            this.unitname.ReadOnly = true;
+            this.unitname.Width = 125;
+            // 
+            // pricecolumn
+            // 
+            this.pricecolumn.HeaderText = "Price";
+            this.pricecolumn.MinimumWidth = 6;
+            this.pricecolumn.Name = "pricecolumn";
+            this.pricecolumn.ReadOnly = true;
+            this.pricecolumn.Width = 125;
+            // 
+            // vatcolumn
+            // 
+            this.vatcolumn.HeaderText = "VAT";
+            this.vatcolumn.MinimumWidth = 6;
+            this.vatcolumn.Name = "vatcolumn";
+            this.vatcolumn.ReadOnly = true;
+            this.vatcolumn.Width = 125;
+            // 
+            // discountcolumn
+            // 
+            this.discountcolumn.HeaderText = "Diss";
+            this.discountcolumn.MinimumWidth = 6;
+            this.discountcolumn.Name = "discountcolumn";
+            this.discountcolumn.ReadOnly = true;
+            this.discountcolumn.Width = 125;
+            // 
+            // totalcolumn
+            // 
+            this.totalcolumn.HeaderText = "Total";
+            this.totalcolumn.MinimumWidth = 6;
+            this.totalcolumn.Name = "totalcolumn";
+            this.totalcolumn.ReadOnly = true;
+            this.totalcolumn.Width = 125;
+            // 
+            // warehouseidcolumn
+            // 
+            this.warehouseidcolumn.HeaderText = "warehouseid";
+            this.warehouseidcolumn.MinimumWidth = 6;
+            this.warehouseidcolumn.Name = "warehouseidcolumn";
+            this.warehouseidcolumn.ReadOnly = true;
+            this.warehouseidcolumn.Visible = false;
+            this.warehouseidcolumn.Width = 125;
+            // 
+            // itemdescriptioncolumn
+            // 
+            this.itemdescriptioncolumn.HeaderText = "itemdescription";
+            this.itemdescriptioncolumn.MinimumWidth = 6;
+            this.itemdescriptioncolumn.Name = "itemdescriptioncolumn";
+            this.itemdescriptioncolumn.ReadOnly = true;
+            this.itemdescriptioncolumn.Visible = false;
+            this.itemdescriptioncolumn.Width = 125;
+            // 
+            // lengthinmetercolumn
+            // 
+            this.lengthinmetercolumn.HeaderText = "lengthinmeter";
+            this.lengthinmetercolumn.MinimumWidth = 6;
+            this.lengthinmetercolumn.Name = "lengthinmetercolumn";
+            this.lengthinmetercolumn.ReadOnly = true;
+            this.lengthinmetercolumn.Visible = false;
+            this.lengthinmetercolumn.Width = 125;
+            // 
+            // pricepermetercolumn
+            // 
+            this.pricepermetercolumn.HeaderText = "pricepermeter";
+            this.pricepermetercolumn.MinimumWidth = 6;
+            this.pricepermetercolumn.Name = "pricepermetercolumn";
+            this.pricepermetercolumn.ReadOnly = true;
+            this.pricepermetercolumn.Visible = false;
+            this.pricepermetercolumn.Width = 125;
+            // 
+            // costpricecolumn
+            // 
+            this.costpricecolumn.HeaderText = "costprice";
+            this.costpricecolumn.MinimumWidth = 6;
+            this.costpricecolumn.Name = "costpricecolumn";
+            this.costpricecolumn.ReadOnly = true;
+            this.costpricecolumn.Visible = false;
+            this.costpricecolumn.Width = 125;
+            // 
+            // vatpercentagecolumn
+            // 
+            this.vatpercentagecolumn.HeaderText = "vatpercentage";
+            this.vatpercentagecolumn.Name = "vatpercentagecolumn";
+            this.vatpercentagecolumn.ReadOnly = true;
+            this.vatpercentagecolumn.Visible = false;
+            // 
+            // discountpercentagecolumn
+            // 
+            this.discountpercentagecolumn.HeaderText = "discountpercentagecolumn";
+            this.discountpercentagecolumn.Name = "discountpercentagecolumn";
+            this.discountpercentagecolumn.ReadOnly = true;
+            this.discountpercentagecolumn.Visible = false;
+            // 
+            // discounttypecolumn
+            // 
+            this.discounttypecolumn.HeaderText = "discounttypecolumn";
+            this.discounttypecolumn.Name = "discounttypecolumn";
+            this.discounttypecolumn.ReadOnly = true;
+            this.discounttypecolumn.Visible = false;
+            // 
+            // actualqtyorderedcolumn
+            // 
+            this.actualqtyorderedcolumn.HeaderText = "actualqtyordered";
+            this.actualqtyorderedcolumn.Name = "actualqtyorderedcolumn";
+            this.actualqtyorderedcolumn.ReadOnly = true;
+            this.actualqtyorderedcolumn.Visible = false;
+            // 
+            // excisedutytxtbox
+            // 
+            this.excisedutytxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.excisedutytxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.excisedutytxtbox.Location = new System.Drawing.Point(288, 178);
+            this.excisedutytxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.excisedutytxtbox.Name = "excisedutytxtbox";
+            this.excisedutytxtbox.Size = new System.Drawing.Size(284, 27);
+            this.excisedutytxtbox.TabIndex = 165;
+            this.excisedutytxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(9, 182);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(88, 18);
+            this.label6.TabIndex = 164;
+            this.label6.Text = "Excise Duties";
+            // 
+            // antidumpingdutiestxtbox
+            // 
+            this.antidumpingdutiestxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.antidumpingdutiestxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.antidumpingdutiestxtbox.Location = new System.Drawing.Point(288, 209);
+            this.antidumpingdutiestxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.antidumpingdutiestxtbox.Name = "antidumpingdutiestxtbox";
+            this.antidumpingdutiestxtbox.Size = new System.Drawing.Size(284, 27);
+            this.antidumpingdutiestxtbox.TabIndex = 167;
+            this.antidumpingdutiestxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(9, 213);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(136, 18);
+            this.label7.TabIndex = 166;
+            this.label7.Text = "Anti-Dumping Duties";
+            // 
+            // terminalhandlingcharges
+            // 
+            this.terminalhandlingcharges.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.terminalhandlingcharges.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.terminalhandlingcharges.Location = new System.Drawing.Point(288, 240);
+            this.terminalhandlingcharges.Margin = new System.Windows.Forms.Padding(2);
+            this.terminalhandlingcharges.Name = "terminalhandlingcharges";
+            this.terminalhandlingcharges.Size = new System.Drawing.Size(284, 27);
+            this.terminalhandlingcharges.TabIndex = 169;
+            this.terminalhandlingcharges.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(9, 244);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(172, 18);
+            this.label8.TabIndex = 168;
+            this.label8.Text = "Terminal Handling Charges";
+            // 
+            // demurragechargestxtbox
+            // 
+            this.demurragechargestxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.demurragechargestxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.demurragechargestxtbox.Location = new System.Drawing.Point(288, 271);
+            this.demurragechargestxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.demurragechargestxtbox.Name = "demurragechargestxtbox";
+            this.demurragechargestxtbox.Size = new System.Drawing.Size(284, 27);
+            this.demurragechargestxtbox.TabIndex = 171;
+            this.demurragechargestxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(9, 275);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(129, 18);
+            this.label9.TabIndex = 170;
+            this.label9.Text = "Demurrage Charges";
+            // 
+            // warehousingchargestxtbox
+            // 
+            this.warehousingchargestxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.warehousingchargestxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.warehousingchargestxtbox.Location = new System.Drawing.Point(288, 302);
+            this.warehousingchargestxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.warehousingchargestxtbox.Name = "warehousingchargestxtbox";
+            this.warehousingchargestxtbox.Size = new System.Drawing.Size(284, 27);
+            this.warehousingchargestxtbox.TabIndex = 173;
+            this.warehousingchargestxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(9, 306);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(141, 18);
+            this.label10.TabIndex = 172;
+            this.label10.Text = "Warehousing Charges";
+            // 
+            // insurancechargestxtbox
+            // 
+            this.insurancechargestxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.insurancechargestxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.insurancechargestxtbox.Location = new System.Drawing.Point(930, 23);
+            this.insurancechargestxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.insurancechargestxtbox.Name = "insurancechargestxtbox";
+            this.insurancechargestxtbox.Size = new System.Drawing.Size(284, 27);
+            this.insurancechargestxtbox.TabIndex = 175;
+            this.insurancechargestxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(718, 27);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(115, 18);
+            this.label11.TabIndex = 174;
+            this.label11.Text = "Marine Insurance";
+            // 
+            // custombondtxtbox
+            // 
+            this.custombondtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.custombondtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.custombondtxtbox.Location = new System.Drawing.Point(930, 54);
+            this.custombondtxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.custombondtxtbox.Name = "custombondtxtbox";
+            this.custombondtxtbox.Size = new System.Drawing.Size(284, 27);
+            this.custombondtxtbox.TabIndex = 177;
+            this.custombondtxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(718, 58);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(96, 18);
+            this.label12.TabIndex = 176;
+            this.label12.Text = "Customs Bond";
+            // 
+            // importlisencepermittxtbox
+            // 
+            this.importlisencepermittxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.importlisencepermittxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.importlisencepermittxtbox.Location = new System.Drawing.Point(930, 85);
+            this.importlisencepermittxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.importlisencepermittxtbox.Name = "importlisencepermittxtbox";
+            this.importlisencepermittxtbox.Size = new System.Drawing.Size(284, 27);
+            this.importlisencepermittxtbox.TabIndex = 179;
+            this.importlisencepermittxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(718, 89);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(159, 18);
+            this.label13.TabIndex = 178;
+            this.label13.Text = "Import Licenses & Permits";
+            // 
+            // inspectionfeestxtbox
+            // 
+            this.inspectionfeestxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.inspectionfeestxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inspectionfeestxtbox.Location = new System.Drawing.Point(930, 116);
+            this.inspectionfeestxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.inspectionfeestxtbox.Name = "inspectionfeestxtbox";
+            this.inspectionfeestxtbox.Size = new System.Drawing.Size(284, 27);
+            this.inspectionfeestxtbox.TabIndex = 181;
+            this.inspectionfeestxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(718, 120);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(104, 18);
+            this.label14.TabIndex = 180;
+            this.label14.Text = "Inspection Fees";
+            // 
+            // legalizationcertificatetxtbox
+            // 
+            this.legalizationcertificatetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.legalizationcertificatetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.legalizationcertificatetxtbox.Location = new System.Drawing.Point(930, 147);
+            this.legalizationcertificatetxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.legalizationcertificatetxtbox.Name = "legalizationcertificatetxtbox";
+            this.legalizationcertificatetxtbox.Size = new System.Drawing.Size(284, 27);
+            this.legalizationcertificatetxtbox.TabIndex = 183;
+            this.legalizationcertificatetxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(718, 151);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(193, 18);
+            this.label15.TabIndex = 182;
+            this.label15.Text = "Legalization & Certification Fees";
+            // 
+            // letterofcreditfeetxtbox
+            // 
+            this.letterofcreditfeetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.letterofcreditfeetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.letterofcreditfeetxtbox.Location = new System.Drawing.Point(930, 178);
+            this.letterofcreditfeetxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.letterofcreditfeetxtbox.Name = "letterofcreditfeetxtbox";
+            this.letterofcreditfeetxtbox.Size = new System.Drawing.Size(284, 27);
+            this.letterofcreditfeetxtbox.TabIndex = 185;
+            this.letterofcreditfeetxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(718, 182);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(134, 18);
+            this.label16.TabIndex = 184;
+            this.label16.Text = "Letter of Credit Fees";
+            // 
+            // foreignexchangechargestxtbox
+            // 
+            this.foreignexchangechargestxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.foreignexchangechargestxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.foreignexchangechargestxtbox.Location = new System.Drawing.Point(930, 209);
+            this.foreignexchangechargestxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.foreignexchangechargestxtbox.Name = "foreignexchangechargestxtbox";
+            this.foreignexchangechargestxtbox.Size = new System.Drawing.Size(284, 27);
+            this.foreignexchangechargestxtbox.TabIndex = 187;
+            this.foreignexchangechargestxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(718, 213);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(168, 18);
+            this.label17.TabIndex = 186;
+            this.label17.Text = "Foreign Exchange Charges";
+            // 
+            // custombrokerfeecharges
+            // 
+            this.custombrokerfeecharges.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.custombrokerfeecharges.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.custombrokerfeecharges.Location = new System.Drawing.Point(930, 240);
+            this.custombrokerfeecharges.Margin = new System.Windows.Forms.Padding(2);
+            this.custombrokerfeecharges.Name = "custombrokerfeecharges";
+            this.custombrokerfeecharges.Size = new System.Drawing.Size(284, 27);
+            this.custombrokerfeecharges.TabIndex = 189;
+            this.custombrokerfeecharges.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(718, 244);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(137, 18);
+            this.label18.TabIndex = 188;
+            this.label18.Text = "Customs Broker Fees";
+            // 
+            // freightforwardertxtbox
+            // 
+            this.freightforwardertxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.freightforwardertxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.freightforwardertxtbox.Location = new System.Drawing.Point(930, 271);
+            this.freightforwardertxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.freightforwardertxtbox.Name = "freightforwardertxtbox";
+            this.freightforwardertxtbox.Size = new System.Drawing.Size(284, 27);
+            this.freightforwardertxtbox.TabIndex = 191;
+            this.freightforwardertxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(718, 275);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(151, 18);
+            this.label19.TabIndex = 190;
+            this.label19.Text = "Freight Forwarder Fees";
             // 
             // PurchaseInvoice
             // 
@@ -1123,20 +1700,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1326, 615);
-            this.Controls.Add(this.currencyconversionratelbl);
-            this.Controls.Add(this.currencynamelbl);
-            this.Controls.Add(this.currencystringlbl);
-            this.Controls.Add(this.currencysymbollbl);
+            this.Controls.Add(this.actualqtyorderedlbl);
+            this.Controls.Add(this.availabilitystatuslbl);
+            this.Controls.Add(this.discounttypelbl);
+            this.Controls.Add(this.discountpercentagelbl);
+            this.Controls.Add(this.vatcodelbl);
             this.Controls.Add(this.currencyidlbl);
             this.Controls.Add(this.currencylbl);
             this.Controls.Add(this.removevatchkbox);
-            this.Controls.Add(this.shippingchargestxtbox);
             this.Controls.Add(this.shipmentreceivedbytxtbox);
             this.Controls.Add(this.shipmentreceivedlbl);
             this.Controls.Add(this.nettotaltxtbox);
             this.Controls.Add(this.totalvattxtbox);
             this.Controls.Add(this.totaldiscounttxtbox);
-            this.Controls.Add(this.freightcharges);
             this.Controls.Add(this.totaldiscountlbl);
             this.Controls.Add(this.totalvatlbl);
             this.Controls.Add(this.nettotallbl);
@@ -1159,6 +1735,8 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpurchaseproducts)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -1200,7 +1778,6 @@
         private System.Windows.Forms.Label totaldiscountlbl;
         private System.Windows.Forms.Label totalvatlbl;
         private System.Windows.Forms.Label nettotallbl;
-        private System.Windows.Forms.Label freightcharges;
         private System.Windows.Forms.Label supplieridlbl;
         private System.Windows.Forms.TextBox qtytxtbox;
         private System.Windows.Forms.TextBox totaldiscounttxtbox;
@@ -1208,7 +1785,6 @@
         private System.Windows.Forms.TextBox nettotaltxtbox;
         private System.Windows.Forms.TextBox shipmentreceivedbytxtbox;
         private System.Windows.Forms.Label shipmentreceivedlbl;
-        private System.Windows.Forms.TextBox shippingchargestxtbox;
         private System.Windows.Forms.Button addbtn;
         private System.Windows.Forms.Label invoicecodelbl;
         private System.Windows.Forms.TextBox companytxtbox;
@@ -1234,23 +1810,71 @@
         private System.Windows.Forms.Label currencystringlbl;
         private System.Windows.Forms.Label currencysymbollbl;
         private System.Windows.Forms.Label currencyconversionratelbl;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem eDITToolStripMenuItem;
+        private System.Windows.Forms.Label discounttypelbl;
+        private System.Windows.Forms.Label discountpercentagelbl;
+        private System.Windows.Forms.Label vatcodelbl;
+        private System.Windows.Forms.Label availabilitystatuslbl;
+        private System.Windows.Forms.TextBox vatchargestxtbox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox customchargestxtbox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox importdutytxtbox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox inlandtransportationtxtbox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox freighttxtbox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label actualqtyorderedlbl;
         private System.Windows.Forms.DataGridViewTextBoxColumn srnocolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn mfrcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productidcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codecolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productid;
         private System.Windows.Forms.DataGridViewTextBoxColumn productnamecolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn qtycolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn availabilitycolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitidcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unitnamecolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn salepricecolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn discountcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pricecolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn vatcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discountcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn warehouseidcolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemdescriptioncolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lengthinmetercolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pricepermetercolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn costpricecolumn;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem eDITToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vatpercentagecolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discountpercentagecolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discounttypecolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn actualqtyorderedcolumn;
+        private System.Windows.Forms.TextBox warehousingchargestxtbox;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox demurragechargestxtbox;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox terminalhandlingcharges;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox antidumpingdutiestxtbox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox excisedutytxtbox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox freightforwardertxtbox;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox custombrokerfeecharges;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox foreignexchangechargestxtbox;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox letterofcreditfeetxtbox;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox legalizationcertificatetxtbox;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox inspectionfeestxtbox;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox importlisencepermittxtbox;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox custombondtxtbox;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox insurancechargestxtbox;
+        private System.Windows.Forms.Label label11;
     }
 }

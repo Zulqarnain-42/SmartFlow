@@ -17,10 +17,14 @@ namespace SmartFlow.Transactions.ReportViewer
     public partial class PaymentReportView : Form
     {
         private string _invoiceNo = string.Empty;
-        public PaymentReportView(string invoiceNo)
+        private bool _iscredit = false;
+        private bool _isdebit = false;
+        public PaymentReportView(string invoiceNo,bool iscredit,bool isdebit)
         {
             InitializeComponent();
-            _invoiceNo = invoiceNo;
+            this._invoiceNo = invoiceNo;
+            this._iscredit = iscredit;
+            this._isdebit = isdebit;
         }
 
         private void PaymentReportView_Load(object sender, EventArgs e)
@@ -46,6 +50,8 @@ namespace SmartFlow.Transactions.ReportViewer
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.AddWithValue("@InvoiceNo", invoiceNo);
+                    command.Parameters.AddWithValue("@IsCredit", _iscredit);
+                    command.Parameters.AddWithValue("@IsDebit", _isdebit);
 
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     DataSet dataSet = new DataSet();

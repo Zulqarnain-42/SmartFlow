@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartFlow.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +20,7 @@ namespace SmartFlow.Transactions
 
         private void invoicenotxtbox_TextChanged(object sender, EventArgs e)
         {
-            string prefix = "PIS-";
+            string prefix = "MRP-";
             if (!invoicenotxtbox.Text.StartsWith(prefix))
             {
                 invoicenotxtbox.Text = prefix;
@@ -27,9 +28,44 @@ namespace SmartFlow.Transactions
             }
         }
 
-        private void searchbtn_Click(object sender, EventArgs e)
+        private async void searchbtn_Click(object sender, EventArgs e)
         {
+            string query = string.Format("SELECT InvoiceTable.Invoiceid,InvoiceTable.InvoiceNo,InvoiceTable.invoicedate,InvoiceTable.ClientID," +
+                        "InvoiceTable.CreatedAt,InvoiceTable.CreatedDay,InvoiceTable.UpdatedAt,InvoiceTable.UpdatedDay,InvoiceTable.AddedBy,InvoiceTable.Companyid," +
+                        "InvoiceTable.Userid,InvoiceTable.InvoiceCode,InvoiceTable.NetTotal,InvoiceTable.ClientName,InvoiceTable.TotalVat,InvoiceTable.TotalDiscount," +
+                        "InvoiceTable.FreightShippingCharges,InvoiceTable.InvoiceRefrence,InvoiceTable.IsPlanetInvoice,InvoiceTable.Currencyid," +
+                        "InvoiceTable.CurrencyName,InvoiceTable.ConversionRate,InvoiceTable.QuotationValidUntill,InvoiceTable.CurrencySymbol," +
+                        "InvoiceTable.SalePerson,AccountSubControlTable.MobileNo,AccountSubControlTable.Email,AccountSubControlTable.RefrencePersonName," +
+                        "AccountSubControlTable.AccountSubControlName,AccountSubControlTable.CodeAccount,AccountSubControlTable.CompanyName " +
+                        "FROM InvoiceTable INNER JOIN AccountSubControlTable " +
+                        "ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = '" + invoicenotxtbox.Text + "'");
 
+            DataTable dataInvoice = await DatabaseAccess.RetriveAsync(query);
+
+            if (dataInvoice.Rows.Count > 0)
+            {
+                string subquery = string.Format("SELECT InvoiceDetailsTable.InvoiceDetailsId,InvoiceDetailsTable.InvoiceNo,InvoiceDetailsTable.AddInventory,InvoiceDetailsTable.MinusInventory,InvoiceDetailsTable.Invoicecode," +
+                    "InvoiceDetailsTable.Productid,InvoiceDetailsTable.Quantity,InvoiceDetailsTable.UnitSalePrice,InvoiceDetailsTable.ItemSerialNoid,InvoiceDetailsTable.ProductName,InvoiceDetailsTable.MFR,InvoiceDetailsTable.ItemWiseDiscount," +
+                    "InvoiceDetailsTable.ItemWiseVAT,InvoiceDetailsTable.Warehouseid,InvoiceDetailsTable.PurchaseCostPrice,InvoiceDetailsTable.PurchaseLowestSalePrice,InvoiceDetailsTable.PurchaseStandardPrice," +
+                    "InvoiceDetailsTable.PurchaseItemSalePrice,InvoiceDetailsTable.SystemSerialNoid,InvoiceDetailsTable.ItemTotal,InvoiceDetailsTable.Unitid,InvoiceDetailsTable.ItemAvailability,InvoiceDetailsTable.PricePerMeter," +
+                    "InvoiceDetailsTable.LengthInMeter,InvoiceDetailsTable.ItemDescription,InvoiceDetailsTable.IsSaleInvoice,InvoiceDetailsTable.VatCode,InvoiceDetailsTable.IsNewRecord,InvoiceDetailsTable.DiscountType," +
+                    "InvoiceDetailsTable.DiscountPercentage,UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
+                    "InvoiceDetailsTable.InvoiceNo = '" + invoicenotxtbox.Text + "'  AND InvoiceDetailsTable.IsNewRecord = '" + true + "'");
+
+                DataTable dtInvoiceDetails = await DatabaseAccess.RetriveAsync(subquery);
+                if (dtInvoiceDetails != null || dtInvoiceDetails.Rows.Count > 0)
+                {
+                    this.Close();
+                    MaterialReceivedFromParty materialReceivedFromParty = new MaterialReceivedFromParty(dataInvoice, dtInvoiceDetails);
+                    materialReceivedFromParty.MdiParent = Application.OpenForms["Dashboard"];
+                    CommonFunction.DisposeOnClose(materialReceivedFromParty);
+                    materialReceivedFromParty.Show();
+                }
+            }
+            else
+            {
+                MessageBox.Show("No Record Found.");
+            }
         }
 
         private void ModifyMaterialReceived_Load(object sender, EventArgs e)

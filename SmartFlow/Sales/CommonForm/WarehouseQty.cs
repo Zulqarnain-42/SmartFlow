@@ -14,10 +14,13 @@ namespace SmartFlow.Sales.CommonForm
     public partial class WarehouseQty : Form
     {
         private DataTable _stockData;
-        public WarehouseQty(DataTable stockdata)
+        private bool _isSaleInvoice = false;
+
+        public WarehouseQty(DataTable stockdata, bool isSaleInvoice)
         {
             InitializeComponent();
             _stockData = stockdata;
+            _isSaleInvoice = isSaleInvoice;
         }
 
         private void WarehouseQty_Load(object sender, EventArgs e)
@@ -90,9 +93,19 @@ namespace SmartFlow.Sales.CommonForm
                         GlobalVariables.availabilitystatus = "IN STOCK";
                         this.Close();
                     }
+                    else if (quantity < 0 && _isSaleInvoice == true) 
+                    {
+                        GlobalVariables.warehouseidglobal = Convert.ToInt32(selectedRow.Cells["WarehouseID"].Value);
+                        GlobalVariables.availabilitystatus = "IN STOCK";
+                        this.Close();
+                        MessageBox.Show("Quantity is not greater than zero. if the item is available. Take Inventory First.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                     else
                     {
-                        MessageBox.Show("Quantity is not greater than zero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        // Close the form after the selection and quantity check
+                        GlobalVariables.warehouseidglobal = Convert.ToInt32(selectedRow.Cells["WarehouseID"].Value);
+                        GlobalVariables.availabilitystatus = "IN STOCK";
+                        this.Close();
                     }
                 }
             }
@@ -128,9 +141,16 @@ namespace SmartFlow.Sales.CommonForm
                             GlobalVariables.availabilitystatus = "IN STOCK";
                             this.Close();
                         }
+                        else if (quantity < 0 && _isSaleInvoice == true)
+                        {
+                            MessageBox.Show("Quantity is not greater than zero. if the item is available. Take Inventory First.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                         else
                         {
-                            MessageBox.Show("Quantity is not greater than zero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            // Close the form after the selection and quantity check
+                            GlobalVariables.warehouseidglobal = Convert.ToInt32(selectedRow.Cells["WarehouseID"].Value);
+                            GlobalVariables.availabilitystatus = "IN STOCK";
+                            this.Close();
                         }
                     }
                 }

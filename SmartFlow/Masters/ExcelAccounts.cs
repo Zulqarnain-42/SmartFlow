@@ -5,6 +5,13 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using SmartFlow.Common;
+using SmartFlow.Common.CommonForms;
+using CrystalDecisions.CrystalReports.Engine;
+using Microsoft.Reporting.Map.WebForms.BingMaps;
+using static System.Windows.Forms.AxHost;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 
 namespace SmartFlow.Masters
 {
@@ -73,39 +80,59 @@ namespace SmartFlow.Masters
         {
             try
             {
-                /*Form openForm = await CommonFunction.IsFormOpenAsync(typeof(AccountGroupSelectionForm));
+                Form openForm = await CommonFunction.IsFormOpenAsync(typeof(AccountGroupSelection));
                 if (openForm == null)
                 {
-                    AccountGroupSelectionForm selectionForm = new AccountGroupSelectionForm
+                    AccountGroupSelection selectionForm = new AccountGroupSelection
                     {
                         WindowState = FormWindowState.Normal,
                         StartPosition = FormStartPosition.CenterScreen,
                     };
 
-                    selectionForm.FormClosed += delegate
-                    {
-                        UpdateAccountGroupInfo();
-                    };
-                    await CommonFunction.DisposeOnCloseAsync(selectionForm);
+                    selectionForm.AccountDataSelected += UpdateAccountInfo;
+                    CommonFunction.DisposeOnClose(selectionForm);
                     selectionForm.ShowDialog();
                 }
                 else
                 {
                     openForm.BringToFront();
-                }*/
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        /*private void UpdateAccountGroupInfo()
+        private async void UpdateAccountInfo(object sender, AccountData e)
         {
-            if(!string.IsNullOrEmpty(GlobalVariables.accountnameglobal) && !string.IsNullOrWhiteSpace(GlobalVariables.accountnameglobal) && 
-                GlobalVariables.accountidglobal > 0)
+            try
             {
-                selectAccounttxtbox.Text = GlobalVariables.accountnameglobal;
-                accountgroupidlabel.Text = GlobalVariables.accountidglobal.ToString();
+                // Simulate some async work (e.g., fetching additional data or processing)
+                await Task.Run(() =>
+                {
+                    // Perform any long-running or async operations here (if needed)
+                    // For example, querying a database, calling an API, etc.
+
+                    int accountid = e.AccountId;
+                    string accountname = e.AccountName;
+                    int accountheadid = e.AccountHeadId;
+
+                    // If you need to update UI controls, ensure that it's done on the UI thread
+                    // If you update textboxes, labels, etc., do it like this:
+                    this.Invoke(new Action(() =>
+                    {
+                        // Assuming these are TextBox controls
+                        accountgroupidlabel.Text = accountid.ToString();
+                        selectAccounttxtbox.Text = accountname.ToString();
+                        accountheadidlbl.Text = accountheadid.ToString();
+                    }));
+                });
             }
-        }*/
+            catch (Exception ex)
+            {
+                // Catch any unexpected errors and show them to the user
+                MessageBox.Show($"An error occurred while updating supplier information: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void sheetCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -118,6 +145,7 @@ namespace SmartFlow.Masters
             try
             {
                 errorProvider.Clear();
+                string accountCode = string.Empty; 
                 if (selectAccounttxtbox.Text.Trim().Length == 0)
                 {
                     errorProvider.SetError(selectAccounttxtbox,"Please Select Account.");
@@ -127,26 +155,25 @@ namespace SmartFlow.Masters
 
                 int accountgroupid = Convert.ToInt32(accountgroupidlabel.Text);
                 string accountgroupName = selectAccounttxtbox.Text;
-                string accountCode = null;
-                int subacountid = 0;
                 bool result = false;
 
-                /*foreach (DataGridViewRow row in dataGridViewExcel.Rows)
+                foreach (DataGridViewRow row in dataGridViewExcel.Rows)
                 {
                     if (accountgroupName == "Customers" || accountgroupName == "Reseller")
                     {
                         string initialize = "CU";
-                        accountCode = GenerateRandomAccountCode(initialize);
+                        accountCode = await GenerateRandomAccountCode(initialize);
                     }
                     else if (accountgroupName == "Suppliers")
                     {
                         string initialize = "SU";
-                        accountCode = GenerateRandomAccountCode(initialize);
+                        accountCode = await GenerateRandomAccountCode(initialize);
                     }
 
                     if (!row.IsNewRow)
                     {
-                        string accountname = null;
+                        string accountname = row.Cells[0].Value.ToString();
+                        string guidcode = Guid.NewGuid().ToString();
                         string getaccounthead = "SELECT AccountControlID,AccountControlName,AccountHead_ID,AccountControlCode,Alias FROM AccountControlTable " +
                         "WHERE AccountControlID = '" + accountgroupid + "'";
 
@@ -165,39 +192,25 @@ namespace SmartFlow.Masters
                                 "CreatedDay,CodeAccount) VALUES ('" + accountHeadID + "','" + accountgroupid + "','" + accountname + "'," +
                                 "'" + Guid.NewGuid() + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + accountCode + "'); " +
                                 "SELECT SCOPE_IDENTITY();";
+                                string tableName = "AccountSubControlTable";
 
-                            }
-                        }
-                        if (accountgroupName == "Customers" || accountgroupName == "Reseller")
-                        {
-                            if (subacountid > 0)
-                            {
-                                string addcustomer = "INSERT INTO CustomerTable (CustomerName,CustomerCode,CreateAt,CreatedDay," +
-                                    "AccountSubControlId,AccountControlId) VALUES ('" + accountname + "','" + accountCode + "'," +
-                                    "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "'," +
-                                    "'" + subacountid + "','" + accountgroupid + "')";
+                                var columnData = new Dictionary<string, object>
+                                {
+                                    { "AccountHead_ID", accountHeadID },
+                                    { "AccountControl_ID", accountgroupid },
+                                    { "AccountSubControlName", accountname },
+                                    { "AccountSubControlCode", guidcode },
+                                    { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                                    { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                                    { "CodeAccount", accountCode }
+                                };
 
-                            }
-                            else
-                            {
-                                MessageBox.Show("Something is wrong.");
-                            }
-                        }
-                        else if (accountgroupName == "Suppliers")
-                        {
-                            if (subacountid > 0)
-                            {
-                                string addsupplier = "INSERT INTO SupplierTable (SupplierName,SupplierCode,CreatedAt,CreatedDay,AccountSubControlId," +
-                                    "AccountControlId) VALUES ('" + accountname + "','" + accountCode + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                                    "'" + DateTime.Now.DayOfWeek + "','" + subacountid + "','" + accountgroupid + "')";
-                            }
-                            else
-                            {
-                                MessageBox.Show("Something is wrong.");
+                                // Assuming ExecuteQueryAsync is an asynchronous method for executing the query
+                                bool isInserted = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData);
                             }
                         }
                     }
-                }*/
+                }
                 if (result)
                 {
                     MessageBox.Show("Saved Successfully.");

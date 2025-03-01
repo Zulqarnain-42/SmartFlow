@@ -372,7 +372,7 @@ namespace SmartFlow.Masters
             {
                 WarehouseSelection warehouseSelection = new WarehouseSelection();
                 warehouseSelection.MdiParent = this.MdiParent;
-                await CommonFunction.DisposeOnCloseAsync(warehouseSelection);
+                CommonFunction.DisposeOnClose(warehouseSelection);
                 warehouseSelection.Show();
             }
             else

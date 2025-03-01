@@ -102,7 +102,7 @@ namespace SmartFlow.Stock
                             {
                                 UpdateWarehouseTxtBox();
                             };
-                            await CommonFunction.DisposeOnCloseAsync(warehouseSelection);
+                            CommonFunction.DisposeOnClose(warehouseSelection);
                             warehouseSelection.Show();
                         }
                     }
@@ -162,7 +162,7 @@ namespace SmartFlow.Stock
 
                     productSelection.ProductDataSelected += UpdateProductTextBox;
 
-                    await CommonFunction.DisposeOnCloseAsync(productSelection);
+                    CommonFunction.DisposeOnClose(productSelection);
                     productSelection.Show();
                 }
                 else

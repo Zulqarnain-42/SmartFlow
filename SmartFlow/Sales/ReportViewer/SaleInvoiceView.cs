@@ -1,4 +1,5 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Windows.Forms;
 using System;
 using System.Configuration;
 using System.Data;
@@ -10,6 +11,7 @@ namespace SmartFlow.Sales.ReportViewer
     public partial class SaleInvoiceView : Form
     {
         private string invoiceNo = string.Empty;
+        private ReportDocument reportDocument;
         public SaleInvoiceView(string _invoiceNo)
         {
             InitializeComponent();
@@ -20,9 +22,9 @@ namespace SmartFlow.Sales.ReportViewer
             try
             {
                 // Create a new instance of the report
-                ReportDocument reportDocument = new ReportDocument();
+                reportDocument = new ReportDocument();
 
-                string reportPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory,@"Sales\ReportViewer\Reports\SaleInvoiceReport.rpt");
+                string reportPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Sales\ReportViewer\Reports\SaleReport.rpt");
                 reportDocument.Load(reportPath);
 
                 // Fetch data for a specific invoice
@@ -33,6 +35,7 @@ namespace SmartFlow.Sales.ReportViewer
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.AddWithValue("@InvoiceNo", invoiceNo);
+                    command.Parameters.AddWithValue("@IsNewRecord", true);
 
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     DataSet dataSet = new DataSet();
@@ -55,6 +58,22 @@ namespace SmartFlow.Sales.ReportViewer
         private void SaleInvoiceView_Load(object sender, EventArgs e)
         {
             LoadCrystalReport(invoiceNo);
+        }
+
+        private void SaleInvoiceView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DisposeReport();
+        }
+
+        private void DisposeReport()
+        {
+            if (reportDocument != null)
+            {
+                reportDocument.Close();
+                reportDocument.Dispose();
+                reportDocument = null;
+                GC.Collect(); // Force garbage collection
+            }
         }
     }
 }

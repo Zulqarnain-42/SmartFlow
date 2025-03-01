@@ -11,6 +11,7 @@ namespace SmartFlow.Purchase.ReportViewer
     public partial class ReturnReportView : Form
     {
         private string _invoiceNo = string.Empty;
+        private ReportDocument reportDocument;
         public ReturnReportView(string invoiceNo)
         {
             InitializeComponent();
@@ -27,7 +28,7 @@ namespace SmartFlow.Purchase.ReportViewer
             try
             {
                 // Create a new instance of the report
-                ReportDocument reportDocument = new ReportDocument();
+                reportDocument = new ReportDocument();
 
                 string reportPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Purchase\ReportViewer\Reports\PurchaseReturnReport.rpt");
                 reportDocument.Load(reportPath);
@@ -40,6 +41,7 @@ namespace SmartFlow.Purchase.ReportViewer
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.AddWithValue("@InvoiceNo", invoiceNo);
+                    command.Parameters.AddWithValue("@IsNewRecord", true);
 
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     DataSet dataSet = new DataSet();
@@ -56,6 +58,22 @@ namespace SmartFlow.Purchase.ReportViewer
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}", "Report Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ReturnReportView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
+        private void DisposeReport()
+        {
+            if (reportDocument != null)
+            {
+                reportDocument.Close();
+                reportDocument.Dispose();
+                reportDocument = null;
+                GC.Collect(); // Force garbage collection
             }
         }
     }

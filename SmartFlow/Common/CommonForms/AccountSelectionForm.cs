@@ -8,14 +8,17 @@ namespace SmartFlow.Common.Forms
         private DateTime lastEnterPressTime;
         private const int doubleEnterThreshold = 500; // Time in milliseconds
         public event EventHandler<AccountData> AccountDataSelected;
+
         public AccountSelectionForm()
         {
             InitializeComponent();
         }
+
         private async void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
             await CommonFunction.GetAccountInfoAsync(searchtxtbox.Text, dgvaccount);
         }
+
         private void AccountSelectionForm_Load(object sender, EventArgs e)
         {
             FocusSearchAndLoadAccountInfo();
@@ -123,6 +126,7 @@ namespace SmartFlow.Common.Forms
             }
 
         }
+
         private void dgvaccount_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -176,6 +180,7 @@ namespace SmartFlow.Common.Forms
             }
 
         }
+
         private void AccountSelectionForm_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -194,8 +199,8 @@ namespace SmartFlow.Common.Forms
                 // Handle any unexpected errors gracefully
                 MessageBox.Show($"An error occurred while processing the Escape key:\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
         private void searchtxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

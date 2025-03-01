@@ -62,9 +62,10 @@
             // 
             this.selectproductlbl.AutoSize = true;
             this.selectproductlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectproductlbl.Location = new System.Drawing.Point(12, 11);
+            this.selectproductlbl.Location = new System.Drawing.Point(9, 9);
+            this.selectproductlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.selectproductlbl.Name = "selectproductlbl";
-            this.selectproductlbl.Size = new System.Drawing.Size(144, 23);
+            this.selectproductlbl.Size = new System.Drawing.Size(112, 18);
             this.selectproductlbl.TabIndex = 4;
             this.selectproductlbl.Text = "SELECT PRODUCT";
             // 
@@ -72,9 +73,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 49);
+            this.label1.Location = new System.Drawing.Point(9, 40);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 23);
+            this.label1.Size = new System.Drawing.Size(117, 18);
             this.label1.TabIndex = 44;
             this.label1.Text = "NO OF BARCODES";
             // 
@@ -82,9 +84,10 @@
             // 
             this.qtybarcode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.qtybarcode.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.qtybarcode.Location = new System.Drawing.Point(173, 44);
+            this.qtybarcode.Location = new System.Drawing.Point(130, 36);
+            this.qtybarcode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.qtybarcode.Name = "qtybarcode";
-            this.qtybarcode.Size = new System.Drawing.Size(500, 32);
+            this.qtybarcode.Size = new System.Drawing.Size(376, 27);
             this.qtybarcode.TabIndex = 1;
             // 
             // panel1
@@ -92,8 +95,9 @@
             this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1117, 45);
+            this.panel1.Size = new System.Drawing.Size(838, 37);
             this.panel1.TabIndex = 46;
             // 
             // headinglbl
@@ -103,8 +107,9 @@
             this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(1117, 45);
+            this.headinglbl.Size = new System.Drawing.Size(838, 37);
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "BARCODE DESIGN";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -117,9 +122,10 @@
             this.panel2.Controls.Add(this.qtybarcode);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 45);
+            this.panel2.Location = new System.Drawing.Point(0, 37);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1117, 87);
+            this.panel2.Size = new System.Drawing.Size(838, 71);
             this.panel2.TabIndex = 47;
             // 
             // selectproducttxtbox
@@ -128,9 +134,10 @@
             this.selectproducttxtbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.selectproducttxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.selectproducttxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectproducttxtbox.Location = new System.Drawing.Point(173, 6);
+            this.selectproducttxtbox.Location = new System.Drawing.Point(130, 5);
+            this.selectproducttxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.selectproducttxtbox.Name = "selectproducttxtbox";
-            this.selectproducttxtbox.Size = new System.Drawing.Size(500, 32);
+            this.selectproducttxtbox.Size = new System.Drawing.Size(376, 27);
             this.selectproducttxtbox.TabIndex = 0;
             this.selectproducttxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectproducttxtbox_MouseClick);
             this.selectproducttxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.selectproducttxtbox_KeyDown);
@@ -139,9 +146,10 @@
             // 
             this.addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addbtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addbtn.Location = new System.Drawing.Point(1000, 6);
+            this.addbtn.Location = new System.Drawing.Point(750, 5);
+            this.addbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.addbtn.Name = "addbtn";
-            this.addbtn.Size = new System.Drawing.Size(105, 70);
+            this.addbtn.Size = new System.Drawing.Size(79, 57);
             this.addbtn.TabIndex = 2;
             this.addbtn.Text = "ADD";
             this.addbtn.UseVisualStyleBackColor = true;
@@ -150,9 +158,10 @@
             // productmfrlbl
             // 
             this.productmfrlbl.AutoSize = true;
-            this.productmfrlbl.Location = new System.Drawing.Point(0, 571);
+            this.productmfrlbl.Location = new System.Drawing.Point(0, 464);
+            this.productmfrlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.productmfrlbl.Name = "productmfrlbl";
-            this.productmfrlbl.Size = new System.Drawing.Size(70, 16);
+            this.productmfrlbl.Size = new System.Drawing.Size(57, 13);
             this.productmfrlbl.TabIndex = 51;
             this.productmfrlbl.Text = "productmfr";
             this.productmfrlbl.Visible = false;
@@ -160,9 +169,10 @@
             // productidlbl
             // 
             this.productidlbl.AutoSize = true;
-            this.productidlbl.Location = new System.Drawing.Point(0, 553);
+            this.productidlbl.Location = new System.Drawing.Point(0, 449);
+            this.productidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.productidlbl.Name = "productidlbl";
-            this.productidlbl.Size = new System.Drawing.Size(63, 16);
+            this.productidlbl.Size = new System.Drawing.Size(51, 13);
             this.productidlbl.TabIndex = 50;
             this.productidlbl.Text = "productid";
             this.productidlbl.Visible = false;
@@ -171,9 +181,10 @@
             // 
             this.generatebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.generatebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.generatebtn.Location = new System.Drawing.Point(815, 527);
+            this.generatebtn.Location = new System.Drawing.Point(611, 428);
+            this.generatebtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.generatebtn.Name = "generatebtn";
-            this.generatebtn.Size = new System.Drawing.Size(290, 60);
+            this.generatebtn.Size = new System.Drawing.Size(218, 49);
             this.generatebtn.TabIndex = 5;
             this.generatebtn.Text = "GENERATE BARCODE";
             this.generatebtn.UseVisualStyleBackColor = true;
@@ -182,9 +193,10 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.dgvbarcodeproducts);
-            this.panel3.Location = new System.Drawing.Point(0, 139);
+            this.panel3.Location = new System.Drawing.Point(0, 113);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1117, 382);
+            this.panel3.Size = new System.Drawing.Size(838, 310);
             this.panel3.TabIndex = 51;
             // 
             // dgvbarcodeproducts
@@ -200,13 +212,14 @@
             this.productmfr,
             this.productname,
             this.barcodeqty});
-            this.dgvbarcodeproducts.Location = new System.Drawing.Point(3, 3);
+            this.dgvbarcodeproducts.Location = new System.Drawing.Point(2, 2);
+            this.dgvbarcodeproducts.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvbarcodeproducts.Name = "dgvbarcodeproducts";
             this.dgvbarcodeproducts.RowHeadersVisible = false;
             this.dgvbarcodeproducts.RowHeadersWidth = 51;
             this.dgvbarcodeproducts.RowTemplate.Height = 24;
             this.dgvbarcodeproducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvbarcodeproducts.Size = new System.Drawing.Size(1111, 376);
+            this.dgvbarcodeproducts.Size = new System.Drawing.Size(833, 306);
             this.dgvbarcodeproducts.TabIndex = 0;
             // 
             // productid
@@ -239,20 +252,18 @@
             // 
             // BarcodeDesign
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1117, 593);
+            this.ClientSize = new System.Drawing.Size(838, 482);
             this.Controls.Add(this.productmfrlbl);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.productidlbl);
             this.Controls.Add(this.generatebtn);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "BarcodeDesign";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BARCODE DESIGN";

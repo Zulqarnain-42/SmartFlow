@@ -35,7 +35,7 @@ namespace SmartFlow.Masters
 
                     allaccountselection.AccountDataSelected += UpdateAccountInfo;
 
-                    await CommonFunction.DisposeOnCloseAsync(allaccountselection);
+                    CommonFunction.DisposeOnClose(allaccountselection);
                     allaccountselection.ShowDialog();
                 }
                 else
@@ -94,7 +94,7 @@ namespace SmartFlow.Masters
 
                         allAccountsSelection.AccountDataSelected += UpdateAccountInfo;
 
-                        await CommonFunction.DisposeOnCloseAsync(allAccountsSelection);
+                        CommonFunction.DisposeOnClose(allAccountsSelection);
                         allAccountsSelection.ShowDialog();
                     }
                     else

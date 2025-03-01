@@ -141,7 +141,7 @@ namespace SmartFlow.Stock
 
                         warehouseSelection.WarehouseDataSelected += UpdateWarehouseInfo;
 
-                        await CommonFunction.DisposeOnCloseAsync(warehouseSelection);
+                        CommonFunction.DisposeOnClose(warehouseSelection);
                         warehouseSelection.Show();
                     }
                 }
@@ -170,10 +170,8 @@ namespace SmartFlow.Stock
                     this.Invoke(new Action(() =>
                     {
                         // Assuming these are TextBox controls
-                        /*supplieridlbl.Text = supplierId.ToString();
-                        selectsuppliertxtbox.Text = supplierName;
-                        codetxtbox.Text = supplierCode;
-                        companytxtbox.Text = companyName;*/
+                        warehouseidlbl.Text = warehouseid.ToString();
+                        selectwarehousetxtbox.Text = warehousename;
                     }));
                 });
             }

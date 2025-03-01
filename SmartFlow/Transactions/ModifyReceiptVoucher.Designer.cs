@@ -131,6 +131,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ModifyReceiptVoucher";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MODIFY RECEIPT VOUCHER";
             this.Load += new System.EventHandler(this.ModifyReceiptVoucher_Load);
             this.panel1.ResumeLayout(false);

@@ -12,6 +12,8 @@ namespace SmartFlow.Sales.CommonForm
 {
     public partial class SearchQuotationForm : Form
     {
+        public event Action<DataTable> DataSelected;
+
         public SearchQuotationForm()
         {
             InitializeComponent();
@@ -39,7 +41,7 @@ namespace SmartFlow.Sales.CommonForm
                     InvoiceTable.NetTotal,InvoiceTable.ClientName,InvoiceTable.TotalVat,InvoiceTable.TotalDiscount,InvoiceTable.FreightShippingCharges,InvoiceTable.TotalQty,
                     InvoiceTable.InvoiceRefrence,InvoiceTable.IsPlanetInvoice,InvoiceTable.Currencyid,InvoiceTable.CurrencyName,InvoiceTable.CurrencySymbol,InvoiceTable.ConversionRate,
                     InvoiceTable.IsSaleInvoice,InvoiceTable.IsTaxAble,InvoiceTable.QuotationValidUntill,InvoiceTable.SalePerson,InvoiceTable.ShipmentReceiveingPerson,
-                    AccountSubControlTable.CompanyName,AccountSubControlTable.CodeAccount,AccountSubControlTable.MobileNo FROM InvoiceTable 
+                    AccountSubControlTable.CompanyName,AccountSubControlTable.CodeAccount,AccountSubControlTable.MobileNo,AccountSubControlTable.AccountSubControlName FROM InvoiceTable 
                     INNER JOIN AccountSubControlTable ON AccountSubControlTable.AccountSubControlID = InvoiceTable.ClientID WHERE InvoiceTable.InvoiceNo = @InvoiceNo";
 
                 var parameters = new Dictionary<string, object>
@@ -51,9 +53,13 @@ namespace SmartFlow.Sales.CommonForm
 
                 if (quotationData != null && quotationData.Rows.Count > 0)
                 {
-                    string subQueryQuotation = @"SELECT InvoiceDetailsId,InvoiceNo,Invoicecode,Productid,Quantity,UnitSalePrice,ItemSerialNoid,ProductName,MFR,ItemWiseDiscount,ItemWiseVAT,
-                        Warehouseid,PurchaseCostPrice,PurchaseLowestSalePrice,PurchaseStandardPrice,PurchaseItemSalePrice,SystemSerialNoid,ItemTotal,Unitid,ItemAvailability,PricePerMeter,
-                        LengthInMeter,ItemDescription,MinusInventory,IsSaleInvoice,AddInventory,VatCode,DiscountPercentage,DiscountType FROM InvoiceDetailsTable WHERE InvoiceNo = @InvoiceNo";
+                    string subQueryQuotation = @"SELECT InvoiceDetailsTable.InvoiceDetailsId,InvoiceDetailsTable.InvoiceNo,InvoiceDetailsTable.AddInventory,InvoiceDetailsTable.MinusInventory,InvoiceDetailsTable.Invoicecode," +
+                    "InvoiceDetailsTable.Productid,InvoiceDetailsTable.Quantity,InvoiceDetailsTable.UnitSalePrice,InvoiceDetailsTable.ItemSerialNoid,InvoiceDetailsTable.ProductName,InvoiceDetailsTable.MFR,InvoiceDetailsTable.ItemWiseDiscount," +
+                    "InvoiceDetailsTable.ItemWiseVAT,InvoiceDetailsTable.Warehouseid,InvoiceDetailsTable.PurchaseCostPrice,InvoiceDetailsTable.PurchaseLowestSalePrice,InvoiceDetailsTable.PurchaseStandardPrice," +
+                    "InvoiceDetailsTable.PurchaseItemSalePrice,InvoiceDetailsTable.SystemSerialNoid,InvoiceDetailsTable.ItemTotal,InvoiceDetailsTable.Unitid,InvoiceDetailsTable.ItemAvailability,InvoiceDetailsTable.PricePerMeter," +
+                    "InvoiceDetailsTable.LengthInMeter,InvoiceDetailsTable.ItemDescription,InvoiceDetailsTable.IsSaleInvoice,InvoiceDetailsTable.VatCode,InvoiceDetailsTable.IsNewRecord,InvoiceDetailsTable.DiscountType," +
+                    "InvoiceDetailsTable.DiscountPercentage,UnitTable.UnitName FROM InvoiceDetailsTable LEFT JOIN UnitTable ON UnitTable.UnitID = InvoiceDetailsTable.Unitid WHERE " +
+                    "InvoiceDetailsTable.InvoiceNo = @InvoiceNo  AND InvoiceDetailsTable.IsNewRecord = '" + true + "'";
 
                     var subparameters = new Dictionary<string, object>
                     {
@@ -64,7 +70,10 @@ namespace SmartFlow.Sales.CommonForm
 
                     if(quotationData.Rows.Count > 0 && quotationdetails.Rows.Count > 0)
                     {
+                        // Send data back to parent form
+                        DataSelected?.Invoke(quotationdetails);
 
+                        this.Close(); // Close the child form
                     }
                 }
                 else

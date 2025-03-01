@@ -8,19 +8,23 @@ namespace SmartFlow.Common.Forms
         private DateTime lastEnterPressTime;
         private const int doubleEnterThreshold = 500; // Time in milliseconds
         public event EventHandler<ProductData> ProductDataSelected;
+
         public ProductSelectionForm()
         {
             InitializeComponent();
         }
+
         private async void searchtxtbox_TextChanged(object sender, EventArgs e)
         {
             await CommonFunction.GetProductAsync(searchtxtbox.Text,dgvproducts);
         }
+
         private async void ProductSelectionForm_Load(object sender, EventArgs e)
         {
             searchtxtbox.Focus();
             await CommonFunction.GetProductAsync("",dgvproducts);
         }
+
         private void dgvproducts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -80,8 +84,8 @@ namespace SmartFlow.Common.Forms
                 // Handle any unexpected exceptions and show the error message
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
         private void dgvproducts_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -127,8 +131,8 @@ namespace SmartFlow.Common.Forms
                 // Handle unexpected exceptions and display error message
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
         private void ProductSelectionForm_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -157,8 +161,8 @@ namespace SmartFlow.Common.Forms
                 // Catch any unexpected errors and display an error message
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
         private void searchtxtbox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

@@ -15,6 +15,7 @@ namespace SmartFlow.Common
     public class CommonFunction
     {
         private static string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
         public static async Task GetSupplierAsync(string searchValue, DataGridView dgv)
         {
             try
@@ -25,7 +26,7 @@ namespace SmartFlow.Common
 
                 if (!string.IsNullOrWhiteSpace(searchValue))
                 {
-                    query += @"AND (AccountSubControlTable.AccountSubControlName LIKE @SearchValue OR AccountSubControlTable.CompanyName LIKE @SearchValue)";
+                    query += @" AND (AccountSubControlTable.AccountSubControlName LIKE @SearchValue OR AccountSubControlTable.CompanyName LIKE @SearchValue)";
                 }
 
                 using (var connection = new SqlConnection(connectionString))
@@ -205,7 +206,6 @@ namespace SmartFlow.Common
             }
         }
 
-
         private static string GetDefaultProductQuery()
         {
             // Default query when no search value is provided
@@ -241,7 +241,6 @@ namespace SmartFlow.Common
             }
             return dt;
         }
-
 
         private static void ShowNoResultsMessage()
         {
@@ -296,159 +295,92 @@ namespace SmartFlow.Common
             }
         }
 
-
-        private static string GetDefaultAccountQuery()
-        {
-            // Default query when no search value is provided
-            return @"SELECT AccountSubControlID [ID], AccountHead_ID [HEADID], AccountSubControlName [ACCOUNT NAME], Email [EMAIL], MobileNo [MOBILE], CodeAccount FROM AccountSubControlTable";
-        }
-
-        private static string BuildSearchQueryAccount(string searchValue)
-        {
-            // Build the search query using parameterization to avoid SQL injection
-            return @"SELECT AccountSubControlID [ID], AccountHead_ID [HEADID], AccountSubControlName [ACCOUNT NAME], Email [EMAIL], MobileNo [MOBILE], CodeAccount FROM AccountSubControlTable 
-                WHERE AccountSubControlName LIKE @SearchValue";
-        }
-
-        /*public static async Task GetAccountGroupInfoAsync(string searchvalue, DataGridView dgv)
+        public static async Task GetAccountGroupInfoAsync(string searchValue, DataGridView dgv)
         {
             try
             {
-                string query = string.Empty;
-                DataTable dt = new DataTable();
+                // Validate search value and build the query
+                string query = string.IsNullOrWhiteSpace(searchValue)
+                    ? GetDefaultAccountGroupQuery()
+                    : BuildSearchQueryAccountGroup(searchValue);
 
-                // Check if the search value is null or empty
-                if (string.IsNullOrEmpty(searchvalue) || string.IsNullOrWhiteSpace(searchvalue))
-                {
-                    query = "SELECT AccountControlID [ID], AccountControlName [Account Name], AccountHead_ID, Alias FROM AccountControlTable";
-                }
-                else
-                {
-                    query = "SELECT AccountControlID [ID], AccountControlName [Account Name], AccountHead_ID, Alias FROM AccountControlTable" +
-                            " WHERE AccountControlName LIKE @SearchValue";
-                }
+                // Retrieve account data from the database asynchronously
+                DataTable dt = await RetrieveDataAsync(query, searchValue);
 
-                // Retrieve data asynchronously
-                *//*dt = await DatabaseAccess.RetriveAsync(query, searchvalue);*//*
-                dt = null;
-                // Populate DataGridView if data is available
-                if (dt.Rows.Count > 0)
+                // Populate DataGridView with data if available
+                if (dt != null && dt.Rows.Count > 0)
                 {
                     dgv.DataSource = dt;
                     dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
                 else
                 {
-                    MessageBox.Show("No results found.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ShowNoResultsMessage();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogError(ex);
+                MessageBox.Show("An error occurred while retrieving the account data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }*/
+        }
 
-
-        /*public static async Task GetProductQtyWarehouseAsync(DataGridView dgv, string productmfr, int productid)
+        private static string GetDefaultAccountGroupQuery()
         {
-            try
-            {
-                string getproductinventoryquery = string.Format("SELECT StockTable.WarehouseID [ID], WarehouseTable.Name [Warehouse Name], " +
-                    "SUM(COALESCE(StockTable.[Quantity], 0)) + COALESCE(InvoiceDetailsTable.Quantity, 0) AS Quantity " +
-                    "FROM StockTable INNER JOIN WarehouseTable ON WarehouseTable.WarehouseID = StockTable.Warehouseid " +
-                    "LEFT JOIN ProductTable ON ProductTable.ProductID = StockTable.ProductID " +
-                    "AND ProductTable.WarehouseID = WarehouseTable.WarehouseID " +
-                    "LEFT JOIN InvoiceDetailsTable ON InvoiceDetailsTable.Productid = StockTable.ProductID " +
-                    "AND InvoiceDetailsTable.Productid = ProductTable.ProductID " +
-                    "AND InvoiceDetailsTable.Warehouseid = WarehouseTable.WarehouseID WHERE StockTable.ProductID = @ProductID " +
-                    "AND StockTable.Warehouseid IN (SELECT WarehouseID FROM WarehouseTable) " +
-                    "GROUP BY StockTable.ProductID, StockTable.Warehouseid, WarehouseTable.Name, InvoiceDetailsTable.Quantity " +
-                    "ORDER BY StockTable.ProductID");
+            return @"SELECT AccountControlID [ID],AccountControlName [ACCOUNT NAME],AccountHeadName [ACCOUNT HEAD NAME],AccountHead_ID [HEADID],CodeAccount FROM AccountControlTable";
+        }
 
-                // Retrieve data asynchronously
-                *//*DataTable datainventory = await DatabaseAccess.RetriveAsync(getproductinventoryquery, productid);*//*
-                DataTable datainventory = null;
-                // Populate DataGridView if data is available
-                if (datainventory != null && datainventory.Rows.Count > 0)
-                {
-                    dgv.DataSource = datainventory;
-                    dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
-                else
-                {
-                    MessageBox.Show("No inventory data found.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }*/
-
-
-        /*public static async Task GetTransactionInfoProductAsync(DataGridView dgv, string productmfr, int productid)
+        private static string BuildSearchQueryAccountGroup(string searchValue)
         {
-            try
-            {
-                // Create the query string using parameterized SQL to prevent SQL injection
-                string query = "SELECT InvoiceTable.Invoiceid [ID], InvoiceTable.InvoiceNo [Invoice No], InvoiceTable.invoicedate [Date], " +
-                    "InvoiceTable.ClientID [Client ID], InvoiceTable.ClientName [Client Name], InvoiceDetailsTable.ProductName [Title], " +
-                    "InvoiceDetailsTable.ItemSerialNoid [Serial No], InvoiceDetailsTable.ItemWiseDiscount [Discount], " +
-                    "InvoiceDetailsTable.ItemWiseVAT [VAT], InvoiceDetailsTable.UnitSalePrice [Price], InvoiceDetailsTable.MFR [MFR], " +
-                    "InvoiceDetailsTable.Quantity [Quantity], InvoiceDetailsTable.SystemSerialNoid [System Serial No] FROM InvoiceTable " +
-                    "INNER JOIN InvoiceDetailsTable ON InvoiceDetailsTable.Invoicecode = InvoiceTable.InvoiceCode " +
-                    "WHERE InvoiceDetailsTable.Productid = @ProductID AND InvoiceTable.ClientID = @ClientID";
+            // Build the search query using parameterization to avoid SQL injection
+            return @"SELECT AccountControlID [ID],AccountControlName [ACCOUNT NAME],AccountHeadName [ACCOUNT HEAD NAME],AccountHead_ID [HEADID],CompanyName [COMPANY],CodeAccount FROM AccountControlTable WHERE 
+                AccountControlName LIKE @searchValue AND CompanyName LIKE @searchValue";
+        }
 
-                // Retrieve data asynchronously
-                DataTable datatransaction = await DatabaseAccess.RetriveAsync(query, productid, GlobalVariables.customeridglobal);
+        private static string GetDefaultAccountQuery()
+        {
+            // Default query when no search value is provided
+            return @"SELECT AccountSubControlID [ID], AccountHead_ID [HEADID], AccountSubControlName [ACCOUNT NAME], Email [EMAIL], MobileNo [MOBILE],CompanyName [COMPANY], CodeAccount FROM AccountSubControlTable";
+        }
 
-                // Populate DataGridView if data is available
-                if (datatransaction != null && datatransaction.Rows.Count > 0)
-                {
-                    dgv.DataSource = datatransaction;
-                }
-                else
-                {
-                    MessageBox.Show("No transactions found.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }*/
-
+        private static string BuildSearchQueryAccount(string searchValue)
+        {
+            // Build the search query using parameterization to avoid SQL injection
+            return @"SELECT AccountSubControlID AS [ID], AccountHead_ID AS [HEADID], AccountSubControlName AS [ACCOUNT NAME], Email AS [EMAIL], MobileNo AS [MOBILE], CompanyName AS [COMPANY], 
+                CodeAccount FROM AccountSubControlTable WHERE EXISTS (SELECT 1 FROM STRING_SPLIT(@SearchValue, ' ') AS Keywords WHERE LOWER(AccountSubControlName) LIKE '%' + LOWER(Keywords.value) + '%' 
+                OR LOWER(CompanyName) LIKE '%' + LOWER(Keywords.value) + '%')
+                ORDER BY CASE WHEN LOWER(AccountSubControlName) = LOWER(@SearchValue) THEN 1  WHEN LOWER(CompanyName) = LOWER(@SearchValue) THEN 2  WHEN LOWER(AccountSubControlName) LIKE LOWER(@SearchValue) + '%' THEN 3  
+                WHEN LOWER(CompanyName) LIKE LOWER(@SearchValue) + '%' THEN 4  
+                ELSE 5  
+            END;";
+        }
 
         public static string BuildSearchQueryProduct(string searchTerm)
         {
             string[] terms = searchTerm.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            StringBuilder queryBuilder = new StringBuilder("SELECT ProductID [ID],ProductName [TITLE],StandardPrice [PRICE],UPC,EAN,MFR,Barcode [BARCODE], (");
+            StringBuilder queryBuilder = new StringBuilder(@"
+                SELECT DISTINCT ProductID AS [ID], ProductName AS [TITLE], 
+                StandardPrice AS [PRICE], UPC, EAN, MFR, Barcode AS [BARCODE]
+                FROM ProductTable
+                WHERE 
+                ");
 
             for (int i = 0; i < terms.Length; i++)
             {
                 string term = terms[i];
                 if (i > 0)
                 {
-                    queryBuilder.Append(" + ");
+                    queryBuilder.Append(" AND ");
                 }
-                queryBuilder.Append($"(CASE WHEN ProductName LIKE '%{term}%' THEN 1 ELSE 0 END)");
-                queryBuilder.Append($" + (CASE WHEN MFR LIKE '%{term}%' THEN 1 ELSE 0 END)");
-                queryBuilder.Append($" + (CASE WHEN UPC LIKE '%{term}%' THEN 1 ELSE 0 END)");
+
+                queryBuilder.Append($@"
+                (ProductName LIKE '%{term}%' OR 
+                MFR LIKE '%{term}%' OR 
+                UPC LIKE '%{term}%') 
+                ");
             }
 
-            queryBuilder.Append(") AS RelevanceScore FROM ProductTable WHERE");
-
-            for (int i = 0; i < terms.Length; i++)
-            {
-                string term = terms[i];
-                if (i > 0)
-                {
-                    queryBuilder.Append(" AND");
-                }
-                queryBuilder.Append($" (ProductName LIKE '%{term}%' OR MFR LIKE '%{term}%' OR UPC LIKE '%{term}%')");
-            }
-
-            queryBuilder.Append(" ORDER BY RelevanceScore DESC");
+            queryBuilder.Append(" ORDER BY ProductName ASC"); // You can change sorting logic as needed.
 
             return queryBuilder.ToString();
         }
@@ -467,7 +399,6 @@ namespace SmartFlow.Common
                 return null;
             });
         }
-
 
         public static async Task<string> HashPasswordAsync(string password)
         {
@@ -488,7 +419,6 @@ namespace SmartFlow.Common
                 }
             });
         }
-
 
         public static async Task PopulateCurrencyComboBoxAsync(ComboBox combo)
         {
@@ -517,7 +447,45 @@ namespace SmartFlow.Common
             combo.ValueMember = "CurrencyId"; // The actual value will be the CurrencyId
         }
 
+        public static async Task PopulateBrandComboBoxAsync(ComboBox combo)
+        {
+            // Retrieve data from the database asynchronously
+            string query = "SELECT BrandId,BrandName,Description,BrandCode FROM BrandTable";
+            DataTable dt = await Task.Run(() => DatabaseAccess.RetriveAsync(query));
 
+            List<BrandData> brands = new List<BrandData>();
+
+            // Insert an empty row as the first item
+            brands.Add(new BrandData
+            {
+                BrandId = 0,  // You can use 0 or -1 to indicate an empty selection
+                BrandName = "", // Empty display text
+                Description = "",
+                BrandCode = ""
+            });
+
+            // Populate the ComboBox with actual data
+            foreach (DataRow row in dt.Rows)
+            {
+                BrandData brand = new BrandData
+                {
+                    BrandId = Convert.ToInt32(row["BrandId"]),
+                    BrandName = row["BrandName"].ToString(),
+                    Description = row["Description"].ToString(),
+                    BrandCode = row["BrandCode"].ToString()
+                };
+
+                brands.Add(brand);
+            }
+
+            // Setting ComboBox data source on the UI thread
+            combo.DataSource = brands;
+            combo.DisplayMember = "BrandName";  // Display brand name
+            combo.ValueMember = "BrandId";      // The actual value will be the BrandId
+
+            // Optionally set the selected index to the empty row
+            combo.SelectedIndex = 0;
+        }
 
         public static async Task FillUnitDataAsync(ComboBox combo)
         {
@@ -638,7 +606,6 @@ namespace SmartFlow.Common
             return dtUnit;
         }
 
-
         private static async Task<DataTable> GetUnitDataFromDatabaseAsync()
         {
             // Query to retrieve unit data from the database, ordered by default unit
@@ -647,7 +614,6 @@ namespace SmartFlow.Common
             // Execute the query asynchronously and return the result
             return await DatabaseAccess.RetriveAsync(query);
         }
-
 
         private static void PopulateUnitDataTable(DataTable dtUnit, DataTable dt)
         {
@@ -668,7 +634,6 @@ namespace SmartFlow.Common
             // Select the first item by default
             combo.SelectedIndex = 0;
         }
-
 
         public static async Task ShiftFocusOnEnterAsync(KeyEventArgs e, Control currentControl)
         {
@@ -697,14 +662,10 @@ namespace SmartFlow.Common
             }
         }
 
-
-        public static async Task DisposeOnCloseAsync(Form form)
+        public static void DisposeOnClose(Form form)
         {
-            form.FormClosed += async (sender, e) =>
+            form.FormClosed += (sender, e) =>
             {
-                // You could perform some async work here if needed
-                await Task.Delay(50);  // Simulated async delay, if necessary
-
                 form.Dispose();
             };
         }
@@ -854,6 +815,76 @@ namespace SmartFlow.Common
                 textBox.Text = totalvat.ToString("N2");
             }
 
+        }
+
+        public static async Task InsertOrUpdateAccountStatementAsync(
+            string clientName,
+            int clientId,
+            string type,
+            string invoiceNo,
+            string accountName,
+            string longDescription,
+            int? accountId,
+            decimal debitAmount,
+            decimal creditAmount,
+            string shortNarration,
+            bool? isDebit,  // Make it nullable so it can accept null
+            bool isCredit,
+            string companyName,
+            string StatmentDescription)
+        {
+            // Step 1: Remove delete query
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    await conn.OpenAsync();
+
+                    // Step 2: Insert new record
+                    string insertQuery = @"INSERT INTO AccountStatementTable (
+                    ClientName, ClientId, CreatedAt, CreatedDay, Type, InvoiceNo, 
+                    AccountName, LongDescription, AccountId, DebitAmount, CreditAmount, ShortNaration, IsDebit, IsCredit, CompanyName, StatmentDescription)
+                    VALUES (
+                    @ClientName, @ClientId, @CreatedAt, @CreatedDay, @Type, @InvoiceNo, 
+                    @AccountName, @LongDescription, @AccountId, @DebitAmount, @CreditAmount, @ShortNaration, @IsDebit, @IsCredit, @CompanyName, @StatmentDescription)";
+
+                    using (SqlCommand insertCmd = new SqlCommand(insertQuery, conn))
+                    {
+                        insertCmd.Parameters.AddWithValue("@ClientName", clientName);
+                        insertCmd.Parameters.AddWithValue("@ClientId", clientId);
+                        insertCmd.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
+                        insertCmd.Parameters.AddWithValue("@CreatedDay", DateTime.Now.DayOfWeek.ToString());
+                        insertCmd.Parameters.AddWithValue("@Type", type);
+                        insertCmd.Parameters.AddWithValue("@InvoiceNo", invoiceNo);
+                        insertCmd.Parameters.AddWithValue("@AccountName", accountName);
+                        insertCmd.Parameters.AddWithValue("@LongDescription", longDescription);
+                        insertCmd.Parameters.AddWithValue("@AccountId", accountId ?? (object)DBNull.Value); // Allow AccountId to be null
+                        insertCmd.Parameters.AddWithValue("@DebitAmount", debitAmount);
+                        insertCmd.Parameters.AddWithValue("@CreditAmount", creditAmount);
+                        insertCmd.Parameters.AddWithValue("@ShortNaration", shortNarration);
+
+                        // Set isDebit to false if it is null
+                        insertCmd.Parameters.AddWithValue("@IsDebit", isDebit ?? false);
+
+                        insertCmd.Parameters.AddWithValue("@IsCredit", isCredit);
+                        insertCmd.Parameters.AddWithValue("@CompanyName", companyName);
+                        insertCmd.Parameters.AddWithValue("@StatmentDescription", StatmentDescription);
+
+                        await insertCmd.ExecuteNonQueryAsync();
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("SQL Error: " + ex.Message);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                throw;
+            }
         }
     }
 }

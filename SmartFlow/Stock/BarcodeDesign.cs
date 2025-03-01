@@ -50,7 +50,7 @@ namespace SmartFlow.Stock
 
                     productSelection.ProductDataSelected += UpdateProductTextBox;
 
-                    await CommonFunction.DisposeOnCloseAsync(productSelection);
+                    CommonFunction.DisposeOnClose(productSelection);
                     productSelection.Show();
                 }
                 else
@@ -181,7 +181,7 @@ namespace SmartFlow.Stock
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
-        public async void GenerateBarcodes(DataTable dataTable)
+        public void GenerateBarcodes(DataTable dataTable)
         {
             BarcodeWriter writer = new BarcodeWriter
             {
@@ -208,7 +208,7 @@ namespace SmartFlow.Stock
 
             this.Close();
             PrintedBarcodeViewer printedBarcode = new PrintedBarcodeViewer(dataTable);
-            await CommonFunction.DisposeOnCloseAsync(printedBarcode);
+            CommonFunction.DisposeOnClose(printedBarcode);
             printedBarcode.Show();
         }
         private bool AreAnyTextBoxesFilled()
@@ -234,7 +234,7 @@ namespace SmartFlow.Stock
 
                         productSelection.ProductDataSelected += UpdateProductTextBox;
 
-                        await CommonFunction.DisposeOnCloseAsync(productSelection);
+                        CommonFunction.DisposeOnClose(productSelection);
                         productSelection.ShowDialog();
                     }
                     else

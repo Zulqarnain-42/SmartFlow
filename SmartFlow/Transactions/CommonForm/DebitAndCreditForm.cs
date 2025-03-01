@@ -1,12 +1,5 @@
 ﻿using SmartFlow.Common;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SmartFlow.Transactions.CommonForm
@@ -22,29 +15,28 @@ namespace SmartFlow.Transactions.CommonForm
         {
             try
             {
+                // Clear previous errors before validation
                 errorProvider.Clear();
+
+                // Ensure the user selects either Debit or Credit
                 if (!isdebitentrylbl.Checked && !iscreditentrylbl.Checked)
                 {
-                    errorProvider.SetError(isdebitentrylbl,"Please Select Debit Or Credit.");
-                    isdebitentrylbl.Focus();
+                    errorProvider.SetError(isdebitentrylbl, "Please Select Debit Or Credit.");
+
+                    // Focus should go to an interactive control
+                    isdebitentrylbl.Focus();  // Change to a RadioButton or CheckBox if needed
+
                     return;
                 }
 
-                /*if (iscreditentrylbl.Checked) 
-                {
-                    GlobalVariables.iscreditglobal = true;
-                }
+                // Set global variables explicitly to avoid logical errors
+                GlobalVariables.iscreditglobal = iscreditentrylbl.Checked;
+                GlobalVariables.isdebitglobal = isdebitentrylbl.Checked;
 
-                if (isdebitentrylbl.Checked)
-                {
-                    GlobalVariables.isdebitglobal = true;
-                }
+                // Store short description in the global variable
+                GlobalVariables.shortdescriptionglobal = shortdescriptiontxtbox.Text;
 
-                if(!string.IsNullOrEmpty(shortnarationtxtbox.Text) && !string.IsNullOrWhiteSpace(shortnarationtxtbox.Text))
-                {
-                    GlobalVariables.shortdescriptionglobal = shortnarationtxtbox.Text;
-                }*/
-
+                // Close the form after setting global values
                 this.Close();
 
             }

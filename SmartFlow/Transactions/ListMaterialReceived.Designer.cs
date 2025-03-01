@@ -70,6 +70,7 @@
             this.searchbtn.TabIndex = 141;
             this.searchbtn.Text = "SEARCH";
             this.searchbtn.UseVisualStyleBackColor = true;
+            this.searchbtn.Click += new System.EventHandler(this.searchbtn_Click);
             // 
             // invoicedatetotxtbox
             // 
@@ -130,6 +131,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ListMaterialReceived";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LIST MATERIAL RECEIVED";
             this.Load += new System.EventHandler(this.ListMaterialReceived_Load);
             this.panel1.ResumeLayout(false);

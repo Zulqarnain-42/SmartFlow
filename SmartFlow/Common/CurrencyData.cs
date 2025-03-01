@@ -9,6 +9,6 @@ namespace SmartFlow.Common
         public string Symbol { get; set; }
         public int CurrencyId { get; set; }
         public string Name { get; set; }
-        public float ConversionRate { get; set; }
+        public decimal ConversionRate { get; set; }
     }
 }

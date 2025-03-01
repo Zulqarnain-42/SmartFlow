@@ -22,7 +22,6 @@ namespace SmartFlow
         {
             try
             {
-                string companycode = null;
                 errorProvider.Clear();
 
                 if(usernametxtbox.Text.Trim().Length == 0)

@@ -16,7 +16,7 @@ namespace SmartFlow.Masters
             InitializeComponent();
         }
 
-        private async void newbtn_Click(object sender, EventArgs e)
+        private void newbtn_Click(object sender, EventArgs e)
         {
             CreateProduct createProduct = new CreateProduct();
             createProduct.MdiParent = this.MdiParent;
@@ -24,7 +24,7 @@ namespace SmartFlow.Masters
             {
                 FillGrid("");
             };
-            await CommonFunction.DisposeOnCloseAsync(createProduct);
+            CommonFunction.DisposeOnClose(createProduct);
             createProduct.Show();
         }
 
@@ -100,7 +100,7 @@ namespace SmartFlow.Masters
             }
         }
 
-        private async void editToolStripMenuItem_Click(object sender, EventArgs e)
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -121,7 +121,7 @@ namespace SmartFlow.Masters
                                 }
                                 FillGrid("");
                             };
-                            await CommonFunction.DisposeOnCloseAsync(createProduct);
+                            CommonFunction.DisposeOnClose(createProduct);
                             createProduct.ShowDialog();
                         }
                         else
@@ -141,7 +141,7 @@ namespace SmartFlow.Masters
             }
         }
 
-        private async void productsGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void productsGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -151,19 +151,30 @@ namespace SmartFlow.Masters
                     {
                         if (productsGridView.SelectedRows.Count == 1)
                         {
-                            CreateProduct createProduct = new CreateProduct(Convert.ToInt32(productsGridView.CurrentRow.Cells[0].Value));
-                            createProduct.MdiParent = this.MdiParent;
-                            createProduct.FormClosed += delegate
+                            // Check if the CurrentRow is not null
+                            if (productsGridView.CurrentRow != null && productsGridView.CurrentRow.Cells[0].Value != null)
                             {
-                                if(productsGridView.CurrentCell.RowIndex > 0 && productsGridView.CurrentCell.ColumnIndex > 0)
+                                CreateProduct createProduct = new CreateProduct(Convert.ToInt32(productsGridView.CurrentRow.Cells[0].Value));
+                                createProduct.MdiParent = this.MdiParent;
+                                createProduct.FormClosed += delegate
                                 {
-                                    currentRowIndex = productsGridView.CurrentCell.RowIndex;
-                                    currentCellIndex = productsGridView.CurrentCell.ColumnIndex;
-                                }
-                                FillGrid("");
-                            };
-                            await CommonFunction.DisposeOnCloseAsync(createProduct);
-                            createProduct.Show();
+                                    // Check if CurrentCell is not null
+                                    if (productsGridView.CurrentCell != null &&
+                                        productsGridView.CurrentCell.RowIndex > 0 &&
+                                        productsGridView.CurrentCell.ColumnIndex > 0)
+                                    {
+                                        currentRowIndex = productsGridView.CurrentCell.RowIndex;
+                                        currentCellIndex = productsGridView.CurrentCell.ColumnIndex;
+                                    }
+                                    FillGrid("");
+                                };
+                                CommonFunction.DisposeOnClose(createProduct);
+                                createProduct.Show();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Invalid row data.");
+                            }
                         }
                         else
                         {
@@ -175,8 +186,13 @@ namespace SmartFlow.Masters
                         MessageBox.Show("No Record Available.");
                     }
                 }
+                else
+                {
+                    MessageBox.Show("The Grid View is null.");
+                }
+
             }
-            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private int GetFirstVisibleRowIndex(DataGridView dataGridView)
@@ -247,7 +263,7 @@ namespace SmartFlow.Masters
             return queryBuilder.ToString();
         }
 
-        private async void productDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void productDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -266,7 +282,7 @@ namespace SmartFlow.Masters
                                 currentCellIndex = productsGridView.CurrentCell.ColumnIndex;
                                 FillGrid("");
                             };
-                            await CommonFunction.DisposeOnCloseAsync(createProduct);
+                            CommonFunction.DisposeOnClose(createProduct);
                             createProduct.ShowDialog();
                         }
                         else

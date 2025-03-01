@@ -50,7 +50,7 @@ namespace SmartFlow.Masters
                 await FillGridAsync("");
             };
 
-            await CommonFunction.DisposeOnCloseAsync(account);
+            CommonFunction.DisposeOnClose(account);
             account.Show();
         }
 
@@ -148,7 +148,7 @@ namespace SmartFlow.Masters
                             };
 
                             // Dispose account when closed
-                            await CommonFunction.DisposeOnCloseAsync(account);
+                            CommonFunction.DisposeOnClose(account);
 
                             // Show the account form asynchronously
                             account.Show();
@@ -198,7 +198,7 @@ namespace SmartFlow.Masters
                             };
 
                             // Dispose account when closed
-                            await CommonFunction.DisposeOnCloseAsync(account);
+                            CommonFunction.DisposeOnClose(account);
 
                             // Show the account form asynchronously
                             account.Show();
@@ -297,7 +297,7 @@ namespace SmartFlow.Masters
                     {
                         queryBuilder.Append(" AND");
                     }
-                    queryBuilder.Append($" (AccountControlTable.AccountControlName LIKE '%{term}%' OR AccountSubControlTable.AccountSubControlName " +
+                    queryBuilder.Append($" (AccountControlTable.AccountControlName LIKE '%{term}%' OR AccountSubControlTable.CompanyName LIKE '%{term}%' OR AccountSubControlTable.AccountSubControlName " +
                         $"LIKE '%{term}%' OR AccountSubControlTable.Email LIKE '%{term}%' OR AccountSubControlTable.MobileNo LIKE '%{term}%')");
                 }
 

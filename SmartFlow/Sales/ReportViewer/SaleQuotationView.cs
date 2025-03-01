@@ -17,6 +17,7 @@ namespace SmartFlow.Sales.ReportViewer
     public partial class SaleQuotationView : Form
     {
         private string invoiceNo = string.Empty;
+        private ReportDocument reportDocument;
         public SaleQuotationView(string _invoiceNo)
         {
             InitializeComponent();
@@ -33,7 +34,7 @@ namespace SmartFlow.Sales.ReportViewer
             try
             {
                 // Create a new instance of the report
-                ReportDocument reportDocument = new ReportDocument();
+                reportDocument = new ReportDocument();
 
                 string reportPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Sales\ReportViewer\Reports\SaleQuotationReport.rpt");
                 reportDocument.Load(reportPath);
@@ -46,6 +47,7 @@ namespace SmartFlow.Sales.ReportViewer
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.AddWithValue("@InvoiceNo", invoiceNo);
+                    command.Parameters.AddWithValue("@IsNewRecord", true);
 
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     DataSet dataSet = new DataSet();
@@ -62,6 +64,22 @@ namespace SmartFlow.Sales.ReportViewer
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}", "Report Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SaleQuotationView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DisposeReport();
+        }
+
+        private void DisposeReport()
+        {
+            if (reportDocument != null)
+            {
+                reportDocument.Close();
+                reportDocument.Dispose();
+                reportDocument = null;
+                GC.Collect(); // Force garbage collection
             }
         }
     }

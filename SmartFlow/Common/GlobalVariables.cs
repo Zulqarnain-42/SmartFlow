@@ -8,7 +8,7 @@ namespace SmartFlow.Common
         public static decimal productitemwisevatamount = 0;
         public static decimal producttotalwithvatitemwise = 0;
         public static decimal productcostprice = 0;
-        public static float productpriceglobal = 0;
+        public static decimal productpriceglobal = 0;
         public static decimal productinmeterprice = 0;
         public static decimal productinmeterlength = 0;
         public static string productitemwisedescriptiongloabl = null;
@@ -17,7 +17,8 @@ namespace SmartFlow.Common
         public static decimal productdiscountamountitemwise = 0;
         public static decimal productfinalamountwithvatanddiscountitemwise = 0;
         public static string availabilitystatus = null;
-        public static float discountpercentage = 0;
+        public static decimal discountpercentage = 0;
+        public static int actualqtyordered = 0;
 
 
         //// UNIT VARIABLES
@@ -29,6 +30,7 @@ namespace SmartFlow.Common
         //// WAREHOUSE VARIABLES
         ///
         public static int warehouseidglobal = 0;
+        public static string warehousenameglobal = null;
 
 
         //// TRANSACTION VARIABLES

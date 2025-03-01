@@ -131,6 +131,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ModifyMaterialIssue";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MODIFY MATERIAL ISSUE PARTY";
             this.Load += new System.EventHandler(this.ModifyMaterialIssue_Load);
             this.panel1.ResumeLayout(false);

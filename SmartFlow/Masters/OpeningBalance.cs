@@ -163,7 +163,7 @@ namespace SmartFlow.Masters
             }
             return false; // No TextBox is filled
         }
-        private async void dataGridViewopeningbalance_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridViewopeningbalance_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -191,7 +191,7 @@ namespace SmartFlow.Masters
                                 currentCellIndex = dataGridViewopeningbalance.CurrentCell.ColumnIndex;
                                 FillGrid("");
                             };
-                            await CommonFunction.DisposeOnCloseAsync(updateOpening);
+                            CommonFunction.DisposeOnClose(updateOpening);
                             updateOpening.ShowDialog();
                         }
                     }

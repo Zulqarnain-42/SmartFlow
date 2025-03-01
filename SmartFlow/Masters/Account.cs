@@ -1,4 +1,5 @@
 ﻿using SmartFlow.Common;
+using SmartFlow.Common.CommonForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -30,28 +31,28 @@ namespace SmartFlow.Masters
             {
                 errorProvider.Clear();
 
-                if (nametxtbox.Text.Trim().Length == 0)
+                if (nametxtbox.Text.Trim().Length == 0 && nametxtbox.Enabled == true)
                 {
                     errorProvider.SetError(nametxtbox, "Please Enter Name");
                     nametxtbox.Focus();
                     return;
                 }
 
-                if (selectaccountgrouptxtbox.Text.Trim().Length == 0)
+                if (selectaccountgrouptxtbox.Text.Trim().Length == 0 && selectaccountgrouptxtbox.Enabled == true)
                 {
                     errorProvider.SetError(selectaccountgrouptxtbox, "Please Select Account Group.");
                     selectaccountgrouptxtbox.Focus();
                     return;
                 }
 
-                if(emailtxtbox.Text.Trim().Length == 0)
+                if(emailtxtbox.Text.Trim().Length == 0 && emailtxtbox.Enabled == true) 
                 {
                     errorProvider.SetError(emailtxtbox,"Please Enter Email.");
                     emailtxtbox.Focus();
                     return;
                 }
 
-                if(mobilenotxtbox.Text.Trim().Length == 0)
+                if(mobilenotxtbox.Text.Trim().Length == 0 && mobilenotxtbox.Enabled == true)
                 {
                     errorProvider.SetError(mobilenotxtbox,"Please Enter Mobile No.");
                     mobilenotxtbox.Focus();
@@ -163,35 +164,61 @@ namespace SmartFlow.Masters
 
         private async Task<bool> InsertAccountSubControlAsync()
         {
+
+            int accountheadid = string.IsNullOrEmpty(accountheadidlbl.Text) ? 0 : Convert.ToInt32(accountheadidlbl.Text);
+            int accountcontrolid = string.IsNullOrEmpty(accountgroupidlbl.Text) ? 0 : Convert.ToInt32(accountgroupidlbl.Text);
+            string accountname = string.IsNullOrEmpty(nametxtbox.Text) ? "N/A" : nametxtbox.Text;
+            string accountsubcontrolcode = Guid.NewGuid().ToString();
+            string codeaccount = string.IsNullOrEmpty(accountcodelbl.Text) ? "0000" : accountcodelbl.Text;
+            string printname = string.IsNullOrEmpty(printnametxtbox.Text) ? "N/A" : printnametxtbox.Text;
+            string address = string.IsNullOrEmpty(addresstxtbox.Text) ? "N/A" : addresstxtbox.Text;
+            string country = string.IsNullOrEmpty(countrytxtbox.Text) ? "N/A" : countrytxtbox.Text;
+            string State = string.IsNullOrEmpty(statetxtbox.Text) ? "N/A" : statetxtbox.Text;
+            string email = string.IsNullOrEmpty(emailtxtbox.Text) ? "N/A" : emailtxtbox.Text;
+            string MobileNo = string.IsNullOrEmpty(mobilenotxtbox.Text) ? "0000000000" : mobilenotxtbox.Text;
+            string Area = string.IsNullOrEmpty(areatxtbox.Text) ? "N/A" : areatxtbox.Text;
+            string Description = string.IsNullOrEmpty(descriptiontxtbox.Text) ? "N/A" : descriptiontxtbox.Text;
+            string trn = string.IsNullOrEmpty(trntxtbox.Text) ? "N/A" : trntxtbox.Text;
+            string gstno = string.IsNullOrEmpty(gstnotxtbox.Text) ? "N/A" : gstnotxtbox.Text;
+            string vatno = string.IsNullOrEmpty(vatnotxtbox.Text) ? "N/A" : vatnotxtbox.Text;
+            string location = string.IsNullOrEmpty(locationtxtbox.Text) ? "N/A" : locationtxtbox.Text;
+            string postalcode = string.IsNullOrEmpty(postalcodetxtbox.Text) ? "0000" : postalcodetxtbox.Text;
+            int paymentterm = string.IsNullOrEmpty(paymenttermstxtbox.Text) ? 0 : Convert.ToInt32(paymenttermstxtbox.Text);
+
+            // Safe parsing for decimal values
+            decimal creditlimit = decimal.TryParse(creditlimittxtbox.Text, out decimal tempCreditLimit) ? tempCreditLimit : 0;
+            decimal discountpercentage = decimal.TryParse(discounttxtbox.Text, out decimal tempDiscount) ? tempDiscount : 0;
+
+
             string tableName = "AccountSubControlTable";
 
             var columnData = new Dictionary<string, object>
             {
-                { "AccountHead_ID", accountheadidlbl.Text },
-                { "AccountControl_ID", accountgroupidlbl.Text },
-                { "AccountSubControlName", nametxtbox.Text },
-                { "AccountSubControlCode", Guid.NewGuid().ToString() },
+                { "AccountHead_ID", accountheadid },
+                { "AccountControl_ID", accountcontrolid },
+                { "AccountSubControlName", accountname },
+                { "AccountSubControlCode", accountsubcontrolcode },
                 { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
                 { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
-                { "CodeAccount", accountcodelbl.Text },
-                { "PrintName", printnametxtbox.Text },
-                { "Address", addresstxtbox.Text },
-                { "Country", countrytxtbox.Text },
-                { "State", statetxtbox.Text },
-                { "Email", emailtxtbox.Text },
-                { "MobileNo", mobilenotxtbox.Text },
-                { "Area", areatxtbox.Text },
-                { "Description", descriptiontxtbox.Text },
-                { "TRN", trntxtbox.Text },
-                { "GSTNO", gstnotxtbox.Text },
-                { "VATNO", vatnotxtbox.Text },
-                { "Location", locationtxtbox.Text },
-                { "PostalCode", postalcodetxtbox.Text },
+                { "CodeAccount", codeaccount },
+                { "PrintName", printname },
+                { "Address", address },
+                { "Country", country },
+                { "State", State },
+                { "Email", email },
+                { "MobileNo", MobileNo },
+                { "Area", Area },
+                { "Description", Description },
+                { "TRN", trn },
+                { "GSTNO", gstno },
+                { "VATNO", vatno },
+                { "Location", location },
+                { "PostalCode", postalcode },
                 { "Fax", faxtxtbox.Text },
                 { "Website", websitetxtbox.Text },
-                { "CreditLimit", creditlimittxtbox.Text },
-                { "PaymentTerm", paymenttermstxtbox.Text },
-                { "DiscountPercentage", discounttxtbox.Text },
+                { "CreditLimit", creditlimit },
+                { "PaymentTerm", paymentterm },
+                { "DiscountPercentage", discountpercentage },
                 { "RefrencePersonName", refrencepersonnametxtbox.Text },
                 { "RefrencePersonMobile", refrencepersonmobiletxtbox.Text },
                 { "RefrencePersonEmail", refrencepersonemailtxtbox.Text },
@@ -424,31 +451,27 @@ namespace SmartFlow.Masters
         {
             try
             {
-                /*if (string.IsNullOrEmpty(selectaccountgrouptxtbox.Text))
+                if (string.IsNullOrEmpty(selectaccountgrouptxtbox.Text))
                 {
-                    Form openForm = await CommonFunction.IsFormOpenAsync(typeof(AccountGroupSelectionForm));
+                    Form openForm = await CommonFunction.IsFormOpenAsync(typeof(AccountGroupSelection));
                     if (openForm == null)
                     {
-                        AccountGroupSelectionForm accountSelection = new AccountGroupSelectionForm
+                        AccountGroupSelection accountSelection = new AccountGroupSelection
                         {
                             WindowState = FormWindowState.Normal,
                             StartPosition = FormStartPosition.CenterParent,
                         };
 
-                        accountSelection.FormClosed += async delegate
-                        {
-                            // Use async call if the UpdateAccountInfo method is async
-                            await UpdateAccountInfo();
-                        };
+                        accountSelection.AccountDataSelected += UpdateAccountInfo;
 
-                        await CommonFunction.DisposeOnCloseAsync(accountSelection);
+                        CommonFunction.DisposeOnClose(accountSelection);
                         await Task.Run(() => accountSelection.ShowDialog());  // Use async operation to show form asynchronously
                     }
                     else
                     {
                         openForm.BringToFront();
                     }
-                }*/
+                }
             }
             catch (Exception ex)
             {
@@ -521,31 +544,29 @@ namespace SmartFlow.Masters
         {
             if (e.KeyCode == Keys.Enter)
             {
-                /*if (string.IsNullOrEmpty(selectaccountgrouptxtbox.Text))
+                if (string.IsNullOrEmpty(selectaccountgrouptxtbox.Text))
                 {
-                    Form openForm = await CommonFunction.IsFormOpenAsync(typeof(AccountGroupSelectionForm));
+                    Form openForm = await CommonFunction.IsFormOpenAsync(typeof(AccountGroupSelection));
                     if (openForm == null)
                     {
-                        AccountGroupSelectionForm accountSelection = new AccountGroupSelectionForm
+                        AccountGroupSelection accountSelection = new AccountGroupSelection
                         {
                             WindowState = FormWindowState.Normal,
                             StartPosition = FormStartPosition.CenterParent,
                         };
 
-                        accountSelection.FormClosed += async delegate
-                        {
-                            await UpdateAccountInfo();
-                        };
+                        accountSelection.AccountDataSelected += UpdateAccountInfo;
 
-                        await CommonFunction.DisposeOnCloseAsync(accountSelection);
-                        // Use ShowDialog asynchronously if you have any async work to be done inside the form
-                        await Task.Run(() => accountSelection.ShowDialog());
+                        CommonFunction.DisposeOnClose(accountSelection);
+
+                        // Run ShowDialog() directly on the UI thread
+                        accountSelection.ShowDialog();
                     }
                     else
                     {
                         openForm.BringToFront();
                     }
-                }*/
+                }
             }
         }
 
@@ -580,9 +601,39 @@ namespace SmartFlow.Masters
                     string initialize = "AC";
                     accountcodelbl.Text = await GenerateRandomAccountCodeAsync(initialize);
                     accountcodelbl.Visible = true;
+                    addresstxtbox.Enabled = false;
+                    countrytxtbox.Enabled = false;
+                    postalcodetxtbox.Enabled = false;
+                    areatxtbox.Enabled = false;
+                    locationtxtbox.Enabled = false;
+                    statetxtbox.Enabled = false;
+                    emailtxtbox.Enabled = false;
+                    websitetxtbox.Enabled = false;
+                    creditlimittxtbox.Enabled = false;
+                    paymenttermstxtbox.Enabled = false;
+                    gstnotxtbox.Enabled = false;
+                    vatnotxtbox.Enabled = false;
+                    servicetaxnotxtbox.Enabled = false;
+                    trntxtbox.Enabled = false;
+                    mobilenotxtbox.Enabled = false;
+                    emiratesidtxtbox.Enabled = false;
+                    faxtxtbox.Enabled = false;
+                    companynametxtbox.Enabled = false;
+                    banknametxtbox.Enabled = false;
+                    accountnotxtbox.Enabled = false;
+                    discounttxtbox.Enabled = false;
+                    refrencepersonnametxtbox.Enabled = false;
+                    refrencepersonemailtxtbox.Enabled = false;
+                    refrencepersonmobiletxtbox.Enabled = false;
+                    descriptiontxtbox.Enabled = false;
                 }
             }
         }
 
+        private void addcompanybtn_Click(object sender, EventArgs e)
+        {
+            AddCompany addCompany = new AddCompany();
+            addCompany.ShowDialog();
+        }
     }
 }

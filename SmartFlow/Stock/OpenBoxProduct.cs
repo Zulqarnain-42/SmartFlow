@@ -11,10 +11,20 @@ namespace SmartFlow.Stock
     public partial class OpenBoxProduct : Form
     {
         private int invoiceCounter = 1;
+        private DataTable _datainvoice;
+        private DataTable _detaildatainvoice;
         public OpenBoxProduct()
         {
             InitializeComponent();
         }
+
+        public OpenBoxProduct(DataTable datainvoice,DataTable detaildatainvoice)
+        {
+            InitializeComponent();
+            this._datainvoice = datainvoice;
+            this._detaildatainvoice = detaildatainvoice;
+        }
+
         private async Task<string> GenerateNextInvoiceNumber()
         {
             try
@@ -305,7 +315,7 @@ namespace SmartFlow.Stock
                             warehouseSelection.MdiParent = this.MdiParent;
 
                             warehouseSelection.WarehouseDataSelected += UpdateWarehouseInfo;
-                            await CommonFunction.DisposeOnCloseAsync(warehouseSelection);
+                            CommonFunction.DisposeOnClose(warehouseSelection);
                             warehouseSelection.Show();
                         }
                     }
@@ -336,10 +346,8 @@ namespace SmartFlow.Stock
                     this.Invoke(new Action(() =>
                     {
                         // Assuming these are TextBox controls
-                        /*supplieridlbl.Text = supplierId.ToString();
-                        selectsuppliertxtbox.Text = supplierName;
-                        codetxtbox.Text = supplierCode;
-                        companytxtbox.Text = companyName;*/
+                        warehouseidlbl.Text = warehouseid.ToString();
+                        selectwarehousefromtxtbox.Text = warehousename;
                     }));
                 });
             }
@@ -365,7 +373,7 @@ namespace SmartFlow.Stock
 
                     productSelectionForm.ProductDataSelected += UpdateProductTextBox;
 
-                    await CommonFunction.DisposeOnCloseAsync(productSelectionForm);
+                    CommonFunction.DisposeOnClose(productSelectionForm);
                     productSelectionForm.ShowDialog();
                 }
                 else
@@ -396,10 +404,12 @@ namespace SmartFlow.Stock
                     this.Invoke(new Action(() =>
                     {
                         // Assuming these are TextBox controls
-                        /* supplieridlbl.Text = supplierId.ToString();
-                         selectsuppliertxtbox.Text = supplierName;
-                         suppliercodetxtbox.Text = supplierCode;
-                         companytxtbox.Text = companyName;*/
+                        productidlbl.Text = productid.ToString();
+                        productnamelbl.Text = productname;
+                        productupclbl.Text = productupc;
+                        productbarcodelbl.Text = productbarcode;
+                        productpricelbl.Text = productprice.ToString();
+                        productmfrlbl.Text = productmfr;
                     }));
                 });
             }
@@ -425,7 +435,7 @@ namespace SmartFlow.Stock
 
                     productSelectionForm.ProductDataSelected += UpdateOpenBoxProductTextBox;
 
-                    await CommonFunction.DisposeOnCloseAsync(productSelectionForm);
+                    CommonFunction.DisposeOnClose(productSelectionForm);
                     productSelectionForm.ShowDialog();
                 }
                 else
@@ -448,17 +458,21 @@ namespace SmartFlow.Stock
                     int productid = e.ProductId;
                     string productName = e.ProductName;
                     string productmfr = e.ProductMfr;
-
+                    string productupc = e.ProductUPC;
+                    float productprice = e.ProductPrice;
+                    string productbarcode = e.ProductBarcode;
 
                     // If you need to update UI controls, ensure that it's done on the UI thread
                     // If you update textboxes, labels, etc., do it like this:
                     this.Invoke(new Action(() =>
                     {
                         // Assuming these are TextBox controls
-                        /*supplieridlbl.Text = supplierId.ToString();
-                        selectsuppliertxtbox.Text = supplierName;
-                        codetxtbox.Text = supplierCode;
-                        companytxtbox.Text = companyName;*/
+                        openboxprodidlbl.Text = productid.ToString();
+                        openboxproductnamelbl.Text = productName;
+                        openboxprodmfrlbl.Text = productmfr;
+                        openboxproductupclbl.Text = productupc;
+                        openboxproductpricelbl.Text = productprice.ToString();
+                        openboxproductbarcodelbl.Text = productbarcode;
                     }));
                 });
             }

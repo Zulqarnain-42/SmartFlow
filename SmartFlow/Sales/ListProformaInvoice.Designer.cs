@@ -70,6 +70,7 @@
             this.searchbtn.TabIndex = 141;
             this.searchbtn.Text = "SEARCH";
             this.searchbtn.UseVisualStyleBackColor = true;
+            this.searchbtn.Click += new System.EventHandler(this.searchbtn_Click);
             // 
             // invoicedatetotxtbox
             // 

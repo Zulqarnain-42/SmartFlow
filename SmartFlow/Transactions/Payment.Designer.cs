@@ -36,6 +36,13 @@
             this.invoicenolbl = new System.Windows.Forms.Label();
             this.datelbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.currencyconversionratelbl = new System.Windows.Forms.Label();
+            this.currencyidlbl = new System.Windows.Forms.Label();
+            this.currencynamelbl = new System.Windows.Forms.Label();
+            this.currencystringlbl = new System.Windows.Forms.Label();
+            this.currencysymbollbl = new System.Windows.Forms.Label();
+            this.transactionidlbl = new System.Windows.Forms.Label();
+            this.transactioncodelbl = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.longdescriptiontxtbox = new System.Windows.Forms.TextBox();
             this.dgvPayment = new System.Windows.Forms.DataGridView();
@@ -48,6 +55,7 @@
             this.iscreditcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.debitcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.creditcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.shortnarationcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.headinglbl = new System.Windows.Forms.Label();
             this.invoicedatetxtbox = new System.Windows.Forms.MaskedTextBox();
@@ -57,20 +65,20 @@
             this.accountcodetxtbox = new System.Windows.Forms.TextBox();
             this.accountcodeandname = new System.Windows.Forms.Label();
             this.paymentvoucheridlbl = new System.Windows.Forms.Label();
-            this.transactioncodelbl = new System.Windows.Forms.Label();
             this.voucherinfotxtbox = new System.Windows.Forms.RichTextBox();
             this.voucherinfolbl = new System.Windows.Forms.Label();
-            this.bankaccountradio = new System.Windows.Forms.RadioButton();
-            this.cashradiobtn = new System.Windows.Forms.RadioButton();
-            this.transactionidlbl = new System.Windows.Forms.Label();
-            this.currencynamelbl = new System.Windows.Forms.Label();
-            this.currencystringlbl = new System.Windows.Forms.Label();
-            this.currencysymbollbl = new System.Windows.Forms.Label();
-            this.currencyidlbl = new System.Windows.Forms.Label();
             this.currencylbl = new System.Windows.Forms.Label();
             this.accountidlbl = new System.Windows.Forms.Label();
             this.accountheadidlbl = new System.Windows.Forms.Label();
             this.addbtn = new System.Windows.Forms.Button();
+            this.totalcreditvaluelbl = new System.Windows.Forms.Label();
+            this.totaldebitvaluelbl = new System.Windows.Forms.Label();
+            this.totalcreditlbl = new System.Windows.Forms.Label();
+            this.totaldebitlbl = new System.Windows.Forms.Label();
+            this.shortnarationtxtbox = new System.Windows.Forms.TextBox();
+            this.narationlbl = new System.Windows.Forms.Label();
+            this.debitamountradio = new System.Windows.Forms.RadioButton();
+            this.creditamountradio = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -91,7 +99,7 @@
             this.closebtn.Margin = new System.Windows.Forms.Padding(2);
             this.closebtn.Name = "closebtn";
             this.closebtn.Size = new System.Drawing.Size(95, 32);
-            this.closebtn.TabIndex = 3;
+            this.closebtn.TabIndex = 1;
             this.closebtn.Text = "Close";
             this.closebtn.UseVisualStyleBackColor = true;
             this.closebtn.Click += new System.EventHandler(this.closebtn_Click);
@@ -104,7 +112,7 @@
             this.savebtn.Margin = new System.Windows.Forms.Padding(2);
             this.savebtn.Name = "savebtn";
             this.savebtn.Size = new System.Drawing.Size(95, 32);
-            this.savebtn.TabIndex = 2;
+            this.savebtn.TabIndex = 0;
             this.savebtn.Text = "Save";
             this.savebtn.UseVisualStyleBackColor = true;
             this.savebtn.Click += new System.EventHandler(this.savebtn_Click);
@@ -118,7 +126,7 @@
             this.invoicenotxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.invoicenotxtbox.Name = "invoicenotxtbox";
             this.invoicenotxtbox.Size = new System.Drawing.Size(457, 27);
-            this.invoicenotxtbox.TabIndex = 20;
+            this.invoicenotxtbox.TabIndex = 1;
             // 
             // invoicenolbl
             // 
@@ -144,20 +152,104 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.currencyconversionratelbl);
             this.panel2.Controls.Add(this.savebtn);
             this.panel2.Controls.Add(this.closebtn);
+            this.panel2.Controls.Add(this.currencyidlbl);
+            this.panel2.Controls.Add(this.currencynamelbl);
+            this.panel2.Controls.Add(this.currencystringlbl);
+            this.panel2.Controls.Add(this.currencysymbollbl);
+            this.panel2.Controls.Add(this.transactionidlbl);
+            this.panel2.Controls.Add(this.transactioncodelbl);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 574);
+            this.panel2.Location = new System.Drawing.Point(0, 650);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1262, 52);
             this.panel2.TabIndex = 47;
             // 
+            // currencyconversionratelbl
+            // 
+            this.currencyconversionratelbl.AutoSize = true;
+            this.currencyconversionratelbl.Location = new System.Drawing.Point(345, 11);
+            this.currencyconversionratelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.currencyconversionratelbl.Name = "currencyconversionratelbl";
+            this.currencyconversionratelbl.Size = new System.Drawing.Size(128, 13);
+            this.currencyconversionratelbl.TabIndex = 171;
+            this.currencyconversionratelbl.Text = "currencyconversionratelbl";
+            this.currencyconversionratelbl.Visible = false;
+            // 
+            // currencyidlbl
+            // 
+            this.currencyidlbl.AutoSize = true;
+            this.currencyidlbl.Location = new System.Drawing.Point(6, 11);
+            this.currencyidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.currencyidlbl.Name = "currencyidlbl";
+            this.currencyidlbl.Size = new System.Drawing.Size(66, 13);
+            this.currencyidlbl.TabIndex = 167;
+            this.currencyidlbl.Text = "currencyidlbl";
+            this.currencyidlbl.Visible = false;
+            // 
+            // currencynamelbl
+            // 
+            this.currencynamelbl.AutoSize = true;
+            this.currencynamelbl.Location = new System.Drawing.Point(76, 11);
+            this.currencynamelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.currencynamelbl.Name = "currencynamelbl";
+            this.currencynamelbl.Size = new System.Drawing.Size(84, 13);
+            this.currencynamelbl.TabIndex = 170;
+            this.currencynamelbl.Text = "currencynamelbl";
+            this.currencynamelbl.Visible = false;
+            // 
+            // currencystringlbl
+            // 
+            this.currencystringlbl.AutoSize = true;
+            this.currencystringlbl.Location = new System.Drawing.Point(164, 11);
+            this.currencystringlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.currencystringlbl.Name = "currencystringlbl";
+            this.currencystringlbl.Size = new System.Drawing.Size(83, 13);
+            this.currencystringlbl.TabIndex = 169;
+            this.currencystringlbl.Text = "currencystringlbl";
+            this.currencystringlbl.Visible = false;
+            // 
+            // currencysymbollbl
+            // 
+            this.currencysymbollbl.AutoSize = true;
+            this.currencysymbollbl.Location = new System.Drawing.Point(251, 11);
+            this.currencysymbollbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.currencysymbollbl.Name = "currencysymbollbl";
+            this.currencysymbollbl.Size = new System.Drawing.Size(90, 13);
+            this.currencysymbollbl.TabIndex = 168;
+            this.currencysymbollbl.Text = "currencysymbollbl";
+            this.currencysymbollbl.Visible = false;
+            // 
+            // transactionidlbl
+            // 
+            this.transactionidlbl.AutoSize = true;
+            this.transactionidlbl.Location = new System.Drawing.Point(817, 11);
+            this.transactionidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.transactionidlbl.Name = "transactionidlbl";
+            this.transactionidlbl.Size = new System.Drawing.Size(77, 13);
+            this.transactionidlbl.TabIndex = 163;
+            this.transactionidlbl.Text = "transactionidlbl";
+            this.transactionidlbl.Visible = false;
+            // 
+            // transactioncodelbl
+            // 
+            this.transactioncodelbl.AutoSize = true;
+            this.transactioncodelbl.Location = new System.Drawing.Point(898, 11);
+            this.transactioncodelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.transactioncodelbl.Name = "transactioncodelbl";
+            this.transactioncodelbl.Size = new System.Drawing.Size(93, 13);
+            this.transactioncodelbl.TabIndex = 158;
+            this.transactioncodelbl.Text = "transactioncodelbl";
+            this.transactioncodelbl.Visible = false;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.longdescriptiontxtbox);
             this.groupBox2.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(9, 462);
+            this.groupBox2.Location = new System.Drawing.Point(9, 548);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
@@ -193,9 +285,10 @@
             this.isdebitcolumn,
             this.iscreditcolumn,
             this.debitcolumn,
-            this.creditcolumn});
+            this.creditcolumn,
+            this.shortnarationcolumn});
             this.dgvPayment.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvPayment.Location = new System.Drawing.Point(12, 136);
+            this.dgvPayment.Location = new System.Drawing.Point(12, 182);
             this.dgvPayment.Margin = new System.Windows.Forms.Padding(2);
             this.dgvPayment.Name = "dgvPayment";
             this.dgvPayment.ReadOnly = true;
@@ -203,11 +296,13 @@
             this.dgvPayment.RowHeadersWidth = 51;
             this.dgvPayment.RowTemplate.Height = 24;
             this.dgvPayment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPayment.Size = new System.Drawing.Size(1012, 292);
+            this.dgvPayment.Size = new System.Drawing.Size(1012, 325);
             this.dgvPayment.TabIndex = 53;
             this.dgvPayment.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPayment_CellDoubleClick);
             this.dgvPayment.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPayment_CellFormatting);
+            this.dgvPayment.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPayment_CellValueChanged);
             this.dgvPayment.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvPayment_RowsAdded);
+            this.dgvPayment.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvPayment_RowsRemoved);
             this.dgvPayment.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvPayment_KeyDown);
             // 
             // serialnocolumn
@@ -286,6 +381,13 @@
             this.creditcolumn.ReadOnly = true;
             this.creditcolumn.Width = 125;
             // 
+            // shortnarationcolumn
+            // 
+            this.shortnarationcolumn.HeaderText = "SHORT NARATION";
+            this.shortnarationcolumn.Name = "shortnarationcolumn";
+            this.shortnarationcolumn.ReadOnly = true;
+            this.shortnarationcolumn.Width = 135;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.headinglbl);
@@ -319,7 +421,7 @@
             this.invoicedatetxtbox.Mask = "00/00/0000";
             this.invoicedatetxtbox.Name = "invoicedatetxtbox";
             this.invoicedatetxtbox.Size = new System.Drawing.Size(141, 27);
-            this.invoicedatetxtbox.TabIndex = 113;
+            this.invoicedatetxtbox.TabIndex = 0;
             this.invoicedatetxtbox.ValidatingType = typeof(System.DateTime);
             // 
             // amounttxtbox
@@ -330,7 +432,7 @@
             this.amounttxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.amounttxtbox.Name = "amounttxtbox";
             this.amounttxtbox.Size = new System.Drawing.Size(678, 27);
-            this.amounttxtbox.TabIndex = 156;
+            this.amounttxtbox.TabIndex = 3;
             this.amounttxtbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // amountlbl
@@ -352,7 +454,7 @@
             this.accountnametxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.accountnametxtbox.Name = "accountnametxtbox";
             this.accountnametxtbox.Size = new System.Drawing.Size(534, 27);
-            this.accountnametxtbox.TabIndex = 154;
+            this.accountnametxtbox.TabIndex = 2;
             this.accountnametxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.accountnametxtbox_MouseClick);
             this.accountnametxtbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.accountnametxtbox_KeyDown);
             // 
@@ -381,7 +483,7 @@
             // paymentvoucheridlbl
             // 
             this.paymentvoucheridlbl.AutoSize = true;
-            this.paymentvoucheridlbl.Location = new System.Drawing.Point(809, 81);
+            this.paymentvoucheridlbl.Location = new System.Drawing.Point(1016, 75);
             this.paymentvoucheridlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.paymentvoucheridlbl.Name = "paymentvoucheridlbl";
             this.paymentvoucheridlbl.Size = new System.Drawing.Size(104, 13);
@@ -389,123 +491,32 @@
             this.paymentvoucheridlbl.Text = "paymentvoucheridlbl";
             this.paymentvoucheridlbl.Visible = false;
             // 
-            // transactioncodelbl
-            // 
-            this.transactioncodelbl.AutoSize = true;
-            this.transactioncodelbl.Location = new System.Drawing.Point(875, 44);
-            this.transactioncodelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.transactioncodelbl.Name = "transactioncodelbl";
-            this.transactioncodelbl.Size = new System.Drawing.Size(93, 13);
-            this.transactioncodelbl.TabIndex = 158;
-            this.transactioncodelbl.Text = "transactioncodelbl";
-            this.transactioncodelbl.Visible = false;
-            // 
             // voucherinfotxtbox
             // 
-            this.voucherinfotxtbox.Location = new System.Drawing.Point(1028, 158);
+            this.voucherinfotxtbox.Enabled = false;
+            this.voucherinfotxtbox.Location = new System.Drawing.Point(1028, 182);
             this.voucherinfotxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.voucherinfotxtbox.Name = "voucherinfotxtbox";
-            this.voucherinfotxtbox.Size = new System.Drawing.Size(225, 398);
-            this.voucherinfotxtbox.TabIndex = 159;
+            this.voucherinfotxtbox.Size = new System.Drawing.Size(225, 460);
+            this.voucherinfotxtbox.TabIndex = 6;
             this.voucherinfotxtbox.Text = "";
             // 
             // voucherinfolbl
             // 
             this.voucherinfolbl.AutoSize = true;
             this.voucherinfolbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.voucherinfolbl.Location = new System.Drawing.Point(1028, 136);
+            this.voucherinfolbl.Location = new System.Drawing.Point(1025, 162);
             this.voucherinfolbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.voucherinfolbl.Name = "voucherinfolbl";
             this.voucherinfolbl.Size = new System.Drawing.Size(87, 18);
             this.voucherinfolbl.TabIndex = 160;
             this.voucherinfolbl.Text = "Voucher Info";
             // 
-            // bankaccountradio
-            // 
-            this.bankaccountradio.AutoSize = true;
-            this.bankaccountradio.Location = new System.Drawing.Point(1153, 84);
-            this.bankaccountradio.Margin = new System.Windows.Forms.Padding(2);
-            this.bankaccountradio.Name = "bankaccountradio";
-            this.bankaccountradio.Size = new System.Drawing.Size(109, 17);
-            this.bankaccountradio.TabIndex = 161;
-            this.bankaccountradio.TabStop = true;
-            this.bankaccountradio.Text = "BANK ACCOUNT";
-            this.bankaccountradio.UseVisualStyleBackColor = true;
-            this.bankaccountradio.Visible = false;
-            // 
-            // cashradiobtn
-            // 
-            this.cashradiobtn.AutoSize = true;
-            this.cashradiobtn.Location = new System.Drawing.Point(1153, 106);
-            this.cashradiobtn.Margin = new System.Windows.Forms.Padding(2);
-            this.cashradiobtn.Name = "cashradiobtn";
-            this.cashradiobtn.Size = new System.Drawing.Size(54, 17);
-            this.cashradiobtn.TabIndex = 162;
-            this.cashradiobtn.TabStop = true;
-            this.cashradiobtn.Text = "CASH";
-            this.cashradiobtn.UseVisualStyleBackColor = true;
-            this.cashradiobtn.Visible = false;
-            // 
-            // transactionidlbl
-            // 
-            this.transactionidlbl.AutoSize = true;
-            this.transactionidlbl.Location = new System.Drawing.Point(875, 64);
-            this.transactionidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.transactionidlbl.Name = "transactionidlbl";
-            this.transactionidlbl.Size = new System.Drawing.Size(77, 13);
-            this.transactionidlbl.TabIndex = 163;
-            this.transactionidlbl.Text = "transactionidlbl";
-            this.transactionidlbl.Visible = false;
-            // 
-            // currencynamelbl
-            // 
-            this.currencynamelbl.AutoSize = true;
-            this.currencynamelbl.Location = new System.Drawing.Point(978, 72);
-            this.currencynamelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.currencynamelbl.Name = "currencynamelbl";
-            this.currencynamelbl.Size = new System.Drawing.Size(84, 13);
-            this.currencynamelbl.TabIndex = 170;
-            this.currencynamelbl.Text = "currencynamelbl";
-            this.currencynamelbl.Visible = false;
-            // 
-            // currencystringlbl
-            // 
-            this.currencystringlbl.AutoSize = true;
-            this.currencystringlbl.Location = new System.Drawing.Point(973, 57);
-            this.currencystringlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.currencystringlbl.Name = "currencystringlbl";
-            this.currencystringlbl.Size = new System.Drawing.Size(83, 13);
-            this.currencystringlbl.TabIndex = 169;
-            this.currencystringlbl.Text = "currencystringlbl";
-            this.currencystringlbl.Visible = false;
-            // 
-            // currencysymbollbl
-            // 
-            this.currencysymbollbl.AutoSize = true;
-            this.currencysymbollbl.Location = new System.Drawing.Point(973, 43);
-            this.currencysymbollbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.currencysymbollbl.Name = "currencysymbollbl";
-            this.currencysymbollbl.Size = new System.Drawing.Size(90, 13);
-            this.currencysymbollbl.TabIndex = 168;
-            this.currencysymbollbl.Text = "currencysymbollbl";
-            this.currencysymbollbl.Visible = false;
-            // 
-            // currencyidlbl
-            // 
-            this.currencyidlbl.AutoSize = true;
-            this.currencyidlbl.Location = new System.Drawing.Point(1162, 64);
-            this.currencyidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.currencyidlbl.Name = "currencyidlbl";
-            this.currencyidlbl.Size = new System.Drawing.Size(66, 13);
-            this.currencyidlbl.TabIndex = 167;
-            this.currencyidlbl.Text = "currencyidlbl";
-            this.currencyidlbl.Visible = false;
-            // 
             // currencylbl
             // 
             this.currencylbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.currencylbl.AutoSize = true;
-            this.currencylbl.Location = new System.Drawing.Point(1162, 44);
+            this.currencylbl.Location = new System.Drawing.Point(1130, 43);
             this.currencylbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.currencylbl.Name = "currencylbl";
             this.currencylbl.Size = new System.Drawing.Size(98, 13);
@@ -515,7 +526,7 @@
             // accountidlbl
             // 
             this.accountidlbl.AutoSize = true;
-            this.accountidlbl.Location = new System.Drawing.Point(807, 44);
+            this.accountidlbl.Location = new System.Drawing.Point(1016, 43);
             this.accountidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.accountidlbl.Name = "accountidlbl";
             this.accountidlbl.Size = new System.Drawing.Size(64, 13);
@@ -526,7 +537,7 @@
             // accountheadidlbl
             // 
             this.accountheadidlbl.AutoSize = true;
-            this.accountheadidlbl.Location = new System.Drawing.Point(809, 64);
+            this.accountheadidlbl.Location = new System.Drawing.Point(1016, 58);
             this.accountheadidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.accountheadidlbl.Name = "accountheadidlbl";
             this.accountheadidlbl.Size = new System.Drawing.Size(88, 13);
@@ -536,33 +547,118 @@
             // 
             // addbtn
             // 
-            this.addbtn.Location = new System.Drawing.Point(812, 106);
+            this.addbtn.Location = new System.Drawing.Point(808, 137);
             this.addbtn.Name = "addbtn";
             this.addbtn.Size = new System.Drawing.Size(85, 27);
-            this.addbtn.TabIndex = 172;
+            this.addbtn.TabIndex = 5;
             this.addbtn.Text = "ADD";
             this.addbtn.UseVisualStyleBackColor = true;
             this.addbtn.Click += new System.EventHandler(this.addbtn_Click);
+            // 
+            // totalcreditvaluelbl
+            // 
+            this.totalcreditvaluelbl.AutoSize = true;
+            this.totalcreditvaluelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
+            this.totalcreditvaluelbl.ForeColor = System.Drawing.Color.Blue;
+            this.totalcreditvaluelbl.Location = new System.Drawing.Point(824, 534);
+            this.totalcreditvaluelbl.Name = "totalcreditvaluelbl";
+            this.totalcreditvaluelbl.Size = new System.Drawing.Size(31, 18);
+            this.totalcreditvaluelbl.TabIndex = 176;
+            this.totalcreditvaluelbl.Text = "0.0";
+            // 
+            // totaldebitvaluelbl
+            // 
+            this.totaldebitvaluelbl.AutoSize = true;
+            this.totaldebitvaluelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
+            this.totaldebitvaluelbl.ForeColor = System.Drawing.Color.Blue;
+            this.totaldebitvaluelbl.Location = new System.Drawing.Point(824, 508);
+            this.totaldebitvaluelbl.Name = "totaldebitvaluelbl";
+            this.totaldebitvaluelbl.Size = new System.Drawing.Size(31, 18);
+            this.totaldebitvaluelbl.TabIndex = 175;
+            this.totaldebitvaluelbl.Text = "0.0";
+            // 
+            // totalcreditlbl
+            // 
+            this.totalcreditlbl.AutoSize = true;
+            this.totalcreditlbl.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalcreditlbl.Location = new System.Drawing.Point(720, 535);
+            this.totalcreditlbl.Name = "totalcreditlbl";
+            this.totalcreditlbl.Size = new System.Drawing.Size(89, 17);
+            this.totalcreditlbl.TabIndex = 174;
+            this.totalcreditlbl.Text = "TOTAL CREDIT";
+            // 
+            // totaldebitlbl
+            // 
+            this.totaldebitlbl.AutoSize = true;
+            this.totaldebitlbl.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold);
+            this.totaldebitlbl.Location = new System.Drawing.Point(720, 509);
+            this.totaldebitlbl.Name = "totaldebitlbl";
+            this.totaldebitlbl.Size = new System.Drawing.Size(82, 17);
+            this.totaldebitlbl.TabIndex = 173;
+            this.totaldebitlbl.Text = "TOTAL DEBIT";
+            // 
+            // shortnarationtxtbox
+            // 
+            this.shortnarationtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.shortnarationtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shortnarationtxtbox.Location = new System.Drawing.Point(125, 137);
+            this.shortnarationtxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.shortnarationtxtbox.Name = "shortnarationtxtbox";
+            this.shortnarationtxtbox.Size = new System.Drawing.Size(678, 27);
+            this.shortnarationtxtbox.TabIndex = 4;
+            // 
+            // narationlbl
+            // 
+            this.narationlbl.AutoSize = true;
+            this.narationlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.narationlbl.Location = new System.Drawing.Point(13, 140);
+            this.narationlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.narationlbl.Name = "narationlbl";
+            this.narationlbl.Size = new System.Drawing.Size(74, 18);
+            this.narationlbl.TabIndex = 177;
+            this.narationlbl.Text = "NARATION";
+            // 
+            // debitamountradio
+            // 
+            this.debitamountradio.AutoSize = true;
+            this.debitamountradio.Checked = true;
+            this.debitamountradio.Location = new System.Drawing.Point(808, 47);
+            this.debitamountradio.Name = "debitamountradio";
+            this.debitamountradio.Size = new System.Drawing.Size(107, 17);
+            this.debitamountradio.TabIndex = 179;
+            this.debitamountradio.TabStop = true;
+            this.debitamountradio.Text = "DEBIT AMOUNT";
+            this.debitamountradio.UseVisualStyleBackColor = true;
+            // 
+            // creditamountradio
+            // 
+            this.creditamountradio.AutoSize = true;
+            this.creditamountradio.Location = new System.Drawing.Point(808, 70);
+            this.creditamountradio.Name = "creditamountradio";
+            this.creditamountradio.Size = new System.Drawing.Size(115, 17);
+            this.creditamountradio.TabIndex = 180;
+            this.creditamountradio.Text = "CREDIT AMOUNT";
+            this.creditamountradio.UseVisualStyleBackColor = true;
             // 
             // Payment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1262, 626);
+            this.ClientSize = new System.Drawing.Size(1262, 702);
+            this.Controls.Add(this.creditamountradio);
+            this.Controls.Add(this.debitamountradio);
+            this.Controls.Add(this.shortnarationtxtbox);
+            this.Controls.Add(this.narationlbl);
+            this.Controls.Add(this.totalcreditvaluelbl);
+            this.Controls.Add(this.totaldebitvaluelbl);
+            this.Controls.Add(this.totalcreditlbl);
+            this.Controls.Add(this.totaldebitlbl);
             this.Controls.Add(this.addbtn);
             this.Controls.Add(this.accountheadidlbl);
-            this.Controls.Add(this.currencynamelbl);
-            this.Controls.Add(this.currencystringlbl);
-            this.Controls.Add(this.currencysymbollbl);
-            this.Controls.Add(this.currencyidlbl);
             this.Controls.Add(this.currencylbl);
-            this.Controls.Add(this.transactionidlbl);
-            this.Controls.Add(this.cashradiobtn);
-            this.Controls.Add(this.bankaccountradio);
             this.Controls.Add(this.voucherinfolbl);
             this.Controls.Add(this.voucherinfotxtbox);
-            this.Controls.Add(this.transactioncodelbl);
             this.Controls.Add(this.paymentvoucheridlbl);
             this.Controls.Add(this.amounttxtbox);
             this.Controls.Add(this.amountlbl);
@@ -591,6 +687,7 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Payment_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPayment)).EndInit();
@@ -624,17 +721,6 @@
         private System.Windows.Forms.Label transactioncodelbl;
         private System.Windows.Forms.Label voucherinfolbl;
         private System.Windows.Forms.RichTextBox voucherinfotxtbox;
-        private System.Windows.Forms.RadioButton cashradiobtn;
-        private System.Windows.Forms.RadioButton bankaccountradio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn serialnocolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn debitcreditcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn accountcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn accountcodecolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn accountidcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn isdebitcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iscreditcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn debitcolumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn creditcolumn;
         private System.Windows.Forms.Label transactionidlbl;
         private System.Windows.Forms.Label currencynamelbl;
         private System.Windows.Forms.Label currencystringlbl;
@@ -644,5 +730,24 @@
         private System.Windows.Forms.Label accountheadidlbl;
         private System.Windows.Forms.Label accountidlbl;
         private System.Windows.Forms.Button addbtn;
+        private System.Windows.Forms.Label totalcreditvaluelbl;
+        private System.Windows.Forms.Label totaldebitvaluelbl;
+        private System.Windows.Forms.Label totalcreditlbl;
+        private System.Windows.Forms.Label totaldebitlbl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn serialnocolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn debitcreditcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn accountcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn accountcodecolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn accountidcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn isdebitcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iscreditcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn debitcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn creditcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn shortnarationcolumn;
+        private System.Windows.Forms.TextBox shortnarationtxtbox;
+        private System.Windows.Forms.Label narationlbl;
+        private System.Windows.Forms.Label currencyconversionratelbl;
+        private System.Windows.Forms.RadioButton creditamountradio;
+        private System.Windows.Forms.RadioButton debitamountradio;
     }
 }

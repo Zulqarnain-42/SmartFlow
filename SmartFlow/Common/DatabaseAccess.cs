@@ -17,6 +17,7 @@ namespace SmartFlow
         private static string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         /*private static string connectionString = @"Data Source=10.255.254.241,1433;Initial Catalog=SmartFlow;User id=fabt;Password=Fabt101;";*/
         /*private static string connectionString = @"Data Source=DESKTOP-1D6LU8Q\SQLEXPRESS;Initial Catalog=19112024;Integrated Security=True;Encrypt=False;";*/
+
         private static async Task<SqlConnection> ConnOpenAsync()
         {
             conn = new SqlConnection(connectionString);
@@ -63,8 +64,8 @@ namespace SmartFlow
                     throw new ArgumentException("Unsupported operation. Use INSERT, UPDATE, or DELETE.");
                 }
 
-                // Execute the query asynchronously
-                using (SqlConnection conn = await ConnOpenAsync())  // Ensure to use async connection opening
+                // Ensure the connection is opened properly
+                using (SqlConnection conn = await ConnOpenAsync())
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     foreach (var param in columnData)
@@ -72,21 +73,15 @@ namespace SmartFlow
                         cmd.Parameters.AddWithValue("@" + param.Key, param.Value ?? DBNull.Value);
                     }
 
-                    int rowsAffected = await cmd.ExecuteNonQueryAsync();  // Asynchronous execution of the query
+                    int rowsAffected = await cmd.ExecuteNonQueryAsync();
                     return rowsAffected > 0;
                 }
             }
             catch (Exception ex)
             {
+
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
-            }
-            finally
-            {
-                if (conn.State == System.Data.ConnectionState.Open)
-                {
-                    conn.Close();
-                }
             }
         }
 
@@ -201,7 +196,6 @@ namespace SmartFlow
             }
         }
 
-
         // Method to execute stored procedure and return DataTable
         public static async Task<DataTable> ExecuteStoredProcedureAsync(string storedProcedureName, params SqlParameter[] parameters)
         {
@@ -245,7 +239,6 @@ namespace SmartFlow
             return resultTable;
         }
 
-
         public class Invoice
         {
             public string Date { get; set; }
@@ -268,7 +261,6 @@ namespace SmartFlow
             public string SerialNumber { get; set; }
             public string VatCode { get; set; }
         }
-
 
         public static async Task<string> GetInvoiceJsonAsync(string invoiceNo)
         {
@@ -310,8 +302,9 @@ namespace SmartFlow
                     SqlCommand itemsCommand = new SqlCommand("SELECT InvoiceDetailsId,InvoiceNo,Invoicecode,Productid,Quantity,UnitSalePrice,ItemSerialNoid,ProductName,MFR," +
                         "ItemWiseDiscount,ItemWiseVAT,Warehouseid,PurchaseCostPrice,PurchaseLowestSalePrice,PurchaseStandardPrice,PurchaseItemSalePrice,SystemSerialNoid,Unitid," +
                         "AddInventory,ItemAvailability,ItemTotal,IsSaleInvoice,PricePerMeter,LengthInMeter,ItemDescription,MinusInventory " +
-                        "FROM InvoiceDetailsTable WHERE InvoiceNo = @InvoiceNo", connection);
+                        "FROM InvoiceDetailsTable WHERE InvoiceNo = @InvoiceNo AND IsNewRecord = @IsNewRecord", connection);
                     itemsCommand.Parameters.AddWithValue("@InvoiceNo", invoiceNo);
+                    itemsCommand.Parameters.AddWithValue("@IsNewRecord", true);
 
                     SqlDataReader itemsReader = await itemsCommand.ExecuteReaderAsync();
                     while (await itemsReader.ReadAsync())
@@ -352,33 +345,45 @@ namespace SmartFlow
             }
         }
 
-
-
         public static async Task<DataTable> RetriveAsync(string query, Dictionary<string, object> parameters = null)
         {
             DataTable dt = new DataTable();
 
-            using (SqlConnection conn = await ConnOpenAsync()) // Ensure ConnOpenAsync is implemented
+            try
             {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlConnection conn = await ConnOpenAsync().ConfigureAwait(false)) // Ensure connection is open
                 {
-                    // Add parameters to the command
-                    if (parameters != null)
+                    if (conn.State != ConnectionState.Open)
                     {
-                        foreach (var param in parameters)
-                        {
-                            cmd.Parameters.AddWithValue(param.Key, param.Value);
-                        }
+                        await conn.OpenAsync().ConfigureAwait(false); // Ensure connection is open before use
                     }
 
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    // Fill the DataTable asynchronously
-                    await Task.Run(() => da.Fill(dt)); // We use Task.Run here to avoid blocking the UI thread
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        // Add parameters safely
+                        if (parameters?.Count > 0)
+                        {
+                            foreach (var param in parameters)
+                            {
+                                cmd.Parameters.AddWithValue(param.Key, param.Value ?? DBNull.Value);
+                            }
+                        }
+
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync().ConfigureAwait(false))
+                        {
+                            dt.Load(reader); // Load the data into DataTable
+                        }
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Database error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return dt;
         }
+
 
         public static async Task<bool> ExecuteNonQueryAsync(string query)
         {
@@ -401,6 +406,33 @@ namespace SmartFlow
             }
         }
 
+        public static async Task<object> ExecuteScalarAsync(string query, Dictionary<string, object> parameters = null)
+        {
+            try
+            {
+                using (SqlConnection conn = await ConnOpenAsync().ConfigureAwait(false)) // Open connection asynchronously
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    // Add parameters if provided
+                    if (parameters != null)
+                    {
+                        foreach (var param in parameters)
+                        {
+                            cmd.Parameters.AddWithValue(param.Key, param.Value ?? DBNull.Value);
+                        }
+                    }
+
+                    object result = await cmd.ExecuteScalarAsync().ConfigureAwait(false);
+                    return result ?? 0; // Return 0 if result is null
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log error (adjust based on your logging system)
+                Console.WriteLine($"[ERROR] ExecuteScalarAsync: {ex.Message}");
+                return 0; // Return 0 to prevent crashes
+            }
+        }
 
         public static async Task<DataTable> RetriveAsync(string storedProcedure, List<SqlParameter> parameters)
         {

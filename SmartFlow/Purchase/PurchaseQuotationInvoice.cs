@@ -18,10 +18,8 @@ namespace SmartFlow.Purchase
 {
     public partial class PurchaseQuotationInvoice : Form
     {
-        private int invoiceCounter = 1;
         private DataTable _dtinvoice;
         private DataTable _dtinvoicedetails;
-        private int _dragRowIndex = -1;
         public PurchaseQuotationInvoice()
         {
             InitializeComponent();
@@ -38,7 +36,7 @@ namespace SmartFlow.Purchase
         {
             try
             {
-                if (_dtinvoice != null && _dtinvoice.Rows.Count > 0 && _dtinvoicedetails != null && _dtinvoicedetails.Rows.Count > 0)
+                if (_dtinvoice != null && _dtinvoice.Rows.Count > 0 || _dtinvoicedetails != null && _dtinvoicedetails.Rows.Count > 0)
                 {
                     DataRow row = _dtinvoice.Rows[0];
 
@@ -193,7 +191,7 @@ namespace SmartFlow.Purchase
             return lastInvoiceNumber;
         }
 
-        private async void newbtn_Click(object sender, EventArgs e)
+        private void newbtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -210,7 +208,7 @@ namespace SmartFlow.Purchase
                     MessageBox.Show("MdiParent is not set.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
-                await CommonFunction.DisposeOnCloseAsync(purchaseQuotationInvoice);
+                CommonFunction.DisposeOnClose(purchaseQuotationInvoice);
                 purchaseQuotationInvoice.Show();
             }
             catch (Exception ex)
@@ -242,87 +240,33 @@ namespace SmartFlow.Purchase
                     return;
                 }
 
+                // Define the custom date format and UK culture
+                string format = "dd/MM/yyyy";
+                var cultureInfo = new System.Globalization.CultureInfo("en-GB"); // UK culture
+
+                // Parse startDate and endDate from the textboxes using the custom format
+                DateTime invoiceDate;
+
+                // Try parsing the dates from the textboxes with the exact format
+                if (DateTime.TryParseExact(invoicedatetxtbox.Text, format, cultureInfo, System.Globalization.DateTimeStyles.None, out invoiceDate))
+                {
+                    // Date parsing was successful
+                    Console.WriteLine($"Start Date: {invoiceDate}");
+                }
+                else
+                {
+                    invoiceDate = DateTime.Parse(invoicedatetxtbox.Text);
+                }
+
                 if (savebtn.Text == "UPDATE")
                 {
                     invoiceno = invoicenotxtbox.Text;
-
-                    DateTime invoiceDate = DateTime.Parse(invoicedatetxtbox.Text);
-                    string invoiceCode = invoicecodelbl.Text;
-                    int supplierId = Convert.ToInt32(supplieridlbl.Text);
-                    string suppliercode = codetxtbox.Text;
-                    string supplierName = selectsuppliertxtbox.Text;
-                    string tableName = "InvoiceTable";
-                    string whereClause = "InvoiceNo = '" + invoiceno + "'";
-
-                    var columnData = new Dictionary<string, object>
-                    {
-                        { "InvoiceNo", invoiceno },
-                        { "invoicedate", invoiceDate },
-                        { "ClientID", supplierId },
-                        { "UpdatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
-                        { "UpdatedDay", DateTime.Now.DayOfWeek },
-                        { "ClientName", supplierName }
-                    };
-
-                    bool isUpdated = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
-                    if (isUpdated)
-                    {
-                        UpdateInvoiceDetailsData(invoiceno, invoiceCode);
-                    }
+                    IsInserted = await UpdatePurchaseQuotation(invoiceno,invoiceDate);
                 }
                 else
                 {
                     invoiceno = await CheckInvoiceBeforeInsert();
-                    DateTime invoiceDate = DateTime.Parse(invoicedatetxtbox.Text);
-                    int supplierId = Convert.ToInt32(supplieridlbl.Text);
-                    string suppliercode = codetxtbox.Text;
-                    string supplierName = selectsuppliertxtbox.Text;
-                    string invoicecode = Guid.NewGuid().ToString();
-                    string tableName = "InvoiceTable";
-
-                    var columnData = new Dictionary<string, object>
-                    {
-                        { "InvoiceNo", invoiceno },
-                        { "invoicedate", invoiceDate },
-                        { "ClientID", supplierId },
-                        { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
-                        { "CreatedDay", DateTime.Now.DayOfWeek },
-                        { "InvoiceCode", invoicecode },
-                        { "ClientName", supplierName }
-                    };
-
-                    bool insertquote = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData);
-
-                    if (insertquote)
-                    {
-                        foreach (DataGridViewRow row in dgvpurchaseproducts.Rows)
-                        {
-                            if (row.IsNewRow) { continue; }
-
-                            int productid = Convert.ToInt32(row.Cells["productid"].Value.ToString());
-                            int quantity = Convert.ToInt32(row.Cells["qtycolumn"].Value.ToString());
-                            string productname = row.Cells["productnamecolumn"].Value.ToString();
-                            string mfr = row.Cells["mfrcolumn"].Value.ToString();
-
-                            string subtable = "InvoiceDetailsTable";
-                            var subColumnData = new Dictionary<string, object>
-                            {
-                                { "InvoiceNo", invoiceno },
-                                { "Invoicecode", invoicecode },
-                                { "Productid", productid },
-                                { "Quantity", quantity },
-                                { "ItemSerialNoid", null },
-                                { "ProductName", productname },
-                                { "MFR", mfr },
-                                { "AddInventory", false },
-                                { "MinusInventory", false }
-                            };
-
-                            IsInserted = await DatabaseAccess.ExecuteQueryAsync(subtable, "INSERT", subColumnData);
-                        }
-
-                        IsInserted = true;
-                    }
+                    IsInserted = await AddPurchaseQuotation(invoiceno, invoiceDate);
                 }
 
                 if (IsInserted)
@@ -330,7 +274,7 @@ namespace SmartFlow.Purchase
                     this.Close();
                     QuotationReportView quotationReportView = new QuotationReportView(invoiceno);
                     quotationReportView.MdiParent = Application.OpenForms["Dashboard"];
-                    await CommonFunction.DisposeOnCloseAsync(quotationReportView);
+                    CommonFunction.DisposeOnClose(quotationReportView);
                     quotationReportView.Show();
                 }
 
@@ -338,118 +282,153 @@ namespace SmartFlow.Purchase
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private void UpdateInvoiceDetailsData(string invoiceNo,string invoiceCode)
+        private async Task<bool> UpdatePurchaseQuotation(string invoiceno,DateTime invoiceDate)
         {
-            /*bool detailadded = false;
+            bool isCompleted = false;
+            string invoiceCode = invoicecodelbl.Text;
+            int supplierId = Convert.ToInt32(supplieridlbl.Text);
+            string suppliercode = codetxtbox.Text;
+            string supplierName = selectsuppliertxtbox.Text;
+
+            string tableName = "InvoiceTable";
+            string whereClause = "InvoiceNo = '" + invoiceno + "'";
+
+            var columnData = new Dictionary<string, object>
+            {
+                { "InvoiceNo", invoiceno },
+                { "invoicedate", invoiceDate },
+                { "ClientID", supplierId },
+                { "UpdatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                { "UpdatedDay", DateTime.Now.DayOfWeek },
+                { "ClientName", supplierName },
+                { "Type", "Purchase Quotation" }
+            };
+
+            bool isUpdated = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
+            if (isUpdated)
+            {
+                isCompleted = await UpdateInvoiceDetailsData(invoiceno, invoiceCode);
+            }
+            return isCompleted;
+        }
+
+        private async Task<bool> AddPurchaseQuotation(string invoiceno,DateTime invoiceDate)
+        {
+            bool isInserted = false;
+            int supplierId = Convert.ToInt32(supplieridlbl.Text);
+            string suppliercode = codetxtbox.Text;
+            string supplierName = selectsuppliertxtbox.Text;
+            string invoicecode = Guid.NewGuid().ToString();
+            string tableName = "InvoiceTable";
+
+            var columnData = new Dictionary<string, object>
+            {
+                { "InvoiceNo", invoiceno },
+                { "invoicedate", invoiceDate },
+                { "ClientID", supplierId },
+                { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                { "CreatedDay", DateTime.Now.DayOfWeek },
+                { "InvoiceCode", invoicecode },
+                { "ClientName", supplierName },
+                { "Type", "Purchase Quotation" }
+            };
+
+            bool insertquote = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData);
+
+            if (insertquote)
+            {
+                foreach (DataGridViewRow row in dgvpurchaseproducts.Rows)
+                {
+                    if (row.IsNewRow) { continue; }
+
+                    int productid = row.Cells["productid"].Value == null ? 0 : Convert.ToInt32(row.Cells["productid"].Value);
+                    int quantity = row.Cells["qtycolumn"].Value == null ? 0 : Convert.ToInt32(row.Cells["qtycolumn"].Value);
+                    string productname = row.Cells["productnamecolumn"].Value == null ? string.Empty : row.Cells["productnamecolumn"].Value.ToString();
+                    string mfr = row.Cells["mfrcolumn"].Value == null ? string.Empty : row.Cells["mfrcolumn"].Value.ToString();
+
+                    string subtable = "InvoiceDetailsTable";
+                    var subColumnData = new Dictionary<string, object>
+                    {
+                        { "InvoiceNo", invoiceno },
+                        { "Invoicecode", invoicecode },
+                        { "Productid", productid },
+                        { "Quantity", quantity },
+                        { "ItemSerialNoid", null },
+                        { "ProductName", productname },
+                        { "MFR", mfr },
+                        { "AddInventory", false },
+                        { "MinusInventory", false }
+                    };
+
+                    isInserted = await DatabaseAccess.ExecuteQueryAsync(subtable, "INSERT", subColumnData);
+                }
+            }
+
+            return isInserted;
+        }
+
+        private async Task<bool> UpdateInvoiceDetailsData(string invoiceNo, string invoiceCode)
+        {
             try
             {
-                // Start a transaction
-                using (var transaction = DatabaseAccess.BeginTransaction())
+                bool isUpdated = false;
+                bool isdone = await UpdateInvoiceDetail(invoiceNo);
+                if (isdone)
                 {
-                    // Insert backup data
-                    InsertBackUpData(invoiceNo, invoiceCode);
-
-                    // Delete existing invoice details
-                    DeleteInvoiceDetail(invoiceNo);
-
-                    // Insert new invoice details
                     foreach (DataGridViewRow row in dgvpurchaseproducts.Rows)
                     {
                         if (row.IsNewRow) { continue; }
 
-                        int productid = Convert.ToInt32(row.Cells["productid"].Value.ToString());
-                        int quantity = Convert.ToInt32(row.Cells["qtycolumn"].Value.ToString());
-                        string productname = row.Cells["productnamecolumn"].Value.ToString();
-                        string mfr = row.Cells["mfrcolumn"].Value.ToString();
+                        int productid = row.Cells["productid"].Value == null ? 0 : Convert.ToInt32(row.Cells["productid"].Value);
+                        int quantity = row.Cells["qtycolumn"].Value == null ? 0 : Convert.ToInt32(row.Cells["qtycolumn"].Value);
+                        string productname = row.Cells["productnamecolumn"].Value == null ? string.Empty : row.Cells["productnamecolumn"].Value.ToString();
+                        string mfr = row.Cells["mfrcolumn"].Value == null ? string.Empty : row.Cells["mfrcolumn"].Value.ToString();
 
                         string subtable = "InvoiceDetailsTable";
                         var subColumnData = new Dictionary<string, object>
-            {
-                { "InvoiceNo", invoiceNo },
-                { "Invoicecode", invoiceCode },
-                { "Productid", productid },
-                { "Quantity", quantity },
-                { "ItemSerialNoid", null },
-                { "ProductName", productname },
-                { "MFR", mfr },
-                 { "AddInventory", false },
-                                { "MinusInventory", false }
-            };
-
-                        // Execute insert for each row
-                        detailadded = DatabaseAccess.ExecuteQuery(subtable, "INSERT", subColumnData, transaction);
-                        if (!detailadded)
                         {
-                            // Rollback transaction if insertion fails
-                            transaction.Rollback();
-                            MessageBox.Show("Error inserting details into the invoice.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
+                            { "InvoiceNo", invoiceNo },
+                            { "Invoicecode", invoiceCode },
+                            { "Productid", productid },
+                            { "Quantity", quantity },
+                            { "ItemSerialNoid", null },
+                            { "ProductName", productname },
+                            { "MFR", mfr },
+                            { "AddInventory", false },
+                            { "MinusInventory", false }
+                        };
+
+                        isUpdated = await DatabaseAccess.ExecuteQueryAsync(subtable, "INSERT", subColumnData);
                     }
-
-                    // Commit the transaction if everything goes smoothly
-                    transaction.Commit();
-
-                    // After successful insertion, close the form and show report
-                    this.Close();
-                    QuotationReportView quotationReportView = new QuotationReportView(invoiceNo);
-                    quotationReportView.MdiParent = Application.OpenForms["Dashboard"];
-                    CommonFunction.DisposeOnClose(quotationReportView);
-                    quotationReportView.Show();
                 }
+                
+                return isUpdated;
             }
             catch (Exception ex)
             {
-                // In case of any error, show the error message
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+                // In case of any error, show the error message
             }
-*/
+
 
         }
 
-        private async void InsertBackUpData(string invoiceNo, string invoicecode)
-        {
-            foreach (DataGridViewRow row in dgvpurchaseproducts.Rows)
-            {
-                if (row.IsNewRow) { continue; }
-
-                int productid = Convert.ToInt32(row.Cells["productid"].Value.ToString());
-                int quantity = Convert.ToInt32(row.Cells["qtycolumn"].Value.ToString());
-                string productname = row.Cells["productnamecolumn"].Value.ToString();
-                string mfr = row.Cells["mfrcolumn"].Value.ToString();
-
-                string subtable = "InvoiceDetailsTable";
-                var subColumnData = new Dictionary<string, object>
-                {
-                    { "InvoiceNo", invoiceNo },
-                    { "Invoicecode", invoicecode },
-                    { "Productid", productid },
-                    { "Quantity", quantity },
-                    { "ItemSerialNoid", null },
-                    { "ProductName", productname },
-                    { "MFR", mfr },
-                     { "AddInventory", false },
-                                { "MinusInventory", false }
-                };
-
-                await DatabaseAccess.ExecuteQueryAsync(subtable, "INSERT", subColumnData);
-            }
-        }
-
-        private async void DeleteInvoiceDetail(string invoiceNo)
+        private async Task<bool> UpdateInvoiceDetail(string invoiceNo)
         {
             try
             {
+                bool isoldrecord = false;
                 string tableName = "InvoiceDetailsTable";
-                string whereClause = "InvoiceNo = @InvoiceNo";
+                string whereClause = "InvoiceNo = '" + invoiceNo + "'";
 
                 var columnData = new Dictionary<string, object>
                 {
-                    { "InvoiceNo", invoiceNo }
+                    { "IsNewRecord", false }
                 };
 
-                await DatabaseAccess.ExecuteQueryAsync(tableName, "DELETE", columnData, whereClause);
-
+                isoldrecord = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
+                return isoldrecord;
             }
             catch (Exception ex) { throw ex; }
         }
@@ -458,7 +437,7 @@ namespace SmartFlow.Purchase
         {
             if (e.Control && e.KeyCode == Keys.D)
             {
-                int productid = Convert.ToInt32(dgvpurchaseproducts.CurrentRow.Cells[1].Value);
+                int productid = Convert.ToInt32(dgvpurchaseproducts.CurrentRow.Cells["productid"].Value);
                 if (productid > 0)
                 {
                     foreach (DataGridViewRow row in dgvpurchaseproducts.SelectedRows)
@@ -528,6 +507,33 @@ namespace SmartFlow.Purchase
         {
             if (e.KeyCode == Keys.Enter) 
             {
+                if (string.IsNullOrEmpty(selectsuppliertxtbox.Text))
+                {
+                    Form openForm = await CommonFunction.IsFormOpenAsync(typeof(SupplierSelectionForm));
+                    if (openForm == null)
+                    {
+                        SupplierSelectionForm supplierSelection = new SupplierSelectionForm
+                        {
+                            WindowState = FormWindowState.Normal,
+                            StartPosition = FormStartPosition.CenterParent,
+                        };
+
+                        supplierSelection.SupplierDataSelected += UpdateSupplierTextBox;
+                        CommonFunction.DisposeOnClose(supplierSelection);
+                        supplierSelection.Show();
+                    }
+                    else
+                    {
+                        openForm.BringToFront();
+                    }
+                }
+            }
+        }
+
+        private async void selectsuppliertxtbox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (string.IsNullOrEmpty(selectsuppliertxtbox.Text))
+            {
                 Form openForm = await CommonFunction.IsFormOpenAsync(typeof(SupplierSelectionForm));
                 if (openForm == null)
                 {
@@ -538,34 +544,13 @@ namespace SmartFlow.Purchase
                     };
 
                     supplierSelection.SupplierDataSelected += UpdateSupplierTextBox;
-                    await CommonFunction.DisposeOnCloseAsync(supplierSelection);
+                    CommonFunction.DisposeOnClose(supplierSelection);
                     supplierSelection.Show();
                 }
                 else
                 {
                     openForm.BringToFront();
                 }
-            }
-        }
-
-        private async void selectsuppliertxtbox_MouseClick(object sender, MouseEventArgs e)
-        {
-            Form openForm = await CommonFunction.IsFormOpenAsync(typeof(SupplierSelectionForm));
-            if (openForm == null)
-            {
-                SupplierSelectionForm supplierSelection = new SupplierSelectionForm
-                {
-                    WindowState = FormWindowState.Normal,
-                    StartPosition = FormStartPosition.CenterParent,
-                };
-
-                supplierSelection.SupplierDataSelected += UpdateSupplierTextBox;
-                await CommonFunction.DisposeOnCloseAsync(supplierSelection);
-                supplierSelection.Show();
-            }
-            else
-            {
-                openForm.BringToFront();
             }
         }
 
@@ -606,7 +591,7 @@ namespace SmartFlow.Purchase
 
                     productSelectionForm.ProductDataSelected += UpdateProductTextBox;
 
-                    await CommonFunction.DisposeOnCloseAsync(productSelectionForm);
+                    CommonFunction.DisposeOnClose(productSelectionForm);
                     productSelectionForm.ShowDialog();
                 }
                 else
@@ -669,7 +654,7 @@ namespace SmartFlow.Purchase
 
                         productSelection.ProductDataSelected += UpdateProductTextBox;
 
-                        await CommonFunction.DisposeOnCloseAsync(productSelection);
+                        CommonFunction.DisposeOnClose(productSelection);
                         productSelection.Show();
                     }
                     else
@@ -796,10 +781,17 @@ namespace SmartFlow.Purchase
                     ? float.Parse(selectedRow.Cells["vatpercentagecolumn"].Value.ToString())
                     : 0.0f;
 
+                float discountpercentage = selectedRow.Cells["discountpercentagecolumn"].Value != null && !string.IsNullOrEmpty(selectedRow.Cells["discountpercentagecolumn"].Value.ToString())
+                        ? float.Parse(selectedRow.Cells["discountpercentagecolumn"].Value.ToString())
+                        : 0.0f;
+
+                bool discounttype = selectedRow.Cells["discounttypecolumn"].Value != null && !string.IsNullOrEmpty(selectedRow.Cells["discounttypecolumn"].Value.ToString())
+                        ? Convert.ToBoolean(selectedRow.Cells["discounttypecolumn"].Value.ToString())
+                        : false;
                 // Open the edit dialog asynchronously
 
                 EditItemInvoice editItemInvoice = new EditItemInvoice(rowIndex, productmfr, productname, productid, quantity, unitid, unitname, price,
-                    vat, discount, itemtotal, warehouseid, itemdescription, lengthinmeter, priceinmeter, vatpercentage);
+                            vat, discount, itemtotal, warehouseid, itemdescription, lengthinmeter, priceinmeter, vatpercentage, discountpercentage, discounttype,false);
                 editItemInvoice.ShowDialog(); // This will still block but in a separate thread.
 
             }

@@ -63,9 +63,10 @@
             // 
             this.barcodelbl.AutoSize = true;
             this.barcodelbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.barcodelbl.Location = new System.Drawing.Point(12, 44);
+            this.barcodelbl.Location = new System.Drawing.Point(9, 36);
+            this.barcodelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.barcodelbl.Name = "barcodelbl";
-            this.barcodelbl.Size = new System.Drawing.Size(154, 23);
+            this.barcodelbl.Size = new System.Drawing.Size(121, 18);
             this.barcodelbl.TabIndex = 0;
             this.barcodelbl.Text = "SEARCH BARCODE ";
             // 
@@ -73,9 +74,10 @@
             // 
             this.searchtextbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchtextbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchtextbox.Location = new System.Drawing.Point(220, 40);
+            this.searchtextbox.Location = new System.Drawing.Point(165, 32);
+            this.searchtextbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchtextbox.Name = "searchtextbox";
-            this.searchtextbox.Size = new System.Drawing.Size(500, 32);
+            this.searchtextbox.Size = new System.Drawing.Size(376, 27);
             this.searchtextbox.TabIndex = 1;
             this.searchtextbox.TextChanged += new System.EventHandler(this.searchtextbox_TextChanged);
             // 
@@ -98,13 +100,14 @@
             this.barcode,
             this.quantity});
             this.dgvinventory.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvinventory.Location = new System.Drawing.Point(3, 4);
+            this.dgvinventory.Location = new System.Drawing.Point(2, 3);
+            this.dgvinventory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvinventory.Name = "dgvinventory";
             this.dgvinventory.RowHeadersVisible = false;
             this.dgvinventory.RowHeadersWidth = 51;
             this.dgvinventory.RowTemplate.Height = 24;
             this.dgvinventory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvinventory.Size = new System.Drawing.Size(1229, 643);
+            this.dgvinventory.Size = new System.Drawing.Size(922, 522);
             this.dgvinventory.TabIndex = 45;
             this.dgvinventory.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvinventory_CellDoubleClick);
             this.dgvinventory.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvinventory_CellEndEdit);
@@ -157,9 +160,10 @@
             this.savebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.savebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.savebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.savebtn.Location = new System.Drawing.Point(1238, 566);
+            this.savebtn.Location = new System.Drawing.Point(928, 460);
+            this.savebtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.savebtn.Name = "savebtn";
-            this.savebtn.Size = new System.Drawing.Size(353, 37);
+            this.savebtn.Size = new System.Drawing.Size(265, 30);
             this.savebtn.TabIndex = 46;
             this.savebtn.Text = "SAVE";
             this.savebtn.UseVisualStyleBackColor = true;
@@ -171,9 +175,10 @@
             this.exitbtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.exitbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exitbtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitbtn.Location = new System.Drawing.Point(1238, 609);
+            this.exitbtn.Location = new System.Drawing.Point(928, 495);
+            this.exitbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.exitbtn.Name = "exitbtn";
-            this.exitbtn.Size = new System.Drawing.Size(353, 37);
+            this.exitbtn.Size = new System.Drawing.Size(265, 30);
             this.exitbtn.TabIndex = 47;
             this.exitbtn.Text = "EXIT";
             this.exitbtn.UseVisualStyleBackColor = true;
@@ -184,8 +189,9 @@
             this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1594, 45);
+            this.panel1.Size = new System.Drawing.Size(1196, 37);
             this.panel1.TabIndex = 48;
             // 
             // headinglbl
@@ -195,8 +201,9 @@
             this.headinglbl.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
+            this.headinglbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(1594, 45);
+            this.headinglbl.Size = new System.Drawing.Size(1196, 37);
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "INVENTORY USING SCANNER";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -210,17 +217,19 @@
             this.panel2.Controls.Add(this.barcodelbl);
             this.panel2.Controls.Add(this.searchtextbox);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 45);
+            this.panel2.Location = new System.Drawing.Point(0, 37);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1594, 76);
+            this.panel2.Size = new System.Drawing.Size(1196, 62);
             this.panel2.TabIndex = 49;
             // 
             // warehouseidlbl
             // 
             this.warehouseidlbl.AutoSize = true;
-            this.warehouseidlbl.Location = new System.Drawing.Point(730, 24);
+            this.warehouseidlbl.Location = new System.Drawing.Point(548, 20);
+            this.warehouseidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.warehouseidlbl.Name = "warehouseidlbl";
-            this.warehouseidlbl.Size = new System.Drawing.Size(84, 16);
+            this.warehouseidlbl.Size = new System.Drawing.Size(67, 13);
             this.warehouseidlbl.TabIndex = 6;
             this.warehouseidlbl.Text = "warehouseid";
             this.warehouseidlbl.Visible = false;
@@ -231,18 +240,20 @@
             this.selectwarehousetxtbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.selectwarehousetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.selectwarehousetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectwarehousetxtbox.Location = new System.Drawing.Point(220, 5);
+            this.selectwarehousetxtbox.Location = new System.Drawing.Point(165, 4);
+            this.selectwarehousetxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.selectwarehousetxtbox.Name = "selectwarehousetxtbox";
-            this.selectwarehousetxtbox.Size = new System.Drawing.Size(500, 32);
+            this.selectwarehousetxtbox.Size = new System.Drawing.Size(376, 27);
             this.selectwarehousetxtbox.TabIndex = 5;
             this.selectwarehousetxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectwarehousetxtbox_MouseClick);
             // 
             // qtyusingscanneridlbl
             // 
             this.qtyusingscanneridlbl.AutoSize = true;
-            this.qtyusingscanneridlbl.Location = new System.Drawing.Point(727, 4);
+            this.qtyusingscanneridlbl.Location = new System.Drawing.Point(545, 3);
+            this.qtyusingscanneridlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.qtyusingscanneridlbl.Name = "qtyusingscanneridlbl";
-            this.qtyusingscanneridlbl.Size = new System.Drawing.Size(116, 16);
+            this.qtyusingscanneridlbl.Size = new System.Drawing.Size(92, 13);
             this.qtyusingscanneridlbl.TabIndex = 4;
             this.qtyusingscanneridlbl.Text = "qtyusingscannerid";
             this.qtyusingscanneridlbl.Visible = false;
@@ -251,9 +262,10 @@
             // 
             this.warehouselbl.AutoSize = true;
             this.warehouselbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.warehouselbl.Location = new System.Drawing.Point(12, 9);
+            this.warehouselbl.Location = new System.Drawing.Point(9, 7);
+            this.warehouselbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.warehouselbl.Name = "warehouselbl";
-            this.warehouselbl.Size = new System.Drawing.Size(111, 23);
+            this.warehouselbl.Size = new System.Drawing.Size(86, 18);
             this.warehouselbl.TabIndex = 2;
             this.warehouselbl.Text = "WAREHOUSE";
             // 
@@ -265,9 +277,10 @@
             this.panel3.Controls.Add(this.exitbtn);
             this.panel3.Controls.Add(this.savebtn);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 121);
+            this.panel3.Location = new System.Drawing.Point(0, 99);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1594, 649);
+            this.panel3.Size = new System.Drawing.Size(1196, 527);
             this.panel3.TabIndex = 50;
             // 
             // importantnoteslbl
@@ -276,9 +289,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.importantnoteslbl.AutoSize = true;
             this.importantnoteslbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.importantnoteslbl.Location = new System.Drawing.Point(1238, 4);
+            this.importantnoteslbl.Location = new System.Drawing.Point(928, 3);
+            this.importantnoteslbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.importantnoteslbl.Name = "importantnoteslbl";
-            this.importantnoteslbl.Size = new System.Drawing.Size(160, 23);
+            this.importantnoteslbl.Size = new System.Drawing.Size(126, 18);
             this.importantnoteslbl.TabIndex = 49;
             this.importantnoteslbl.Text = "IMPORTANT NOTES";
             // 
@@ -286,9 +300,10 @@
             // 
             this.importantnotestxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.importantnotestxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.importantnotestxtbox.Location = new System.Drawing.Point(1239, 38);
+            this.importantnotestxtbox.Location = new System.Drawing.Point(929, 31);
+            this.importantnotestxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.importantnotestxtbox.Name = "importantnotestxtbox";
-            this.importantnotestxtbox.Size = new System.Drawing.Size(343, 346);
+            this.importantnotestxtbox.Size = new System.Drawing.Size(258, 282);
             this.importantnotestxtbox.TabIndex = 48;
             this.importantnotestxtbox.Text = "";
             // 
@@ -298,17 +313,15 @@
             // 
             // QtyUsingScanner
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1594, 770);
+            this.ClientSize = new System.Drawing.Size(1196, 626);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "QtyUsingScanner";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UPDATE INVENTORY USING SCANNER";

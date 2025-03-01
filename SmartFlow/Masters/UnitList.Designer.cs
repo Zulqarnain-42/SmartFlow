@@ -60,7 +60,7 @@
             // 
             this.closebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.closebtn.Location = new System.Drawing.Point(628, 345);
-            this.closebtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.closebtn.Margin = new System.Windows.Forms.Padding(2);
             this.closebtn.Name = "closebtn";
             this.closebtn.Size = new System.Drawing.Size(248, 29);
             this.closebtn.TabIndex = 67;
@@ -93,7 +93,7 @@
             this.panel3.Controls.Add(this.dgvListunit);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 37);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(885, 384);
             this.panel3.TabIndex = 6;
@@ -103,7 +103,7 @@
             this.isdefaultchkbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.isdefaultchkbox.AutoSize = true;
             this.isdefaultchkbox.Location = new System.Drawing.Point(627, 266);
-            this.isdefaultchkbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.isdefaultchkbox.Margin = new System.Windows.Forms.Padding(2);
             this.isdefaultchkbox.Name = "isdefaultchkbox";
             this.isdefaultchkbox.Size = new System.Drawing.Size(88, 17);
             this.isdefaultchkbox.TabIndex = 69;
@@ -114,7 +114,7 @@
             // 
             this.descriptiontxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.descriptiontxtbox.Location = new System.Drawing.Point(628, 73);
-            this.descriptiontxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.descriptiontxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.descriptiontxtbox.Name = "descriptiontxtbox";
             this.descriptiontxtbox.Size = new System.Drawing.Size(249, 188);
             this.descriptiontxtbox.TabIndex = 68;
@@ -135,7 +135,7 @@
             // 
             this.savebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.savebtn.Location = new System.Drawing.Point(628, 299);
-            this.savebtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.savebtn.Margin = new System.Windows.Forms.Padding(2);
             this.savebtn.Name = "savebtn";
             this.savebtn.Size = new System.Drawing.Size(248, 29);
             this.savebtn.TabIndex = 60;
@@ -149,7 +149,7 @@
             this.unitnametxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.unitnametxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitnametxtbox.Location = new System.Drawing.Point(628, 24);
-            this.unitnametxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.unitnametxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.unitnametxtbox.Name = "unitnametxtbox";
             this.unitnametxtbox.Size = new System.Drawing.Size(249, 27);
             this.unitnametxtbox.TabIndex = 55;
@@ -194,7 +194,7 @@
             this.dgvListunit.ContextMenuStrip = this.contextMenuStrip;
             this.dgvListunit.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvListunit.Location = new System.Drawing.Point(0, 2);
-            this.dgvListunit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvListunit.Margin = new System.Windows.Forms.Padding(2);
             this.dgvListunit.Name = "dgvListunit";
             this.dgvListunit.RowHeadersWidth = 51;
             this.dgvListunit.RowTemplate.Height = 24;
@@ -238,7 +238,7 @@
             this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(885, 37);
             this.panel1.TabIndex = 4;
@@ -250,8 +250,7 @@
             this.ClientSize = new System.Drawing.Size(885, 421);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "UnitList";
             this.Text = "UnitList";
             this.Load += new System.EventHandler(this.UnitList_Load);

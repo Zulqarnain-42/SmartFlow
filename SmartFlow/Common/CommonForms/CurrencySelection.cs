@@ -7,6 +7,7 @@ namespace SmartFlow.Common.CommonForms
     {
         public delegate void SendDataEventHandler(CurrencyData currency);
         public event SendDataEventHandler DataSent;
+
         public CurrencySelection()
         {
             InitializeComponent();
@@ -22,6 +23,14 @@ namespace SmartFlow.Common.CommonForms
             try
             {
                 errorProvider.Clear();
+
+                if(conversionratetxtbox.Visible == true && conversionratetxtbox.Text.Length == 0)
+                {
+                    errorProvider.SetError(conversionratetxtbox,"Please Enter Conversion Rate.");
+                    conversionratetxtbox.Focus();
+                    return;
+                }
+
                 // Assuming the ComboBox (cmbcurrency) is populated with a list of currency objects
                 if (cmbcurrency.SelectedItem != null)
                 {
@@ -30,6 +39,10 @@ namespace SmartFlow.Common.CommonForms
 
                     if (selectedCurrency != null)
                     {
+                        if (decimal.TryParse(conversionratetxtbox.Text, out decimal conversionRate))
+                        {
+                            selectedCurrency.ConversionRate = conversionRate;
+                        }
                         // Trigger the event to send the data back to the parent form
                         DataSent?.Invoke(selectedCurrency);
 
@@ -39,6 +52,28 @@ namespace SmartFlow.Common.CommonForms
                 }
             }
             catch (Exception ex) { throw ex; }
+        }
+
+        private void cmbcurrency_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbcurrency.SelectedItem != null)
+            {
+                // Assuming SelectedItem is an object with a property "Name"
+                var selectedCurrency = (CurrencyData)cmbcurrency.SelectedItem;
+
+                if (selectedCurrency.Name.Trim().Equals("Dirham", StringComparison.OrdinalIgnoreCase))
+                {
+                    conversionratetxtbox.Visible = false;
+                    conversionratetxtbox.Text = "";  // Optionally clear the text
+                    conversionratelbl.Visible = false;
+
+                }
+                else
+                {
+                    conversionratetxtbox.Visible = true;
+                    conversionratelbl.Visible = true;
+                }
+            }
         }
     }
 }

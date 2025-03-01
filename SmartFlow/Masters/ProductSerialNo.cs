@@ -9,9 +9,18 @@ namespace SmartFlow.Masters
 {
     public partial class ProductSerialNo : Form
     {
+        private int _productid = 0;
+        private string _productmfr = string.Empty;
+
         public ProductSerialNo()
         {
             InitializeComponent();
+        }
+
+        public ProductSerialNo(int productid)
+        {
+            InitializeComponent();
+            this._productid = productid;
         }
 
         private async void selectproducttxtbox_MouseClick(object sender, MouseEventArgs e)
@@ -29,7 +38,7 @@ namespace SmartFlow.Masters
 
                     productSelection.ProductDataSelected += UpdateProductTextBox;
 
-                    await CommonFunction.DisposeOnCloseAsync(productSelection);
+                    CommonFunction.DisposeOnClose(productSelection);
                     productSelection.Show();
                 }
                 else
@@ -58,7 +67,7 @@ namespace SmartFlow.Masters
                         productSelection.ProductDataSelected += UpdateProductTextBox;
 
 
-                        await CommonFunction.DisposeOnCloseAsync(productSelection);
+                        CommonFunction.DisposeOnClose(productSelection);
                         productSelection.Show();
                     }
                     else
@@ -93,7 +102,7 @@ namespace SmartFlow.Masters
                         // Assuming these are TextBox controls
                         productidlbl.Text = productid.ToString();
                         selectproducttxtbox.Text = productname.ToString();
-                        mfrlbl.Text = productmfr.ToString();
+                        productmfrlbl.Text = productmfr.ToString();
                         productupclbl.Text = productupc.ToString();
                         productbarcodelbl.Text = productbarcode.ToString();
                     }));
@@ -113,11 +122,11 @@ namespace SmartFlow.Masters
                 && !string.IsNullOrEmpty(serialnotxtbox.Text) && !string.IsNullOrWhiteSpace(serialnotxtbox.Text))
             {
                 string serialNo = serialnotxtbox.Text.ToUpper();
-                string productmfr = mfrlbl.Text.ToUpper();
+                string productmfr = productmfrlbl.Text.ToUpper();
                 string productid = productidlbl.Text;
                 dgvItemSerialNo.Rows.Add(productid,productmfr, serialNo);
                 serialnotxtbox.Text = string.Empty;
-                mfrlbl.Text = string.Empty;
+                productmfrlbl.Text = string.Empty;
                 productidlbl.Text = string.Empty;
                 selectproducttxtbox.Text = string.Empty;
             }
@@ -125,13 +134,14 @@ namespace SmartFlow.Masters
 
         private async void savebtn_Click(object sender, EventArgs e)
         {
-            foreach(DataGridViewRow row in dgvItemSerialNo.Rows)
+            bool result = false;
+            foreach (DataGridViewRow row in dgvItemSerialNo.Rows)
             {
                 if(row.IsNewRow) continue;
 
                 string serialNo = row.Cells["serialnocolumn"].Value?.ToString() ?? "";
-                string mfr = mfrlbl.Text;
-                int productid = Convert.ToInt32(productidlbl.Text);
+                string mfr = productmfrlbl.Text;
+                int productid = int.TryParse(row.Cells["productidcolumn"].Value?.ToString(), out int tempProductId) ? tempProductId : 0;
 
                 string tableName = "BoxSerialNoTable";
 
@@ -144,7 +154,13 @@ namespace SmartFlow.Masters
                     {"ProductMfr", mfr }
                 };
 
-                bool result = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData);
+                result = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData);
+                
+            }
+
+            if (result)
+            {
+                MessageBox.Show("Saved Successfully!");
                 dgvItemSerialNo.Rows.Clear();
             }
         }
@@ -152,6 +168,24 @@ namespace SmartFlow.Masters
         private void exitbtn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ProductSerialNo_Load(object sender, EventArgs e)
+        {
+            if(_productid > 0)
+            {
+                selectproducttxtbox.Visible = false;
+                addbtn.Visible = false;
+                productidlbl.Text = _productid.ToString();
+                productmfrlbl.Text = _productmfr.ToString();
+            }
+            else
+            {
+                selectproducttxtbox.Visible = true;
+                addbtn.Visible = true;
+                productidlbl.Text = string.Empty;
+                productmfrlbl.Text = string.Empty;
+            }
         }
     }
 }

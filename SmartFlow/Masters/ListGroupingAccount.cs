@@ -14,7 +14,7 @@ namespace SmartFlow.Masters
             InitializeComponent();
         }
 
-        private async void newbtn_Click(object sender, EventArgs e)
+        private void newbtn_Click(object sender, EventArgs e)
         {
             GroupingAccount account = new GroupingAccount
             {
@@ -25,7 +25,7 @@ namespace SmartFlow.Masters
             {
                 FillGrid();
             };
-            await CommonFunction.DisposeOnCloseAsync(account);
+            CommonFunction.DisposeOnClose(account);
             account.ShowDialog();
         }
 
@@ -63,7 +63,7 @@ namespace SmartFlow.Masters
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private async void dgvlistgroupingaccount_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvlistgroupingaccount_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -86,14 +86,14 @@ namespace SmartFlow.Masters
                             }
                             FillGrid();
                         };
-                        await CommonFunction.DisposeOnCloseAsync(groupingAccount);
+                        CommonFunction.DisposeOnClose(groupingAccount);
                         groupingAccount.ShowDialog();
                     }
                 }
             }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private async void eDITToolStripMenuItem_Click(object sender, EventArgs e)
+        private void eDITToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace SmartFlow.Masters
                             }
                             FillGrid();
                         };
-                        await CommonFunction.DisposeOnCloseAsync(groupingAccount);
+                        CommonFunction.DisposeOnClose(groupingAccount);
                         groupingAccount.ShowDialog();
                     }
                 }

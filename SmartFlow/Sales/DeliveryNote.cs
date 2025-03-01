@@ -9,5 +9,14 @@ namespace SmartFlow.Sales
         {
             InitializeComponent();
         }
+
+        private void DeliveryNote_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                    this.Close();
+                    e.Handled = true;
+            }
+        }
     }
 }
