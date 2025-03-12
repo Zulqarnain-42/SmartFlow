@@ -13,6 +13,7 @@ namespace SmartFlow.General
         {
             InitializeComponent();
         }
+
         public NewCompany(int companyID)
         {
             InitializeComponent();
@@ -47,6 +48,7 @@ namespace SmartFlow.General
 
                 string query = string.Empty;
                 string companyCode = Guid.NewGuid().ToString();
+
 
                 string tableName = "CompanyTable";
                 var columnData = new Dictionary<string, object>

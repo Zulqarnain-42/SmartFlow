@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.headinglbl = new System.Windows.Forms.Label();
-            this.selectproducttxtbox = new System.Windows.Forms.TextBox();
             this.selectbrandlbl = new System.Windows.Forms.Label();
             this.searchbtn = new System.Windows.Forms.Button();
             this.invoicedatetotxtbox = new System.Windows.Forms.MaskedTextBox();
@@ -39,8 +38,7 @@
             this.invoicedatetxtbox = new System.Windows.Forms.MaskedTextBox();
             this.datelbl = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.mfrtxtbox = new System.Windows.Forms.Label();
-            this.productidlbl = new System.Windows.Forms.Label();
+            this.cmbbrand = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +49,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(509, 45);
+            this.panel1.Size = new System.Drawing.Size(509, 37);
             this.panel1.TabIndex = 161;
             // 
             // headinglbl
@@ -62,24 +60,16 @@
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
             this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(509, 45);
+            this.headinglbl.Size = new System.Drawing.Size(509, 37);
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "BRAND WISE STOCK";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // selectproducttxtbox
-            // 
-            this.selectproducttxtbox.Font = new System.Drawing.Font("Calibri", 12F);
-            this.selectproducttxtbox.Location = new System.Drawing.Point(175, 83);
-            this.selectproducttxtbox.Name = "selectproducttxtbox";
-            this.selectproducttxtbox.Size = new System.Drawing.Size(281, 27);
-            this.selectproducttxtbox.TabIndex = 168;
             // 
             // selectbrandlbl
             // 
             this.selectbrandlbl.AutoSize = true;
             this.selectbrandlbl.Font = new System.Drawing.Font("Calibri", 11F);
-            this.selectbrandlbl.Location = new System.Drawing.Point(24, 87);
+            this.selectbrandlbl.Location = new System.Drawing.Point(23, 72);
             this.selectbrandlbl.Name = "selectbrandlbl";
             this.selectbrandlbl.Size = new System.Drawing.Size(97, 18);
             this.selectbrandlbl.TabIndex = 167;
@@ -88,19 +78,20 @@
             // searchbtn
             // 
             this.searchbtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchbtn.Location = new System.Drawing.Point(175, 177);
+            this.searchbtn.Location = new System.Drawing.Point(174, 162);
             this.searchbtn.Margin = new System.Windows.Forms.Padding(2);
             this.searchbtn.Name = "searchbtn";
             this.searchbtn.Size = new System.Drawing.Size(281, 28);
             this.searchbtn.TabIndex = 166;
             this.searchbtn.Text = "SEARCH";
             this.searchbtn.UseVisualStyleBackColor = true;
+            this.searchbtn.Click += new System.EventHandler(this.searchbtn_Click);
             // 
             // invoicedatetotxtbox
             // 
             this.invoicedatetotxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.invoicedatetotxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoicedatetotxtbox.Location = new System.Drawing.Point(175, 145);
+            this.invoicedatetotxtbox.Location = new System.Drawing.Point(174, 130);
             this.invoicedatetotxtbox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.invoicedatetotxtbox.Mask = "00/00/0000";
             this.invoicedatetotxtbox.Name = "invoicedatetotxtbox";
@@ -112,7 +103,7 @@
             // 
             this.datetolbl.AutoSize = true;
             this.datetolbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.datetolbl.Location = new System.Drawing.Point(24, 149);
+            this.datetolbl.Location = new System.Drawing.Point(23, 134);
             this.datetolbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.datetolbl.Name = "datetolbl";
             this.datetolbl.Size = new System.Drawing.Size(59, 18);
@@ -123,7 +114,7 @@
             // 
             this.invoicedatetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.invoicedatetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoicedatetxtbox.Location = new System.Drawing.Point(175, 114);
+            this.invoicedatetxtbox.Location = new System.Drawing.Point(174, 99);
             this.invoicedatetxtbox.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.invoicedatetxtbox.Mask = "00/00/0000";
             this.invoicedatetxtbox.Name = "invoicedatetxtbox";
@@ -135,7 +126,7 @@
             // 
             this.datelbl.AutoSize = true;
             this.datelbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.datelbl.Location = new System.Drawing.Point(24, 118);
+            this.datelbl.Location = new System.Drawing.Point(23, 103);
             this.datelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.datelbl.Name = "datelbl";
             this.datelbl.Size = new System.Drawing.Size(79, 18);
@@ -146,41 +137,30 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // mfrtxtbox
+            // cmbbrand
             // 
-            this.mfrtxtbox.AutoSize = true;
-            this.mfrtxtbox.Location = new System.Drawing.Point(27, 192);
-            this.mfrtxtbox.Name = "mfrtxtbox";
-            this.mfrtxtbox.Size = new System.Drawing.Size(49, 13);
-            this.mfrtxtbox.TabIndex = 170;
-            this.mfrtxtbox.Text = "mfrtxtbox";
-            this.mfrtxtbox.Visible = false;
-            // 
-            // productidlbl
-            // 
-            this.productidlbl.AutoSize = true;
-            this.productidlbl.Location = new System.Drawing.Point(27, 177);
-            this.productidlbl.Name = "productidlbl";
-            this.productidlbl.Size = new System.Drawing.Size(61, 13);
-            this.productidlbl.TabIndex = 169;
-            this.productidlbl.Text = "productidlbl";
-            this.productidlbl.Visible = false;
+            this.cmbbrand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbbrand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbbrand.Font = new System.Drawing.Font("Calibri", 12F);
+            this.cmbbrand.FormattingEnabled = true;
+            this.cmbbrand.Location = new System.Drawing.Point(174, 68);
+            this.cmbbrand.Name = "cmbbrand";
+            this.cmbbrand.Size = new System.Drawing.Size(281, 27);
+            this.cmbbrand.TabIndex = 171;
             // 
             // BrandWiseStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(509, 211);
+            this.Controls.Add(this.cmbbrand);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.selectproducttxtbox);
             this.Controls.Add(this.selectbrandlbl);
             this.Controls.Add(this.searchbtn);
             this.Controls.Add(this.invoicedatetotxtbox);
             this.Controls.Add(this.datetolbl);
             this.Controls.Add(this.invoicedatetxtbox);
             this.Controls.Add(this.datelbl);
-            this.Controls.Add(this.mfrtxtbox);
-            this.Controls.Add(this.productidlbl);
             this.Name = "BrandWiseStock";
             this.Text = "BRAND WISE STOCK";
             this.Load += new System.EventHandler(this.BrandWiseStock_Load);
@@ -195,7 +175,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label headinglbl;
-        private System.Windows.Forms.TextBox selectproducttxtbox;
         private System.Windows.Forms.Label selectbrandlbl;
         private System.Windows.Forms.Button searchbtn;
         private System.Windows.Forms.MaskedTextBox invoicedatetotxtbox;
@@ -203,7 +182,6 @@
         private System.Windows.Forms.MaskedTextBox invoicedatetxtbox;
         private System.Windows.Forms.Label datelbl;
         private System.Windows.Forms.ErrorProvider errorProvider;
-        private System.Windows.Forms.Label mfrtxtbox;
-        private System.Windows.Forms.Label productidlbl;
+        private System.Windows.Forms.ComboBox cmbbrand;
     }
 }

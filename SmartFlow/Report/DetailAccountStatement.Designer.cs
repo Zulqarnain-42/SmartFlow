@@ -32,6 +32,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.headinglbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.printbtn = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.totalcreditvaluelbl = new System.Windows.Forms.Label();
             this.totaldebitvaluelbl = new System.Windows.Forms.Label();
@@ -45,9 +47,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.accountnamevaluelbl = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.openingbalancevaluelbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlistinvoices)).BeginInit();
             this.SuspendLayout();
@@ -58,7 +61,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 45);
+            this.panel1.Size = new System.Drawing.Size(800, 37);
             this.panel1.TabIndex = 14;
             // 
             // headinglbl
@@ -69,7 +72,7 @@
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
             this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(800, 45);
+            this.headinglbl.Size = new System.Drawing.Size(800, 37);
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "DETAIL ACCOUNT STATEMENT";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -86,6 +89,25 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(800, 362);
             this.panel2.TabIndex = 15;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.printbtn);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(601, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(199, 297);
+            this.panel4.TabIndex = 4;
+            // 
+            // printbtn
+            // 
+            this.printbtn.Location = new System.Drawing.Point(3, 3);
+            this.printbtn.Name = "printbtn";
+            this.printbtn.Size = new System.Drawing.Size(193, 23);
+            this.printbtn.TabIndex = 0;
+            this.printbtn.Text = "PRINT";
+            this.printbtn.UseVisualStyleBackColor = true;
+            this.printbtn.Click += new System.EventHandler(this.printbtn_Click);
             // 
             // panel3
             // 
@@ -242,19 +264,22 @@
             this.accountnamevaluelbl.TabIndex = 22;
             this.accountnamevaluelbl.Text = "accountnamevaluelbl";
             // 
-            // panel4
+            // openingbalancevaluelbl
             // 
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(601, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(199, 297);
-            this.panel4.TabIndex = 4;
+            this.openingbalancevaluelbl.AutoSize = true;
+            this.openingbalancevaluelbl.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openingbalancevaluelbl.Location = new System.Drawing.Point(156, 68);
+            this.openingbalancevaluelbl.Name = "openingbalancevaluelbl";
+            this.openingbalancevaluelbl.Size = new System.Drawing.Size(149, 17);
+            this.openingbalancevaluelbl.TabIndex = 23;
+            this.openingbalancevaluelbl.Text = "openingbalancevaluelbl";
             // 
             // DetailAccountStatement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.openingbalancevaluelbl);
             this.Controls.Add(this.accountnamevaluelbl);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -270,6 +295,7 @@
             this.Load += new System.EventHandler(this.DetailAccountStatement_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlistinvoices)).EndInit();
@@ -297,5 +323,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label accountnamevaluelbl;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label openingbalancevaluelbl;
+        private System.Windows.Forms.Button printbtn;
     }
 }

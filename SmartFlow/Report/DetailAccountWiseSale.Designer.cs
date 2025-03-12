@@ -32,6 +32,7 @@
             this.headinglbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.checkdemounit = new System.Windows.Forms.Button();
             this.totalqtyvaluelbl = new System.Windows.Forms.Label();
             this.totalamountvaluelbl = new System.Windows.Forms.Label();
             this.totalqtylbl = new System.Windows.Forms.Label();
@@ -41,7 +42,6 @@
             this.fromdatevaluelbl = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.checkdemounit = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -54,7 +54,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 45);
+            this.panel1.Size = new System.Drawing.Size(800, 37);
             this.panel1.TabIndex = 20;
             // 
             // headinglbl
@@ -65,7 +65,7 @@
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
             this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(800, 45);
+            this.headinglbl.Size = new System.Drawing.Size(800, 37);
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "DETAIL ACCOUNT WISE SALE";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -94,6 +94,15 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(800, 65);
             this.panel3.TabIndex = 3;
+            // 
+            // checkdemounit
+            // 
+            this.checkdemounit.Location = new System.Drawing.Point(12, 30);
+            this.checkdemounit.Name = "checkdemounit";
+            this.checkdemounit.Size = new System.Drawing.Size(102, 23);
+            this.checkdemounit.TabIndex = 4;
+            this.checkdemounit.Text = "CHECK DEMO";
+            this.checkdemounit.UseVisualStyleBackColor = true;
             // 
             // totalqtyvaluelbl
             // 
@@ -198,15 +207,6 @@
             this.label1.Size = new System.Drawing.Size(76, 17);
             this.label1.TabIndex = 22;
             this.label1.Text = "FROM DATE";
-            // 
-            // checkdemounit
-            // 
-            this.checkdemounit.Location = new System.Drawing.Point(12, 30);
-            this.checkdemounit.Name = "checkdemounit";
-            this.checkdemounit.Size = new System.Drawing.Size(102, 23);
-            this.checkdemounit.TabIndex = 4;
-            this.checkdemounit.Text = "CHECK DEMO";
-            this.checkdemounit.UseVisualStyleBackColor = true;
             // 
             // DetailAccountWiseSale
             // 

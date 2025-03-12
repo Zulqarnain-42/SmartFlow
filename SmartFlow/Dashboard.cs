@@ -227,19 +227,6 @@ namespace SmartFlow
             }
         }
 
-        private async void addOpenBoxProductsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form openForm = await CommonFunction.IsFormOpenAsync(typeof(OpenBoxProduct));
-            if(openForm == null)
-            {
-                OpenBoxProduct openBoxProduct = new OpenBoxProduct();
-                openBoxProduct.MdiParent = this;
-                CommonFunction.DisposeOnClose(openBoxProduct);
-                openBoxProduct.Show();
-            }
-            else { openForm.BringToFront(); }
-        }
-
         private async void termsConditionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form openForm = await CommonFunction.IsFormOpenAsync(typeof(Terms));
@@ -981,6 +968,78 @@ namespace SmartFlow
             brandWiseStock.MdiParent = this;
             CommonFunction.DisposeOnClose(brandWiseStock);
             brandWiseStock.Show();
+        }
+
+        private void aDDToolStripMenuItem28_Click(object sender, EventArgs e)
+        {
+            StockJournal stockJournal = new StockJournal();
+            stockJournal.MdiParent = this;
+            CommonFunction.DisposeOnClose(stockJournal);
+            stockJournal.Show();
+        }
+
+        private void addCompanyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewCompany newCompany = new NewCompany();
+            newCompany.MdiParent = this;
+            CommonFunction.DisposeOnClose(newCompany);
+            newCompany.Show();
+        }
+
+        private void bankDepositToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BankDeposit bankDeposit = new BankDeposit();
+            bankDeposit.MdiParent = this;
+            CommonFunction.DisposeOnClose(bankDeposit);
+            bankDeposit.Show();
+        }
+
+        private void bankWithdrawalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BankWithdraw bankWithdraw = new BankWithdraw();
+            bankWithdraw.MdiParent = this;
+            CommonFunction.DisposeOnClose(bankWithdraw);
+            bankWithdraw.Show();
+        }
+
+        private void aDDToolStripMenuItem29_Click(object sender, EventArgs e)
+        {
+            ProductSerialNo productSerialNo = new ProductSerialNo();
+            productSerialNo.MdiParent = this;
+            CommonFunction.DisposeOnClose(productSerialNo);
+            productSerialNo.Show();
+        }
+
+        private void lISTToolStripMenuItem29_Click(object sender, EventArgs e)
+        {
+            ListProductSerial listProductSerial = new ListProductSerial();
+            listProductSerial.MdiParent = this;
+            CommonFunction.DisposeOnClose(listProductSerial);
+            listProductSerial.Show();
+        }
+
+        private void aDDToolStripMenuItem23_Click(object sender, EventArgs e)
+        {
+            OpenBoxProduct openBoxProduct = new OpenBoxProduct();
+            openBoxProduct.MdiParent = this;
+            CommonFunction.DisposeOnClose(openBoxProduct);
+            openBoxProduct.Show();
+        }
+
+        private void aDDToolStripMenuItem26_Click(object sender, EventArgs e)
+        {
+            StockAdjustment stockAdjustment = new StockAdjustment();
+            stockAdjustment.MdiParent = this;
+            CommonFunction.DisposeOnClose(stockAdjustment);
+            stockAdjustment.Show();
+        }
+
+        private void sHELFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Shelf shelf = new Shelf();
+            shelf.MdiParent = this;
+            CommonFunction.DisposeOnClose(shelf);
+            shelf.Show();
         }
     }
 }

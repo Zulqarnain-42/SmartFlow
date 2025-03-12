@@ -102,6 +102,10 @@
             this.companynamelbl = new System.Windows.Forms.Label();
             this.companynametxtbox = new System.Windows.Forms.TextBox();
             this.addcompanybtn = new System.Windows.Forms.Button();
+            this.countrynamelbl = new System.Windows.Forms.Label();
+            this.compnamelbl = new System.Windows.Forms.Label();
+            this.companyaddresslbl = new System.Windows.Forms.Label();
+            this.accountsubcontrolcode = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.panel1.SuspendLayout();
             this.refrencepersongroupbox.SuspendLayout();
@@ -912,12 +916,56 @@
             this.addcompanybtn.UseVisualStyleBackColor = true;
             this.addcompanybtn.Click += new System.EventHandler(this.addcompanybtn_Click);
             // 
+            // countrynamelbl
+            // 
+            this.countrynamelbl.AutoSize = true;
+            this.countrynamelbl.Location = new System.Drawing.Point(11, 507);
+            this.countrynamelbl.Name = "countrynamelbl";
+            this.countrynamelbl.Size = new System.Drawing.Size(78, 13);
+            this.countrynamelbl.TabIndex = 70;
+            this.countrynamelbl.Text = "countrynamelbl";
+            this.countrynamelbl.Visible = false;
+            // 
+            // compnamelbl
+            // 
+            this.compnamelbl.AutoSize = true;
+            this.compnamelbl.Location = new System.Drawing.Point(11, 494);
+            this.compnamelbl.Name = "compnamelbl";
+            this.compnamelbl.Size = new System.Drawing.Size(69, 13);
+            this.compnamelbl.TabIndex = 71;
+            this.compnamelbl.Text = "compnamelbl";
+            this.compnamelbl.Visible = false;
+            // 
+            // companyaddresslbl
+            // 
+            this.companyaddresslbl.AutoSize = true;
+            this.companyaddresslbl.Location = new System.Drawing.Point(11, 520);
+            this.companyaddresslbl.Name = "companyaddresslbl";
+            this.companyaddresslbl.Size = new System.Drawing.Size(97, 13);
+            this.companyaddresslbl.TabIndex = 72;
+            this.companyaddresslbl.Text = "companyaddresslbl";
+            this.companyaddresslbl.Visible = false;
+            // 
+            // accountsubcontrolcode
+            // 
+            this.accountsubcontrolcode.AutoSize = true;
+            this.accountsubcontrolcode.Location = new System.Drawing.Point(14, 537);
+            this.accountsubcontrolcode.Name = "accountsubcontrolcode";
+            this.accountsubcontrolcode.Size = new System.Drawing.Size(119, 13);
+            this.accountsubcontrolcode.TabIndex = 73;
+            this.accountsubcontrolcode.Text = "accountsubcontrolcode";
+            this.accountsubcontrolcode.Visible = false;
+            // 
             // Account
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1233, 592);
+            this.Controls.Add(this.accountsubcontrolcode);
+            this.Controls.Add(this.companyaddresslbl);
+            this.Controls.Add(this.compnamelbl);
+            this.Controls.Add(this.countrynamelbl);
             this.Controls.Add(this.addcompanybtn);
             this.Controls.Add(this.companynametxtbox);
             this.Controls.Add(this.companynamelbl);
@@ -1074,5 +1122,9 @@
         private System.Windows.Forms.TextBox companynametxtbox;
         private System.Windows.Forms.Label companynamelbl;
         private System.Windows.Forms.Button addcompanybtn;
+        private System.Windows.Forms.Label companyaddresslbl;
+        private System.Windows.Forms.Label compnamelbl;
+        private System.Windows.Forms.Label countrynamelbl;
+        private System.Windows.Forms.Label accountsubcontrolcode;
     }
 }

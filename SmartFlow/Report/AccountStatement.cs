@@ -19,6 +19,7 @@ namespace SmartFlow.Report
     {
         private static string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         string accountname = string.Empty;
+        decimal openingbalance = 0;
         public AccountStatement()
         {
             InitializeComponent();
@@ -84,6 +85,7 @@ namespace SmartFlow.Report
                     int accountid = e.AccountId;
                     accountname = e.AccountName;
                     int accountheadid = e.AccountHeadId;
+                    decimal openingbalance = e.OpeningBalance;
 
                     // If you need to update UI controls, ensure that it's done on the UI thread
                     // If you update textboxes, labels, etc., do it like this:
@@ -213,19 +215,12 @@ namespace SmartFlow.Report
                                 {
                                     adapter.Fill(dataInvoice);
                                 }
-
-                                if (dataInvoice.Rows.Count > 0)
-                                {
-                                    this.Close();
-                                    DetailAccountStatement accountStatement = new DetailAccountStatement(dataInvoice, startDate, endDate, accountname);
-                                    accountStatement.MdiParent = Application.OpenForms["Dashboard"];
-                                    CommonFunction.DisposeOnClose(accountStatement);
-                                    accountStatement.Show();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("No data found for the specified date range.", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                }
+                                
+                                this.Close();
+                                DetailAccountStatement accountStatement = new DetailAccountStatement(dataInvoice, startDate, endDate, accountname, openingbalance);
+                                accountStatement.MdiParent = Application.OpenForms["Dashboard"];
+                                CommonFunction.DisposeOnClose(accountStatement);
+                                accountStatement.Show();
                             }
                         }
                     }

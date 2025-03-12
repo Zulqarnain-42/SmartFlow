@@ -2,6 +2,7 @@
 using SmartFlow.Common;
 using SmartFlow.Common.CommonForms;
 using SmartFlow.Common.Forms;
+using SmartFlow.Transactions.ReportViewer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -115,7 +116,12 @@ namespace SmartFlow.Transactions
                                 currencysymbollbl.Text = string.Empty;
 
                                 dgvjournal.Rows.Clear();
-                                MessageBox.Show("Updated Successfully!");
+                                var journalreportviewer = new JournalReportViewer(invoiceNo)
+                                {
+                                    MdiParent = Application.OpenForms["Dashboard"]
+                                };
+                                CommonFunction.DisposeOnClose(journalreportviewer);
+                                journalreportviewer.Show();
                             }
                         }
                     }
@@ -196,7 +202,12 @@ namespace SmartFlow.Transactions
                                 currencysymbollbl.Text = string.Empty;
 
                                 dgvjournal.Rows.Clear();
-                                MessageBox.Show("Saved Successfully!");
+                                var journalreportviewer = new JournalReportViewer(invoiceNo)
+                                {
+                                    MdiParent = Application.OpenForms["Dashboard"]
+                                };
+                                CommonFunction.DisposeOnClose(journalreportviewer);
+                                journalreportviewer.Show();
                             }
                         }
                         else

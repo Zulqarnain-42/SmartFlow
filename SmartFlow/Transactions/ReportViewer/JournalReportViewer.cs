@@ -1,5 +1,4 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Windows.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,16 +11,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SmartFlow.Report.ReportViewer
+namespace SmartFlow.Transactions.ReportViewer
 {
-    public partial class AccountLedgerReportViewer : Form
+    public partial class JournalReportViewer: Form
     {
         private string _invoiceNo = string.Empty;
-        private ReportDocument reportDocument;
-
-        public AccountLedgerReportViewer()
+        public JournalReportViewer(string invoiceNo)
         {
             InitializeComponent();
+            _invoiceNo = invoiceNo;
+        }
+
+        private void JournalReportViewer_Load(object sender, EventArgs e)
+        {
+            LoadCrystalReport(_invoiceNo);
         }
 
         private void LoadCrystalReport(string invoiceNo)
@@ -29,19 +32,20 @@ namespace SmartFlow.Report.ReportViewer
             try
             {
                 // Create a new instance of the report
-                reportDocument = new ReportDocument();
+                ReportDocument reportDocument = new ReportDocument();
 
-                string reportPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Transactions\ReportViewer\Reports\PaymentReport.rpt");
+                string reportPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Transactions\ReportViewer\Reports\JournalReport.rpt");
                 reportDocument.Load(reportPath);
 
                 // Fetch data for a specific invoice
                 string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    SqlCommand command = new SqlCommand("GetTransactionDetailsByInvoice", connection);
+                    SqlCommand command = new SqlCommand("GetTransactionDetailsByInvoiceNo", connection);
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.AddWithValue("@InvoiceNo", invoiceNo);
+                    command.Parameters.AddWithValue("@IsNewRecord", true);
 
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     DataSet dataSet = new DataSet();
@@ -52,34 +56,13 @@ namespace SmartFlow.Report.ReportViewer
                 }
 
                 // Set the CrystalReportViewer's ReportSource
-                crystalReportViewer.ReportSource = reportDocument;
-                crystalReportViewer.Refresh();
+                crystalReportViewer1.ReportSource = reportDocument;
+                crystalReportViewer1.Refresh();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}", "Report Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void AccountLedgerReportViewer_Load(object sender, EventArgs e)
-        {
-            LoadCrystalReport(_invoiceNo);
-        }
-
-        private void DisposeReport()
-        {
-            if (reportDocument != null)
-            {
-                reportDocument.Close();
-                reportDocument.Dispose();
-                reportDocument = null;
-                GC.Collect(); // Force garbage collection
-            }
-        }
-
-        private void AccountLedgerReportViewer_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            DisposeReport();
         }
     }
 }

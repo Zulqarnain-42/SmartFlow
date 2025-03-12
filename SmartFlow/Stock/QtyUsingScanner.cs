@@ -83,20 +83,43 @@ namespace SmartFlow.Stock
                             string barcode = Convert.ToString(row.Cells[4].Value);
                             int quantity = Convert.ToInt32(row.Cells[5].Value);
 
+
                             if (quantity > 0)
                             {
                                 tableName = "StockTable";
-
-                                var subtableData = new Dictionary<string, object>
+                                Dictionary<string, object> subtableData;
+                                if (minusitemchkbox.Checked == true)
                                 {
-                                    { "ProductID", productid },
-                                    { "ProductMfr", mfr },
-                                    { "Quantity", quantity },
-                                    { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
-                                    { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
-                                    { "WarehouseId", warehouseid },
-                                    { "StockCustom_ID", stockcustomid }
-                                };
+                                    subtableData = new Dictionary<string, object>
+                                    {
+                                        { "ProductID", productid },
+                                        { "ProductMfr", mfr },
+                                        { "Quantity", quantity },
+                                        { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                                        { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                                        { "WarehouseId", warehouseid },
+                                        { "StockCustom_ID", stockcustomid },
+                                        { "MinusInventory", true }
+                                    };
+                                }
+                                else
+                                {
+                                    int rackid = Convert.ToInt32(selectrackcombo.SelectedValue);
+                                    int shelfid = Convert.ToInt32(selectshelfcombo.SelectedValue);
+                                    subtableData = new Dictionary<string, object>
+                                    {
+                                        { "ProductID", productid },
+                                        { "ProductMfr", mfr },
+                                        { "Quantity", quantity },
+                                        { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                                        { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                                        { "WarehouseId", warehouseid },
+                                        { "StockCustom_ID", stockcustomid },
+                                        { "AddInventory", true },
+                                        { "RackId", rackid },
+                                        { "ShelfId", shelfid }
+                                    };
+                                }
 
                                 result = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", subtableData); 
                                 if (result)
@@ -133,6 +156,16 @@ namespace SmartFlow.Stock
                     dgvinventory.Rows.Clear();
                     importantnotestxtbox.Clear();
                     selectwarehousetxtbox.Clear();
+
+                    if(minusitemchkbox.Checked == true)
+                    {
+                        selectrackcombo.SelectedIndex = 0;
+                        selectshelfcombo.SelectedIndex = 0;
+                        selectrackcombo.Visible = false;
+                        selectracklbl.Visible = false;
+                        selectshelfcombo.Visible = false;
+                        selectshelflbl.Visible = false;
+                    }
                 }
             }
             catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -528,6 +561,39 @@ namespace SmartFlow.Stock
                     MessageBox.Show("Please enter a valid quantity.");
                     dgvinventory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 1; // Reset to default
                 }
+            }
+        }
+
+        private async void selectwarehousetxtbox_Leave(object sender, EventArgs e)
+        {
+            int warehouseid = Convert.ToInt32(warehouseidlbl.Text);
+            if (warehouseid > 0 && minusitemchkbox.Checked == false)
+            {
+                await CommonFunction.PopulateRackComboBoxAsync(selectrackcombo, warehouseid);
+                selectrackcombo.Visible = true;
+                selectracklbl.Visible = true;
+            }
+        }
+
+        private async void selectrackcombo_Leave(object sender, EventArgs e)
+        {
+            int rackid = Convert.ToInt32(selectrackcombo.SelectedValue);
+            if(rackid > 0 && minusitemchkbox.Checked == false)
+            {
+                await CommonFunction.PopulateShelfComboBoxAsync(selectshelfcombo, rackid);
+                selectshelfcombo.Visible = true;
+                selectshelflbl.Visible = true;
+            }
+        }
+
+        private void minusitemchkbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if(minusitemchkbox.Checked == true)
+            {
+                selectrackcombo.Visible = false;
+                selectracklbl.Visible = false;
+                selectshelfcombo.Visible = false;
+                selectshelflbl.Visible = false;
             }
         }
     }

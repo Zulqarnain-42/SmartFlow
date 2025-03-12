@@ -39,7 +39,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 45);
+            this.panel1.Size = new System.Drawing.Size(800, 37);
             this.panel1.TabIndex = 1;
             // 
             // label1
@@ -50,7 +50,7 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(800, 45);
+            this.label1.Size = new System.Drawing.Size(800, 37);
             this.label1.TabIndex = 0;
             this.label1.Text = "MODIFY PURCHASE TYPE MASTER";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

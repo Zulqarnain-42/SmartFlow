@@ -2,6 +2,7 @@
 using SmartFlow.Common.Forms;
 using SmartFlow.Purchase;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,7 +19,7 @@ namespace SmartFlow.Stock
             InitializeComponent();
         }
 
-        public OpenBoxProduct(DataTable datainvoice,DataTable detaildatainvoice)
+        public OpenBoxProduct(DataTable datainvoice, DataTable detaildatainvoice)
         {
             InitializeComponent();
             this._datainvoice = datainvoice;
@@ -65,8 +66,8 @@ namespace SmartFlow.Stock
 
                 return newInvoiceNumber;
             }
-            catch (Exception ex) 
-            { 
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
@@ -100,16 +101,16 @@ namespace SmartFlow.Stock
             try
             {
                 errorProvider.Clear();
-                if(selectwarehousefromtxtbox.Text.Trim().Length == 0)
+                if (selectwarehousefromtxtbox.Text.Trim().Length == 0)
                 {
-                    errorProvider.SetError(selectwarehousefromtxtbox,"Kindly Select a warehouse.");
+                    errorProvider.SetError(selectwarehousefromtxtbox, "Kindly Select a warehouse.");
                     selectwarehousefromtxtbox.Focus();
                     return;
                 }
 
-                if(descriptiontxtbox.Text.Trim().Length == 0)
+                if (descriptiontxtbox.Text.Trim().Length == 0)
                 {
-                    errorProvider.SetError(descriptiontxtbox,"Add Description.");
+                    errorProvider.SetError(descriptiontxtbox, "Add Description.");
                     descriptiontxtbox.Focus();
                     return;
                 }
@@ -118,26 +119,43 @@ namespace SmartFlow.Stock
                 string invoiceno = openboxproductidlbl.Text;
                 string description = descriptiontxtbox.Text;
 
-                addopenboxproductdata = string.Format("INSERT INTO StockCustomizedTable (Code,CreatedAt,CreatedDay,InvoiceNo,Description) VALUES ('" + Guid.NewGuid() + "'," +
-                    "'" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "','" + DateTime.Now.DayOfWeek + "','" + invoiceno + "','" + description + "'); " +
-                    "SELECT SCOPE_IDENTITY();");
+                string tableName = "StockCustomizedTable";
+                var columnData = new Dictionary<string, object>
+                {
+                    { "Code", Guid.NewGuid().ToString() },
+                    { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                    { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                    { "InvoiceNo", invoiceno },
+                    { "Description", description }
+                };
 
-                int stockcustomid = 1;
+                int stockcustomid = await DatabaseAccess.InsertDataIdAsync(tableName, columnData);
                 int warehouseid = Convert.ToInt32(warehouseidlbl.Text);
 
                 if (stockcustomid > 0)
                 {
-                    string openboxproid = openboxprodidlbl.Text.ToString();
-                    string openboxprodname = openboxproductnamelbl.Text;
-                    string openboxprodupc = openboxproductupclbl.Text;
-                    string openboxprodprice = openboxproductpricelbl.Text;
-                    string openboxprodbarcode = openboxproductbarcodelbl.Text;
+                    string openboxproid = productidlbl.Text.ToString();
+                    string openboxprodname = productnamelbl.Text;
+                    string openmfr = productmfrlbl.Text;
+                    string openboxprodupc = productupclbl.Text;
+                    string openboxprodprice = productpricelbl.Text;
+                    string openboxprodbarcode = productbarcodelbl.Text;
+                    int openboxqty = Convert.ToInt32(openboxqtytxtbox.Text);
 
-                    string insertopenboxproducts = string.Format("INSERT INTO StockTable (ProductID,Quantity,CreatedAt,CreatedDay,WarehouseId," +
-                        "StockCustom_ID,MinusOpenBoxQuantity) VALUES ('" + openboxproid + "','" + -1 + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                        "'" + DateTime.Now.DayOfWeek + "','" + warehouseid + "','" + stockcustomid + "','" + -1 + "')");
+                    tableName = "StockTable";
+                    var subtableData = new Dictionary<string, object>
+                    {
+                        { "ProductID", openboxproid },
+                        { "ProductMfr", openmfr },
+                        { "Quantity", openboxqty },
+                        { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                        { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                        { "WarehouseId", warehouseid },
+                        { "StockCustom_ID", stockcustomid },
+                        { "MinusInventory", true }
+                    };
 
-                    bool result = false;
+                    bool result = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", subtableData);
 
                     if (result)
                     {
@@ -146,19 +164,28 @@ namespace SmartFlow.Stock
                             if (!row.IsNewRow)
                             {
                                 string productid = Convert.ToString(row.Cells[0].Value);
-                                string productname = Convert.ToString(row.Cells[1].Value);
-                                string upc = Convert.ToString(row.Cells[2].Value);
-                                string price = Convert.ToString(row.Cells[3].Value);
-                                string barcode = Convert.ToString(row.Cells[4].Value);
-                                int quantity = Convert.ToInt32(row.Cells[5].Value);
+                                string mfr = row.Cells[1].Value.ToString();
+                                string productname = Convert.ToString(row.Cells[2].Value);
+                                string upc = Convert.ToString(row.Cells[3].Value);
+                                string price = Convert.ToString(row.Cells[4].Value);
+                                string barcode = Convert.ToString(row.Cells[5].Value);
+                                int quantity = Convert.ToInt32(row.Cells[6].Value);
 
-                                string insertproducts = string.Format("INSERT INTO StockTable (ProductID,Quantity,CreatedAt,CreatedDay,WarehouseId," +
-                                "StockCustom_ID,AddOpenBoxQuantity) VALUES ('" + productid + "','" + quantity + "','" + DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                                "'" + DateTime.Now.DayOfWeek + "','" + warehouseid + "','" + stockcustomid + "','" + quantity + "')");
+                                tableName = "StockTable";
+                                var subsubtabledata = new Dictionary<string, object>
+                                {
+                                    { "ProductID", productid },
+                                    { "ProductMfr", mfr },
+                                    { "Quantity", quantity },
+                                    { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                                    { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                                    { "WarehouseId", warehouseid },
+                                    { "StockCustom_ID", stockcustomid },
+                                    { "AddInventory", true }
+                                };
+                                bool result1 = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", subsubtabledata);
 
-                                bool result1 = false;
-
-                                if (result1) 
+                                if (result1)
                                 {
                                     int count = 0;
                                     int diff = Convert.ToInt32(quantity) - count;
@@ -169,9 +196,17 @@ namespace SmartFlow.Stock
                                         while (start < diff)
                                         {
                                             string serialnumber = await GenerateRandomSerialNumber();
-                                            string query1 = string.Format("INSERT INTO SerialNoTable (ProductId,SerialNo,CreatedAt,CreatedDay) " +
-                                        "VALUES ('" + productid + "','" + serialnumber + "','" + System.DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") + "'," +
-                                        "'" + System.DateTime.Now.DayOfWeek + "')");
+
+                                            string serialtable = "SerialNoTable";
+                                            var serialtabledata = new Dictionary<string, object>
+                                            {
+                                                { "ProductId", productid },
+                                                { "SerialNo", serialnumber },
+                                                { "CreatedAt",DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                                                { "CreatedDay", DateTime.Now.DayOfWeek.ToString() }
+                                            };
+
+                                            await DatabaseAccess.ExecuteQueryAsync(serialtable, "INSERT", serialtabledata);
 
                                             start++;
                                         }
@@ -181,11 +216,23 @@ namespace SmartFlow.Stock
                         }
 
                         MessageBox.Show("Saved Successfully!");
+                        selectwarehousefromtxtbox.Text = string.Empty;
+                        openboxproducttxtbox.Text = string.Empty;
+                        openboxqtytxtbox.Text = string.Empty;
+                        productbarcodelbl.Text = string.Empty;
+                        productupclbl.Text = string.Empty;
+                        productnamelbl.Text = string.Empty;
+                        productidlbl.Text = string.Empty;
+                        productpricelbl.Text = string.Empty;
+                        productmfrlbl.Text = string.Empty;
+                        selectwarehousefromtxtbox.Focus();
                     }
                 }
 
-            }catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
+
         static async Task<string> GenerateRandomSerialNumber()
         {
             Random random = new Random();
@@ -214,16 +261,16 @@ namespace SmartFlow.Stock
             try
             {
                 errorProvider.Clear();
-                if(selectwarehousefromtxtbox.Text.Trim().Length == 0)
+                if (selectwarehousefromtxtbox.Text.Trim().Length == 0)
                 {
-                    errorProvider.SetError(selectwarehousefromtxtbox,"Kindly Select Warehouse");
+                    errorProvider.SetError(selectwarehousefromtxtbox, "Kindly Select Warehouse");
                     selectwarehousefromtxtbox.Focus();
                     return;
                 }
 
-                if(qtytextbox.Text.Trim().Length == 0)
+                if (qtytextbox.Text.Trim().Length == 0)
                 {
-                    errorProvider.SetError(qtytextbox,"Please Enter Quantity.");
+                    errorProvider.SetError(qtytextbox, "Please Enter Quantity.");
                     qtytextbox.Focus();
                     return;
                 }
@@ -245,16 +292,29 @@ namespace SmartFlow.Stock
 
                 if (!productExists)
                 {
-                    dgvproducts.Rows.Add(openboxprodidlbl.Text, openboxproductnamelbl.Text, openboxproductupclbl.Text, openboxproductpricelbl.Text, 
+                    dgvproducts.Rows.Add(openboxprodidlbl.Text, openboxprodmfrlbl.Text, openboxproductnamelbl.Text, openboxproductupclbl.Text, openboxproductpricelbl.Text,
                         openboxproductbarcodelbl.Text, qtytextbox.Text);
                 }
 
-                remainingproductmfrtxtbox.Text = string.Empty;
-                qtytextbox.Text = string.Empty;
-                remainingproductmfrtxtbox.Focus();
+                ResetLabelData();
 
-            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
+
+        private void ResetLabelData()
+        {
+            openboxprodidlbl.Text = string.Empty;
+            openboxprodmfrlbl.Text = string.Empty;
+            openboxproductnamelbl.Text = string.Empty;
+            openboxproductupclbl.Text = string.Empty;
+            openboxproductpricelbl.Text = string.Empty;
+            openboxproductbarcodelbl.Text = string.Empty;
+            remainingproductmfrtxtbox.Text = string.Empty;
+            qtytextbox.Text = string.Empty;
+            remainingproductmfrtxtbox.Focus();
+        }
+
         private void dgvproducts_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.D)
@@ -311,7 +371,11 @@ namespace SmartFlow.Stock
                     {
                         if (warehousedata.Rows.Count > 0)
                         {
-                            WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
+                            WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata)
+                            {
+                                WindowState = FormWindowState.Normal,
+                                StartPosition = FormStartPosition.CenterScreen,
+                            };
                             warehouseSelection.MdiParent = this.MdiParent;
 
                             warehouseSelection.WarehouseDataSelected += UpdateWarehouseInfo;
@@ -325,7 +389,7 @@ namespace SmartFlow.Stock
                     openForm.BringToFront();
                 }
             }
-            
+
         }
 
         private async void UpdateWarehouseInfo(object sender, WarehouseData e)
@@ -406,6 +470,7 @@ namespace SmartFlow.Stock
                         // Assuming these are TextBox controls
                         productidlbl.Text = productid.ToString();
                         productnamelbl.Text = productname;
+                        openboxproducttxtbox.Text = productname;
                         productupclbl.Text = productupc;
                         productbarcodelbl.Text = productbarcode;
                         productpricelbl.Text = productprice.ToString();
@@ -422,28 +487,24 @@ namespace SmartFlow.Stock
         }
         private async void remainingproductmfrtxtbox_MouseClick(object sender, MouseEventArgs e)
         {
-            if (string.IsNullOrEmpty(remainingboxproductlbl.Text))
+            Form openForm = await CommonFunction.IsFormOpenAsync(typeof(ProductSelectionForm));
+            if (openForm == null)
             {
-                Form openForm = await CommonFunction.IsFormOpenAsync(typeof(ProductSelectionForm));
-                if (openForm == null)
+                ProductSelectionForm productSelectionForm = new ProductSelectionForm
                 {
-                    ProductSelectionForm productSelectionForm = new ProductSelectionForm
-                    {
-                        WindowState = FormWindowState.Normal,
-                        StartPosition = FormStartPosition.CenterScreen,
-                    };
+                    WindowState = FormWindowState.Normal,
+                    StartPosition = FormStartPosition.CenterScreen,
+                };
 
-                    productSelectionForm.ProductDataSelected += UpdateOpenBoxProductTextBox;
-
-                    CommonFunction.DisposeOnClose(productSelectionForm);
-                    productSelectionForm.ShowDialog();
-                }
-                else
-                {
-                    openForm.BringToFront();
-                }
+                productSelectionForm.ProductDataSelected += UpdateOpenBoxProductTextBox;
+                CommonFunction.DisposeOnClose(productSelectionForm);
+                productSelectionForm.ShowDialog();
             }
-            
+            else
+            {
+                openForm.BringToFront();
+            }
+
         }
         private async void UpdateOpenBoxProductTextBox(object sender, ProductData e)
         {
@@ -469,6 +530,7 @@ namespace SmartFlow.Stock
                         // Assuming these are TextBox controls
                         openboxprodidlbl.Text = productid.ToString();
                         openboxproductnamelbl.Text = productName;
+                        remainingproductmfrtxtbox.Text = productName;
                         openboxprodmfrlbl.Text = productmfr;
                         openboxproductupclbl.Text = productupc;
                         openboxproductpricelbl.Text = productprice.ToString();
@@ -495,36 +557,5 @@ namespace SmartFlow.Stock
         {
             this.Close();
         }
-
-        /*private bool InsertOpenBoxProducts()
-        {
-            string tableName = "";
-            var columnData = new Dictionary<string, object>
-            {
-                { "Code", Guid.NewGuid().ToString() },
-                { "CreatedAt", DateTime.Now.ToString() },
-                { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
-                { "InvoiceNo", openboxproductidlbl.Text },
-                { "Description", descriptiontxtbox.Text }
-            };
-
-            int result = DatabaseAccess.InsertDataId(tableName, columnData);
-
-            if (result == 0) 
-            {
-                string subtable = "";
-
-                var subcolumnData = new Dictionary<string, object>
-                {
-                    { "ProductID", },
-                    { "Quantity", },
-                    { "CreatedAt", },
-                    { "CreatedDay", },
-                    { "WarehouseId", },
-                    { "StockCustom_ID", },
-                    { "MinusOpenBoxQuantity", }
-                };
-            }
-        }*/
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace SmartFlow.Masters
 {
@@ -11,7 +12,7 @@ namespace SmartFlow.Masters
     {
         private int _productid = 0;
         private string _productmfr = string.Empty;
-
+        private int invoiceCounter = 1;
         public ProductSerialNo()
         {
             InitializeComponent();
@@ -118,17 +119,34 @@ namespace SmartFlow.Masters
 
         private void addbtn_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(selectproducttxtbox.Text) && !string.IsNullOrWhiteSpace(selectproducttxtbox.Text) 
-                && !string.IsNullOrEmpty(serialnotxtbox.Text) && !string.IsNullOrWhiteSpace(serialnotxtbox.Text))
+            if(_productid > 0)
             {
-                string serialNo = serialnotxtbox.Text.ToUpper();
-                string productmfr = productmfrlbl.Text.ToUpper();
-                string productid = productidlbl.Text;
-                dgvItemSerialNo.Rows.Add(productid,productmfr, serialNo);
-                serialnotxtbox.Text = string.Empty;
-                productmfrlbl.Text = string.Empty;
-                productidlbl.Text = string.Empty;
-                selectproducttxtbox.Text = string.Empty;
+                if (!string.IsNullOrEmpty(serialnotxtbox.Text) && !string.IsNullOrWhiteSpace(serialnotxtbox.Text))
+                {
+                    string serialNo = serialnotxtbox.Text.ToUpper();
+                    string productmfr = productmfrlbl.Text.ToUpper();
+                    string productid = productidlbl.Text;
+                    dgvItemSerialNo.Rows.Add(productid, productmfr, serialNo);
+                    serialnotxtbox.Text = string.Empty;
+                    selectproducttxtbox.Text = string.Empty;
+                    serialnotxtbox.Focus();
+                }
+
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(selectproducttxtbox.Text) && !string.IsNullOrWhiteSpace(selectproducttxtbox.Text)
+                && !string.IsNullOrEmpty(serialnotxtbox.Text) && !string.IsNullOrWhiteSpace(serialnotxtbox.Text))
+                {
+                    string serialNo = serialnotxtbox.Text.ToUpper();
+                    string productmfr = productmfrlbl.Text.ToUpper();
+                    string productid = productidlbl.Text;
+                    dgvItemSerialNo.Rows.Add(productid, productmfr, serialNo);
+                    serialnotxtbox.Text = string.Empty;
+                    productmfrlbl.Text = string.Empty;
+                    productidlbl.Text = string.Empty;
+                    selectproducttxtbox.Text = string.Empty;
+                }
             }
         }
 
@@ -151,7 +169,8 @@ namespace SmartFlow.Masters
                     {"SerialNo", serialNo },
                     {"CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
                     {"CreatedDay", DateTime.Now.DayOfWeek.ToString() },
-                    {"ProductMfr", mfr }
+                    {"ProductMfr", mfr },
+                    {"InvoiceNo", productserialnoinvoicelbl.Text }
                 };
 
                 result = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData);
@@ -170,14 +189,22 @@ namespace SmartFlow.Masters
             this.Close();
         }
 
-        private void ProductSerialNo_Load(object sender, EventArgs e)
+        private async void ProductSerialNo_Load(object sender, EventArgs e)
         {
             if(_productid > 0)
             {
                 selectproducttxtbox.Visible = false;
-                addbtn.Visible = false;
+                addbtn.Visible = true;
                 productidlbl.Text = _productid.ToString();
                 productmfrlbl.Text = _productmfr.ToString();
+                selectproductlbl.Visible = false;
+
+                string query = "SELECT MFR FROM ProductTable WHERE ProductID = '" + _productid + "'";
+                DataTable dt = await DatabaseAccess.RetriveAsync(query);
+                if(dt.Rows.Count > 0)
+                {
+                    productmfrlbl.Text = dt.Rows[0]["MFR"].ToString();
+                }
             }
             else
             {
@@ -186,6 +213,73 @@ namespace SmartFlow.Masters
                 productidlbl.Text = string.Empty;
                 productmfrlbl.Text = string.Empty;
             }
+            productserialnoinvoicelbl.Text = await GenerateNextInvoiceNumber();
+        }
+
+        private async Task<string> GenerateNextInvoiceNumber()
+        {
+            try
+            {
+                string lastInvoiceNumber = await GetLastInvoiceNumber();
+                string newInvoiceNumber;
+
+                if (lastInvoiceNumber == null)
+                {
+
+                    // Generate the invoice number using the current date and a sequential number
+                    string invoicepart = "PSR";
+                    string datePart = DateTime.Today.ToString("yyMMdd");
+                    string sequentialPart = invoiceCounter.ToString("D5"); // Assuming a 5-digit sequential number
+
+                    // Increment the invoice counter for the next invoice
+                    invoiceCounter++;
+
+                    // Concatenate the date part and sequential part to form the invoice number
+                    newInvoiceNumber = $"{invoicepart}-{datePart}-{sequentialPart}";
+
+                    return newInvoiceNumber;
+                    // If no previous invoice number, start with the first one
+                }
+                else
+                {
+                    // Extract the sequential part from the last invoice number
+                    string sequentialPart = lastInvoiceNumber.Substring(lastInvoiceNumber.LastIndexOf('-') + 1);
+                    int lastSequentialNumber = int.Parse(sequentialPart);
+                    string invoicepart = "PSR";
+                    string datePart = DateTime.Today.ToString("yyMMdd");
+                    // Increment the sequential number
+                    int nextSequentialNumber = lastSequentialNumber + 1;
+
+                    // Generate the new invoice number
+                    newInvoiceNumber = $"{invoicepart}-{datePart}-{nextSequentialNumber:D5}";
+                }
+
+                return newInvoiceNumber;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+        private async Task<string> GetLastInvoiceNumber()
+        {
+            string lastInvoiceNumber = null;
+            try
+            {
+                string query = "SELECT TOP 1 InvoiceNo FROM BoxSerialNoTable WHERE InvoiceNo LIKE 'PSR-%' ORDER BY InvoiceNo DESC";
+                DataTable invoiceData = await DatabaseAccess.RetriveAsync(query);
+                if (invoiceData.Rows.Count > 0)
+                {
+                    lastInvoiceNumber = invoiceData.Rows[0]["InvoiceNo"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return lastInvoiceNumber;
         }
     }
 }

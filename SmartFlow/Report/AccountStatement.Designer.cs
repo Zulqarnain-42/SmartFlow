@@ -39,6 +39,7 @@
             this.invoicedatetotxtbox = new System.Windows.Forms.MaskedTextBox();
             this.accountidlbl = new System.Windows.Forms.Label();
             this.accountheadidlbl = new System.Windows.Forms.Label();
+            this.accountopeningbalancelbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             this.panel1.Controls.Add(this.balancesheetlbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(468, 37);
             this.panel1.TabIndex = 0;
@@ -99,7 +100,7 @@
             // savebtn
             // 
             this.savebtn.Location = new System.Drawing.Point(131, 136);
-            this.savebtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.savebtn.Margin = new System.Windows.Forms.Padding(2);
             this.savebtn.Name = "savebtn";
             this.savebtn.Size = new System.Drawing.Size(305, 21);
             this.savebtn.TabIndex = 4;
@@ -110,7 +111,7 @@
             // selectaccounttxtbox
             // 
             this.selectaccounttxtbox.Location = new System.Drawing.Point(131, 61);
-            this.selectaccounttxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.selectaccounttxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.selectaccounttxtbox.Name = "selectaccounttxtbox";
             this.selectaccounttxtbox.Size = new System.Drawing.Size(306, 20);
             this.selectaccounttxtbox.TabIndex = 5;
@@ -122,7 +123,7 @@
             this.invoicedatetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.invoicedatetxtbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
             this.invoicedatetxtbox.Location = new System.Drawing.Point(131, 83);
-            this.invoicedatetxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.invoicedatetxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.invoicedatetxtbox.Mask = "00/00/0000";
             this.invoicedatetxtbox.Name = "invoicedatetxtbox";
             this.invoicedatetxtbox.Size = new System.Drawing.Size(306, 19);
@@ -134,7 +135,7 @@
             this.invoicedatetotxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.invoicedatetotxtbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
             this.invoicedatetotxtbox.Location = new System.Drawing.Point(131, 104);
-            this.invoicedatetotxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.invoicedatetotxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.invoicedatetotxtbox.Mask = "00/00/0000";
             this.invoicedatetotxtbox.Name = "invoicedatetotxtbox";
             this.invoicedatetotxtbox.Size = new System.Drawing.Size(306, 19);
@@ -162,11 +163,22 @@
             this.accountheadidlbl.Text = "accountheadidlbl";
             this.accountheadidlbl.Visible = false;
             // 
-            // BalanceSheet
+            // accountopeningbalancelbl
+            // 
+            this.accountopeningbalancelbl.AutoSize = true;
+            this.accountopeningbalancelbl.Location = new System.Drawing.Point(25, 175);
+            this.accountopeningbalancelbl.Name = "accountopeningbalancelbl";
+            this.accountopeningbalancelbl.Size = new System.Drawing.Size(132, 13);
+            this.accountopeningbalancelbl.TabIndex = 12;
+            this.accountopeningbalancelbl.Text = "accountopeningbalancelbl";
+            this.accountopeningbalancelbl.Visible = false;
+            // 
+            // AccountStatement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(468, 206);
+            this.Controls.Add(this.accountopeningbalancelbl);
             this.Controls.Add(this.accountheadidlbl);
             this.Controls.Add(this.accountidlbl);
             this.Controls.Add(this.invoicedatetotxtbox);
@@ -177,8 +189,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.selectaccountlbl);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "BalanceSheet";
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Name = "AccountStatement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CHECK BALANCE SHEET";
             this.Load += new System.EventHandler(this.BalanceSheet_Load);
@@ -201,5 +213,6 @@
         private System.Windows.Forms.MaskedTextBox invoicedatetotxtbox;
         private System.Windows.Forms.Label accountidlbl;
         private System.Windows.Forms.Label accountheadidlbl;
+        private System.Windows.Forms.Label accountopeningbalancelbl;
     }
 }

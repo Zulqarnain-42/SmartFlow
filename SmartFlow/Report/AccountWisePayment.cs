@@ -168,7 +168,6 @@ namespace SmartFlow.Report
                         WHERE T.InvoiceDate BETWEEN @StartDate AND @EndDate
                         AND T.InvoiceNo LIKE @InvoicePattern
                         AND IsNewRecord = @IsNewRecord
-                        AND 
                         ORDER BY T.InvoiceDate, T.InvoiceNo, TD.TransactionDetailId";
 
                     // Use a parameterized query to avoid issues with direct string concatenation

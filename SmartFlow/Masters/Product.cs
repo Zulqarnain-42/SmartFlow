@@ -283,7 +283,7 @@ namespace SmartFlow.Masters
                                 FillGrid("");
                             };
                             CommonFunction.DisposeOnClose(createProduct);
-                            createProduct.ShowDialog();
+                            createProduct.Show();
                         }
                         else
                         {

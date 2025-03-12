@@ -74,7 +74,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(864, 45);
+            this.panel1.Size = new System.Drawing.Size(864, 37);
             this.panel1.TabIndex = 0;
             // 
             // headinglbl
@@ -85,7 +85,7 @@
             this.headinglbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
             this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(864, 45);
+            this.headinglbl.Size = new System.Drawing.Size(864, 37);
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "ITEM WISE VAT";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

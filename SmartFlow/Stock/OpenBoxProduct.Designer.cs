@@ -32,7 +32,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.headinglbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.openboxqtytxtbox = new System.Windows.Forms.TextBox();
             this.openboxproductqtylbl = new System.Windows.Forms.Label();
             this.selectwarehousefromtxtbox = new System.Windows.Forms.TextBox();
             this.addbtn = new System.Windows.Forms.Button();
@@ -50,6 +50,8 @@
             this.productidlbl = new System.Windows.Forms.Label();
             this.openboxproductidlbl = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.openboxprodmfrlbl = new System.Windows.Forms.Label();
+            this.productmfrlbl = new System.Windows.Forms.Label();
             this.closebtn = new System.Windows.Forms.Button();
             this.openboxproductpricelbl = new System.Windows.Forms.Label();
             this.savebtn = new System.Windows.Forms.Button();
@@ -60,16 +62,15 @@
             this.descriptionlbl = new System.Windows.Forms.Label();
             this.openboxprodidlbl = new System.Windows.Forms.Label();
             this.dgvproducts = new System.Windows.Forms.DataGridView();
+            this.productpricelbl = new System.Windows.Forms.Label();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.productid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productmfr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productupc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productbarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productqty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productpricelbl = new System.Windows.Forms.Label();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.productmfrlbl = new System.Windows.Forms.Label();
-            this.openboxprodmfrlbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -84,7 +85,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1086, 37);
+            this.panel1.Size = new System.Drawing.Size(1118, 37);
             this.panel1.TabIndex = 0;
             // 
             // headinglbl
@@ -96,14 +97,14 @@
             this.headinglbl.Location = new System.Drawing.Point(0, 0);
             this.headinglbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.headinglbl.Name = "headinglbl";
-            this.headinglbl.Size = new System.Drawing.Size(1086, 37);
+            this.headinglbl.Size = new System.Drawing.Size(1118, 37);
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "OPEN BOX PRODUCTS";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.openboxqtytxtbox);
             this.panel2.Controls.Add(this.openboxproductqtylbl);
             this.panel2.Controls.Add(this.selectwarehousefromtxtbox);
             this.panel2.Controls.Add(this.addbtn);
@@ -118,20 +119,20 @@
             this.panel2.Location = new System.Drawing.Point(0, 37);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1086, 104);
+            this.panel2.Size = new System.Drawing.Size(1118, 104);
             this.panel2.TabIndex = 1;
             // 
-            // textBox1
+            // openboxqtytxtbox
             // 
-            this.textBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(190, 67);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(270, 27);
-            this.textBox1.TabIndex = 34;
+            this.openboxqtytxtbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.openboxqtytxtbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.openboxqtytxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.openboxqtytxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openboxqtytxtbox.Location = new System.Drawing.Point(190, 67);
+            this.openboxqtytxtbox.Margin = new System.Windows.Forms.Padding(2);
+            this.openboxqtytxtbox.Name = "openboxqtytxtbox";
+            this.openboxqtytxtbox.Size = new System.Drawing.Size(270, 27);
+            this.openboxqtytxtbox.TabIndex = 34;
             // 
             // openboxproductqtylbl
             // 
@@ -161,7 +162,7 @@
             // 
             this.addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addbtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addbtn.Location = new System.Drawing.Point(998, 18);
+            this.addbtn.Location = new System.Drawing.Point(1028, 5);
             this.addbtn.Margin = new System.Windows.Forms.Padding(2);
             this.addbtn.Name = "addbtn";
             this.addbtn.Size = new System.Drawing.Size(79, 57);
@@ -174,7 +175,7 @@
             // 
             this.qtytextbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.qtytextbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.qtytextbox.Location = new System.Drawing.Point(712, 36);
+            this.qtytextbox.Location = new System.Drawing.Point(734, 36);
             this.qtytextbox.Margin = new System.Windows.Forms.Padding(2);
             this.qtytextbox.Name = "qtytextbox";
             this.qtytextbox.Size = new System.Drawing.Size(270, 27);
@@ -210,7 +211,7 @@
             this.remainingproductmfrtxtbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.remainingproductmfrtxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.remainingproductmfrtxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remainingproductmfrtxtbox.Location = new System.Drawing.Point(712, 5);
+            this.remainingproductmfrtxtbox.Location = new System.Drawing.Point(734, 5);
             this.remainingproductmfrtxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.remainingproductmfrtxtbox.Name = "remainingproductmfrtxtbox";
             this.remainingproductmfrtxtbox.Size = new System.Drawing.Size(270, 27);
@@ -253,7 +254,7 @@
             // warehouseidlbl
             // 
             this.warehouseidlbl.AutoSize = true;
-            this.warehouseidlbl.Location = new System.Drawing.Point(1003, 236);
+            this.warehouseidlbl.Location = new System.Drawing.Point(1040, 236);
             this.warehouseidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.warehouseidlbl.Name = "warehouseidlbl";
             this.warehouseidlbl.Size = new System.Drawing.Size(67, 13);
@@ -264,7 +265,7 @@
             // productbarcodelbl
             // 
             this.productbarcodelbl.AutoSize = true;
-            this.productbarcodelbl.Location = new System.Drawing.Point(856, 316);
+            this.productbarcodelbl.Location = new System.Drawing.Point(1024, 355);
             this.productbarcodelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.productbarcodelbl.Name = "productbarcodelbl";
             this.productbarcodelbl.Size = new System.Drawing.Size(82, 13);
@@ -275,7 +276,7 @@
             // productupclbl
             // 
             this.productupclbl.AutoSize = true;
-            this.productupclbl.Location = new System.Drawing.Point(856, 299);
+            this.productupclbl.Location = new System.Drawing.Point(1045, 368);
             this.productupclbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.productupclbl.Name = "productupclbl";
             this.productupclbl.Size = new System.Drawing.Size(61, 13);
@@ -286,7 +287,7 @@
             // productnamelbl
             // 
             this.productnamelbl.AutoSize = true;
-            this.productnamelbl.Location = new System.Drawing.Point(856, 283);
+            this.productnamelbl.Location = new System.Drawing.Point(1037, 381);
             this.productnamelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.productnamelbl.Name = "productnamelbl";
             this.productnamelbl.Size = new System.Drawing.Size(69, 13);
@@ -297,7 +298,7 @@
             // productidlbl
             // 
             this.productidlbl.AutoSize = true;
-            this.productidlbl.Location = new System.Drawing.Point(856, 266);
+            this.productidlbl.Location = new System.Drawing.Point(888, 381);
             this.productidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.productidlbl.Name = "productidlbl";
             this.productidlbl.Size = new System.Drawing.Size(51, 13);
@@ -308,7 +309,7 @@
             // openboxproductidlbl
             // 
             this.openboxproductidlbl.AutoSize = true;
-            this.openboxproductidlbl.Location = new System.Drawing.Point(854, 249);
+            this.openboxproductidlbl.Location = new System.Drawing.Point(888, 368);
             this.openboxproductidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.openboxproductidlbl.Name = "openboxproductidlbl";
             this.openboxproductidlbl.Size = new System.Drawing.Size(92, 13);
@@ -341,15 +342,37 @@
             this.panel3.Location = new System.Drawing.Point(0, 141);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1086, 487);
+            this.panel3.Size = new System.Drawing.Size(1118, 487);
             this.panel3.TabIndex = 2;
+            // 
+            // openboxprodmfrlbl
+            // 
+            this.openboxprodmfrlbl.AutoSize = true;
+            this.openboxprodmfrlbl.Location = new System.Drawing.Point(1013, 299);
+            this.openboxprodmfrlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.openboxprodmfrlbl.Name = "openboxprodmfrlbl";
+            this.openboxprodmfrlbl.Size = new System.Drawing.Size(93, 13);
+            this.openboxprodmfrlbl.TabIndex = 40;
+            this.openboxprodmfrlbl.Text = "openboxprodmfrlbl";
+            this.openboxprodmfrlbl.Visible = false;
+            // 
+            // productmfrlbl
+            // 
+            this.productmfrlbl.AutoSize = true;
+            this.productmfrlbl.Location = new System.Drawing.Point(1039, 266);
+            this.productmfrlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.productmfrlbl.Name = "productmfrlbl";
+            this.productmfrlbl.Size = new System.Drawing.Size(67, 13);
+            this.productmfrlbl.TabIndex = 39;
+            this.productmfrlbl.Text = "productmfrlbl";
+            this.productmfrlbl.Visible = false;
             // 
             // closebtn
             // 
             this.closebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.closebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.closebtn.Location = new System.Drawing.Point(859, 447);
+            this.closebtn.Location = new System.Drawing.Point(891, 447);
             this.closebtn.Margin = new System.Windows.Forms.Padding(2);
             this.closebtn.Name = "closebtn";
             this.closebtn.Size = new System.Drawing.Size(218, 37);
@@ -361,7 +384,7 @@
             // openboxproductpricelbl
             // 
             this.openboxproductpricelbl.AutoSize = true;
-            this.openboxproductpricelbl.Location = new System.Drawing.Point(978, 340);
+            this.openboxproductpricelbl.Location = new System.Drawing.Point(999, 283);
             this.openboxproductpricelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.openboxproductpricelbl.Name = "openboxproductpricelbl";
             this.openboxproductpricelbl.Size = new System.Drawing.Size(107, 13);
@@ -374,7 +397,7 @@
             this.savebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.savebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.savebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.savebtn.Location = new System.Drawing.Point(859, 406);
+            this.savebtn.Location = new System.Drawing.Point(891, 406);
             this.savebtn.Margin = new System.Windows.Forms.Padding(2);
             this.savebtn.Name = "savebtn";
             this.savebtn.Size = new System.Drawing.Size(218, 37);
@@ -386,7 +409,7 @@
             // openboxproductbarcodelbl
             // 
             this.openboxproductbarcodelbl.AutoSize = true;
-            this.openboxproductbarcodelbl.Location = new System.Drawing.Point(854, 236);
+            this.openboxproductbarcodelbl.Location = new System.Drawing.Point(888, 355);
             this.openboxproductbarcodelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.openboxproductbarcodelbl.Name = "openboxproductbarcodelbl";
             this.openboxproductbarcodelbl.Size = new System.Drawing.Size(123, 13);
@@ -400,7 +423,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.descriptiontxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.descriptiontxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.descriptiontxtbox.Location = new System.Drawing.Point(859, 27);
+            this.descriptiontxtbox.Location = new System.Drawing.Point(891, 27);
             this.descriptiontxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.descriptiontxtbox.Name = "descriptiontxtbox";
             this.descriptiontxtbox.Size = new System.Drawing.Size(219, 203);
@@ -410,7 +433,7 @@
             // openboxproductupclbl
             // 
             this.openboxproductupclbl.AutoSize = true;
-            this.openboxproductupclbl.Location = new System.Drawing.Point(856, 373);
+            this.openboxproductupclbl.Location = new System.Drawing.Point(1004, 316);
             this.openboxproductupclbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.openboxproductupclbl.Name = "openboxproductupclbl";
             this.openboxproductupclbl.Size = new System.Drawing.Size(102, 13);
@@ -421,7 +444,7 @@
             // openboxproductnamelbl
             // 
             this.openboxproductnamelbl.AutoSize = true;
-            this.openboxproductnamelbl.Location = new System.Drawing.Point(856, 357);
+            this.openboxproductnamelbl.Location = new System.Drawing.Point(996, 329);
             this.openboxproductnamelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.openboxproductnamelbl.Name = "openboxproductnamelbl";
             this.openboxproductnamelbl.Size = new System.Drawing.Size(110, 13);
@@ -435,7 +458,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.descriptionlbl.AutoSize = true;
             this.descriptionlbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.descriptionlbl.Location = new System.Drawing.Point(856, 6);
+            this.descriptionlbl.Location = new System.Drawing.Point(888, 6);
             this.descriptionlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.descriptionlbl.Name = "descriptionlbl";
             this.descriptionlbl.Size = new System.Drawing.Size(90, 18);
@@ -445,7 +468,7 @@
             // openboxprodidlbl
             // 
             this.openboxprodidlbl.AutoSize = true;
-            this.openboxprodidlbl.Location = new System.Drawing.Point(856, 339);
+            this.openboxprodidlbl.Location = new System.Drawing.Point(1019, 342);
             this.openboxprodidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.openboxprodidlbl.Name = "openboxprodidlbl";
             this.openboxprodidlbl.Size = new System.Drawing.Size(87, 13);
@@ -466,6 +489,7 @@
             this.dgvproducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvproducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.productid,
+            this.productmfr,
             this.productname,
             this.productupc,
             this.productprice,
@@ -480,9 +504,24 @@
             this.dgvproducts.RowHeadersWidth = 51;
             this.dgvproducts.RowTemplate.Height = 24;
             this.dgvproducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvproducts.Size = new System.Drawing.Size(849, 484);
+            this.dgvproducts.Size = new System.Drawing.Size(882, 484);
             this.dgvproducts.TabIndex = 1;
             this.dgvproducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvproducts_KeyDown);
+            // 
+            // productpricelbl
+            // 
+            this.productpricelbl.AutoSize = true;
+            this.productpricelbl.Location = new System.Drawing.Point(1040, 249);
+            this.productpricelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.productpricelbl.Name = "productpricelbl";
+            this.productpricelbl.Size = new System.Drawing.Size(66, 13);
+            this.productpricelbl.TabIndex = 31;
+            this.productpricelbl.Text = "productprice";
+            this.productpricelbl.Visible = false;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // productid
             // 
@@ -490,6 +529,11 @@
             this.productid.MinimumWidth = 6;
             this.productid.Name = "productid";
             this.productid.Width = 125;
+            // 
+            // productmfr
+            // 
+            this.productmfr.HeaderText = "MFR";
+            this.productmfr.Name = "productmfr";
             // 
             // productname
             // 
@@ -526,49 +570,12 @@
             this.productqty.Name = "productqty";
             this.productqty.Width = 125;
             // 
-            // productpricelbl
-            // 
-            this.productpricelbl.AutoSize = true;
-            this.productpricelbl.Location = new System.Drawing.Point(996, 266);
-            this.productpricelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.productpricelbl.Name = "productpricelbl";
-            this.productpricelbl.Size = new System.Drawing.Size(66, 13);
-            this.productpricelbl.TabIndex = 31;
-            this.productpricelbl.Text = "productprice";
-            this.productpricelbl.Visible = false;
-            // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            // 
-            // productmfrlbl
-            // 
-            this.productmfrlbl.AutoSize = true;
-            this.productmfrlbl.Location = new System.Drawing.Point(995, 283);
-            this.productmfrlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.productmfrlbl.Name = "productmfrlbl";
-            this.productmfrlbl.Size = new System.Drawing.Size(67, 13);
-            this.productmfrlbl.TabIndex = 39;
-            this.productmfrlbl.Text = "productmfrlbl";
-            this.productmfrlbl.Visible = false;
-            // 
-            // openboxprodmfrlbl
-            // 
-            this.openboxprodmfrlbl.AutoSize = true;
-            this.openboxprodmfrlbl.Location = new System.Drawing.Point(977, 357);
-            this.openboxprodmfrlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.openboxprodmfrlbl.Name = "openboxprodmfrlbl";
-            this.openboxprodmfrlbl.Size = new System.Drawing.Size(93, 13);
-            this.openboxprodmfrlbl.TabIndex = 40;
-            this.openboxprodmfrlbl.Text = "openboxprodmfrlbl";
-            this.openboxprodmfrlbl.Visible = false;
-            // 
             // OpenBoxProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1086, 628);
+            this.ClientSize = new System.Drawing.Size(1118, 628);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -620,18 +627,19 @@
         private System.Windows.Forms.Button addbtn;
         private System.Windows.Forms.TextBox qtytextbox;
         private System.Windows.Forms.Label qtylbl;
+        private System.Windows.Forms.TextBox selectwarehousefromtxtbox;
+        private System.Windows.Forms.Label warehouseidlbl;
+        private System.Windows.Forms.Button closebtn;
+        private System.Windows.Forms.TextBox openboxqtytxtbox;
+        private System.Windows.Forms.Label openboxproductqtylbl;
+        private System.Windows.Forms.Label productmfrlbl;
+        private System.Windows.Forms.Label openboxprodmfrlbl;
         private System.Windows.Forms.DataGridViewTextBoxColumn productid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productmfr;
         private System.Windows.Forms.DataGridViewTextBoxColumn productname;
         private System.Windows.Forms.DataGridViewTextBoxColumn productupc;
         private System.Windows.Forms.DataGridViewTextBoxColumn productprice;
         private System.Windows.Forms.DataGridViewTextBoxColumn productbarcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn productqty;
-        private System.Windows.Forms.TextBox selectwarehousefromtxtbox;
-        private System.Windows.Forms.Label warehouseidlbl;
-        private System.Windows.Forms.Button closebtn;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label openboxproductqtylbl;
-        private System.Windows.Forms.Label productmfrlbl;
-        private System.Windows.Forms.Label openboxprodmfrlbl;
     }
 }

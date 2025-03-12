@@ -485,8 +485,8 @@ namespace SmartFlow.Purchase
             bool insertinvoice = await Task.Run(() => DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData));
             string companyName = companytxtbox.Text;
             decimal totalwithshippingcharges = netTotal + shippingCharges;
-            await CommonFunction.InsertOrUpdateAccountStatementAsync(supplierName, supplierid, "Purchases", invoiceNo, accountName, "", accountsubcontrolid, totalwithshippingcharges, 0, "", true, false, companyName, "For Supplier");
-            await CommonFunction.InsertOrUpdateAccountStatementAsync(supplierName, supplierid, "Purchases", invoiceNo, accountName, "", accountsubcontrolid, 0, totalwithshippingcharges, "", false, true, companyName, "For Office");
+            await CommonFunction.InsertOrUpdateAccountStatementAsync(supplierName, supplierid, "Purchases", invoiceNo, accountName, "", accountsubcontrolid, 0, totalwithshippingcharges, "", true, false, companyName, "For Supplier");
+            await CommonFunction.InsertOrUpdateAccountStatementAsync(supplierName, supplierid, "Purchases", invoiceNo, accountName, "", accountsubcontrolid, totalwithshippingcharges, 0, "", false, true, companyName, "For Office");
 
             if (insertinvoice)
             {
@@ -533,7 +533,8 @@ namespace SmartFlow.Purchase
                         { "MinusInventory", false },
                         { "UnitSalePrice", saleprice },
                         { "VatCode", vatpercentage },
-                        { "QtyOrdered", actualqtyordered }
+                        { "QtyOrdered", actualqtyordered },
+                        { "IsNewRecord", true }
                     };
 
                     insertprod = await Task.Run(() => DatabaseAccess.ExecuteQueryAsync(subtable, "INSERT", subColumnData));
@@ -595,8 +596,8 @@ namespace SmartFlow.Purchase
                 { "InvoiceNo", invoiceNo },
                 { "invoicedate", invoiceDate },
                 { "ClientID", supplierid },
-                { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") },
-                { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                { "UpdatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") },
+                { "UpdatedDay", DateTime.Now.DayOfWeek.ToString() },
                 { "InvoiceCode", invoicecode },
                 { "NetTotal", netTotal },
                 { "ClientName", supplierName },
@@ -609,7 +610,6 @@ namespace SmartFlow.Purchase
                 { "CurrencyName", currencyname },
                 { "CurrencySymbol", currencysymbol },
                 { "ConversionRate", currencyconversionrate },
-                { "AddedBy", "JEAN" },
                 { "InvoiceType", "Purchase" }
             };
 
@@ -617,8 +617,8 @@ namespace SmartFlow.Purchase
             bool isdeleted = await DeleteStatementData(invoiceNo);
             string companyName = companytxtbox.Text;
             decimal totalwithshippingcharges = netTotal + shippingCharges;
-            await CommonFunction.InsertOrUpdateAccountStatementAsync(supplierName, supplierid, "Purchases", invoiceNo, accountName, "", accountsubcontrolid, totalwithshippingcharges, 0, "", true, false, companyName, "For Supplier");
-            await CommonFunction.InsertOrUpdateAccountStatementAsync(supplierName, supplierid, "Purchases", invoiceNo, accountName, "", accountsubcontrolid, 0, totalwithshippingcharges, "", false, true, companyName, "For Office");
+            await CommonFunction.InsertOrUpdateAccountStatementAsync(supplierName, supplierid, "Purchases", invoiceNo, accountName, "", accountsubcontrolid,  0, totalwithshippingcharges, "", true, false, companyName, "For Supplier");
+            await CommonFunction.InsertOrUpdateAccountStatementAsync(supplierName, supplierid, "Purchases", invoiceNo, accountName, "", accountsubcontrolid, totalwithshippingcharges, 0, "", false, true, companyName, "For Office");
 
 
             if (isUpdated)
@@ -676,7 +676,8 @@ namespace SmartFlow.Purchase
                                 { "MinusInventory", false },
                                 { "UnitSalePrice", saleprice },
                                 { "VatCode", vatpercentage },
-                                { "QtyOrdered", actualqtyordered }
+                                { "QtyOrdered", actualqtyordered },
+                                { "IsNewRecord", true }
                             };
 
                             // Insert product details into the database
@@ -1387,14 +1388,14 @@ namespace SmartFlow.Purchase
             {
                 bool isUpdated = false;
                 string tableName = "InvoiceDetailsTable";
-                string whereClause = "InvoiceNo = '" + invoiceNo + "'";
+                string whereClause = "InvoiceNo = @InvoiceNo";
 
                 var columnData = new Dictionary<string, object>
                 {
-                    { "IsNewRecord", false }
+                    { "InvoiceNo", invoiceNo }
                 };
 
-                isUpdated = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
+                isUpdated = await DatabaseAccess.ExecuteQueryAsync(tableName, "DELETE", columnData, whereClause);
                 return isUpdated;
             }
             catch (Exception ex) { throw ex; }

@@ -16,19 +16,23 @@ namespace SmartFlow.Report
         private DateTime _startdate;
         private DateTime _enddate;
         private string _companyName;
-        public DetailAccountStatement(DataTable datainvoice, DateTime startdate, DateTime enddate, string companyName)
+        private decimal _openingbalance;
+
+        public DetailAccountStatement(DataTable datainvoice, DateTime startdate, DateTime enddate, string companyName, decimal openingbalance)
         {
             InitializeComponent();
             _datainvoice = datainvoice;
             _startdate = startdate;
             _enddate = enddate;
             _companyName = companyName;
+            _openingbalance = openingbalance;
         }
 
         private void DetailAccountStatement_Load(object sender, EventArgs e)
         {
             dgvlistinvoices.DataSource = _datainvoice;
             accountnamevaluelbl.Text = _companyName;
+            openingbalancevaluelbl.Text = _openingbalance.ToString();
             dgvlistinvoices.Columns["Account"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvlistinvoices.Columns["Vch/Bill No"].Width = 160;
             dgvlistinvoices.Columns["Short Narration"].Width = 200;
@@ -54,6 +58,7 @@ namespace SmartFlow.Report
             // Set the value in the label
             closingbalanceamtlbl.Text = string.IsNullOrEmpty(lastBalance) ? "AED 0" : $"AED {lastBalance}";
         }
+
         private void CalculateTotalDebitAndCredit(DataGridView dgv, Label lblTotalDebit, Label lblTotalCredit)
         {
             decimal totalDebit = 0;
@@ -79,6 +84,9 @@ namespace SmartFlow.Report
             lblTotalCredit.Text = $"Total Credit: AED {totalCredit:N2}";
         }
 
+        private void printbtn_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

@@ -83,11 +83,16 @@ namespace SmartFlow.Common.Forms
                                 {
                                     int accountheadid = Convert.ToInt32(selectedRow.Cells["HEADID"]?.Value ?? 0);
                                     // Raise the event with the data to pass to the parent form
+                                    decimal credit = selectedRow.Cells["Credit"]?.Value != null ? Convert.ToDecimal(selectedRow.Cells["Credit"].Value) : 0;
+                                    decimal debit = selectedRow.Cells["Debit"]?.Value != null ? Convert.ToDecimal(selectedRow.Cells["Debit"].Value) : 0;
+                                    decimal amount = credit != 0 ? credit : debit; // Assign Credit if available, otherwise Debit.
+
                                     AccountDataSelected?.Invoke(this, new AccountData(
                                         accountid,
                                         selectedRow.Cells["Account Name"]?.Value?.ToString() ?? "Unknown",
                                         accountheadid,
-                                        selectedRow.Cells["CodeAccount"]?.Value?.ToString() ?? "Unknown"
+                                        selectedRow.Cells["CodeAccount"]?.Value?.ToString() ?? "Unknown",
+                                        amount // Assign either Credit or Debit, ensuring only one is selected.
                                     ));
 
                                     // Close the child form after passing the data
@@ -146,11 +151,16 @@ namespace SmartFlow.Common.Forms
                             {
                                 int accountheadid = Convert.ToInt32(selectedRow.Cells["HEADID"]?.Value ?? 0);
                                 // Raise the event with the data to pass to the parent form
+                                decimal credit = selectedRow.Cells["Credit"]?.Value != null ? Convert.ToDecimal(selectedRow.Cells["Credit"].Value) : 0;
+                                decimal debit = selectedRow.Cells["Debit"]?.Value != null ? Convert.ToDecimal(selectedRow.Cells["Debit"].Value) : 0;
+                                decimal amount = credit != 0 ? credit : debit; // Assign Credit if available, otherwise Debit.
+
                                 AccountDataSelected?.Invoke(this, new AccountData(
                                     accountid,
                                     selectedRow.Cells["Account Name"]?.Value?.ToString() ?? "Unknown",
                                     accountheadid,
-                                    selectedRow.Cells["CodeAccount"]?.Value?.ToString() ?? "Unknown"
+                                    selectedRow.Cells["CodeAccount"]?.Value?.ToString() ?? "Unknown",
+                                    amount // Assign either Credit or Debit, ensuring only one is selected.
                                 ));
 
                                 // Close the child form after passing the data

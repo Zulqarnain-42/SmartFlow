@@ -70,98 +70,51 @@ namespace SmartFlow.Common
             await Task.CompletedTask;
         }
 
-        public static async Task GetItemSerialNoAsync(string searchValue, int searchId, DataGridView dgv)
-        {
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(searchValue) && searchId > 0)
-                {
-                    string query = @"SELECT SerialNOID, ProductId, SerialNo FROM SerialNoTable WHERE ProductId = @SearchId AND IsSold = @IsSold";
-
-                    using (var connection = new SqlConnection(connectionString))
-                    {
-                        using (var command = new SqlCommand(query, connection))
-                        {
-                            // Add parameters to the query to prevent SQL injection
-                            command.Parameters.AddWithValue("@SearchId", searchId);
-                            command.Parameters.AddWithValue("@IsSold", false);
-
-                            await connection.OpenAsync(); // Use asynchronous method to open the connection
-                            using (var reader = await command.ExecuteReaderAsync()) // Asynchronous reader execution
-                            {
-                                DataTable dt = new DataTable();
-                                dt.Load(reader);
-
-                                if (dt.Rows.Count > 0)
-                                {
-                                    dgv.DataSource = dt;
-                                    dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("No available serial numbers found.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                }
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Please provide a valid search value and search ID.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            catch (SqlException sqlEx)
-            {
-                MessageBox.Show($"Database error: {sqlEx.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            // Return a completed task to ensure the method returns a Task as expected
-            await Task.CompletedTask;
-        }
-
         public static async Task GetCustomerAsync(string searchValue, DataGridView dgv)
         {
             try
             {
-                string query = @"SELECT AccountSubControlTable.AccountSubControlID [ID],AccountSubControlTable.CodeAccount [Code],AccountSubControlTable.AccountSubControlName [Account Name],
-                    AccountSubControlTable.CompanyName [Company Name],AccountSubControlTable.MobileNo [Mobile],AccountSubControlTable.Email [Email],AccountSubControlTable.CreatedAt [Created],
-                    AccountSubControlTable.CreatedDay [Day] FROM AccountSubControlTable WHERE IsCustomer = 1";
+                var queryBuilder = new StringBuilder(@"
+                SELECT 
+                    AccountSubControlTable.AccountSubControlID AS [ID],
+                    AccountSubControlTable.CodeAccount AS [Code],
+                    AccountSubControlTable.AccountSubControlName AS [Account Name],
+                    AccountSubControlTable.CompanyName AS [Company Name],
+                    AccountSubControlTable.MobileNo AS [Mobile],
+                    AccountSubControlTable.Email AS [Email],
+                    AccountSubControlTable.CreatedAt AS [Created],
+                    AccountSubControlTable.CreatedDay AS [Day] 
+                    FROM AccountSubControlTable");
 
-                // Add search filter if a search value is provided
                 if (!string.IsNullOrWhiteSpace(searchValue))
                 {
-                    query += @"AND (AccountSubControlTable.AccountSubControlName LIKE @SearchValue OR AccountSubControlTable.CompanyName LIKE @SearchValue)";
+                    queryBuilder.Append(" WHERE AccountSubControlTable.AccountSubControlName LIKE @SearchValue OR AccountSubControlTable.CompanyName LIKE @SearchValue");
                 }
 
                 using (var connection = new SqlConnection(connectionString))
+                using (var command = new SqlCommand(queryBuilder.ToString(), connection))
                 {
-                    using (var command = new SqlCommand(query, connection))
+                    if (!string.IsNullOrWhiteSpace(searchValue))
                     {
-                        // Add parameters to prevent SQL injection
-                        if (!string.IsNullOrWhiteSpace(searchValue))
+                        command.Parameters.Add("@SearchValue", SqlDbType.NVarChar).Value = "%" + searchValue + "%";
+                    }
+
+                    await connection.OpenAsync();
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    using (var dt = new DataTable())
+                    {
+                        dt.Load(reader);
+                        dgv.DataSource = dt;
+
+                        // Adjust column properties if data exists
+                        if (dt.Rows.Count == 0)
                         {
-                            command.Parameters.AddWithValue("@SearchValue", "%" + searchValue + "%");
+                            MessageBox.Show("No customers found.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-
-                        await connection.OpenAsync(); // Asynchronous method to open the connection
-                        using (var reader = await command.ExecuteReaderAsync()) // Asynchronous reader execution
+                        else
                         {
-                            DataTable dt = new DataTable();
-                            dt.Load(reader);
-
-                            if (dt.Rows.Count > 0)
-                            {
-                                dgv.DataSource = dt;
-                                dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                            }
-                            else
-                            {
-                                MessageBox.Show("No customers found.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
+                            dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                         }
                     }
                 }
@@ -175,6 +128,7 @@ namespace SmartFlow.Common
                 MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         public static async Task GetProductAsync(string searchValue, DataGridView dgv)
         {
@@ -340,14 +294,16 @@ namespace SmartFlow.Common
         private static string GetDefaultAccountQuery()
         {
             // Default query when no search value is provided
-            return @"SELECT AccountSubControlID [ID], AccountHead_ID [HEADID], AccountSubControlName [ACCOUNT NAME], Email [EMAIL], MobileNo [MOBILE],CompanyName [COMPANY], CodeAccount FROM AccountSubControlTable";
+            return @"SELECT AccountSubControlID [ID], AccountHead_ID [HEADID], AccountSubControlName [ACCOUNT NAME], Email [EMAIL], MobileNo [MOBILE],CompanyName [COMPANY], CodeAccount,
+                OpeningBalanceCredit [Credit],OpeningBalanceDebit [Debit] FROM AccountSubControlTable";
         }
 
         private static string BuildSearchQueryAccount(string searchValue)
         {
             // Build the search query using parameterization to avoid SQL injection
             return @"SELECT AccountSubControlID AS [ID], AccountHead_ID AS [HEADID], AccountSubControlName AS [ACCOUNT NAME], Email AS [EMAIL], MobileNo AS [MOBILE], CompanyName AS [COMPANY], 
-                CodeAccount FROM AccountSubControlTable WHERE EXISTS (SELECT 1 FROM STRING_SPLIT(@SearchValue, ' ') AS Keywords WHERE LOWER(AccountSubControlName) LIKE '%' + LOWER(Keywords.value) + '%' 
+                CodeAccount,OpeningBalanceCredit [Credit],OpeningBalanceDebit [Debit] FROM AccountSubControlTable WHERE EXISTS 
+                (SELECT 1 FROM STRING_SPLIT(@SearchValue, ' ') AS Keywords WHERE LOWER(AccountSubControlName) LIKE '%' + LOWER(Keywords.value) + '%' 
                 OR LOWER(CompanyName) LIKE '%' + LOWER(Keywords.value) + '%')
                 ORDER BY CASE WHEN LOWER(AccountSubControlName) = LOWER(@SearchValue) THEN 1  WHEN LOWER(CompanyName) = LOWER(@SearchValue) THEN 2  WHEN LOWER(AccountSubControlName) LIKE LOWER(@SearchValue) + '%' THEN 3  
                 WHEN LOWER(CompanyName) LIKE LOWER(@SearchValue) + '%' THEN 4  
@@ -486,6 +442,85 @@ namespace SmartFlow.Common
             // Optionally set the selected index to the empty row
             combo.SelectedIndex = 0;
         }
+
+        public static async Task PopulateRackComboBoxAsync(ComboBox combo, int warehouseid = 0)
+        {
+            // Modify query based on warehouseid condition
+            string query = "SELECT Rackid, RackCode FROM RackTable";
+
+            if (warehouseid > 0) // Apply filtering if warehouseid is provided
+            {
+                query += $" WHERE WarehouseID = {warehouseid}";
+            }
+
+            // Retrieve data from the database asynchronously
+            DataTable dt = await Task.Run(() => DatabaseAccess.RetriveAsync(query));
+
+            List<RackData> rack = new List<RackData>
+            {
+                new RackData
+                {
+                    Rackid = 0,  // Empty selection indicator
+                    RackCode = "" // Empty display text
+                }
+            };
+
+            // Populate the ComboBox with actual data
+            foreach (DataRow row in dt.Rows)
+            {
+                rack.Add(new RackData
+                {
+                    Rackid = Convert.ToInt32(row["Rackid"]),
+                    RackCode = row["RackCode"].ToString()
+                });
+            }
+
+            // Setting ComboBox data source on the UI thread
+            combo.DataSource = rack;
+            combo.DisplayMember = "RackCode";  // Display RackCode
+            combo.ValueMember = "Rackid";      // The actual value will be the Rackid
+            combo.SelectedIndex = 0;           // Default to the first empty row
+        }
+
+        public static async Task PopulateShelfComboBoxAsync(ComboBox combo, int rackid = 0)
+        {
+            // Modify query based on warehouseid condition
+            string query = "SELECT ShelfId, ShelfCode FROM ShelfTable";
+
+            if (rackid > 0) // Apply filtering if warehouseid is provided
+            {
+                query += $" WHERE RackId = {rackid}";
+            }
+
+            // Retrieve data from the database asynchronously
+            DataTable dt = await Task.Run(() => DatabaseAccess.RetriveAsync(query));
+
+            List<ShelfData> shelfs = new List<ShelfData>
+            {
+                new ShelfData
+                {
+                    ShelfId = 0,  // Empty selection indicator
+                    ShelfCode = "" // Empty display text
+                }
+            };
+
+            // Populate the ComboBox with actual data
+            foreach (DataRow row in dt.Rows)
+            {
+                shelfs.Add(new ShelfData
+                {
+                    ShelfId = Convert.ToInt32(row["ShelfId"]),
+                    ShelfCode = row["ShelfCode"].ToString()
+                });
+            }
+
+            // Setting ComboBox data source on the UI thread
+            combo.DataSource = shelfs;
+            combo.DisplayMember = "ShelfCode";  // Display RackCode
+            combo.ValueMember = "ShelfId";      // The actual value will be the Rackid
+            combo.SelectedIndex = 0;           // Default to the first empty row
+        }
+
 
         public static async Task FillUnitDataAsync(ComboBox combo)
         {

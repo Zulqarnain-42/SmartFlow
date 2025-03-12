@@ -1,6 +1,6 @@
-﻿namespace SmartFlow.Common.CommonForms
+﻿namespace SmartFlow.Report.ReportViewer
 {
-    partial class LoadingForm
+    partial class AccountStatementReportViewer
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "LoadingForm";
+            this.Text = "AccountStatementReportViewer";
         }
 
         #endregion

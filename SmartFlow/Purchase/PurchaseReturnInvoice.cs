@@ -581,11 +581,11 @@ namespace SmartFlow
                         { "Warehouseid", warehouseid },
                         { "ItemTotal", total },
                         { "Unitid", unitid },
-                        { "AddInventory", false },
+                        { "AddInventory", true },
                         { "PricePerMeter", pricepermeter },
                         { "LengthInMeter", lengthinmeter },
                         { "ItemDescription", itemdescription },
-                        { "MinusInventory", true },
+                        { "MinusInventory", false },
                         { "UnitSalePrice", saleprice },
                         { "VatCode", vatpercentage }
                     };
@@ -628,8 +628,8 @@ namespace SmartFlow
                 { "InvoiceNo", invoiceno },
                 { "invoicedate", invoiceDate },
                 { "ClientID", supplierid },
-                { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
-                { "CreatedDay", DateTime.Now.DayOfWeek },
+                { "UpdatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") },
+                { "UpdatedDay", DateTime.Now.DayOfWeek.ToString() },
                 { "InvoiceCode", invoicecode },
                 { "NetTotal", netTotal },
                 { "ClientName", supplierName },
@@ -709,11 +709,11 @@ namespace SmartFlow
                     { "Warehouseid", warehouseid },
                     { "ItemTotal", total },
                     { "Unitid", unitid },
-                    { "AddInventory", false },
+                    { "AddInventory", true },
                     { "PricePerMeter", pricepermeter },
                     { "LengthInMeter", lengthinmeter },
                     { "ItemDescription", itemdescription },
-                    { "MinusInventory", true },
+                    { "MinusInventory", false },
                     { "UnitSalePrice", saleprice },
                     { "VatCode", vatpercentage }
                 };

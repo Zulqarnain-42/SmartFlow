@@ -46,6 +46,7 @@
             this.savebtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.headinglbl = new System.Windows.Forms.Label();
+            this.productserialnoinvoicelbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemSerialNo)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -172,6 +173,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.productserialnoinvoicelbl);
             this.panel2.Controls.Add(this.productbarcodelbl);
             this.panel2.Controls.Add(this.exitbtn);
             this.panel2.Controls.Add(this.productupclbl);
@@ -253,6 +255,16 @@
             this.headinglbl.Text = "ADD SERIAL NO";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // productserialnoinvoicelbl
+            // 
+            this.productserialnoinvoicelbl.AutoSize = true;
+            this.productserialnoinvoicelbl.Location = new System.Drawing.Point(407, 18);
+            this.productserialnoinvoicelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.productserialnoinvoicelbl.Name = "productserialnoinvoicelbl";
+            this.productserialnoinvoicelbl.Size = new System.Drawing.Size(123, 13);
+            this.productserialnoinvoicelbl.TabIndex = 14;
+            this.productserialnoinvoicelbl.Text = "productserialnoinvoicelbl";
+            // 
             // ProductSerialNo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -299,5 +311,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn serialnocolumn;
         private System.Windows.Forms.Label productupclbl;
         private System.Windows.Forms.Label productbarcodelbl;
+        private System.Windows.Forms.Label productserialnoinvoicelbl;
     }
 }

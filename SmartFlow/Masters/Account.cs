@@ -1,4 +1,5 @@
-﻿using SmartFlow.Common;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using SmartFlow.Common;
 using SmartFlow.Common.CommonForms;
 using System;
 using System.Collections.Generic;
@@ -158,6 +159,28 @@ namespace SmartFlow.Masters
 
             // Assuming ExecuteQueryAsync is an asynchronous method for executing the query
             bool isUpdated = await DatabaseAccess.ExecuteQueryAsync(tableName, "UPDATE", columnData, whereClause);
+            if (compnamelbl.Text != "compnamelbl" && countrynamelbl.Text != "countrynamelbl" && companyaddresslbl.Text != "companyaddresslbl")
+            {
+                if (isUpdated)
+                {
+                    string companame = compnamelbl.Text;
+                    string countryname = countrynamelbl.Text;
+                    string companyaddress = companyaddresslbl.Text;
+                    string subtablename = "CSCompanyTable";
+
+                    var subcolumnData = new Dictionary<string, object>
+                    {
+                        { "CompanyName", companame },
+                        { "Country", countryname },
+                        { "Address", companyaddress },
+                        { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                        { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                        { "AccountSubControlCode", accountsubcontrolcode.Text }
+                    };
+
+                    await DatabaseAccess.ExecuteQueryAsync(subtablename, "INSERT", subcolumnData);
+                }
+            }
             return isUpdated;
         }
 
@@ -236,6 +259,29 @@ namespace SmartFlow.Masters
 
             // Assuming ExecuteQueryAsync is an asynchronous method for executing the query
             bool isInserted = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", columnData);
+            if(compnamelbl.Text != "compnamelbl" && countrynamelbl.Text != "countrynamelbl" && companyaddresslbl.Text != "companyaddresslbl")
+            {
+                if (isInserted)
+                {
+                    string companame = compnamelbl.Text;
+                    string countryname = countrynamelbl.Text;
+                    string companyaddress = companyaddresslbl.Text;
+                    string subtablename = "CSCompanyTable";
+
+                    var subcolumnData = new Dictionary<string, object>
+                    {
+                        { "CompanyName", companame },
+                        { "Country", countryname },
+                        { "Address", companyaddress },
+                        { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
+                        { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
+                        { "AccountSubControlCode", accountsubcontrolcode }
+                    };
+
+                    await DatabaseAccess.ExecuteQueryAsync(subtablename, "INSERT", subcolumnData);
+                }
+            }
+           
             return isInserted;
         }
 
@@ -268,6 +314,7 @@ namespace SmartFlow.Masters
                 string vatno = dt.Rows[0]["VATNO"].ToString();
                 string emiratesid = dt.Rows[0]["EmiratesId"].ToString();
                 string companyName = dt.Rows[0]["CompanyName"].ToString();
+
 
                 if (nametxtbox.Text == accountName && addresstxtbox.Text == address && countrytxtbox.Text == country && emailtxtbox.Text == email &&
                     mobilenotxtbox.Text == mobileno && trntxtbox.Text == trn && gstnotxtbox.Text == gstno && vatnotxtbox.Text == vatno &&
@@ -401,6 +448,7 @@ namespace SmartFlow.Masters
                 }
 
                 // Populate other controls
+                accountsubcontrolcode.Text = row["AccountSubControlCode"].ToString();
                 addresstxtbox.Text = row["Address"].ToString();
                 countrytxtbox.Text = row["Country"].ToString();
                 emailtxtbox.Text = row["Email"].ToString();
@@ -633,7 +681,15 @@ namespace SmartFlow.Masters
         private void addcompanybtn_Click(object sender, EventArgs e)
         {
             AddCompany addCompany = new AddCompany();
+            addCompany.DataUpdated += AddCompany_DataUpdated;
             addCompany.ShowDialog();
+        }
+
+        private void AddCompany_DataUpdated(string companyname,string countryname,string address)
+        {
+            compnamelbl.Text = companyname;
+            countrynamelbl.Text = countryname;
+            companyaddresslbl.Text = address;
         }
     }
 }

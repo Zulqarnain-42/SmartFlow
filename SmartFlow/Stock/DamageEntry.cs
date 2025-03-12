@@ -483,7 +483,8 @@ namespace SmartFlow.Stock
                         { "DamageQty", quantity },
                         { "Warehouseid", warehouseId },
                         { "Quantity", quantity },
-                        { "ProductMfr", productMfr }
+                        { "ProductMfr", productMfr },
+                        { "MinusInventory", true }
                     };
 
                     bool subResult = await DatabaseAccess.ExecuteQueryAsync(subTable, "INSERT", detailData);

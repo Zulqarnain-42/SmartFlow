@@ -82,13 +82,15 @@ namespace SmartFlow.Common.CommonForms
                                 {
                                     int accountheadid = Convert.ToInt32(selectedRow.Cells["HEADID"]?.Value ?? 0);
                                     // Raise the event with the data to pass to the parent form
+                                    decimal amount = 0; // Assign Credit if available, otherwise Debit.
+
                                     AccountDataSelected?.Invoke(this, new AccountData(
                                         accountid,
-                                        selectedRow.Cells["Account Name"]?.Value?.ToString() ?? "Unknown",
+                                        selectedRow.Cells["Account Name"]?.Value?.ToString() ?? "",
                                         accountheadid,
-                                        selectedRow.Cells["CodeAccount"]?.Value?.ToString() ?? "Unknown"
+                                        selectedRow.Cells["CodeAccount"]?.Value?.ToString() ?? "",
+                                        amount // Assign either Credit or Debit, ensuring only one is selected.
                                     ));
-
                                     // Close the child form after passing the data
                                     this.Close();
                                 }
@@ -144,12 +146,16 @@ namespace SmartFlow.Common.CommonForms
                             {
                                 int accountheadid = Convert.ToInt32(selectedRow.Cells["HEADID"]?.Value ?? 0);
                                 // Raise the event with the data to pass to the parent form
+                                decimal amount = 0; // Assign Credit if available, otherwise Debit.
+
                                 AccountDataSelected?.Invoke(this, new AccountData(
                                     accountid,
-                                    selectedRow.Cells["Account Name"]?.Value?.ToString() ?? "Unknown",
+                                    selectedRow.Cells["Account Name"]?.Value?.ToString() ?? "",
                                     accountheadid,
-                                    selectedRow.Cells["CodeAccount"]?.Value?.ToString() ?? "Unknown"
+                                    selectedRow.Cells["CodeAccount"]?.Value?.ToString() ?? "",
+                                    amount // Assign either Credit or Debit, ensuring only one is selected.
                                 ));
+
 
                                 // Close the child form after passing the data
                                 this.Close();

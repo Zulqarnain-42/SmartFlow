@@ -43,10 +43,15 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.headinglbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.warehouseidlbl = new System.Windows.Forms.Label();
+            this.selectshelfcombo = new System.Windows.Forms.ComboBox();
+            this.selectshelflbl = new System.Windows.Forms.Label();
+            this.selectrackcombo = new System.Windows.Forms.ComboBox();
+            this.selectracklbl = new System.Windows.Forms.Label();
+            this.minusitemchkbox = new System.Windows.Forms.CheckBox();
             this.selectwarehousetxtbox = new System.Windows.Forms.TextBox();
-            this.qtyusingscanneridlbl = new System.Windows.Forms.Label();
             this.warehouselbl = new System.Windows.Forms.Label();
+            this.warehouseidlbl = new System.Windows.Forms.Label();
+            this.qtyusingscanneridlbl = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.importantnoteslbl = new System.Windows.Forms.Label();
             this.importantnotestxtbox = new System.Windows.Forms.RichTextBox();
@@ -75,7 +80,7 @@
             this.searchtextbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchtextbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchtextbox.Location = new System.Drawing.Point(165, 32);
-            this.searchtextbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.searchtextbox.Margin = new System.Windows.Forms.Padding(2);
             this.searchtextbox.Name = "searchtextbox";
             this.searchtextbox.Size = new System.Drawing.Size(376, 27);
             this.searchtextbox.TabIndex = 1;
@@ -101,7 +106,7 @@
             this.quantity});
             this.dgvinventory.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvinventory.Location = new System.Drawing.Point(2, 3);
-            this.dgvinventory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvinventory.Margin = new System.Windows.Forms.Padding(2);
             this.dgvinventory.Name = "dgvinventory";
             this.dgvinventory.RowHeadersVisible = false;
             this.dgvinventory.RowHeadersWidth = 51;
@@ -161,7 +166,7 @@
             this.savebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.savebtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.savebtn.Location = new System.Drawing.Point(928, 460);
-            this.savebtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.savebtn.Margin = new System.Windows.Forms.Padding(2);
             this.savebtn.Name = "savebtn";
             this.savebtn.Size = new System.Drawing.Size(265, 30);
             this.savebtn.TabIndex = 46;
@@ -176,7 +181,7 @@
             this.exitbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exitbtn.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitbtn.Location = new System.Drawing.Point(928, 495);
-            this.exitbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.exitbtn.Margin = new System.Windows.Forms.Padding(2);
             this.exitbtn.Name = "exitbtn";
             this.exitbtn.Size = new System.Drawing.Size(265, 30);
             this.exitbtn.TabIndex = 47;
@@ -189,7 +194,7 @@
             this.panel1.Controls.Add(this.headinglbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1196, 37);
             this.panel1.TabIndex = 48;
@@ -210,29 +215,82 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.warehouseidlbl);
+            this.panel2.Controls.Add(this.selectshelfcombo);
+            this.panel2.Controls.Add(this.selectshelflbl);
+            this.panel2.Controls.Add(this.selectrackcombo);
+            this.panel2.Controls.Add(this.selectracklbl);
+            this.panel2.Controls.Add(this.minusitemchkbox);
             this.panel2.Controls.Add(this.selectwarehousetxtbox);
-            this.panel2.Controls.Add(this.qtyusingscanneridlbl);
             this.panel2.Controls.Add(this.warehouselbl);
             this.panel2.Controls.Add(this.barcodelbl);
             this.panel2.Controls.Add(this.searchtextbox);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 37);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1196, 62);
             this.panel2.TabIndex = 49;
             // 
-            // warehouseidlbl
+            // selectshelfcombo
             // 
-            this.warehouseidlbl.AutoSize = true;
-            this.warehouseidlbl.Location = new System.Drawing.Point(548, 20);
-            this.warehouseidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.warehouseidlbl.Name = "warehouseidlbl";
-            this.warehouseidlbl.Size = new System.Drawing.Size(67, 13);
-            this.warehouseidlbl.TabIndex = 6;
-            this.warehouseidlbl.Text = "warehouseid";
-            this.warehouseidlbl.Visible = false;
+            this.selectshelfcombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.selectshelfcombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.selectshelfcombo.Font = new System.Drawing.Font("Calibri", 12F);
+            this.selectshelfcombo.FormattingEnabled = true;
+            this.selectshelfcombo.Location = new System.Drawing.Point(641, 32);
+            this.selectshelfcombo.Name = "selectshelfcombo";
+            this.selectshelfcombo.Size = new System.Drawing.Size(440, 27);
+            this.selectshelfcombo.TabIndex = 11;
+            this.selectshelfcombo.Visible = false;
+            // 
+            // selectshelflbl
+            // 
+            this.selectshelflbl.AutoSize = true;
+            this.selectshelflbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectshelflbl.Location = new System.Drawing.Point(550, 36);
+            this.selectshelflbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.selectshelflbl.Name = "selectshelflbl";
+            this.selectshelflbl.Size = new System.Drawing.Size(89, 18);
+            this.selectshelflbl.TabIndex = 10;
+            this.selectshelflbl.Text = "SELECT SHELF";
+            this.selectshelflbl.Visible = false;
+            // 
+            // selectrackcombo
+            // 
+            this.selectrackcombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.selectrackcombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.selectrackcombo.Font = new System.Drawing.Font("Calibri", 12F);
+            this.selectrackcombo.FormattingEnabled = true;
+            this.selectrackcombo.Location = new System.Drawing.Point(641, 3);
+            this.selectrackcombo.Name = "selectrackcombo";
+            this.selectrackcombo.Size = new System.Drawing.Size(440, 27);
+            this.selectrackcombo.TabIndex = 9;
+            this.selectrackcombo.Visible = false;
+            this.selectrackcombo.Leave += new System.EventHandler(this.selectrackcombo_Leave);
+            // 
+            // selectracklbl
+            // 
+            this.selectracklbl.AutoSize = true;
+            this.selectracklbl.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectracklbl.Location = new System.Drawing.Point(550, 7);
+            this.selectracklbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.selectracklbl.Name = "selectracklbl";
+            this.selectracklbl.Size = new System.Drawing.Size(86, 18);
+            this.selectracklbl.TabIndex = 8;
+            this.selectracklbl.Text = "SELECT RACK";
+            this.selectracklbl.Visible = false;
+            // 
+            // minusitemchkbox
+            // 
+            this.minusitemchkbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.minusitemchkbox.AutoSize = true;
+            this.minusitemchkbox.Location = new System.Drawing.Point(1087, 9);
+            this.minusitemchkbox.Name = "minusitemchkbox";
+            this.minusitemchkbox.Size = new System.Drawing.Size(97, 17);
+            this.minusitemchkbox.TabIndex = 7;
+            this.minusitemchkbox.Text = "MINUS ITEMS";
+            this.minusitemchkbox.UseVisualStyleBackColor = true;
+            this.minusitemchkbox.CheckedChanged += new System.EventHandler(this.minusitemchkbox_CheckedChanged);
             // 
             // selectwarehousetxtbox
             // 
@@ -240,23 +298,13 @@
             this.selectwarehousetxtbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.selectwarehousetxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.selectwarehousetxtbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectwarehousetxtbox.Location = new System.Drawing.Point(165, 4);
-            this.selectwarehousetxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.selectwarehousetxtbox.Location = new System.Drawing.Point(165, 3);
+            this.selectwarehousetxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.selectwarehousetxtbox.Name = "selectwarehousetxtbox";
             this.selectwarehousetxtbox.Size = new System.Drawing.Size(376, 27);
             this.selectwarehousetxtbox.TabIndex = 5;
             this.selectwarehousetxtbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.selectwarehousetxtbox_MouseClick);
-            // 
-            // qtyusingscanneridlbl
-            // 
-            this.qtyusingscanneridlbl.AutoSize = true;
-            this.qtyusingscanneridlbl.Location = new System.Drawing.Point(545, 3);
-            this.qtyusingscanneridlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.qtyusingscanneridlbl.Name = "qtyusingscanneridlbl";
-            this.qtyusingscanneridlbl.Size = new System.Drawing.Size(92, 13);
-            this.qtyusingscanneridlbl.TabIndex = 4;
-            this.qtyusingscanneridlbl.Text = "qtyusingscannerid";
-            this.qtyusingscanneridlbl.Visible = false;
+            this.selectwarehousetxtbox.Leave += new System.EventHandler(this.selectwarehousetxtbox_Leave);
             // 
             // warehouselbl
             // 
@@ -269,16 +317,40 @@
             this.warehouselbl.TabIndex = 2;
             this.warehouselbl.Text = "WAREHOUSE";
             // 
+            // warehouseidlbl
+            // 
+            this.warehouseidlbl.AutoSize = true;
+            this.warehouseidlbl.Location = new System.Drawing.Point(1098, 353);
+            this.warehouseidlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.warehouseidlbl.Name = "warehouseidlbl";
+            this.warehouseidlbl.Size = new System.Drawing.Size(67, 13);
+            this.warehouseidlbl.TabIndex = 6;
+            this.warehouseidlbl.Text = "warehouseid";
+            this.warehouseidlbl.Visible = false;
+            // 
+            // qtyusingscanneridlbl
+            // 
+            this.qtyusingscanneridlbl.AutoSize = true;
+            this.qtyusingscanneridlbl.Location = new System.Drawing.Point(1095, 336);
+            this.qtyusingscanneridlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.qtyusingscanneridlbl.Name = "qtyusingscanneridlbl";
+            this.qtyusingscanneridlbl.Size = new System.Drawing.Size(92, 13);
+            this.qtyusingscanneridlbl.TabIndex = 4;
+            this.qtyusingscanneridlbl.Text = "qtyusingscannerid";
+            this.qtyusingscanneridlbl.Visible = false;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.dgvinventory);
+            this.panel3.Controls.Add(this.warehouseidlbl);
             this.panel3.Controls.Add(this.importantnoteslbl);
             this.panel3.Controls.Add(this.importantnotestxtbox);
+            this.panel3.Controls.Add(this.qtyusingscanneridlbl);
             this.panel3.Controls.Add(this.exitbtn);
             this.panel3.Controls.Add(this.savebtn);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 99);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1196, 527);
             this.panel3.TabIndex = 50;
@@ -301,7 +373,7 @@
             this.importantnotestxtbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.importantnotestxtbox.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.importantnotestxtbox.Location = new System.Drawing.Point(929, 31);
-            this.importantnotestxtbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.importantnotestxtbox.Margin = new System.Windows.Forms.Padding(2);
             this.importantnotestxtbox.Name = "importantnotestxtbox";
             this.importantnotestxtbox.Size = new System.Drawing.Size(258, 282);
             this.importantnotestxtbox.TabIndex = 48;
@@ -321,7 +393,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "QtyUsingScanner";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UPDATE INVENTORY USING SCANNER";
@@ -364,5 +436,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn productmfr;
         private System.Windows.Forms.DataGridViewTextBoxColumn barcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
+        private System.Windows.Forms.CheckBox minusitemchkbox;
+        private System.Windows.Forms.Label selectracklbl;
+        private System.Windows.Forms.ComboBox selectrackcombo;
+        private System.Windows.Forms.ComboBox selectshelfcombo;
+        private System.Windows.Forms.Label selectshelflbl;
     }
 }

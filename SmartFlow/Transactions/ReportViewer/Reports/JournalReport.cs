@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SmartFlow.Report.ReportViewer.Reports {
+namespace SmartFlow.Transactions.ReportViewer.Reports {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace SmartFlow.Report.ReportViewer.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class AccountLedger : ReportClass {
+    public class JournalReport : ReportClass {
         
-        public AccountLedger() {
+        public JournalReport() {
         }
         
         public override string ResourceName {
             get {
-                return "AccountLedger.rpt";
+                return "JournalReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SmartFlow.Report.ReportViewer.Reports {
         
         public override string FullResourceName {
             get {
-                return "SmartFlow.Report.ReportViewer.Reports.AccountLedger.rpt";
+                return "SmartFlow.Transactions.ReportViewer.Reports.JournalReport.rpt";
             }
             set {
                 // Do nothing
@@ -87,12 +87,20 @@ namespace SmartFlow.Report.ReportViewer.Reports {
                 return this.ReportDefinition.Sections[4];
             }
         }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_InvoiceNo {
+            get {
+                return this.DataDefinition.ParameterFields[0];
+            }
+        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedAccountLedger : Component, ICachedReport {
+    public class CachedJournalReport : Component, ICachedReport {
         
-        public CachedAccountLedger() {
+        public CachedJournalReport() {
         }
         
         [Browsable(false)]
@@ -129,7 +137,7 @@ namespace SmartFlow.Report.ReportViewer.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            AccountLedger rpt = new AccountLedger();
+            JournalReport rpt = new JournalReport();
             rpt.Site = this.Site;
             return rpt;
         }

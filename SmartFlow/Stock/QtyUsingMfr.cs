@@ -147,7 +147,8 @@ namespace SmartFlow.Stock
                                 { "CreatedAt", DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss") },
                                 { "CreatedDay", DateTime.Now.DayOfWeek.ToString() },
                                 { "WarehouseId", warehouseid },
-                                { "StockCustom_ID", stockcustomid }
+                                { "StockCustom_ID", stockcustomid },
+                                { "AddInventory", true }
                             };
 
                             result = await DatabaseAccess.ExecuteQueryAsync(tableName, "INSERT", stockColumnData);
