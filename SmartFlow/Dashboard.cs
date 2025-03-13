@@ -1041,5 +1041,13 @@ namespace SmartFlow
             CommonFunction.DisposeOnClose(shelf);
             shelf.Show();
         }
+
+        private void bOOKINGLOCATIONToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BookingLocation bookingLocation = new BookingLocation();
+            bookingLocation.MdiParent = this;
+            CommonFunction.DisposeOnClose(bookingLocation);
+            bookingLocation.Show();
+        }
     }
 }

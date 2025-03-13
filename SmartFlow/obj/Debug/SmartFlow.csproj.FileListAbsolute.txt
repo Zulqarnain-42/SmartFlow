@@ -956,6 +956,7 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Setting.Terms
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.BarcodeDesign.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Dashboard.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Properties.Resources.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.BookingLocation.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.BookItem.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.BoxForm.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.DetailDamageEntry.resources
@@ -991,6 +992,7 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.ReportV
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.ReportViewer.StockTransferViewer.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.DamageEntry.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.OpenBoxProduct.resources
+C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.Shelf.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.StockAdjustment.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.StockJournal.resources
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.StockTransfer.resources
@@ -1040,4 +1042,3 @@ C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.csproj.CoreCo
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.csproj.Up2Date
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.exe
 C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.pdb
-C:\Users\FABT\source\repos\SmartFlow\SmartFlow\obj\Debug\SmartFlow.Stock.Shelf.resources

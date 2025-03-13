@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -378,148 +379,373 @@ namespace SmartFlow.Common
 
         public static async Task PopulateCurrencyComboBoxAsync(ComboBox combo)
         {
-            // Retrieve data from the database asynchronously
-            string query = "SELECT CurrencyId, Symbol, Name, CurrencyString FROM CurrencyTable";
-            DataTable dt = await Task.Run(() => DatabaseAccess.RetriveAsync(query));
-
-            List<CurrencyData> currencies = new List<CurrencyData>();
-
-            foreach (DataRow row in dt.Rows)
+            try
             {
-                CurrencyData currency = new CurrencyData
+                string query = "SELECT CurrencyId, Symbol, Name, CurrencyString FROM CurrencyTable";
+
+                // Retrieve data from the database asynchronously, ensuring dt is never null
+                DataTable dt = await Task.Run(() => DatabaseAccess.RetriveAsync(query)) ?? new DataTable();
+
+                List<CurrencyData> currencies = new List<CurrencyData>
                 {
-                    CurrencyId = Convert.ToInt32(row["CurrencyId"]),
-                    Symbol = row["Symbol"].ToString(),
-                    Name = row["Name"].ToString(),
-                    CurrencyString = row["CurrencyString"].ToString()
+                    new CurrencyData
+                    {
+                        CurrencyId = 0,  // Empty selection indicator
+                        Symbol = "",
+                        Name = "-- Select --", // Meaningful empty display text
+                        CurrencyString = ""
+                    }
                 };
 
-                currencies.Add(currency);
-            }
+                if (dt.Rows.Count > 0) // Check if data exists before looping
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        try
+                        {
+                            currencies.Add(new CurrencyData
+                            {
+                                CurrencyId = Convert.ToInt32(row["CurrencyId"]),
+                                Symbol = row["Symbol"].ToString(),
+                                Name = row["Name"].ToString(),
+                                CurrencyString = row["CurrencyString"].ToString()
+                            });
+                        }
+                        catch (Exception ex) // Handle individual row errors
+                        {
+                            MessageBox.Show($"Error processing row: {ex.Message}", "Data Processing Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
 
-            // Setting ComboBox data source on the UI thread
-            combo.DataSource = currencies;
-            combo.DisplayMember = "Name";  // Or whatever you want to display
-            combo.ValueMember = "CurrencyId"; // The actual value will be the CurrencyId
+                // Ensure binding happens on the UI thread
+                if (combo.IsHandleCreated) // Prevents errors if ComboBox is disposed
+                {
+                    combo.Invoke(new Action(() =>
+                    {
+                        try
+                        {
+                            combo.DataSource = null; // Reset first to avoid binding issues
+                            combo.DataSource = currencies;
+                            combo.DisplayMember = "Name";  // Ensure this property exists in CurrencyData
+                            combo.ValueMember = "CurrencyId";
+                            combo.SelectedIndex = 0; // Default to the first empty row
+                        }
+                        catch (Exception ex) // Handle ComboBox UI errors
+                        {
+                            MessageBox.Show($"Error updating ComboBox: {ex.Message}", "UI Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }));
+                }
+                else
+                {
+                    MessageBox.Show("ComboBox handle not created. Skipping update.", "UI Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex) // Catch any unexpected errors
+            {
+                MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
+
 
         public static async Task PopulateBrandComboBoxAsync(ComboBox combo)
         {
-            // Retrieve data from the database asynchronously
-            string query = "SELECT BrandId,BrandName,Description,BrandCode FROM BrandTable";
-            DataTable dt = await Task.Run(() => DatabaseAccess.RetriveAsync(query));
-
-            List<BrandData> brands = new List<BrandData>();
-
-            // Insert an empty row as the first item
-            brands.Add(new BrandData
+            try
             {
-                BrandId = 0,  // You can use 0 or -1 to indicate an empty selection
-                BrandName = "", // Empty display text
-                Description = "",
-                BrandCode = ""
-            });
+                string query = "SELECT BrandId, BrandName, Description, BrandCode FROM BrandTable";
 
-            // Populate the ComboBox with actual data
-            foreach (DataRow row in dt.Rows)
-            {
-                BrandData brand = new BrandData
+                // Retrieve data from the database asynchronously, ensuring dt is never null
+                DataTable dt = await Task.Run(() => DatabaseAccess.RetriveAsync(query)) ?? new DataTable();
+
+                List<BrandData> brands = new List<BrandData>
                 {
-                    BrandId = Convert.ToInt32(row["BrandId"]),
-                    BrandName = row["BrandName"].ToString(),
-                    Description = row["Description"].ToString(),
-                    BrandCode = row["BrandCode"].ToString()
+                    new BrandData
+                    {
+                        BrandId = 0,  // Empty selection indicator
+                        BrandName = "-- Select --", // Meaningful empty display text
+                        Description = "",
+                        BrandCode = ""
+                    }
                 };
 
-                brands.Add(brand);
+                if (dt.Rows.Count > 0) // Check if data exists before looping
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        try
+                        {
+                            brands.Add(new BrandData
+                            {
+                                BrandId = Convert.ToInt32(row["BrandId"]),
+                                BrandName = row["BrandName"].ToString(),
+                                Description = row["Description"].ToString(),
+                                BrandCode = row["BrandCode"].ToString()
+                            });
+                        }
+                        catch (Exception ex) // Handle individual row errors
+                        {
+                            MessageBox.Show($"Error processing row: {ex.Message}", "Data Processing Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
+
+                // Ensure binding happens on the UI thread
+                if (combo.IsHandleCreated) // Prevents errors if ComboBox is disposed
+                {
+                    combo.Invoke(new Action(() =>
+                    {
+                        try
+                        {
+                            combo.DataSource = null; // Reset first to avoid binding issues
+                            combo.DataSource = brands;
+                            combo.DisplayMember = "BrandName";  // Ensure this property exists in BrandData
+                            combo.ValueMember = "BrandId";
+                            combo.SelectedIndex = 0; // Default to the first empty row
+                        }
+                        catch (Exception ex) // Handle ComboBox UI errors
+                        {
+                            MessageBox.Show($"Error updating ComboBox: {ex.Message}", "UI Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }));
+                }
+                else
+                {
+                    MessageBox.Show("ComboBox handle not created. Skipping update.", "UI Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-
-            // Setting ComboBox data source on the UI thread
-            combo.DataSource = brands;
-            combo.DisplayMember = "BrandName";  // Display brand name
-            combo.ValueMember = "BrandId";      // The actual value will be the BrandId
-
-            // Optionally set the selected index to the empty row
-            combo.SelectedIndex = 0;
+            catch (Exception ex) // Catch any unexpected errors
+            {
+                MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
 
         public static async Task PopulateRackComboBoxAsync(ComboBox combo, int warehouseid = 0)
         {
-            // Modify query based on warehouseid condition
-            string query = "SELECT Rackid, RackCode FROM RackTable";
-
-            if (warehouseid > 0) // Apply filtering if warehouseid is provided
+            try
             {
-                query += $" WHERE WarehouseID = {warehouseid}";
-            }
+                string query = "SELECT Rackid, RackCode FROM RackTable";
 
-            // Retrieve data from the database asynchronously
-            DataTable dt = await Task.Run(() => DatabaseAccess.RetriveAsync(query));
-
-            List<RackData> rack = new List<RackData>
-            {
-                new RackData
+                if (warehouseid > 0) // Apply filtering if warehouseid is provided
                 {
-                    Rackid = 0,  // Empty selection indicator
-                    RackCode = "" // Empty display text
+                    query += $" WHERE WarehouseID = {warehouseid}";
                 }
-            };
 
-            // Populate the ComboBox with actual data
-            foreach (DataRow row in dt.Rows)
-            {
-                rack.Add(new RackData
+                // Retrieve data from the database asynchronously, ensuring dt is never null
+                DataTable dt = await Task.Run(() => DatabaseAccess.RetriveAsync(query)) ?? new DataTable(); // Ensure dt is never null
+
+                List<RackData> rackList = new List<RackData>
                 {
-                    Rackid = Convert.ToInt32(row["Rackid"]),
-                    RackCode = row["RackCode"].ToString()
-                });
-            }
+                    new RackData
+                    {
+                        Rackid = 0,  // Empty selection indicator
+                        RackCode = "-- Select --" // Meaningful empty display text
+                    }
+                };
 
-            // Setting ComboBox data source on the UI thread
-            combo.DataSource = rack;
-            combo.DisplayMember = "RackCode";  // Display RackCode
-            combo.ValueMember = "Rackid";      // The actual value will be the Rackid
-            combo.SelectedIndex = 0;           // Default to the first empty row
+                if (dt.Rows.Count > 0) // Check if data exists before looping
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        try
+                        {
+                            rackList.Add(new RackData
+                            {
+                                Rackid = Convert.ToInt32(row["Rackid"]),
+                                RackCode = row["RackCode"].ToString()
+                            });
+                        }
+                        catch (Exception ex) // Handle individual row errors
+                        {
+                            MessageBox.Show($"Error processing row: {ex.Message}", "Data Processing Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
+
+                // Ensure binding happens on the UI thread
+                if (combo.IsHandleCreated) // Prevents errors if ComboBox is disposed
+                {
+                    combo.Invoke(new Action(() =>
+                    {
+                        try
+                        {
+                            combo.DataSource = null; // Reset first to avoid binding issues
+                            combo.DataSource = rackList;
+                            combo.DisplayMember = "RackCode";  // Ensure this property exists in RackData
+                            combo.ValueMember = "Rackid";
+                            combo.SelectedIndex = 0; // Default to the first empty row
+                        }
+                        catch (Exception ex) // Handle ComboBox UI errors
+                        {
+                            MessageBox.Show($"Error updating ComboBox: {ex.Message}", "UI Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }));
+                }
+                else
+                {
+                    MessageBox.Show("ComboBox handle not created. Skipping update.", "UI Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex) // Catch any unexpected errors
+            {
+                MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
+
+        public static async Task PopulateBookingLocationComboBoxAsync(ComboBox combo, int warehouseid = 0)
+        {
+            try
+            {
+                string query = "SELECT BLocationId, BLocationCode FROM BookingLocation";
+
+                if (warehouseid > 0) // Apply filtering if warehouseid is provided
+                {
+                    query += $" WHERE Warehouseid = {warehouseid}";
+                }
+
+                // Retrieve data from the database asynchronously, ensuring dt is never null
+                DataTable dt = await Task.Run(() => DatabaseAccess.RetriveAsync(query)) ?? new DataTable(); // Ensure dt is never null
+
+                List<BookingLocationData> bookingLocationDatas = new List<BookingLocationData>
+                {
+                    new BookingLocationData
+                    {
+                        BookingLocationId = 0,  // Empty selection indicator
+                        BookingLocationCode = "-- Select --" // Meaningful empty display text
+                    }
+                };
+
+                if (dt.Rows.Count > 0) // Proceed only if there is data
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        try
+                        {
+                            bookingLocationDatas.Add(new BookingLocationData
+                            {
+                                BookingLocationId = Convert.ToInt32(row["BLocationId"]),
+                                BookingLocationCode = row["BLocationCode"].ToString()
+                            });
+                        }
+                        catch (Exception ex) // Handle errors while processing each row
+                        {
+                            MessageBox.Show($"Error processing row: {ex.Message}", "Data Processing Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
+
+                // Ensure binding happens on UI thread
+                if (combo.IsHandleCreated) // Prevents errors if ComboBox is disposed
+                {
+                    combo.Invoke(new Action(() =>
+                    {
+                        try
+                        {
+                            combo.DataSource = null; // Reset first to avoid binding issues
+                            combo.DataSource = bookingLocationDatas;
+                            combo.DisplayMember = "BookingLocationCode";  // Ensure this property exists in BookingLocationData
+                            combo.ValueMember = "BookingLocationId";
+                            combo.SelectedIndex = 0; // Default to the first empty row
+                        }
+                        catch (Exception ex) // Handle errors while updating the ComboBox
+                        {
+                            MessageBox.Show($"Error updating ComboBox: {ex.Message}", "UI Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }));
+                }
+                else
+                {
+                    MessageBox.Show("ComboBox handle not created. Skipping update.", "UI Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex) // Catch any unexpected errors
+            {
+                MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
 
         public static async Task PopulateShelfComboBoxAsync(ComboBox combo, int rackid = 0)
         {
-            // Modify query based on warehouseid condition
-            string query = "SELECT ShelfId, ShelfCode FROM ShelfTable";
-
-            if (rackid > 0) // Apply filtering if warehouseid is provided
+            try
             {
-                query += $" WHERE RackId = {rackid}";
-            }
+                string query = "SELECT ShelfId, ShelfCode FROM ShelfTable";
 
-            // Retrieve data from the database asynchronously
-            DataTable dt = await Task.Run(() => DatabaseAccess.RetriveAsync(query));
-
-            List<ShelfData> shelfs = new List<ShelfData>
-            {
-                new ShelfData
+                if (rackid > 0) // Apply filtering if rackid is provided
                 {
-                    ShelfId = 0,  // Empty selection indicator
-                    ShelfCode = "" // Empty display text
+                    query += $" WHERE RackId = {rackid}";
                 }
-            };
 
-            // Populate the ComboBox with actual data
-            foreach (DataRow row in dt.Rows)
-            {
-                shelfs.Add(new ShelfData
+                // Retrieve data from the database asynchronously, ensuring dt is never null
+                DataTable dt = await Task.Run(() => DatabaseAccess.RetriveAsync(query)) ?? new DataTable(); // Ensure dt is never null
+
+                List<ShelfData> shelfs = new List<ShelfData>
                 {
-                    ShelfId = Convert.ToInt32(row["ShelfId"]),
-                    ShelfCode = row["ShelfCode"].ToString()
-                });
-            }
+                    new ShelfData
+                    {
+                        ShelfId = 0,  // Empty selection indicator
+                        ShelfCode = "-- Select --" // Meaningful empty display text
+                    }
+                };
 
-            // Setting ComboBox data source on the UI thread
-            combo.DataSource = shelfs;
-            combo.DisplayMember = "ShelfCode";  // Display RackCode
-            combo.ValueMember = "ShelfId";      // The actual value will be the Rackid
-            combo.SelectedIndex = 0;           // Default to the first empty row
+                if (dt.Rows.Count > 0) // Proceed only if there is data
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        try
+                        {
+                            shelfs.Add(new ShelfData
+                            {
+                                ShelfId = Convert.ToInt32(row["ShelfId"]),
+                                ShelfCode = row["ShelfCode"].ToString()
+                            });
+                        }
+                        catch (Exception ex) // Handle errors while processing each row
+                        {
+                            MessageBox.Show($"Error processing row: {ex.Message}", "Data Processing Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
+
+                // Ensure binding happens on UI thread
+                if (combo.IsHandleCreated) // Prevents errors if ComboBox is disposed
+                {
+                    combo.Invoke(new Action(() =>
+                    {
+                        try
+                        {
+                            combo.DataSource = null; // Reset first to avoid binding issues
+                            combo.DataSource = shelfs;
+                            combo.DisplayMember = "ShelfCode";  // Ensure this property exists in ShelfData
+                            combo.ValueMember = "ShelfId";
+                            combo.SelectedIndex = 0; // Default to the first empty row
+                        }
+                        catch (Exception ex) // Handle errors while updating the ComboBox
+                        {
+                            MessageBox.Show($"Error updating ComboBox: {ex.Message}", "UI Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }));
+                }
+                else
+                {
+                    MessageBox.Show("ComboBox handle not created. Skipping update.", "UI Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex) // Catch any unexpected errors
+            {
+                MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
 
 
         public static async Task FillUnitDataAsync(ComboBox combo)

@@ -134,6 +134,7 @@
             this.stockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.warehouseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.racksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sHELFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stockTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aDDToolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
             this.lISTToolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
@@ -239,7 +240,7 @@
             this.addaccountbtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.sHELFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bOOKINGLOCATIONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -1068,6 +1069,7 @@
             // 
             this.stockToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.warehouseToolStripMenuItem,
+            this.bOOKINGLOCATIONToolStripMenuItem,
             this.racksToolStripMenuItem,
             this.sHELFToolStripMenuItem,
             this.stockTransferToolStripMenuItem,
@@ -1102,6 +1104,13 @@
             this.racksToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
             this.racksToolStripMenuItem.Text = "RACKS";
             this.racksToolStripMenuItem.Click += new System.EventHandler(this.racksToolStripMenuItem_Click);
+            // 
+            // sHELFToolStripMenuItem
+            // 
+            this.sHELFToolStripMenuItem.Name = "sHELFToolStripMenuItem";
+            this.sHELFToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
+            this.sHELFToolStripMenuItem.Text = "SHELF";
+            this.sHELFToolStripMenuItem.Click += new System.EventHandler(this.sHELFToolStripMenuItem_Click);
             // 
             // stockTransferToolStripMenuItem
             // 
@@ -1999,12 +2008,12 @@
             this.panel2.Size = new System.Drawing.Size(1045, 45);
             this.panel2.TabIndex = 5;
             // 
-            // sHELFToolStripMenuItem
+            // bOOKINGLOCATIONToolStripMenuItem
             // 
-            this.sHELFToolStripMenuItem.Name = "sHELFToolStripMenuItem";
-            this.sHELFToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
-            this.sHELFToolStripMenuItem.Text = "SHELF";
-            this.sHELFToolStripMenuItem.Click += new System.EventHandler(this.sHELFToolStripMenuItem_Click);
+            this.bOOKINGLOCATIONToolStripMenuItem.Name = "bOOKINGLOCATIONToolStripMenuItem";
+            this.bOOKINGLOCATIONToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
+            this.bOOKINGLOCATIONToolStripMenuItem.Text = "BOOKING LOCATION";
+            this.bOOKINGLOCATIONToolStripMenuItem.Click += new System.EventHandler(this.bOOKINGLOCATIONToolStripMenuItem_Click);
             // 
             // Dashboard
             // 
@@ -2245,5 +2254,6 @@
         private System.Windows.Forms.ToolStripMenuItem aDDToolStripMenuItem29;
         private System.Windows.Forms.ToolStripMenuItem lISTToolStripMenuItem29;
         private System.Windows.Forms.ToolStripMenuItem sHELFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bOOKINGLOCATIONToolStripMenuItem;
     }
 }

@@ -40,13 +40,13 @@
             this.productmfrlbl = new System.Windows.Forms.Label();
             this.addbtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.productserialnoinvoicelbl = new System.Windows.Forms.Label();
             this.productbarcodelbl = new System.Windows.Forms.Label();
             this.exitbtn = new System.Windows.Forms.Button();
             this.productupclbl = new System.Windows.Forms.Label();
             this.savebtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.headinglbl = new System.Windows.Forms.Label();
-            this.productserialnoinvoicelbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemSerialNo)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -187,6 +187,17 @@
             this.panel2.Size = new System.Drawing.Size(848, 49);
             this.panel2.TabIndex = 10;
             // 
+            // productserialnoinvoicelbl
+            // 
+            this.productserialnoinvoicelbl.AutoSize = true;
+            this.productserialnoinvoicelbl.Location = new System.Drawing.Point(407, 18);
+            this.productserialnoinvoicelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.productserialnoinvoicelbl.Name = "productserialnoinvoicelbl";
+            this.productserialnoinvoicelbl.Size = new System.Drawing.Size(123, 13);
+            this.productserialnoinvoicelbl.TabIndex = 14;
+            this.productserialnoinvoicelbl.Text = "productserialnoinvoicelbl";
+            this.productserialnoinvoicelbl.Visible = false;
+            // 
             // productbarcodelbl
             // 
             this.productbarcodelbl.AutoSize = true;
@@ -254,16 +265,6 @@
             this.headinglbl.TabIndex = 0;
             this.headinglbl.Text = "ADD SERIAL NO";
             this.headinglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // productserialnoinvoicelbl
-            // 
-            this.productserialnoinvoicelbl.AutoSize = true;
-            this.productserialnoinvoicelbl.Location = new System.Drawing.Point(407, 18);
-            this.productserialnoinvoicelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.productserialnoinvoicelbl.Name = "productserialnoinvoicelbl";
-            this.productserialnoinvoicelbl.Size = new System.Drawing.Size(123, 13);
-            this.productserialnoinvoicelbl.TabIndex = 14;
-            this.productserialnoinvoicelbl.Text = "productserialnoinvoicelbl";
             // 
             // ProductSerialNo
             // 

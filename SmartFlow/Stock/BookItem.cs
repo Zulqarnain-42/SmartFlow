@@ -24,27 +24,12 @@ namespace SmartFlow.Stock
             startdatetxtbox.Text = DateTime.Now.ToString("dd/MM/yyyy");
             enddatetxtbox.Text = DateTime.Now.AddDays(20).ToString("dd/MM/yyyy");
         }
-        private async void searchbtn_Click(object sender, EventArgs e)
+        private void searchbtn_Click(object sender, EventArgs e)
         {
             try
             {
                 errorProvider.Clear();
 
-                if (invoicenotxtbox.Text.Trim().Length == 0)
-                {
-                    errorProvider.SetError(invoicenotxtbox, "Please Enter Invoice No.");
-                    invoicenotxtbox.Focus();
-                    return;
-                }
-                else
-                {
-                    string query = string.Format("");
-                    DataTable invoicedata = await DatabaseAccess.RetriveAsync(query);
-                    if (invoicedata.Rows.Count > 0)
-                    {
-
-                    }
-                }
             }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void closebtn_Click(object sender, EventArgs e)
@@ -63,10 +48,10 @@ namespace SmartFlow.Stock
                     return;
                 }
 
-                if(bookinglocationtxtbox.Text.Trim().Length == 0)
+                if(bookinglocationcombo.SelectedIndex > 0)
                 {
-                    errorProvider.SetError(bookinglocationtxtbox,"Please Select Booking Location.");
-                    bookinglocationtxtbox.Focus();
+                    errorProvider.SetError(bookinglocationcombo, "Please Select Booking Location.");
+                    bookinglocationcombo.Focus();
                     return;
                 }
 
@@ -95,13 +80,13 @@ namespace SmartFlow.Stock
                     {
                         if (warehousedata.Rows.Count > 0)
                         {
-                            WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata);
-                            warehouseSelection.MdiParent = this.MdiParent;
-
-                            warehouseSelection.FormClosed += delegate
+                            WarehouseSelection warehouseSelection = new WarehouseSelection(warehousedata)
                             {
-                                UpdateWarehouseTxtBox();
+                                WindowState = FormWindowState.Normal,
+                                StartPosition = FormStartPosition.CenterParent,
                             };
+
+                            warehouseSelection.WarehouseDataSelected += UpdateWarehouseInfo;
                             CommonFunction.DisposeOnClose(warehouseSelection);
                             warehouseSelection.Show();
                         }
@@ -114,10 +99,35 @@ namespace SmartFlow.Stock
             }
         }
 
-        private void UpdateWarehouseTxtBox()
+        private async void UpdateWarehouseInfo(object sender, WarehouseData e)
         {
-            /*selectwarehousetxtbox.Text = GlobalVariables.warehousenameglobal;
-            warehouseidlbl.Text = GlobalVariables.warehouseidglobal.ToString();*/
+            try
+            {
+                // Simulate some async work (e.g., fetching additional data or processing)
+                await Task.Run(() =>
+                {
+                    // Perform any long-running or async operations here (if needed)
+                    // For example, querying a database, calling an API, etc.
+
+                    int warehouseid = e.WarehouseId;
+                    string warehousename = e.WarehouseName;
+
+                    // If you need to update UI controls, ensure that it's done on the UI thread
+                    // If you update textboxes, labels, etc., do it like this:
+                    this.Invoke(new Action(() =>
+                    {
+                        // Assuming these are TextBox controls
+                        warehouseidlbl.Text = warehouseid.ToString();
+                        selectwarehousetxtbox.Text = warehousename;
+                    }));
+                });
+            }
+            catch (Exception ex)
+            {
+                // Catch any unexpected errors and show them to the user
+                MessageBox.Show($"An error occurred while updating supplier information: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BookItem_KeyDown(object sender, KeyEventArgs e)
@@ -143,9 +153,8 @@ namespace SmartFlow.Stock
         }
         private bool AreAnyTextBoxesFilled()
         {
-            if (invoicenotxtbox.Text.Trim().Length > 0) { return true; }
             if (selectwarehousetxtbox.Text.Trim().Length > 0) { return true; }
-            if (bookinglocationtxtbox.Text.Trim().Length > 0) { return true; }
+            if (bookinglocationcombo.SelectedIndex > 0) { return true; }
             if (importantnotestxtbox.Text.Trim().Length > 0) { return true; }
             return false; // No TextBox is filled
         }
@@ -193,10 +202,12 @@ namespace SmartFlow.Stock
                     this.Invoke(new Action(() =>
                     {
                         // Assuming these are TextBox controls
-                        /* supplieridlbl.Text = supplierId.ToString();
-                         selectsuppliertxtbox.Text = supplierName;
-                         suppliercodetxtbox.Text = supplierCode;
-                         companytxtbox.Text = companyName;*/
+                        selectproducttxtbox.Text = productname.ToString();
+                        productidlbl.Text = productid.ToString();
+                        productmfrlbl.Text = productmfr.ToString();
+                        productupclbl.Text = productupc.ToString();
+                        productpricelbl.Text = productprice.ToString();
+                        productbarcodelbl.Text = productbarcode.ToString();
                     }));
                 });
             }
@@ -212,9 +223,51 @@ namespace SmartFlow.Stock
         {
             try
             {
+                bool productExists = false;
+                foreach (DataGridViewRow row in dgvbookingitem.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        if (row.Cells["productidcolumn"].Value != null && row.Cells["productidcolumn"].Value.ToString() == productidlbl.Text)
+                        {
+                            int currentQuantity = Convert.ToInt32(row.Cells["productquantity"].Value);
+                            row.Cells["productquantity"].Value = currentQuantity + Convert.ToInt32(qtytxtbox.Text);
+                            productExists = true;
+                            break;
+                        }
+                    }
+                }
 
+                if (!productExists)
+                {
+                    dgvbookingitem.Rows.Add(productidlbl.Text, productmfrlbl.Text, selectproducttxtbox.Text, productupclbl.Text, productbarcodelbl.Text,
+                        qtytxtbox.Text);
+                }
+
+                ResetLabelData();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void ResetLabelData()
+        {
+            selectproducttxtbox.Text = string.Empty;
+            qtytxtbox.Text = string.Empty;
+            productpricelbl.Text = string.Empty;
+            productbarcodelbl.Text = string.Empty;
+            productidlbl.Text = string.Empty;
+            productmfrlbl.Text = string.Empty;
+            productupclbl.Text = string.Empty;
+            selectproducttxtbox.Focus();
+        }
+
+        private async void selectwarehousetxtbox_Leave(object sender, EventArgs e)
+        {
+            int warehouseid = Convert.ToInt32(warehouseidlbl.Text);
+            if (warehouseid > 0)
+            {
+                await CommonFunction.PopulateBookingLocationComboBoxAsync(bookinglocationcombo, warehouseid);
+            }
         }
     }
 }

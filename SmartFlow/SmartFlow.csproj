@@ -293,6 +293,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\AccountData.cs" />
+    <Compile Include="Common\BookingLocationData.cs" />
     <Compile Include="Common\BrandData.cs" />
     <Compile Include="Common\CommonForms\AccountGroupSelection.cs">
       <SubType>Form</SubType>
@@ -1069,6 +1070,12 @@
     </Compile>
     <Compile Include="Sales\SaleReturnInvoice.Designer.cs">
       <DependentUpon>SaleReturnInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\BookingLocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock\BookingLocation.Designer.cs">
+      <DependentUpon>BookingLocation.cs</DependentUpon>
     </Compile>
     <Compile Include="Stock\BookItem.cs">
       <SubType>Form</SubType>
@@ -2058,6 +2065,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Stock\BookingLocation.resx">
+      <DependentUpon>BookingLocation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Stock\BookItem.resx">
       <DependentUpon>BookItem.cs</DependentUpon>
     </EmbeddedResource>
