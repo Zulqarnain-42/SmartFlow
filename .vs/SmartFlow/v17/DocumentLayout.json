@@ -3,7 +3,47 @@
   "WorkspaceRootPath": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\common\\commonfunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\transactions\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\transactions\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\transactions\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\transactions\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\report\\accountwisepayment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\report\\accountwisepayment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\report\\accountwisereceipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\report\\accountwisereceipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\report\\accountwisesale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\report\\accountwisesale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\common\\accountdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\common\\accountdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\transactions\\payment.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\transactions\\payment.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\transactions\\reportviewer\\reports\\paymentreport.rpt||{C0EF7560-990E-4D61-B970-65A6096B6866}",
+      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\transactions\\reportviewer\\reports\\paymentreport.rpt||{C0EF7560-990E-4D61-B970-65A6096B6866}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\common\\databaseaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\common\\databaseaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|c:\\users\\fabt\\source\\repos\\smartflow\\smartflow\\common\\commonfunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\common\\commonfunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -11,11 +51,11 @@
       "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\stock\\bookitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|c:\\users\\fabt\\source\\repos\\smartflow\\smartflow\\common\\bookinglocationdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\common\\bookinglocationdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\common\\bookinglocationdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|c:\\users\\fabt\\source\\repos\\smartflow\\smartflow\\stock\\bookitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\stock\\bookitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\stock\\bookitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -75,16 +115,8 @@
       "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\sales\\saleinvoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\common\\customerdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\common\\customerdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\common\\databaseaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\common\\databaseaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\masters\\createproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -747,14 +779,6 @@
       "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\transactions\\reportviewer\\reports\\journalreport.rpt||{C0EF7560-990E-4D61-B970-65A6096B6866}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\transactions\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\transactions\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\transactions\\reportviewer\\reports\\paymentreport.rpt||{C0EF7560-990E-4D61-B970-65A6096B6866}",
-      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\transactions\\reportviewer\\reports\\paymentreport.rpt||{C0EF7560-990E-4D61-B970-65A6096B6866}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\transactions\\reportviewer\\journalreportviewer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\transactions\\reportviewer\\journalreportviewer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -781,10 +805,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\transactions\\reportviewer\\paymentreportview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\transactions\\reportviewer\\paymentreportview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\transactions\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\transactions\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\transactions\\journal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -821,10 +841,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\purchase\\purchaseorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\purchase\\purchaseorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\common\\accountdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\common\\accountdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\common\\commonforms\\accountselectionform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -881,10 +897,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\report\\detailaccountwisesale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\report\\detailaccountwisesale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\report\\accountwisepayment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\report\\accountwisepayment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\transactions\\listpayment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -1143,14 +1155,6 @@
       "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\transactions\\receipts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\report\\accountwisereceipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\report\\accountwisereceipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\report\\accountwisesale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\report\\accountwisesale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\transactions\\detailreceipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\transactions\\detailreceipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -1161,10 +1165,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\sales\\reportviewer\\saleinvoiceview.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\sales\\reportviewer\\saleinvoiceview.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\transactions\\payment.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|solutionrelative:smartflow\\transactions\\payment.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A73B6F72-B9DC-4309-9FA7-C7C9CDB2C20A}|SmartFlow\\SmartFlow.csproj|C:\\Users\\FABT\\source\\repos\\SmartFlow\\smartflow\\transactions\\materialissuetoparty.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -1612,7 +1612,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -1628,113 +1628,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BookingLocationData.cs",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\BookingLocationData.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Common\\BookingLocationData.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\BookingLocationData.cs",
-              "RelativeToolTip": "SmartFlow\\Common\\BookingLocationData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T06:12:29.72Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BookItem.cs",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\BookItem.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Stock\\BookItem.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\BookItem.cs",
-              "RelativeToolTip": "SmartFlow\\Stock\\BookItem.cs",
-              "ViewState": "AgIAAPQAAAAAAAAAAAAUwAUBAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-05T18:17:08.702Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "DamageEntry.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DamageEntry.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Stock\\DamageEntry.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DamageEntry.cs [Design]",
-              "RelativeToolTip": "SmartFlow\\Stock\\DamageEntry.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T15:40:30.776Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ListRacks.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListRacks.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListRacks.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListRacks.cs [Design]",
-              "RelativeToolTip": "SmartFlow\\Stock\\ListRacks.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T09:24:50.414Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ListRacks.cs",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListRacks.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListRacks.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListRacks.cs",
-              "RelativeToolTip": "SmartFlow\\Stock\\ListRacks.cs",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAewHgAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T09:36:52.861Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "BookItem.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\BookItem.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Stock\\BookItem.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\BookItem.cs [Design]",
-              "RelativeToolTip": "SmartFlow\\Stock\\BookItem.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T15:40:15.665Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "QtyUsingScanner.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\QtyUsingScanner.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Stock\\QtyUsingScanner.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\QtyUsingScanner.cs [Design]",
-              "RelativeToolTip": "SmartFlow\\Stock\\QtyUsingScanner.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T15:41:32.976Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "QtyUsingScanner.cs",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\QtyUsingScanner.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Stock\\QtyUsingScanner.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\QtyUsingScanner.cs",
-              "RelativeToolTip": "SmartFlow\\Stock\\QtyUsingScanner.cs",
-              "ViewState": "AgIAADECAAAAAAAAAIAwwD4CAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-08T07:16:24.84Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "StockAdjustment.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\StockAdjustment.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Stock\\StockAdjustment.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\StockAdjustment.cs [Design]",
-              "RelativeToolTip": "SmartFlow\\Stock\\StockAdjustment.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T08:03:44.823Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 14,
               "Title": "StockAdjustment.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\StockAdjustment.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\StockAdjustment.cs",
@@ -1746,20 +1640,251 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 10,
               "Title": "CommonFunction.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\CommonFunction.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\CommonFunction.cs",
               "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\CommonFunction.cs",
               "RelativeToolTip": "SmartFlow\\Common\\CommonFunction.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMgAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAB0DAAAAAAAAAAAmwEYDAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-03T06:54:19.544Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DatabaseAccess.cs",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\DatabaseAccess.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Common\\DatabaseAccess.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\DatabaseAccess.cs",
+              "RelativeToolTip": "SmartFlow\\Common\\DatabaseAccess.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAqwBEAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T14:43:32.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "App.config",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\App.config",
+              "RelativeDocumentMoniker": "SmartFlow\\App.config",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\App.config",
+              "RelativeToolTip": "SmartFlow\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-01-11T05:13:54.031Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PaymentReport.rpt",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ReportViewer\\Reports\\PaymentReport.rpt",
+              "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ReportViewer\\Reports\\PaymentReport.rpt",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ReportViewer\\Reports\\PaymentReport.rpt",
+              "RelativeToolTip": "SmartFlow\\Transactions\\ReportViewer\\Reports\\PaymentReport.rpt",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIeSURBVDhPpZJNSFRRFMd/9973ZnIaswwiWvSFmyFNFyEUTlC4qDYptghaSOAmoY3QojZFVkLuIqZ2FhVCYGOLFhERRBs3MkP0IWmZ5geaOo06M76v28Ia581r1w/O4lzO\u002BZ9z7jnwP2itRamfGEzpUr\u002BczpYGX3yAxGBKu56nXc/T5SQGU/pfBWTgQQim5leYnFv2GcCF0/WBLgMCAFKKgAHce56GslF9Akquu0qKot3xepFC0BqvoTVeQ0tTDVXRcDHHJ/AnHyUlSkqSYoAH0/eJTzWgpMRQEtPwN\u002B3zTKUAMJTg5vwN2ORQKbew7GU5MnGw2FUpxt6OT61C6ONA9fBXj1O/LLpnryKlwciPMZbnsgBknSyNk3UMH/vgExD5vNW2Wlhrfj\u002Be23NrYOnkdEYSj4UZajhDxf4wM\u002BkZvj0Zg0XIDdgAJN\u002BNcq45JgBk5/X\u002B5KXbz7oMN3vlbsd2jsZCvEwVsPofExGVUNCQgULS8W0kwPnLD0Xy7YheyKzos73juvbiqD7U9UUf6K/Tq/k1bdmuth1XW7arn74ZCa6xr6ddh0MmVdEKmmIRtkYNTNPkUf0LLNtFqfXqSglMtfH3gUMqOJCe8KiuCrGr2qBg2TiOWx5WxDdQ36tJ/Xk2zOKqZHPI4/DuDAuLC\u002BzcsY1IZON4AE407hOUC\u002BTzVlvesq9lsrnan0src0Pp8e7hjxOvge99Pe250ti//Aa4Se8VLBKf0wAAAABJRU5ErkJggg==",
+              "WhenOpened": "2025-01-13T07:08:25.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Payment.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Payment.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Transactions\\Payment.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Payment.cs [Design]",
+              "RelativeToolTip": "SmartFlow\\Transactions\\Payment.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-13T10:11:03.387Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Payment.cs",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Payment.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Transactions\\Payment.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Payment.cs",
+              "RelativeToolTip": "SmartFlow\\Transactions\\Payment.cs",
+              "ViewState": "AgIAAD8CAAAAAAAAAAAnwF4CAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T10:06:13.873Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Payment.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Payment.Designer.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Transactions\\Payment.Designer.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Payment.Designer.cs",
+              "RelativeToolTip": "SmartFlow\\Transactions\\Payment.Designer.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T10:06:57.137Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AccountData.cs",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\AccountData.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Common\\AccountData.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\AccountData.cs",
+              "RelativeToolTip": "SmartFlow\\Common\\AccountData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-15T18:34:38.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AccountWiseSale.cs",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWiseSale.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Report\\AccountWiseSale.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWiseSale.cs",
+              "RelativeToolTip": "SmartFlow\\Report\\AccountWiseSale.cs",
+              "ViewState": "AgIAAKgAAAAAAAAAAAAewMAAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-21T06:06:04.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AccountWiseReceipt.cs",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWiseReceipt.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Report\\AccountWiseReceipt.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWiseReceipt.cs",
+              "RelativeToolTip": "SmartFlow\\Report\\AccountWiseReceipt.cs",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAewIEAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-24T05:54:58.408Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AccountWisePayment.cs",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWisePayment.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Report\\AccountWisePayment.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWisePayment.cs",
+              "RelativeToolTip": "SmartFlow\\Report\\AccountWisePayment.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAAADcAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-24T05:54:38.168Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "StockAdjustment.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\StockAdjustment.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Stock\\StockAdjustment.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\StockAdjustment.cs [Design]",
+              "RelativeToolTip": "SmartFlow\\Stock\\StockAdjustment.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T08:03:44.823Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "QtyUsingScanner.cs",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\QtyUsingScanner.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Stock\\QtyUsingScanner.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\QtyUsingScanner.cs",
+              "RelativeToolTip": "SmartFlow\\Stock\\QtyUsingScanner.cs",
+              "ViewState": "AgIAADECAAAAAAAAAIAwwD4CAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T07:16:24.84Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "QtyUsingScanner.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\QtyUsingScanner.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Stock\\QtyUsingScanner.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\QtyUsingScanner.cs [Design]",
+              "RelativeToolTip": "SmartFlow\\Stock\\QtyUsingScanner.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-07T15:41:32.976Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 13,
+              "Title": "BookItem.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\BookItem.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Stock\\BookItem.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\BookItem.cs [Design]",
+              "RelativeToolTip": "SmartFlow\\Stock\\BookItem.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-07T15:40:15.665Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ListRacks.cs",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListRacks.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListRacks.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListRacks.cs",
+              "RelativeToolTip": "SmartFlow\\Stock\\ListRacks.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAewHgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T09:36:52.861Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ListRacks.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListRacks.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListRacks.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListRacks.cs [Design]",
+              "RelativeToolTip": "SmartFlow\\Stock\\ListRacks.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T09:24:50.414Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "DamageEntry.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DamageEntry.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Stock\\DamageEntry.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DamageEntry.cs [Design]",
+              "RelativeToolTip": "SmartFlow\\Stock\\DamageEntry.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-07T15:40:30.776Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "BookItem.cs",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\BookItem.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Stock\\BookItem.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\BookItem.cs",
+              "RelativeToolTip": "SmartFlow\\Stock\\BookItem.cs",
+              "ViewState": "AgIAAPQAAAAAAAAAAAAUwAUBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-05T18:17:08.702Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "BookingLocationData.cs",
+              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\BookingLocationData.cs",
+              "RelativeDocumentMoniker": "SmartFlow\\Common\\BookingLocationData.cs",
+              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\BookingLocationData.cs",
+              "RelativeToolTip": "SmartFlow\\Common\\BookingLocationData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-13T06:12:29.72Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
               "Title": "Dashboard.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Dashboard.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Dashboard.cs",
@@ -1771,7 +1896,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 25,
               "Title": "BoxForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\BoxForm.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\BoxForm.cs",
@@ -1782,7 +1907,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 26,
               "Title": "ProductSerialNo.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ProductSerialNo.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ProductSerialNo.cs",
@@ -1793,7 +1918,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 24,
               "Title": "Dashboard.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Dashboard.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Dashboard.cs",
@@ -1804,7 +1929,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 20,
               "Title": "BookingLocation.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\BookingLocation.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\BookingLocation.cs",
@@ -1815,7 +1940,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 21,
               "Title": "BookingLocation.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\BookingLocation.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\BookingLocation.cs",
@@ -1827,19 +1952,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "DatabaseAccess.cs",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\DatabaseAccess.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Common\\DatabaseAccess.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\DatabaseAccess.cs",
-              "RelativeToolTip": "SmartFlow\\Common\\DatabaseAccess.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-02T14:43:32.326Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 28,
               "Title": "CustomerData.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\CustomerData.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\CustomerData.cs",
@@ -1851,20 +1964,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "App.config",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\App.config",
-              "RelativeDocumentMoniker": "SmartFlow\\App.config",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\App.config",
-              "RelativeToolTip": "SmartFlow\\App.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-01-11T05:13:54.031Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 33,
               "Title": "QtyUsingMfr.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\QtyUsingMfr.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\QtyUsingMfr.cs",
@@ -1875,7 +1975,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 36,
               "Title": "SaleInvoice.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\SaleInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\SaleInvoice.cs",
@@ -1887,7 +1987,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 27,
               "Title": "SaleInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\SaleInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\SaleInvoice.cs",
@@ -1898,7 +1998,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 34,
               "Title": "Shelf.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\Shelf.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\Shelf.cs",
@@ -1910,7 +2010,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 38,
               "Title": "BrandData.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\BrandData.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\BrandData.cs",
@@ -1922,7 +2022,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 29,
               "Title": "CreateProduct.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\CreateProduct.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\CreateProduct.cs",
@@ -1934,7 +2034,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 30,
               "Title": "CreateProduct.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\CreateProduct.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\CreateProduct.cs",
@@ -1945,7 +2045,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 31,
               "Title": "ShelfData.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\ShelfData.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\ShelfData.cs",
@@ -1957,7 +2057,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 32,
               "Title": "QtyUsingScanner.Designer.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\QtyUsingScanner.Designer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\QtyUsingScanner.Designer.cs",
@@ -1969,7 +2069,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 42,
               "Title": "ProfermaInvoice.rpt",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ReportViewer\\Reports\\ProfermaInvoice.rpt",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ReportViewer\\Reports\\ProfermaInvoice.rpt",
@@ -1980,7 +2080,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 35,
               "Title": "Shelf.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\Shelf.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\Shelf.cs",
@@ -1991,7 +2091,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 37,
               "Title": "RackData.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\RackData.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\RackData.cs",
@@ -2003,7 +2103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 43,
               "Title": "Dashboard.Designer.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Dashboard.Designer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Dashboard.Designer.cs",
@@ -2015,7 +2115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 40,
               "Title": "OpenBoxProduct.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\OpenBoxProduct.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\OpenBoxProduct.cs",
@@ -2027,7 +2127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 39,
               "Title": "Shelf.Designer.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\Shelf.Designer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\Shelf.Designer.cs",
@@ -2039,7 +2139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 41,
               "Title": "OpenBoxProduct.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\OpenBoxProduct.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\OpenBoxProduct.cs",
@@ -2050,7 +2150,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 55,
               "Title": "SaleQuotationInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\SaleQuotationInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\SaleQuotationInvoice.cs",
@@ -2061,7 +2161,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 45,
               "Title": "DetailProductSerial.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DetailProductSerial.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\DetailProductSerial.cs",
@@ -2073,7 +2173,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 46,
               "Title": "DetailProductSerial.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DetailProductSerial.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\DetailProductSerial.cs",
@@ -2084,7 +2184,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 47,
               "Title": "ListProductSerial.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListProductSerial.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListProductSerial.cs",
@@ -2095,7 +2195,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 44,
               "Title": "ListProductSerial.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListProductSerial.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListProductSerial.cs",
@@ -2107,7 +2207,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 48,
               "Title": "DetailQtyUsingMfr.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DetailQtyUsingMfr.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\DetailQtyUsingMfr.cs",
@@ -2119,7 +2219,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 49,
               "Title": "DetailQtyUsingMfr.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DetailQtyUsingMfr.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\DetailQtyUsingMfr.cs",
@@ -2130,7 +2230,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 52,
               "Title": "ListQtyUsingScanner.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListQtyUsingScanner.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListQtyUsingScanner.cs",
@@ -2141,7 +2241,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 53,
               "Title": "ProductSerialNo.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ProductSerialNo.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ProductSerialNo.cs",
@@ -2153,7 +2253,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 50,
               "Title": "DetailDamageEntry.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DetailDamageEntry.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\DetailDamageEntry.cs",
@@ -2164,7 +2264,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 51,
               "Title": "ListQtyUsingScanner.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListQtyUsingScanner.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListQtyUsingScanner.cs",
@@ -2176,7 +2276,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 56,
               "Title": "StockTransfer.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\StockTransfer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\StockTransfer.cs",
@@ -2188,7 +2288,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 57,
               "Title": "StockTransfer.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\StockTransfer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\StockTransfer.cs",
@@ -2199,7 +2299,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 58,
               "Title": "DamageEntry.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DamageEntry.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\DamageEntry.cs",
@@ -2211,7 +2311,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 54,
               "Title": "SaleQuotationInvoice.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\SaleQuotationInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\SaleQuotationInvoice.cs",
@@ -2223,7 +2323,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 59,
               "Title": "QtyUsingMfr.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\QtyUsingMfr.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\QtyUsingMfr.cs",
@@ -2235,7 +2335,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 60,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Program.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Program.cs",
@@ -2247,7 +2347,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 61,
               "Title": "Product.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\Product.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\Product.cs",
@@ -2259,7 +2359,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 62,
               "Title": "Product.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\Product.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\Product.cs",
@@ -2270,7 +2370,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 63,
               "Title": "PurchaseInvoice.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\PurchaseInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\PurchaseInvoice.cs",
@@ -2282,7 +2382,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 64,
               "Title": "PurchaseInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\PurchaseInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\PurchaseInvoice.cs",
@@ -2293,7 +2393,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 72,
               "Title": "BankDeposit.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\BankDeposit.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\BankDeposit.cs",
@@ -2304,7 +2404,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 65,
               "Title": "PerformaInvoice.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\PerformaInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\PerformaInvoice.cs",
@@ -2316,7 +2416,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 66,
               "Title": "PerformaInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\PerformaInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\PerformaInvoice.cs",
@@ -2327,7 +2427,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 67,
               "Title": "DetailDebitNote.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\DetailDebitNote.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\DetailDebitNote.cs",
@@ -2338,7 +2438,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 68,
               "Title": "DetailCreditNote.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\DetailCreditNote.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\DetailCreditNote.cs",
@@ -2349,7 +2449,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 69,
               "Title": "DebitNote.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\DebitNote.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\DebitNote.cs",
@@ -2360,7 +2460,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 70,
               "Title": "CreditNote.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\CreditNote.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\CreditNote.cs",
@@ -2371,7 +2471,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 71,
               "Title": "BankWithdraw.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\BankWithdraw.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\BankWithdraw.cs",
@@ -2382,7 +2482,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 73,
               "Title": "DebitAndCreditForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\CommonForm\\DebitAndCreditForm.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\CommonForm\\DebitAndCreditForm.cs",
@@ -2393,7 +2493,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 74,
               "Title": "UpdateQuantity.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\UpdateQuantity.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\UpdateQuantity.cs",
@@ -2404,7 +2504,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 75,
               "Title": "StockJournal.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\StockJournal.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\StockJournal.cs",
@@ -2415,7 +2515,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 76,
               "Title": "ModifyDeliveryNote.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ModifyDeliveryNote.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ModifyDeliveryNote.cs",
@@ -2426,7 +2526,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 77,
               "Title": "ModifyPackingList.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ModifyPackingList.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ModifyPackingList.cs",
@@ -2437,7 +2537,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 78,
               "Title": "ModifyBookingItem.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ModifyBookingItem.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ModifyBookingItem.cs",
@@ -2448,7 +2548,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 79,
               "Title": "ListWarehouse.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListWarehouse.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListWarehouse.cs",
@@ -2459,7 +2559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 80,
               "Title": "ListStockTransfer.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListStockTransfer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListStockTransfer.cs",
@@ -2470,7 +2570,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 81,
               "Title": "ListStockJournal.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListStockJournal.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListStockJournal.cs",
@@ -2481,7 +2581,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 82,
               "Title": "ListQtyUsingMFr.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListQtyUsingMFr.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListQtyUsingMFr.cs",
@@ -2492,7 +2592,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 83,
               "Title": "ListPackinglist.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListPackinglist.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListPackinglist.cs",
@@ -2503,7 +2603,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 76,
+              "DocumentIndex": 84,
               "Title": "ListPackingBox.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListPackingBox.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListPackingBox.cs",
@@ -2514,7 +2614,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 77,
+              "DocumentIndex": 85,
               "Title": "ListDeliveryNote.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListDeliveryNote.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListDeliveryNote.cs",
@@ -2525,7 +2625,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 78,
+              "DocumentIndex": 86,
               "Title": "ListDamageEntry.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListDamageEntry.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListDamageEntry.cs",
@@ -2536,7 +2636,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 79,
+              "DocumentIndex": 87,
               "Title": "ListBookingItem.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListBookingItem.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListBookingItem.cs",
@@ -2547,7 +2647,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 80,
+              "DocumentIndex": 88,
               "Title": "DetailStockTransfer.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DetailStockTransfer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\DetailStockTransfer.cs",
@@ -2558,7 +2658,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 82,
+              "DocumentIndex": 90,
               "Title": "DetailQtyUsingScanner.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DetailQtyUsingScanner.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\DetailQtyUsingScanner.cs",
@@ -2569,7 +2669,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 81,
+              "DocumentIndex": 89,
               "Title": "DetailStockJournal.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DetailStockJournal.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\DetailStockJournal.cs",
@@ -2580,7 +2680,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 83,
+              "DocumentIndex": 91,
               "Title": "DetailPackingBox.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DetailPackingBox.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\DetailPackingBox.cs",
@@ -2591,7 +2691,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 84,
+              "DocumentIndex": 92,
               "Title": "BarcodeDesign.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\BarcodeDesign.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\BarcodeDesign.cs",
@@ -2602,7 +2702,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 85,
+              "DocumentIndex": 93,
               "Title": "Terms.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Setting\\Terms.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Setting\\Terms.cs",
@@ -2613,7 +2713,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 86,
+              "DocumentIndex": 94,
               "Title": "FileManager.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Setting\\FileManager.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Setting\\FileManager.cs",
@@ -2624,7 +2724,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 87,
+              "DocumentIndex": 95,
               "Title": "DatabaseConnection.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Setting\\DatabaseConnection.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Setting\\DatabaseConnection.cs",
@@ -2635,7 +2735,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 88,
+              "DocumentIndex": 96,
               "Title": "TaxPlanet.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\TaxPlanet.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\TaxPlanet.cs",
@@ -2646,7 +2746,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 89,
+              "DocumentIndex": 97,
               "Title": "SaleReturnInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\SaleReturnInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\SaleReturnInvoice.cs",
@@ -2657,7 +2757,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 90,
+              "DocumentIndex": 98,
               "Title": "PackingList.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\PackingList.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\PackingList.cs",
@@ -2668,7 +2768,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 91,
+              "DocumentIndex": 99,
               "Title": "ModifySaleReturnInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ModifySaleReturnInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ModifySaleReturnInvoice.cs",
@@ -2679,7 +2779,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 92,
+              "DocumentIndex": 100,
               "Title": "ModifySaleQuotation.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ModifySaleQuotation.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ModifySaleQuotation.cs",
@@ -2690,7 +2790,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 93,
+              "DocumentIndex": 101,
               "Title": "ModifySaleInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ModifySaleInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ModifySaleInvoice.cs",
@@ -2701,7 +2801,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 94,
+              "DocumentIndex": 102,
               "Title": "ModifyProformaInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ModifyProformaInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ModifyProformaInvoice.cs",
@@ -2712,7 +2812,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 95,
+              "DocumentIndex": 103,
               "Title": "ListSalesReturn.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ListSalesReturn.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ListSalesReturn.cs",
@@ -2723,7 +2823,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 96,
+              "DocumentIndex": 104,
               "Title": "ListSalesQuotation.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ListSalesQuotation.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ListSalesQuotation.cs",
@@ -2734,7 +2834,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 97,
+              "DocumentIndex": 105,
               "Title": "ListSaleInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ListSaleInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ListSaleInvoice.cs",
@@ -2745,7 +2845,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 98,
+              "DocumentIndex": 106,
               "Title": "ListProformaInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ListProformaInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ListProformaInvoice.cs",
@@ -2756,7 +2856,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 99,
+              "DocumentIndex": 107,
               "Title": "DetailSaleReturn.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\DetailSaleReturn.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\DetailSaleReturn.cs",
@@ -2767,7 +2867,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 100,
+              "DocumentIndex": 108,
               "Title": "DetailSaleQuotation.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\DetailSaleQuotation.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\DetailSaleQuotation.cs",
@@ -2778,7 +2878,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 101,
+              "DocumentIndex": 109,
               "Title": "DetailSaleInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\DetailSaleInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\DetailSaleInvoice.cs",
@@ -2789,7 +2889,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 102,
+              "DocumentIndex": 110,
               "Title": "DetailProformaInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\DetailProformaInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\DetailProformaInvoice.cs",
@@ -2800,7 +2900,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 103,
+              "DocumentIndex": 111,
               "Title": "DeliveryNote.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\DeliveryNote.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\DeliveryNote.cs",
@@ -2811,7 +2911,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 104,
+              "DocumentIndex": 112,
               "Title": "WarehouseQty.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\CommonForm\\WarehouseQty.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\CommonForm\\WarehouseQty.cs",
@@ -2822,7 +2922,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 105,
+              "DocumentIndex": 113,
               "Title": "VATForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\CommonForm\\VATForm.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\CommonForm\\VATForm.cs",
@@ -2833,7 +2933,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 106,
+              "DocumentIndex": 114,
               "Title": "SearchSaleInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\CommonForm\\SearchSaleInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\CommonForm\\SearchSaleInvoice.cs",
@@ -2844,7 +2944,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 107,
+              "DocumentIndex": 115,
               "Title": "SearchQuotationForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\CommonForm\\SearchQuotationForm.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\CommonForm\\SearchQuotationForm.cs",
@@ -2855,7 +2955,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 108,
+              "DocumentIndex": 116,
               "Title": "SearchInvoiceForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\CommonForm\\SearchInvoiceForm.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\CommonForm\\SearchInvoiceForm.cs",
@@ -2866,7 +2966,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 109,
+              "DocumentIndex": 117,
               "Title": "ItemAvailability.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\CommonForm\\ItemAvailability.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\CommonForm\\ItemAvailability.cs",
@@ -2877,7 +2977,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 110,
+              "DocumentIndex": 118,
               "Title": "EditItemInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\CommonForm\\EditItemInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\CommonForm\\EditItemInvoice.cs",
@@ -2888,7 +2988,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 111,
+              "DocumentIndex": 119,
               "Title": "SearchWithSerialNo.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\SearchWithSerialNo.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\SearchWithSerialNo.cs",
@@ -2899,7 +2999,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 112,
+              "DocumentIndex": 120,
               "Title": "ItemWiseSalesReturn.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\ItemWiseSalesReturn.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\ItemWiseSalesReturn.cs",
@@ -2910,7 +3010,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 113,
+              "DocumentIndex": 121,
               "Title": "ItemWiseSale.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\ItemWiseSale.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\ItemWiseSale.cs",
@@ -2921,7 +3021,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 114,
+              "DocumentIndex": 122,
               "Title": "ItemWisePurchase.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\ItemWisePurchase.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\ItemWisePurchase.cs",
@@ -2932,7 +3032,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 115,
+              "DocumentIndex": 123,
               "Title": "ItemHistory.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\ItemHistory.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\ItemHistory.cs",
@@ -2943,7 +3043,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 116,
+              "DocumentIndex": 124,
               "Title": "DetailItemWiseSaleReturn.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\DetailItemWiseSaleReturn.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\DetailItemWiseSaleReturn.cs",
@@ -2954,7 +3054,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 117,
+              "DocumentIndex": 125,
               "Title": "DetailItemWiseSale.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\DetailItemWiseSale.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\DetailItemWiseSale.cs",
@@ -2965,7 +3065,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 118,
+              "DocumentIndex": 126,
               "Title": "DetailItemWisePurchase.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\DetailItemWisePurchase.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\DetailItemWisePurchase.cs",
@@ -2976,7 +3076,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 119,
+              "DocumentIndex": 127,
               "Title": "DetailItemHistory.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\DetailItemHistory.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\DetailItemHistory.cs",
@@ -2987,7 +3087,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 120,
+              "DocumentIndex": 128,
               "Title": "DetailBrandWiseInventory.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\DetailBrandWiseInventory.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\DetailBrandWiseInventory.cs",
@@ -2998,7 +3098,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 121,
+              "DocumentIndex": 129,
               "Title": "DetailAccountWiseSale.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\DetailAccountWiseSale.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\DetailAccountWiseSale.cs",
@@ -3009,7 +3109,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 122,
+              "DocumentIndex": 130,
               "Title": "DetailAccountStatement.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\DetailAccountStatement.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\DetailAccountStatement.cs",
@@ -3020,7 +3120,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 123,
+              "DocumentIndex": 131,
               "Title": "BrandWiseStock.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\BrandWiseStock.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\BrandWiseStock.cs",
@@ -3031,40 +3131,43 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 124,
+              "DocumentIndex": 132,
               "Title": "AccountWiseSale.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWiseSale.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\AccountWiseSale.cs",
               "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWiseSale.cs [Design]",
               "RelativeToolTip": "SmartFlow\\Report\\AccountWiseSale.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-21T06:04:41.416Z"
+              "WhenOpened": "2025-02-21T06:04:41.416Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 125,
+              "DocumentIndex": 133,
               "Title": "AccountWiseReceipt.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWiseReceipt.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\AccountWiseReceipt.cs",
               "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWiseReceipt.cs [Design]",
               "RelativeToolTip": "SmartFlow\\Report\\AccountWiseReceipt.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-22T17:40:58.893Z"
+              "WhenOpened": "2025-02-22T17:40:58.893Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 126,
+              "DocumentIndex": 134,
               "Title": "AccountWisePayment.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWisePayment.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\AccountWisePayment.cs",
               "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWisePayment.cs [Design]",
               "RelativeToolTip": "SmartFlow\\Report\\AccountWisePayment.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-22T17:41:15.021Z"
+              "WhenOpened": "2025-02-22T17:41:15.021Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 127,
+              "DocumentIndex": 135,
               "Title": "AccountStatement.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountStatement.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\AccountStatement.cs",
@@ -3075,7 +3178,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 128,
+              "DocumentIndex": 136,
               "Title": "WarehouseSelection.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\WarehouseSelection.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\WarehouseSelection.cs",
@@ -3086,7 +3189,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 129,
+              "DocumentIndex": 137,
               "Title": "PurchaseReturnInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\PurchaseReturnInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\PurchaseReturnInvoice.cs",
@@ -3097,7 +3200,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 130,
+              "DocumentIndex": 138,
               "Title": "PurchaseQuotationInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\PurchaseQuotationInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\PurchaseQuotationInvoice.cs",
@@ -3108,7 +3211,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 131,
+              "DocumentIndex": 139,
               "Title": "PurchaseOrder.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\PurchaseOrder.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\PurchaseOrder.cs",
@@ -3119,7 +3222,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 132,
+              "DocumentIndex": 140,
               "Title": "ModifyPurchaseReturn.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ModifyPurchaseReturn.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ModifyPurchaseReturn.cs",
@@ -3130,7 +3233,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 133,
+              "DocumentIndex": 141,
               "Title": "ModifyPurchaseQuotation.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ModifyPurchaseQuotation.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ModifyPurchaseQuotation.cs",
@@ -3141,7 +3244,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 134,
+              "DocumentIndex": 142,
               "Title": "ModifyPurchaseOrder.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ModifyPurchaseOrder.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ModifyPurchaseOrder.cs",
@@ -3152,7 +3255,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 135,
+              "DocumentIndex": 143,
               "Title": "ModifyPurchaseInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ModifyPurchaseInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ModifyPurchaseInvoice.cs",
@@ -3163,7 +3266,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 136,
+              "DocumentIndex": 144,
               "Title": "ListPurchaseReturn.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ListPurchaseReturn.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ListPurchaseReturn.cs",
@@ -3174,7 +3277,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 137,
+              "DocumentIndex": 145,
               "Title": "ListPurchaseQuotation.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ListPurchaseQuotation.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ListPurchaseQuotation.cs",
@@ -3186,7 +3289,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 138,
+              "DocumentIndex": 146,
               "Title": "ListPurchaseOrder.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ListPurchaseOrder.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ListPurchaseOrder.cs",
@@ -3197,7 +3300,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 139,
+              "DocumentIndex": 147,
               "Title": "ListPurchaseInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ListPurchaseInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ListPurchaseInvoice.cs",
@@ -3208,7 +3311,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 140,
+              "DocumentIndex": 148,
               "Title": "DetailPurchaseReturn.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\DetailPurchaseReturn.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\DetailPurchaseReturn.cs",
@@ -3219,7 +3322,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 141,
+              "DocumentIndex": 149,
               "Title": "DetailPurchaseQuotation.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\DetailPurchaseQuotation.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\DetailPurchaseQuotation.cs",
@@ -3230,7 +3333,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 142,
+              "DocumentIndex": 150,
               "Title": "DetailPurchaseOrder.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\DetailPurchaseOrder.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\DetailPurchaseOrder.cs",
@@ -3241,7 +3344,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 143,
+              "DocumentIndex": 151,
               "Title": "DetailPurchaseInvoice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\DetailPurchaseInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\DetailPurchaseInvoice.cs",
@@ -3252,7 +3355,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 144,
+              "DocumentIndex": 152,
               "Title": "UploadExcel.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\UploadExcel.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\UploadExcel.cs",
@@ -3263,7 +3366,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 145,
+              "DocumentIndex": 153,
               "Title": "UpdateOpeningBalance.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\UpdateOpeningBalance.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\UpdateOpeningBalance.cs",
@@ -3274,7 +3377,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 146,
+              "DocumentIndex": 154,
               "Title": "UnitList.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\UnitList.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\UnitList.cs",
@@ -3285,7 +3388,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 147,
+              "DocumentIndex": 155,
               "Title": "SaleType.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\SaleType.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\SaleType.cs",
@@ -3296,7 +3399,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 148,
+              "DocumentIndex": 156,
               "Title": "PurchaseType.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\PurchaseType.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\PurchaseType.cs",
@@ -3307,7 +3410,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 149,
+              "DocumentIndex": 157,
               "Title": "OpeningBalance.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\OpeningBalance.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\OpeningBalance.cs",
@@ -3318,7 +3421,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 150,
+              "DocumentIndex": 158,
               "Title": "ModifySaleType.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ModifySaleType.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ModifySaleType.cs",
@@ -3329,7 +3432,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 151,
+              "DocumentIndex": 159,
               "Title": "ModifyPurchaseType.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ModifyPurchaseType.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ModifyPurchaseType.cs",
@@ -3340,7 +3443,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 152,
+              "DocumentIndex": 160,
               "Title": "ListSaleType.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ListSaleType.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ListSaleType.cs",
@@ -3351,7 +3454,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 153,
+              "DocumentIndex": 161,
               "Title": "ListPurchaseType.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ListPurchaseType.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ListPurchaseType.cs",
@@ -3362,7 +3465,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 154,
+              "DocumentIndex": 162,
               "Title": "ListGroupingAccount.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ListGroupingAccount.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ListGroupingAccount.cs",
@@ -3373,7 +3476,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 155,
+              "DocumentIndex": 163,
               "Title": "ListBrands.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ListBrands.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ListBrands.cs",
@@ -3384,7 +3487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 156,
+              "DocumentIndex": 164,
               "Title": "GroupingAccount.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\GroupingAccount.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\GroupingAccount.cs",
@@ -3395,7 +3498,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 157,
+              "DocumentIndex": 165,
               "Title": "ExcelAccounts.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ExcelAccounts.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ExcelAccounts.cs",
@@ -3406,7 +3509,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 158,
+              "DocumentIndex": 166,
               "Title": "CurrencyList.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\CurrencyList.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\CurrencyList.cs",
@@ -3417,7 +3520,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 159,
+              "DocumentIndex": 167,
               "Title": "CheckPrice.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\CheckPrice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\CheckPrice.cs",
@@ -3428,7 +3531,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 160,
+              "DocumentIndex": 168,
               "Title": "AddCompany.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\AddCompany.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\AddCompany.cs",
@@ -3439,7 +3542,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 161,
+              "DocumentIndex": 169,
               "Title": "AccountHistory.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\AccountHistory.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\AccountHistory.cs",
@@ -3450,7 +3553,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 162,
+              "DocumentIndex": 170,
               "Title": "AccountGroupHistory.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\AccountGroupHistory.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\AccountGroupHistory.cs",
@@ -3461,7 +3564,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 163,
+              "DocumentIndex": 171,
               "Title": "Account.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\Account.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\Account.cs",
@@ -3472,7 +3575,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 164,
+              "DocumentIndex": 172,
               "Title": "CustomerListReportViewer.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ReportViewer\\CustomerListReportViewer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ReportViewer\\CustomerListReportViewer.cs",
@@ -3483,7 +3586,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 165,
+              "DocumentIndex": 173,
               "Title": "AccountListReportViewer.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ReportViewer\\AccountListReportViewer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ReportViewer\\AccountListReportViewer.cs",
@@ -3494,7 +3597,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 166,
+              "DocumentIndex": 174,
               "Title": "AccountGroupListReportViewer.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ReportViewer\\AccountGroupListReportViewer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ReportViewer\\AccountGroupListReportViewer.cs",
@@ -3505,7 +3608,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 167,
+              "DocumentIndex": 175,
               "Title": "NewCompany.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\General\\NewCompany.cs",
               "RelativeDocumentMoniker": "SmartFlow\\General\\NewCompany.cs",
@@ -3517,7 +3620,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 168,
+              "DocumentIndex": 176,
               "Title": "SupplierSelectionForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\CommonForms\\SupplierSelectionForm.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\CommonForms\\SupplierSelectionForm.cs",
@@ -3528,7 +3631,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 169,
+              "DocumentIndex": 177,
               "Title": "ProductSelectionForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\CommonForms\\ProductSelectionForm.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\CommonForms\\ProductSelectionForm.cs",
@@ -3539,7 +3642,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 170,
+              "DocumentIndex": 178,
               "Title": "CustomerSelectionForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\CommonForms\\CustomerSelectionForm.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\CommonForms\\CustomerSelectionForm.cs",
@@ -3550,7 +3653,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 171,
+              "DocumentIndex": 179,
               "Title": "CurrencySelection.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\CommonForms\\CurrencySelection.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\CommonForms\\CurrencySelection.cs",
@@ -3561,7 +3664,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 172,
+              "DocumentIndex": 180,
               "Title": "AccountSelectionForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\CommonForms\\AccountSelectionForm.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\CommonForms\\AccountSelectionForm.cs",
@@ -3572,7 +3675,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 173,
+              "DocumentIndex": 181,
               "Title": "AccountGroupSelection.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\CommonForms\\AccountGroupSelection.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\CommonForms\\AccountGroupSelection.cs",
@@ -3583,7 +3686,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 175,
+              "DocumentIndex": 183,
               "Title": "PurchaseInvoiceReport.rpt",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ReportViewer\\Reports\\PurchaseInvoiceReport.rpt",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ReportViewer\\Reports\\PurchaseInvoiceReport.rpt",
@@ -3594,7 +3697,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 176,
+              "DocumentIndex": 184,
               "Title": "InvoiceReportView.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ReportViewer\\InvoiceReportView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ReportViewer\\InvoiceReportView.cs",
@@ -3606,7 +3709,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 174,
+              "DocumentIndex": 182,
               "Title": "CustomerSelectionForm.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\CommonForms\\CustomerSelectionForm.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\CommonForms\\CustomerSelectionForm.cs",
@@ -3618,7 +3721,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 178,
+              "DocumentIndex": 186,
               "Title": "AccountHistory.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\AccountHistory.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\AccountHistory.cs",
@@ -3630,7 +3733,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 177,
+              "DocumentIndex": 185,
               "Title": "Account.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\Account.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\Account.cs",
@@ -3642,7 +3745,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 179,
+              "DocumentIndex": 187,
               "Title": "AccountStatement.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountStatement.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\AccountStatement.cs",
@@ -3654,7 +3757,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 180,
+              "DocumentIndex": 188,
               "Title": "DetailAccountStatement.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\DetailAccountStatement.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\DetailAccountStatement.cs",
@@ -3666,7 +3769,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 183,
+              "DocumentIndex": 191,
               "Title": "AccountGroupSelection.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\CommonForms\\AccountGroupSelection.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\CommonForms\\AccountGroupSelection.cs",
@@ -3678,7 +3781,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 184,
+              "DocumentIndex": 192,
               "Title": "BrandWiseStock.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\BrandWiseStock.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\BrandWiseStock.cs",
@@ -3690,7 +3793,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 182,
+              "DocumentIndex": 190,
               "Title": "AccountStatementReportViewer.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\ReportViewer\\AccountStatementReportViewer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\ReportViewer\\AccountStatementReportViewer.cs",
@@ -3701,7 +3804,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 181,
+              "DocumentIndex": 189,
               "Title": "AccountStatementReport.rpt",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\ReportViewer\\Reports\\AccountStatementReport.rpt",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\ReportViewer\\Reports\\AccountStatementReport.rpt",
@@ -3712,18 +3815,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 186,
-              "Title": "Payment.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Payment.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Transactions\\Payment.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Payment.cs [Design]",
-              "RelativeToolTip": "SmartFlow\\Transactions\\Payment.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-13T10:11:03.387Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 190,
+              "DocumentIndex": 196,
               "Title": "JournalReportViewer.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ReportViewer\\JournalReportViewer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ReportViewer\\JournalReportViewer.cs",
@@ -3734,7 +3826,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 185,
+              "DocumentIndex": 193,
               "Title": "JournalReport.rpt",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ReportViewer\\Reports\\JournalReport.rpt",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ReportViewer\\Reports\\JournalReport.rpt",
@@ -3745,7 +3837,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 191,
+              "DocumentIndex": 197,
               "Title": "ReceiptReportView.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ReportViewer\\ReceiptReportView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ReportViewer\\ReceiptReportView.cs",
@@ -3757,7 +3849,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 192,
+              "DocumentIndex": 198,
               "Title": "ReceiptReportView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ReportViewer\\ReceiptReportView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ReportViewer\\ReceiptReportView.cs",
@@ -3769,29 +3861,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 195,
-              "Title": "Payment.cs",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Payment.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Transactions\\Payment.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Payment.cs",
-              "RelativeToolTip": "SmartFlow\\Transactions\\Payment.cs",
-              "ViewState": "AgIAAJkAAAAAAAAAAAAtwLcAAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T10:06:13.873Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 187,
-              "Title": "PaymentReport.rpt",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ReportViewer\\Reports\\PaymentReport.rpt",
-              "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ReportViewer\\Reports\\PaymentReport.rpt",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ReportViewer\\Reports\\PaymentReport.rpt",
-              "RelativeToolTip": "SmartFlow\\Transactions\\ReportViewer\\Reports\\PaymentReport.rpt",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIeSURBVDhPpZJNSFRRFMd/9973ZnIaswwiWvSFmyFNFyEUTlC4qDYptghaSOAmoY3QojZFVkLuIqZ2FhVCYGOLFhERRBs3MkP0IWmZ5geaOo06M76v28Ia581r1w/O4lzO\u002BZ9z7jnwP2itRamfGEzpUr\u002BczpYGX3yAxGBKu56nXc/T5SQGU/pfBWTgQQim5leYnFv2GcCF0/WBLgMCAFKKgAHce56GslF9Akquu0qKot3xepFC0BqvoTVeQ0tTDVXRcDHHJ/AnHyUlSkqSYoAH0/eJTzWgpMRQEtPwN\u002B3zTKUAMJTg5vwN2ORQKbew7GU5MnGw2FUpxt6OT61C6ONA9fBXj1O/LLpnryKlwciPMZbnsgBknSyNk3UMH/vgExD5vNW2Wlhrfj\u002Be23NrYOnkdEYSj4UZajhDxf4wM\u002BkZvj0Zg0XIDdgAJN\u002BNcq45JgBk5/X\u002B5KXbz7oMN3vlbsd2jsZCvEwVsPofExGVUNCQgULS8W0kwPnLD0Xy7YheyKzos73juvbiqD7U9UUf6K/Tq/k1bdmuth1XW7arn74ZCa6xr6ddh0MmVdEKmmIRtkYNTNPkUf0LLNtFqfXqSglMtfH3gUMqOJCe8KiuCrGr2qBg2TiOWx5WxDdQ36tJ/Xk2zOKqZHPI4/DuDAuLC\u002BzcsY1IZON4AE407hOUC\u002BTzVlvesq9lsrnan0src0Pp8e7hjxOvge99Pe250ti//Aa4Se8VLBKf0wAAAABJRU5ErkJggg==",
-              "WhenOpened": "2025-01-13T07:08:25.372Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 189,
               "Title": "Journal.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Journal.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\Journal.cs",
@@ -3803,7 +3872,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 193,
+              "DocumentIndex": 199,
               "Title": "PaymentReportView.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ReportViewer\\PaymentReportView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ReportViewer\\PaymentReportView.cs",
@@ -3815,7 +3884,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 194,
+              "DocumentIndex": 200,
               "Title": "PaymentReportView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ReportViewer\\PaymentReportView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ReportViewer\\PaymentReportView.cs",
@@ -3826,7 +3895,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 188,
+              "DocumentIndex": 194,
               "Title": "JournalReportViewer.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ReportViewer\\JournalReportViewer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ReportViewer\\JournalReportViewer.cs",
@@ -3838,7 +3907,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 196,
+              "DocumentIndex": 201,
               "Title": "Journal.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Journal.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\Journal.cs",
@@ -3849,7 +3918,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 197,
+              "DocumentIndex": 202,
               "Title": "DebitNoteReportView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ReportViewer\\DebitNoteReportView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ReportViewer\\DebitNoteReportView.cs",
@@ -3860,7 +3929,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 198,
+              "DocumentIndex": 203,
               "Title": "MaterialReceivedParty.rpt",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ReportViewer\\Reports\\MaterialReceivedParty.rpt",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ReportViewer\\Reports\\MaterialReceivedParty.rpt",
@@ -3871,7 +3940,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 199,
+              "DocumentIndex": 204,
               "Title": "MaterialReceivedReportView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ReportViewer\\MaterialReceivedReportView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ReportViewer\\MaterialReceivedReportView.cs",
@@ -3882,7 +3951,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 200,
+              "DocumentIndex": 205,
               "Title": "MaterialIssueReportView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ReportViewer\\MaterialIssueReportView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ReportViewer\\MaterialIssueReportView.cs",
@@ -3893,7 +3962,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 201,
+              "DocumentIndex": 206,
               "Title": "SaleReturnInvoice.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\SaleReturnInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\SaleReturnInvoice.cs",
@@ -3905,7 +3974,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 202,
+              "DocumentIndex": 207,
               "Title": "PurchaseReturnInvoice.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\PurchaseReturnInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\PurchaseReturnInvoice.cs",
@@ -3917,7 +3986,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 203,
+              "DocumentIndex": 208,
               "Title": "PurchaseQuotationInvoice.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\PurchaseQuotationInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\PurchaseQuotationInvoice.cs",
@@ -3929,7 +3998,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 204,
+              "DocumentIndex": 209,
               "Title": "PurchaseOrder.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\PurchaseOrder.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\PurchaseOrder.cs",
@@ -3941,19 +4010,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 205,
-              "Title": "AccountData.cs",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\AccountData.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Common\\AccountData.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\AccountData.cs",
-              "RelativeToolTip": "SmartFlow\\Common\\AccountData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-15T18:34:38.3Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 206,
+              "DocumentIndex": 210,
               "Title": "AccountSelectionForm.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\CommonForms\\AccountSelectionForm.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\CommonForms\\AccountSelectionForm.cs",
@@ -3965,7 +4022,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 207,
+              "DocumentIndex": 211,
               "Title": "PurchaseOrderReport.rpt",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ReportViewer\\Reports\\PurchaseOrderReport.rpt",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ReportViewer\\Reports\\PurchaseOrderReport.rpt",
@@ -3976,7 +4033,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 209,
+              "DocumentIndex": 213,
               "Title": "EditItemInvoice.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\CommonForm\\EditItemInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\CommonForm\\EditItemInvoice.cs",
@@ -3988,7 +4045,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 208,
+              "DocumentIndex": 212,
               "Title": "AddCompany.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\AddCompany.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\AddCompany.cs",
@@ -4000,7 +4057,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 211,
+              "DocumentIndex": 215,
               "Title": "ItemWiseSale.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\ItemWiseSale.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\ItemWiseSale.cs",
@@ -4012,7 +4069,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 212,
+              "DocumentIndex": 216,
               "Title": "NewCompany.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\General\\NewCompany.cs",
               "RelativeDocumentMoniker": "SmartFlow\\General\\NewCompany.cs",
@@ -4025,7 +4082,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 210,
+              "DocumentIndex": 214,
               "Title": "SearchWithSerialNo.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\SearchWithSerialNo.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\SearchWithSerialNo.cs",
@@ -4037,7 +4094,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 213,
+              "DocumentIndex": 217,
               "Title": "ListStockJournal.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListStockJournal.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListStockJournal.cs",
@@ -4049,7 +4106,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 214,
+              "DocumentIndex": 218,
               "Title": "ListPackingBox.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListPackingBox.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListPackingBox.cs",
@@ -4061,7 +4118,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 219,
+              "DocumentIndex": 223,
               "Title": "DetailAccountWiseSale.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\DetailAccountWiseSale.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\DetailAccountWiseSale.cs",
@@ -4073,7 +4130,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 215,
+              "DocumentIndex": 219,
               "Title": "DetailBrandWiseInventory.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\DetailBrandWiseInventory.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\DetailBrandWiseInventory.cs",
@@ -4085,7 +4142,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 217,
+              "DocumentIndex": 221,
               "Title": "ListPayment.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ListPayment.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ListPayment.cs",
@@ -4097,7 +4154,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 221,
+              "DocumentIndex": 224,
               "Title": "ListPayment.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ListPayment.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ListPayment.cs",
@@ -4108,7 +4165,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 216,
+              "DocumentIndex": 220,
               "Title": "ItemWisePurchase.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\ItemWisePurchase.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\ItemWisePurchase.cs",
@@ -4120,7 +4177,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 218,
+              "DocumentIndex": 222,
               "Title": "DetailPayment.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\DetailPayment.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\DetailPayment.cs",
@@ -4132,7 +4189,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 222,
+              "DocumentIndex": 225,
               "Title": "DetailPayment.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\DetailPayment.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\DetailPayment.cs",
@@ -4140,18 +4197,6 @@
               "RelativeToolTip": "SmartFlow\\Transactions\\DetailPayment.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-22T13:31:32.942Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 220,
-              "Title": "AccountWisePayment.cs",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWisePayment.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Report\\AccountWisePayment.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWisePayment.cs",
-              "RelativeToolTip": "SmartFlow\\Report\\AccountWisePayment.cs",
-              "ViewState": "AgIAAJcAAAAAAAAAAAAewKcAAABLAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T05:54:38.168Z"
             },
             {
               "$type": "Document",
@@ -4177,7 +4222,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 223,
+              "DocumentIndex": 226,
               "Title": "ProductSelectionForm.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\CommonForms\\ProductSelectionForm.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\CommonForms\\ProductSelectionForm.cs",
@@ -4189,7 +4234,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 226,
+              "DocumentIndex": 229,
               "Title": "SaleReturnReport.rpt",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ReportViewer\\Reports\\SaleReturnReport.rpt",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ReportViewer\\Reports\\SaleReturnReport.rpt",
@@ -4200,7 +4245,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 227,
+              "DocumentIndex": 230,
               "Title": "SaleReport.rpt",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ReportViewer\\Reports\\SaleReport.rpt",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ReportViewer\\Reports\\SaleReport.rpt",
@@ -4211,7 +4256,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 228,
+              "DocumentIndex": 231,
               "Title": "SaleQuotationReport.rpt",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ReportViewer\\Reports\\SaleQuotationReport.rpt",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ReportViewer\\Reports\\SaleQuotationReport.rpt",
@@ -4222,7 +4267,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 224,
+              "DocumentIndex": 227,
               "Title": "StockJournal.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\StockJournal.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\StockJournal.cs",
@@ -4234,7 +4279,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 229,
+              "DocumentIndex": 232,
               "Title": "PurchaseReturnReport.rpt",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ReportViewer\\Reports\\PurchaseReturnReport.rpt",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ReportViewer\\Reports\\PurchaseReturnReport.rpt",
@@ -4245,7 +4290,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 225,
+              "DocumentIndex": 228,
               "Title": "BoxForm.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\BoxForm.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\BoxForm.cs",
@@ -4257,7 +4302,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 230,
+              "DocumentIndex": 233,
               "Title": "PurchaseQuotationReport.rpt",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ReportViewer\\Reports\\PurchaseQuotationReport.rpt",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ReportViewer\\Reports\\PurchaseQuotationReport.rpt",
@@ -4268,7 +4313,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 231,
+              "DocumentIndex": 234,
               "Title": "VATForm.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\CommonForm\\VATForm.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\CommonForm\\VATForm.cs",
@@ -4280,7 +4325,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 232,
+              "DocumentIndex": 235,
               "Title": "GlobalVariables.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\GlobalVariables.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\GlobalVariables.cs",
@@ -4292,7 +4337,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 233,
+              "DocumentIndex": 236,
               "Title": "ItemWiseSalesReturn.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\ItemWiseSalesReturn.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\ItemWiseSalesReturn.cs",
@@ -4304,7 +4349,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 235,
+              "DocumentIndex": 238,
               "Title": "DetailItemWisePurchase.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\DetailItemWisePurchase.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\DetailItemWisePurchase.cs",
@@ -4316,7 +4361,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 234,
+              "DocumentIndex": 237,
               "Title": "DetailItemWiseSaleReturn.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\DetailItemWiseSaleReturn.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\DetailItemWiseSaleReturn.cs",
@@ -4328,7 +4373,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 236,
+              "DocumentIndex": 239,
               "Title": "DetailItemHistory.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\DetailItemHistory.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\DetailItemHistory.cs",
@@ -4340,7 +4385,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 237,
+              "DocumentIndex": 240,
               "Title": "ItemHistory.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\ItemHistory.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\ItemHistory.cs",
@@ -4352,7 +4397,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 238,
+              "DocumentIndex": 241,
               "Title": "DetailItemWiseSale.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\DetailItemWiseSale.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Report\\DetailItemWiseSale.cs",
@@ -4364,7 +4409,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 239,
+              "DocumentIndex": 242,
               "Title": "ListSalesQuotation.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ListSalesQuotation.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ListSalesQuotation.cs",
@@ -4376,7 +4421,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 240,
+              "DocumentIndex": 243,
               "Title": "ListSaleInvoice.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ListSaleInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ListSaleInvoice.cs",
@@ -4388,7 +4433,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 241,
+              "DocumentIndex": 244,
               "Title": "DetailQtyUsingScanner.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DetailQtyUsingScanner.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\DetailQtyUsingScanner.cs",
@@ -4400,7 +4445,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 244,
+              "DocumentIndex": 247,
               "Title": "ListStockTransfer.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListStockTransfer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListStockTransfer.cs",
@@ -4412,7 +4457,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 242,
+              "DocumentIndex": 245,
               "Title": "DetailDamageEntry.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DetailDamageEntry.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\DetailDamageEntry.cs",
@@ -4424,7 +4469,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 243,
+              "DocumentIndex": 246,
               "Title": "DetailStockTransfer.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\DetailStockTransfer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\DetailStockTransfer.cs",
@@ -4436,7 +4481,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 245,
+              "DocumentIndex": 248,
               "Title": "MaterialIssueToParty.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\MaterialIssueToParty.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\MaterialIssueToParty.cs",
@@ -4447,7 +4492,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 246,
+              "DocumentIndex": 249,
               "Title": "ListQtyUsingMFr.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListQtyUsingMFr.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListQtyUsingMFr.cs",
@@ -4459,7 +4504,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 247,
+              "DocumentIndex": 250,
               "Title": "ListDamageEntry.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListDamageEntry.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListDamageEntry.cs",
@@ -4471,7 +4516,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 248,
+              "DocumentIndex": 251,
               "Title": "DetailSaleInvoice.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\DetailSaleInvoice.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\DetailSaleInvoice.cs",
@@ -4483,7 +4528,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 249,
+              "DocumentIndex": 252,
               "Title": "ListBrands.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ListBrands.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ListBrands.cs",
@@ -4495,7 +4540,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 250,
+              "DocumentIndex": 253,
               "Title": "ListRacks.Designer.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Stock\\ListRacks.Designer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Stock\\ListRacks.Designer.cs",
@@ -4507,7 +4552,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 252,
+              "DocumentIndex": 255,
               "Title": "CurrencySelection.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\CommonForms\\CurrencySelection.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\CommonForms\\CurrencySelection.cs",
@@ -4519,7 +4564,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 254,
+              "DocumentIndex": 257,
               "Title": "UnitList.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\UnitList.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\UnitList.cs",
@@ -4531,7 +4576,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 251,
+              "DocumentIndex": 254,
               "Title": "CreateProduct.Designer.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\CreateProduct.Designer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\CreateProduct.Designer.cs",
@@ -4543,7 +4588,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 253,
+              "DocumentIndex": 256,
               "Title": "CurrencyData.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Common\\CurrencyData.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Common\\CurrencyData.cs",
@@ -4555,7 +4600,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 256,
+              "DocumentIndex": 259,
               "Title": "DetailJournal.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\DetailJournal.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\DetailJournal.cs",
@@ -4567,7 +4612,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 257,
+              "DocumentIndex": 260,
               "Title": "DetailJournal.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\DetailJournal.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\DetailJournal.cs",
@@ -4578,7 +4623,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 255,
+              "DocumentIndex": 258,
               "Title": "ListJournal.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\ListJournal.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\ListJournal.cs",
@@ -4590,7 +4635,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 260,
+              "DocumentIndex": 263,
               "Title": "SaleInvoiceView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ReportViewer\\SaleInvoiceView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ReportViewer\\SaleInvoiceView.cs",
@@ -4601,7 +4646,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 262,
+              "DocumentIndex": 265,
               "Title": "SaleQuotationView.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ReportViewer\\SaleQuotationView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ReportViewer\\SaleQuotationView.cs",
@@ -4613,7 +4658,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 263,
+              "DocumentIndex": 266,
               "Title": "SaleQuotationView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ReportViewer\\SaleQuotationView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ReportViewer\\SaleQuotationView.cs",
@@ -4624,7 +4669,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 258,
+              "DocumentIndex": 261,
               "Title": "ProformaInvoiceView.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ReportViewer\\ProformaInvoiceView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ReportViewer\\ProformaInvoiceView.cs",
@@ -4636,7 +4681,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 259,
+              "DocumentIndex": 262,
               "Title": "ProformaInvoiceView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ReportViewer\\ProformaInvoiceView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ReportViewer\\ProformaInvoiceView.cs",
@@ -4647,7 +4692,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 261,
+              "DocumentIndex": 264,
               "Title": "SaleInvoiceView.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ReportViewer\\SaleInvoiceView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ReportViewer\\SaleInvoiceView.cs",
@@ -4659,7 +4704,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 264,
+              "DocumentIndex": 267,
               "Title": "SaleReturnView.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ReportViewer\\SaleReturnView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ReportViewer\\SaleReturnView.cs",
@@ -4671,7 +4716,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 265,
+              "DocumentIndex": 268,
               "Title": "SaleReturnView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ReportViewer\\SaleReturnView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ReportViewer\\SaleReturnView.cs",
@@ -4682,7 +4727,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 266,
+              "DocumentIndex": 269,
               "Title": "PackingListView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ReportViewer\\PackingListView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ReportViewer\\PackingListView.cs",
@@ -4693,7 +4738,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 267,
+              "DocumentIndex": 270,
               "Title": "DeliveryNoteView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ReportViewer\\DeliveryNoteView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ReportViewer\\DeliveryNoteView.cs",
@@ -4704,7 +4749,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 268,
+              "DocumentIndex": 271,
               "Title": "ReturnReportView.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ReportViewer\\ReturnReportView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ReportViewer\\ReturnReportView.cs",
@@ -4716,7 +4761,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 269,
+              "DocumentIndex": 272,
               "Title": "ReturnReportView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ReportViewer\\ReturnReportView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ReportViewer\\ReturnReportView.cs",
@@ -4727,7 +4772,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 270,
+              "DocumentIndex": 273,
               "Title": "QuotationReportView.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ReportViewer\\QuotationReportView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ReportViewer\\QuotationReportView.cs",
@@ -4739,7 +4784,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 271,
+              "DocumentIndex": 274,
               "Title": "QuotationReportView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ReportViewer\\QuotationReportView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ReportViewer\\QuotationReportView.cs",
@@ -4750,7 +4795,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 272,
+              "DocumentIndex": 275,
               "Title": "OrderReportView.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ReportViewer\\OrderReportView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ReportViewer\\OrderReportView.cs",
@@ -4762,7 +4807,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 273,
+              "DocumentIndex": 276,
               "Title": "OrderReportView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ReportViewer\\OrderReportView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ReportViewer\\OrderReportView.cs",
@@ -4773,7 +4818,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 274,
+              "DocumentIndex": 277,
               "Title": "InvoiceReportView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Purchase\\ReportViewer\\InvoiceReportView.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Purchase\\ReportViewer\\InvoiceReportView.cs",
@@ -4784,7 +4829,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 275,
+              "DocumentIndex": 278,
               "Title": "SupplierListReportViewer.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ReportViewer\\SupplierListReportViewer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ReportViewer\\SupplierListReportViewer.cs",
@@ -4796,7 +4841,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 276,
+              "DocumentIndex": 279,
               "Title": "SupplierListReportViewer.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ReportViewer\\SupplierListReportViewer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ReportViewer\\SupplierListReportViewer.cs",
@@ -4807,7 +4852,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 277,
+              "DocumentIndex": 280,
               "Title": "ProductListReportViewer.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ReportViewer\\ProductListReportViewer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ReportViewer\\ProductListReportViewer.cs",
@@ -4819,7 +4864,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 278,
+              "DocumentIndex": 281,
               "Title": "ProductListReportViewer.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ReportViewer\\ProductListReportViewer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ReportViewer\\ProductListReportViewer.cs",
@@ -4830,7 +4875,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 279,
+              "DocumentIndex": 282,
               "Title": "CustomerListReportViewer.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ReportViewer\\CustomerListReportViewer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ReportViewer\\CustomerListReportViewer.cs",
@@ -4842,7 +4887,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 280,
+              "DocumentIndex": 283,
               "Title": "AccountListReportViewer.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ReportViewer\\AccountListReportViewer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ReportViewer\\AccountListReportViewer.cs",
@@ -4854,7 +4899,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 281,
+              "DocumentIndex": 284,
               "Title": "AccountGroupListReportViewer.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ReportViewer\\AccountGroupListReportViewer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ReportViewer\\AccountGroupListReportViewer.cs",
@@ -4866,7 +4911,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 282,
+              "DocumentIndex": 285,
               "Title": "ExcelAccounts.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Masters\\ExcelAccounts.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Masters\\ExcelAccounts.cs",
@@ -4878,7 +4923,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 283,
+              "DocumentIndex": 286,
               "Title": "Receipts.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Receipts.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\Receipts.cs",
@@ -4890,7 +4935,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 284,
+              "DocumentIndex": 287,
               "Title": "Receipts.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Receipts.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\Receipts.cs",
@@ -4901,31 +4946,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 286,
-              "Title": "AccountWiseSale.cs",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWiseSale.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Report\\AccountWiseSale.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWiseSale.cs",
-              "RelativeToolTip": "SmartFlow\\Report\\AccountWiseSale.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-21T06:06:04.848Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 285,
-              "Title": "AccountWiseReceipt.cs",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWiseReceipt.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Report\\AccountWiseReceipt.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Report\\AccountWiseReceipt.cs",
-              "RelativeToolTip": "SmartFlow\\Report\\AccountWiseReceipt.cs",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAmwLEAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T05:54:58.408Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 287,
+              "DocumentIndex": 288,
               "Title": "DetailReceipt.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\DetailReceipt.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\DetailReceipt.cs",
@@ -4937,7 +4958,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 288,
+              "DocumentIndex": 289,
               "Title": "DetailReceipt.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\DetailReceipt.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Transactions\\DetailReceipt.cs",
@@ -4948,7 +4969,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 289,
+              "DocumentIndex": 290,
               "Title": "SaleInvoiceView.Designer.cs",
               "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Sales\\ReportViewer\\SaleInvoiceView.Designer.cs",
               "RelativeDocumentMoniker": "SmartFlow\\Sales\\ReportViewer\\SaleInvoiceView.Designer.cs",
@@ -4957,18 +4978,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-03T06:01:40.272Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 290,
-              "Title": "Payment.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Payment.Designer.cs",
-              "RelativeDocumentMoniker": "SmartFlow\\Transactions\\Payment.Designer.cs",
-              "ToolTip": "C:\\Users\\FABT\\source\\repos\\SmartFlow\\SmartFlow\\Transactions\\Payment.Designer.cs",
-              "RelativeToolTip": "SmartFlow\\Transactions\\Payment.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T10:06:57.137Z"
             },
             {
               "$type": "Document",
